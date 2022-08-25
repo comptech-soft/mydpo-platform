@@ -1,0 +1,19 @@
+{
+    "name": "ovidiu/mydpo-platform",
+    "description": "Cod comun aplicatiilor mydpo si mydpo-admin",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Andrus Ovidiu",
+            "email": "ovidiu.andrus@comptech.ro"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "MyDpo\\": "src/"
+        }
+    }
+}
