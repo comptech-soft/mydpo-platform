@@ -1,5 +1,6 @@
 <?php
 
+use MyDpo\Http\Controllers\Admin\CustomersController;
 
 Route::prefix('clienti')->group( function() {
         
