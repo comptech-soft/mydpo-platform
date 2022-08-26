@@ -9,7 +9,6 @@
             "email": "ovidiu.andrus@comptech.ro"
         }
     ],
-    "minimum-stability": "dev",
     "require": {
         "spatie/laravel-activitylog": "^4.5"
     },
