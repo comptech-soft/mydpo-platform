@@ -8,6 +8,8 @@ Route::middleware(['isadmin'])->prefix('admin')->group(function () {
     require __DIR__ . '/servicii/routes.php';
     require __DIR__ . '/persons/routes.php';
 
+    require __DIR__ . '/planificare/routes.php';
+
     require __DIR__ . '/localitati/routes.php';
 
 
