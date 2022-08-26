@@ -10,7 +10,9 @@
         }
     ],
     "minimum-stability": "dev",
-    "require": {},
+    "require": {
+        "spatie/laravel-activitylog": "^4.5"
+    },
     "autoload": {
         "psr-4": {
             "MyDpo\\": "src/"
