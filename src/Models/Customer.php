@@ -7,6 +7,7 @@ use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Models\CustomerStatus;
 use MyDpo\Models\City;
+use MyDpo\Models\CustomerContract;
 
 class Customer extends Model {
 
@@ -54,6 +55,7 @@ class Customer extends Model {
         'full_city',
         'region_id',
         'country_id',
+        'last_contract',
     ];
 
     public function getFullCityAttribute() {
@@ -70,6 +72,11 @@ class Customer extends Model {
         ];
 
         return  implode(', ', $r);
+    }
+
+    public function getLastContractAttribute() {
+        
+        return 'aaaaa';
     }
 
     public function getRegionIdAttribute() {
@@ -94,6 +101,10 @@ class Customer extends Model {
 
     public function city() {
         return $this->belongsTo(City::class, 'city_id');
+    }
+
+    function contracts() {
+        return $this->hasMany(CustomerContract::class, 'customer_id')->orderBy('date_to', 'desc');
     }
 
     public static function getItems($input) {
