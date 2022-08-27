@@ -42,19 +42,19 @@ class CustomerContract extends Model {
 
     /**
      * Diferenta de azi pana la date_to
-     * < 0 ==> OK
+     * > 0 ==> OK
      * = 0 ==> expira azi
-     * > 0 ==> a expirat
+     * < 0 ==> a expirat
      */
     public function getDaysDifferenceAttribute() {   
         $now = Carbon::now();
         $expire = Carbon::createFromFormat('Y-m-d', $this->date_to);
         
-        $daysDiff = $now->diffInDays($expire);
-        $hoursDiff = $now->diffInHours($expire);
+        $daysDiff = $expire->diffInDays($now);
+        $hoursDiff = $expire->diffInHours($now);
 
         $color = 'green';
-        if($daysDiff > 0)
+        if($daysDiff < 0)
         {
             $color = 'red';
         }
@@ -63,7 +63,7 @@ class CustomerContract extends Model {
             if($daysDiff == 0)
             {
                 $color = 'orange';
-                if($hoursDiff > 0)
+                if($hoursDiff < 0)
                 {
                     $color = 'red';
                 }
@@ -76,7 +76,7 @@ class CustomerContract extends Model {
             'days' => $daysDiff,
             'hours' => $hoursDiff,
             'color' => $color,
-            'human' => $now->diffForHumans($expire),
+            'human' => $expire->diffForHumans($now),
         ];
     }
 
