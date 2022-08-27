@@ -66,7 +66,7 @@ class Customer extends Model {
         $r = [
             $this->city->name,
             $this->city->region->name,
-            $this->city->region->contry->name,
+            $this->city->region->country->name,
         ];
 
         return explode(', ', $r);
