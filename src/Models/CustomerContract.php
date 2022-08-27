@@ -54,7 +54,7 @@ class CustomerContract extends Model {
         $hoursDiff = $expire->diffInHours($now, false);
 
         $color = 'green';
-        if($daysDiff < 0)
+        if($daysDiff > 0)
         {
             $color = 'red';
         }
@@ -63,7 +63,7 @@ class CustomerContract extends Model {
             if($daysDiff == 0)
             {
                 $color = 'orange';
-                if($hoursDiff < 0)
+                if($hoursDiff > 0)
                 {
                     $color = 'red';
                 }
