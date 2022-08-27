@@ -50,6 +50,44 @@ class Customer extends Model {
         'deleted_by',
     ];
 
+    protected $appends = [
+        'full_city',
+        'region_id',
+        'country_id',
+    ];
+
+    public function getFullCityAttribute() {
+        
+        if( ! $this->city_id )
+        {
+            return NULL;
+        }
+
+        $r = [
+            $this->city->name,
+            $this->city->region->name,
+            $this->city->region->contry->name,
+        ];
+
+        return explode(', ', $r);
+    }
+
+    public function getRegionIdAttribute() {
+        if( ! $this->city_id )
+        {
+            return NULL;
+        }
+        return $this->city->region->id;
+    }
+
+    public function getCountryIdAttribute() {
+        if( ! $this->city_id )
+        {
+            return NULL;
+        }
+        return $this->city->region->country->id;
+    }
+
     public function mystatus() {
         return $this->belongsTo(CustomerStatus::class, 'status', 'slug');
     }
