@@ -49,7 +49,7 @@ class Customer extends Model {
     ];
 
     public function mystatus() {
-        return $this->belongsTo(CustomerStatus::class, 'slug', 'status');
+        return $this->belongsTo(CustomerStatus::class, 'status', 'slug');
     }
 
     public static function getItems($input) {
