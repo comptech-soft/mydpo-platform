@@ -5,6 +5,7 @@ namespace MyDpo\Models;
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Helpers\Performers\Datatable\DoAction;
+use MyDpo\Models\CustomerStatus;
 
 class Customer extends Model {
 
@@ -19,7 +20,10 @@ class Customer extends Model {
         'deleted_by' => 'integer',
     ];
 
-    // protected $with = ['city.region.country', 'contracts.orders.services.service', 'persons.user', 'departments'];
+    protected $with = [
+        'mystatus', 
+        // 'city.region.country', 'contracts.orders.services.service', 'persons.user', 'departments'
+    ];
 
     protected $fillable = [
         'id',
@@ -43,6 +47,10 @@ class Customer extends Model {
         'updated_by',
         'deleted_by',
     ];
+
+    public function mystatus() {
+        return $this->belongsTo(CustomerStatus::class, 'slug', 'status');
+    }
 
     public static function getItems($input) {
         return (new GetItems($input, self::query(), __CLASS__))->Perform();
