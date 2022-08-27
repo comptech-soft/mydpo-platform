@@ -10,6 +10,8 @@ Route::middleware('verified')->group(function () {
 
     Route::get('my-profile', [MyProfileController::class, 'index']);
 
+    require __DIR__ . '/customers-statuses/routes.php';
+
     require __DIR__ . '/admin/routes.php';
 
 });
