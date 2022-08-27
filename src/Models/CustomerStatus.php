@@ -4,7 +4,9 @@ namespace MyDpo\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Customer extends Model {
+class CustomerStatus extends Model {
+
+    protected $table = 'customers-statuses';
 
     protected $casts = [
         'props' => 'json',

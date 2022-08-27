@@ -8,6 +8,8 @@ use MyDpo\Helpers\Performers\Datatable\DoAction;
 
 class Customer extends Model {
 
+    protected $table = 'customers';
+
     protected $casts = [
         'logo' => 'json',
         'city_id' => 'integer',
