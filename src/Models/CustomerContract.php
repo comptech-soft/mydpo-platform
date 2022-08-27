@@ -50,11 +50,14 @@ class CustomerContract extends Model {
         $now = Carbon::now();
         $expire = Carbon::createFromFormat('Y-m-d', $this->date_to);
         
-        $diff = $now->diffInDays($expire);
+        $daysDiff = $now->diffInDays($expire);
+        $hoursDiff = $now->diffInHours($expire);
+
         return [
-            'now' => $now->format('d.m.Y'),
+            'now' => $now->format('Y-m-d'),
             'date_to' => $this->date_to,
-            'diff' => $diff,
+            'days' => $daysDiff,
+            'hours' => $hoursDiff,
         ];
     }
 
