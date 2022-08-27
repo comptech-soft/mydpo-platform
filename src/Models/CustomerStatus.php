@@ -17,7 +17,14 @@ class CustomerStatus extends Model {
         'name',
         'slug',
         'props',
-      ];
+    ];
 
+    protected $append = [
+        'initial',
+    ];
+
+    public function getInitialAttribute() {
+        return strtoupper($this->name[0]);
+    }
 
 }
