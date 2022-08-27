@@ -69,7 +69,7 @@ class Customer extends Model {
             $this->city->region->country->name,
         ];
 
-        return explode(', ', $r);
+        return  implode(', ', $r);
     }
 
     public function getRegionIdAttribute() {
