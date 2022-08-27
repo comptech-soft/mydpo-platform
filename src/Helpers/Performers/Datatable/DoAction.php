@@ -173,7 +173,7 @@ class DoAction extends Perform {
 
         activity()
             ->by(\Auth::user())
-            ->on($this->model)
+            ->on($this->record)
             ->withProperties(
                 [
                     'record' => $this->record,
