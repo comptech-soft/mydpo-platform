@@ -47,9 +47,14 @@ class CustomerContract extends Model {
      * > 0 ==> a expirat
      */
     public function getDaysDifferenceAttribute() {   
+        $now = Carbon::now();
+        $expire = Carbon::createFromFormat('Y-m-d', $this->date_to);
+        
+        $diff = $now->diffInDays($expire);
         return [
-            'now' => Carbon::now(),
-            'date_to' => Carbon::createFromFormat('Y-m-d', $this->date_to),
+            'now' => $now->format('d.m.Y'),
+            'date_to' => $this->date_to,
+            'diff' => $diff,
         ];
     }
 
