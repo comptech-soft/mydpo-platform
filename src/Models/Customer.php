@@ -72,7 +72,6 @@ class Customer extends Model {
         if( $action == 'update')
         {
             $result['name'] .= (',' . $input['id']);
-            $result['slug'] .= (',' . $input['id']);
         }
         return $result;
     }
