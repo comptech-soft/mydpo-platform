@@ -50,8 +50,8 @@ class CustomerContract extends Model {
         $now = Carbon::now();
         $expire = Carbon::createFromFormat('Y-m-d', $this->date_to);
         
-        $daysDiff = $expire->diffInDays($now);
-        $hoursDiff = $expire->diffInHours($now);
+        $daysDiff = $expire->diffInDays($now, false);
+        $hoursDiff = $expire->diffInHours($now, false);
 
         $color = 'green';
         if($daysDiff < 0)
