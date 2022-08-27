@@ -65,7 +65,6 @@ class Customer extends Model {
 
         $result = [
             'name' => 'required|max:191|unique:customers,name',
-            'slug' => 'required|size:32|unique:customers,slug',
             'email' => 'required|email',
             'city_id' => 'required|exists:cities,id',
         ];
