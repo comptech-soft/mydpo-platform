@@ -35,6 +35,13 @@ class CustomerContract extends Model {
         'deleted_by'
     ];
 
+    protected $appends = [
+        'day_difference',
+    ];
+
+    public function getDayDifferenceAttribute() {   
+        return 10;
+    }
 
     // function orders() {
     //     return $this->hasMany(CustomerOrder::class, 'contract_id')->orderBy('date', 'desc');
