@@ -20,4 +20,8 @@ class ConfigController extends Controller
     public function getItems(Request $r) {
         return SysConfig::getItems($r->all());
     }
+
+    public function doAction($action, Request $r) {
+        return SysConfig::doAction($action, $r->all());
+    }
 }
