@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Models\CustomerStatus;
+use MyDpo\Models\City;
 
 class Customer extends Model {
 
@@ -22,7 +23,8 @@ class Customer extends Model {
 
     protected $with = [
         'mystatus', 
-        // 'city.region.country', 'contracts.orders.services.service', 'persons.user', 'departments'
+        'city.region.country', 
+        //'contracts.orders.services.service', 'persons.user', 'departments'
     ];
 
     protected $fillable = [
@@ -50,6 +52,10 @@ class Customer extends Model {
 
     public function mystatus() {
         return $this->belongsTo(CustomerStatus::class, 'status', 'slug');
+    }
+
+    public function city() {
+        return $this->belongsTo(City::class, 'city_id');
     }
 
     public static function getItems($input) {

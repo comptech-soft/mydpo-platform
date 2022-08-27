@@ -185,7 +185,7 @@ class DoAction extends Perform {
             ->createdAt($now = now())
             ->log(
                 __(
-                    'Utilizatorul :name a executat acțiunea :action', 
+                    ':name a executat acțiunea :action', 
                     [
                         'name' => \Auth::user()->full_name,
                         'action' => $this->action,

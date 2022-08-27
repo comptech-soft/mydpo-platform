@@ -27,7 +27,7 @@ class TrackUserLogin
                 ->createdAt($now = now())
                 ->log(
                     __(
-                        'Utilizatorul :name a intrat in sistem', 
+                        ':name a intrat in sistem', 
                         [
                             'name' => $event->user->full_name 
                         ]
