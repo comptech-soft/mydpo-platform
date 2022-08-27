@@ -76,7 +76,7 @@ class Customer extends Model {
 
     public function getLastContractAttribute() {
         
-        return 'aaaaa';
+        return $this->contracts->first();
     }
 
     public function getRegionIdAttribute() {
