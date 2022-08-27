@@ -7,13 +7,11 @@ use Illuminate\Http\Request;
 use MyDpo\Helpers\Response;
 use MyDpo\Models\CustomerStatus;
 
-class CustomersController extends Controller
+class CustomersStatusesController extends Controller
 {
     
     public function getItems(Request $r) {
         return CustomerStatus::getItems($r->all());
     }
-
-
 
 }
