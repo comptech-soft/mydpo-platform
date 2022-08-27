@@ -3,6 +3,7 @@
 namespace MyDpo\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 use MyDpo\Models\Customer;
 
 class CustomerContract extends Model {
@@ -36,11 +37,20 @@ class CustomerContract extends Model {
     ];
 
     protected $appends = [
-        'day_difference',
+        'days_difference',
     ];
 
-    public function getDayDifferenceAttribute() {   
-        return 10;
+    /**
+     * Diferenta de azi pana la date_to
+     * < 0 ==> OK
+     * = 0 ==> expira azi
+     * > 0 ==> a expirat
+     */
+    public function getDaysDifferenceAttribute() {   
+        return [
+            'now' => Carbon::now(),
+            'date_to' => $this->date_to,
+        ];
     }
 
     // function orders() {
