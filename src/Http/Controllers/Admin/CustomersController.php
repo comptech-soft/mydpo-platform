@@ -5,6 +5,7 @@ namespace MyDpo\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Helpers\Response;
+use MyDpo\Models\Customer;
 
 class CustomersController extends Controller
 {
@@ -14,6 +15,14 @@ class CustomersController extends Controller
             '~templates.index', 
             asset('apps/customers/index.js')
         );
+    }
+
+    public function getItems(Request $r) {
+        return Customer::getItems($r->all());
+    }
+
+    public function doAction($action, Request $r) {
+        return Customer::doAction($action, $r->all());
     }
 
 }

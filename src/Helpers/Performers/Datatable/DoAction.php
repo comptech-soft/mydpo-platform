@@ -177,8 +177,7 @@ class DoAction extends Perform {
             ->withProperties(
                 [
                     'input' => request()->all(),
-                    'ip' => request()->all(),
-                    'old' => $this->record,
+                    'ip' => request()->ip(),
                     'new' => $this->payload['record'],
                 ]
             )

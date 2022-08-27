@@ -19,7 +19,8 @@ class TrackUserLogin
                 ->withProperties(
                     [
                         'input' => request()->all(),
-                        'ip' => request()->all(),
+                        'ip' => request()->ip(),
+                        'user' => $event->user,
                     ]
                 )
                 ->event('login')
