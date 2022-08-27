@@ -176,10 +176,10 @@ class DoAction extends Perform {
             ->on($this->record)
             ->withProperties(
                 [
-                    'record' => $this->record,
                     'input' => request()->all(),
                     'ip' => request()->all(),
-
+                    'old' => $this->record,
+                    'new' => $this->payload['record'],
                 ]
             )
             ->event($this->action)
