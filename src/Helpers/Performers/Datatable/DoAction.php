@@ -162,6 +162,7 @@ class DoAction extends Perform {
         {
             return call_user_func([$this->model, $method], $this->input, $this->record);
         }
+
         return $this->{$method}();
     }
 
@@ -169,6 +170,29 @@ class DoAction extends Perform {
         $this->payload = [
             'record' => $this->DispatchAction(),
         ];
+
+        activity()
+            ->by(\Auth::user())
+            ->on($this->model)
+            ->withProperties(
+                [
+                    'record' => $this->record,
+                    'input' => request()->all(),
+                    'ip' => request()->all(),
+
+                ]
+            )
+            ->event($this->action)
+            ->createdAt($now = now())
+            ->log(
+                __(
+                    'Utilizatorul :name a executat acțiunea :action', 
+                    [
+                        'name' => \Auth::user()->full_name,
+                        'action' => $this->action,
+                    ]
+                ), 
+            );
     }
 
 }
