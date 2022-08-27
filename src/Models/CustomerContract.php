@@ -75,6 +75,7 @@ class CustomerContract extends Model {
             'date_to' => $this->date_to,
             'days' => $daysDiff,
             'hours' => $hoursDiff,
+            'color' => $color,
         ];
     }
 
