@@ -53,6 +53,23 @@ class CustomerContract extends Model {
         $daysDiff = $now->diffInDays($expire);
         $hoursDiff = $now->diffInHours($expire);
 
+        $color = 'green';
+        if($daysDiff > 0)
+        {
+            $color = 'red';
+        }
+        else
+        {
+            if($daysDiff == 0)
+            {
+                $color = 'orange';
+                if($hoursDiff > 0)
+                {
+                    $color = 'red';
+                }
+            }
+        }
+
         return [
             'now' => $now->format('Y-m-d'),
             'date_to' => $this->date_to,
