@@ -1,8 +1,8 @@
 <?php
 
-namespace B2B\Classes\Comptech\Performers\Datatable;
+namespace MyDpo\Helpers\Performers\Datatable;
 
-use B2B\Classes\Comptech\Helpers\Perform;
+use MyDpo\Helpers\Perform;
 
 class DoAction extends Perform {
 
