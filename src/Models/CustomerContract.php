@@ -76,6 +76,7 @@ class CustomerContract extends Model {
             'days' => $daysDiff,
             'hours' => $hoursDiff,
             'color' => $color,
+            'human' => $now->diffForHumans($expire),
         ];
     }
 
