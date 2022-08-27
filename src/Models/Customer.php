@@ -56,6 +56,28 @@ class Customer extends Model {
         return (new GetItems($input, self::query(), __CLASS__))->Perform();
     }
 
+    public static function GetRules($action, $input) {
+
+        if($action == 'delete')
+        {
+            return NULL;
+        }
+
+        $result = [
+            'name' => 'required|max:191|unique:customers,name',
+            'slug' => 'required|size:32|unique:customers,slug',
+            'email' => 'required|email',
+            'city_id' => 'required|exists:cities,id',
+        ];
+
+        if( $action == 'update')
+        {
+            $result['name'] .= (',' . $input['id']);
+            $result['slug'] .= (',' . $input['id']);
+        }
+        return $result;
+    }
+
     public static function doAction($action, $input) {
         return (new DoAction($action, $input, __CLASS__))->Perform();
     }
