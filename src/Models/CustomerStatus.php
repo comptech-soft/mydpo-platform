@@ -19,7 +19,7 @@ class CustomerStatus extends Model {
         'props',
     ];
 
-    protected $append = [
+    protected $appends = [
         'initial',
     ];
 
