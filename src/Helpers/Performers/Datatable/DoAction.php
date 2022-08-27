@@ -82,12 +82,12 @@ class DoAction extends Perform {
 
         if( ( ($this->action == 'insert') || ($this->action == 'duplicate') ) && $this->addCreatedBy)
         {   
-            $r['created_by'] = \Sentinel::check() ? \Sentinel::check()->id : NULL;
+            $r['created_by'] = \Auth::check() ? \Auth::check()->id : NULL;
         }
 
         if(($this->action == 'update') && $this->addUpdatedBy)
         {   
-            $r['updated_by'] = \Sentinel::check() ? \Sentinel::check()->id : NULL;
+            $r['updated_by'] = \Auth::check() ? \Auth::check()->id : NULL;
         }
 
         return $r;
