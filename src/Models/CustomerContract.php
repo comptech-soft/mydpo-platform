@@ -49,7 +49,7 @@ class CustomerContract extends Model {
     public function getDaysDifferenceAttribute() {   
         return [
             'now' => Carbon::now(),
-            'date_to' => $this->date_to,
+            'date_to' => Carbon::createFromFormat('Y-m-d', $this->date_to),
         ];
     }
 
