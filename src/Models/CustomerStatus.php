@@ -4,6 +4,7 @@ namespace MyDpo\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
+use MyDpo\Models\Customer;
 
 class CustomerStatus extends Model {
 
@@ -28,8 +29,12 @@ class CustomerStatus extends Model {
         return strtoupper($this->name[0]);
     }
 
+    function customers() {
+        return $this->hasMany(Customer::class, 'slug', 'status');
+    }
+
     public static function getItems($input) {
-        return (new GetItems($input, self::query(), __CLASS__))->Perform();
+        return (new GetItems($input, self::query()->withCount('customers'), __CLASS__))->Perform();
     }
 
 
