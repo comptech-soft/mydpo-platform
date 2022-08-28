@@ -43,7 +43,12 @@ class CustomerContract extends Model {
 
     protected $appends = [
         'days_difference',
+        'last_order',
     ];
+
+    public function getLastOrderAttribute() {
+        return $this->orders->first();
+    }
 
     function orders() {
         return $this->hasMany(CustomerOrder::class, 'contract_id')->orderBy('date_to', 'desc');
