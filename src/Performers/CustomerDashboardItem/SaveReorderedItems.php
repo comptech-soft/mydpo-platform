@@ -7,11 +7,17 @@ use MyDpo\Models\UserSetting;
 
 class SaveReorderedItems extends Perform {
 
+    public static function MakeSettingCode($platform) {
+        return 'customer-dashboard-' . $platform . '-' . $customer_id . '-' . $user_id;
+    }
+    
     public function Action() {
 
-        dd($this->input);
-
-        $code = 'customer-dashboard-' . $this->input['platform'] . ($this->input['customer_id'] ? '-' . $this->input['customer_id'] : '');
+        $code = self::MakeSettingCode(
+            $this->input['platform'],
+            $this->input['customer_id'],
+            $this->input['user_id']
+        );
         
         UserSetting::saveSetting([
             'user_id' => $this->input['user_id'], 
