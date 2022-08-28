@@ -1,6 +1,6 @@
 <?php
 
-namespace B2B\Models\Decalex;
+namespace MyDpo\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Performers\UserSetting\SaveSetting;
