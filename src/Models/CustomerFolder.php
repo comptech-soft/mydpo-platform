@@ -45,7 +45,8 @@ class CustomerFolder extends Model {
         return (new GetItems(
             $input, 
             self::query()
-                ->whereRaw('((`customers-folders`.`deleted` IS NULL) OR (`customers-folders`.`deleted` = 0))'), 
+                ->whereRaw('((`customers-folders`.`deleted` IS NULL) OR (`customers-folders`.`deleted` = 0))')
+                ->with(['children', 'files']), 
             __CLASS__
         ))->Perform();
     }
