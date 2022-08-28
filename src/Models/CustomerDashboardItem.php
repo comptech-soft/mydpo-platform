@@ -36,4 +36,9 @@ class CustomerDashboardItem extends Model {
     public static function getItems($input) {
         return (new GetItems($input, self::query()->with(['children']), __CLASS__))->Perform();
     }
+
+    public static function saveReorderedItems($input) {
+        dd($input);
+    }
+    
 }

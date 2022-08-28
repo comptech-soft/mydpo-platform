@@ -14,4 +14,8 @@ class CustomersDashboardItemsController extends Controller
         return CustomerDashboardItem::getItems($r->all());
     }
 
+    public function saveReorderedItems(Request $r) {
+        return CustomerDashboardItem::saveReorderedItems($r->all());
+    }
+    
 }
