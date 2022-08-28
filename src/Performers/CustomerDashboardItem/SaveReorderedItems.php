@@ -10,7 +10,7 @@ class SaveReorderedItems extends Perform {
     public static function MakeSettingCode($platform) {
         return 'customer-dashboard-' . $platform . '-' . $customer_id . '-' . $user_id;
     }
-    
+
     public function Action() {
 
         $code = self::MakeSettingCode(
@@ -22,7 +22,7 @@ class SaveReorderedItems extends Perform {
         UserSetting::saveSetting([
             'user_id' => $this->input['user_id'], 
             'code' => $code ,
-            'value' => $this->input['lists'],
+            'value' => $this->input['items'],
         ]);  
     }
 }
