@@ -14,6 +14,18 @@ trait DaysDifference {
      * < 0 ==> a expirat
      */
     public function getDaysDifferenceAttribute() {   
+        if( ! $this->date_to )
+        {
+            return [
+                'now' => $now->format('Y-m-d'),
+                'date_to' => $this->date_to,
+                'days' => NULL,
+                'hours' => NULL,
+                'color' => NULL,
+                'human' => NULL,
+            ];
+        }
+
         $now = Carbon::now();
         $expire = Carbon::createFromFormat('Y-m-d', $this->date_to);
         
