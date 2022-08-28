@@ -3,54 +3,61 @@
 namespace MyDpo\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Carbon\Carbon;
 use MyDpo\Models\Customer;
-use MyDpo\Models\CustomerOrder;
+use MyDpo\Models\CustomerContract;
 
 use MyDpo\Traits\DaysDifference;
 
-class CustomerContract extends Model {
-
-    use DaysDifference;
+class CustomerOrder extends Model {
     
-    protected $table = 'customers-contracts';
+    use DaysDifference;
+
+    protected $table = 'customers-orders';
 
     protected $casts = [
         'props' => 'json',
+        'customer_id' => 'integer',
+        'contract_id' => 'integer',
         'prelungire_automata' => 'integer',
         'created_by' => 'integer',
         'updated_by' => 'integer',
-        'deleted_by' => 'integer',
-        'deleted' => 'integer',
-        'customer_id' => 'integer',
         'date_to_history' => 'json',
+        'deleted' => 'integer',
     ];
 
     protected $fillable = [
         'id',
         'number',
-        'date_from',
+        'date',
         'date_to',
         'customer_id',
+        'contract_id',
         'prelungire_automata',
+        'date_to_history',
         'deleted',
-        'status',
         'props',
         'created_by',
         'updated_by',
-        'deleted_by'
+        'deleted_by',
     ];
 
     protected $appends = [
         'days_difference',
     ];
 
-    function orders() {
-        return $this->hasMany(CustomerOrder::class, 'contract_id')->orderBy('date_to', 'desc');
-    }
+    /** order->services */
+    // function services() {
+    //     return $this->hasMany(CustomerOrderService::class, 'order_id');
+    // }
     
     public function customer() {
         return $this->belongsTo(Customer::class, 'customer_id');
     }
+
+    /** order->contract */
+    public function contract() {
+        return $this->belongsTo(CustomerContract::class, 'contract_id');
+    }
+    
 
 }
