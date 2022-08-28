@@ -3,8 +3,9 @@
 namespace MyDpo\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
 use Kalnoy\Nestedset\NodeTrait;
+use MyDpo\Helpers\Performers\Datatable\GetItems;
+use MyDpo\Models\CustomerFile;
 
 class CustomerFolder extends Model {
 
@@ -12,7 +13,7 @@ class CustomerFolder extends Model {
     
     protected $table = 'customers-folders';
 
-    // protected $with = ['children', 'files'];
+    protected $with = ['children', 'files'];
 
     protected $casts = [
         'id' => 'integer',
@@ -35,5 +36,19 @@ class CustomerFolder extends Model {
         'updated_by',
         'deleted_by',
     ];
+
+    function files() {
+        return $this->hasMany(CustomerFile::class, 'folder_id');
+    }
+
+    public static function getItems($input) {
+        return (new GetItems(
+            $input, 
+            self::query()
+                ->whereRaw('((`customers-folders`.`deleted` IS NULL) OR (`customers-folders`.`deleted` = 0))'), 
+            __CLASS__
+        ))->Perform();
+    }
+
 
 }
