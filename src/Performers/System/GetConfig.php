@@ -7,7 +7,6 @@ use MyDpo\Models\SysConfig;
 
 class GetConfig extends Perform {
 
-
     public function Action() {
     
         $user = \Auth::user();

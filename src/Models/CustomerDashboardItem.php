@@ -5,6 +5,7 @@ namespace MyDpo\Models;
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
 use Kalnoy\Nestedset\NodeTrait;
+use MyDpo\Performers\CustomerDashboardItem\SaveReorderedItems;
 
 class CustomerDashboardItem extends Model {
 
@@ -38,7 +39,13 @@ class CustomerDashboardItem extends Model {
     }
 
     public static function saveReorderedItems($input) {
-        dd($input);
+        return 
+            (new SaveReorderedItems(NULL))
+            ->SetSuccessMessage(NULL)
+            ->SetExceptionMessage([
+                \Exception::class => NULL,
+            ])
+            ->Perform();
     }
     
 }
