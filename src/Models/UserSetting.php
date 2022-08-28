@@ -44,8 +44,6 @@ class UserSetting extends Model {
     }
 
     public static function saveSetting($input) {
-
-        dd($input);
         return (new SaveSetting($input))
             ->SetSuccessMessage('Saved successfully!')
             ->Perform();
