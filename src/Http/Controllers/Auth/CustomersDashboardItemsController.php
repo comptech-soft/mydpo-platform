@@ -11,7 +11,7 @@ class CustomersDashboardItemsController extends Controller
 {
     
     public function getItems(Request $r) {
-        return CustCustomerDashboardItemomerStatus::getItems($r->all());
+        return CustomerDashboardItem::getItems($r->all());
     }
 
 }
