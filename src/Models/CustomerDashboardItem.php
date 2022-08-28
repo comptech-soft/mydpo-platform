@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
 use Kalnoy\Nestedset\NodeTrait;
 
-class DashboardItem extends Model {
+class CustomerDashboardItem extends Model {
 
     use NodeTrait;
 
-    protected $table = 'dashboard-items';
+    protected $table = 'customers-dashboard-items';
 
     protected $casts = [
         'props' => 'json',
