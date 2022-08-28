@@ -40,7 +40,7 @@ class CustomerDashboardItem extends Model {
 
     public static function saveReorderedItems($input) {
         return 
-            (new SaveReorderedItems(NULL))
+            (new SaveReorderedItems($input))
             ->SetSuccessMessage(NULL)
             ->SetExceptionMessage([
                 \Exception::class => NULL,
