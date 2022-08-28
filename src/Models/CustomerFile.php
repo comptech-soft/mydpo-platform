@@ -3,13 +3,14 @@
 namespace MyDpo\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use MyDpo\Models\CustomerFolder;
 
 class CustomerFile extends Model {
 
     
     protected $table = 'customers-files';
 
-    // protected $appends  = ['icon', 'is_image', 'is_office', 'just_name'];
+    protected $appends  = ['icon', 'is_image', 'is_office', 'just_name'];
 
     protected $casts = [
         'id' => 'integer',
@@ -45,5 +46,27 @@ class CustomerFile extends Model {
         'updated_by',
         'deleted_by',
     ];
+
+    public function getIconAttribute() {
+        return config('app.url') . '/images/extensions/'. strtolower($this->file_original_extension) . '.png';
+    }
+
+    public function getIsImageAttribute() {
+        $ext = strtolower($this->file_original_extension);
+        return in_array($ext, ['jpg', 'jpeg', 'png']);
+    }   
+
+    public function getIsOfficeAttribute() {
+        $ext = strtolower($this->file_original_extension);
+        return in_array($ext, ['doc', 'docx', 'xls', 'xlsx']);
+    }  
+
+    public function getJustNameAttribute() {
+        return \Str::replace('.' . $this->file_original_extension, '', $this->file_original_name);
+    } 
+
+    function folder() {
+        return $this->belongsTo(CustomerFolder::class, 'folder_id');
+    }
 
 }
