@@ -14,7 +14,6 @@ class SaveSetting extends Perform {
         if(! $record)
         {
             $record = UserSetting::create($this->input);
-            dd($record);
         }
         else
         {
