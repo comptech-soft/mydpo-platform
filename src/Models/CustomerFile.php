@@ -48,7 +48,7 @@ class CustomerFile extends Model {
     ];
 
     public function getIconAttribute() {
-        return config('app.url') . '/images/extensions/'. strtolower($this->file_original_extension) . '.png';
+        return config('app.url') . '/imgs/extensions/'. strtolower($this->file_original_extension) . '.png';
     }
 
     public function getIsImageAttribute() {
