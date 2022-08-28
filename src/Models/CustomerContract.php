@@ -3,7 +3,6 @@
 namespace MyDpo\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Carbon\Carbon;
 use MyDpo\Models\Customer;
 use MyDpo\Models\CustomerOrder;
 

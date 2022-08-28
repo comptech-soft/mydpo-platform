@@ -2,6 +2,8 @@
 
 namespace MyDpo\Traits;
 
+use Carbon\Carbon;
+
 trait DaysDifference { 
 
 
