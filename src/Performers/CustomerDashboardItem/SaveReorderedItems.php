@@ -7,7 +7,7 @@ use MyDpo\Models\UserSetting;
 
 class SaveReorderedItems extends Perform {
 
-    public static function MakeSettingCode($platform) {
+    public static function MakeSettingCode($platform, $customer_id, $user_id) {
         return 'customer-dashboard-' . $platform . '-' . $customer_id . '-' . $user_id;
     }
 
