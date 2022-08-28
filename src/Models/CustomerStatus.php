@@ -30,7 +30,7 @@ class CustomerStatus extends Model {
     }
 
     function customers() {
-        return $this->hasMany(Customer::class, 'slug', 'status');
+        return $this->hasMany(Customer::class, 'status', 'slug');
     }
 
     public static function getItems($input) {
