@@ -6,6 +6,7 @@ use MyDpo\Helpers\Perform;
 use MyDpo\Models\SysConfig;
 use App\Models\User;
 use MyDpo\Models\Knolyx;
+use App\Models\Curs;
 
 class OpenKnolyxCourse extends Perform {
 
@@ -18,11 +19,17 @@ class OpenKnolyxCourse extends Perform {
             throw new \Exception('User inexistent.');
         }
         
-        
         $user = Knolyx::CreateUser($user);
 
-        dd($user);
+        if( ! $user->k_id )
+        {
+            throw new \Exception('User Knolyx inexistent.');
+        }
 
+        $course = Curs::find($this->input['curs_id']);
+
+        dd($course);
+        
         // /**
         //  * #2. GET {{baseURL}}/public/api/v1/business-rule/course/{{courseId}}
         //  */
