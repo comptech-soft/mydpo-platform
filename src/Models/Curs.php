@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Models\Decalex;
+namespace MyDpo\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
