@@ -94,7 +94,7 @@ class CustomerFile extends Model {
 
     public static function doAction($action, $input) {
 
-        $nput['file_original_name'] = $input['name'];
+        $input['file_original_name'] = $input['name'];
         return (new DoAction($action, $input, __CLASS__))->Perform();
     }
 
