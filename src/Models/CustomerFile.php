@@ -71,8 +71,17 @@ class CustomerFile extends Model {
     }
 
     public static function doInsert($input, $record) {
+        if( ! array_key_exists('files', $input) )
+        {
+            throw new \Exception('Nu am fișiere.');
+        }
 
-        dd($input);
+        if( ! is_array($input['files']) )
+        {
+            $input['files'] = [$input['files']];
+        }
+
+        dd($input['files']);
         if( $input['file'] && is_array($input['file']) )
         {
             foreach($input['file'] as $file)
