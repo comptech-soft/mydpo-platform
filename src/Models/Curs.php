@@ -57,7 +57,22 @@ class Curs extends Model {
 
     protected $appends = [
         'days_difference',
+        'my_url',
     ];
+
+    /**
+     * 
+     * ATTRIBUTES
+     * 
+     */
+    public function getMyUrlAttribute() {
+        if( ($this-> type == 'knolyx') && $this->k_id)
+        {
+            return config('knolyx.url') . $this->k_id;
+        }
+        return $this->url;
+    }
+
 
     public function category() {
         return $this->belongsTo(Category::class, 'category_id');
