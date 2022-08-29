@@ -6,9 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Models\Category;
+use MyDpo\Traits\DaysDifference;
 
 class Curs extends Model {
 
+    use DaysDifference;
+    
     protected $table = 'cursuri';
 
     protected $with = ['category'];
