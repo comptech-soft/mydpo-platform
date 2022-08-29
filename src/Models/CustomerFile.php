@@ -87,8 +87,10 @@ class CustomerFile extends Model {
 
         foreach($input['files'] as $file)
         {
-            self::ProcessFile($file, $input);
+            $record = self::ProcessFile($file, $input);
         }
+
+        return $record;
     }
 
     public static function ProcessFile($file, $input) {
@@ -124,7 +126,11 @@ class CustomerFile extends Model {
                 ];
             }
 
-            $record = self::create($inputdata);
+            return self::create($inputdata);
+        }
+        else
+        {
+            throw new \Exception('Fișier incorect.');
         }
     }
 
