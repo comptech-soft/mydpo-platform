@@ -73,6 +73,7 @@ class Curs extends Model {
                     $j->on('categories.id', '=', 'cursuri.category_id');
                 }
             )
+            ->select('cursuri.*')
         ;
     }
 
