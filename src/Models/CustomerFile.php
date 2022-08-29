@@ -86,7 +86,7 @@ class CustomerFile extends Model {
             'customer_id' => 'required|exists:customers,id',
             'file_original_extension' => 'required',
             'platform' => 'in:admin,b2b',
-            'folder_id' => 'required|exists:customers_folders,id',
+            'folder_id' => 'required|exists:customers-folders,id',
             'url' => 'required',
         ];
         return $result;
