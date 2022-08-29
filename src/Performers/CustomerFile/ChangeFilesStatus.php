@@ -5,7 +5,7 @@ namespace MyDpo\Performers\CustomerFile;
 use MyDpo\Helpers\Perform;
 // use MyDpo\Models\UserSetting;
 
-class SaveSetting extends Perform {
+class ChangeFilesStatus extends Perform {
 
     public function Action() {
 
