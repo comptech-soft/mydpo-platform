@@ -2,7 +2,7 @@
 
 namespace MyDpo\Models;
 
-class Knolyx extends Model {
+class Knolyx {
 
     
     public static function CreateUser($user) {
