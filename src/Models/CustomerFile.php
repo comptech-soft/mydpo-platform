@@ -70,9 +70,26 @@ class CustomerFile extends Model {
         return $this->belongsTo(CustomerFolder::class, 'folder_id');
     }
 
+    public static function doInsert($input, $record) {
+
+        dd($input);
+        if( $input['file'] && is_array($input['file']) )
+        {
+            foreach($input['file'] as $file)
+            {
+                self::ProcessFile($file, $input);
+            }
+        }
+        else
+        {
+            if($input['file'])
+            {
+                self::ProcessFile($input['file'], $input);
+            }
+        }
+    }
 
     public static function doAction($action, $input) {
-        dd($input);
         return (new DoAction($action, $input, __CLASS__))->Perform();
     }
 
