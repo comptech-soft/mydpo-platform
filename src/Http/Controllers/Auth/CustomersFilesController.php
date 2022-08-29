@@ -13,4 +13,8 @@ class CustomersFilesController extends Controller
         return CustomerFile::doAction($action, $r->all());
     }
 
+    public function changeFilesStatus(Request $r) {
+        return CustomerFile::changeFilesStatus($r->all());
+    }
+
 }

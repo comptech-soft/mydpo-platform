@@ -5,6 +5,7 @@ namespace MyDpo\Models;
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Models\CustomerFolder;
+use MyDpo\Performers\CustomerFile\ChangeFilesStatus;
 
 class CustomerFile extends Model {
 
@@ -69,6 +70,12 @@ class CustomerFile extends Model {
     function folder() {
         return $this->belongsTo(CustomerFolder::class, 'folder_id');
     }
+
+    public static function changeFilesStatus($input) {
+        return (new ChangeFilesStatus($input))
+            ->SetSuccessMessage('Schimbare status cu success!')
+            ->Perform();
+    } 
 
     public static function doAction($action, $input) {
         return (new DoAction($action, $input, __CLASS__))->Perform();
