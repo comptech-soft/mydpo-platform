@@ -70,7 +70,7 @@ class Curs extends Model {
             ->leftJoin(
                 'categories',
                 function($j) {
-                    $j->on('categories.id', '=', 'educatie.category_id');
+                    $j->on('categories.id', '=', 'cursuri.category_id');
                 }
             )
         ;
