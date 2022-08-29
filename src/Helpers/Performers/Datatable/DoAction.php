@@ -173,7 +173,7 @@ class DoAction extends Perform {
 
         activity()
             ->by(\Auth::user())
-            ->on($this->record)
+            ->on($this->payload['record'])
             ->withProperties(
                 [
                     'input' => request()->all(),
