@@ -11,7 +11,7 @@ use MyDpo\Traits\DaysDifference;
 class Curs extends Model {
 
     use DaysDifference;
-    
+
     protected $table = 'cursuri';
 
     protected $with = ['category'];
@@ -53,6 +53,10 @@ class Curs extends Model {
         'created_by',
         'updated_by',
         'deleted_by'
+    ];
+
+    protected $appends = [
+        'days_difference',
     ];
 
     public function category() {
