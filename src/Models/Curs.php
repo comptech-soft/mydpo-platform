@@ -80,8 +80,8 @@ class Curs extends Model {
         return (new GetItems(
             $input, 
             self::getQuery()->with([
-                'customercursuri.trimitere.detalii.customer', 
-                'customercursuri.participanti'
+                // 'customercursuri.trimitere.detalii.customer', 
+                // 'customercursuri.participanti'
             ]), 
             __CLASS__
         ))
