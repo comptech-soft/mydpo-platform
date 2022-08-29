@@ -40,14 +40,41 @@ class Knolyx {
     /**
      * #2. GET {{baseURL}}/public/api/v1/business-rule/course/{{courseId}}
      */
-    public static function GetCourseRole($course) {
+    public static function GetCourseRole($course, $user) {
         $response =  \Http::withHeaders([
             'X-Project-Id' => config('knolyx.project_id'),
             'X-Api-Key' => config('knolyx.app_key')
         ])
         ->get(config('knolyx.endpoint') . 'business-rule/course/' . $course->k_id)
         ->json();
-        
-        return $response[0];
+
+        $courseRole = $response[0];
+
+        if( ! array_key_exists('USER', $courseRole['associations']) )
+        {
+            $courseRole['associations']['USER'] = [];
+        }
+
+        if( ! in_array($user->k_id, $courseRole['associations']['USER']) )
+        {
+            $courseRole['associations']['USER'][] = $user['k_id'];
+            self::SetCourseRole($course->id, $courseRole);
+        }
+    }
+
+    /**
+     * #3. POST {{baseURL}}/public/api/v1/business-rule/course/{{courseId}}
+     */
+    public static function SetCourseRole($course_id, $courseRole) {
+        $response =  \Http::withHeaders([
+            'X-Project-Id' => config('knolyx.project_id'),
+            'X-Api-Key' => config('knolyx.app_key')
+        ])
+        ->post(
+            config('knolyx.endpoint') . 'business-rule/course/' . $course_id,  
+            [$courseRole]
+        );
+
+        dd($response);
     }
 }

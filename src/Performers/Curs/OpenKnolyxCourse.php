@@ -33,25 +33,7 @@ class OpenKnolyxCourse extends Perform {
             throw new \Exception('Curs inexistent.');
         }
 
-        $courseRole = Knolyx::GetCourseRole($course);
-
-        dd($courseRole);
-
- 
-
-        // /**
-        //  * #3. POST {{baseURL}}/public/api/v1/business-rule/course/{{courseId}}
-        //  */
-        // if( ! array_key_exists('USER', $courseRole['associations']) )
-        // {
-        //     $courseRole['associations']['USER'] = [];
-        // }
-        
-        // if( ! in_array($user['k_id'], $courseRole['associations']['USER']) )
-        // {
-        //     $courseRole['associations']['USER'][] = $user['k_id'];
-        //     self::SetCourseRole($course_id, $courseRole);
-        // }
+        $courseRole = Knolyx::GetCourseRole($course, $user);
     }
 
 }
