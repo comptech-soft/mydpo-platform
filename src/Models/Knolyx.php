@@ -58,8 +58,10 @@ class Knolyx {
         if( ! in_array($user->k_id, $courseRole['associations']['USER']) )
         {
             $courseRole['associations']['USER'][] = $user['k_id'];
-            self::SetCourseRole($course->id, $courseRole);
+            return self::SetCourseRole($course->id, $courseRole);
         }
+
+        return $courseRole;
     }
 
     /**
@@ -74,7 +76,6 @@ class Knolyx {
             config('knolyx.endpoint') . 'business-rule/course/' . $course_id,  
             [$courseRole]
         );
-
-        dd($response);
+        return $response;
     }
 }
