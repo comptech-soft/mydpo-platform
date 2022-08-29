@@ -77,7 +77,24 @@ class CustomerFile extends Model {
             ->Perform();
     } 
 
+    public static function GetRules($action, $input) {
+        if($action == 'delete')
+        {
+            return NULL;
+        }
+        $result = [
+            'customer_id' => 'required|exists:customers,id',
+            'file_original_extension' => 'required',
+            'platform' => 'in:admin,b2b',
+            'folder_id' => 'required|exists:customers_folders,id',
+            'url' => 'required',
+        ];
+        return $result;
+    }
+
     public static function doAction($action, $input) {
+
+        $nput['file_original_name'] = $input['name'];
         return (new DoAction($action, $input, __CLASS__))->Perform();
     }
 
