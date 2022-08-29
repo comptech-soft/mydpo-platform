@@ -18,15 +18,10 @@ class OpenKnolyxCourse extends Perform {
             throw new \Exception('User inexistent.');
         }
         
-        /**
-         * #1. PUT {{baseURL}}/public/api/v1/user/provision
-         */
-        Knolyx::CreateUser($user);
+        
+        $user = Knolyx::CreateUser($user);
 
-        // if( ! $user['k_id'] ) 
-        // {
-        //     throw new \Exception('Nu am utilizator Knolyx.');
-        // }
+        dd($user);
 
         // /**
         //  * #2. GET {{baseURL}}/public/api/v1/business-rule/course/{{courseId}}

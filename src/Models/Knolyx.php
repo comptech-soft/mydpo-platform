@@ -4,7 +4,9 @@ namespace MyDpo\Models;
 
 class Knolyx {
 
-    
+    /**
+     * #1. PUT {{baseURL}}/public/api/v1/user/provision
+     */
     public static function CreateUser($user) {
         if( ! $user['k_id'] )
         {
@@ -30,8 +32,8 @@ class Knolyx {
             }
 
             $user->refresh();
-
-            dd($user);
         }
+
+        return $user;
     }
 }
