@@ -50,29 +50,27 @@ class ChangeFilesStatus extends Perform {
             }
 
             $record->save();
-
-            activity()
-                ->by(\Auth::user())
-                ->on($record)
-                ->withProperties(
-                    [
-                        'input' => request()->all(),
-                        'ip' => request()->ip(),
-                    ]
-                )
-                ->event(__CLASS__)
-                ->createdAt($now = now())
-                ->log(
-                    __(
-                        ':name a schimbat statusul fișierelor', 
-                        [
-                            'name' => \Auth::user()->full_name 
-                        ]
-                    ), 
-                );
-
-            
         }
+
+        activity()
+            ->by(\Auth::user())
+            ->on($record)
+            ->withProperties(
+                [
+                    'input' => request()->all(),
+                    'ip' => request()->ip(),
+                ]
+            )
+            ->event(__CLASS__)
+            ->createdAt($now = now())
+            ->log(
+                __(
+                    ':name a schimbat statusul fișierelor', 
+                    [
+                        'name' => \Auth::user()->full_name 
+                    ]
+                ), 
+            );
         
     }
 
