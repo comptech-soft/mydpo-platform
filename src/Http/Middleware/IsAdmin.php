@@ -3,7 +3,6 @@
 namespace MyDpo\Http\Middleware;
 
 use Closure;
-// use Comptech\Helpers\Response;
 
 class IsAdmin {
 
