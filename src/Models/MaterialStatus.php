@@ -22,6 +22,7 @@ class MaterialStatus extends Model {
 
     protected $appends = [
         'at_documente',
+        'at_cursuri'
     ];
 
     public function getAtDocumenteAttribute() {
