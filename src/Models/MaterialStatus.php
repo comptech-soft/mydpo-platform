@@ -20,6 +20,14 @@ class MaterialStatus extends Model {
         'applied_to',
     ];
 
+    protected $appends = [
+        'at_documente',
+    ];
+
+    public function getAtDocumenteAttribute() {
+        return $this->applied_to->documente == 1;
+    }
+
     public static function getItems($input) {
         return (new GetItems($input, self::query(), __CLASS__))->Perform();
     }
