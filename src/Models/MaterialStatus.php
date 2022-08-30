@@ -25,7 +25,11 @@ class MaterialStatus extends Model {
     ];
 
     public function getAtDocumenteAttribute() {
-        return $this->applied_to['documente'] == 1;
+        if( array_key_exists('documente', $this->applied_to) )
+        {
+            return $this->applied_to['documente'] == 1;
+        }
+        return false;
     }
 
     public static function getItems($input) {
