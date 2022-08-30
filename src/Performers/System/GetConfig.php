@@ -4,6 +4,7 @@ namespace MyDpo\Performers\System;
 
 use MyDpo\Helpers\Perform;
 use MyDpo\Models\SysConfig;
+use MyDpo\Models\Platform;
 
 class GetConfig extends Perform {
 
@@ -28,6 +29,7 @@ class GetConfig extends Perform {
             'env' => config('app.env'),
             'platform' => config('app.platform'),
             'sysconfig' => SysConfig::all()->pluck('value', 'code'),
+            'platforms' => Platform::all()->pluck('name', 'slug'),
             'php' => [
                 'post_max_size' => self::parseSize(ini_get('post_max_size')),
                 'upload_max_filesize' => self::parseSize(ini_get('upload_max_filesize')),
