@@ -11,6 +11,7 @@ class MaterialStatus extends Model {
 
     protected $casts = [
         'applied_to' => 'json',
+        'props' => 'json',
     ];
 
     protected $fillable = [
@@ -18,6 +19,8 @@ class MaterialStatus extends Model {
         'name',
         'slug',
         'applied_to',
+        'color',
+        'props',
     ];
 
     protected $appends = [

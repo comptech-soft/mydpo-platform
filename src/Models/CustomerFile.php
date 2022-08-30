@@ -71,6 +71,10 @@ class CustomerFile extends Model {
         return $this->belongsTo(CustomerFolder::class, 'folder_id');
     }
 
+    // function folder() {
+    //     return $this->belongsTo(CustomerFolder::class, 'folder_id');
+    // }
+
     public static function changeFilesStatus($input) {
         return (new ChangeFilesStatus($input))
             ->SetSuccessMessage('Schimbare status cu success!')
