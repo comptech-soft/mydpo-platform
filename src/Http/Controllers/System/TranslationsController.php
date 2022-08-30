@@ -10,7 +10,7 @@ class TranslationsController extends Controller
 {
 
     public function createKey(Request $r) {
-        return Translation::createKey();
+        return Translation::createKey($r->all());
     }
 
 }
