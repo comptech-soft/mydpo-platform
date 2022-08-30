@@ -5,6 +5,7 @@ namespace MyDpo\Models;
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Models\CustomerFolder;
+use MyDpo\Models\MaterialStatus;
 use MyDpo\Performers\CustomerFile\ChangeFilesStatus;
 
 class CustomerFile extends Model {
@@ -12,7 +13,9 @@ class CustomerFile extends Model {
     
     protected $table = 'customers-files';
 
-    protected $appends  = ['icon', 'is_image', 'is_office', 'just_name'];
+    protected $appends = ['icon', 'is_image', 'is_office', 'just_name'];
+
+    protected $with = ['mystatus'];
 
     protected $casts = [
         'id' => 'integer',
@@ -71,9 +74,9 @@ class CustomerFile extends Model {
         return $this->belongsTo(CustomerFolder::class, 'folder_id');
     }
 
-    // function folder() {
-    //     return $this->belongsTo(CustomerFolder::class, 'folder_id');
-    // }
+    function mystatus() {
+        return $this->belongsTo(MaterialStatus::class, 'status', 'slug');
+    }
 
     public static function changeFilesStatus($input) {
         return (new ChangeFilesStatus($input))
