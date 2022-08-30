@@ -13,7 +13,7 @@ class CreateKey extends Perform {
         {
             Translation::create([
                 'ro' => $this->input['key'],
-            ])
+            ]);
         }
     }
 
