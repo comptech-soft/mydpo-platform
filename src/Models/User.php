@@ -147,22 +147,7 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
     }
 
     public function inRoles($slugs) {
-
-        $r = FALSE;
-
-        foreach($this->roles as $i => $role)
-        {
-            $r = FALSE;
-            foreach($slugs as $j => $slug)
-            {
-                if($role->slug == $slug)
-                {
-                    $r = TRUE;
-                }
-            }
-            return $r;
-        }
-
+        return in_array($this->role->slug, $slugs);
     }
 
     public static function getItems($input) {
