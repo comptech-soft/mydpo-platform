@@ -13,7 +13,7 @@ class DeleteFiles extends Perform {
 
         activity()
             ->by(\Auth::user())
-            ->on(NULL)
+            ->on(CustomerFile::class)
             ->withProperties(
                 [
                     'input' => request()->all(),
