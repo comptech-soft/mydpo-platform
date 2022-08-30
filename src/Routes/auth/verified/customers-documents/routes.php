@@ -12,7 +12,6 @@ Route::prefix('customers-files')->group( function() {
         
     Route::post('action/{action}', [CustomersFilesController::class, 'doAction']);
     Route::post('change-files-status', [CustomersFilesController::class, 'changeFilesStatus']);
-
-    
+    Route::post('delete-files', [CustomersFilesController::class, 'deleteFiles']);
 
 });

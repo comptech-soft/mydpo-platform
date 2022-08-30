@@ -7,6 +7,7 @@ use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Models\CustomerFolder;
 use MyDpo\Models\MaterialStatus;
 use MyDpo\Performers\CustomerFile\ChangeFilesStatus;
+use MyDpo\Performers\CustomerFile\DeleteFiles;
 
 class CustomerFile extends Model {
 
@@ -81,6 +82,12 @@ class CustomerFile extends Model {
     public static function changeFilesStatus($input) {
         return (new ChangeFilesStatus($input))
             ->SetSuccessMessage('Schimbare status cu success!')
+            ->Perform();
+    } 
+
+    public static function deleteFiles($input) {
+        return (new DeleteFiles($input))
+            ->SetSuccessMessage('Ștergere fișiere cu success!')
             ->Perform();
     } 
 

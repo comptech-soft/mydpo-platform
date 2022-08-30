@@ -16,4 +16,10 @@ class CustomersFilesController extends Controller
         return CustomerFile::changeFilesStatus($r->all());
     }
 
+    public function deleteFiles(Request $r) {
+        return CustomerFile::deleteFiles($r->all());
+    }
+
+    
+
 }
