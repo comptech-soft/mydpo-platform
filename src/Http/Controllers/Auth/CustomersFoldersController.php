@@ -13,4 +13,8 @@ class CustomersFoldersController extends Controller
         return CustomerFolder::getItems($r->all());
     }
 
+    public function doAction($action, Request $r) {
+        return CustomerFile::doAction($action, $r->all());
+    }
+
 }

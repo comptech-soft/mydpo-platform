@@ -6,6 +6,8 @@ use MyDpo\Http\Controllers\Auth\CustomersFilesController;
 Route::prefix('customers-folders')->group( function() {
         
     Route::post('items', [CustomersFoldersController::class, 'getItems']);
+    Route::post('action/{action}', [CustomersFoldersController::class, 'doAction']);
+
 });
 
 Route::prefix('customers-files')->group( function() {
