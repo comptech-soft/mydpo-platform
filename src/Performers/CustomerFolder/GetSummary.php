@@ -42,8 +42,8 @@ class GetSummary extends Perform {
         $this->payload = [
 
             'folders' => $folders[0],
-            'files' => $files[0],
-            
+            'files' => $files,
+
         ];
     
     }
