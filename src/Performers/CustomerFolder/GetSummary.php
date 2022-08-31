@@ -9,7 +9,7 @@ class GetSummary extends Perform {
 
     public function Action() {
 
-        $folers = \DB::select("
+        $folders = \DB::select("
             SELECT
                 COUNT(*) AS `count_folders`
             FROM 
