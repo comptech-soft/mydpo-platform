@@ -59,6 +59,7 @@ class CustomerFolder extends Model {
         }
         $result = [
             'customer_id' => 'required|exists:customers,id',
+            'platform' => 'in:admin,b2b',
             'name' => [
                 'required',
                 new ValidName($input),
@@ -90,6 +91,10 @@ class CustomerFolder extends Model {
     }
 
     public static function doAction($action, $input) {
+        if( ! $input['platform'] )
+        {
+            $input['platform'] = config('app.platform');
+        }
         return (new DoAction($action, $input, __CLASS__))->Perform();
     }
 
