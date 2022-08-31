@@ -8,6 +8,7 @@ use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Models\CustomerFile;
 use MyDpo\Rules\CustomerFolder\ValidName;
+use MyDpo\Performers\CustomerFolder\GetAncestors;
 
 class CustomerFolder extends Folder {
 
@@ -32,6 +33,11 @@ class CustomerFolder extends Folder {
             __CLASS__
         ))->Perform();
     }
+
+    public static function getAncestors($input) {
+        return (new GetAncestors($input))->Perform();
+    }
+
 
     public static function GetRules($action, $input) {
         if($action == 'delete')
