@@ -9,6 +9,16 @@ class GetSummary extends Perform {
 
     public function Action() {
 
+        $folers = \DB::select("
+            SELECT
+                COUNT(*) AS `count_folders`
+            FROM 
+                `customers-folders`
+            WHERE 
+                (`customers-folders`.`customer_id` = " . $this->input['customer_id'] . ") AND 
+                ((`customers-folders`.`deleted` IS NULL) OR (`customers-folders`.`deleted` = 0))
+        ");
+
         $files = \DB::select("
             SELECT
                 `materiale-statuses`.`name`,
@@ -31,6 +41,7 @@ class GetSummary extends Perform {
 
         $this->payload = [
 
+            'folders' => $folders,
             'files' => $files,
         ];
     
