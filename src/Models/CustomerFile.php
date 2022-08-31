@@ -92,7 +92,7 @@ class CustomerFile extends Model {
     } 
 
     public static function GetRules($action, $input) {
-        if($action == 'delete')
+        if( ($action == 'delete') || ($action == 'insert') )
         {
             return NULL;
         }
