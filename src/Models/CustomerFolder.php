@@ -75,7 +75,13 @@ class CustomerFolder extends Model {
 
     public static function doDelete($input, $folder) {
 
-       dd($input, $folder);
+        foreach($folder->files as $file)
+        {
+            $file->delete();
+        }
+        
+        $folder->deleted = 1;
+        $folder->save();
     
         return $folder;
     }
