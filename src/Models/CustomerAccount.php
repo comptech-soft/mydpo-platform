@@ -55,7 +55,11 @@ class CustomerAccount extends Model {
 
         $result = [
             'customer_id' => 'required|exists:customers,id',
-            'department_id' => 'required|exists:customers-departamente,id',          
+            'department_id' => 'required|exists:customers-departamente,id', 
+            'user_id' => [
+                'required',
+                'exists:users,id'
+            ],         
         ];
 
         // if($input['personSource'] == 1) // new person
