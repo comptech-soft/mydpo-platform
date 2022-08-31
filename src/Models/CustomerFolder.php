@@ -63,15 +63,27 @@ class CustomerFolder extends Folder {
         return (new DoAction($action, $input, __CLASS__))->Perform();
     }
 
-    public static function doDelete($input, $folder) {
+    function deepDelete() {
 
-        foreach($folder->files as $file)
+        foreach($this->files as $file)
         {
             $file->delete();
         }
         
-        $folder->deleted = 1;
-        $folder->save();
+        $this->deleted = 1;
+        $this->save();
+
+        foreach($this->children as $child)
+        {
+            $child->deepDelete();
+        }
+    }
+
+
+    public static function doDelete($input, $folder) {
+
+        $folder->deepDelete();
+        
     
         return $folder;
     }
