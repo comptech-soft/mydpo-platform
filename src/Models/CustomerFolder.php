@@ -69,6 +69,17 @@ class CustomerFolder extends Model {
         return $result;
     }
 
+    public static function doAction($action, $input) {
+        return (new DoAction($action, $input, __CLASS__))->Perform();
+    }
+
+    public static function dDelete($input, $folder) {
+
+       dd($input, $folder);
+    
+        return $folder;
+    }
+
     public static function doInsert($input, $folder) {
 
         if(! array_key_exists('parent_id', $input) )
@@ -89,14 +100,5 @@ class CustomerFolder extends Model {
     
         return $folder;
     }
-
-    public static function doAction($action, $input) {
-        if( ! $input['platform'] )
-        {
-            $input['platform'] = config('app.platform');
-        }
-        return (new DoAction($action, $input, __CLASS__))->Perform();
-    }
-
 
 }
