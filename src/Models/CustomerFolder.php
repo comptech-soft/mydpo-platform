@@ -9,6 +9,7 @@ use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Models\CustomerFile;
 use MyDpo\Rules\CustomerFolder\ValidName;
 use MyDpo\Performers\CustomerFolder\GetAncestors;
+use MyDpo\Performers\CustomerFolder\GetSummary;
 
 class CustomerFolder extends Folder {
 
@@ -18,7 +19,6 @@ class CustomerFolder extends Folder {
         'children',
         'files'
     ];
-
     
     function files() {
         return $this->hasMany(CustomerFile::class, 'folder_id');
@@ -38,6 +38,9 @@ class CustomerFolder extends Folder {
         return (new GetAncestors($input))->Perform();
     }
 
+    public static function getSummary($input) {
+        return (new GetSummary($input))->Perform();
+    }
 
     public static function GetRules($action, $input) {
         if($action == 'delete')

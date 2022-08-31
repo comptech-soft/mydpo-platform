@@ -17,6 +17,10 @@ class CustomersFoldersController extends Controller
         return CustomerFolder::getAncestors($r->all());
     }
 
+    public function getSummary(Request $r) {
+        return CustomerFolder::getSummary($r->all());
+    }
+    
     public function doAction($action, Request $r) {
         return CustomerFolder::doAction($action, $r->all());
     }
