@@ -3,6 +3,7 @@
 namespace MyDpo\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Models\CustomerFolder;
 use MyDpo\Models\MaterialStatus;
@@ -77,6 +78,14 @@ class CustomerFile extends Model {
 
     function mystatus() {
         return $this->belongsTo(MaterialStatus::class, 'status', 'slug');
+    }
+
+    public static function getItems($input) {
+        return (new GetItems(
+            $input, 
+            self::query(),
+            __CLASS__
+        ))->Perform();
     }
 
     public static function changeFilesStatus($input) {
