@@ -49,6 +49,7 @@ class CustomerDepartment extends Model {
                 'required', 
                 new UniqueName($input),
             ],
+            'email' => 'sometimes|nullable|email',
             'customer_id' => 'exists:customers,id',
         ];
 
