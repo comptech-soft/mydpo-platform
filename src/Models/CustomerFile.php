@@ -107,8 +107,10 @@ class CustomerFile extends Model {
     }
 
     public static function doAction($action, $input) {
-
-        $input['file_original_name'] = $input['name'];
+        if($action == 'update')
+        {
+            $input['file_original_name'] = $input['name'];
+        }
         return (new DoAction($action, $input, __CLASS__))->Perform();
     }
 
