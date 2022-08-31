@@ -15,7 +15,9 @@ class CustomerFolder extends Model {
     
     protected $table = 'customers-folders';
 
-    protected $with = ['children', 'files'];
+    protected $with = [ 
+        'files'
+    ];
 
     protected $casts = [
         'id' => 'integer',
@@ -47,7 +49,10 @@ class CustomerFolder extends Model {
         return (new GetItems(
             $input, 
             self::query()
-                ->whereRaw('((`customers-folders`.`deleted` IS NULL) OR (`customers-folders`.`deleted` = 0))'), 
+                ->whereRaw('((`customers-folders`.`deleted` IS NULL) OR (`customers-folders`.`deleted` = 0))')
+                ->with(['children' => function($q) {
+                    $q->whereRaw('((`customers-folders`.`deleted` IS NULL) OR (`customers-folders`.`deleted` = 0))');
+                }]), 
             __CLASS__
         ))->Perform();
     }
