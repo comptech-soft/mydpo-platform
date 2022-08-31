@@ -73,7 +73,7 @@ class CustomerFolder extends Model {
         return (new DoAction($action, $input, __CLASS__))->Perform();
     }
 
-    public static function dDelete($input, $folder) {
+    public static function doDelete($input, $folder) {
 
        dd($input, $folder);
     
