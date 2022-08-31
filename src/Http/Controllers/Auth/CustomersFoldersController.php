@@ -14,7 +14,7 @@ class CustomersFoldersController extends Controller
     }
 
     public function doAction($action, Request $r) {
-        return CustomerFile::doAction($action, $r->all());
+        return CustomerFolder::doAction($action, $r->all());
     }
 
 }
