@@ -5,7 +5,7 @@ namespace MyDpo\Models;
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Helpers\Performers\Datatable\DoAction;
-use MyDpo\Models\CustomerFolder;
+use MyDpo\Models\Folder;
 use MyDpo\Models\MaterialStatus;
 use MyDpo\Performers\CustomerFile\ChangeFilesStatus;
 use MyDpo\Performers\CustomerFile\DeleteFiles;
@@ -73,7 +73,7 @@ class CustomerFile extends Model {
     } 
 
     function folder() {
-        return $this->belongsTo(CustomerFolder::class, 'folder_id');
+        return $this->belongsTo(Folder::class, 'folder_id');
     }
 
     function mystatus() {
@@ -83,7 +83,12 @@ class CustomerFile extends Model {
     public static function getItems($input) {
         return (new GetItems(
             $input, 
-            self::query(),
+            self::query()
+            ->with([
+                'folder' => function($q) {
+                    $q->whereRaw('((`customers-folders`.`deleted` IS NULL) OR (`customers-folders`.`deleted` = 0))');
+                }, 
+            ]),
             __CLASS__
         ))->Perform();
     }
