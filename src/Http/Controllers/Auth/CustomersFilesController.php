@@ -8,6 +8,10 @@ use MyDpo\Models\CustomerFile;
 
 class CustomersFilesController extends Controller
 {
+    public function getItems(Request $r) {
+        return CustomerFile::getItems($r->all());
+    }
+
     public function doAction($action, Request $r) {
         return CustomerFile::doAction($action, $r->all());
     }
@@ -19,7 +23,5 @@ class CustomersFilesController extends Controller
     public function deleteFiles(Request $r) {
         return CustomerFile::deleteFiles($r->all());
     }
-
-    
 
 }

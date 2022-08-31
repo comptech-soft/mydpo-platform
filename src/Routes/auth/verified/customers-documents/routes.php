@@ -12,6 +12,7 @@ Route::prefix('customers-folders')->group( function() {
 
 Route::prefix('customers-files')->group( function() {
         
+    Route::post('items', [CustomersFilesController::class, 'getItems']);
     Route::post('action/{action}', [CustomersFilesController::class, 'doAction']);
     Route::post('change-files-status', [CustomersFilesController::class, 'changeFilesStatus']);
     Route::post('delete-files', [CustomersFilesController::class, 'deleteFiles']);
