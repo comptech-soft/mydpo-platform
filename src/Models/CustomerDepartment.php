@@ -5,6 +5,7 @@ namespace MyDpo\Models;
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Helpers\Performers\Datatable\DoAction;
+use MyDpo\Rules\CustomerDepartment\UniqueName;
 
 class CustomerDepartment extends Model {
 
@@ -36,6 +37,26 @@ class CustomerDepartment extends Model {
 
     public static function getItems($input) {
         return (new GetItems($input, self::query(), __CLASS__))->Perform();
+    }
+
+    public static function GetRules($action, $input) {
+        if($action == 'delete')
+        {
+            return NULL;
+        }
+        $result = [
+            'departament' => [
+                'required', 
+                new UniqueName($input),
+            ],
+            'customer_id' => 'exists:customers,id',
+        ];
+
+        return $result;
+    }
+
+    public static function doAction($action, $input) {
+        return (new DoAction($action, $input, __CLASS__))->Perform();
     }
 
 }
