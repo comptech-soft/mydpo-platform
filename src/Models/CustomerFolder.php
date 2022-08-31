@@ -7,7 +7,7 @@ use Kalnoy\Nestedset\NodeTrait;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Models\CustomerFile;
-use B2B\Rules\Decalex\CustomerFolder\ValidName;
+use MyDpo\Rules\CustomerFolder\ValidName;
 
 class CustomerFolder extends Model {
 
@@ -88,7 +88,7 @@ class CustomerFolder extends Model {
     
         return $folder;
     }
-    
+
     public static function doAction($action, $input) {
         return (new DoAction($action, $input, __CLASS__))->Perform();
     }
