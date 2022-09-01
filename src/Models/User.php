@@ -83,6 +83,7 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
         return !! $this->email_verified_at;
     }
 
+    /** RoleByPlatform = Rolul potrivit platformei */
     public function getRoleAttribute() {
         $r = NULL;
         foreach($this->roles as $i => $role)

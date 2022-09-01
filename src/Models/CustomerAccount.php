@@ -42,6 +42,20 @@ class CustomerAccount extends Model {
 
     protected $with = ['user', 'department'];
 
+    protected $appends = ['role'];
+
+    public function getRoleAttribute() {
+        $r = NULL;
+        foreach($this->user->roles as $i => $role)
+        {
+            if($role->type == 'b2b' )
+            {
+                $r = $role;
+            }
+        }
+        return $r;
+    }
+
     public function user() {
         return $this->belongsTo(User::class, 'user_id');
     }
