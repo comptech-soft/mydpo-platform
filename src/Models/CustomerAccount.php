@@ -5,6 +5,8 @@ namespace MyDpo\Models;
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Helpers\Performers\Datatable\DoAction;
+use MyDpo\Models\User;
+use MyDpo\Models\CustomerDepartment;
 
 class CustomerAccount extends Model {
 
@@ -16,7 +18,7 @@ class CustomerAccount extends Model {
         'newsletter' => 'integer',
         'customer_id' => 'integer',
         'user_id' => 'integer',
-        'order_no' => 'order_no',
+        'order_no' => 'integer',
         'updated_by' => 'integer',
         'created_by' => 'integer',
         'deleted_by' => 'integer',
@@ -37,6 +39,16 @@ class CustomerAccount extends Model {
         'deleted',
         'deleted_by',
     ];
+
+    protected $with = ['user', 'department'];
+
+    public function user() {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function department() {
+        return $this->belongsTo(CustomerDepartment::class, 'department_id');
+    }
 
     public static function getItems($input) {
         return (new GetItems($input, self::query(), __CLASS__))->Perform();
