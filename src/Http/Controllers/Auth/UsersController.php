@@ -13,4 +13,8 @@ class UsersController extends Controller
         return User::getItems($r->all());
     }
 
+    public function doAction($action, Request $r) {
+        return User::doAction($action, $r->all());
+    }
+
 }

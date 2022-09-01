@@ -14,6 +14,7 @@ use Laravel\Passport\HasApiTokens;
 use MyDpo\Models\Role;
 use MyDpo\Models\UserSetting;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
+use MyDpo\Helpers\Performers\Datatable\DoAction;
 
 class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
 {
@@ -154,4 +155,10 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
     public static function getItems($input) {
         return (new GetItems($input, self::query(), __CLASS__))->Perform();
     }
+
+    public static function doAction($action, $input) {
+        dd($input);
+        return (new DoAction($action, $input, __CLASS__))->Perform();
+    }
+
 }
