@@ -43,4 +43,16 @@ class Role extends Model {
     
     }
 
+    public static function getBySlug() {
+
+        $result = [];
+        
+        foreach(self::all() as $role)
+        {
+            $result[$role->slug] = $role;
+        }
+
+        return $result;
+    }
+
 }
