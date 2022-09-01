@@ -33,7 +33,7 @@ class GetConfig extends Perform {
             'sysconfig' => SysConfig::all()->pluck('value', 'code'),
             'platforms' => Platform::all()->pluck('name', 'slug'),
             'material_statuses' => MaterialStatus::all(),
-            'languages' => Langauge::getBySlug(),
+            'languages' => Language::getBySlug(),
             'php' => [
                 'post_max_size' => self::parseSize(ini_get('post_max_size')),
                 'upload_max_filesize' => self::parseSize(ini_get('upload_max_filesize')),
