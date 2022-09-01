@@ -39,7 +39,7 @@ class Role extends Model {
             'role_users', 
             'role_id', 
             'user_id'
-        )->withTimestamps();
+        )->with(['customer_id'])->withTimestamps();
     
     }
 
