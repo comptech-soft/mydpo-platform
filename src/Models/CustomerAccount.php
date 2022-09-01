@@ -49,7 +49,7 @@ class CustomerAccount extends Model {
         $r = NULL;
         foreach($this->user->roles as $i => $role)
         {
-            if($role->type == 'b2b' )
+            if( ($role->type == 'b2b') && ($role->customer_id == $this->customer_id) )
             {
                 $r = $role;
             }
