@@ -17,6 +17,7 @@ class CustomerAccount extends Model {
         'id' => 'integer',
         'newsletter' => 'integer',
         'customer_id' => 'integer',
+        'department_id' => 'integer',
         'user_id' => 'integer',
         'order_no' => 'integer',
         'updated_by' => 'integer',
@@ -27,7 +28,7 @@ class CustomerAccount extends Model {
     protected $fillable = [
         'id',
         'phone',
-        'department',
+        'department_id',
         'newsletter',
         'locale',
         'customer_id',
