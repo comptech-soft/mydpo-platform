@@ -140,7 +140,7 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
             'role_users', 
             'user_id', 
             'role_id'
-        )->withTimestamps();
+        )->with(['customer_id'])->withTimestamps();
     }
 
     function settings() {
