@@ -26,6 +26,23 @@ class RoleUser extends Model {
 
     public static function CreateAccountRole($customer_id, $user_id, $role_id) {
 
+        $record = self::where('customer_id', $customer_id)
+            ->where('user_id', $user_id)
+            ->where('role_id', $role_id)
+            ->first();
+
+        if( $record )
+        {
+            return $record;
+        }
+
+        return self::create([
+            'user_id' => $user_id,
+            'role_id' => $role_id,
+            'customer_id' => $customer_id,
+            'created_by' => \Auth::user()->id,
+        ]);
+
         dd(__METHOD__, $customer_id, $user_id, $role_id);
     }
 

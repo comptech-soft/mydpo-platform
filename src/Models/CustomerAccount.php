@@ -129,7 +129,10 @@ class CustomerAccount extends Model {
         // $user_id = $input['user_id'];
         // $role_id = $input['user']['role_id'];
 
-        RoleUser::CreateAccountRole($input['customer_id'], $input['user_id'], $input['user']['role_id']);
+        $roleUser = RoleUser::CreateAccountRole($input['customer_id'], $input['user_id'], $input['user']['role_id']);
+
+        dd($roleUser);
+        
     } 
 
 }
