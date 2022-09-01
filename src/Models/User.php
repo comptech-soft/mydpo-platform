@@ -15,6 +15,8 @@ use MyDpo\Models\Role;
 use MyDpo\Models\UserSetting;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Helpers\Performers\Datatable\DoAction;
+use Illuminate\Validation\Rules;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
 {
@@ -134,7 +136,6 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
      * RELATIONS
      * 
      */
-
     public function roles(): BelongsToMany {
         return $this->belongsToMany(
             Role::class, 
@@ -159,6 +160,47 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
     public static function doAction($action, $input) {
         dd($input);
         return (new DoAction($action, $input, __CLASS__))->Perform();
+    }
+
+    public static function GetRules($action, $input) {
+        
+        if($action == 'delete')
+        {
+            return NULL;
+        }
+
+        $result = [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ];
+
+        // if($action == 'update')
+        // {
+        //     if(array_key_exists('password', $input) && $input['password'])
+        //     {
+        //         $result['password'] = [
+        //             new ValidPassword($input['password']),
+        //         ];
+        //         $result['password_confirmation'] = [
+        //             'required',
+        //             new UpdatedPassword($input['password'], $input['password_confirmation']),
+        //         ];
+        //     }
+        //     $result['email'] .= (',' . $input['id']);
+        // }
+
+        return $result;
+    }
+
+    public static function GetMessages($action, $input) {
+        return [
+            'last_name.required' => 'Numele trebuie completat.',
+            'first_name.required' => 'Prenumele trebuie completat.',
+            'email.required' => 'Adresa de email trebuie completată.',
+            'email.email' => 'Adresa de email nu pare să fie o adresă de email corectă.',
+            'email.unique' => 'Adresa de email este deja folosită de alt utilizator',
+        ];
     }
 
 }
