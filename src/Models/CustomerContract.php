@@ -3,6 +3,8 @@
 namespace MyDpo\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use MyDpo\Helpers\Performers\Datatable\GetItems;
+use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Models\Customer;
 use MyDpo\Models\CustomerOrder;
 
@@ -55,6 +57,10 @@ class CustomerContract extends Model {
     
     public function customer() {
         return $this->belongsTo(Customer::class, 'customer_id');
+    }
+
+    public static function getItems($input) {
+        return (new GetItems($input, self::query(), __CLASS__))->Perform();
     }
 
 }

@@ -14,6 +14,7 @@ Route::middleware('verified')->group(function () {
     require __DIR__ . '/customers-dashboard-items/routes.php';
     require __DIR__ . '/customers-documents/routes.php';
     require __DIR__ . '/customers-departments/routes.php';
+    require __DIR__ . '/customers-contracte/routes.php';
     require __DIR__ . '/customers-accounts/routes.php';
     
     require __DIR__ . '/users/routes.php';
