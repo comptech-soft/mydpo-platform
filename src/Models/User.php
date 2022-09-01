@@ -185,7 +185,7 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
             'last_name' => ['required', 'string', 'max:255'],
             'first_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
-            'type' => 'in:b2b,admin',
+            'type' => ['required', 'in:b2b,admin'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ];
 
