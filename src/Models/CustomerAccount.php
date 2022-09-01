@@ -7,6 +7,7 @@ use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Models\User;
 use MyDpo\Models\CustomerDepartment;
+use MyDpo\Models\RoleUser;
 
 class CustomerAccount extends Model {
 
@@ -122,6 +123,13 @@ class CustomerAccount extends Model {
         return $result;
     }
 
+    public static function doInsert($input) {
+        
+        // $customer_id = $input['customer_id'];
+        // $user_id = $input['user_id'];
+        // $role_id = $input['user']['role_id'];
 
+        RoleUser::CreateAccountRole($input['customer_id'], $input['user_id'], $input['user']['role_id']);
+    } 
 
 }
