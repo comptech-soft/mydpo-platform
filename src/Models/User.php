@@ -158,8 +158,18 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
     }
 
     public static function doAction($action, $input) {
-        dd($input);
         return (new DoAction($action, $input, __CLASS__))->Perform();
+    }
+
+    public static function doInsert($input, $user) {
+        $user = self::create([
+            'last_name' => $input['last_name'],
+            'first_name' => $input['first_name'],
+            'email' => $input['email'],
+            'password' => Hash::make($input['password']),
+        ]);
+
+        return $user;
     }
 
     public static function GetRules($action, $input) {
