@@ -4,7 +4,7 @@ namespace MyDpo\Http\Middleware;
 
 use Closure;
 
-class IsAdmin {
+class IsB2B {
 
     public function handle($request, Closure $next) {
 
@@ -15,12 +15,12 @@ class IsAdmin {
             return redirect(config('app.url'));
         }
 
-        if( config('app.platform') != 'admin ')
+        if( config('app.platform') != 'b2b ')
         {
             return redirect(config('app.url'));
         }
 
-        if( ! $user->inRoles(['sa', 'admin', 'operator']) )
+        if( ! $user->inRoles(['master', 'customer']) )
         {
             return redirect(config('app.url'));
         }
