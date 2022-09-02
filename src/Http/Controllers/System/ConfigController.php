@@ -13,4 +13,17 @@ class ConfigController extends Controller
         return Config::getConfig();
     }
 
+    public function setLocale($locale) {
+        
+        if(! in_array($locale, ['en', 'ro']))
+        {
+            $locale = 'ro';
+        }
+
+        \App::setlocale($locale);
+        session()->put('locale', $locale);
+
+        return redirect()->back();
+    } 
+
 }
