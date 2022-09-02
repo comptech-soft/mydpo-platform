@@ -12,8 +12,8 @@ use MyDpo\Http\Controllers\System\TranslationsController;
 Route::get('/', [WelcomeController::class, 'index']);
 
 Route::prefix('system')->group(function () {
-    Route::get('set-locale/{locale}', [ConfigController::class, 'getConfig']);
-    Route::post('get-config', [ConfigController::class, 'setLocale']);
+    Route::get('set-locale/{locale}', [ConfigController::class, 'setLocale']);
+    Route::post('get-config', [ConfigController::class, 'getConfig']);
 });
 
 Route::prefix('validation')->group(function () {
