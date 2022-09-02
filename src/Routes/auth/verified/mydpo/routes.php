@@ -1,6 +1,6 @@
 <?php
 
-Route::middleware(['isb2b'])->prefix('admin')->group(function () {
+Route::middleware(['isb2b'])->group(function () {
     
     // require __DIR__ . '/clienti/routes.php';
     // require __DIR__ . '/contracte/routes.php';
