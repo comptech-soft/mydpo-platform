@@ -15,7 +15,7 @@ class IsB2B {
             return redirect(config('app.url'));
         }
 
-        if( config('app.platform') != 'b2b ')
+        if( config('app.platform') != 'b2b')
         {
             return redirect(config('app.url'));
         }

@@ -15,7 +15,7 @@ class IsAdmin {
             return redirect(config('app.url'));
         }
 
-        if( config('app.platform') != 'admin ')
+        if( config('app.platform') != 'admin')
         {
             return redirect(config('app.url'));
         }
