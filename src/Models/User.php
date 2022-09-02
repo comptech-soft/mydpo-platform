@@ -156,7 +156,7 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
             'user_id', 
             'customer_id'
         )
-        ->withPivot('phobe', 'props', 'deleted', 'created_by', 'updated_by')
+        ->withPivot('phone', 'props', 'deleted', 'created_by', 'updated_by')
         ->withTimestamps();
     }
 
