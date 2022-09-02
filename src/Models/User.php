@@ -12,6 +12,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 use MyDpo\Models\Role;
+use MyDpo\Models\Customer;
 use MyDpo\Models\UserSetting;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Helpers\Performers\Datatable\DoAction;
@@ -66,6 +67,7 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
 
     protected $with = [
         'roles',
+        'customers',
     ];
 
     protected $appends  = [
@@ -142,7 +144,20 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
             'role_users', 
             'user_id', 
             'role_id'
-        )->withPivot('customer_id')->withTimestamps();
+        )
+        ->withPivot('customer_id')
+        ->withTimestamps();
+    }
+
+    public function customers(): BelongsToMany {
+        return $this->belongsToMany(
+            Customer::class, 
+            'team-customers', 
+            'user_id', 
+            'customer_id'
+        )
+        ->withPivot('phobe', 'props', 'deleted', 'created_by', 'updated_by')
+        ->withTimestamps();
     }
 
     function settings() {
