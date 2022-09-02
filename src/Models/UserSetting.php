@@ -39,6 +39,13 @@ class UserSetting extends Model {
         'updated_by'
     ]; 
 
+    public static function saveActiveCustomer($input) {
+        return self::saveSetting([
+            ...$input,
+            'code' =>  $input['platform'] . '-active-customer'
+        ]);
+    }
+
     public static function getByUserAndCode($user_id, $code) {
         return self::where('user_id', $user_id)->where('code', $code)->first();
     }

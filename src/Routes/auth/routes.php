@@ -4,6 +4,7 @@ use MyDpo\Http\Controllers\System\DashboardController;
 use MyDpo\Http\Controllers\Usersession\EmailVerificationPromptController;
 use MyDpo\Http\Controllers\Usersession\VerifyEmailController;
 use MyDpo\Http\Controllers\Usersession\LogoutController;
+use MyDpo\Http\Controllers\System\ConfigController;
 
 /**
  * Authenticated routes
@@ -28,10 +29,15 @@ Route::middleware('auth')->group(function () {
      */
     Route::middleware(['signed', 'throttle:6,1'])->get('verify-email/{id}/{hash}', [VerifyEmailController::class, 'index'])->name('verification.verify');
 
-    /**
-     * Iesirea din platforma
-     */
-    Route::post('system/logout', [LogoutController::class, 'logout']);
+    Route::prefix('system')->group(function () {
+
+        /**
+         * Iesirea din platforma
+         */
+        Route::post('logout', [LogoutController::class, 'logout']);
+        Route::post('save-active-customer', [ConfigController::class, 'saveActiveCustomer']);
+
+    });
 
     require __DIR__ . '/verified/routes.php';
 });

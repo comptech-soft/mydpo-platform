@@ -5,6 +5,7 @@ namespace MyDpo\Http\Controllers\System;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Helpers\System\Config;
+use MyDpo\Models\UserSetting;
 
 class ConfigController extends Controller
 {
@@ -13,6 +14,10 @@ class ConfigController extends Controller
         return Config::getConfig();
     }
 
+    public function saveActiveCustomer(Request $r) {
+        return UserSetting::saveActiveCustomer($r->all());
+    }
+    
     public function setLocale($locale) {
         
         if(! in_array($locale, ['en', 'ro']))
