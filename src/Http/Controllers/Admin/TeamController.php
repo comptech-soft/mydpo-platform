@@ -14,7 +14,7 @@ class TeamController extends Controller {
 
         return Response::View(
             '~templates.index', 
-            asset('apps/' + $asset + '/index.js')
+            asset('apps/' . $asset . '/index.js')
         );
     }
 
