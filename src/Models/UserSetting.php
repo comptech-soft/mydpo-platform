@@ -42,7 +42,8 @@ class UserSetting extends Model {
     public static function saveActiveCustomer($input) {
         return self::saveSetting([
             ...$input,
-            'code' =>  $input['platform'] . '-active-customer'
+            'code' =>  $input['platform'] . '-active-customer',
+            'value' => $input['customer_id'],
         ]);
     }
 
