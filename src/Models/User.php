@@ -152,7 +152,7 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
     public function customers(): BelongsToMany {
         return $this->belongsToMany(
             Customer::class, 
-            'team-customers', 
+            'users-customers', 
             'user_id', 
             'customer_id'
         )
