@@ -49,7 +49,7 @@ class Sharematerial extends Model {
     ];
 
     protected static function booted() {
-        static::addGlobalScope( new ShareMaterialScope() );
+        static::addGlobalScope( new ShareMaterialScope );
     }
 
     /**
