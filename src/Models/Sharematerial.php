@@ -44,6 +44,7 @@ class Sharematerial extends Model {
         'ore_lucrate',
         'count_customers',
         'count_users',
+        'count_materiale',
     ];
 
 
@@ -77,6 +78,13 @@ class Sharematerial extends Model {
         return $t;
     }
 
+    public function getCountMaterialeAttribute() {
+        if(is_null($this->materiale_trimise))
+        {
+            return 0;
+        }
+        return count($this->materiale_trimise);
+    }
 
     public static function getItems($input) {
         return (new GetItems($input, self::query(), __CLASS__))->Perform();
