@@ -39,6 +39,30 @@ class Sharematerial extends Model {
         'deleted_by',
     ];
 
+    protected $appends = [
+        'ore_lucrate',
+        'count_customers',
+    ];
+
+
+    /**
+     * 
+     * ATTRIBUTES
+     * 
+     */
+    public function getOreLucrateAttribute() {
+        return is_null($this->effective_time) ? 0 : $this->effective_time; 
+    }
+
+    public function getCountCustomersAttribute() {
+        if(is_null($this->customers))
+        {
+            return 0;
+        }
+        return count($this->customers);
+    }
+
+
     public static function getItems($input) {
         return (new GetItems($input, self::query(), __CLASS__))->Perform();
     }
