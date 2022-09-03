@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Scope;
 class ShareMaterialScope implements Scope {
 
     public function apply(Builder $builder, Model $model) {
-        $builder->where('id', '<=', 100);
+        $builder->whereRaw("(`share-materiale`.`id` <= 100)");
     }
 
 }
