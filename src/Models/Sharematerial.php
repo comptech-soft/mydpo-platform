@@ -43,6 +43,7 @@ class Sharematerial extends Model {
     protected $appends = [
         'ore_lucrate',
         'count_customers',
+        'count_users',
     ];
 
 
@@ -61,6 +62,19 @@ class Sharematerial extends Model {
             return 0;
         }
         return count($this->customers);
+    }
+
+    public function getCountUsersAttribute() {
+        if(is_null($this->customers))
+        {
+            return 0;
+        }
+        $t = 0;
+        foreach($this->customers as $customer_id => $users)
+        {
+            $t += count($users);
+        }
+        return $t;
     }
 
 
