@@ -4,6 +4,7 @@ namespace MyDpo\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
+use MyDpo\Scopes\ShareMaterialScope;
 
 class Sharematerial extends Model {
 
@@ -47,9 +48,10 @@ class Sharematerial extends Model {
         'count_materiale',
     ];
 
-    public function scopeNotdeleted($query) {
-        return $query->whereRaw("(MOD(id, 2) = 0)");
+    protected static function booted() {
+        static::addGlobalScope( new ShareMaterialScope );
     }
+
     /**
      * 
      * ATTRIBUTES
@@ -89,7 +91,7 @@ class Sharematerial extends Model {
     }
 
     public static function getItems($input) {
-        return (new GetItems($input, self::query()->notdeleted(), __CLASS__))->Perform();
+        return (new GetItems($input, self::query(), __CLASS__))->Perform();
     }
 
 }
