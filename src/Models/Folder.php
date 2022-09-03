@@ -3,9 +3,9 @@
 namespace MyDpo\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use MyDpo\Scopes\FolderScope;
 
-class Folder extends Model 
-{
+class Folder extends Model  {
 
     protected $table = 'customers-folders';
 
@@ -31,6 +31,8 @@ class Folder extends Model
         'deleted_by',
     ];
 
-
+    protected static function booted() {
+        static::addGlobalScope( new FolderScope );
+    }
 
 }
