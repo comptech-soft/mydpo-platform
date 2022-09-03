@@ -48,7 +48,7 @@ class Sharematerial extends Model {
     ];
 
     public function scopeNotdeleted($query) {
-        return $query->whereRaw("((id >=50 ) AND (id <= 100))");
+        return $query->whereRaw("(MOD(id, 2) = 0");
     }
     /**
      * 
