@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Scope;
 class ShareMaterialScope implements Scope {
 
     public function apply(Builder $builder, Model $model) {
-        $builder->whereRaw("(MOD(`share-materiale`.`id`, 2) = 1)");
+        $builder->whereRaw("((`share-materiale`.`deleted` IS NULL) OR (`share-materiale`.`deleted` = 0))");
     }
 
 }
