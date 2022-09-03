@@ -117,10 +117,9 @@ class Customer extends Model {
     }
 
     public static function getItemsWithPersons($input) {
-        return (new GetItems($input, self::query()->with(['accounts']), __CLASS__))->Perform();
+        return (new GetItems($input, self::query()->with(['accounts'])->has('accounts'), __CLASS__))->Perform();
     }
     
-
     public static function GetRules($action, $input) {
 
         if($action == 'delete')
