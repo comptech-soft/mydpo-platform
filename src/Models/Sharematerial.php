@@ -17,7 +17,8 @@ class Sharematerial extends Model {
         'updated_by' => 'integer',
         'deleted_by' => 'integer',
         'deleted' => 'integer',
-        'effective_time' => 'decimal:2',
+        'effective_time' => 'float',
+        'ore_lucrate' => 'float',
     ];
 
     protected $fillable = [
