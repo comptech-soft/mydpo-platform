@@ -8,6 +8,7 @@ use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Models\CustomerStatus;
 use MyDpo\Models\City;
 use MyDpo\Models\CustomerContract;
+use MyDpo\Models\CustomerAccount;
 
 class Customer extends Model {
 
@@ -107,9 +108,18 @@ class Customer extends Model {
         return $this->hasMany(CustomerContract::class, 'customer_id')->orderBy('date_to', 'desc');
     }
 
+    function accounts() {
+        return $this->hasMany(CustomerAccount::class, 'customer_id');
+    }
+
     public static function getItems($input) {
         return (new GetItems($input, self::query(), __CLASS__))->Perform();
     }
+
+    public static function getItemsWithPersons($input) {
+        return (new GetItems($input, self::query()->with(['accounts']), __CLASS__))->Perform();
+    }
+    
 
     public static function GetRules($action, $input) {
 
