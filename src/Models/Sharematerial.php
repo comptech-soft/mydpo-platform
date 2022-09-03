@@ -4,6 +4,7 @@ namespace MyDpo\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
+use MyDpo\Scopes\ShareMaterialScope;
 
 class Sharematerial extends Model {
 
@@ -47,6 +48,9 @@ class Sharematerial extends Model {
         'count_materiale',
     ];
 
+    protected static function booted() {
+        static::addGlobalScope( new ShareMaterialScope() );
+    }
 
     /**
      * 
