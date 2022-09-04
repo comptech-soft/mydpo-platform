@@ -5,6 +5,7 @@ namespace MyDpo\Models;
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Scopes\ShareMaterialScope;
+use MyDpo\Traits\NextNumber;
 
 class Sharematerial extends Model {
 
@@ -93,5 +94,18 @@ class Sharematerial extends Model {
     public static function getItems($input) {
         return (new GetItems($input, self::query(), __CLASS__))->Perform();
     }
+
+    // public static function getNextNumber($input) {
+    //     $records = \DB::select("
+    //         SELECT 
+    //             MAX(CAST(`number` AS UNSIGNED)) as max_number 
+    //         FROM `trimiteri` 
+    //         WHERE type='" . $this->input . "'"
+    //     );
+
+    //     $this->payload = number_format(1 + $records[0]->max_number, 0, '', '');
+    // }
+
+    
 
 }
