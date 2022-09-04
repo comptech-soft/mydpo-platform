@@ -19,7 +19,7 @@ class AtLeastOne implements Rule {
             return FALSE;
         }
 
-        if( count($this->input['custmers']) == 0)
+        if( count($this->input['customers']) == 0)
         {
             return FALSE;
         }
