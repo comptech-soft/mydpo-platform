@@ -34,8 +34,8 @@ class Sharematerial extends Model {
         'date',
         'status',
         'type',
-        'completed_from',
-        'completed_to',
+        'date_from',
+        'date_to',
         'effective_time',
         'descriere',
         'customers',
@@ -124,6 +124,10 @@ class Sharematerial extends Model {
                 'date',
             ],
             'type' => 'in:centralizator,chestionar,curs',
+            'effective_time' => [
+                'number',
+                'min:0',
+            ],
             'customers' => [
                 new AtLeastOneCustomer($input),
             ],
