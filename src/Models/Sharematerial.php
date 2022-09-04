@@ -4,6 +4,7 @@ namespace MyDpo\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
+use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Scopes\ShareMaterialScope;
 use MyDpo\Traits\NextNumber;
 
@@ -105,11 +106,10 @@ class Sharematerial extends Model {
         return (new GetItems($input, self::query(), __CLASS__))->Perform();
     }
 
-    // public static function getNextNumber($input) {
-        
-
-    //     $this->payload = number_format(1 + $records[0]->max_number, 0, '', '');
-    // }
+    public static function doAction($action, $input) {
+        dd($input);
+        return (new DoAction($action, $input, __CLASS__))->Perform();
+    }
 
     
 

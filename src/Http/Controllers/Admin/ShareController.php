@@ -29,6 +29,10 @@ class ShareController extends Controller {
         return Sharematerial::getItems($r->all());
     }
 
+    public function doAction($action, Request $r) {
+        return Sharematerial::doAction($action, $r->all());
+    }
+
     public function getNextNumber(Request $r) {
         return Sharematerial::getNextNumber($r->all());
     }
