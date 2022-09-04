@@ -4,7 +4,7 @@ namespace MyDpo\Rules\Sharematerial;
 
 use Illuminate\Contracts\Validation\Rule;
 
-class AtLeastOne implements Rule {
+class AtLeastOneCustomer implements Rule {
 
     public $input = NULL;
 

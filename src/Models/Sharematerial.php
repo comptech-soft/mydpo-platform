@@ -7,7 +7,8 @@ use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Scopes\ShareMaterialScope;
 use MyDpo\Traits\NextNumber;
-use MyDpo\Rules\Sharematerial\AtLeastOne;
+use MyDpo\Rules\Sharematerial\AtLeastOneCustomer;
+use MyDpo\Rules\Sharematerial\AtLeastOneMaterial;
 
 class Sharematerial extends Model {
 
@@ -56,9 +57,7 @@ class Sharematerial extends Model {
     public $nextNumberColumn = 'number';
 
     public static function nextNumberWhere($input) {
-     
         return "type = '" . $input['type'] . "'";
-    
     }
 
     protected static function booted() {
@@ -126,7 +125,10 @@ class Sharematerial extends Model {
             ],
             'type' => 'in:centralizator,chestionar,curs',
             'customers' => [
-                new AtLeastOne($input),
+                new AtLeastOneCustomer($input),
+            ],
+            'materiale_trimise' => [
+                new AtLeastOneMaterial($input),
             ],
         ];
 
