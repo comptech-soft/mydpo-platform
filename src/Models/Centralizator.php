@@ -46,10 +46,10 @@ class Centralizator extends Model {
             ->leftJoin(
                 'categories',
                 function($j) {
-                    $j->on('categories.id', '=', 'chestionare.category_id');
+                    $j->on('categories.id', '=', 'centralizatoare.category_id');
                 }
             )
-            ->select('chestionare.*')
+            ->select('centralizatoare.*')
         ;
     }
 
