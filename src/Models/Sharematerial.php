@@ -10,7 +10,7 @@ use MyDpo\Traits\NextNumber;
 class Sharematerial extends Model {
 
     use NextNumber;
-    
+
     protected $table = 'share-materiale';
 
     protected $casts = [
@@ -98,12 +98,7 @@ class Sharematerial extends Model {
     }
 
     // public static function getNextNumber($input) {
-    //     $records = \DB::select("
-    //         SELECT 
-    //             MAX(CAST(`number` AS UNSIGNED)) as max_number 
-    //         FROM `trimiteri` 
-    //         WHERE type='" . $this->input . "'"
-    //     );
+        
 
     //     $this->payload = number_format(1 + $records[0]->max_number, 0, '', '');
     // }
