@@ -23,12 +23,7 @@ class GetNextNumber extends Perform {
 
         $records = \DB::select($sql);
 
-        if( count($records) == 0)
-        {
-            return 1;
-        }
-
-        return 1 + $records[0]->max_number;
+        $this->payload =  1 + (count($records) > 0 ? $records[0]->max_number : 0);
     }
 
 } 
