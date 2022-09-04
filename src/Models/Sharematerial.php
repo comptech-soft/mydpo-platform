@@ -9,6 +9,7 @@ use MyDpo\Scopes\ShareMaterialScope;
 use MyDpo\Traits\NextNumber;
 use MyDpo\Rules\Sharematerial\AtLeastOneCustomer;
 use MyDpo\Rules\Sharematerial\AtLeastOneMaterial;
+use MyDpo\Models\SharematerialDetail;
 
 class Sharematerial extends Model {
 
@@ -102,6 +103,11 @@ class Sharematerial extends Model {
         return count($this->materiale_trimise);
     }
 
+    public function details() {
+        return $this->hasMany(SharematerialDetail::class, 'trimitere_id');
+    }
+
+
     public static function getItems($input) {
         return (new GetItems($input, self::query(), __CLASS__))->Perform();
     }
@@ -120,24 +126,32 @@ class Sharematerial extends Model {
     public function CreateDetailsRecords() {
         foreach($this->customers as $customer_id => $users)
         {
-            static::CreateCustomerDetailsRecords($customer_id, $users, $this->materiale_trimise);
+            static::CreateCustomerDetailsRecords($this->id, $customer_id, $users, $this->materiale_trimise);
         }
     }
 
-    public static function CreateCustomerDetailsRecords($customer_id, $users, $materiale_trimise) {
+    public static function CreateCustomerDetailsRecords($trimitere_id, $customer_id, $users, $materiale_trimise) {
         foreach($users as $i => $user_id) {
-            self::CreateCustomerUserDetailsRecords($customer_id, $user_id, $materiale_trimise);
+            self::CreateCustomerUserDetailsRecords($trimitere_id, $customer_id, $user_id, $materiale_trimise);
         }
     }
 
-    public static function CreateCustomerUserDetailsRecords($customer_id, $user_id, $materiale_trimise) {
+    public static function CreateCustomerUserDetailsRecords($trimitere_id, $customer_id, $user_id, $materiale_trimise) {
         foreach($materiale_trimise as $i => $material_id) {
-            self::CreateCustomerUserMaterialDetailsRecords($customer_id, $user_id, $material_id);
+            self::CreateCustomerUserMaterialDetailsRecords($trimitere_id, $customer_id, $user_id, $material_id);
         }
     }
 
-    public static function CreateCustomerUserMaterialDetailsRecords($customer_id, $user_id, $material_id) {
-        dd(__METHOD__, $customer_id, $user_id, $material_id);
+    public static function CreateCustomerUserMaterialDetailsRecords($trimitere_id, $customer_id, $user_id, $material_id) {
+        SharematerialDetail::create([
+            'trimitere_id' => $trimitere_id,
+            'customer_id' => $customer_id,
+            'assigned_to' => $user_id,
+            'sended_document_id' => $material_id,
+            'effective_time' => 2.45,
+            'created_by' => \Auth::user()->id,
+
+        ]);
     }
 
     public static function GetRules($action, $input) {
