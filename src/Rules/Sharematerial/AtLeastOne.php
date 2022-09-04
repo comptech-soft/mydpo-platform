@@ -14,7 +14,18 @@ class AtLeastOne implements Rule {
 
     public function passes($attribute, $value) {   
 
-        dd($this->input);
+        if(! array_key_exists('customers', $this->input) )
+        {
+            return FALSE;
+        }
+
+        if( count($this->input['custmers']) == 0)
+        {
+            return FALSE;
+        }
+
+        dd($this->input['custmers']);
+        // dd($this->input);
     }
 
     public function message()
