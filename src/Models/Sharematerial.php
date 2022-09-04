@@ -9,6 +9,8 @@ use MyDpo\Traits\NextNumber;
 
 class Sharematerial extends Model {
 
+    use NextNumber;
+    
     protected $table = 'share-materiale';
 
     protected $casts = [
