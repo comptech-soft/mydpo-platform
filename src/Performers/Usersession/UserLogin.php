@@ -25,6 +25,12 @@ class UserLogin extends Perform {
          */
         $user = \Auth::user();
 
+        if( ! $user->role )
+        {
+            UserSession::logout();
+            throw new \Exception('Datele de autentificare nu se potrivesc cu înregistrările noastre.');
+        }
+
         if(config('app.platform') == 'b2b')
         {
             $slugs = ['master', 'customer'];
