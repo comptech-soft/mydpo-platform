@@ -7,7 +7,7 @@ use MyDpo\Models\Sharematerial;
 
 class SharematerialDetail extends Model {
 
-    protected $table = 'trimiteri-details';
+    protected $table = 'share-materiale-details';
 
     protected $casts = [
         'id' => 'integer',
