@@ -122,7 +122,7 @@ class Sharematerial extends Model {
 
         $share->CreateDetailsRecords();
 
-        $share->CreateCustomersMaterials();
+        // $share->CreateCustomersMaterials();
 
         return $share;
     } 
