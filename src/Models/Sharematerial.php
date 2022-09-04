@@ -122,13 +122,13 @@ class Sharematerial extends Model {
 
         $share->CreateDetailsRecords();
 
-        // $share->CreateCustomersMaterials();
+        $share->CreateCustomersMaterials();
 
         return $share;
     } 
 
     public function CreateCustomersMaterials() {
-        dd(__METHOD__, $this->type, $this->materiale_trimise);
+        $this->{"CreateCustomer" . $this->type};
     }
 
     public function CreateDetailsRecords() {
