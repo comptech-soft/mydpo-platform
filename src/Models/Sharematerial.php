@@ -108,8 +108,27 @@ class Sharematerial extends Model {
 
     public static function doAction($action, $input) {
         dd($input);
-        
+
         return (new DoAction($action, $input, __CLASS__))->Perform();
+    }
+
+    public static function GetRules($action, $input) {
+        if($action == 'delete')
+        {
+            return NULL;
+        }
+        $result = [
+            'number' => [
+                'required'
+            ],
+            'date' => [
+                'required',
+                'date',
+            ],
+            'type' => 'in:centralizator,chestionar,curs',
+        ];
+        
+        return $result;
     }
 
     
