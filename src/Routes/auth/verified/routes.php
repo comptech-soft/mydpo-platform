@@ -18,7 +18,8 @@ Route::middleware('verified')->group(function () {
     require __DIR__ . '/customers-orders/routes.php';
     require __DIR__ . '/customers-services/routes.php';
     require __DIR__ . '/customers-accounts/routes.php';
-    
+    require __DIR__ . '/cusomers-materiale/routes.php';
+
     require __DIR__ . '/users/routes.php';
     
     require __DIR__ . '/admin/routes.php';
