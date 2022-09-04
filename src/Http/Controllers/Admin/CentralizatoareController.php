@@ -5,6 +5,7 @@ namespace MyDpo\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Helpers\Response;
+use MyDpo\Models\Centralizator;
 
 class CentralizatoareController extends Controller
 {
@@ -14,6 +15,14 @@ class CentralizatoareController extends Controller
             '~templates.index', 
             asset('apps/centralizatoare/index.js')
         );
+    }
+
+    public function getItems(Request $r) {
+        return Centralizator::getItems($r->all());
+    }
+
+    public function doAction($action, Request $r) {
+        return Centralizator::doAction($action, $r->all());
     }
 
 }
