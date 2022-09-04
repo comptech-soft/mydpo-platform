@@ -53,6 +53,12 @@ class Sharematerial extends Model {
 
     protected $nextNumberColumn = 'number';
 
+    protected static function nextNumberWhere($input) {
+     
+        return "type = '" . $input['type'] . "'";
+    
+    }
+
     protected static function booted() {
         static::addGlobalScope( new ShareMaterialScope );
     }
