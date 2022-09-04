@@ -7,6 +7,7 @@ use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Scopes\ShareMaterialScope;
 use MyDpo\Traits\NextNumber;
+use MyDpo\Rules\Sharematerial\AtLeastOne;
 
 class Sharematerial extends Model {
 
@@ -126,8 +127,11 @@ class Sharematerial extends Model {
                 'date',
             ],
             'type' => 'in:centralizator,chestionar,curs',
+            'customers' => [
+                new AtLeastOne($input),
+            ],
         ];
-        
+
         return $result;
     }
 
