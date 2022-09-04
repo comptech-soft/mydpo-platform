@@ -10,6 +10,7 @@ use MyDpo\Traits\NextNumber;
 use MyDpo\Rules\Sharematerial\AtLeastOneCustomer;
 use MyDpo\Rules\Sharematerial\AtLeastOneMaterial;
 use MyDpo\Models\SharematerialDetail;
+use Mydpo\Models\CustomerCurs;
 
 class Sharematerial extends Model {
 
@@ -137,11 +138,21 @@ class Sharematerial extends Model {
     }
 
     public static function CreateCustomerMaterialsRecords($type, $trimitere_id, $calculated_time, $customer_id, $users, $materiale_trimise) {
-        call_user_func([__CLASS__, 'CreateCustomer' . ucfirst($type) . 'Records'], $trimitere_id, $calculated_time, $customer_id, $users, $materiale_trimise);
+        foreach($materiale_trimise as $material_id)
+        {
+            call_user_func([__CLASS__, 'CreateCustomer' . ucfirst($type) . 'Record'], $trimitere_id, $calculated_time, $customer_id, $users, $material_id);
+        }
+
     }
 
-    public static function CreateCustomerCursRecords($trimitere_id, $calculated_time, $customer_id, $users, $materiale_trimise) {
-        dd(__METHOD__, $trimitere_id, $calculated_time, $customer_id, $users, $materiale_trimise);
+    public static function CreateCustomerCursRecord($trimitere_id, $calculated_time, $customer_id, $users, $material_id) {
+        CustomerCurs::create([
+            'customer_id' => $customer_id,
+            'curs_id' => $material_id,
+            'trimitere_id' => $trimitere_id,
+            'effective_time' => $calculated_time * count($users),
+            'assigned_users' => $users,
+        ]);
     }   
 
     public function CreateDetailsRecords() {

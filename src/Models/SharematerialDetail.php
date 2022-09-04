@@ -17,6 +17,7 @@ class SharematerialDetail extends Model {
         'sended_document_id' => 'integer',
         'created_by' => 'integer',
         'updated_by' => 'integer',
+        'effective_time' => 'float',
     ];
 
     protected $fillable = [
