@@ -133,33 +133,36 @@ class Sharematerial extends Model {
 
     public function CreateDetailsRecords() {
 
-        dd($this->count_users, $this->count_materiale);
-        
+        $numberOfitems = $this->count_users * $this->count_materiale;
+
+
+        $calculated_time = ($numberOfitems > 0) ? $this->effective_time/$numberOfitems : 0; 
+
         foreach($this->customers as $customer_id => $users)
         {
-            static::CreateCustomerDetailsRecords($this->id, $customer_id, $users, $this->materiale_trimise);
+            static::CreateCustomerDetailsRecords($this->id, $calculated_time, $customer_id, $users, $this->materiale_trimise);
         }
     }
 
-    public static function CreateCustomerDetailsRecords($trimitere_id, $customer_id, $users, $materiale_trimise) {
+    public static function CreateCustomerDetailsRecords($trimitere_id, $calculated_time, $customer_id, $users, $materiale_trimise) {
         foreach($users as $i => $user_id) {
-            self::CreateCustomerUserDetailsRecords($trimitere_id, $customer_id, $user_id, $materiale_trimise);
+            self::CreateCustomerUserDetailsRecords($trimitere_id, $calculated_time, $customer_id, $user_id, $materiale_trimise);
         }
     }
 
-    public static function CreateCustomerUserDetailsRecords($trimitere_id, $customer_id, $user_id, $materiale_trimise) {
+    public static function CreateCustomerUserDetailsRecords($trimitere_id, $calculated_time, $customer_id, $user_id, $materiale_trimise) {
         foreach($materiale_trimise as $i => $material_id) {
-            self::CreateCustomerUserMaterialDetailsRecords($trimitere_id, $customer_id, $user_id, $material_id);
+            self::CreateCustomerUserMaterialDetailsRecords($trimitere_id, $calculated_time, $customer_id, $user_id, $material_id);
         }
     }
 
-    public static function CreateCustomerUserMaterialDetailsRecords($trimitere_id, $customer_id, $user_id, $material_id) {
+    public static function CreateCustomerUserMaterialDetailsRecords($trimitere_id, $calculated_time, $customer_id, $user_id, $material_id) {
         SharematerialDetail::create([
             'trimitere_id' => $trimitere_id,
             'customer_id' => $customer_id,
             'assigned_to' => $user_id,
             'sended_document_id' => $material_id,
-            'effective_time' => 2.45,
+            'effective_time' => $calculated_time,
             'created_by' => \Auth::user()->id,
 
         ]);
