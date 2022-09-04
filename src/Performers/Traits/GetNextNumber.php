@@ -6,10 +6,11 @@ use MyDpo\Helpers\Perform;
 
 class GetNextNumber extends Perform {
 
-
     public function Action() {
         
-        $instance = $this->input['instance'];
+        $model = $this->input['model'];
+
+        $instance = new $model();
 
         $table = $instance->getTable();
 
@@ -17,7 +18,7 @@ class GetNextNumber extends Perform {
             SELECT 
                 MAX(CAST(`" . $instance->nextNumberColumn . "` AS UNSIGNED)) as max_number 
             FROM `" . $table . "` 
-            WHERE " . $instance->nextNumberWhere($this->input)
+            WHERE " . call_user_func([$model, 'nextNumberWhere'], $this->input)
         ;
 
         $records = \DB::select($sql);
@@ -26,6 +27,7 @@ class GetNextNumber extends Perform {
         {
             return 1;
         }
+
         return 1 + $records[0]->max_number;
     }
 

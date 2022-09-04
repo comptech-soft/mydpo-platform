@@ -51,9 +51,9 @@ class Sharematerial extends Model {
         'count_materiale',
     ];
 
-    protected $nextNumberColumn = 'number';
+    public $nextNumberColumn = 'number';
 
-    protected static function nextNumberWhere($input) {
+    public static function nextNumberWhere($input) {
      
         return "type = '" . $input['type'] . "'";
     
