@@ -10,7 +10,7 @@ use MyDpo\Traits\NextNumber;
 use MyDpo\Rules\Sharematerial\AtLeastOneCustomer;
 use MyDpo\Rules\Sharematerial\AtLeastOneMaterial;
 use MyDpo\Models\SharematerialDetail;
-use Mydpo\Models\CustomerCurs;
+use MyDpo\Models\CustomerCurs;
 
 class Sharematerial extends Model {
 
