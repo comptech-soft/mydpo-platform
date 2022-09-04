@@ -132,13 +132,17 @@ class Sharematerial extends Model {
         $calculated_time = ($numberOfitems > 0) ? $this->effective_time/$numberOfitems : 0; 
 
         foreach($this->customers as $customer_id => $users) {
-            static::CreateCustomerMaterialsRecords($this->id, $calculated_time, $customer_id, $users, $this->materiale_trimise);
+            static::CreateCustomerMaterialsRecords($this->type, $this->id, $calculated_time, $customer_id, $users, $this->materiale_trimise);
         }
     }
 
-    public static function CreateCustomerMaterialsRecords($trimitere_id, $calculated_time, $customer_id, $users, $materiale_trimise) {
-        dd(__METHOD__, $trimitere_id, $calculated_time, $customer_id, $users, $materiale_trimise);
+    public static function CreateCustomerMaterialsRecords($type, $trimitere_id, $calculated_time, $customer_id, $users, $materiale_trimise) {
+        call_user_func([__CLASS__, 'CreateCustomer' . ucfirst($type) . 'Records'], $trimitere_id, $calculated_time, $customer_id, $users, $materiale_trimise);
     }
+
+    public static function CreateCustomerCursRecords($trimitere_id, $calculated_time, $customer_id, $users, $materiale_trimise) {
+        dd(__METHOD__, $trimitere_id, $calculated_time, $customer_id, $users, $materiale_trimise);
+    }   
 
     public function CreateDetailsRecords() {
 
