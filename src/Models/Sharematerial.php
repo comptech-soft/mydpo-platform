@@ -125,7 +125,7 @@ class Sharematerial extends Model {
             ],
             'type' => 'in:centralizator,chestionar,curs',
             'effective_time' => [
-                'number',
+                'numeric',
                 'min:0',
             ],
             'customers' => [
