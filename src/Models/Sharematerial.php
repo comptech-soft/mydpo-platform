@@ -128,7 +128,7 @@ class Sharematerial extends Model {
     } 
 
     public function CreateCustomersMaterials() {
-        $this->{"CreateCustomer" . $this->type};
+        $this->{"CreateCustomer" . $this->type}();
     }
 
     public function CreateDetailsRecords() {
