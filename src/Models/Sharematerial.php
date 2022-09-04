@@ -132,7 +132,7 @@ class Sharematerial extends Model {
         $calculated_time = ($numberOfitems > 0) ? $this->effective_time/$numberOfitems : 0; 
 
         foreach($this->customers as $customer_id => $users) {
-            static::CreateCustomerMaterialsRecords($this->id, $calculated_time, $customer_id, $users, $this->materiale_trimis);
+            static::CreateCustomerMaterialsRecords($this->id, $calculated_time, $customer_id, $users, $this->materiale_trimise);
         }
     }
 
