@@ -118,7 +118,14 @@ class Sharematerial extends Model {
     } 
 
     public function CreateDetailsRecords() {
-        dd(__METHOD__, $this->customers);
+        foreach($this->customers as $customer_id => $users)
+        {
+            static::CreateCustomerDetailsRecords($customer_id, $users);
+        }
+    }
+
+    public static function CreateCustomerDetailsRecords($customer_id, $users) {
+        dd(__METHOD__, $customer_id, $users);
     }
 
     public static function GetRules($action, $input) {
