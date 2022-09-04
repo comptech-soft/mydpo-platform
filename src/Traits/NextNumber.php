@@ -12,7 +12,7 @@ trait NextNumber {
             SELECT 
                 MAX(CAST(`number` AS UNSIGNED)) as max_number 
             FROM `" . $table . "` 
-            WHERE type='" . $this->input . "'"
+            WHERE type='" . $input . "'"
         ;
 
         return $sql;
