@@ -108,9 +108,34 @@ class Sharematerial extends Model {
         return $this->hasMany(SharematerialDetail::class, 'trimitere_id');
     }
 
-
     public static function getItems($input) {
-        return (new GetItems($input, self::query(), __CLASS__))->Perform();
+
+        if( array_key_exists('jsons', $input) && $input['jsons'])
+        {
+            $query = self::applyJsonsFilter(self::query(), $input['jsons']);
+        }
+        else
+        {
+            $query = self::query();
+        }
+        
+        return (new GetItems($input, $query, __CLASS__))->Perform();
+    }
+
+    public static function applyJsonsFilter($query, $jsons) {
+
+        foreach($jsons as $i => $json)
+        {
+            $query = self::applyJsonFilter($query, $json);
+        }
+
+        return $query;
+    }
+
+    public static function applyJsonFilter($query, $json) {
+        
+        return $query->{$json['method']}($json['column'] . '->' . $json['key']);
+        
     }
 
     public static function doAction($action, $input) {
