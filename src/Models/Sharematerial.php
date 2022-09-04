@@ -122,10 +122,19 @@ class Sharematerial extends Model {
 
         $share->CreateDetailsRecords();
 
+        $share->CreateCustomersMaterials();
+
         return $share;
     } 
 
+    public function CreateCustomersMaterials() {
+        dd(__METHOD__, $this->type, $this->materiale_trimise);
+    }
+
     public function CreateDetailsRecords() {
+
+        dd($this->count_users, $this->count_materiale);
+        
         foreach($this->customers as $customer_id => $users)
         {
             static::CreateCustomerDetailsRecords($this->id, $customer_id, $users, $this->materiale_trimise);
