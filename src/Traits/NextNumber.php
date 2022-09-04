@@ -10,7 +10,7 @@ trait NextNumber {
 
         return (new GetNextNumber([
             ...$input, 
-            'instance' => new static
+            'model' => __CLASS__
         ]))
             ->SetSuccessMessage('Schimbare status cu success!')
             ->Perform();
