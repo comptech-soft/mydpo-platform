@@ -24,7 +24,7 @@ class AtLeastOne implements Rule {
             return FALSE;
         }
 
-        dd($this->input['custmers']);
+        dd($this->input['customers']);
         // dd($this->input);
     }
 
