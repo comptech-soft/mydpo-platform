@@ -1,10 +1,10 @@
 <?php
 
-use MyDpo\Http\Controllers\Auth\CustomersShareMaterialeDetailsController;
+use MyDpo\Http\Controllers\Auth\CustomersShareMaterialeController;
 
-Route::prefix('customers-share-materiale-details')->group( function() {
+Route::prefix('customers-share-materiale')->group( function() {
         
-    Route::post('items', [CustomersShareMaterialeDetailsController::class, 'getItems']);
+    Route::post('items', [CustomersShareMaterialeController::class, 'getItems']);
     // Route::post('action/{action}', [CustomersFoldersController::class, 'doAction']);
     // Route::post('get-ancestors', [CustomersFoldersController::class, 'getAncestors']);
     // Route::post('get-summary', [CustomersFoldersController::class, 'getSummary']);
