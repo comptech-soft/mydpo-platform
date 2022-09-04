@@ -24,12 +24,16 @@ class AtLeastOne implements Rule {
             return FALSE;
         }
 
-        dd($this->input['customers']);
-        // dd($this->input);
+        $count_users = 0;
+        foreach($this->input['customers'] as $customer_id => $users)
+        {
+            $count_users += count($users);
+        }
+        
+        return $count_users != 0;
     }
 
-    public function message()
-    {
-        return '????';
+    public function message() {
+        return 'Pentru trimitere, Trebuie selectat cel puțin un cont destinatar.';
     }
 }
