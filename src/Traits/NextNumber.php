@@ -6,11 +6,12 @@ trait NextNumber {
 
     public static function getNextNumber($input) {
 
-        $table = (new static)->getTable();
+        $instance = new static; 
+        $table = $instance->getTable();
 
         $sql = "
             SELECT 
-                MAX(CAST(`" . self::$nextNumberColumn . "` AS UNSIGNED)) as max_number 
+                MAX(CAST(`" . $instance->nextNumberColumn . "` AS UNSIGNED)) as max_number 
             FROM `" . $table . "` 
             WHERE type='aaaa'"
         ;
