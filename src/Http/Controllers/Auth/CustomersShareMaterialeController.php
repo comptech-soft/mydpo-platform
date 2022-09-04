@@ -10,7 +10,7 @@ class CustomersShareMaterialeController extends Controller
 {
     
     public function getItems(Request $r) {
-        return SharematerialDetail::getItems($r->all());
+        return Sharematerial::getItems($r->all());
     }
 
 }
