@@ -21,7 +21,6 @@ class CursuriController extends Controller
         return Curs::openKnolyxCourse($r->all());
     }
 
-
     public function getItems(Request $r) {
         return Curs::getItems($r->all());
     }

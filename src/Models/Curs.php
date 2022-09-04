@@ -74,7 +74,6 @@ class Curs extends Model {
         return $this->url;
     }
 
-
     public function category() {
         return $this->belongsTo(Category::class, 'category_id');
     }

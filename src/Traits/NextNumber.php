@@ -12,10 +12,8 @@ trait NextNumber {
             ...$input, 
             'model' => __CLASS__
         ]))
-            ->SetSuccessMessage('Schimbare status cu success!')
+            ->SetSuccessMessage(NULL)
             ->Perform();
-
-       
         
     }
 }
