@@ -10,7 +10,7 @@ trait NextNumber {
 
         $sql = "
             SELECT 
-                MAX(CAST(`number` AS UNSIGNED)) as max_number 
+                MAX(CAST(`" . self::$nextNumberColumn . "` AS UNSIGNED)) as max_number 
             FROM `" . $table . "` 
             WHERE type='aaaa'"
         ;

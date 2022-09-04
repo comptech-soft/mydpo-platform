@@ -51,6 +51,8 @@ class Sharematerial extends Model {
         'count_materiale',
     ];
 
+    protected $nextNumberColumn = 'number';
+
     protected static function booted() {
         static::addGlobalScope( new ShareMaterialScope );
     }
