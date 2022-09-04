@@ -121,6 +121,8 @@ class Sharematerial extends Model {
         $share = self::create($input);
 
         $share->CreateDetailsRecords();
+
+        return $share;
     } 
 
     public function CreateDetailsRecords() {
