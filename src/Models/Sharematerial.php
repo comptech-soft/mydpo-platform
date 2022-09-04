@@ -128,14 +128,21 @@ class Sharematerial extends Model {
     } 
 
     public function CreateCustomersMaterials() {
-        $this->{"CreateCustomer" . $this->type}();
+        $numberOfitems = $this->count_users * $this->count_materiale;
+        $calculated_time = ($numberOfitems > 0) ? $this->effective_time/$numberOfitems : 0; 
+
+        foreach($this->customers as $customer_id => $users) {
+            static::CreateCustomerMaterialsRecords($this->id, $calculated_time, $customer_id, $users, $this->materiale_trimis);
+        }
+    }
+
+    public static function CreateCustomerMaterialsRecords($trimitere_id, $calculated_time, $customer_id, $users, $materiale_trimise) {
+        dd(__METHOD__, $trimitere_id, $calculated_time, $customer_id, $users, $materiale_trimise);
     }
 
     public function CreateDetailsRecords() {
 
         $numberOfitems = $this->count_users * $this->count_materiale;
-
-
         $calculated_time = ($numberOfitems > 0) ? $this->effective_time/$numberOfitems : 0; 
 
         foreach($this->customers as $customer_id => $users)
