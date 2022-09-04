@@ -110,6 +110,17 @@ class Sharematerial extends Model {
         return (new DoAction($action, $input, __CLASS__))->Perform();
     }
 
+    public static function doInsert($input, $share) {
+
+        $share = self::create($input);
+
+        $share->CreateDetailsRecords();
+    } 
+
+    public function CreateDetailsRecords() {
+        dd(__METHOD__, $this->customers);
+    }
+
     public static function GetRules($action, $input) {
         if($action == 'delete')
         {
