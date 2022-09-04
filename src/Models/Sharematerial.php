@@ -108,8 +108,6 @@ class Sharematerial extends Model {
     }
 
     public static function doAction($action, $input) {
-        dd($input);
-
         return (new DoAction($action, $input, __CLASS__))->Perform();
     }
 
