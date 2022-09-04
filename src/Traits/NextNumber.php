@@ -2,7 +2,7 @@
 
 namespace MyDpo\Traits;
 
-use MyDpo\Traits\GetNextNumber;
+use MyDpo\Perdormers\Traits\GetNextNumber;
 
 trait NextNumber { 
 
