@@ -18,7 +18,7 @@ class OpenKnolyxCourse extends Perform {
         {
             throw new \Exception('User inexistent.');
         }
-        
+	    
         $user = Knolyx::CreateUser($user);
 
         if( ! $user->k_id )
@@ -28,12 +28,15 @@ class OpenKnolyxCourse extends Perform {
 
         $course = Curs::find($this->input['curs_id']);
 
+			
         if( ! $course || ! $course->k_id)
         {
             throw new \Exception('Curs inexistent.');
         }
 
         $courseRole = Knolyx::GetCourseRole($course, $user);
+		
+		Knolyx::SetCourseRole($course->k_id, $courseRole);
     }
 
 }
