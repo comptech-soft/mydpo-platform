@@ -152,11 +152,11 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
     public function customers(): BelongsToMany {
         return $this->belongsToMany(
             Customer::class, 
-            'users-customers', 
+            'customers-persons', 
             'user_id', 
             'customer_id'
         )
-        ->withPivot('phone', 'props', 'deleted', 'created_by', 'updated_by')
+        ->withPivot('phone', 'newsletter', 'locale', 'department_id', 'created_by', 'updated_by')
         ->withTimestamps();
     }
 
