@@ -67,7 +67,7 @@ class Customer extends Model {
             return NULL;
         }
 
-        return $this->logo->url;
+        return $this->logo['url'];
     }
 
     public function getFullCityAttribute() {
