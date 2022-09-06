@@ -4,7 +4,7 @@ namespace MyDpo\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-use Comptech\Performers\Upload\GetFileProperties;
+use MyDpo\Performers\Upload\GetFileProperties;
 use Illuminate\Validation\Rules\File;
 use Illuminate\Validation\Rule;
 
