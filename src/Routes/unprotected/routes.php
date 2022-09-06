@@ -8,12 +8,15 @@ use MyDpo\Http\Controllers\System\ContactController;
 use MyDpo\Http\Controllers\System\TermeniController;
 use MyDpo\Http\Controllers\System\NotaController;
 use MyDpo\Http\Controllers\System\TranslationsController;
+use MyDpo\Http\Controllers\System\UploadsController;
 
 Route::get('/', [WelcomeController::class, 'index']);
 
 Route::prefix('system')->group(function () {
     Route::get('set-locale/{locale}', [ConfigController::class, 'setLocale']);
     Route::post('get-config', [ConfigController::class, 'getConfig']);
+
+    Route::post('get-file-properties', [UploadsController::class, 'getFileProperties']);
 });
 
 Route::prefix('validation')->group(function () {
