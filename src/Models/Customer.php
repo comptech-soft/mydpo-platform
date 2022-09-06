@@ -57,7 +57,18 @@ class Customer extends Model {
         'region_id',
         'country_id',
         'last_contract',
+        'mylogo',
     ];
+
+    public function getMylogoAttribute() {
+        
+        if( ! $this->logo )
+        {
+            return NULL;
+        }
+
+        return $this->logo->url;
+    }
 
     public function getFullCityAttribute() {
         

@@ -90,35 +90,7 @@ class CustomerAccount extends Model {
             ],         
         ];
 
-        // if($input['personSource'] == 1) // new person
-        // {
-        //     $result['user.last_name'] = 'required';
-        //     $result['user.first_name'] = 'required';
-        //     $result['user.email'] = 'required|email|unique:users,email';
 
-        //     if($action == 'insert' || $action == 'duplicate')
-        //     {
-        //         $result['user.password'] = [
-        //             'required', 
-        //             'min:8', 
-        //             'confirmed',
-        //             new ValidPassword($input['user']['password']),
-        //         ];
-        //     }
-        // }
-
-        // if($input['personSource'] == 2) // existent person
-        // {
-        //     $result['user.id'] = [
-        //         'required',
-        //         new CustomerPerson($input),
-        //     ];
-        // }
-        
-        // if($action == 'update')
-        // {
-        //     $result['user.email'] .= (',' . $input['user']['id']);
-        // }
 
         return $result;
     }
