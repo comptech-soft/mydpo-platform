@@ -11,6 +11,7 @@ use MyDpo\Rules\Sharematerial\AtLeastOneCustomer;
 use MyDpo\Rules\Sharematerial\AtLeastOneMaterial;
 use MyDpo\Models\SharematerialDetail;
 use MyDpo\Models\CustomerCurs;
+use MyDpo\Models\CustomerCursUser;
 
 class Sharematerial extends Model {
 
@@ -178,6 +179,20 @@ class Sharematerial extends Model {
             'effective_time' => $calculated_time * count($users),
             'assigned_users' => $users,
         ]);
+
+        /**
+         * Se face inregistrare pentru fiecare user in parte
+         */
+        foreach($users as $i => $user_id) 
+        {
+            CustomerCursUser::create([
+                'customer_id' => $customer_id,
+                'curs_id' => $material_id,
+                'trimitere_id' => $trimitere_id,
+                'user_id' => $user_id,
+                'status' => 'sended',
+            ]);
+        }
     }   
 
     public function CreateDetailsRecords() {
