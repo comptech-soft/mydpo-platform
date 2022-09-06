@@ -5,7 +5,7 @@ namespace MyDpo\Http\Controllers\System;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Comptech\Helpers\Response;
-// use Comptech\Models\System\Upload;
+use Comptech\Models\Upload;
 
 class UploadsController extends Controller {
 
