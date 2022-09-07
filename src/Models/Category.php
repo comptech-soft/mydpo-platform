@@ -4,6 +4,7 @@ namespace MyDpo\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
+use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Models\Curs;
 use MyDpo\Rules\Category\UniqueName;
 
