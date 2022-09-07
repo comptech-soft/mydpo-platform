@@ -134,7 +134,7 @@ class Curs extends Model {
 
         $this->props = [
             ...$this->props,
-            'image' => mb_convert_encoding($image, 'UTF-8', 'UTF-8'),
+            'image' => $image,
         ];
 
         $this->save();
