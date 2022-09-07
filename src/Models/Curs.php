@@ -61,6 +61,7 @@ class Curs extends Model {
     protected $appends = [
         'days_difference',
         'my_url',
+        'my_image',
     ];
 
     /**
@@ -69,13 +70,31 @@ class Curs extends Model {
      * 
      */
     public function getMyUrlAttribute() {
-        if( ($this-> type == 'knolyx') && $this->k_id)
+        if( ($this->type == 'knolyx') && $this->k_id)
         {
             return config('knolyx.url') . $this->k_id;
         }
         return $this->url;
     }
 
+    public function getMyImageAttribute() {
+        if(! $this->props )
+        {
+            return NULL;
+        }
+
+        if( ! array_key_exists('image', $this->props))
+        {
+            return NULL;
+        }
+
+        return "data:'" . $this->props['image']['mime'] . "';base64,'" . $this->props['image']['base64'] . "'";
+    }
+    /**
+     * 
+     * RELATIONS
+     * 
+     */
     public function category() {
         return $this->belongsTo(Category::class, 'category_id');
     }
