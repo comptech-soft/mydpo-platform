@@ -5,6 +5,7 @@ namespace MyDpo\Performers\Curs;
 use MyDpo\Helpers\Perform;
 use MyDpo\Models\SysConfig;
 use MyDpo\Models\Knolyx;
+use MyDpo\Models\Curs;
 
 class GetKnolyxCourses extends Perform {
 
@@ -15,6 +16,8 @@ class GetKnolyxCourses extends Perform {
         \Log::info($page . ' - ' . $size . ' - ' . count($result['list']));
         if( count($result['list']) > 0 )
         {
+
+            Curs::saveFromKnolyx($result['list']);
             $this->GetCourses($page + 1, $size);
         }
         
@@ -22,7 +25,7 @@ class GetKnolyxCourses extends Perform {
 
     public function Action() {
 
-        $this->GetCourses(1, 1);
+        $this->GetCourses(0, 20);
 
         
 
