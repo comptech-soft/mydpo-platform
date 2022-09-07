@@ -149,7 +149,15 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
         ->withTimestamps();
     }
 
-    public function customers(): BelongsToMany {
+    /**
+     * la ce customeri sunt eu printre cei acre au conturi: customers-persons
+     */
+    public function customers() {
+        if( config('app.platform') == 'admin' )
+        {
+            return NULL;
+        }
+        
         return $this->belongsToMany(
             Customer::class, 
             'customers-persons', 
