@@ -16,7 +16,7 @@ class GetKnolyxCourses extends Perform {
         if( count($result['list']) > 0 )
         {
 
-            Curs::saveFromKnolyx($result['list']);
+            Curs::saveCoursesFromKnolyx($result['list']);
             $this->GetCourses($page + 1, $size);
         }
         
