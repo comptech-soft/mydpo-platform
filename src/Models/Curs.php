@@ -116,7 +116,7 @@ class Curs extends Model {
 
         $courses = Curs::whereNotNull('k_id')->get();
 
-        foreach($courses $i => $curs)
+        foreach($courses as $i => $curs)
         {
             dd($curs);
         }
