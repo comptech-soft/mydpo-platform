@@ -17,6 +17,10 @@ class CursuriController extends Controller
         );
     }
 
+    public function getKnolyxCourses(Request $r) {
+        return Curs::getKnolyxCourses($r->all());
+    }
+
     public function openKnolyxCourse(Request $r) {
         return Curs::openKnolyxCourse($r->all());
     }

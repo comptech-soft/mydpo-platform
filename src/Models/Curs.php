@@ -8,6 +8,7 @@ use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Models\Category;
 use MyDpo\Traits\DaysDifference;
 use MyDpo\Performers\Curs\OpenKnolyxCourse;
+use MyDpo\Performers\Curs\GetKnolyxCourses;
 
 class Curs extends Model {
 
@@ -109,6 +110,11 @@ class Curs extends Model {
             __CLASS__
         ))
         ->Perform();
+    }
+    
+    public static function getKnolyxCourses($input) {
+        return (new GetKnolyxCourses($input))
+            ->Perform();
     }
 
     public static function openKnolyxCourse($input) {

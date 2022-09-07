@@ -8,4 +8,6 @@ Route::prefix('cursuri')->group( function() {
     Route::post('items', [CursuriController::class, 'getItems']);
     Route::post('action/{action}', [CursuriController::class, 'doAction']);    
 
+    Route::post('get-knolyx-courses', [CursuriController::class, 'getKnolyxCourses']);
+
 });
