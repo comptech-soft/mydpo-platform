@@ -52,10 +52,8 @@ class Category extends Model {
     }
 
     public static function isValidName($input) {
-
         $validator = \Validator::make($input, self::GetRules('insert', $input) );
-
-        return $this->validator->fails() ? 0 : 1;
+        return $validator->fails() ? 0 : 1;
     }
 
     public static function GetRules($action, $input) {
