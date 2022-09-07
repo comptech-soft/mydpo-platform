@@ -127,6 +127,11 @@ class Curs extends Model {
     public function getKnolyxImage() {
         $image = Knolyx::getCourseImage($this->k_id);
 
+        if( ! $this->props )
+        {
+            $this->props = [];
+        }
+        
         $this->props = [
             ...$this->props,
             'image' => $image,
