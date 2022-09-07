@@ -98,11 +98,11 @@ class Knolyx {
      * Atentia la paginare si size
      * Cum aduc toate?
      */
-    public static function GetCourses() {
+    public static function GetCourses($page, $size) {
         $response =  \Http::withHeaders([
             'X-Project-Id' => config('knolyx.project_id'),
             'X-Api-Key' => config('knolyx.app_key')
-        ])->get(config('knolyx.endpoint') . 'course?pagination.page=0&pagination.size=20');
+        ])->get(config('knolyx.endpoint') . 'course?pagination.page=' . $page . '&pagination.size=' . $size);
 
         return $response->json();
     }

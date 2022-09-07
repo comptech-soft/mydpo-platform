@@ -8,11 +8,20 @@ use MyDpo\Models\Knolyx;
 
 class GetKnolyxCourses extends Perform {
 
-    public function Action() {
+    public function GetCourses($page, $size) {
 
-        $result = Knolyx::GetCourses();
+        $result = Knolyx::GetCourses($page, $size);
 
         dd($result);
+    }
+
+    public function Action() {
+
+        $this->GetCourses(1, 1);
+
+        
+
+        
     }
 
 }
