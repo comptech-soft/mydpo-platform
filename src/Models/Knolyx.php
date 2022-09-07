@@ -115,8 +115,10 @@ class Knolyx {
 
         $body = $response->getBody()->getContents();
 
-        dd($body);
-        
+        $base64 = base64_encode($body);
+
+        dd($base64);
+
         return $response->json();
     }
 }
