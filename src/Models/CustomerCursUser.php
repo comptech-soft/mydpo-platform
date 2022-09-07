@@ -3,6 +3,7 @@
 namespace MyDpo\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use MyDpo\Models\user;
 
 class CustomerCursUser extends Model {
 
@@ -33,5 +34,13 @@ class CustomerCursUser extends Model {
         'updated_by',
         'deleted_by'
     ];
+
+    protected $with = [
+        'user'
+    ];
+
+    public function user() {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 
 }
