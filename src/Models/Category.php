@@ -70,5 +70,11 @@ class Category extends Model {
         return $result;
     }
 
+    public static function isValidName($input) {
+
+        dd(__METHOD__, $input);
+    }
+
+
 
 }

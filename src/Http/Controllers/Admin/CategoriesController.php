@@ -17,4 +17,8 @@ class CategoriesController extends Controller {
         return Category::doAction($action, $r->all());
     }
 
+    public function isValidName(Request $r) {
+        return Category::isValidName($r->all());
+    }
+
 }
