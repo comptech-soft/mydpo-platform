@@ -130,7 +130,30 @@ class Curs extends Model {
     }
 
     public static function saveCourseFromKnolyx($course) {
-        dd($course);
+        $curs = self::where('k_id', $course['id'])->first();
+
+        $input = [
+            'name' => $course['title'],
+            'descriere' => $course['description'],
+            'type' => 'knolyx',
+            'k_id' => $course['id'],
+            'k_level' => $course['level'],
+            'k_duration' => $course['duration'],
+            'k_number_students_enrolled' => $course['numberOfStudentsEnrolled'],
+            'k_from_training_tracker' => $course['fromTrainingTracker'],
+            'k_avatar' => $course['avatar'],
+            'created_by' => \Auth::user()->id,
+            'updated_by' => \Auth::user()->id,
+        ];
+
+        if(! $curs )
+        {
+            $curs = self::create($input);
+        }
+        else
+        {
+            $curs->update($input);
+        }
     }
 
 }
