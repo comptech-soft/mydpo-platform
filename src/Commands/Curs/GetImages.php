@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Commands;
+namespace MyDpo\Commands\Curs;
 
 use Illuminate\Console\Command;
 
