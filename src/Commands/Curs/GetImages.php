@@ -14,7 +14,7 @@ class GetImages extends Command {
     public function handle() {
 
         Curs::getKnolyxCoursesImages();
-        $this->info('Pam pam. The command was successful!' . $courses->count());
+        $this->info('Pam pam. The command was successful!');
     
     }
 }

@@ -136,6 +136,8 @@ class Curs extends Model {
             ...$this->props,
             'image' => mb_convert_encoding($image, 'UTF-8', 'UTF-8'),
         ];
+
+        $this->save();
     }
 
     public static function getKnolyxCourses($input) {
