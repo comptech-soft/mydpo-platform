@@ -3,6 +3,7 @@
 namespace MyDpo\Commands\Curs;
 
 use Illuminate\Console\Command;
+use MyDpo\Models\Curs;
 
 class GetImages extends Command {
 
@@ -12,7 +13,8 @@ class GetImages extends Command {
 
     public function handle() {
 
-        $this->info('Pam pam. The command was successful!');
+        $courses = Curs::whereNotNull('k_id')->get();
+        $this->info('Pam pam. The command was successful!' . $courses->count());
     
     }
 }
