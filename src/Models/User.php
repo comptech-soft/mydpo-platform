@@ -155,9 +155,14 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
     public function customers() {
         if( config('app.platform') == 'admin' )
         {
-            return NULL;
+            return $this->belongsToMany(
+                Customer::class, 
+                'customers-persons', 
+                'user_id', 
+                'customer_id'
+            )->whereRaw('1 = 0');
         }
-        
+
         return $this->belongsToMany(
             Customer::class, 
             'customers-persons', 
