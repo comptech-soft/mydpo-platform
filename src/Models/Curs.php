@@ -118,10 +118,15 @@ class Curs extends Model {
 
         foreach($courses as $i => $curs)
         {
-            dd($curs);
+            $curs->getKnolyxImage();
         }
 
     }
+
+    public function getKnolyxImage() {
+        dd($this->k_id);
+    }
+
 
     
     public static function getKnolyxCourses($input) {
