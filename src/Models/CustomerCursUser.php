@@ -37,12 +37,12 @@ class CustomerCursUser extends Model {
         'deleted_by'
     ];
 
-    protected $with = [
-        'user'
-    ];
+    // protected $with = [
+    //     'user'
+    // ];
 
-    public function user() {
-        return $this->belongsTo(User::class, 'user_id');
-    }
+    // public function user() {
+    //     return $this->belongsTo(User::class, 'user_id');
+    // }
 
 }
