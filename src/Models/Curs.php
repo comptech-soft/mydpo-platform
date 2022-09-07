@@ -9,6 +9,7 @@ use MyDpo\Models\Category;
 use MyDpo\Traits\DaysDifference;
 use MyDpo\Performers\Curs\OpenKnolyxCourse;
 use MyDpo\Performers\Curs\GetKnolyxCourses;
+use MyDpo\Models\Knolyx;
 
 class Curs extends Model {
 
@@ -124,11 +125,11 @@ class Curs extends Model {
     }
 
     public function getKnolyxImage() {
-        dd($this->k_id);
+        $image = Knolyx::getCourseImage($this->k_id);
+
+        dd($image);
     }
 
-
-    
     public static function getKnolyxCourses($input) {
         return (new GetKnolyxCourses($input))
             ->Perform();

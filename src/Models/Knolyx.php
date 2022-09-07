@@ -106,6 +106,15 @@ class Knolyx {
 
         return $response->json();
     }
+
+    public static function getCourseImage($course_id) {
+        $response =  \Http::withHeaders([
+            'X-Project-Id' => config('knolyx.project_id'),
+            'X-Api-Key' => config('knolyx.app_key')
+        ])->get(config('knolyx.endpoint') . 'course/' . $coursse_id . '/image');
+
+        return $response->json();
+    }
 }
 
 
