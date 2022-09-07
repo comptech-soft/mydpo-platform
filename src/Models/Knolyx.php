@@ -93,4 +93,19 @@ class Knolyx {
 		
         return $response;
     }
+
+    /**
+     * Atentia la paginare si size
+     * Cum aduc toate?
+     */
+    public static function GetCourses() {
+        $response =  \Http::withHeaders([
+            'X-Project-Id' => config('knolyx.project_id'),
+            'X-Api-Key' => config('knolyx.app_key')
+        ])->get(config('knolyx.endpoint') . 'course?pagination.page=0&pagination.size=20');
+
+        return $response->json();
+    }
 }
+
+
