@@ -40,7 +40,8 @@ class CustomerCurs extends Model {
     ];
 
     protected $with = [
-        'curs'
+        'curs',
+        'users',
     ];
 
     public function curs() {
