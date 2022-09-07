@@ -13,7 +13,7 @@ class GetImages extends Command {
 
     public function handle() {
 
-        $courses = Curs::whereNotNull('k_id')->get();
+        Curs::getKnolyxCoursesImages();
         $this->info('Pam pam. The command was successful!' . $courses->count());
     
     }

@@ -111,6 +111,18 @@ class Curs extends Model {
         ))
         ->Perform();
     }
+
+    public static function getKnolyxCoursesImages() {
+
+        $courses = Curs::whereNotNull('k_id')->get();
+
+        foreach($courses $i => $curs)
+        {
+            dd($curs);
+        }
+
+    }
+
     
     public static function getKnolyxCourses($input) {
         return (new GetKnolyxCourses($input))
