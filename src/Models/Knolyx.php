@@ -111,7 +111,7 @@ class Knolyx {
         $response =  \Http::withHeaders([
             'X-Project-Id' => config('knolyx.project_id'),
             'X-Api-Key' => config('knolyx.app_key')
-        ])->get(config('knolyx.endpoint') . 'course/' . $coursse_id . '/image');
+        ])->get(config('knolyx.endpoint') . 'course/' . $course_id . '/image');
 
         return $response->json();
     }
