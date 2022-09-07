@@ -13,7 +13,6 @@ class GetKnolyxCourses extends Perform {
 
         $result = Knolyx::GetCourses($page, $size);
 
-        \Log::info($page . ' - ' . $size . ' - ' . count($result['list']));
         if( count($result['list']) > 0 )
         {
 
@@ -24,12 +23,7 @@ class GetKnolyxCourses extends Perform {
     }
 
     public function Action() {
-
         $this->GetCourses(0, 20);
-
-        
-
-        
     }
 
 }

@@ -122,8 +122,15 @@ class Curs extends Model {
             ->Perform();
     }
 
-    public static function saveFromKnolyx($courses) {
-        dd($courses);
+    public static function saveCoursesFromKnolyx($courses) {
+        foreach($courses as $i => $course)
+        {
+            self::saveCourseFromKnolyx($course);
+        }
+    }
+
+    public static function saveCourseFromKnolyx($course) {
+        dd($course);
     }
 
 }
