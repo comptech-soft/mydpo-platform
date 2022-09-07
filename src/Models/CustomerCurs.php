@@ -49,7 +49,7 @@ class CustomerCurs extends Model {
     }
 
     public function cursusers() {
-        return $this->hasMany(CustomerCursUser::class, 'user_id');
+        return $this->hasMany(CustomerCursUser::class, 'customer_curs_id');
     }
 
     public static function getItems($input) {

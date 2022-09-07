@@ -172,7 +172,7 @@ class Sharematerial extends Model {
     }
 
     public static function CreateCustomerCursRecord($trimitere_id, $calculated_time, $customer_id, $users, $material_id) {
-        CustomerCurs::create([
+        $customer_curs = CustomerCurs::create([
             'customer_id' => $customer_id,
             'curs_id' => $material_id,
             'trimitere_id' => $trimitere_id,
@@ -186,6 +186,7 @@ class Sharematerial extends Model {
         foreach($users as $i => $user_id) 
         {
             CustomerCursUser::create([
+                'customer_curs_id' => $customer_curs->id,
                 'customer_id' => $customer_id,
                 'curs_id' => $material_id,
                 'trimitere_id' => $trimitere_id,

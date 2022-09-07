@@ -3,7 +3,7 @@
 namespace MyDpo\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use MyDpo\Models\user;
+use MyDpo\Models\User;
 
 class CustomerCursUser extends Model {
 
@@ -19,10 +19,12 @@ class CustomerCursUser extends Model {
         'deleted_by' => 'integer',
         'deleted' => 'integer',
         'user_id' => 'integer',
+        'customer_curs_id' => 'integer',
     ];
 
     protected $fillable = [
         'id',
+        'customer_curs_id',
         'customer_id',
         'curs_id',
         'trimitere_id',
