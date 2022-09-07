@@ -117,6 +117,8 @@ class Knolyx {
 
         $base64 = base64_encode($body);
 
+        dd($response->getHeader('Content-Type')[0]);
+
         dd($base64);
 
         return $response->json();
