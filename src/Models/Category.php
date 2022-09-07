@@ -51,6 +51,13 @@ class Category extends Model {
         return (new DoAction($action, $input, __CLASS__))->Perform();
     }
 
+    public static function isValidName($input) {
+
+        $validator = \Validator::make($input, self::GetRules('insert', $input) );
+
+        return $this->validator->fails() ? 0 : 1;
+    }
+
     public static function GetRules($action, $input) {
 
         if($action == 'delete')
@@ -68,11 +75,6 @@ class Category extends Model {
         ];
 
         return $result;
-    }
-
-    public static function isValidName($input) {
-
-        dd(__METHOD__, $input);
     }
 
 
