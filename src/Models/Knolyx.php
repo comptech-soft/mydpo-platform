@@ -113,6 +113,8 @@ class Knolyx {
             'X-Api-Key' => config('knolyx.app_key')
         ])->get(config('knolyx.endpoint') . 'course/' . $course_id . '/image');
 
+        dd(config('knolyx.endpoint') . 'course/' . $course_id . '/image', $response);
+
         return $response->json();
     }
 }
