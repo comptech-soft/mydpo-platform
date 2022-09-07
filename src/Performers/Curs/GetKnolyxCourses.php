@@ -12,7 +12,12 @@ class GetKnolyxCourses extends Perform {
 
         $result = Knolyx::GetCourses($page, $size);
 
-        dd($result);
+        \Log::info($page . ' - ' . $size . ' - ' . count($result['list']));
+        if( count($result['list']) > 0 )
+        {
+            $this->GetCourses($page + 1, $size);
+        }
+        
     }
 
     public function Action() {
