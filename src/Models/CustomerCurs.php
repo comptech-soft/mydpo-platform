@@ -3,6 +3,7 @@
 namespace MyDpo\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use MyDpo\Helpers\Performers\Datatable\GetItems;
 
 class CustomerCurs extends Model {
 
@@ -36,4 +37,8 @@ class CustomerCurs extends Model {
         'deleted_by'
     ];
 
+    public static function getItems($input) {
+        return (new GetItems($input, self::query(), __CLASS__))->Perform();
+    }
+    
 }
