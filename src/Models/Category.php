@@ -5,6 +5,7 @@ namespace MyDpo\Models;
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Models\Curs;
+use MyDpo\Rules\Category\UniqueName;
 
 class Category extends Model {
    
@@ -44,5 +45,29 @@ class Category extends Model {
             __CLASS__
         ))->Perform();
     }
+
+    public static function doAction($action, $input) {
+        return (new DoAction($action, $input, __CLASS__))->Perform();
+    }
+
+    public static function GetRules($action, $input) {
+
+        if($action == 'delete')
+        {
+            return NULL;
+        }
+
+        $result = [
+            'name' => [
+                'required',
+                'max:191',
+                new UniqueName($input),
+            ],
+            'type' => 'in:centralizatoare,chestionare,cursuri',
+        ];
+
+        return $result;
+    }
+
 
 }

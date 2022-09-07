@@ -13,4 +13,8 @@ class CategoriesController extends Controller {
         return Category::getItems($r->all(), $type);
     }
 
+    public function doAction($action, Request $r) {
+        return Category::doAction($action, $r->all());
+    }
+
 }
