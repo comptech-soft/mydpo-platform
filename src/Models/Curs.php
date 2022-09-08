@@ -117,10 +117,7 @@ class Curs extends Model {
     public static function doInsert($input, $curs) {
         if($input['file'])
         {
-            if($action == 'insert')
-            {
-                $input['file'] = self::saveFile($input['file']);
-            }
+            $input['file'] = self::saveFile($input['file']);
         }
 
         $curs = self::create($input);
