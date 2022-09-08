@@ -96,7 +96,12 @@ class Curs extends Model {
             return NULL;
         }
 
-        return "data:'" . $this->props['image']['mime'] . "';base64,'" . $this->props['image']['base64'] . "'";
+        if( ($this->type == 'knolyx') && $this->k_id)
+        {
+            return "data:'" . $this->props['image']['mime'] . "';base64,'" . $this->props['image']['base64'] . "'";
+        }
+
+        return NULL;
     }
     /**
      * 
