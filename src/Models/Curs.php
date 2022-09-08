@@ -130,19 +130,22 @@ class Curs extends Model {
         }
         $result = [
             'name' => 'required|unique:cursuri,name',
+            
             'type' => 'required',
+            
             'category_id' => 'required|exists:categories,id',
+
             'url' => [
-                new IsUrlPresent($input),
+                'bail',
                 'nullable',
-                'sometimes',
+                new IsUrlPresent($input),
                 'active_url'
             ],
 
             'file' => [
-                new IsFilePresent($input),
+                'bail',
                 'nullable',
-                'sometimes',
+                new IsFilePresent($input),
                 'file',
                 'max:5242880',
                 'mimes:pdf',

@@ -15,9 +15,6 @@ class IsFilePresent implements Rule {
     }
 
     public function passes($attribute, $value) {   
-
-        dd($this->input);
-        
         if($this->input['type'] == 'fisier')
         {
             if(! $this->input['file'])
