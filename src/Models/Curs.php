@@ -217,6 +217,11 @@ class Curs extends Model {
             ];
         }
 
+        if($action == 'update')
+        {
+            $result['name'] .= (',' . $input['id']);
+        }
+
         return $result;
     }
 
