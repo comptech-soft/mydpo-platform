@@ -113,6 +113,49 @@ class Curs extends Model {
         return (new DoAction($action, $input, __CLASS__))->Perform();
     }
 
+
+    public static function doInsert($input, $curs) {
+        if($input['file'])
+        {
+            if($action == 'insert')
+            {
+                $input['file'] = self::saveFile($input['file']);
+            }
+        }
+
+        $curs = self::create($input);
+
+        return $curs;
+    }
+
+    public static function saveFile($file) {
+        $ext = strtolower($file->extension());
+
+        if(in_array($ext, ['pdf']))
+        {
+            $filename = md5(time()) . '-' . \Str::slug(str_replace($file->extension(), '', $file->getClientOriginalName())) . '.' .  strtolower($file->extension());
+            
+            $result = $file->storeAs('cursuri/' .  \Auth::user()->id, $filename, 's3');
+
+            $inputdata = [
+                'file_original_name' => $file->getClientOriginalName(),
+                'file_original_extension' => $file->extension(),
+                'file_full_name' => $filename,
+                'file_mime_type' => $file->getMimeType(),
+                'file_upload_ip' => request()->ip(),
+                'file_size' => $file->getSize(),
+                'url' => config('filesystems.disks.s3.url') . $result,
+                'created_by' => \Auth::user()->id,
+            ];
+            
+            return $inputdata;
+        }
+        else
+        {
+            throw new \Exception('Fișier incorect.');
+        }
+    }
+
     public static function GetMessages($action, $input) {
 
         return [
