@@ -226,10 +226,7 @@ class Curs extends Model {
     public static function getItems($input) {
         return (new GetItems(
             $input, 
-            self::query()->with([
-                // 'customercursuri.trimitere.detalii.customer', 
-                // 'customercursuri.participanti'
-            ]), 
+            self::query(), 
             __CLASS__
         ))
         ->Perform();
