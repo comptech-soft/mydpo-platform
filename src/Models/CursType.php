@@ -20,4 +20,8 @@ class CursType extends Model {
         'props',
     ];
 
+    public static function getItems($input, $type = NULL) {
+        return (new GetItems($input, self::query(), __CLASS__))->Perform();
+    }
+
 }
