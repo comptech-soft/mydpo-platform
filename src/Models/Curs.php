@@ -10,6 +10,7 @@ use MyDpo\Traits\DaysDifference;
 use MyDpo\Performers\Curs\OpenKnolyxCourse;
 use MyDpo\Performers\Curs\GetKnolyxCourses;
 use MyDpo\Models\Knolyx;
+use MyDpo\Rules\Curs\IsUrlPresent;
 
 class Curs extends Model {
 
@@ -127,9 +128,14 @@ class Curs extends Model {
             return NULL;
         }
         $result = [
-            'name' => 'required',
+            'name' => 'required|unique:cursuri,name',
             'type' => 'required',
             'category_id' => 'required|exists:categories,id',
+            'url' => [
+                new IsUrlPresent($input),
+                'sometimes',
+                'active_url'
+            ],
         ];
         return $result;
     }
