@@ -3,6 +3,7 @@
 namespace MyDpo\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\UploadedFile;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Models\Category;
@@ -151,7 +152,18 @@ class Curs extends Model {
         return (new DoAction($action, $input, __CLASS__))->Perform();
     }
 
-    
+    public static function doUpdate($input, $curs) {
+        
+        if($input['file'] && ($input['file'] instanceof UploadedFile))
+        {
+            $input['file'] = self::saveFile($input['file']);
+        }
+
+        $curs->update($input);
+
+        return $curs;
+    }
+
     public static function doDelete($input, $curs) {
         $curs->deleted = true;
         $curs->deleted_by = \Auth::user()->id;
@@ -160,7 +172,8 @@ class Curs extends Model {
     }
 
     public static function doInsert($input, $curs) {
-        if($input['file'])
+        
+        if($input['file'] && ($input['file'] instanceof UploadedFile))
         {
             $input['file'] = self::saveFile($input['file']);
         }
