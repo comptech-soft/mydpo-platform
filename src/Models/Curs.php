@@ -133,6 +133,7 @@ class Curs extends Model {
             'category_id' => 'required|exists:categories,id',
             'url' => [
                 new IsUrlPresent($input),
+                'nullable',
                 'sometimes',
                 'active_url'
             ],
