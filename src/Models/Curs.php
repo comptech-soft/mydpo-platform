@@ -116,7 +116,7 @@ class Curs extends Model {
         return [
             'name.required' => 'Denumirea cursului trebuie completată.',
             'category_id.required' => 'Categoria trebuie selectată.',
-            'url.required' => 'Linkul trebuie completat.',
+            'type.required' => 'Tipul cursului trebuie selectat.',
             'url.url' => 'Linkul nu pare sa fie valid.',
         ];
     }
@@ -128,7 +128,7 @@ class Curs extends Model {
         }
         $result = [
             'name' => 'required',
-            'url' => '',
+            'type' => 'required',
             'category_id' => 'required|exists:categories,id',
         ];
         return $result;
