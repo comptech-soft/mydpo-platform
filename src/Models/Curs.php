@@ -134,20 +134,26 @@ class Curs extends Model {
             'type' => 'required',
             
             'category_id' => 'required|exists:categories,id',
+        ];
 
-            'url' => [
-                new IsUrlPresent($input),
-                'active_url'
-            ],
-
-            'file' => [
+        if($input['type'] == 'fisier')
+        {
+            $result['file'] = [
                 new IsFilePresent($input),
                 'file',
                 'max:5242880',
                 'mimes:pdf',
                 'mimetypes:application/pdf',
-            ],
-        ];
+            ];
+        }
+
+        if( ($input['type'] == 'link') || ($input['type'] == 'youtube'))
+        {
+            $result['url'] = [
+                new IsUrlPresent($input),
+                'active_url'
+            ];
+        }
 
         return $result;
     }
