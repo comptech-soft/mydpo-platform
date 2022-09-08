@@ -77,7 +77,7 @@ class Curs extends Model {
             return config('knolyx.url') . $this->k_id;
         }
 
-        if( ($this->type == 'fisier') && this->file)
+        if( ($this->type == 'fisier') && $this->file)
         {   
             return $this->file['url'];
         }
