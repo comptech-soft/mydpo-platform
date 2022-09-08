@@ -210,23 +210,23 @@ class Curs extends Model {
     }
 
 
-    public static function getQuery() {
-        return 
-            self::query()
-            ->leftJoin(
-                'categories',
-                function($j) {
-                    $j->on('categories.id', '=', 'cursuri.category_id');
-                }
-            )
-            ->select('cursuri.*')
-        ;
-    }
+    // public static function getQuery() {
+    //     return 
+    //         self::query()
+    //         ->leftJoin(
+    //             'categories',
+    //             function($j) {
+    //                 $j->on('categories.id', '=', 'cursuri.category_id');
+    //             }
+    //         )
+    //         ->select('cursuri.*')
+    //     ;
+    // }
 
     public static function getItems($input) {
         return (new GetItems(
             $input, 
-            self::getQuery()->with([
+            self::query()->with([
                 // 'customercursuri.trimitere.detalii.customer', 
                 // 'customercursuri.participanti'
             ]), 
