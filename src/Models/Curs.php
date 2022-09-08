@@ -133,6 +133,7 @@ class Curs extends Model {
         $curs->deleted = true;
         $curs->deleted_by = \Auth::user()->id;
         $curs->save();
+        return $curs;
     }
 
     public static function doInsert($input, $curs) {
