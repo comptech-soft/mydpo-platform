@@ -133,23 +133,23 @@ class Curs extends Model {
             'type' => 'required',
             'category_id' => 'required|exists:categories,id',
             'url' => [
+                new IsUrlPresent($input),
                 'nullable',
                 'sometimes',
-                new IsUrlPresent($input),
                 'active_url'
             ],
 
             'file' => [
+                new IsFilePresent($input),
                 'nullable',
                 'sometimes',
-                new IsFilePresent($input),
                 'file',
                 'max:5242880',
                 'mimes:pdf',
                 'mimetypes:application/pdf',
             ],
         ];
-        
+
         return $result;
     }
 
