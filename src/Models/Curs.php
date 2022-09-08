@@ -125,10 +125,33 @@ class Curs extends Model {
     //     return $this->hasMany(CursFisier::class, 'curs_id');
     // }
 
+    public static function PrepareActionInput($action, $input) {
+        if(! array_key_exists('tematica', $input) )
+        {
+            $input['tematica'] = NULL;
+        }
+        else
+        {
+            if(! is_array($input['tematica']) )
+            {
+                $input['tematica'] = NULL;
+            }
+            else
+            {
+                if( count($input['tematica']) == 0)
+                {
+                    $input['tematica'] = NULL;
+                }
+            }
+        }
+        return $input;
+    }
+
     public static function doAction($action, $input) {
         return (new DoAction($action, $input, __CLASS__))->Perform();
     }
 
+    
     public static function doDelete($input, $curs) {
         $curs->deleted = true;
         $curs->deleted_by = \Auth::user()->id;
