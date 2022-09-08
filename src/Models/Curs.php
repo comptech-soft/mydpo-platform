@@ -107,6 +107,34 @@ class Curs extends Model {
     //     return $this->hasMany(CursFisier::class, 'curs_id');
     // }
 
+    public static function doAction($action, $input) {
+        return (new DoAction($action, $input, __CLASS__))->Perform();
+    }
+
+    public static function GetMessages($action, $input) {
+
+        return [
+            'name.required' => 'Denumirea cursului trebuie completată.',
+            'category_id.required' => 'Categoria trebuie selectată.',
+            'url.required' => 'Linkul trebuie completat.',
+            'url.url' => 'Linkul nu pare sa fie valid.',
+        ];
+    }
+
+    public static function GetRules($action, $input) {
+        if($action == 'delete')
+        {
+            return NULL;
+        }
+        $result = [
+            'name' => 'required',
+            'url' => '',
+            'category_id' => 'required|exists:categories,id',
+        ];
+        return $result;
+    }
+
+
     public static function getQuery() {
         return 
             self::query()
