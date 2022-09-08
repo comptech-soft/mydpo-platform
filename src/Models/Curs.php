@@ -12,6 +12,7 @@ use MyDpo\Performers\Curs\GetKnolyxCourses;
 use MyDpo\Models\Knolyx;
 use MyDpo\Rules\Curs\IsUrlPresent;
 use MyDpo\Rules\Curs\IsFilePresent;
+use MyDpo\Scopes\CursScope;
 
 class Curs extends Model {
 
@@ -65,6 +66,10 @@ class Curs extends Model {
         'my_url',
         'my_image',
     ];
+
+    protected static function booted() {
+        static::addGlobalScope( new CursScope );
+    }
 
     /**
      * 
@@ -124,6 +129,11 @@ class Curs extends Model {
         return (new DoAction($action, $input, __CLASS__))->Perform();
     }
 
+    public static function doDelete($input, $curs) {
+        $curs->deleted = true;
+        $curs->deleted_by = Aurh::user()->id;
+        $curs->save();
+    }
 
     public static function doInsert($input, $curs) {
         if($input['file'])
