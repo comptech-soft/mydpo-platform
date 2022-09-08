@@ -131,7 +131,7 @@ class Curs extends Model {
 
     public static function doDelete($input, $curs) {
         $curs->deleted = true;
-        $curs->deleted_by = Auth::user()->id;
+        $curs->deleted_by = \Auth::user()->id;
         $curs->save();
     }
 
