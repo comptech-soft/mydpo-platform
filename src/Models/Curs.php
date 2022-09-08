@@ -149,6 +149,7 @@ class Curs extends Model {
                 'mimetypes:application/pdf',
             ],
         ];
+        
         return $result;
     }
 
