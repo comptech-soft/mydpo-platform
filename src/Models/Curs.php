@@ -11,6 +11,7 @@ use MyDpo\Performers\Curs\OpenKnolyxCourse;
 use MyDpo\Performers\Curs\GetKnolyxCourses;
 use MyDpo\Models\Knolyx;
 use MyDpo\Rules\Curs\IsUrlPresent;
+use MyDpo\Rules\Curs\IsFilePresent;
 
 class Curs extends Model {
 
@@ -132,10 +133,20 @@ class Curs extends Model {
             'type' => 'required',
             'category_id' => 'required|exists:categories,id',
             'url' => [
-                new IsUrlPresent($input),
                 'nullable',
                 'sometimes',
+                new IsUrlPresent($input),
                 'active_url'
+            ],
+
+            'file' => [
+                'nullable',
+                'sometimes',
+                new IsFilePresent($input),
+                'file',
+                'max:5242880',
+                'mimes:pdf',
+                'mimetypes:application/pdf',
             ],
         ];
         return $result;

@@ -4,7 +4,7 @@ namespace MyDpo\Rules\Curs;
 
 use Illuminate\Contracts\Validation\Rule;
 
-class IsUrlPresent implements Rule {
+class IsFilePresent implements Rule {
 
     public $input = NULL;
     public $record = NULL;
@@ -16,20 +16,11 @@ class IsUrlPresent implements Rule {
 
     public function passes($attribute, $value) {   
 
-        if($this->input['type'] == 'link')
+        if($this->input['type'] == 'fisier')
         {
-            if(! $this->input['url'])
+            if(! $this->input['file'])
             {
-                $this->message = 'Linkul trebuie completat.';
-                return FALSE;
-            }
-        }
-
-        if($this->input['type'] == 'youtube')
-        {
-            if(! $this->input['url'])
-            {
-                $this->message = 'Linkul YouTube trebuie completat.';
+                $this->message = 'Fișerul trebuie selectat.';
                 return FALSE;
             }
         }
