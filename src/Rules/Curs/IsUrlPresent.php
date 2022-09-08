@@ -16,6 +16,12 @@ class IsUrlPresent implements Rule {
 
     public function passes($attribute, $value) {   
 
+        if(! $this->input['type'])
+        {
+            $this->message = 'Selectați tipul cursului.';
+            return FALSE;
+        }
+
         if($this->input['type'] == 'link')
         {
             if(! $this->input['url'])

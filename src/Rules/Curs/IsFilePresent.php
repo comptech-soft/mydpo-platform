@@ -15,6 +15,12 @@ class IsFilePresent implements Rule {
     }
 
     public function passes($attribute, $value) {   
+        if(! $this->input['type'])
+        {
+            $this->message = 'Selectați tipul cursului.';
+            return FALSE;
+        }
+
         if($this->input['type'] == 'fisier')
         {
             if(! $this->input['file'])

@@ -136,15 +136,11 @@ class Curs extends Model {
             'category_id' => 'required|exists:categories,id',
 
             'url' => [
-                'bail',
-                'nullable',
                 new IsUrlPresent($input),
                 'active_url'
             ],
 
             'file' => [
-                'bail',
-                'nullable',
                 new IsFilePresent($input),
                 'file',
                 'max:5242880',
