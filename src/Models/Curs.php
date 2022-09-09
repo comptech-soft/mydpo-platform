@@ -236,13 +236,16 @@ class Curs extends Model {
 
         if($input['type'] == 'fisier')
         {
-            $result['file'] = [
-                new IsFilePresent($input),
-                'file',
-                'max:5242880',
-                'mimes:pdf',
-                'mimetypes:application/pdf',
-            ];
+            if( ($action == 'insert') || (($action == 'update')  && (! $input['file'] )) )
+            {
+                $result['file'] = [
+                    new IsFilePresent($input),
+                    'file',
+                    'max:5242880',
+                    'mimes:pdf',
+                    'mimetypes:application/pdf',
+                ];
+            }
         }
 
         if( ($input['type'] == 'link') || ($input['type'] == 'youtube'))
