@@ -175,10 +175,12 @@ class Curs extends Model {
 
         $curs->props = [
             ...$curs->props,
-            'k->id' => $curs->k_id,
+            'k_id' => $curs->k_id,
+            'name' => $curs->name,
         ];
 
         $curs->k_id = NULL;
+        $curs->name = '#' . $curs->id . '-' . $curs->name;
 
         $curs->save();
         return $curs;
