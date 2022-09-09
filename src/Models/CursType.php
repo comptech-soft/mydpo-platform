@@ -4,6 +4,7 @@ namespace MyDpo\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
+use MyDpo\Models\Curs;
 
 class CursType extends Model {
    
@@ -20,8 +21,12 @@ class CursType extends Model {
         'props',
     ];
 
+    function cursuri() {
+        return $this->hasMany(Curs::class, 'type', 'slug');
+    }
+
     public static function getItems($input, $type = NULL) {
-        return (new GetItems($input, self::query(), __CLASS__))->Perform();
+        return (new GetItems($input, self::query()->withCount('cursuri'), __CLASS__))->Perform();
     }
 
 }
