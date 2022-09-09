@@ -92,14 +92,17 @@ class Curs extends Model {
     }
 
     public function getMyImageAttribute() {
+
+        $image = config('app.url') + '/imgs/layout/card-course-header.jpg';
+
         if(! $this->props )
         {
-            return NULL;
+            return $image;
         }
 
         if( ! array_key_exists('image', $this->props))
         {
-            return NULL;
+            return $image;
         }
 
         if( ($this->type == 'knolyx') && $this->k_id)
@@ -107,7 +110,7 @@ class Curs extends Model {
             return "data:" . $this->props['image']['mime'] . ";base64," . $this->props['image']['base64'];
         }
 
-        return NULL;
+        return $image;
     }
     /**
      * 
