@@ -93,11 +93,11 @@ class Curs extends Model {
 
     public function getMyImageAttribute() {
 
-        if( $this->type == 'youtube ')
+        if( $this->type == 'youtube')
         {
             return 'https://img.youtube.com/vi/C_339sQXq9Y/0.jpg';
         }
-        
+
         $image = config('app.url') . '/imgs/layout/card-course-header.jpg';
 
         if(! $this->props )
