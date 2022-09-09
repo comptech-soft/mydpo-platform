@@ -95,7 +95,8 @@ class Curs extends Model {
 
         if( $this->type == 'youtube')
         {
-            return 'https://img.youtube.com/vi/C_339sQXq9Y/0.jpg';
+            $code= \Str::of($this->url)->explode('=')->last();
+            return 'https://img.youtube.com/vi/' . $code . '/0.jpg';
         }
 
         $image = config('app.url') . '/imgs/layout/card-course-header.jpg';
@@ -114,8 +115,6 @@ class Curs extends Model {
         {
             return "data:" . $this->props['image']['mime'] . ";base64," . $this->props['image']['base64'];
         }
-
-        
 
         return $image;
     }
