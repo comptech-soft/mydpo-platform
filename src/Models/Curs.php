@@ -93,6 +93,11 @@ class Curs extends Model {
 
     public function getMyImageAttribute() {
 
+        if( $this->type == 'youtube ')
+        {
+            return 'https://img.youtube.com/vi/C_339sQXq9Y/0.jpg';
+        }
+        
         $image = config('app.url') . '/imgs/layout/card-course-header.jpg';
 
         if(! $this->props )
@@ -110,10 +115,7 @@ class Curs extends Model {
             return "data:" . $this->props['image']['mime'] . ";base64," . $this->props['image']['base64'];
         }
 
-        if( $this->type = 'youtube ')
-        {
-            return 'https://img.youtube.com/vi/C_339sQXq9Y/0.jpg';
-        }
+        
 
         return $image;
     }
