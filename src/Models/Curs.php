@@ -167,6 +167,15 @@ class Curs extends Model {
     public static function doDelete($input, $curs) {
         $curs->deleted = true;
         $curs->deleted_by = \Auth::user()->id;
+
+        
+        $curs->props = [
+            ...$curs->props,
+            'k->id' => $curs->k_id,
+        ];
+
+        $curs->k_id = NULL;
+
         $curs->save();
         return $curs;
     }
@@ -315,13 +324,11 @@ class Curs extends Model {
     }
 
     public static function getKnolyxCourses($input) {
-        return (new GetKnolyxCourses($input))
-            ->Perform();
+        return (new GetKnolyxCourses($input))->Perform();
     }
 
     public static function openKnolyxCourse($input) {
-        return (new OpenKnolyxCourse($input))
-            ->Perform();
+        return (new OpenKnolyxCourse($input))->Perform();
     }
 
     public static function saveCoursesFromKnolyx($courses) {
