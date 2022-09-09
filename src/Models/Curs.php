@@ -104,7 +104,7 @@ class Curs extends Model {
 
         if( ($this->type == 'knolyx') && $this->k_id)
         {
-            return "data:'" . $this->props['image']['mime'] . "';base64,'" . $this->props['image']['base64'] . "'";
+            return "data:" . $this->props['image']['mime'] . ";base64," . $this->props['image']['base64'];
         }
 
         return NULL;
