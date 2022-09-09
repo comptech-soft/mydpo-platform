@@ -168,7 +168,11 @@ class Curs extends Model {
         $curs->deleted = true;
         $curs->deleted_by = \Auth::user()->id;
 
-        
+        if(! $curs->props )
+        {
+            $curs->props = [];
+        }
+
         $curs->props = [
             ...$curs->props,
             'k->id' => $curs->k_id,
