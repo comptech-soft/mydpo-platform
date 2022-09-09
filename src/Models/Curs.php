@@ -93,7 +93,7 @@ class Curs extends Model {
 
     public function getMyImageAttribute() {
 
-        $image = config('app.url') + '/imgs/layout/card-course-header.jpg';
+        $image = config('app.url') . '/imgs/layout/card-course-header.jpg';
 
         if(! $this->props )
         {
