@@ -18,6 +18,7 @@ use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Helpers\Performers\Datatable\DoAction;
 use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Hash;
+use MyDpo\Performers\UserSetting\SaveSetting;
 
 class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
 {
@@ -309,7 +310,9 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
     }
 
     public static function saveUserSettings($input) {
-        dd($input);
+        return (new SaveSetting($input))
+            ->SetSuccessMessage('Schimbare status cu success!')
+            ->Perform();
     }
 
     
