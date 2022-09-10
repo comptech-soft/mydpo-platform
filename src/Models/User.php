@@ -321,7 +321,7 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
         return (new Changepassword(
             $input,
             [
-                'passsword' => [
+                'password' => [
                     'required', 
                     'confirmed', 
                     Rules\Password::defaults()
