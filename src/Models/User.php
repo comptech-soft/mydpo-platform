@@ -212,6 +212,8 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
 
     public static function GetRules($action, $input) {
         
+        dd($input);
+        
         if($action == 'delete')
         {
             return NULL;
