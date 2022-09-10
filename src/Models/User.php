@@ -315,6 +315,12 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
             ->Perform();
     }
 
-    
+    public static function changePassword($input) {
 
+        dd($input);
+        // return (new SaveSetting($input))
+        //     ->SetSuccessMessage('Schimbare status cu success!')
+        //     ->Perform();
+    }
+    
 }
