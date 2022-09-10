@@ -1,6 +1,8 @@
 <?php
 
 use MyDpo\Http\Controllers\Usersession\LoginController;
+use MyDpo\Http\Controllers\Usersession\ForgotPasswordController;
+
 use MyDpo\Http\Controllers\Auth\AuthenticatedSessionController;
 
 Route::middleware('guest')->group(function () {
@@ -10,7 +12,7 @@ Route::middleware('guest')->group(function () {
 
     Route::get('forgot-password',  [ForgotPasswordController::class, 'index']);
     Route::post('system/forgot-password',  [ForgotPasswordController::class, 'sendResetPasswordLink']);
-    
+
     /**
      * Atentie la asta! Trebuie pentru SSO
      */
