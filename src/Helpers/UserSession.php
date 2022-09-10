@@ -7,7 +7,7 @@ use Illuminate\Validation\Rules;
 use MyDpo\Performers\Usersession\Logout;
 use MyDpo\Performers\Usersession\UserLogin;
 use MyDpo\Performers\Usersession\SendResetPasswordLink;
-// use Comptech\Performers\System\UpdateNewPassword;
+use MyDpo\Performers\Usersession\UpdateNewPassword;
 // use Comptech\Performers\System\Register;
 use MyDpo\Performers\Usersession\SendActivationEmail;
 
