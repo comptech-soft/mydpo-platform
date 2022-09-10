@@ -243,7 +243,7 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
             //         new UpdatedPassword($input['password'], $input['password_confirmation']),
             //     ];
             // }
-            $result['email']['unique:users,email'] .= (',' . $input['id']);
+            $result['email'][4] .= (',' . $input['id']);
         }
 
         return $result;
