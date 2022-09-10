@@ -3,16 +3,17 @@
 namespace MyDpo\Performers\User;
 
 use MyDpo\Helpers\Perform;
+use MyDpo\Models\User;
 
 class Changepassword extends Perform {
 
     public function Action() {
         
-        dd(__METHOD__, $this->input);
-        // \Auth::guard('web')->logout();
- 
-        // request()->session()->invalidate();
-        // request()->session()->regenerateToken();
+        $user = User::find($this->input['id']);
+
+        $user->update([
+            'password' => \Hash::make($this->input['password'])
+        ]);
 
     }
 
