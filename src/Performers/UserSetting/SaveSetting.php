@@ -9,10 +9,11 @@ class SaveSetting extends Perform {
 
     public function Action() {
 
-        $record = UserSetting::getByUserAndCustomerAndCode(
+        $record = UserSetting::getByUserAndCustomerAndCodeAndPlatform(
             $this->input['user_id'], 
             $this->input['customer_id'], 
-            $this->input['code']
+            $this->input['code'],
+            $this->input['platform']
         );
         
         if(! $record)
@@ -21,7 +22,8 @@ class SaveSetting extends Perform {
         }
         else
         {
-            $record->update(['value' => $this->input['value']]);
+            $record->update([
+                'value' => $this->input['value']]);
         }
         
     }
