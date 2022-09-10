@@ -17,4 +17,10 @@ class UsersController extends Controller
         return User::doAction($action, $r->all());
     }
 
+    public function saveUserSettings(Request $r) {
+        return User::saveUserSettings($r->all());
+    }
+
+    
+
 }

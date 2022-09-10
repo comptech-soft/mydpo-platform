@@ -231,7 +231,7 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
             throw new \Exception('Fișier incorect.');
         }
     }
-    
+
     public static function doInsert($input, $user) {
         $user = self::create([
             'last_name' => $input['last_name'],
@@ -307,5 +307,11 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
             'email.unique' => 'Adresa de email este deja folosită de alt utilizator',
         ];
     }
+
+    public static function saveUserSettings($input) {
+        dd($input);
+    }
+
+    
 
 }
