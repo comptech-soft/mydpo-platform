@@ -25,12 +25,17 @@ class TrackUserLogin {
                 ->createdAt($now = now())
                 ->log(
                     __(
-                        ':name a achimbat parola', 
+                        ':name a intrat in sistem', 
                         [
                             'name' => $event->user->full_name 
                         ]
                     ), 
                 );
+
+            \Auth::user()->update([
+                'last_login' => $now,
+            ]);
+            
         }
         catch(\Exception $e)
         {

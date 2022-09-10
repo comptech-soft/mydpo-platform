@@ -25,16 +25,12 @@ class Newpassword {
                 ->createdAt($now = now())
                 ->log(
                     __(
-                        ':name a intrat in sistem', 
+                        ':name a schimbat parola', 
                         [
                             'name' => $event->user->full_name 
                         ]
                     ), 
                 );
-
-            \Auth::user()->update([
-                'last_login' => $now,
-            ]);
             
         }
         catch(\Exception $e)
