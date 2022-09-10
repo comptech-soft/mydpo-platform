@@ -321,9 +321,11 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
         return (new Changepassword(
             $input,
             [
-                'required', 
-                'confirmed', 
-                Rules\Password::defaults()
+                'passsword' => [
+                    'required', 
+                    'confirmed', 
+                    Rules\Password::defaults()
+                ]
             ]
         ))
             ->SetSuccessMessage('Schimbare parolă cu success!')
