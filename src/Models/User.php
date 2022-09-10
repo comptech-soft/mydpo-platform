@@ -225,20 +225,20 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ];
 
-        // if($action == 'update')
-        // {
-        //     if(array_key_exists('password', $input) && $input['password'])
-        //     {
-        //         $result['password'] = [
-        //             new ValidPassword($input['password']),
-        //         ];
-        //         $result['password_confirmation'] = [
-        //             'required',
-        //             new UpdatedPassword($input['password'], $input['password_confirmation']),
-        //         ];
-        //     }
-        //     $result['email'] .= (',' . $input['id']);
-        // }
+        if($action == 'update')
+        {
+            // if(array_key_exists('password', $input) && $input['password'])
+            // {
+            //     $result['password'] = [
+            //         new ValidPassword($input['password']),
+            //     ];
+            //     $result['password_confirmation'] = [
+            //         'required',
+            //         new UpdatedPassword($input['password'], $input['password_confirmation']),
+            //     ];
+            // }
+            $result['email'] .= (',' . $input['id']);
+        }
 
         return $result;
     }
