@@ -276,7 +276,7 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
             $result['password'] = [
                 'required', 
                 'confirmed', 
-                Rules\Password::defaults()
+                Rules\Password::defaults()->mixedCase()->letters()->numbers()->symbols()
             ];
         }
 
@@ -324,7 +324,7 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
                 'password' => [
                     'required', 
                     'confirmed', 
-                    Rules\Password::defaults()
+                    Rules\Password::defaults()->mixedCase()->letters()->numbers()->symbols()
                 ]
             ]
         ))
