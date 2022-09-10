@@ -6,6 +6,6 @@ Route::prefix('users')->group( function() {
         
     Route::post('items', [UsersController::class, 'getItems']);
     Route::post('action/{action}', [UsersController::class, 'doAction']);
-    Route::post('action/save-user-settings', [UsersController::class, 'saveUserSettings']);
+    Route::post('save-user-settings', [UsersController::class, 'saveUserSettings']);
     
 });
