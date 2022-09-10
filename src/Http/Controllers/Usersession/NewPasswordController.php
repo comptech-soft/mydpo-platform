@@ -1,11 +1,11 @@
 <?php
 
-namespace MyDpo\Http\Controllers\System;
+namespace MyDpo\Http\Controllers\Usersession;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Comptech\Helpers\Response;
-use Comptech\System\UserSession;
+use MyDpo\Helpers\Response;
+use MyDpo\Helpers\UserSession;
 
 class NewPasswordController extends Controller
 {
