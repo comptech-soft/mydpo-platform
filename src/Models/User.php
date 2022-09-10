@@ -227,11 +227,15 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
                 'max:255', 
                 'unique:users,email'
             ],
-            'type' => ['required', 'in:b2b,admin'],
         ];
 
         if($action == 'insert')
         {
+            $result['type'] = [
+                'required', 
+                'in:b2b,admin'
+            ];
+
             $result['password'] = [
                 'required', 
                 'confirmed', 
