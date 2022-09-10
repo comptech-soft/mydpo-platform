@@ -17,24 +17,11 @@ class UserSetting extends Model {
     protected $fillable = [
         'id',
         'user_id',
+        'customer_id',
         'type',
         'description',
         'code',
         'value',
-        'width',
-        'decimals',
-        'suffix',
-        'props',
-        'file_original_name',
-        'file_original_extension',
-        'file_full_name',
-        'file_mime_type',
-        'file_upload_ip',
-        'url',
-        'value',
-        'file_size',
-        'file_width',
-        'file_height',
         'created_by',
         'updated_by'
     ]; 
@@ -47,8 +34,8 @@ class UserSetting extends Model {
         ]);
     }
 
-    public static function getByUserAndCode($user_id, $code) {
-        return self::where('user_id', $user_id)->where('code', $code)->first();
+    public static function getByUserAndCustomerAndCode($user_id, $customer_id, $code) {
+        return self::where('user_id', $user_id)->where('code', $code)->where('customer_id', $customer_id)->first();
     }
 
     public static function saveSetting($input) {

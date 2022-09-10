@@ -9,9 +9,13 @@ class SaveSetting extends Perform {
 
     public function Action() {
 
-        dd($input);
-        
-        $record = UserSetting::getByUserAndCode($this->input['user_id'], $this->input['code']);
+        dd($this->input);
+
+        $record = UserSetting::getByUserAndCustomerAndCode(
+            $this->input['user_id'], 
+            $this->input['customer_id'], 
+            $this->input['code']
+        );
         
         if(! $record)
         {
