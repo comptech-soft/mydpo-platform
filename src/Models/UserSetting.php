@@ -18,6 +18,7 @@ class UserSetting extends Model {
         'id',
         'user_id',
         'customer_id',
+        'platform',
         'type',
         'description',
         'code',
