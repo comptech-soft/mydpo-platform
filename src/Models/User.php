@@ -4,7 +4,7 @@ namespace MyDpo\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-
+use Illuminate\Http\UploadedFile;
 use Illuminate\Contracts\Auth\CanResetPassword;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -193,6 +193,45 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
         return (new DoAction($action, $input, __CLASS__))->Perform();
     }
 
+    public static function doUpdate($input, $user) {
+        if($input['avatar'] && ($input['avatar'] instanceof UploadedFile))
+        {
+            $input['avatar'] = self::saveFile($input['avatar']);
+        }
+
+        $user->update($input);
+
+        return $user;
+    }
+
+    public static function saveFile($file) {
+        $ext = strtolower($file->extension());
+
+        if(in_array($ext, ['png', 'jpg', 'jpeg']))
+        {
+            $filename = md5(time()) . '-' . \Str::slug(str_replace($file->extension(), '', $file->getClientOriginalName())) . '.' .  strtolower($file->extension());
+            
+            $result = $file->storeAs('users-avatars/' .  \Auth::user()->id, $filename, 's3');
+
+            $inputdata = [
+                'file_original_name' => $file->getClientOriginalName(),
+                'file_original_extension' => $file->extension(),
+                'file_full_name' => $filename,
+                'file_mime_type' => $file->getMimeType(),
+                'file_upload_ip' => request()->ip(),
+                'file_size' => $file->getSize(),
+                'url' => config('filesystems.disks.s3.url') . $result,
+                'created_by' => \Auth::user()->id,
+            ];
+            
+            return $inputdata;
+        }
+        else
+        {
+            throw new \Exception('Fișier incorect.');
+        }
+    }
+    
     public static function doInsert($input, $user) {
         $user = self::create([
             'last_name' => $input['last_name'],
