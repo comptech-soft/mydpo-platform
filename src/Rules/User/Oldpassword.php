@@ -3,6 +3,7 @@
 namespace MyDpo\Rules\User;
 
 use Illuminate\Contracts\Validation\Rule;
+use MyDpo\Models\User;
 
 class Oldpassword implements Rule {
 
@@ -16,14 +17,17 @@ class Oldpassword implements Rule {
 
     public function passes($attribute, $value) {   
         
-        dd($this->input);
+        $user = User::find($this->input['id']);
+
+        return \Hash::check(
+            $this->input['oldpassword'], 
+            $user->password
+        );
+
     }
 
     public function message() {
-        return $this->message;
+        return 'Se pare că parola actuală nu este introdusă corect';
     }
 }
 
-// if(!Hash::check($request->old_password, auth()->user()->password)){
-//     return back()->with("error", "Old Password Doesn't match!");
-// }
