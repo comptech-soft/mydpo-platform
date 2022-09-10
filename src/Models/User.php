@@ -212,8 +212,6 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
 
     public static function GetRules($action, $input) {
         
-        dd($input);
-        
         if($action == 'delete')
         {
             return NULL;
@@ -222,7 +220,13 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
         $result = [
             'last_name' => ['required', 'string', 'max:255'],
             'first_name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
+            'email' => [
+                'required', 
+                'string', 
+                'email', 
+                'max:255', 
+                'unique:users,email'
+            ],
             'type' => ['required', 'in:b2b,admin'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ];
@@ -239,8 +243,10 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
             //         new UpdatedPassword($input['password'], $input['password_confirmation']),
             //     ];
             // }
-            $result['email'] .= (',' . $input['id']);
+            $result['email']['unique'] .= (',' . $input['id']);
         }
+
+        return $result;
 
         return $result;
     }
