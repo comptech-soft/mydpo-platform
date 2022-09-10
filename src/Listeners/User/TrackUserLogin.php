@@ -4,13 +4,11 @@ namespace MyDpo\Listeners\User;
 
 use Illuminate\Auth\Events\Login;
 
-class TrackUserLogin
-{
+class TrackUserLogin {
     /**
      * Handle the event.
      */
-    public function handle(Login $event)
-    {
+    public function handle(Login $event) {
         try
         {
             activity()
@@ -23,21 +21,16 @@ class TrackUserLogin
                         'user' => $event->user,
                     ]
                 )
-                ->event('login')
+                ->event('change-password')
                 ->createdAt($now = now())
                 ->log(
                     __(
-                        ':name a intrat in sistem', 
+                        ':name a achimbat parola', 
                         [
                             'name' => $event->user->full_name 
                         ]
                     ), 
                 );
-
-            \Auth::user()->update([
-                'last_login' => $now,
-            ]);
-            
         }
         catch(\Exception $e)
         {

@@ -4,14 +4,11 @@ namespace MyDpo\Listeners\User;
 
 use Illuminate\Auth\Events\PasswordReset;
 
-class Newpassword
-{
+class Newpassword {
     /**
      * Handle the event.
      */
-    public function handle(PasswordReset $event)
-    {
-        dd(__METHOD__, $event);
+    public function handle(PasswordReset $event) {
         try
         {
             activity()
