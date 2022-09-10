@@ -20,6 +20,7 @@ use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Hash;
 use MyDpo\Performers\UserSetting\SaveSetting;
 use MyDpo\Performers\User\Changepassword;
+use MyDpo\Rules\User\Oldpassword;
 
 class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
 {
@@ -321,6 +322,11 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
         return (new Changepassword(
             $input,
             [
+                'oldpassword' => [
+                    'required',
+                    new Oldpassword($input),
+                ],
+
                 'password' => [
                     'required', 
                     'confirmed', 
