@@ -4,14 +4,14 @@ namespace MyDpo\Listeners\User;
 
 use Illuminate\Auth\Events\PasswordReset;
 
-class TrackUserLogin
+class Newpassword
 {
     /**
      * Handle the event.
      */
     public function handle(PasswordReset $event)
     {
-        dd($event);
+        dd(__METHOD__, $event);
         try
         {
             activity()
