@@ -3,7 +3,6 @@
 namespace MyDpo\Helpers;
 
 use Illuminate\Validation\Rules;
-
 use MyDpo\Performers\Usersession\Logout;
 use MyDpo\Performers\Usersession\UserLogin;
 use MyDpo\Performers\Usersession\SendResetPasswordLink;
@@ -11,8 +10,6 @@ use MyDpo\Performers\Usersession\UpdateNewPassword;
 // use Comptech\Performers\System\Register;
 use MyDpo\Performers\Usersession\SendActivationEmail;
 
-// use Comptech\Rules\User\ValidPassword;
-// use Comptech\Rules\User\UpdatedPassword;
 
 class UserSession {
 
@@ -122,8 +119,11 @@ class UserSession {
         return (new UpdateNewPassword(
             $input, 
             [
-                'password' => new ValidPassword($input),
-                'password_confirmation' => new UpdatedPassword($input),
+                'password' => [
+                    'required', 
+                    'confirmed', 
+                    Rules\Password::defaults()->mixedCase()->letters()->numbers()->symbols()
+                ],
                 'token' => 'required',
                 'email' => 'required|email|exists:users,email',
             ],
