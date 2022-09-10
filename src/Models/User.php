@@ -228,8 +228,16 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
                 'unique:users,email'
             ],
             'type' => ['required', 'in:b2b,admin'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ];
+
+        if($action == 'insert')
+        {
+            $result['password'] = [
+                'required', 
+                'confirmed', 
+                Rules\Password::defaults()
+            ];
+        }
 
         if($action == 'update')
         {
