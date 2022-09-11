@@ -69,7 +69,7 @@ class Curs extends Model {
     ];
 
     protected static function booted() {
-        static::addGlobalScope( new CursScope );
+        static::addGlobalScope( new CursScope() );
     }
 
     /**
