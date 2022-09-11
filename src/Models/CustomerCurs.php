@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Models\Curs;
 use MyDpo\Models\CustomerCursUser;
+use MyDpo\Performers\CustomerCurs\GetSummary;
 
 class CustomerCurs extends Model {
 
@@ -56,6 +57,7 @@ class CustomerCurs extends Model {
         return (new GetItems($input, self::query(), __CLASS__))->Perform();
     }
 
-    
-
+    public static function getSummary($input) {
+        return (new GetSummary($input))->Perform();
+    }
 }

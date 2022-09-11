@@ -12,5 +12,9 @@ class CustomersCursuriController extends Controller
     public function getItems(Request $r) {
         return CustomerCurs::getItems($r->all());
     }
+
+    public function getSummary(Request $r) {
+        return CustomerCurs::getSummary($r->all());
+    }
     
 }

@@ -6,7 +6,8 @@ use MyDpo\Http\Controllers\Admin\CursuriController;
 Route::prefix('customers-cursuri')->group( function() {
         
     Route::post('items', [CustomersCursuriController::class, 'getItems']);
-    
+    Route::post('get-summary', [CustomersCursuriController::class, 'getSummary']);
+
 });
 
 
