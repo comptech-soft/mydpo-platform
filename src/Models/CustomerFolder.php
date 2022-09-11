@@ -20,8 +20,15 @@ class CustomerFolder extends Folder {
         'files'
     ];
     
-    function files() {
-        return $this->hasMany(CustomerFile::class, 'folder_id');
+    function files() {        
+        $platform = config('app.platform');
+
+        if($platform == 'admin')
+        {
+            return $this->hasMany(CustomerFile::class, 'folder_id');
+        }
+
+        return $this->hasMany(CustomerFile::class, 'folder_id')->where('status', '<>', 'protected');
     }
 
     public static function getItems($input) {
