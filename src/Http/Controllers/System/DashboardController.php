@@ -6,10 +6,25 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Helpers\Response;
 
-class DashboardController extends Controller
-{
+class DashboardController extends Controller {
     public function index(Request $r) {
 
+        $user = \Auth::user();
+
+        if(! $user->active )
+        {
+            return Response::View(
+                '~templates.index', 
+                asset('apps/email-verify-prompt/index.js'),
+                [],
+                $r->all()
+            );        
+        }
+
+        /**
+         * admin ==> dashboard
+         * b2b   ==> my-dashboard
+         */
         $asset = (config('app.platform') == 'admin') ? 'dashboard' : 'my-dashboard';
 
         return Response::View(
