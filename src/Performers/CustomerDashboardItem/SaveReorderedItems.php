@@ -16,7 +16,7 @@ class SaveReorderedItems extends Perform {
             'user_id' => $this->input['user_id'], 
             'platform' => $this->input['platform'],
             'customer_id' => $this->input['customer_id'], 
-            'code' => 'customer-dashboard',
+            'code' =>  $this->input['platform'] . '-' . $this->input['customer_id'] . '-customer-dashboard',
             'value' => $this->input['items'],
         ]);  
     }
