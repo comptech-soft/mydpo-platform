@@ -11,12 +11,9 @@ class NotdeletedScope implements Scope {
     public function apply(Builder $builder, Model $model) {
 
         $instance = new $model();
-
         $table = $instance->getTable();
 
-        dd($table);
-
-        $builder->whereRaw("((`cursuri`.`deleted` IS NULL) OR (`cursuri`.`deleted` = 0))");
+        $builder->whereRaw("((`" . $table . "`.`deleted` IS NULL) OR (`" . $table . "`.`deleted` = 0))");
     }
 
 }
