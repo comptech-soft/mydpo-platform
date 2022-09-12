@@ -10,7 +10,7 @@ class NotdeletedScope implements Scope {
 
     public function apply(Builder $builder, Model $model) {
 
-        dd($model);
+        dd($model->table);
         $builder->whereRaw("((`cursuri`.`deleted` IS NULL) OR (`cursuri`.`deleted` = 0))");
     }
 
