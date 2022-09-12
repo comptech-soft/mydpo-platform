@@ -1,6 +1,6 @@
 <?php
  
- namespace MyDpo\Scopes;
+namespace MyDpo\Scopes;
  
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;

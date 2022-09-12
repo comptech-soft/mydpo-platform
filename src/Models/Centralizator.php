@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Models\Category;
+use MyDpo\Scopes\NotdeletedScope;
 
 class Centralizator extends Model {
 
@@ -36,6 +37,10 @@ class Centralizator extends Model {
         'deleted_by',
     ];
 
+    protected static function booted() {
+        static::addGlobalScope( new NotdeletedScope() );
+    }
+
     public function category() {
         return $this->belongsTo(Category::class, 'category_id');
     }
@@ -56,8 +61,7 @@ class Centralizator extends Model {
     public static function getItems($input) {
         return (new GetItems(
             $input, 
-            self::getQuery()->with([
-            ]), 
+            self::getQuery(), 
             __CLASS__
         ))
         ->Perform();

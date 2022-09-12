@@ -6,10 +6,12 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Scope;
  
-class FolderScope implements Scope {
+class NotdeletedScope implements Scope {
 
     public function apply(Builder $builder, Model $model) {
-        $builder->whereRaw("((`customers-folders`.`deleted` IS NULL) OR (`customers-folders`.`deleted` = 0))");
+
+        dd($model);
+        $builder->whereRaw("((`cursuri`.`deleted` IS NULL) OR (`cursuri`.`deleted` = 0))");
     }
 
 }
