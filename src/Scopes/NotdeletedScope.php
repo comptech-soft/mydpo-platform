@@ -14,8 +14,8 @@ class NotdeletedScope implements Scope {
 
         $table = $instance->getTable();
 
-        dd($atble);
-        
+        dd($table);
+
         $builder->whereRaw("((`cursuri`.`deleted` IS NULL) OR (`cursuri`.`deleted` = 0))");
     }
 
