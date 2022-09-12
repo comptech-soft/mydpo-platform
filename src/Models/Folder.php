@@ -3,7 +3,7 @@
 namespace MyDpo\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use MyDpo\Scopes\FolderScope;
+use MyDpo\Scopes\NotdeletedScope;
 
 class Folder extends Model  {
 
@@ -32,7 +32,7 @@ class Folder extends Model  {
     ];
 
     protected static function booted() {
-        static::addGlobalScope( new FolderScope );
+        static::addGlobalScope( new NotdeletedScope() );
     }
 
 }

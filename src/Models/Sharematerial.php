@@ -5,7 +5,7 @@ namespace MyDpo\Models;
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Helpers\Performers\Datatable\DoAction;
-use MyDpo\Scopes\ShareMaterialScope;
+use MyDpo\Scopes\NotdeletedScope;
 use MyDpo\Traits\NextNumber;
 use MyDpo\Rules\Sharematerial\AtLeastOneCustomer;
 use MyDpo\Rules\Sharematerial\AtLeastOneMaterial;
@@ -64,7 +64,7 @@ class Sharematerial extends Model {
     }
 
     protected static function booted() {
-        static::addGlobalScope( new ShareMaterialScope );
+        static::addGlobalScope( new NotdeletedScope() );
     }
 
     /**

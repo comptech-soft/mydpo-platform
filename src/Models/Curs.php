@@ -13,7 +13,7 @@ use MyDpo\Performers\Curs\GetKnolyxCourses;
 use MyDpo\Models\Knolyx;
 use MyDpo\Rules\Curs\IsUrlPresent;
 use MyDpo\Rules\Curs\IsFilePresent;
-use MyDpo\Scopes\CursScope;
+use MyDpo\Scopes\NotdeletedScope;
 
 class Curs extends Model {
 
@@ -69,7 +69,7 @@ class Curs extends Model {
     ];
 
     protected static function booted() {
-        static::addGlobalScope( new CursScope() );
+        static::addGlobalScope( new NotdeletedScope() );
     }
 
     /**
