@@ -1,7 +1,6 @@
 <?php
 
 use MyDpo\Http\Controllers\Auth\CustomersCentralizatoareController;
-use MyDpo\Http\Controllers\Admin\CentralizatoareController;
 
 Route::prefix('customers-centralizatoare')->group( function() {
         

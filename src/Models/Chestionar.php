@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Models\Category;
+use MyDpo\Scopes\NotdeletedScope;
 
 class Chestionar extends Model {
     
@@ -40,6 +41,10 @@ class Chestionar extends Model {
         'deleted_by',
     ];
 
+    protected static function booted() {
+        static::addGlobalScope( new NotdeletedScope() );
+    }
+    
     public function category() {
         return $this->belongsTo(Category::class, 'category_id');
     }

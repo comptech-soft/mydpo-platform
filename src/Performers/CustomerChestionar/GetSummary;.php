@@ -1,20 +1,20 @@
 <?php
 
-namespace MyDpo\Performers\CustomerCentralizator;
+namespace MyDpo\Performers\CustomerChestionar;
 
 use MyDpo\Helpers\Perform;
-use MyDpo\Models\CustomerCentralizator;
+use MyDpo\Models\CustomerChestionar;
 
 class GetSummary extends Perform {
 
     /**
-     * Cate centralizator are asociate un customer
+     * Cate chestionar are asociate un customer
      */
     public function Action() {
 
         $customer_id = $this->input['customer_id'];
         
-        $count = CustomerCentralizator::where('customer_id', $customer_id)->has('centralizator')->count();
+        $count = CustomerChestionar::where('customer_id', $customer_id)->has('chestionar')->count();
         
         $this->payload = [
 
