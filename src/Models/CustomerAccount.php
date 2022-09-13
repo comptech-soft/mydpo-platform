@@ -80,25 +80,17 @@ class CustomerAccount extends Model {
         return (new DoAction($action, $input, __CLASS__))->Perform();
     }
 
-    public static function GetRules($action, $input) {
-       
-        if($action == 'delete')
-        {
-            return NULL;
-        }
+    public static function doUpdate($input, $account) {
 
-        $result = [
-            'customer_id' => 'required|exists:customers,id',
-            'department_id' => 'required|exists:customers-departamente,id', 
-            'user_id' => [
-                'required',
-                'exists:users,id',
-                new UniqueUser($input),
-            ],
-            'user.role_id' => 'required|in:4,5'         
-        ];
+        $account->update($input);
 
-        return $result;
+        $roleUser = RoleUser::CreateAccountRole(
+            $input['customer_id'], 
+            $input['user_id'], 
+            $input['user']['role_id']
+        );
+
+        return $account;
     }
 
     public static function doInsert($input) {
@@ -120,5 +112,28 @@ class CustomerAccount extends Model {
         return $account;
 
     } 
+
+    public static function GetRules($action, $input) {
+       
+        if($action == 'delete')
+        {
+            return NULL;
+        }
+
+        $result = [
+            'customer_id' => 'required|exists:customers,id',
+            'department_id' => 'required|exists:customers-departamente,id', 
+            'user_id' => [
+                'required',
+                'exists:users,id',
+                new UniqueUser($input),
+            ],
+            'user.role_id' => 'required|in:4,5'         
+        ];
+
+        return $result;
+    }
+
+    
 
 }
