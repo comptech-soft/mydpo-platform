@@ -15,7 +15,7 @@ class CustomersDashboardController extends Controller {
 
         if( ! $customer )
         {
-            return redirect(config('app.url') . 'admin/clienti');
+            return redirect(config('app.url') . '/admin/clienti');
         }
 
         return Response::View(
