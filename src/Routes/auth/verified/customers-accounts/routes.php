@@ -2,6 +2,12 @@
 
 use MyDpo\Http\Controllers\Auth\CustomersAccountsController;
 
+Route::middleware('valid-customer')->prefix('customer-accounts')->group( function() {
+
+    Route::get('/{customer_id}', [CustomersAccountsController::class, 'index']);
+
+});
+
 Route::prefix('customers-accounts')->group( function() {
         
     Route::post('items', [CustomersAccountsController::class, 'getItems']);
