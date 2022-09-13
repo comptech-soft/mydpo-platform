@@ -13,7 +13,7 @@ class CustomersDepartmentsController extends Controller {
 
         return Response::View(
             '~templates.index', 
-            asset('apps/customer-cursuri/index.js'),
+            asset('apps/customer-departments/index.js'),
             [], 
             [
                 'customer_id' => $customer_id,
