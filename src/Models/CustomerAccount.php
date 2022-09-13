@@ -100,7 +100,7 @@ class CustomerAccount extends Model {
             'user_id' => $input['user_id'],
             'department_id' => $input['department_id'],
             'newsletter' => $input['newsletter'],
-            'locale' => $input['department_id'],
+            'locale' => $input['locale'],
         ]);
 
         $roleUser = RoleUser::CreateAccountRole(
