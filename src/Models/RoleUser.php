@@ -43,7 +43,6 @@ class RoleUser extends Model {
             'created_by' => \Auth::user()->id,
         ]);
 
-        dd(__METHOD__, $customer_id, $user_id, $role_id);
     }
 
 }
