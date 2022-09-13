@@ -16,7 +16,9 @@ class UniqueUser implements Rule {
 
     public function passes($attribute, $value) {   
 
-        $q = CustomerAccount::where('name', $this->input['customer_id'])->where('user_id', $this->input['user_id'])->where('deleted', 0);
+        $q = CustomerAccount::where('customer_id', $this->input['customer_id'])
+            ->where('user_id', $this->input['user_id'])
+            ->where('deleted', 0);
 
         if(array_key_exists('id', $this->input) && $this->input['id'])
         {
