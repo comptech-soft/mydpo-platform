@@ -16,5 +16,9 @@ class CustomersDashboardItemsController extends Controller
     public function saveReorderedItems(Request $r) {
         return CustomerDashboardItem::saveReorderedItems($r->all());
     }
+
+    public function saveProfileReorderedItems(Request $r) {
+        return CustomerDashboardItem::saveProfileReorderedItems($r->all());
+    }
     
 }
