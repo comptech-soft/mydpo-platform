@@ -15,12 +15,20 @@ class CustomersDashboardController extends Controller {
 
         if( ! $customer )
         {
-            return redirect(config('app.url') . '/admin/clienti');
+            if(config('app.platform') == 'admin')
+            {
+                return redirect(config('app.url') . '/admin/clienti');
+            }
+            return redirect(config('app.url')); 
         }
 
         return Response::View(
             '~templates.index', 
-            asset('apps/centralizatoare/index.js')
+            asset('apps/customer-dashboard/index.js'),
+            [], 
+            [
+                'customer_id' => $customer_id,
+            ]
         );
     }
 
