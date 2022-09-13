@@ -8,6 +8,8 @@ use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Models\User;
 use MyDpo\Models\CustomerDepartment;
 use MyDpo\Models\RoleUser;
+use MyDpo\Rules\CustomerAccount\UniqueUser;
+use MyDpo\Scopes\NotdeletedScope;
 
 class CustomerAccount extends Model {
 
@@ -41,6 +43,10 @@ class CustomerAccount extends Model {
         'deleted',
         'deleted_by',
     ];
+
+    protected static function booted() {
+        static::addGlobalScope( new NotdeletedScope() );
+    }
 
     protected $with = ['user', 'department'];
 
@@ -86,7 +92,8 @@ class CustomerAccount extends Model {
             'department_id' => 'required|exists:customers-departamente,id', 
             'user_id' => [
                 'required',
-                'exists:users,id'
+                'exists:users,id',
+                new UniqueUser($input),
             ],         
         ];
 
