@@ -8,7 +8,7 @@ class ValidCustomer {
 
     public function handle($request, Closure $next) {
 
-        dd($request->all());
+        dd($request->customer_id);
         // $user = $request->user();
 
         // if( ! $user )
