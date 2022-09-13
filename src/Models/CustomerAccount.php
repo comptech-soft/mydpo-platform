@@ -94,7 +94,8 @@ class CustomerAccount extends Model {
                 'required',
                 'exists:users,id',
                 new UniqueUser($input),
-            ],         
+            ],
+            'user.role_id' => 'required|in:4,5'         
         ];
 
         return $result;
