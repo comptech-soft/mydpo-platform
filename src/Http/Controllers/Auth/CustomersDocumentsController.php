@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use MyDpo\Helpers\Response;
 use MyDpo\Models\Customer;
 
-class CustomersDashboardController extends Controller {
+class CustomersDocumentsController extends Controller {
     
     public function index($customer_id,Request $r) {
 
@@ -31,5 +31,5 @@ class CustomersDashboardController extends Controller {
             ]
         );
     }
-    
+
 }
