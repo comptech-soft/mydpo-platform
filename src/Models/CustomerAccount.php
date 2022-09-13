@@ -90,8 +90,6 @@ class CustomerAccount extends Model {
             ],         
         ];
 
-
-
         return $result;
     }
 
@@ -101,7 +99,7 @@ class CustomerAccount extends Model {
             'customer_id' => $input['customer_id'],
             'user_id' => $input['user_id'],
             'department_id' => $input['department_id'],
-            'newsletter' => $input['department_id'],
+            'newsletter' => $input['newsletter'],
             'locale' => $input['department_id'],
         ]);
 
