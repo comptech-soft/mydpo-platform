@@ -4,7 +4,7 @@ use MyDpo\Http\Controllers\Auth\CustomersDocumentsController;
 use MyDpo\Http\Controllers\Auth\CustomersFoldersController;
 use MyDpo\Http\Controllers\Auth\CustomersFilesController;
 
-Route::prefix('customer-documents')->group( function() {
+Route::middleware('valid-customer')->prefix('customer-documents')->group( function() {
 
     Route::get('/{customer_id}', [CustomersDocumentsController::class, 'index']);
 

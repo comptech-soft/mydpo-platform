@@ -11,17 +11,6 @@ class CustomersDocumentsController extends Controller {
     
     public function index($customer_id,Request $r) {
 
-        $customer = Customer::find($customer_id);
-
-        if( ! $customer )
-        {
-            if(config('app.platform') == 'admin')
-            {
-                return redirect(config('app.url') . '/admin/clienti');
-            }
-            return redirect(config('app.url')); 
-        }
-
         return Response::View(
             '~templates.index', 
             asset('apps/customer-documents/index.js'),
