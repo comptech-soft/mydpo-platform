@@ -7,8 +7,7 @@ use Illuminate\Http\Request;
 use MyDpo\Helpers\Response;
 use MyDpo\Models\Centralizator;
 
-class CentralizatoareController extends Controller
-{
+class CentralizatoareController extends Controller {
     
     public function index(Request $r) {
         return Response::View(
