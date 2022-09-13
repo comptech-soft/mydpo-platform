@@ -26,6 +26,11 @@ class RoleUser extends Model {
 
     public static function CreateAccountRole($customer_id, $user_id, $role_id) {
 
+        if(!! $customer_id &&  in_array($role_id, [4, 5])  )
+        {
+            self::where('customer_id', $customer_id)->where('role_id', $role_id)->where('user_id', $user_id)->delete();
+        }
+
         $record = self::where('customer_id', $customer_id)
             ->where('user_id', $user_id)
             ->where('role_id', $role_id)
