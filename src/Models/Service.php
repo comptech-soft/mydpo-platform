@@ -57,10 +57,8 @@ class Service extends Model {
         
         $result = [
             'type' => 'required|exists:services-types,slug',
-            
             'name' => 'required',
-            
-            // 'category_id' => 'required|exists:categories,id',
+            'is_abonament' => 'required|in:0,1',
         ];
 
         
