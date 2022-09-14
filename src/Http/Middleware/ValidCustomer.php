@@ -18,9 +18,16 @@ class ValidCustomer {
             {
                 return redirect(config('app.url') . '/admin/clienti');
             }
+
             return redirect(config('app.url')); 
         }
 
-        return $next($request);
+        if(config('app.platform') == 'admin')
+        {
+            return $next($request);
+        }
+
+        dd($customer->id, \Auth::user()->id);
+        
     }
 }
