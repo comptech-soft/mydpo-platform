@@ -29,9 +29,12 @@ class ValidCustomer {
 
         /**
          * Numai cei cu conturi pot intra
+         * Sunt: Auth::user();
+         * Accesez: url/customer_id;
+         * Cinee trebuie sa fiu eu in raport cu customer_id?
          */
-        $customers = CustomerAccount::where('user_id', \Auth::user()->id)->get(['customer_id'])->toArray();
-        dd($customer->id, \Auth::user()->id, $customers);
+        $account = CustomerAccount::where('user_id', \Auth::user()->id)->where('customer_id', $customer->id)->first();
+        dd($customer->id, \Auth::user()->id, $account);
         
     }
 }
