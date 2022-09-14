@@ -34,7 +34,20 @@ class ValidCustomer {
          * Cinee trebuie sa fiu eu in raport cu customer_id?
          */
         $account = CustomerAccount::where('user_id', \Auth::user()->id)->where('customer_id', $customer->id)->first();
-        dd($customer->id, \Auth::user()->id, $account);
+       
+        /**
+         * Nu avem corespondent in tabela [customers-persons]
+         */
+        if(! $account )
+        {
+            return redirect(config('app.url')); 
+        }
+
+        /**
+         * Avem inregistrare in [customers-persons]
+         * Ce alte restrictii mai sunt?
+         */
+        return $next($request);
         
     }
 }
