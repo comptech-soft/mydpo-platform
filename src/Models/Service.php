@@ -45,6 +45,12 @@ class Service extends Model {
     }
 
     public static function doAction($action, $input) {
+
+        if( ! array_key_exists('abonamente', $input) )
+        {
+            $input['abonamente'] = NULL;
+        }
+        
         return (new DoAction($action, $input, __CLASS__))->Perform();
     }
 
