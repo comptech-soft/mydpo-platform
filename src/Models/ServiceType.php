@@ -23,7 +23,7 @@ class ServiceType extends Model {
     ];
 
     function services() {
-        return $this->hasMany(Service::class, 'type');
+        return $this->hasMany(Service::class, 'type', 'slug');
     }
 
     public static function getItems($input) {
