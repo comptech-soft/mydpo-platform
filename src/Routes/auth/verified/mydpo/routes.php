@@ -1,8 +1,8 @@
 <?php
 
-Route::middleware(['isb2b'])->group(function () {
+Route::middleware(['isb2b'])->prefix('b2b')->group(function () {
     
-    // require __DIR__ . '/clienti/routes.php';
+    require __DIR__ . '/clienti/routes.php';
     // require __DIR__ . '/contracte/routes.php';
     // require __DIR__ . '/comenzi/routes.php';
 
@@ -15,7 +15,8 @@ Route::middleware(['isb2b'])->group(function () {
     // require __DIR__ . '/chestionare/routes.php';
     // require __DIR__ . '/cursuri/routes.php';
 
-    require __DIR__ . '/../admin/echipa/routes.php';
+
+    // require __DIR__ . '/../admin/echipa/routes.php';
 
     // require __DIR__ . '/rapoarte/routes.php';
 
