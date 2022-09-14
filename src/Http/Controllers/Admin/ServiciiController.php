@@ -19,4 +19,8 @@ class ServiciiController extends Controller {
     public function getItems(Request $r) {
         return Service::getItems($r->all());
     }
+
+    public function doAction($action, Request $r) {
+        return Service::doAction($action, $r->all());
+    }
 }

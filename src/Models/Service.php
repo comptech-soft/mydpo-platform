@@ -4,6 +4,7 @@ namespace MyDpo\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
+use MyDpo\Helpers\Performers\Datatable\DoAction;
 
 class Service extends Model {
 
@@ -41,6 +42,30 @@ class Service extends Model {
 
     public static function getItems($input) {
         return (new GetItems($input, self::query(), __CLASS__))->Perform();
+    }
+
+    public static function doAction($action, $input) {
+        return (new DoAction($action, $input, __CLASS__))->Perform();
+    }
+
+    public static function GetRules($action, $input) {
+
+        if($action == 'delete')
+        {
+            return NULL;
+        }
+        
+        $result = [
+            'type' => 'required|exists:services-types,slug',
+            
+            'name' => 'required',
+            
+            // 'category_id' => 'required|exists:categories,id',
+        ];
+
+        
+
+        return $result;
     }
 
 }

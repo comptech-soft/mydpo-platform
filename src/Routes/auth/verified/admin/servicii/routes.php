@@ -8,7 +8,7 @@ Route::prefix('servicii')->group( function() {
     Route::get('/', [ServiciiController::class, 'index']);        
 
     Route::post('items', [ServiciiController::class, 'getItems']);
-
+    Route::post('action/{action}', [ServiciiController::class, 'doAction']);  
 });
 
 Route::prefix('services-types')->group( function() {
