@@ -52,6 +52,6 @@ class CustomerService extends Model {
     }
 
     public static function getItems($input) {
-        return (new GetItems($input, self::query()->with(['service']), __CLASS__))->Perform();
+        return (new GetItems($input, self::query()->with(['service.type']), __CLASS__))->Perform();
     }
 }

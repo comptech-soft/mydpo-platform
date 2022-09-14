@@ -5,10 +5,10 @@ namespace MyDpo\Models;
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Helpers\Performers\Datatable\DoAction;
+use MyDpo\Models\ServiceType;
 
 class Service extends Model {
 
-    
     protected $table = 'services';
 
     protected $casts = [
@@ -40,6 +40,10 @@ class Service extends Model {
         'deleted_by'
     ];
 
+    public function type() {
+        return $this->belongsTo(ServiceType::class, 'type', 'slug');
+    }
+
     public static function getItems($input) {
         return (new GetItems($input, self::query(), __CLASS__))->Perform();
     }
@@ -66,8 +70,6 @@ class Service extends Model {
             'name' => 'required',
             'is_abonament' => 'required|in:0,1',
         ];
-
-        
 
         return $result;
     }
