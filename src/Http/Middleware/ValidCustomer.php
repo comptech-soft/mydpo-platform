@@ -30,7 +30,7 @@ class ValidCustomer {
         /**
          * Numai cei cu conturi pot intra
          */
-        $customers = CustomerAccount::where('user_id', \Auth::user()->id)->pluck('name', 'id')->toArray();
+        $customers = CustomerAccount::where('user_id', \Auth::user()->id)->with(['customer'])->pluck('name', 'customer_id')->toArray();
         dd($customer->id, \Auth::user()->id, $customers);
         
     }

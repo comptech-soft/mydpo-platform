@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Models\User;
+use MyDpo\Models\Customer;
 use MyDpo\Models\CustomerDepartment;
 use MyDpo\Models\RoleUser;
 use MyDpo\Rules\CustomerAccount\UniqueUser;
@@ -66,6 +67,10 @@ class CustomerAccount extends Model {
 
     public function user() {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function customer() {
+        return $this->belongsTo(Customer::class, 'customer_id');
     }
 
     public function department() {
