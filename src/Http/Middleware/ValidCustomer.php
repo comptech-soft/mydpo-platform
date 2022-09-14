@@ -4,7 +4,7 @@ namespace MyDpo\Http\Middleware;
 
 use Closure;
 use MyDpo\Models\Customer;
-
+use MyDpo\Models\CustomerAccount;
 
 class ValidCustomer {
 
@@ -27,7 +27,11 @@ class ValidCustomer {
             return $next($request);
         }
 
-        dd($customer->id, \Auth::user()->id);
+        /**
+         * Numai cei cu conturi pot intra
+         */
+        $customers = CustomerAccount::where('user_id', \Auth::user()->id)->plick('name', 'id')->toArray();
+        dd($customer->id, \Auth::user()->id, $customers);
         
     }
 }
