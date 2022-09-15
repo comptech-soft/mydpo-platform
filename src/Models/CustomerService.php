@@ -57,8 +57,12 @@ class CustomerService extends Model {
     }
 
     public static function doAction($action, $input) {
-        dd(__METHOD__, $input);
         return (new DoAction($action, $input, __CLASS__))->Perform();
+    }
+
+    public static function doInsert($input, $service) {
+        $service = self::create($input);
+        return $service;
     }
 
     public static function GetRules($action, $input) {
