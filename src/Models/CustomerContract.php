@@ -69,7 +69,7 @@ class CustomerContract extends Model {
     }
 
     public function attachOrder($order) {
-        CustomerOrder::doAction('insert', [
+        return CustomerOrder::doAction('insert', [
             'id' => NULL,
             ...$order,
             'contract_id' => $this->id,
@@ -91,10 +91,13 @@ class CustomerContract extends Model {
 
         if( array_key_exists('orders', $input) )
         {
+            $result = [];
             foreach($input['orders'] as $i => $order)
             {
-                $contract->attachOrder($order);
+                $result[] = $contract->attachOrder($order);
             }
+
+            dd($result);
         }
 
         return $contract;
