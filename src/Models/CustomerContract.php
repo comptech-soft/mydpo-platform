@@ -34,6 +34,7 @@ class CustomerContract extends Model {
         'date_to',
         'customer_id',
         'prelungire_automata',
+        'date_to_history',
         'deleted',
         'status',
         'props',
