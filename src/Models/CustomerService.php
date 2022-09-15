@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Models\Service;
+use MyDpo\Rules\CustomerService\UniqueOrderService;
 
 class CustomerService extends Model {
 
@@ -58,6 +59,26 @@ class CustomerService extends Model {
     public static function doAction($action, $input) {
         dd(__METHOD__, $input);
         return (new DoAction($action, $input, __CLASS__))->Perform();
+    }
+
+    public static function GetRules($action, $input) {
+
+        if($action == 'delete')
+        {
+            return NULL;
+        }
+
+        $result = [
+            'customer_id' => 'required|exists:customers,id',
+            'contract_id' => 'required|exists:customers-contracts,id',
+            'order_id' => 'required|exists:customers-orders,id',
+            'service_id' => [
+                'required',
+                'exists:services,id',
+                new UniqueOrderService($input),
+            ],
+        ];
+        return $result;
     }
 
 }
