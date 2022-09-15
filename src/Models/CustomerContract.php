@@ -74,7 +74,7 @@ class CustomerContract extends Model {
             'date_to_history' => [
                 [
                     'date_to' =>  $input['date_to'],
-                    'updated_by' => \Sentinel::check()->id,
+                    'updated_by' => \Auth::user()->id,
                     'updated_at' => \Carbon\Carbon::now()->format('Y-m-d'),
                 ]
             ]
