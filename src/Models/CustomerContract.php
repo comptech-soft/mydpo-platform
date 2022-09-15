@@ -61,7 +61,7 @@ class CustomerContract extends Model {
     }
 
     public static function getItems($input) {
-        return (new GetItems($input, self::query()->with(['orders']), __CLASS__))->Perform();
+        return (new GetItems($input, self::query()->with(['orders.services']), __CLASS__))->Perform();
     }
 
     public static function doAction($action, $input) {

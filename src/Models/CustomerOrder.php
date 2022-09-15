@@ -48,10 +48,9 @@ class CustomerOrder extends Model {
         'days_difference',
     ];
 
-    /** order->services */
-    // function services() {
-    //     return $this->hasMany(CustomerOrderService::class, 'order_id');
-    // }
+    function services() {
+        return $this->hasMany(CustomerService::class, 'order_id');
+    }
     
     public function customer() {
         return $this->belongsTo(Customer::class, 'customer_id');
