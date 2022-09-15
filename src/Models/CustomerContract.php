@@ -70,6 +70,7 @@ class CustomerContract extends Model {
 
     public function attachOrder($order) {
         CustomerOrder::doAction('insert', [
+            'id' => NULL,
             ...$order,
             'contract_id' => $this->id,
         ]);
