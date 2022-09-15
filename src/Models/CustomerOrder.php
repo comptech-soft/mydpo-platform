@@ -7,6 +7,7 @@ use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Models\Customer;
 use MyDpo\Models\CustomerContract;
+use MyDpo\Models\CustomerService;
 use MyDpo\Rules\CustomerOrder\OrderNumber;
 use MyDpo\Traits\DaysDifference;
 
@@ -66,9 +67,40 @@ class CustomerOrder extends Model {
     }
 
     public static function doAction($action, $input) {
-
-        dd($input);
         return (new DoAction($action, $input, __CLASS__))->Perform();
+    }
+
+    public function attachService($service) {
+        CustomerService::doAction('insert', [
+            ...$service,
+            'customer_id' => $this->contract->customer_id,
+            'contract_id' => $this->contract_id,
+            'order_id' => $this->id,
+        ]);
+    }
+
+    public static function doInsert($input, $order) {
+        
+        $order = self::create([
+            ...$input,
+            'date_to_history' => [
+                [
+                    'date_to' =>  $input['date_to'],
+                    'updated_by' => \Auth::user()->id,
+                    'updated_at' => \Carbon\Carbon::now()->format('Y-m-d'),
+                ]
+            ]
+        ]);
+
+        if( array_key_exists('services', $input) )
+        {
+            foreach($input['services'] as $i => $service)
+            {
+                $order->attachService($service);
+            }
+        }
+
+        return $order;
     }
 
     public static function GetRules($action, $input) {
