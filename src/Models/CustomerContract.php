@@ -7,7 +7,7 @@ use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Models\Customer;
 use MyDpo\Models\CustomerOrder;
-
+use MyDpo\Rules\CustomerContract\ContractNumber;
 use MyDpo\Traits\DaysDifference;
 
 class CustomerContract extends Model {
@@ -62,5 +62,34 @@ class CustomerContract extends Model {
     public static function getItems($input) {
         return (new GetItems($input, self::query(), __CLASS__))->Perform();
     }
+
+    public static function doAction($action, $input) {
+        return (new DoAction($action, $input, __CLASS__))->Perform();
+    }
+
+
+    public static function GetRules($action, $input) {
+       
+        if($action == 'delete')
+        {
+            return NULL;
+        }
+
+        $result = [
+            'customer_id' => 'required|exists:customers,id',
+            'number' => [
+                'required',
+                'max:16',
+                new ContractNumber($input),
+            ],
+            'status' => 'required',
+            'date_from' => 'required|date',
+            'date_to' => 'required|date',
+        ];
+
+        
+        return $result;
+    }
+
 
 }
