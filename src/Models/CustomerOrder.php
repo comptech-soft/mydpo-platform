@@ -72,7 +72,7 @@ class CustomerOrder extends Model {
 
     public function attachService($service) {
         CustomerService::doAction('insert', [
-            'id' => $service['service_id'],
+            'service_id' => $service['service_id'],
             ...$service['record'],
             'customer_id' => $this->contract->customer_id,
             'contract_id' => $this->contract_id,
