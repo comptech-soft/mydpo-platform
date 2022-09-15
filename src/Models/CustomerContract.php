@@ -68,6 +68,13 @@ class CustomerContract extends Model {
         return (new DoAction($action, $input, __CLASS__))->Perform();
     }
 
+    public function attachOrder($order) {
+        CustomerOrder::doAction('insert', [
+            ...$order,
+            'customer_id' => $this->id,
+        ]);
+    }
+
     public static function doInsert($input, $contract) {
         
         $contract = self::create([
@@ -80,6 +87,14 @@ class CustomerContract extends Model {
                 ]
             ]
         ]);
+
+        if( array_key_exists('orders', $input) )
+        {
+            foreach($input['orders'] as $i => $order)
+            {
+                $contract->attachOrder($order);
+            }
+        }
 
         return $contract;
     }
