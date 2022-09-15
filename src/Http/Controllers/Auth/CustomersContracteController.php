@@ -17,6 +17,7 @@ class CustomersContracteController extends Controller {
             [], 
             [
                 'customer_id' => $customer_id,
+                'insert' => $r->insert,
             ]
         );
     }
