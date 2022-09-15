@@ -67,6 +67,21 @@ class CustomerContract extends Model {
         return (new DoAction($action, $input, __CLASS__))->Perform();
     }
 
+    public static function doInsert($input, $contract) {
+        
+        $contract = self::create([
+            ...$input,
+            'date_to_history' => [
+                [
+                    'date_to' =>  $input['date_to'],
+                    'updated_by' => \Sentinel::check()->id,
+                    'updated_at' => \Carbon\Carbon::now()->format('Y-m-d'),
+                ]
+            ]
+        ]);
+
+        return $contract;
+    }
 
     public static function GetRules($action, $input) {
        
