@@ -187,6 +187,8 @@ class DoAction extends Perform {
             ->event($this->action . '#' . $this->payload['record']['id'])
             ->createdAt($now = now())
             ->log(\Auth::user()->full_name . '#' . $this->action);
+
+        sleep(1);
     }
 
 }

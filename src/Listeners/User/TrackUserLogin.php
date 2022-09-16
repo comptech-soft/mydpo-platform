@@ -21,16 +21,9 @@ class TrackUserLogin {
                         'user' => $event->user,
                     ]
                 )
-                ->event('change-password')
+                ->event('login')
                 ->createdAt($now = now())
-                ->log(
-                    __(
-                        ':name a intrat in sistem', 
-                        [
-                            'name' => $event->user->full_name 
-                        ]
-                    ), 
-                );
+                ->log($event->user->full_name . '#login');
 
             \Auth::user()->update([
                 'last_login' => $now,
