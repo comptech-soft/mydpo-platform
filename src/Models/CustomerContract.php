@@ -91,15 +91,19 @@ class CustomerContract extends Model {
 
         if( array_key_exists('orders', $input) )
         {
-            $result = [];
             foreach($input['orders'] as $i => $order)
             {
-                $result[] = $contract->attachOrder($order);
+                $result = $contract->attachOrder($order);
+                if( ! $result['success'] )
+                {
+                    throw new \Exception($result['message']);
+                }
             }
         }
 
         return $contract;
     }
+
 
     public static function GetRules($action, $input) {
        
