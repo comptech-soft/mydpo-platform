@@ -171,6 +171,9 @@ class DoAction extends Perform {
             'record' => $this->DispatchAction(),
         ];
 
+        /**
+         * Unique: event, causer_id (by), created_at
+         */
         activity()
             ->by(\Auth::user())
             ->on($this->payload['record'])
@@ -181,17 +184,9 @@ class DoAction extends Perform {
                     'new' => $this->payload['record'],
                 ]
             )
-            ->event($this->action)
+            ->event($this->action . '#' . $this->payload['record']['id'])
             ->createdAt($now = now())
-            ->log(
-                __(
-                    ':name a executat acțiunea :action', 
-                    [
-                        'name' => \Auth::user()->full_name,
-                        'action' => $this->action,
-                    ]
-                ), 
-            );
+            ->log(\Auth::user()->full_name . '#' . $this->action);
     }
 
 }
