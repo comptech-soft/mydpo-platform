@@ -96,8 +96,6 @@ class CustomerContract extends Model {
             {
                 $result[] = $contract->attachOrder($order);
             }
-
-            dd($result);
         }
 
         return $contract;
