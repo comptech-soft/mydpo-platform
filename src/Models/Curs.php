@@ -330,10 +330,13 @@ class Curs extends Model {
             $this->props = [];
         }
 
-        $this->props = [
-            ...$this->props,
-            'image' => $image,
-        ];
+        if($image)
+        {
+            $this->props = [
+                ...$this->props,
+                'image' => $image,
+            ];
+        }
 
         $this->save();
     }

@@ -64,7 +64,25 @@ class Knolyx {
 				'action' => "STUDENTS"
 			];
 		}
-
+		else
+		{
+			$response[0] = [
+				'name' => "All",
+				'type' => "PRIVATE",
+				'startDateTime' => "2022-07-21 21:00:00",
+				'endDateTime' => "2022-11-29 22:00:00",
+				'restrictions' => [
+					'minimumTime' => false,
+					'browseOrder' => "anyOrder",
+					'minimumTimeValue' => "1 hours",
+				],
+				'associations' => [
+					"USER" => []
+				 ],
+				'action' => "STUDENTS"
+			];
+		}
+		
         $courseRole = $response[0];
 		
         if( ! array_key_exists('USER', $courseRole['associations']) )
@@ -112,15 +130,20 @@ class Knolyx {
             'X-Project-Id' => config('knolyx.project_id'),
             'X-Api-Key' => config('knolyx.app_key')
         ])->get(config('knolyx.endpoint') . 'course/' . $course_id . '/image');
-
+		
         $body = $response->getBody()->getContents();
-
+				
         $base64 = base64_encode($body);
-
-        return [
-            'mime' => $response->getHeader('Content-Type')[0],
-            'base64' => $base64, 
-        ];
+		
+		if($base64 && (count($response->getHeader('Content-Type')) > 1))
+		{				
+			return [
+				'mime' => $response->getHeader('Content-Type'),
+				'base64' => $base64, 
+			];
+		}
+        
+		return NULL;
     }
 }
 
