@@ -28,10 +28,8 @@ class CustomerFolder extends Folder {
             return $this->hasMany(CustomerFile::class, 'folder_id');
         }
 
-        // 'status', '<>', 'protected'
-
         return $this->hasMany(CustomerFile::class, 'folder_id')
-            ->whereRaw("((`customer-files`.`platform` = 'b2b') OR ( (`customer-files`.`platform` = 'admin') AND (`customer-files`.`status` = 'protected')))");
+            ->whereRaw("((`customers-files`.`platform` = 'b2b') OR ( (`customers-files`.`platform` = 'admin') AND (`customers-files`.`status` = 'protected')))");
     }
 
     public static function getItems($input) {
