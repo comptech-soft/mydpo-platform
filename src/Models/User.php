@@ -82,17 +82,18 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
         'my_settings'
     ];
 
-    /**
-     * 
-     * ATTRIBUTES
-     * 
-     */
+    /** *************************
+     * ATTRIBUTES               *
+     ****************************/
+    
     public function getActiveAttribute() {
         return !! $this->email_verified_at;
     }
 
-    /** RoleByPlatform = Rolul potrivit platformei */
     public function getRoleAttribute() {
+        /**
+         * Role By Platform = Rolul potrivit platformei 
+         **/
         $r = NULL;
         foreach($this->roles as $i => $role)
         {
@@ -136,11 +137,9 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
         return $this->settings()->get()->pluck('value', 'code');
     }
 
-    /**
-     * 
-     * RELATIONS
-     * 
-     */
+    /** *************************
+     * RELATIONS                *
+     ****************************/
     public function roles(): BelongsToMany {
         return $this->belongsToMany(
             Role::class, 
@@ -152,12 +151,15 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
         ->withTimestamps();
     }
 
-    /**
-     * la ce customeri sunt eu printre cei acre au conturi: customers-persons
-     */
     public function customers() {
+        /**
+         * la ce customeri sunt eu printre cei care au conturi: customers-persons
+         */
         if( config('app.platform') == 'admin' )
         {
+            /**
+             * Daca sunt pe platforma admin nu se pune problema sa fiu user al vreunui customer
+             */
             return $this->belongsToMany(
                 Customer::class, 
                 'customers-persons', 
@@ -166,6 +168,9 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
             )->whereRaw('1 = 0');
         }
 
+        /**
+         * Daca sunt pe platforma b2b ==> ce gasesc in [customers-persons]
+         */
         return $this->belongsToMany(
             Customer::class, 
             'customers-persons', 
@@ -180,6 +185,10 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
         return $this->hasMany(UserSetting::class, 'user_id')->where('platform', config('app.platform'));
     }
 
+    /** *************************
+     * ROLURI.PERMISIUNI        *
+     ****************************/
+
     public function inRoles($slugs) {
         if(! $this->role)
         {
@@ -187,6 +196,10 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
         }
         return in_array($this->role->slug, $slugs);
     }
+
+    /** *************************
+     * ITEMS                    *
+     ****************************/
 
     public static function getItems($input) {
         return (new GetItems($input, self::query(), __CLASS__))->Perform();
