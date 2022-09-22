@@ -38,6 +38,7 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
         'password',
         'avatar',
         'phone',
+        'email_verified_at',
         'permissions',
         'last_login',
         'editable',
