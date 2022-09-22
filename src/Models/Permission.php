@@ -8,7 +8,8 @@ use Kalnoy\Nestedset\NodeTrait;
 // https://github.com/lazychaser/laravel-nestedset#installation
 
 class Permission extends Model {
- 
+    use NodeTrait;
+    
     protected $table = 'permissions';
 
     protected $with = ['ancestors'];
