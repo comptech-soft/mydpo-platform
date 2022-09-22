@@ -5,7 +5,7 @@ namespace MyDpo\Models;
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
 
-class MaterialStatus extends Model {
+class UserStatus extends Model {
 
     protected $table = 'users-statuses';
 
