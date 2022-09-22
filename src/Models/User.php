@@ -217,8 +217,14 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
 
         if( array_key_exists('active', $input) )
         {   
-            dd($input['active']);
-            // $input['email_verified_at']
+            if( ($input['active'] == 'false') || ! $input['active'])
+            {
+                $input['email_verified_at'] = NULL;
+            }
+            else
+            {
+                $input['email_verified_at'] = \Carbon\Carbon::now();
+            }
         }
 
         $user->update($input);
