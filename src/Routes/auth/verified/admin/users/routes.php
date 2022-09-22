@@ -1,6 +1,7 @@
 <?php
 
 use MyDpo\Http\Controllers\Admin\UsersController;
+use MyDpo\Http\Controllers\Admin\UserDashboardController;
 
 Route::prefix('utilizatori')->group( function() {
         
@@ -15,4 +16,11 @@ Route::prefix('utilizatori')->group( function() {
     // Route::post('persons/items', [CustomersController::class, 'getItemsWithPersons']);
     
     // 
+});
+
+
+Route::prefix('utilizator-dashboard')->group( function() {
+        
+    Route::get('/{user_id}', [UserDashboardController::class, 'index']);        
+   
 });
