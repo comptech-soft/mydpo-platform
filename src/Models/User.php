@@ -206,6 +206,9 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
         return (new GetItems($input, self::query(), __CLASS__))->Perform();
     }
 
+    /** *************************
+     * ACTIONS                  *
+     ****************************/
     public static function doAction($action, $input) {
         return (new DoAction($action, $input, __CLASS__))->Perform();
     }
@@ -364,5 +367,22 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
             ->SetSuccessMessage('Schimbare parolă cu success!')
             ->Perform();
     }
+
+    public static function updatePassword($input) {
+        return (new Changepassword(
+            $input,
+            [
+                'password' => [
+                    'required', 
+                    'confirmed', 
+                    Rules\Password::defaults()->mixedCase()->letters()->numbers()->symbols()
+                ]
+            ]
+        ))
+            ->SetSuccessMessage('Schimbare parolă cu success!')
+            ->Perform();
+    }
+
+    
     
 }

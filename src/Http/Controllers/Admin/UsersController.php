@@ -23,4 +23,10 @@ class UsersController extends Controller {
     public function doAction($action, Request $r) {
         return User::doAction($action, $r->all());
     }
+
+    public function updatePassword(Request $r) {
+        return User::updatePassword($r->all());
+    }
+
+    
 }
