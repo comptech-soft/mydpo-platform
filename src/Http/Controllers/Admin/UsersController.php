@@ -5,7 +5,7 @@ namespace MyDpo\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Helpers\Response;
-// use MyDpo\Models\Customer;
+use MyDpo\Models\User;
 
 class UsersController extends Controller {
     
@@ -16,6 +16,7 @@ class UsersController extends Controller {
         );
     }
 
-    
-
+    public function getItems(Request $r) {
+        return User::getItems($r->all());
+    }
 }
