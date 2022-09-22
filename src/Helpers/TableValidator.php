@@ -4,8 +4,14 @@ namespace MyDpo\Helpers;
 
 class TableValidator {
 
-    public static function columnValueExists($table, $column, $value) {
-        $result = \DB::table($table)->where($column, $value)->first();        
+    public static function columnValueExists($table, $column, $value, $id = NULL)  {
+
+        $q = \DB::table($table)->where($column, $value);
+        if($id)
+        {
+            $q->where('id', '<>', $id);
+        }
+        $result = $q->first();        
         return $result ? 1 : 0;
     }
 

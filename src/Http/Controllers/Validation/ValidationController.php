@@ -15,7 +15,7 @@ class ValidationController extends Controller
 
     public function columnValueUnique(Request $r) {
 
-        return TableValidator::columnValueUnique($r->table, $r->column, $r->value); 
+        return TableValidator::columnValueUnique($r->table, $r->column, $r->value, $r->id); 
         
     }
 
