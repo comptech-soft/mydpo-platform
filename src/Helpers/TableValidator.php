@@ -15,8 +15,8 @@ class TableValidator {
         return $result ? 1 : 0;
     }
 
-    public static function columnValueUnique($table, $column, $value) {
-        return 1 - self::columnValueExists($table, $column, $value);
+    public static function columnValueUnique($table, $column, $value, $id = NULL) {
+        return 1 - self::columnValueExists($table, $column, $value, $id);
     }
     
 }
