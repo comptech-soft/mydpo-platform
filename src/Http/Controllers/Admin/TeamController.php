@@ -10,7 +10,6 @@ class TeamController extends Controller {
     
     public function index(Request $r) {
 
-        dd(__METHOD__);
         $asset = (config('app.platform') == 'admin') ? 'team' : 'my-team';
 
         return Response::View(
