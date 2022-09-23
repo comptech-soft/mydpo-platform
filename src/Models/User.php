@@ -326,6 +326,7 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
             'email.required' => 'Adresa de email trebuie completată.',
             'email.email' => 'Adresa de email nu pare să fie o adresă de email corectă.',
             'email.unique' => 'Adresa de email este deja folosită de alt utilizator',
+            'password.min' => 'Parola trebuie să fie de cel puțin 8 caractere și să conțină litere mari și mici, cifre și caractere speciale.',
         ];
     }
 
