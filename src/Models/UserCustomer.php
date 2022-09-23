@@ -2,6 +2,7 @@
 
 namespace MyDpo\Models;
 
+use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Models\Customer;
 use MyDpo\Models\User;
 
@@ -37,6 +38,10 @@ class UserCustomer extends Model {
 
     public function user() {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public static function getItems($input) {
+        return (new GetItems($input, self::query(), __CLASS__))->Perform();
     }
 
 }
