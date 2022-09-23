@@ -313,21 +313,9 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
 
         if($action == 'update')
         {
-            // if(array_key_exists('password', $input) && $input['password'])
-            // {
-            //     $result['password'] = [
-            //         new ValidPassword($input['password']),
-            //     ];
-            //     $result['password_confirmation'] = [
-            //         'required',
-            //         new UpdatedPassword($input['password'], $input['password_confirmation']),
-            //     ];
-            // }
             $result['email'][4] .= (',' . $input['id']);
         }
-
-        return $result;
-
+        
         return $result;
     }
 
@@ -362,6 +350,9 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
                     'confirmed', 
                     Rules\Password::defaults()->mixedCase()->letters()->numbers()->symbols()
                 ]
+            ],
+            [
+                'password.min' => 'Parola trebuie să fie de cel puțin 8 caractere și să conțină litere mari și mici, cifre și caractere speciale.',
             ]
         ))
             ->SetSuccessMessage('Schimbare parolă cu success!')
