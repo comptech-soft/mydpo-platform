@@ -2,6 +2,7 @@
 
 namespace MyDpo\Models;
 
+use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Models\Customer;
 use MyDpo\Models\User;
