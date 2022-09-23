@@ -129,6 +129,7 @@ class UserSession {
             ],
             [
                 'token.required' => 'Codul de resetare este obligatoriu.',
+                'password.min' => 'Parola trebuie să fie de cel puțin 8 caractere și să conțină litere mari și mici, cifre și caractere speciale.',
             ]
         ))
         ->SetSuccessMessage('Parola a fost schimbată cu success!')
