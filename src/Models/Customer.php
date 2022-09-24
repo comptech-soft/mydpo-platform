@@ -9,7 +9,7 @@ use MyDpo\Models\CustomerStatus;
 use MyDpo\Models\City;
 use MyDpo\Models\CustomerContract;
 use MyDpo\Models\CustomerAccount;
-use MyDpo\Models\Folder;
+use MyDpo\Models\CustomerFolder;
 
 class Customer extends Model {
 
@@ -126,10 +126,40 @@ class Customer extends Model {
 
     public function createDefaultFolder($defaultFolder) {
 
-        $folder = 
-        dd($defaultFolder->name, $this->id);
+        $folder = Folder::where('customer_id', $this->id)->where('name', $defaultFolder->name)->first();
+
+        if( ! $folder )
+        {
+            $input = [
+                'name' => $defaultFolder->name,
+                'customer_id' => $this->id,
+                'default_folder_id' => $defaultFolder->id,
+                'platform' => 'admin',
+                'props' => [
+                    'defaultfolder' => $defaultFolder, 
+                ],
+                'deleted' => 0,
+            ];
+
+            if( ! $defaultFolder->parent_id )
+            {
+                $folder = Folder::create($input);
+            }
+            else
+            {
+                $parent = Folder::where('default_folder_id', $defaultFolder->parent_id)->first();
+
+                dd($parent);
+                
+                $parent->children()->create($input);
+            }
+
+            // if($defaultFolder)
+            // 
+        }
+        // dd($defaultFolder->name, $this->id);
     }
-    
+
     public function createDefaultFolders() {
         $defaultFolders = CustomerFolderDefault::all();        
         foreach($defaultFolders as $i => $defaultFolder) {
