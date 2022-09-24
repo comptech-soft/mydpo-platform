@@ -8,6 +8,8 @@ use Kalnoy\Nestedset\NodeTrait;
 class CustomerFolderDefault extends Model {
 
     use NodeTrait; 
+
+    protected $table = 'customers-folders-default';
     
     protected $fillable = [
         'id',
