@@ -126,42 +126,32 @@ class Customer extends Model {
 
     public function createDefaultFolder($defaultFolder) {
 
-        $folder = Folder::where('customer_id', $this->id)->where('name', $defaultFolder->name)->first();
+        $folder = CustomerFolder::where('customer_id', $this->id)->where('name', $defaultFolder->name)->first();
+
+        $input = [
+            'name' => $defaultFolder->name,
+            'customer_id' => $this->id,
+            'default_folder_id' => $defaultFolder->id,
+            'platform' => 'admin',
+            'props' => [
+                'defaultfolder' => $defaultFolder, 
+            ],
+            'deleted' => 0,
+        ];
 
         if( ! $folder )
         {
-            $input = [
-                'name' => $defaultFolder->name,
-                'customer_id' => $this->id,
-                'default_folder_id' => $defaultFolder->id,
-                'platform' => 'admin',
-                'props' => [
-                    'defaultfolder' => $defaultFolder, 
-                ],
-                'deleted' => 0,
-            ];
-
-            if( ! $defaultFolder->parent_id )
-            {
-                $folder = Folder::create($input);
-            }
-            else
-            {
-                $parent = Folder::where('default_folder_id', $defaultFolder->parent_id)->first();
-
-                dd($parent);
-                
-                $parent->children()->create($input);
-            }
-
-            // if($defaultFolder)
-            // 
+            $folder = CustomerFolder::create($input);  
         }
-        // dd($defaultFolder->name, $this->id);
+        else
+        {
+            $folder->update($input);
+        }
     }
 
     public function createDefaultFolders() {
-        $defaultFolders = CustomerFolderDefault::all();        
+        $defaultFolders = CustomerFolderDefault::whereNull('parent_id')->get();  
+
         foreach($defaultFolders as $i => $defaultFolder) {
             $this->createDefaultFolder($defaultFolder);
         }
