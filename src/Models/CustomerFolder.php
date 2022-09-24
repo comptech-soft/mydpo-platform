@@ -87,12 +87,8 @@ class CustomerFolder extends Folder {
         }
     }
 
-
     public static function doDelete($input, $folder) {
-
         $folder->deepDelete();
-        
-    
         return $folder;
     }
 

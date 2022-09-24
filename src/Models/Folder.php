@@ -3,6 +3,7 @@
 namespace MyDpo\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Scopes\NotdeletedScope;
 
 class Folder extends Model  {
@@ -37,6 +38,10 @@ class Folder extends Model  {
 
     protected static function booted() {
         static::addGlobalScope( new NotdeletedScope() );
+    }
+
+    public static function getItems($input) {
+        return (new GetItems($input, self::query()->withCount('customers'), __CLASS__))->Perform();
     }
 
 }
