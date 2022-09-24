@@ -123,6 +123,10 @@ class Customer extends Model {
         return $this->hasMany(CustomerAccount::class, 'customer_id');
     }
 
+    public function createDefaultFolders() {
+        dd(__METHOD__);
+    }
+
     public static function getItems($input) {
         return (new GetItems($input, self::query(), __CLASS__))->Perform();
     }

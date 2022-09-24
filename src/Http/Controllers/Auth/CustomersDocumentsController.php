@@ -11,6 +11,9 @@ class CustomersDocumentsController extends Controller {
     
     public function index($customer_id,Request $r) {
 
+        $customer = Customer::find($customer_id);
+        $customer->createDefaultFolders();
+
         return Response::View(
             '~templates.index', 
             asset('apps/customer-documents/index.js'),
