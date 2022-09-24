@@ -15,7 +15,9 @@ class Folder extends Model  {
         'updated_by' => 'integer',
         'deleted_by' => 'integer',
         'customer_id' => 'integer',
+        'default_folder_id' => 'integer',
         'deleted' => 'integer',
+        'props'=> 'json',
         'parent_id' => 'integer',
     ];
 
@@ -23,9 +25,11 @@ class Folder extends Model  {
         'id',
         'name',
         'platform',
+        'default_folder_id',
         'customer_id',
         'deleted',
         'parent_id',
+        'props',
         'created_by',
         'updated_by',
         'deleted_by',

@@ -9,6 +9,7 @@ use MyDpo\Models\CustomerStatus;
 use MyDpo\Models\City;
 use MyDpo\Models\CustomerContract;
 use MyDpo\Models\CustomerAccount;
+use MyDpo\Models\Folder;
 
 class Customer extends Model {
 
@@ -123,8 +124,17 @@ class Customer extends Model {
         return $this->hasMany(CustomerAccount::class, 'customer_id');
     }
 
+    public function createDefaultFolder($defaultFolder) {
+
+        $folder = 
+        dd($defaultFolder->name, $this->id);
+    }
+    
     public function createDefaultFolders() {
-        dd(__METHOD__);
+        $defaultFolders = CustomerFolderDefault::all();        
+        foreach($defaultFolders as $i => $defaultFolder) {
+            $this->createDefaultFolder($defaultFolder);
+        }
     }
 
     public static function getItems($input) {
