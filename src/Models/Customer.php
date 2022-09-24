@@ -124,9 +124,16 @@ class Customer extends Model {
         return $this->hasMany(CustomerAccount::class, 'customer_id');
     }
 
-    public function createDefaultFolder($defaultFolder) {
+    public function createDefaultFolder($defaultFolder, $parent) {
 
-        $folder = CustomerFolder::where('customer_id', $this->id)->where('name', $defaultFolder->name)->first();
+        if(! $parent )
+        {
+            $folder = CustomerFolder::where('customer_id', $this->id)->where('name', $defaultFolder->name)->first();
+        }
+        else
+        {
+            $folder = CustomerFolder::where('customer_id', $this->id)->where('name', $defaultFolder->name)->where('parent_id', $parent->id)->first();
+        }
 
         $input = [
             'name' => $defaultFolder->name,
@@ -141,11 +148,26 @@ class Customer extends Model {
 
         if( ! $folder )
         {
-            $folder = CustomerFolder::create($input);  
+            if(! $parent )
+            {
+                $folder = CustomerFolder::create($input);
+            }
+            else
+            {
+                $parent->children()->create($input);
+            }  
         }
         else
         {
             $folder->update($input);
+        }
+
+        if($defaultFolder->children->count())
+        {
+            foreach($defaultFolder->children as $i => $child) 
+            {
+                $this->createDefaultFolder($child, $folder);
+            }
         }
     }
 
@@ -153,7 +175,7 @@ class Customer extends Model {
         $defaultFolders = CustomerFolderDefault::whereNull('parent_id')->get();  
 
         foreach($defaultFolders as $i => $defaultFolder) {
-            $this->createDefaultFolder($defaultFolder);
+            $this->createDefaultFolder($defaultFolder, NULL);
         }
     }
 
