@@ -17,6 +17,7 @@ Route::prefix('customers-folders')->group( function() {
     Route::post('action/{action}', [CustomersFoldersController::class, 'doAction']);
     Route::post('get-ancestors', [CustomersFoldersController::class, 'getAncestors']);
     Route::post('get-summary', [CustomersFoldersController::class, 'getSummary']);
+    Route::post('save-orderd-folders', [CustomersFoldersController::class, 'saveOrderdFolders']);
 });
 
 Route::prefix('customers-files')->group( function() {

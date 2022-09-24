@@ -25,6 +25,10 @@ class CustomersFoldersController extends Controller
     public function getSummary(Request $r) {
         return CustomerFolder::getSummary($r->all());
     }
+
+    public function saveOrderdFolders(Request $r) {
+        return CustomerFolder::saveOrderdFolders($r->all());
+    }
     
     public function doAction($action, Request $r) {
         return CustomerFolder::doAction($action, $r->all());

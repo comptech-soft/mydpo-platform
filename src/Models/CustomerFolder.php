@@ -10,6 +10,7 @@ use MyDpo\Models\CustomerFile;
 use MyDpo\Rules\CustomerFolder\ValidName;
 use MyDpo\Performers\CustomerFolder\GetAncestors;
 use MyDpo\Performers\CustomerFolder\GetSummary;
+use MyDpo\Performers\CustomerFolder\SaveOrderdFolders;
 
 class CustomerFolder extends Folder {
 
@@ -48,6 +49,10 @@ class CustomerFolder extends Folder {
 
     public static function getSummary($input) {
         return (new GetSummary($input))->Perform();
+    }
+
+    public static function saveOrderdFolders($input) {
+        return (new SaveOrderdFolders($input))->Perform();
     }
 
     public static function GetRules($action, $input) {
