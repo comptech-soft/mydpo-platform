@@ -25,7 +25,7 @@ class Folder extends Model  {
         'platform',
         'customer_id',
         'deleted',
-        'status',
+        'parent_id',
         'created_by',
         'updated_by',
         'deleted_by',
