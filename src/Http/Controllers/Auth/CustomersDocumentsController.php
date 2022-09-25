@@ -9,7 +9,7 @@ use MyDpo\Models\Customer;
 
 class CustomersDocumentsController extends Controller {
     
-    public function index($customer_id,Request $r) {
+    public function index($customer_id, Request $r) {
 
         $customer = Customer::find($customer_id);
         $customer->createDefaultFolders();
@@ -23,5 +23,11 @@ class CustomersDocumentsController extends Controller {
             ]
         );
     }
+
+    public function downloadFile($file_id, Request $r) {
+
+        dd(__METHOD__, $file_id);
+    }
+    
 
 }
