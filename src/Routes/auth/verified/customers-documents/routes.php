@@ -6,10 +6,12 @@ use MyDpo\Http\Controllers\Auth\CustomersFilesController;
 
 Route::middleware('valid-customer')->prefix('customer-documents')->group( function() {
 
-    Route::get('download/{file_id}', [CustomersDocumentsController::class, 'downloadFile']);
+    Route::get('download/{customer_id}/{file_id}', [CustomersDocumentsController::class, 'downloadFile']);
     Route::get('/{customer_id}', [CustomersDocumentsController::class, 'index']);
 
 });
+
+
 
 Route::prefix('customers-folders')->group( function() {
         

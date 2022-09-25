@@ -24,9 +24,9 @@ class CustomersDocumentsController extends Controller {
         );
     }
 
-    public function downloadFile($file_id, Request $r) {
+    public function downloadFile($customer_id, $file_id, Request $r) {
 
-        dd(__METHOD__, $file_id);
+        dd(__METHOD__, $customer_id, $file_id);
     }
     
 
