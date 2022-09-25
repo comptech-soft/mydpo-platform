@@ -153,9 +153,9 @@ class CustomerFile extends Model {
 
         if(in_array($ext, ['jpg', 'jpeg', 'png', 'doc', 'docx', 'xls', 'xlsx', 'pdf', 'txt', 'rar', 'zip']))
         {
-            $filename = md5(time()) . '-' . \Str::slug(str_replace($file->extension(), '', $file->getClientOriginalName())) . '.' .  strtolower($file->extension());
+            $filename = \Str::slug(str_replace($file->extension(), '', $file->getClientOriginalName())) . '.' .  strtolower($file->extension());
             
-            $result = $file->storeAs('customers-documents/' . $input['customer_id'] . '/' . \Auth::user()->id, $filename, 's3');
+            $result = $file->storeAs('documents/' . $input['customer_id'] . '/' . \Auth::user()->id, $filename, 's3');
 
             $inputdata = [
                 ...$input,
