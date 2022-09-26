@@ -3,6 +3,7 @@
 use MyDpo\Http\Controllers\Auth\CustomersDocumentsController;
 use MyDpo\Http\Controllers\Auth\CustomersFoldersController;
 use MyDpo\Http\Controllers\Auth\CustomersFilesController;
+use MyDpo\Http\Controllers\Auth\CustomersFoldersPermssionsController;
 
 Route::middleware('valid-customer')->prefix('customer-documents')->group( function() {
 
@@ -10,8 +11,6 @@ Route::middleware('valid-customer')->prefix('customer-documents')->group( functi
     Route::get('/{customer_id}', [CustomersDocumentsController::class, 'index']);
 
 });
-
-
 
 Route::prefix('customers-folders')->group( function() {
         
@@ -21,6 +20,7 @@ Route::prefix('customers-folders')->group( function() {
     Route::post('get-ancestors', [CustomersFoldersController::class, 'getAncestors']);
     Route::post('get-summary', [CustomersFoldersController::class, 'getSummary']);
     Route::post('save-orderd-folders', [CustomersFoldersController::class, 'saveOrderdFolders']);
+
 });
 
 Route::prefix('customers-files')->group( function() {
@@ -30,5 +30,11 @@ Route::prefix('customers-files')->group( function() {
     Route::post('change-files-status', [CustomersFilesController::class, 'changeFilesStatus']);
     Route::post('move-files', [CustomersFilesController::class, 'moveFiles']);
     Route::post('delete-files', [CustomersFilesController::class, 'deleteFiles']);
+
+});
+
+Route::prefix('customers-folders-permissions')->group( function() {
+    
+    Route::post('items', [CustomersFoldersPermssionsController::class, 'getItems']);
 
 });
