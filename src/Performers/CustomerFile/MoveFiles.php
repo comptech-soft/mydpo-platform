@@ -9,40 +9,32 @@ class MoveFiles extends Perform {
   
     public function Action() {
 
-        dd($this->input);
-        // foreach($this->input['files'] as $i => $file_id)
-        // {
-        //     $record = CustomerFile::find($file_id);
+        $files = CustomerFile::whereIn('id', $this->input['files'])->update([
 
-        //     $record->status = $this->input['status'];
+            'folder_id' => $this->input['folder_id'],
+            'updated_at' => \Carbon\Carbon::now(),
+            'updated_by' => \Auth::user()->id,
 
-        //     if(false)
-        //     {
-        //         $this->SendNotify();
-        //     }
-
-        //     $record->save();
-        // }
-
-        // activity()
-        //     ->by(\Auth::user())
-        //     ->on($record)
-        //     ->withProperties(
-        //         [
-        //             'input' => request()->all(),
-        //             'ip' => request()->ip(),
-        //         ]
-        //     )
-        //     ->event(__CLASS__)
-        //     ->createdAt($now = now())
-        //     ->log(
-        //         __(
-        //             ':name a schimbat statusul fișierelor', 
-        //             [
-        //                 'name' => \Auth::user()->full_name 
-        //             ]
-        //         ), 
-        //     );
+        ]);
+        
+        activity()
+            ->by(\Auth::user())
+            ->withProperties(
+                [
+                    'input' => request()->all(),
+                    'ip' => request()->ip(),
+                ]
+            )
+            ->event(__CLASS__)
+            ->createdAt($now = now())
+            ->log(
+                __(
+                    ':name a mutat fișierele', 
+                    [
+                        'name' => \Auth::user()->full_name 
+                    ]
+                ), 
+            );
         
     }
 
