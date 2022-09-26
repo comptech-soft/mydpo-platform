@@ -8,6 +8,7 @@ use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Models\Folder;
 use MyDpo\Models\MaterialStatus;
 use MyDpo\Performers\CustomerFile\ChangeFilesStatus;
+use MyDpo\Performers\CustomerFile\MoveFiles;
 use MyDpo\Performers\CustomerFile\DeleteFiles;
 
 class CustomerFile extends Model {
@@ -92,6 +93,12 @@ class CustomerFile extends Model {
             __CLASS__
         ))->Perform();
     }
+
+    public static function moveFiles($input) {
+        return (new MoveFiles($input))
+            ->SetSuccessMessage('Mutare fișiere cu success!')
+            ->Perform();
+    } 
 
     public static function changeFilesStatus($input) {
         return (new ChangeFilesStatus($input))

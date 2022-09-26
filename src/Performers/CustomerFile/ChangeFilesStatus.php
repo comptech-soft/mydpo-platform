@@ -36,6 +36,7 @@ class ChangeFilesStatus extends Perform {
 
         }
     }
+    
     public function Action() {
 
         foreach($this->input['files'] as $i => $file_id)

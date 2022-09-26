@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Helpers\Response;
 use MyDpo\Models\Customer;
+use MyDpo\Models\CustomerFile;
 
 class CustomersDocumentsController extends Controller {
     
