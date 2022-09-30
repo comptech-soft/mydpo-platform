@@ -3,11 +3,6 @@
 namespace MyDpo\Performers\System;
 
 use MyDpo\Helpers\Perform;
-// use MyDpo\Models\SysConfig;
-// use MyDpo\Models\Platform;
-// use MyDpo\Models\MaterialStatus;
-// use MyDpo\Models\Language;
-// use MyDpo\Models\Role;
 
 class GetUserRole extends Perform {
 
@@ -15,8 +10,16 @@ class GetUserRole extends Perform {
     
         $user = \Auth::user();
 
-        dd($user);
-    }
+        $r = NULL;
+        foreach($user->roles as $i => $role) 
+        {
+            if($role->pivot->customer_id && ($role->pivot->customer_id == $this->input['customer_id']))
+            {
+                $r = $role;
+            }
+        }
 
-   
+        $this->payload = $r;
+    }
+    
 } 
