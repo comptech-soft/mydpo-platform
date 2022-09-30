@@ -26,8 +26,7 @@ class CustomersDocumentsController extends Controller {
     }
 
     public function downloadFile($customer_id, $file_id, Request $r) {
-
-        dd(__METHOD__, $customer_id, $file_id);
+        return CustomerFile::downloadFile($customer_id, $file_id);
     }
     
 
