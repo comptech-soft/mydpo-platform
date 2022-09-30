@@ -98,7 +98,7 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
         $r = NULL;
         foreach($this->roles as $i => $role)
         {
-            if($role->type == config('app.platform') )
+            if($role->type == config('app.platform') && (config('app.platform') == 'admin'))
             {
                 $r = $role;
             }
