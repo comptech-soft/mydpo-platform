@@ -3,6 +3,7 @@
 namespace MyDpo\Helpers\System;
 
 use MyDpo\Performers\System\GetConfig;
+use MyDpo\Performers\System\GetUserRole;
 
 class Config {
 
@@ -10,6 +11,17 @@ class Config {
 
         return 
             (new GetConfig(NULL))
+            ->SetSuccessMessage(NULL)
+            ->SetExceptionMessage([
+                \Exception::class => NULL,
+            ])
+            ->Perform();
+    }
+    
+    public static function getUserRole() {
+
+        return 
+            (new GetUserRole(NULL))
             ->SetSuccessMessage(NULL)
             ->SetExceptionMessage([
                 \Exception::class => NULL,

@@ -15,6 +15,7 @@ Route::get('/', [WelcomeController::class, 'index']);
 Route::prefix('system')->group(function () {
     Route::get('set-locale/{locale}', [ConfigController::class, 'setLocale']);
     Route::post('get-config', [ConfigController::class, 'getConfig']);
+    Route::post('get-user-role', [ConfigController::class, 'getUserRole']);
 
     Route::post('get-file-properties', [UploadsController::class, 'getFileProperties']);
 });
