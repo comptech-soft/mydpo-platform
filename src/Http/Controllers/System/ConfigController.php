@@ -15,7 +15,7 @@ class ConfigController extends Controller
     }
 
     public function getUserRole(Request $r) {
-        return Config::getUserRole();
+        return Config::getUserRole($r->all());
     }
     
     public function saveActiveCustomer(Request $r) {

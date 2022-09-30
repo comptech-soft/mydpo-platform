@@ -18,10 +18,10 @@ class Config {
             ->Perform();
     }
     
-    public static function getUserRole() {
+    public static function getUserRole($input) {
 
         return 
-            (new GetUserRole(NULL))
+            (new GetUserRole($input))
             ->SetSuccessMessage(NULL)
             ->SetExceptionMessage([
                 \Exception::class => NULL,
