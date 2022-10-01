@@ -96,13 +96,19 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
          * Role By Platform = Rolul potrivit platformei 
          **/
         $r = NULL;
-        foreach($this->roles as $i => $role)
+
+        if( (config('app.platform') == 'admin') )
         {
-            if($role->type == config('app.platform') && (config('app.platform') == 'admin'))
+            foreach($this->roles as $i => $role)
             {
-                $r = $role;
+                if($role->type == config('app.platform'))
+                {
+                    $r = $role;
+                }
             }
+            return $r;
         }
+
         return $r;
     }
 
@@ -191,6 +197,11 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
      ****************************/
 
     public function inRoles($slugs) {
+        if( (config('app.platform') == 'b2b') )
+        {
+            return true;
+        }
+
         if(! $this->role)
         {
             return false;
