@@ -5,7 +5,7 @@ namespace MyDpo\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Helpers\Response;
-// use MyDpo\Models\User;
+use MyDpo\Models\Role;
 
 class RolesController extends Controller {
     
@@ -16,9 +16,9 @@ class RolesController extends Controller {
         );
     }
 
-    // public function getItems(Request $r) {
-    //     return User::getItems($r->all());
-    // }
+    public function getItems(Request $r) {
+        return Role::getItems($r->all());
+    }
 
     // public function doAction($action, Request $r) {
     //     return User::doAction($action, $r->all());

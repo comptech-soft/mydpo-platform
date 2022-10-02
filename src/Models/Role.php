@@ -3,8 +3,8 @@
 namespace MyDpo\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-
 use Illuminate\Database\Eloquent\Model;
+use MyDpo\Helpers\Performers\Datatable\GetItems;
 
 class Role extends Model {
 
@@ -33,14 +33,16 @@ class Role extends Model {
     ];
 
     public function users(): BelongsToMany {
-
         return $this->belongsToMany(
             \App\Models\User::class, 
             'role_users', 
             'role_id', 
             'user_id'
         )->withPivot('customer_id')->withTimestamps();
-    
+    }
+
+    public static function getItems($input) {
+        return (new GetItems($input, self::query(), __CLASS__))->Perform();
     }
 
     public static function getBySlug() {
