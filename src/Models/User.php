@@ -117,7 +117,7 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
 			$this->last_name,
             $this->first_name,
 		])->filter( function($value) {
-			return strlen(trim($value)) != 0;
+			return $value && (strlen(trim($value)) != 0);
 		})->implode(' ');
     }
     
