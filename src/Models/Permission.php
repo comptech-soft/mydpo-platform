@@ -14,7 +14,7 @@ class Permission extends Model {
     
     protected $table = 'permissions';
 
-    // protected $with = ['ancestors'];
+    protected $with = ['children'];
 
     protected $fillable = [
         'id',
@@ -73,7 +73,7 @@ class Permission extends Model {
     }
 
     public static function getItems($input) {
-        return (new GetItems($input, self::query()->with(['children']), __CLASS__))->Perform();
+        return (new GetItems($input, self::query(), __CLASS__))->Perform();
     }
 
 }
