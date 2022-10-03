@@ -60,7 +60,7 @@ class Permission extends Model {
         else
         {
             $parent = self::find($input['parent_id']);
-            $input['slug'] = $parent->slug . '-' . $input['slug'];
+            $input['slug'] = $parent->slug . '#' . $input['slug'];
             $permission = $parent->children()->create($input);
         }
     
