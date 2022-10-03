@@ -44,6 +44,27 @@ class Permission extends Model {
         return $result;
     }
 
+    public static function doInsert($input, $folder) {
+
+        if(! array_key_exists('parent_id', $input) )
+        {
+            $input['parent_id'] = NULL;
+        } 
+
+        if( ! $input['parent_id'] )
+        {
+            $permission = new self($input);
+            $permission->save();
+        }
+        else
+        {
+            $parent = self::find($input['parent_id']);
+            $permission = $parent->children()->create($input);
+        }
+    
+        return $permission;
+    }
+
     public static function doAction($action, $input) {
         return (new DoAction($action, $input, __CLASS__))->Perform();
     }
