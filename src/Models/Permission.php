@@ -46,6 +46,7 @@ class Permission extends Model {
 
     public static function doInsert($input, $folder) {
 
+        
         if(! array_key_exists('parent_id', $input) )
         {
             $input['parent_id'] = NULL;
@@ -59,6 +60,7 @@ class Permission extends Model {
         else
         {
             $parent = self::find($input['parent_id']);
+            $input['slug'] = $parent->slug . '-' . $input['slug'];
             $permission = $parent->children()->create($input);
         }
     
