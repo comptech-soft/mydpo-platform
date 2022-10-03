@@ -19,5 +19,9 @@ class PermissionsController extends Controller {
     public function getItems(Request $r) {
         return Permission::getItems($r->all());
     }
+
+    public function doAction($action, Request $r) {
+        return Permission::doAction($action, $r->all());
+    }
     
 }
