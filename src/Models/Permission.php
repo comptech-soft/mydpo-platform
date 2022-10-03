@@ -66,6 +66,7 @@ class Permission extends Model {
     }
 
     public static function doAction($action, $input) {
+        $input['slug'] = \Str::slug($input['name']);
         return (new DoAction($action, $input, __CLASS__))->Perform();
     }
 
