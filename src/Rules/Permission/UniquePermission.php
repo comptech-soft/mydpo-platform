@@ -23,7 +23,7 @@ class UniquePermission implements Rule {
         }
         else
         {
-            $q = CustomerFolder::where('name', $this->input['name']); 
+            $q = Permission::where('name', $this->input['name']); 
         }
 
 
