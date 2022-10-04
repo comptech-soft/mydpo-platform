@@ -11,10 +11,7 @@ class SaveRolePermissions extends Perform {
 
         $role = Role::find($this->input['id']);
 
-        $role->permissions = [
-            ...$role->permissions ? $role->permissions : [],
-            $this->input['permissions'],
-        ];
+        $role->permissions = $this->input['permissions'];
 
         $role->save();
     
