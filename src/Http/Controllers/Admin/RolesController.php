@@ -24,9 +24,9 @@ class RolesController extends Controller {
     //     return User::doAction($action, $r->all());
     // }
 
-    // public function updatePassword(Request $r) {
-    //     return User::updatePassword($r->all());
-    // }
+    public function saveRolePermissions(Request $r) {
+        return Role::saveRolePermissions($r->all());
+    }
 
     
 }

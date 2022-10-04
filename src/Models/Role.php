@@ -45,6 +45,12 @@ class Role extends Model {
         return (new GetItems($input, self::query(), __CLASS__))->Perform();
     }
 
+    public static function saveRolePermissions($input) {
+        dd($input);
+    }
+
+    
+
     public static function getBySlug() {
 
         $result = [];
