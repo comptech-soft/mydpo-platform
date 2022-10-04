@@ -5,6 +5,7 @@ namespace MyDpo\Models;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
+use MyDpo\Performers\Role\SaveRolePermissions;
 
 class Role extends Model {
 
@@ -46,11 +47,9 @@ class Role extends Model {
     }
 
     public static function saveRolePermissions($input) {
-        dd($input);
+        return (new SaveRolePermissions($input))->Perform();
     }
-
     
-
     public static function getBySlug() {
 
         $result = [];
