@@ -9,8 +9,14 @@ class SaveRolePermissions extends Perform {
 
     public function Action() {
 
-      
-        dd($this->input);
+        $role = Role::find($this->input['id']);
+
+        $role->permissions = [
+            ...$role->permissions ? $role->permissions : [],
+            $this->input['permissions'],
+        ];
+
+        $role->save();
     
     }
 }
