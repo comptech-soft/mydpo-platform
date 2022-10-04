@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Kalnoy\Nestedset\NodeTrait;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Helpers\Performers\Datatable\DoAction;
+use MyDpo\Rules\Permission\UniquePermission;
 
 // https://github.com/lazychaser/laravel-nestedset#installation
 
@@ -37,7 +38,7 @@ class Permission extends Model {
         $result = [
             'name' => [
                 'required',
-                'unique:permissions,name'
+                new UniquePermission($input),
             ],
            
         ];
@@ -46,7 +47,6 @@ class Permission extends Model {
 
     public static function doInsert($input, $folder) {
 
-        
         if(! array_key_exists('parent_id', $input) )
         {
             $input['parent_id'] = NULL;

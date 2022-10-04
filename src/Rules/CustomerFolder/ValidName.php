@@ -10,13 +10,12 @@ class ValidName implements Rule {
     public $input = NULL;
     public $folder = NULL;
 
-    public function __construct($input)
-    {
+    public function __construct($input) {
         $this->input = $input;
     }
 
-    public function passes($attribute, $value)
-    {   
+    public function passes($attribute, $value) {
+
         if( $this->input['parent_id'] )
         {
             $q = CustomerFolder::where('customer_id', $this->input['customer_id'])
@@ -45,8 +44,7 @@ class ValidName implements Rule {
         return TRUE;
     }
 
-    public function message()
-    {
+    public function message() {
         return 'Folderul "' . $this->input['name'] . '" deja există.';
     }
 }
