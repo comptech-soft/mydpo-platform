@@ -27,6 +27,7 @@ class CustomerFolderPermission extends Model {
         'has_access',
         'updated_by',
         'deleted_by',
+        'created_by',
     ];
 
     public static function getItems($input) {
