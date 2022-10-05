@@ -25,7 +25,7 @@ class UserLogin extends Perform {
          */
         $user = \Auth::user();
 
-        if( ! $user->role )
+        if( $user->roles->count() == 0)
         {
             UserSession::logout();
             throw new \Exception('Datele de autentificare nu se potrivesc cu înregistrările noastre.');
@@ -43,7 +43,7 @@ class UserLogin extends Perform {
         /**
          * Daca nu are ==> nu face login
          */
-        if( ! $user->inRoles($slugs) ) 
+        if( (config('app.platform') == 'admin') && ! $user->inRoles($slugs) ) 
         {
             UserSession::logout();
             throw new \Exception('Datele de autentificare nu se potrivesc cu înregistrările noastre.');
