@@ -11,6 +11,7 @@ use MyDpo\Rules\CustomerFolder\ValidName;
 use MyDpo\Performers\CustomerFolder\GetAncestors;
 use MyDpo\Performers\CustomerFolder\GetSummary;
 use MyDpo\Performers\CustomerFolder\SaveOrderdFolders;
+use MyDpo\Performers\CustomerFolder\SaveFoldersAccess;
 
 class CustomerFolder extends Folder {
 
@@ -53,6 +54,10 @@ class CustomerFolder extends Folder {
 
     public static function saveOrderdFolders($input) {
         return (new SaveOrderdFolders($input))->Perform();
+    }
+
+    public static function saveFoldersAccess($input) {
+        return (new SaveFoldersAccess($input))->Perform();
     }
 
     public static function GetRules($action, $input) {

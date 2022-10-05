@@ -30,6 +30,10 @@ class CustomersFoldersController extends Controller
         return CustomerFolder::saveOrderdFolders($r->all());
     }
     
+    public function saveFoldersAccess(Request $r) {
+        return CustomerFolder::saveFoldersAccess($r->all());
+    }
+
     public function doAction($action, Request $r) {
         return CustomerFolder::doAction($action, $r->all());
     }
