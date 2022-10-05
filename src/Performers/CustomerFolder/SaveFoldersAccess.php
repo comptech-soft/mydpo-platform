@@ -10,12 +10,16 @@ class SaveFoldersAccess extends Perform {
 
     public function Action() {
 
-        
         CustomerFolderPermission::where('customer_id', $this->input['customer_id'])
             ->where('user_id',  $this->input['user_id'])
             ->update([
                 'has_access' => 0,
             ]);
+
+        if( ! array_key_exists('selectedFolders', $this->input ) )
+        {
+            $this->input['selectedFolders'] = [];
+        }
 
         foreach($this->input['selectedFolders'] as $i => $folder_id) 
         {
