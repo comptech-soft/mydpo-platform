@@ -10,6 +10,7 @@ use MyDpo\Models\MaterialStatus;
 use MyDpo\Performers\CustomerFile\ChangeFilesStatus;
 use MyDpo\Performers\CustomerFile\MoveFiles;
 use MyDpo\Performers\CustomerFile\DeleteFiles;
+use MyDpo\Events\CustomerDocuments\FilesUpload as FilesUploadEvent;
 
 class CustomerFile extends Model {
 
@@ -165,7 +166,7 @@ class CustomerFile extends Model {
             $record = self::ProcessFile($file, $input);
         }
 
-        dd('Bam bam');
+        event(new FilesUploadEvent());
 
         return $record;
     }
