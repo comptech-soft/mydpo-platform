@@ -161,13 +161,23 @@ class CustomerFile extends Model {
             $input['files'] = [$input['files']];
         }
 
+        $files = [];
         foreach($input['files'] as $file)
         {
-            $record = self::ProcessFile($file, $input);
+            $files[] = $record = self::ProcessFile($file, $input);
         }
 
+        foreach($files as $i => $file) 
+        {
+            dd($file);
+        }
 
-        event(new FilesUploadEvent($input));
+        event(new FilesUploadEvent([
+            'customer_id' => $this->input['customer_id'],
+            'folder_id' => $this->input['foledr_id'],
+            'files' => $files,
+
+        ]));
 
         return $record;
     }

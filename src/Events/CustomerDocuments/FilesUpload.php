@@ -9,6 +9,7 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use MyDpo\Models\Customer;
 
 class FilesUpload implements ShouldBroadcast {
     use Dispatchable, InteractsWithSockets, SerializesModels;
@@ -18,7 +19,7 @@ class FilesUpload implements ShouldBroadcast {
 
     public function __construct($input) {
         $this->input = $input;
-        $this->sender = \Auth::user()->id;
+        $this->sender = \Auth::user();
 
         dd($this->input, $this->sender);
     }
