@@ -386,9 +386,21 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
             ->Perform();
     }
 
-    
+    /**
+     * Am un array de obiecte [ ['user_id' => 15], ....]
+     * Returnez collection de User
+     */
     public static function GetUsersByIds($ids) {
         
-        dd(__METHOD__, $ids);
+        if( count($ids) == 0 )
+        {
+            return NULL;
+        }
+
+        $ids = collect($ids)->unique()->map(function($item) {
+            return $item->user_id;
+        })->sort()->toArray();
+
+        return self::whereIn('id', $ids)->get();
     }
 }

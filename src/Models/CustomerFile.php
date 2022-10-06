@@ -185,15 +185,6 @@ class CustomerFile extends Model {
         }
 
         return User::GetUsersByIds($users);
-        // return [
-        //     ...$input['customer']->team->map(function($item){
-        //         return $item->user->id;
-        //     }),
-
-        //     ...$input['customer']->accounts->map(function($item){
-        //         return $item->user->id;
-        //     }),
-        // ];
     
     }
 
@@ -203,7 +194,7 @@ class CustomerFile extends Model {
 
         $receivers = call_user_func([__CLASS__, $method], $input);
 
-        dd($receivers);
+        dd(__METHOD__, $receivers);
 
         foreach($files as $i => $file) 
         {
