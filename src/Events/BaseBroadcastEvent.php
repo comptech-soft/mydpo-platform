@@ -23,6 +23,8 @@ class BaseBroadcastEvent implements ShouldBroadcast {
     public $notification_template = NULL;
     public $customer = NULL;
 
+    public $notification_record = [];
+
     public function __construct($entity, $action, $input) {
 
         $this->entity = $entity;
@@ -42,6 +44,27 @@ class BaseBroadcastEvent implements ShouldBroadcast {
         {
             throw new \Exception('NU avem notificare definită pentru acțiunea ' . $this->entity . '-' . $this->action . ' pe platforma ' . config('app.platform'));
         }
+
+        $this->notification_record = [
+
+            'type_id' => $this->notification_template->id,
+            'subject_type' => NULL,
+            'subject_id' => NULL,
+            'sender_id' => $this->sender->id,
+            'customer_id' => $this->customer ? $this->customer->id : NULL,
+            'receiver_id'=> NULL,
+            'event' => $this->entity . '-' . $this->action,
+            'date_from' => NULL,
+            'date_to' => NULL,
+            'readed_at' => NULL,
+            'message' => $this->notification_template->message,
+            'props' => [
+                'title' => $this->notification_template->title,
+            ],
+            'deleted' => 0,
+            'created_by' => $this->sender->id,
+        ];
+
     }
 
     public function broadcastAs() {

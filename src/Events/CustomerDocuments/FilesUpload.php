@@ -29,11 +29,9 @@ class FilesUpload extends BaseBroadcastEvent {
         $this->file = $this->input['file'];
         $this->folder = Folder::find($this->input['folder_id']);
 
-        dd('OK' , $this->notification_template);
+        dd('OK' , $this->notification_record);
 
-        $notification = [
 
-        ];
     }
 
     
