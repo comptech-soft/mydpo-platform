@@ -23,7 +23,7 @@ class FilesUpload extends BaseBroadcastEvent {
 
     public function __construct($input) {
 
-        parent::construct('files', 'upload', $input);
+        parent::__construct('files', 'upload', $input);
 
        
         $this->file = $this->input['file'];
@@ -36,11 +36,5 @@ class FilesUpload extends BaseBroadcastEvent {
         ];
     }
 
-    public function broadcastAs() {
-        return 'files-upload';
-    }
-
-    public function broadcastOn() {
-        return new PrivateChannel('files-upload');
-    }
+    
 }
