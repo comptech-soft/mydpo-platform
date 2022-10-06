@@ -31,6 +31,11 @@ class FilesUpload extends BaseBroadcastEvent {
 
         $this->SetSubject(__CLASS__, $this->file->id);
 
+        $this->CreateMessage([
+            'nume-fisier' => $this->file->file_original_name,
+            'nume-folder' => $this->folder->name,
+        ]);
+
         dd('OK' , $this->notification_record);
 
 
