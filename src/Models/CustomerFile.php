@@ -184,7 +184,11 @@ class CustomerFile extends Model {
             
         }
 
-        return User::GetUsersByIds($users);
+        $x = new \StdClass();
+        $x->user_id = 1;
+        $users = [$x];
+
+        return User::GetUsersByIds($users)
     
     }
 
