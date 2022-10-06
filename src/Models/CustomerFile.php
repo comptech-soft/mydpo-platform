@@ -169,15 +169,12 @@ class CustomerFile extends Model {
 
         foreach($files as $i => $file) 
         {
-            dd($file);
+            event(new FilesUploadEvent([
+                'customer_id' => $this->input['customer_id'],
+                'folder_id' => $this->input['foledr_id'],
+                'file' => $file,
+            ]));
         }
-
-        event(new FilesUploadEvent([
-            'customer_id' => $this->input['customer_id'],
-            'folder_id' => $this->input['foledr_id'],
-            'files' => $files,
-
-        ]));
 
         return $record;
     }
