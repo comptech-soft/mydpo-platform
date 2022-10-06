@@ -387,5 +387,8 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
     }
 
     
-    
+    public static function GetUsersByIds($ids) {
+        
+        dd(__METHOD__, $ids);
+    }
 }

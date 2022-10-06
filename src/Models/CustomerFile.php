@@ -8,6 +8,7 @@ use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Models\Folder;
 use MyDpo\Models\Customer;
 use MyDpo\Models\MaterialStatus;
+use MyDpo\Models\User;
 use MyDpo\Performers\CustomerFile\ChangeFilesStatus;
 use MyDpo\Performers\CustomerFile\MoveFiles;
 use MyDpo\Performers\CustomerFile\DeleteFiles;
@@ -183,7 +184,7 @@ class CustomerFile extends Model {
             
         }
 
-        dd($users);
+        return User::GetUsersByIds($users);
         // return [
         //     ...$input['customer']->team->map(function($item){
         //         return $item->user->id;
