@@ -171,7 +171,7 @@ class CustomerFile extends Model {
         {
             event(new FilesUploadEvent([
                 'customer_id' => $input['customer_id'],
-                'folder_id' => $input['foledr_id'],
+                'folder_id' => $input['folder_id'],
                 'file' => $file,
             ]));
         }
