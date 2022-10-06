@@ -157,6 +157,10 @@ class CustomerFile extends Model {
             ...$input['customer']->team->map(function($item){
                 return $item->user->id;
             }),
+
+            ...$input['customer']->accounts->map(function($item){
+                return $item->user->id;
+            }),
         ];
     
     }
