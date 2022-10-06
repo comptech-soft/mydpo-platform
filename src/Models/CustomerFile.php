@@ -153,7 +153,7 @@ class CustomerFile extends Model {
 
     public static function CreateNotificationReceiversAdmin($input) {
 
-        dd($input['customer']);
+        dd($input['customer']->team);
     
     }
 

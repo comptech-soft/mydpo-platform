@@ -10,6 +10,7 @@ use MyDpo\Models\City;
 use MyDpo\Models\CustomerContract;
 use MyDpo\Models\CustomerAccount;
 use MyDpo\Models\CustomerFolder;
+use MyDpo\Models\UserCustomer;
 
 class Customer extends Model {
 
@@ -122,6 +123,10 @@ class Customer extends Model {
 
     function accounts() {
         return $this->hasMany(CustomerAccount::class, 'customer_id');
+    }
+
+    function team() {
+        return $this->hasMany(UserCustomer::class, 'customer_id');
     }
 
     public function createDefaultFolder($defaultFolder, $parent) {
