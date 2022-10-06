@@ -75,6 +75,10 @@ class BaseBroadcastEvent implements ShouldBroadcast {
         return new PrivateChannel($this->entity . '-' . $this->action);
     }
 
+    public function broadcastWith() {
+        return $this->notification_record;
+    }
+
     public function CreateMessage($replacements) {
         $r = $this->notification_template->message;
         foreach($replacements as $key => $value)
