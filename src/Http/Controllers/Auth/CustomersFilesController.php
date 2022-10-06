@@ -27,10 +27,6 @@ class CustomersFilesController extends Controller
     public function deleteFiles(Request $r) {
         return CustomerFile::deleteFiles($r->all());
     }
-
-    public function downloadFiles(Request $r) {
-        return CustomerFile::downloadFiles($r->all());
-    }
     
 
 }

@@ -9,7 +9,6 @@ use MyDpo\Models\Folder;
 use MyDpo\Models\MaterialStatus;
 use MyDpo\Performers\CustomerFile\ChangeFilesStatus;
 use MyDpo\Performers\CustomerFile\MoveFiles;
-use MyDpo\Performers\CustomerFile\DownloadFiles;
 use MyDpo\Performers\CustomerFile\DeleteFiles;
 
 class CustomerFile extends Model {
@@ -80,12 +79,6 @@ class CustomerFile extends Model {
 
     function mystatus() {
         return $this->belongsTo(MaterialStatus::class, 'status', 'slug');
-    }
-
-    public static function downloadFiles($input) {
-        return (new DownloadFiles($input))
-            ->SetSuccessMessage('Download fișiere cu success!')
-            ->Perform();
     }
 
     public static function downloadFile($customer_id, $file_id) {

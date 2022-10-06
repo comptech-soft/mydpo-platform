@@ -31,8 +31,7 @@ Route::prefix('customers-files')->group( function() {
     Route::post('change-files-status', [CustomersFilesController::class, 'changeFilesStatus']);
     Route::post('move-files', [CustomersFilesController::class, 'moveFiles']);
     Route::post('delete-files', [CustomersFilesController::class, 'deleteFiles']);
-    Route::post('download-files', [CustomersFilesController::class, 'downloadFiles']);
-
+   
 });
 
 Route::prefix('customers-folders-permissions')->group( function() {
