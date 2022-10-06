@@ -165,6 +165,8 @@ class CustomerFile extends Model {
             $record = self::ProcessFile($file, $input);
         }
 
+        dd('Bam bam');
+
         return $record;
     }
 
