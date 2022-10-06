@@ -160,27 +160,56 @@ class CustomerFile extends Model {
         {
             /**
              * 1. Operator (care are clientul asociat) 
+             * 
              */
+            $operators = $input['customer']->GetMyTeamOperators();
 
             /**
              * 2. Master
+             * SELECT
+	`customers-persons`.user_id
+FROM `customers-persons`
+LEFT JOIN `role_users`
+	LEFT JOIN `roles`
+	ON `roles`.id = `role_users`.role_id
+ON `role_users`.user_id = `customers-persons`.user_id
+WHERE 
+	(`customers-persons`.customer_id = 2)
+	AND (`role_users`.customer_id = 2)
+	AND (`roles`.slug = 'master')
              */
 
             /**
              * 3. Client (daca s-a urcat in structura la care el are acces)
+             * SELECT
+	`customers-persons`.user_id
+FROM `customers-persons`
+LEFT JOIN `role_users`
+	LEFT JOIN `roles`
+	ON `roles`.id = `role_users`.role_id
+ON `role_users`.user_id = `customers-persons`.user_id
+LEFT JOIN `customers-folders-permissions`
+ON `customers-folders-permissions`.user_id = `customers-persons`.user_id
+WHERE 
+	(`customers-persons`.customer_id = 2)
+	AND (`role_users`.customer_id = 2)
+	AND (`customers-folders-permissions`.folder_id = 452)
+	AND (`customers-folders-permissions`.has_access = 1)
+	AND (`roles`.slug = 'customer')
              */
+            
         }
 
+        dd($operators);
+        // return [
+        //     ...$input['customer']->team->map(function($item){
+        //         return $item->user->id;
+        //     }),
 
-        return [
-            ...$input['customer']->team->map(function($item){
-                return $item->user->id;
-            }),
-
-            ...$input['customer']->accounts->map(function($item){
-                return $item->user->id;
-            }),
-        ];
+        //     ...$input['customer']->accounts->map(function($item){
+        //         return $item->user->id;
+        //     }),
+        // ];
     
     }
 
