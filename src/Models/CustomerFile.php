@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Models\Folder;
+use MyDpo\Models\Customer;
 use MyDpo\Models\MaterialStatus;
 use MyDpo\Performers\CustomerFile\ChangeFilesStatus;
 use MyDpo\Performers\CustomerFile\MoveFiles;
@@ -152,7 +153,8 @@ class CustomerFile extends Model {
 
     public static function CreateNotificationReceiversAdmin($input) {
 
-        dd(__METHOD__);
+        dd($input['customer']);
+    
     }
 
     public static function CreateNotifications($files, $input) {
@@ -187,9 +189,10 @@ class CustomerFile extends Model {
             $files[] = $record = self::ProcessFile($file, $input);
         }
 
+        $customer = Customer::find($input['customer_id']);
+
         self::CreateNotifications($files, [
-            'customer_id' => $input['customer_id'],
-            'folder_id' => $input['folder_id'],
+            'customer' => $customer,
         ]);
 
         return $record;
