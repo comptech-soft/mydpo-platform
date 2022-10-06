@@ -22,22 +22,29 @@ class BaseBroadcastEvent implements ShouldBroadcast {
     public $sender = NULL;
     public $notification_template = NULL;
     public $customer = NULL;
+    public $receiver = NULL;
 
     public $notification_record = [];
 
     public function __construct($entity, $action, $input) {
-
-        dd($input);
 
         $this->entity = $entity;
         $this->action = $action;
         $this->input = $input;
         
         $this->sender = \Auth::user();
+        $this->receiver = $input['receiver'];
 
-        if( array_key_exists('customer_id', $this->input))
+        if( array_key_exists('customer', $this->input))
         {
-            $this->customer = Customer::find($this->input['customer_id']);
+            $this->customer = $this->input['customer'];
+        }
+        else
+        {
+            if( array_key_exists('customer_id', $this->input))
+            {
+                $this->customer = Customer::find($this->input['customer_id']);
+            }
         }
         
         $this->notification_template = TemplateNotification::findByEntityActionPlatform($entity, $action, config('app.platform'));
@@ -54,7 +61,7 @@ class BaseBroadcastEvent implements ShouldBroadcast {
             'subject_id' => NULL,
             'sender_id' => $this->sender->id,
             'customer_id' => $this->customer ? $this->customer->id : NULL,
-            'receiver_id'=> NULL,
+            'receiver_id'=> $this->receiver_id,
             'event' => $this->entity . '-' . $this->action,
             'date_from' => NULL,
             'date_to' => NULL,

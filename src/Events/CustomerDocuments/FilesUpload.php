@@ -24,8 +24,7 @@ class FilesUpload extends BaseBroadcastEvent {
     public function __construct($input) {
 
         parent::__construct('files', 'upload', $input);
-
-       
+               
         $this->file = $this->input['file'];
         $this->folder = Folder::find($this->input['folder_id']);
 
@@ -35,6 +34,8 @@ class FilesUpload extends BaseBroadcastEvent {
             'nume-fisier' => $this->file->file_original_name,
             'nume-folder' => $this->folder->name,
         ]);
+
+        dd(__METHOD__, $this->notification_record);
 
     }
 
