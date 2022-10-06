@@ -150,7 +150,17 @@ class CustomerFile extends Model {
         return (new DoAction($action, $input, __CLASS__))->Perform();
     }
 
+    public static function CreateNotificationReceiversAdmin($input) {
+
+        dd(__METHOD__);
+    }
+
     public static function CreateNotifications($files, $input) {
+
+        $method = 'CreateNotificationReceivers' . ucfirst(config('app.platform'));
+
+        $receivers = call_user_func([self, $method], $input);
+
         foreach($files as $i => $file) 
         {
             event(new FilesUploadEvent([
