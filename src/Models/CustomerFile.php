@@ -159,7 +159,7 @@ class CustomerFile extends Model {
 
         $method = 'CreateNotificationReceivers' . ucfirst(config('app.platform'));
 
-        $receivers = call_user_func([self, $method], $input);
+        $receivers = call_user_func([__CLASS__, $method], $input);
 
         foreach($files as $i => $file) 
         {
