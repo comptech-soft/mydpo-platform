@@ -32,7 +32,7 @@ class FilesUpload implements ShouldBroadcast {
         $this->file = $this->input['file'];
         $this->folder = Folder::find($this->input['folder_id']);
 
-        dd($this->sender->full_name, $this->customer->name, $this->file->file_original_name, $this->folder_name);
+        dd($this->sender->full_name, $this->customer->name, $this->file->file_original_name, $this->folder->name);
     }
 
     public function broadcastAs() {
