@@ -10,29 +10,30 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-use MyDpo\Models\Customer;
+use MyDpo\Events\BaseBroadcastEvent;
+
 use MyDpo\Models\Folder;
 
-class FilesUpload implements ShouldBroadcast {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $input = NULL;
+class FilesUpload extends BaseBroadcastEvent {
 
-    public $sender = NULL;
-    public $customr = NULL;
     public $file = NULL;
     public $folder = NULL;
 
 
     public function __construct($input) {
-        $this->input = $input;
-        
-        $this->sender = \Auth::user();
-        $this->customer = Customer::find($this->input['customer_id']);
+
+        parent::construct('files', 'upload', $input);
+
+       
         $this->file = $this->input['file'];
         $this->folder = Folder::find($this->input['folder_id']);
 
-        dd($this->sender->full_name, $this->customer->name, $this->file->file_original_name, $this->folder->name);
+        dd('OK' , $this->notification_template);
+
+        $notification = [
+
+        ];
     }
 
     public function broadcastAs() {
