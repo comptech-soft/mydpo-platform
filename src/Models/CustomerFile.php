@@ -150,6 +150,13 @@ class CustomerFile extends Model {
         return (new DoAction($action, $input, __CLASS__))->Perform();
     }
 
+    public static function CreateNotifications($files, $input) {
+        foreach($files as $i => $file) 
+        {
+            event(new FilesUploadEvent($input));
+        }
+    }
+
     public static function doInsert($input, $record) {
         if( ! array_key_exists('files', $input) )
         {
@@ -167,14 +174,13 @@ class CustomerFile extends Model {
             $files[] = $record = self::ProcessFile($file, $input);
         }
 
-        foreach($files as $i => $file) 
-        {
-            event(new FilesUploadEvent([
-                'customer_id' => $input['customer_id'],
-                'folder_id' => $input['folder_id'],
-                'file' => $file,
-            ]));
-        }
+        self::CreateNotifications($files, [
+            'customer_id' => $input['customer_id'],
+            'folder_id' => $input['folder_id'],
+            'file' => $file,
+        ]);
+
+        
 
         return $record;
     }
