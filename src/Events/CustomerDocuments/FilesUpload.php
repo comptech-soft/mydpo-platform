@@ -14,7 +14,7 @@ class FilesUpload {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public function __construct() {
-        //
+        \Log::info(__METHOD__ . '--> Files Uploaded Events');
     }
 
     public function broadcastAs() {
