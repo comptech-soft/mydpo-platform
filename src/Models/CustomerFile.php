@@ -172,7 +172,7 @@ class CustomerFile extends Model {
             /**
              * 3. Client (daca s-a urcat in structura la care el are acces)
              */
-            $users = $input['customer']->GetMyUserByFolderAccess($input['file']->folder_id);
+            $users = $input['customer']->GetMyUserByFolderAccess($input['folder_id']);
 
             $users = [
 
@@ -234,6 +234,7 @@ class CustomerFile extends Model {
 
         self::CreateNotifications($files, [
             'customer' => $customer,
+            'folder_id' => $input['folder_id'],
         ]);
 
         return $record;
