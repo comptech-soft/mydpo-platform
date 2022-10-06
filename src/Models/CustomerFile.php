@@ -153,7 +153,11 @@ class CustomerFile extends Model {
 
     public static function CreateNotificationReceiversAdmin($input) {
 
-        dd($input['customer']->team);
+        return [
+            ...$input['customer']->team->map(function($item){
+                return $item->user->id;
+            }),
+        ];
     
     }
 
@@ -162,6 +166,8 @@ class CustomerFile extends Model {
         $method = 'CreateNotificationReceivers' . ucfirst(config('app.platform'));
 
         $receivers = call_user_func([__CLASS__, $method], $input);
+
+        dd($receivers);
 
         foreach($files as $i => $file) 
         {
