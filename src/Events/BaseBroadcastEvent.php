@@ -27,6 +27,8 @@ class BaseBroadcastEvent implements ShouldBroadcast {
 
     public function __construct($entity, $action, $input) {
 
+        dd($input);
+
         $this->entity = $entity;
         $this->action = $action;
         $this->input = $input;

@@ -194,14 +194,16 @@ class CustomerFile extends Model {
 
         $receivers = call_user_func([__CLASS__, $method], $input);
 
-        dd(__METHOD__, $receivers);
-
         foreach($files as $i => $file) 
         {
-            event(new FilesUploadEvent([
-                ...$input,
-                'file' => $file,
-            ]));
+            foreach($receivers as $j => $receiver)
+            {
+                event(new FilesUploadEvent([
+                    ...$input,
+                    'file' => $file,
+                    'receiver' => $receiver,
+                ]));
+            }
         }
     }
 
