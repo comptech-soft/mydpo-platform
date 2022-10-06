@@ -161,6 +161,14 @@ class CustomerFile extends Model {
             /**
              * 1. Operator (care are clientul asociat) 
              */
+
+            /**
+             * 2. Master
+             */
+
+            /**
+             * 3. Client (daca s-a urcat in structura la care el are acces)
+             */
         }
 
 
