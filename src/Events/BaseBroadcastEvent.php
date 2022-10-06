@@ -44,4 +44,12 @@ class BaseBroadcastEvent implements ShouldBroadcast {
         }
     }
 
+    public function broadcastAs() {
+        return $this->entity . '-' . $this->action;
+    }
+
+    public function broadcastOn() {
+        return new PrivateChannel($this->entity . '-' . $this->action);
+    }
+
 }
