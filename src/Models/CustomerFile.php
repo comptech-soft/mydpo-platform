@@ -166,8 +166,8 @@ class CustomerFile extends Model {
             $record = self::ProcessFile($file, $input);
         }
 
-        \Log::info(__METHOD__ . '--> Files Uploaded');
-        event(new FilesUploadEvent());
+
+        event(new FilesUploadEvent($input));
 
         return $record;
     }

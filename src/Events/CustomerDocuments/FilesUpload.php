@@ -13,8 +13,14 @@ use Illuminate\Queue\SerializesModels;
 class FilesUpload implements ShouldBroadcast {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public function __construct() {
-        \Log::info(__METHOD__ . '--> Files Uploaded Events');
+    public $input = NULL;
+    public $sender = NULL;
+
+    public function __construct($input) {
+        $this->input = $input;
+        $this->sender = \Auth::user()->id;
+
+        dd($this->input, $this->sender);
     }
 
     public function broadcastAs() {
