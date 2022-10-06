@@ -35,7 +35,7 @@ class FilesUpload extends BaseBroadcastEvent {
             'nume-folder' => $this->folder->name,
         ]);
 
-        dd(__METHOD__, $this->notification_record);
+        $this->InsertNotification();
 
     }
 

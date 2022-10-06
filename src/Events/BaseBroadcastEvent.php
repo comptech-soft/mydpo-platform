@@ -10,6 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use MyDpo\Models\Customer;
+use MyDpo\Models\CustomerNotification;
 use MyDpo\Models\TemplateNotification;
 
 class BaseBroadcastEvent implements ShouldBroadcast {
@@ -86,6 +87,10 @@ class BaseBroadcastEvent implements ShouldBroadcast {
 
     public function broadcastWith() {
         return $this->notification_record;
+    }
+
+    public function InsertNotification() {
+        CustomerNotification::create($this->notification_record);
     }
 
     public function CreateMessage($replacements) {
