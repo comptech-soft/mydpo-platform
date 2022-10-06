@@ -156,6 +156,7 @@ class CustomerFile extends Model {
          * Sunt pe platforma MyDpoAdmin
          */
         $user = \Auth::user();
+
         if($user->inRoles(['sa', 'admin']))
         {
             /**
@@ -164,32 +165,25 @@ class CustomerFile extends Model {
             $operators = $input['customer']->GetMyOperators();
 
             /**
-             * 2. Master
+             * 2. Masters
              */
-            $master = $input['customer']->GetMyMasters();
+            $masters = $input['customer']->GetMyMasters();
 
             /**
              * 3. Client (daca s-a urcat in structura la care el are acces)
-             * SELECT
-	`customers-persons`.user_id
-FROM `customers-persons`
-LEFT JOIN `role_users`
-	LEFT JOIN `roles`
-	ON `roles`.id = `role_users`.role_id
-ON `role_users`.user_id = `customers-persons`.user_id
-LEFT JOIN `customers-folders-permissions`
-ON `customers-folders-permissions`.user_id = `customers-persons`.user_id
-WHERE 
-	(`customers-persons`.customer_id = 2)
-	AND (`role_users`.customer_id = 2)
-	AND (`customers-folders-permissions`.folder_id = 452)
-	AND (`customers-folders-permissions`.has_access = 1)
-	AND (`roles`.slug = 'customer')
              */
+            $users = $input['customer']->GetMyUserByFolderAccess($input['file']->folder_id);
+
+            $users = [
+
+                ...$users,
+                ...$operators,
+                ...$masters,
+            ];
             
         }
 
-        dd($operators);
+        dd($users);
         // return [
         //     ...$input['customer']->team->map(function($item){
         //         return $item->user->id;

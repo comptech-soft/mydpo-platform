@@ -235,7 +235,7 @@ class Customer extends Model {
     }
 
     public function GetMyMasters() {
-        
+
         $sql = "
             SELECT
 	            `customers-persons`.user_id
@@ -248,6 +248,29 @@ class Customer extends Model {
 	            (`customers-persons`.customer_id = " . $this->id . ")
 	            AND (`role_users`.customer_id = " . $this->id . ")
 	            AND (`roles`.slug = 'master')
+        ";
+
+        return \DB::select($sql);
+    }
+
+    public function GetMyUserByFolderAccess($folder_id) {
+
+        $sql = "
+            SELECT
+                `customers-persons`.user_id
+                FROM `customers-persons`
+                LEFT JOIN `role_users`
+                    LEFT JOIN `roles`
+                    ON `roles`.id = `role_users`.role_id
+                ON `role_users`.user_id = `customers-persons`.user_id
+                LEFT JOIN `customers-folders-permissions`
+                ON `customers-folders-permissions`.user_id = `customers-persons`.user_id
+                WHERE 
+                    (`customers-persons`.customer_id = " . $this->id . ")
+                    AND (`role_users`.customer_id = " . $this->id . ")
+                    AND (`customers-folders-permissions`.folder_id = " . $folder_id . ")
+                    AND (`customers-folders-permissions`.has_access = 1)
+                    AND (`roles`.slug = 'customer')
         ";
 
         return \DB::select($sql);
