@@ -152,6 +152,17 @@ class CustomerFile extends Model {
     }
 
     public static function CreateNotificationReceiversAdmin($input) {
+        /**
+         * Sunt pe platforma MyDpoAdmin
+         */
+        $user = \Auth::user();
+        if($user->inRoles(['sa', 'admin']))
+        {
+            /**
+             * 1. Operator (care are clientul asociat) 
+             */
+        }
+
 
         return [
             ...$input['customer']->team->map(function($item){
