@@ -188,7 +188,7 @@ class CustomerFile extends Model {
         $x->user_id = 1;
         $users = [$x];
 
-        return User::GetUsersByIds($users)
+        return User::GetUsersByIds($users);
     
     }
 
