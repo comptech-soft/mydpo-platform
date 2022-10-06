@@ -10,7 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class FilesUpload {
+class FilesUpload implements ShouldBroadcast {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public function __construct() {
