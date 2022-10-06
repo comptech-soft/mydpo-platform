@@ -153,7 +153,10 @@ class CustomerFile extends Model {
     public static function CreateNotifications($files, $input) {
         foreach($files as $i => $file) 
         {
-            event(new FilesUploadEvent($input));
+            event(new FilesUploadEvent([
+                ...$input,
+                'file' => $file,
+            ]));
         }
     }
 
@@ -177,10 +180,7 @@ class CustomerFile extends Model {
         self::CreateNotifications($files, [
             'customer_id' => $input['customer_id'],
             'folder_id' => $input['folder_id'],
-            'file' => $file,
         ]);
-
-        
 
         return $record;
     }
