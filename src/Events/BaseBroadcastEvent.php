@@ -75,4 +75,10 @@ class BaseBroadcastEvent implements ShouldBroadcast {
         return new PrivateChannel($this->entity . '-' . $this->action);
     }
 
+    public function SetSubject($subject_type, $subject_id) {
+        $this->notification_record['subject_type'] = $subject_type;
+        $this->notification_record['subject_id'] = $subject_id;
+
+    }
+
 }
