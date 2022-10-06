@@ -81,6 +81,10 @@ class CustomerFile extends Model {
         return $this->belongsTo(MaterialStatus::class, 'status', 'slug');
     }
 
+    public static function downloadFiles($input) {
+        dd(__METHOD__, $input)
+    }
+
     public static function downloadFile($customer_id, $file_id) {
 
         $record = self::where('customer_id', $customer_id)->where('id', $file_id)->first();

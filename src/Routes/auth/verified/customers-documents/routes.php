@@ -22,8 +22,6 @@ Route::prefix('customers-folders')->group( function() {
     Route::post('save-orderd-folders', [CustomersFoldersController::class, 'saveOrderdFolders']);
     Route::post('save-folders-access', [CustomersFoldersController::class, 'saveFoldersAccess']);
 
-    
-
 });
 
 Route::prefix('customers-files')->group( function() {
@@ -33,6 +31,7 @@ Route::prefix('customers-files')->group( function() {
     Route::post('change-files-status', [CustomersFilesController::class, 'changeFilesStatus']);
     Route::post('move-files', [CustomersFilesController::class, 'moveFiles']);
     Route::post('delete-files', [CustomersFilesController::class, 'deleteFiles']);
+    Route::post('download-files', [CustomersFilesController::class, 'downloadFiles']);
 
 });
 
