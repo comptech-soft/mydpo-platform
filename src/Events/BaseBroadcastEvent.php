@@ -61,7 +61,7 @@ class BaseBroadcastEvent implements ShouldBroadcast {
             'subject_id' => NULL,
             'sender_id' => $this->sender->id,
             'customer_id' => $this->customer ? $this->customer->id : NULL,
-            'receiver_id'=> $this->receiver_id,
+            'receiver_id'=> $this->receiver->id,
             'event' => $this->entity . '-' . $this->action,
             'date_from' => NULL,
             'date_to' => NULL,
