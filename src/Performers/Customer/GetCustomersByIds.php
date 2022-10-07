@@ -10,7 +10,7 @@ class GetCustomersByIds extends Perform {
    
     public function Action() {
 
-        $ids = $this->input['ids'];
+        $ids = array_key_exists('ids', $his->input) ? $this->input['ids'] : [];
 
         if( count($ids) == 0 )
         {
