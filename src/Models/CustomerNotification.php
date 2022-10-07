@@ -5,7 +5,7 @@ namespace MyDpo\Models;
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
 // use MyDpo\Helpers\Performers\Datatable\DoAction;
-// use MyDpo\Models\User;
+use MyDpo\Models\TemplateNotification;
 // use MyDpo\Models\Customer;
 // use MyDpo\Models\CustomerDepartment;
 // use MyDpo\Models\RoleUser;
@@ -51,23 +51,17 @@ class CustomerNotification extends Model {
 
     // protected $with = ['user', 'department'];
 
-    // protected $appends = ['role'];
+    protected $appends = [
+        'icon'
+    ];
 
-    // public function getRoleAttribute() {
-    //     $r = NULL;
-    //     foreach($this->user->roles as $i => $role)
-    //     {
-    //         if( ($role->type == 'b2b') && ($role->pivot->customer_id == $this->customer_id) )
-    //         {
-    //             $r = $role;
-    //         }
-    //     }
-    //     return $r;
-    // }
+    public function getIconAttribute() {
+        return $this->template->props['icon'];
+    }
 
-    // public function user() {
-    //     return $this->belongsTo(User::class, 'user_id');
-    // }
+    public function template() {
+        return $this->belongsTo(TemplateNotification::class, 'type_id');
+    }
 
     // public function customer() {
     //     return $this->belongsTo(Customer::class, 'customer_id');
