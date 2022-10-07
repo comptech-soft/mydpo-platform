@@ -11,6 +11,7 @@ use MyDpo\Models\CustomerContract;
 use MyDpo\Models\CustomerAccount;
 use MyDpo\Models\CustomerFolder;
 use MyDpo\Models\UserCustomer;
+use MyDpo\Performers\Customer\GetCustomersByIds;
 
 class Customer extends Model {
 
@@ -190,6 +191,10 @@ class Customer extends Model {
 
     public static function getItemsWithPersons($input) {
         return (new GetItems($input, self::query()->whereHas('accounts')->with(['accounts']), __CLASS__))->Perform();
+    }
+
+    public static function getCustomersByIds($input) {
+        return (new GetCustomersByIds($input))->Perform();
     }
     
     public static function doAction($action, $input) {

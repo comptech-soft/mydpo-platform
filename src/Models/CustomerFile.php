@@ -160,19 +160,13 @@ class CustomerFile extends Model {
 
         if($user->inRoles(['sa', 'admin']))
         {
-            /**
-             * 1. Operator (care are clientul asociat) 
-             */
+            /** 1. Operator (care are clientul asociat) */
             $operators = $input['customer']->GetMyOperators();
 
-            /**
-             * 2. Masters
-             */
+            /** 2. Masters */
             $masters = $input['customer']->GetMyMasters();
 
-            /**
-             * 3. Client (daca s-a urcat in structura la care el are acces)
-             */
+            /** Client (daca s-a urcat in structura la care el are acces) */
             $users = $input['customer']->GetMyUserByFolderAccess($input['folder_id']);
 
             $users = [
@@ -184,9 +178,9 @@ class CustomerFile extends Model {
             
         }
 
-        $x = new \StdClass();
-        $x->user_id = 1;
-        $users = [$x];
+        // $x = new \StdClass();
+        // $x->user_id = 1;
+        // $users = [$x];
 
         return User::GetUsersByIds($users);
     

@@ -8,33 +8,33 @@ use MyDpo\Models\CustomerFile;
 class ChangeFilesStatus extends Perform {
 
     public function SendNotify() {
-        if( ($this->input['status'] == 'public') && ($record->status == 'protected'))
-        {
-            $customer = Customer::where('id', $record->customer_id)->with(['persons'])->first();
+        // if( ($this->input['status'] == 'public') && ($record->status == 'protected'))
+        // {
+        //     $customer = Customer::where('id', $record->customer_id)->with(['persons'])->first();
 
-            $notificare = Notification::getByEntityAndAction('document', 'trimitere');
+        //     $notificare = Notification::getByEntityAndAction('document', 'trimitere');
 
-            foreach($customer->persons as $person)
-            {
-                $notificare->Notify([
-                    'sender_id' => \Sentinel::check()->id,
-                    'entity_id' => $record->id,
-                    'customer_id' => $customer->id,
-                    'receiver_id' => $person->user_id,
-                    'date_from' => NULL,
-                    'date_to' => NULL,
-                    'readed_at' => NULL,
-                    'status' => 'created',
-                    'props' => [
-                        'file' => $record,
-                        'url' => '???',
-                        'sender' => \Sentinel::check(),
-                    ],
-                    'created_by' => \Sentinel::check()->id,
-                ]);
-            }
+        //     foreach($customer->persons as $person)
+        //     {
+        //         $notificare->Notify([
+        //             'sender_id' => \Sentinel::check()->id,
+        //             'entity_id' => $record->id,
+        //             'customer_id' => $customer->id,
+        //             'receiver_id' => $person->user_id,
+        //             'date_from' => NULL,
+        //             'date_to' => NULL,
+        //             'readed_at' => NULL,
+        //             'status' => 'created',
+        //             'props' => [
+        //                 'file' => $record,
+        //                 'url' => '???',
+        //                 'sender' => \Sentinel::check(),
+        //             ],
+        //             'created_by' => \Sentinel::check()->id,
+        //         ]);
+        //     }
 
-        }
+        // }
     }
     
     public function Action() {
