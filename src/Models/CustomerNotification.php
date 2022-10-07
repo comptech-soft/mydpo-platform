@@ -55,7 +55,8 @@ class CustomerNotification extends Model {
     ];
 
     protected $appends = [
-        'icon'
+        'icon',
+        'noty_status'
     ];
 
     public function getIconAttribute() {
