@@ -69,11 +69,13 @@ class CustomerNotification extends Model {
             return [
                 'color' => 'green',
                 'icon' => 'mdi-checkbox-marked-circle',
+                'text' => 'Citit',
             ];
         }
         return [
             'color' => 'red',
             'icon' => 'mdi-circle',
+            'text' => 'Necitit',
         ];
     }
 
