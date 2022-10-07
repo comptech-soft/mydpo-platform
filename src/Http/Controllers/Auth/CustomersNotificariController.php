@@ -8,7 +8,7 @@ use MyDpo\Helpers\Response;
 
 class CustomersNotificariController extends Controller {
     
-    public function index($customer_id,Request $r) {
+    public function index($customer_id, Request $r) {
 
         return Response::View(
             '~templates.index', 
@@ -18,6 +18,12 @@ class CustomersNotificariController extends Controller {
                 'customer_id' => $customer_id,
             ]
         );
+    }
+
+
+    public function getNotifications(Request $request) {
+
+        dd($request->all());
     }
 
   

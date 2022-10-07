@@ -7,3 +7,9 @@ Route::middleware('valid-customer')->prefix('customer-notificari')->group( funct
     Route::get('/{customer_id}', [CustomersNotificariController::class, 'index']);
 
 });
+
+Route::prefix('customer-notificari')->group( function() {
+
+    Route::post('get-notifications', [CustomersNotificariController::class, 'getNotifications']);
+
+});
