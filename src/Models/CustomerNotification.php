@@ -62,6 +62,20 @@ class CustomerNotification extends Model {
         return $this->template->props['icon'];
     }
 
+    public function getNotyStatusAttribute() {
+        if($this->status == 'readed')
+        {
+            return [
+                'color' => 'green',
+                'icon' => 'mdi-checkbox-marked-circle',
+            ];
+        }
+        return [
+            'color' => 'red',
+            'icon' => 'mdi-circle',
+        ];
+    }
+
     public function template() {
         return $this->belongsTo(TemplateNotification::class, 'type_id');
     }
