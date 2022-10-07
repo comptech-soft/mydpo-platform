@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
 // use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Models\TemplateNotification;
-// use MyDpo\Models\Customer;
-// use MyDpo\Models\CustomerDepartment;
+use MyDpo\Models\User;
+use MyDpo\Models\Customer;
 // use MyDpo\Models\RoleUser;
 // use MyDpo\Rules\CustomerAccount\UniqueUser;
 
@@ -49,7 +49,10 @@ class CustomerNotification extends Model {
         'updated_by',
     ];
 
-    // protected $with = ['user', 'department'];
+    protected $with = [
+        'sender', 
+        'customer'
+    ];
 
     protected $appends = [
         'icon'
@@ -63,13 +66,13 @@ class CustomerNotification extends Model {
         return $this->belongsTo(TemplateNotification::class, 'type_id');
     }
 
-    // public function customer() {
-    //     return $this->belongsTo(Customer::class, 'customer_id');
-    // }
+    public function customer() {
+        return $this->belongsTo(Customer::class, 'customer_id');
+    }
 
-    // public function department() {
-    //     return $this->belongsTo(CustomerDepartment::class, 'department_id');
-    // }
+    public function sender() {
+        return $this->belongsTo(User::class, 'sender_id');
+    }
 
     public static function getItems($input) {
         return (new GetItems($input, self::query(), __CLASS__))->Perform();
