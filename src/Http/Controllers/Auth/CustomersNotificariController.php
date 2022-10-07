@@ -5,6 +5,7 @@ namespace MyDpo\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Helpers\Response;
+use MyDpo\Models\CustomerNotification;
 
 class CustomersNotificariController extends Controller {
     
@@ -21,9 +22,8 @@ class CustomersNotificariController extends Controller {
     }
 
 
-    public function getNotifications(Request $request) {
-
-        dd($request->all());
+    public function getItems(Request $r) {
+        return CustomerNotification::getItems($r->all());
     }
 
   

@@ -8,8 +8,8 @@ Route::middleware('valid-customer')->prefix('customer-notificari')->group( funct
 
 });
 
-Route::prefix('customer-notificari')->group( function() {
+Route::prefix('customer-notifications')->group( function() {
 
-    Route::post('get-notifications', [CustomersNotificariController::class, 'getNotifications']);
+    Route::post('items', [CustomersNotificariController::class, 'getItems']);
 
 });
