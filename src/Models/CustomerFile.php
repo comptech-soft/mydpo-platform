@@ -174,6 +174,10 @@ class CustomerFile extends Model {
             ];
             
         }
+        else
+        {
+            $users = [];
+        }
 
         // $x = new \StdClass();
         // $x->user_id = 1;
