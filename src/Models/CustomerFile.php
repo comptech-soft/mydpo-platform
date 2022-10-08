@@ -249,6 +249,11 @@ class CustomerFile extends Model {
 
         $receivers = call_user_func([__CLASS__, $method], $input);
 
+        if(! $receivers )
+        {
+            return NULL;
+        }
+
         foreach($files as $i => $file) 
         {
             foreach($receivers as $j => $receiver)
