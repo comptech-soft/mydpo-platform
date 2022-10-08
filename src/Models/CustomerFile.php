@@ -206,12 +206,11 @@ class CustomerFile extends Model {
             
         // }
 
-        // // $x = new \StdClass();
-        // // $x->user_id = 1;
-        // // $users = [$x];
+        $x = new \StdClass();
+        $x->user_id = 1;
+        $users = [$x];
 
-        return [];
-        // return User::GetUsersByIds($users);
+        return User::GetUsersByIds($users);
     
     }
 
