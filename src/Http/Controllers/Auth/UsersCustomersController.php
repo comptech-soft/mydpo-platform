@@ -12,4 +12,8 @@ class UsersCustomersController extends Controller {
         return UserCustomer::getItems($r->all());
     }
 
+    public function updateUserCustomers(Request $r) {
+        return UserCustomer::updateUserCustomers($r->all());
+    }
+
 }

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Models\Customer;
 use MyDpo\Models\User;
+use MyDpo\Performers\UserCustomer\UpdateUserCustomers;
 
 class UserCustomer extends Model {
 
@@ -43,6 +44,12 @@ class UserCustomer extends Model {
 
     public static function getItems($input) {
         return (new GetItems($input, self::query(), __CLASS__))->Perform();
+    }
+
+    public static function updateUserCustomers($input) {
+        return (new UpdateUserCustomers($input))
+            ->SetSuccessMessage('Setare cu succes')
+            ->Perform();
     }
 
 }
