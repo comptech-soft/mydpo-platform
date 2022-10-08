@@ -153,9 +153,6 @@ class CustomerFile extends Model {
     }
 
     public static function CreateNotificationReceiversAdmin($input) {
-        /**
-         * Sunt pe platforma MyDpoAdmin
-         */
         $user = \Auth::user();
 
         if($user->inRoles(['sa', 'admin']))
@@ -186,8 +183,64 @@ class CustomerFile extends Model {
     
     }
 
-    public static function CreateNotifications($files, $input) {
+    public static function CreateNotificationReceiversB2b($input) {
+        // $user = \Auth::user();
 
+        // if($user->inRoles(['sa', 'admin']))
+        // {
+        //     /** 1. Operator (care are clientul asociat) */
+        //     $operators = $input['customer']->GetMyOperators();
+
+        //     /** 2. Masters */
+        //     $masters = $input['customer']->GetMyMasters();
+
+        //     /** Client (daca s-a urcat in structura la care el are acces) */
+        //     $users = $input['customer']->GetMyUserByFolderAccess($input['folder_id']);
+
+        //     $users = [
+
+        //         ...$users,
+        //         ...$operators,
+        //         ...$masters,
+        //     ];
+            
+        // }
+
+        // // $x = new \StdClass();
+        // // $x->user_id = 1;
+        // // $users = [$x];
+
+        return User::GetUsersByIds($users);
+    
+    }
+
+    public static function CreateNotifications($files, $input) {
+        /**
+         * REGULI TRIMITER NOTIFICARE upload-files
+         * 
+         * 1. Platforma MyDPOAdmin
+         *      1.1. Admin face upload
+         *              A. Admini           - toti adminii diferiti de cel care face upload
+         *              B. Operatori        - operatorii care au clientul asociat
+         *              C. Masteri          - toti masterii clientului
+         *              D. Useri            - daca s-a urcat in structura la care el are acces
+         *      1.2. Oerator face upload
+         *              A. Admini           - toti adminii
+         *              B. Operatori        - operatorii care au clientul asociat, diferit de operatorul care face upload
+         *              C. Masteri          - toti masterii clientului
+         *              D. Useri            - daca s-a urcat in structura la care el are acces
+         * 2. Platforma MyDpo
+         *      2.1. Master face upload
+         *              A. Admini           - toti adminii
+         *              B. Operatori        - operatorii care au clientul asociat
+         *              C. Masteri          - toti masterii clientului, diferit de masterul care face upload
+         *              D. Useri            - daca s-a urcat in structura la care el are acces
+         *      2.2. User face upload
+         *              A. Admini           - toti adminii
+         *              B. Operatori        - operatorii care au clientul asociat
+         *              C. Masteri          - toti masterii clientului
+         *              D. Useri            - daca s-a urcat in structura la care el are acces
+         */
         $method = 'CreateNotificationReceivers' . ucfirst(config('app.platform'));
 
         $receivers = call_user_func([__CLASS__, $method], $input);
