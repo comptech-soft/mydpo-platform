@@ -178,10 +178,16 @@ class Customer extends Model {
     }
 
     public function createDefaultFolders() {
-        $defaultFolders = CustomerFolderDefault::whereNull('parent_id')->get();  
+        if( ! $this->default_folders_created )
+        {
+            $defaultFolders = CustomerFolderDefault::whereNull('parent_id')->get();
 
-        foreach($defaultFolders as $i => $defaultFolder) {
-            $this->createDefaultFolder($defaultFolder, NULL);
+            foreach($defaultFolders as $i => $defaultFolder) {
+                $this->createDefaultFolder($defaultFolder, NULL);
+            }
+
+            $this->default_folders_created = 1;
+            $this->save();
         }
     }
 
