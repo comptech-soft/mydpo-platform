@@ -37,9 +37,11 @@ class CustomerPersonCreateAccount extends Mailable
     public function content() {
 
         return new Content(
-            view: 'view.name',
+            view: 'vendor.customer-persons.activate-account',
             // markdown: 'emails.orders.shipped',
-            with: [],
+            with: [
+                'level' => NULL,
+            ],
         );
     }
 
