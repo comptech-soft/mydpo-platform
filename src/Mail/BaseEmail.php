@@ -39,8 +39,8 @@ class BaseEmail extends Mailable
      */
     public function envelope() {
         return new Envelope(
-            from: new Address('jeffrey@example.com', 'Jeffrey Way'),
-            subject: 'Order Shipped',
+            from: new Address(config('mail.from.address'),  config('mail.from.name')),
+            subject:  $this->email_template->subject,
         );
     }
 
@@ -54,7 +54,9 @@ class BaseEmail extends Mailable
             markdown: 'vendor.notifications.email',
             with: [
                 'level' => 'info',
-                'introLines' => [],
+                'introLines' => [
+                    $this->email_template->body,
+                ],
                 'outroLines' => [],
                 'actionUrl' => config('app.url'),
                 'actionText' => 'Bam vam...',
