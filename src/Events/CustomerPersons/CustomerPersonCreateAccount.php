@@ -25,8 +25,6 @@ class CustomerPersonCreateAccount extends BaseBroadcastEvent {
         $this->account = $this->input['account'];
         $this->roleUser = $this->input['roleUser'];
 
-        // dd($this->account->user);
-
         $this->SetSubject(__CLASS__, $this->account->id);
 
         $this->CreateMessage([
@@ -36,7 +34,7 @@ class CustomerPersonCreateAccount extends BaseBroadcastEvent {
 
         $this->InsertNotification();
 
-        \Mail::to($this->account->user)->send(new CreateAccountMail());
+        \Mail::to($this->account->user)->send(new CreateAccountMail($this->entity, $this->action, $this->input));
 
 
     }

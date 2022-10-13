@@ -14,11 +14,13 @@ class BaseEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    /**
-     * Create a new message instance.
-     */
-    public function __construct() {
-        //
+    public $input = NULL;
+
+    public $entity = NULL;
+    public $action = NULL;
+
+    public function __construct($entity, $action, $input) {
+        dd($entity, $action, $input);
     }
 
     /**
