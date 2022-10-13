@@ -10,6 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use MyDpo\Events\BaseBroadcastEvent;
+use MyDpo\Mail\CustomerPersons\CustomerPersonCreateAccount as CreateAccountMail;
 
 class CustomerPersonCreateAccount extends BaseBroadcastEvent {
 
@@ -24,7 +25,7 @@ class CustomerPersonCreateAccount extends BaseBroadcastEvent {
         $this->account = $this->input['account'];
         $this->roleUser = $this->input['roleUser'];
 
-        dd($this->account->user);
+        // dd($this->account->user);
 
         $this->SetSubject(__CLASS__, $this->account->id);
 
@@ -35,7 +36,8 @@ class CustomerPersonCreateAccount extends BaseBroadcastEvent {
 
         $this->InsertNotification();
 
-        
+        \Mail::to($this->account->user)->send(new CreateAccountMail());
+
 
     }
 
