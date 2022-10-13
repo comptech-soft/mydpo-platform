@@ -24,16 +24,18 @@ class CustomerPersonCreateAccount extends BaseBroadcastEvent {
         $this->account = $this->input['account'];
         $this->roleUser = $this->input['roleUser'];
 
-        dd($this->account, $this->roleUser);
+        dd($this->account->user);
 
-        // $this->SetSubject(__CLASS__, $this->file->id);
+        $this->SetSubject(__CLASS__, $this->account->id);
 
-        // $this->CreateMessage([
-        //     'nume-fisier' => $this->file->file_original_name,
-        //     'nume-folder' => $this->folder->name,
-        // ]);
+        $this->CreateMessage([
+            // 'nume-fisier' => $this->file->file_original_name,
+            // 'nume-folder' => $this->folder->name,
+        ]);
 
-        // $this->InsertNotification();
+        $this->InsertNotification();
+
+        
 
     }
 
