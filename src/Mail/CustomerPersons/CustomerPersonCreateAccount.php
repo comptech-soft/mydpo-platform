@@ -41,9 +41,8 @@ class CustomerPersonCreateAccount extends Mailable
             'subject' => $this->subject,
             'greeting' => $this->greeting,
             'salutation' => $this->salutation,
-           
-            'actionText' => $this->actionText,
-            '' => $this->actionUrl,
+
+
             'displayableActionUrl' => str_replace(['mailto:', 'tel:'], '', $this->actionUrl ?? ''),
 
          */
@@ -55,6 +54,7 @@ class CustomerPersonCreateAccount extends Mailable
                 'introLines' => [],
                 'outroLines' => [],
                 'actionUrl' => config('app.url'),
+                'actionText' => 'Bam vam...',
             ],
         );
     }
