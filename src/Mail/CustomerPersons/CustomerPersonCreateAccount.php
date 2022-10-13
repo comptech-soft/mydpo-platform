@@ -37,12 +37,11 @@ class CustomerPersonCreateAccount extends Mailable
     public function content() {
 
         /**
-         * 'level' => $this->level,
+         * 
             'subject' => $this->subject,
             'greeting' => $this->greeting,
             'salutation' => $this->salutation,
-            'introLines' => $this->introLines,
-            'outroLines' => $this->outroLines,
+           
             'actionText' => $this->actionText,
             'actionUrl' => $this->actionUrl,
             'displayableActionUrl' => str_replace(['mailto:', 'tel:'], '', $this->actionUrl ?? ''),
@@ -54,6 +53,7 @@ class CustomerPersonCreateAccount extends Mailable
             with: [
                 'level' => 'info',
                 'introLines' => [],
+                'outroLines' => [],
             ],
         );
     }
