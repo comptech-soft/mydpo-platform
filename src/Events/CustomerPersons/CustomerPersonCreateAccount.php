@@ -9,11 +9,7 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-
 use MyDpo\Events\BaseBroadcastEvent;
-
-use MyDpo\Models\Folder;
-
 
 class CustomerPersonCreateAccount extends BaseBroadcastEvent {
 
@@ -26,7 +22,7 @@ class CustomerPersonCreateAccount extends BaseBroadcastEvent {
         parent::__construct('persons', 'create', $input);
                
         $this->account = $this->input['account'];
-        $this->roleUser = Folder::find($this->input['roleUser']);
+        $this->roleUser = $this->input['roleUser'];
 
         dd($this->account, $this->roleUser);
 
