@@ -36,11 +36,24 @@ class CustomerPersonCreateAccount extends Mailable
      */
     public function content() {
 
+        /**
+         * 'level' => $this->level,
+            'subject' => $this->subject,
+            'greeting' => $this->greeting,
+            'salutation' => $this->salutation,
+            'introLines' => $this->introLines,
+            'outroLines' => $this->outroLines,
+            'actionText' => $this->actionText,
+            'actionUrl' => $this->actionUrl,
+            'displayableActionUrl' => str_replace(['mailto:', 'tel:'], '', $this->actionUrl ?? ''),
+
+         */
         return new Content(
             view: 'vendor.customer-persons.activate-account',
             // markdown: 'emails.orders.shipped',
             with: [
-                'level' => NULL,
+                'level' => 'info',
+                'introLines' => [],
             ],
         );
     }
