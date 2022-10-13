@@ -78,7 +78,7 @@ class CustomerAccount extends Model {
     }
 
     public static function getItems($input) {
-        return (new GetItems($input, self::query(), __CLASS__))->Perform();
+        return (new GetItems($input, self::query()->with(['customer', 'department', 'user']), __CLASS__))->Perform();
     }
 
     public static function doAction($action, $input) {
