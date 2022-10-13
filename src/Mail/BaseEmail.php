@@ -9,6 +9,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Mail\Mailables\Address;
 use Illuminate\Queue\SerializesModels;
+use MyDpo\Models\TemplateEmail;
 
 class BaseEmail extends Mailable
 {
@@ -19,8 +20,18 @@ class BaseEmail extends Mailable
     public $entity = NULL;
     public $action = NULL;
 
+    public $email_template = NULL;
+
     public function __construct($entity, $action, $input) {
-        dd($entity, $action, $input);
+
+        $this->email_template = TemplateEmail::findByEntityActionPlatform($entity, $action, config('app.platform'));
+        
+        if( ! $this->email_template )
+        {
+            throw new \Exception('Nu avem email definit pentru acțiunea ' . $this->entity . '-' . $this->action . ' pe platforma ' . config('app.platform'));
+        }
+
+
     }
 
     /**

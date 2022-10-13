@@ -52,7 +52,7 @@ class BaseBroadcastEvent implements ShouldBroadcast {
 
         if( ! $this->notification_template )
         {
-            throw new \Exception('NU avem notificare definită pentru acțiunea ' . $this->entity . '-' . $this->action . ' pe platforma ' . config('app.platform'));
+            throw new \Exception('Nu avem notificare definită pentru acțiunea ' . $this->entity . '-' . $this->action . ' pe platforma ' . config('app.platform'));
         }
 
         $this->notification_record = [
