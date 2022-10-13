@@ -10,6 +10,7 @@ use MyDpo\Models\Customer;
 use MyDpo\Models\CustomerDepartment;
 use MyDpo\Models\RoleUser;
 use MyDpo\Rules\CustomerAccount\UniqueUser;
+use MyDpo\Events\CustomerPersons\CustomerPersonCreateAccount;
 use MyDpo\Scopes\NotdeletedScope;
 
 class CustomerAccount extends Model {
@@ -113,6 +114,12 @@ class CustomerAccount extends Model {
             $input['user_id'], 
             $input['user']['role_id']
         );
+
+        event(new CustomerPersonCreateAccount([
+            ...$input,
+            'account' => $account,
+            'roleUser' => $roleUser,
+        ]));
 
         return $account;
 
