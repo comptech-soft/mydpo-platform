@@ -43,7 +43,7 @@ class CustomerPersonCreateAccount extends Mailable
             'salutation' => $this->salutation,
            
             'actionText' => $this->actionText,
-            'actionUrl' => $this->actionUrl,
+            '' => $this->actionUrl,
             'displayableActionUrl' => str_replace(['mailto:', 'tel:'], '', $this->actionUrl ?? ''),
 
          */
@@ -54,6 +54,7 @@ class CustomerPersonCreateAccount extends Mailable
                 'level' => 'info',
                 'introLines' => [],
                 'outroLines' => [],
+                'actionUrl' => config('app.url'),
             ],
         );
     }
