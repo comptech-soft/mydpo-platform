@@ -55,6 +55,7 @@ class CustomerPersonCreateAccount extends Mailable
                 'outroLines' => [],
                 'actionUrl' => config('app.url'),
                 'actionText' => 'Bam vam...',
+                'displayableActionUrl' => 'aaa',
             ],
         );
     }
