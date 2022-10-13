@@ -34,7 +34,7 @@ class BaseBroadcastEvent implements ShouldBroadcast {
         $this->input = $input;
         
         $this->sender = \Auth::user();
-        $this->receiver = $input['receiver'];
+        $this->receiver = array_key_exists('receiver', $input) ? $input['receiver'] : NULL;
 
         if( array_key_exists('customer', $this->input))
         {
@@ -62,7 +62,7 @@ class BaseBroadcastEvent implements ShouldBroadcast {
             'subject_id' => NULL,
             'sender_id' => $this->sender->id,
             'customer_id' => $this->customer ? $this->customer->id : NULL,
-            'receiver_id'=> $this->receiver->id,
+            'receiver_id'=> $this->receiver ? $this->receiver->id : NULL,
             'event' => $this->entity . '-' . $this->action,
             'status' => 'sended',
             'date_from' => NULL,
