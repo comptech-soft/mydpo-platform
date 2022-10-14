@@ -173,7 +173,7 @@ class CustomerFile extends Model {
             $operators = $input['customer']->GetMyOperators(true);
 
             /** C. Masteri          - toti masterii clientului */
-            $masters = $input['customer']->GetMyMasters();
+            $masters = $input['customer']->GetMyMasters(true);
 
             /** D. Useri            - daca s-a urcat in structura la care el are acces */
             $users = $input['customer']->GetMyUserByFolderAccess($input['folder_id']);
@@ -187,32 +187,39 @@ class CustomerFile extends Model {
         }
         else
         {
-            /**
-             * 1.2. Operator face upload
-             *       A. Admini           - toti adminii
-             *       B. Operatori        - operatorii care au clientul asociat, diferit de operatorul care face upload
-             *       C. Masteri          - toti masterii clientului
-             *       D. Useri            - daca s-a urcat in structura la care el are acces
-             */
+            if($user->inRoles(['operator']))
+            {
+                /**
+                 * 1.2. Operator face upload
+                 *       A. Admini           - toti adminii
+                 *       B. Operatori        - operatorii care au clientul asociat, diferit de operatorul care face upload
+                 *       C. Masteri          - toti masterii clientului
+                 *       D. Useri            - daca s-a urcat in structura la care el are acces
+                 */
 
-            /** A. Admini           -  toti adminii */
-            $admins = $user->GetMyAdmins(true);
+                /** A. Admini           -  toti adminii */
+                $admins = $user->GetMyAdmins(true);
 
-            /** B. Operatori        - operatorii care au clientul asociat, diferit de operatorul care face upload **/
-            $operators = $input['customer']->GetMyOperators(false);
+                /** B. Operatori        - operatorii care au clientul asociat, diferit de operatorul care face upload **/
+                $operators = $input['customer']->GetMyOperators(false);
 
-            /** C. Masteri          - toti masterii clientului */
-            $masters = $input['customer']->GetMyMasters();
+                /** C. Masteri          - toti masterii clientului */
+                $masters = $input['customer']->GetMyMasters(true);
 
-            /** D. Useri            - daca s-a urcat in structura la care el are acces */
-            $users = $input['customer']->GetMyUserByFolderAccess($input['folder_id']);
+                /** D. Useri            - daca s-a urcat in structura la care el are acces */
+                $users = $input['customer']->GetMyUserByFolderAccess($input['folder_id']);
 
-            $users = [
-                ...$admins,
-                ...$operators,
-                ...$masters,
-                ...$users,
-            ];  
+                $users = [
+                    ...$admins,
+                    ...$operators,
+                    ...$masters,
+                    ...$users,
+                ];
+            }  
+            else
+            {
+                $users = [];
+            }
         }
         
         return User::GetUsersByIds($users);
@@ -223,37 +230,57 @@ class CustomerFile extends Model {
 
         $user = \Auth::user();
 
-        $role = RoleUser::where('user_id', $user->id)
+        $user = \Auth::user();
+
+        $roleUser = RoleUser::where('user_id', $user->id)
             ->where('customer_id', $input['customer']->id)
             ->whereIn('role_id', [4, 5])
             ->first();
 
-        dd($user->full_name, $input['customer']->name, $role);
+        if($roleUser->role->slug == 'master')
+        {
+            /**
+             * 2.1. Master face upload
+             *    A. Admini           - toti adminii
+             *    B. Operatori        - operatorii care au clientul asociat
+             *    C. Masteri          - toti masterii clientului, diferit de masterul care face upload
+             *    D. Useri            - daca s-a urcat in structura la care el are acces
+             */
 
-        // if($user->inRoles(['sa', 'admin']))
-        // {
-        //     /** 1. Operator (care are clientul asociat) */
-        //     $operators = $input['customer']->GetMyOperators();
+            /** A. Admini           -  toti adminii */
+            $admins = $user->GetMyAdmins(true);
 
-        //     /** 2. Masters */
-        //     $masters = $input['customer']->GetMyMasters();
+            /** B. Operatori        - operatorii care au clientul asociat **/
+            $operators = $input['customer']->GetMyOperators(true);
 
-        //     /** Client (daca s-a urcat in structura la care el are acces) */
-        //     $users = $input['customer']->GetMyUserByFolderAccess($input['folder_id']);
+            /** C.Masteri          - toti masterii clientului, diferit de masterul care face upload */
+            $masters = $input['customer']->GetMyMasters(false);
 
-        //     $users = [
+            /** D. Useri            - daca s-a urcat in structura la care el are acces */
+            $users = $input['customer']->GetMyUserByFolderAccess($input['folder_id']);
 
-        //         ...$users,
-        //         ...$operators,
-        //         ...$masters,
-        //     ];
+            $users = [
+                ...$admins,
+                ...$operators,
+                ...$masters,
+                ...$users,
+            ];
+
+            dd($users);
+        }
+        else
+        {
+            if($roleUser->role->slug == 'customer')
+            {
+
+               
+            }
+            else
+            {
+                $users = [];
+            }
+        }
             
-        // }
-
-        $x = new \StdClass();
-        $x->user_id = 1;
-        $users = [$x];
-
         return User::GetUsersByIds($users);
     
     }
