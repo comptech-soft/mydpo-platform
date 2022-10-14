@@ -212,8 +212,6 @@ class CustomerFile extends Model {
                 ...$masters,
                 ...$users,
             ];  
-
-            dd($users);
         }
         
         return User::GetUsersByIds($users);
@@ -221,6 +219,8 @@ class CustomerFile extends Model {
     }
 
     public static function CreateNotificationReceiversB2b($input) {
+
+        dd(__METHOD__);
         // $user = \Auth::user();
 
         // if($user->inRoles(['sa', 'admin']))
