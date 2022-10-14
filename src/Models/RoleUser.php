@@ -3,6 +3,7 @@
 namespace MyDpo\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use MyDpo\Models\Role;
 
 class RoleUser extends Model {
 
@@ -12,6 +13,7 @@ class RoleUser extends Model {
         'user_id' => 'integer',
         'role_id' => 'integer',
         'user_id' => 'integer',
+        'customer_id' => 'integer',
         'created_by' => 'integer',
         'updated_by' => 'integer',
     ];
@@ -24,9 +26,13 @@ class RoleUser extends Model {
         'updated_by'
     ];
 
+    public function role() {
+        return $this->belongsTo(Role::class, 'role_id');
+    }
+
     public static function CreateAccountRole($customer_id, $user_id, $role_id) {
 
-        if(!! $customer_id &&  in_array($role_id, [4, 5])  )
+        if(!! $customer_id && in_array($role_id, [4, 5])  )
         {
             self::where('customer_id', $customer_id)->whereIn('role_id',[4, 5])->where('user_id', $user_id)->delete();
         }
@@ -35,7 +41,6 @@ class RoleUser extends Model {
             ->where('user_id', $user_id)
             ->where('role_id', $role_id)
             ->first();
-
 
         if( $record )
         {
