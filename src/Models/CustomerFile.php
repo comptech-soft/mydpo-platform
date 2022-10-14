@@ -169,7 +169,7 @@ class CustomerFile extends Model {
             $admins = $user->GetMyAdmins(false);
 
             /** B. Operatori        - operatorii care au clientul asociat **/
-            $operators = $input['customer']->GetMyOperators();
+            $operators = $input['customer']->GetMyOperators(true);
 
             /** C. Masteri          - toti masterii clientului */
             $masters = $input['customer']->GetMyMasters();
@@ -179,9 +179,9 @@ class CustomerFile extends Model {
 
             $users = [
                 ...$admins,
-                ...$users,
                 ...$operators,
                 ...$masters,
+                ...$users,
             ];            
         }
         else
@@ -197,18 +197,25 @@ class CustomerFile extends Model {
             /** A. Admini           -  toti adminii */
             $admins = $user->GetMyAdmins(true);
 
+            /** B. Operatori        - operatorii care au clientul asociat, diferit de operatorul care face upload **/
+            $operators = $input['customer']->GetMyOperators(false);
+
+            /** C. Masteri          - toti masterii clientului */
+            $masters = $input['customer']->GetMyMasters();
+
+            /** D. Useri            - daca s-a urcat in structura la care el are acces */
+            $users = $input['customer']->GetMyUserByFolderAccess($input['folder_id']);
+
             $users = [
                 ...$admins,
-                // ...$users,
-                // ...$operators,
-                // ...$masters,
+                ...$operators,
+                ...$masters,
+                ...$users,
             ];  
+
+            dd($users);
         }
-
-        // $x = new \StdClass();
-        // $x->user_id = 1;
-        // $users = [$x];
-
+        
         return User::GetUsersByIds($users);
     
     }

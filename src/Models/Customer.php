@@ -227,20 +227,39 @@ class Customer extends Model {
         return $result;
     }
 
-    public function GetMyOperators() {
+    public function GetMyOperators($all) {
 
-        $sql = "
-            SELECT
-                `users-customers`.user_id
-            FROM `users-customers`
-                LEFT JOIN `role_users`
-                    LEFT JOIN `roles`
-                    ON `roles`.id = `role_users`.role_id
-                ON `role_users`.user_id = `users-customers`.user_id
-            WHERE 
-                (`users-customers`.customer_id = " . $this->id . ")
-                AND (`roles`.slug = 'operator')
-            ";
+        if($all)
+        {
+            $sql = "
+                SELECT
+                    `users-customers`.user_id
+                FROM `users-customers`
+                    LEFT JOIN `role_users`
+                        LEFT JOIN `roles`
+                        ON `roles`.id = `role_users`.role_id
+                    ON `role_users`.user_id = `users-customers`.user_id
+                WHERE 
+                    (`users-customers`.customer_id = " . $this->id . ")
+                    AND (`roles`.slug = 'operator')
+                ";
+        }
+        else
+        {
+            $sql = "
+                SELECT
+                    `users-customers`.user_id
+                FROM `users-customers`
+                    LEFT JOIN `role_users`
+                        LEFT JOIN `roles`
+                        ON `roles`.id = `role_users`.role_id
+                    ON `role_users`.user_id = `users-customers`.user_id
+                WHERE 
+                    (`users-customers`.customer_id = " . $this->id . ")
+                    AND (`roles`.slug = 'operator')
+                    AND (`users-customers`.user_id <> " . \Auth::user()->id . ")
+                ";
+        }
 
         return \DB::select($sql);
     }
