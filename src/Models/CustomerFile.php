@@ -157,6 +157,13 @@ class CustomerFile extends Model {
 
         if($user->inRoles(['sa', 'admin']))
         {
+            /**
+             * 1.1. Admin face upload
+             *       A. Admini           - toti adminii diferiti de cel care face upload
+             *       B. Operatori        - operatorii care au clientul asociat
+             *       C. Masteri          - toti masterii clientului
+             *       D. Useri            - daca s-a urcat in structura la care el are acces
+             */
             /** 1. Operator (care are clientul asociat) */
             $operators = $input['customer']->GetMyOperators();
 
@@ -176,6 +183,13 @@ class CustomerFile extends Model {
         }
         else
         {
+            /**
+             * 1.2. Operator face upload
+             *       A. Admini           - toti adminii
+             *       B. Operatori        - operatorii care au clientul asociat, diferit de operatorul care face upload
+             *       C. Masteri          - toti masterii clientului
+             *       D. Useri            - daca s-a urcat in structura la care el are acces
+             */
             $users = [];
         }
 
