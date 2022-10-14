@@ -403,4 +403,24 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
 
         return self::whereIn('id', $ids)->get();
     }
+
+
+    public function GetMyAdmins() {
+        /**
+         * A. Admini           - toti adminii diferiti de cel care face upload
+         */
+        
+        $sql = "
+            SELECT
+                `users`.id user_id
+            FROM `users`
+            LEFT JOIN `role_users` 
+            ON `role_users`.user_id = `users`.id
+            WHERE 
+                ((`role_users`.role_id = 1) OR (`role_users`.role_id = 2))
+                AND (`users`.id <> " . $this-> id . ")
+        ";
+
+        return \DB::select($sql);
+    }
 }
