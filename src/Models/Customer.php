@@ -264,21 +264,41 @@ class Customer extends Model {
         return \DB::select($sql);
     }
 
-    public function GetMyMasters() {
+    public function GetMyMasters($all) {
 
-        $sql = "
-            SELECT
-	            `customers-persons`.user_id
-            FROM `customers-persons`
-            LEFT JOIN `role_users`
-	            LEFT JOIN `roles`
-	            ON `roles`.id = `role_users`.role_id
-            ON `role_users`.user_id = `customers-persons`.user_id
-            WHERE 
-	            (`customers-persons`.customer_id = " . $this->id . ")
-	            AND (`role_users`.customer_id = " . $this->id . ")
-	            AND (`roles`.slug = 'master')
-        ";
+        if($all)
+        {
+            $sql = "
+                SELECT
+                    `customers-persons`.user_id
+                FROM `customers-persons`
+                LEFT JOIN `role_users`
+                    LEFT JOIN `roles`
+                    ON `roles`.id = `role_users`.role_id
+                ON `role_users`.user_id = `customers-persons`.user_id
+                WHERE 
+                    (`customers-persons`.customer_id = " . $this->id . ")
+                    AND (`role_users`.customer_id = " . $this->id . ")
+                    AND (`roles`.slug = 'master')
+            ";
+        }
+        else
+        {
+            $sql = "
+                SELECT
+                    `customers-persons`.user_id
+                FROM `customers-persons`
+                LEFT JOIN `role_users`
+                    LEFT JOIN `roles`
+                    ON `roles`.id = `role_users`.role_id
+                ON `role_users`.user_id = `customers-persons`.user_id
+                WHERE 
+                    (`customers-persons`.customer_id = " . $this->id . ")
+                    AND (`role_users`.customer_id = " . $this->id . ")
+                    AND (`roles`.slug = 'master')
+                    AND (`customers-persons`.user_id <> " . \Auth::user()->id . ")
+            ";
+        }
 
         return \DB::select($sql);
     }
