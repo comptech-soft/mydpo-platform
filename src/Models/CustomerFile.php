@@ -176,7 +176,7 @@ class CustomerFile extends Model {
             $masters = $input['customer']->GetMyMasters(true);
 
             /** D. Useri            - daca s-a urcat in structura la care el are acces */
-            $users = $input['customer']->GetMyUserByFolderAccess($input['folder_id']);
+            $users = $input['customer']->GetMyUserByFolderAccess($input['folder_id'], true);
 
             $users = [
                 ...$admins,
@@ -207,7 +207,7 @@ class CustomerFile extends Model {
                 $masters = $input['customer']->GetMyMasters(true);
 
                 /** D. Useri            - daca s-a urcat in structura la care el are acces */
-                $users = $input['customer']->GetMyUserByFolderAccess($input['folder_id']);
+                $users = $input['customer']->GetMyUserByFolderAccess($input['folder_id'], true);
 
                 $users = [
                     ...$admins,
@@ -257,7 +257,7 @@ class CustomerFile extends Model {
             $masters = $input['customer']->GetMyMasters(false);
 
             /** D. Useri            - daca s-a urcat in structura la care el are acces */
-            $users = $input['customer']->GetMyUserByFolderAccess($input['folder_id']);
+            $users = $input['customer']->GetMyUserByFolderAccess($input['folder_id'], true);
 
             $users = [
                 ...$admins,
