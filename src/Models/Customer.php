@@ -303,25 +303,50 @@ class Customer extends Model {
         return \DB::select($sql);
     }
 
-    public function GetMyUserByFolderAccess($folder_id) {
+    public function GetMyUserByFolderAccess($folder_id, $all) {
 
-        $sql = "
-            SELECT
-                `customers-persons`.user_id
-                FROM `customers-persons`
-                LEFT JOIN `role_users`
-                    LEFT JOIN `roles`
-                    ON `roles`.id = `role_users`.role_id
-                ON `role_users`.user_id = `customers-persons`.user_id
-                LEFT JOIN `customers-folders-permissions`
-                ON `customers-folders-permissions`.user_id = `customers-persons`.user_id
-                WHERE 
-                    (`customers-persons`.customer_id = " . $this->id . ")
-                    AND (`role_users`.customer_id = " . $this->id . ")
-                    AND (`customers-folders-permissions`.folder_id = " . $folder_id . ")
-                    AND (`customers-folders-permissions`.has_access = 1)
-                    AND (`roles`.slug = 'customer')
-        ";
+        if($all)
+        {
+            $sql = "
+                SELECT
+                    `customers-persons`.user_id
+                    FROM `customers-persons`
+                    LEFT JOIN `role_users`
+                        LEFT JOIN `roles`
+                        ON `roles`.id = `role_users`.role_id
+                    ON `role_users`.user_id = `customers-persons`.user_id
+                    LEFT JOIN `customers-folders-permissions`
+                    ON `customers-folders-permissions`.user_id = `customers-persons`.user_id
+                    WHERE 
+                        (`customers-persons`.customer_id = " . $this->id . ")
+                        AND (`role_users`.customer_id = " . $this->id . ")
+                        AND (`customers-folders-permissions`.folder_id = " . $folder_id . ")
+                        AND (`customers-folders-permissions`.has_access = 1)
+                        AND (`roles`.slug = 'customer')
+            ";
+        }
+        else
+        {
+            $sql = "
+                SELECT
+                    `customers-persons`.user_id
+                    FROM `customers-persons`
+                    LEFT JOIN `role_users`
+                        LEFT JOIN `roles`
+                        ON `roles`.id = `role_users`.role_id
+                    ON `role_users`.user_id = `customers-persons`.user_id
+                    LEFT JOIN `customers-folders-permissions`
+                    ON `customers-folders-permissions`.user_id = `customers-persons`.user_id
+                    WHERE 
+                        (`customers-persons`.customer_id = " . $this->id . ")
+                        AND (`role_users`.customer_id = " . $this->id . ")
+                        AND (`customers-folders-permissions`.folder_id = " . $folder_id . ")
+                        AND (`customers-folders-permissions`.has_access = 1)
+                        AND (`roles`.slug = 'customer')
+                        AND (`customers-persons`.user_id <> " . \Auth::user()->id . ")
+
+            ";
+        }
 
         return \DB::select($sql);
     }

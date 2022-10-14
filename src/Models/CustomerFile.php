@@ -265,14 +265,31 @@ class CustomerFile extends Model {
                 ...$masters,
                 ...$users,
             ];
-
-            dd($users);
         }
         else
         {
             if($roleUser->role->slug == 'customer')
             {
+                /**
+                 * 2.2. User face upload
+                 *   A. Admini           - toti adminii
+                 *   B. Operatori        - operatorii care au clientul asociat
+                 *   C. Masteri          - toti masterii clientului
+                 *   D. Useri            - daca s-a urcat in structura la care el are acces
+                 * 
+                 */
 
+                /** A. Admini           -  toti adminii */
+                $admins = $user->GetMyAdmins(true);
+
+                /** B. Operatori        - operatorii care au clientul asociat **/
+                $operators = $input['customer']->GetMyOperators(true);
+
+                /** C. Masteri          - toti masterii clientului */
+                $masters = $input['customer']->GetMyMasters(true);
+
+                /** D. Useri            - daca s-a urcat in structura la care el are acces */
+                $users = $input['customer']->GetMyUserByFolderAccess($input['folder_id'], false);
                
             }
             else
