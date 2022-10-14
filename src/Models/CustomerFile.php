@@ -164,13 +164,19 @@ class CustomerFile extends Model {
              *       C. Masteri          - toti masterii clientului
              *       D. Useri            - daca s-a urcat in structura la care el are acces
              */
-            /** 1. Operator (care are clientul asociat) */
+
+             /** A. Admini           - toti adminii diferiti de cel care face upload */
+            $admins = $user->GetMyAdmins();
+
+            dd($admins);
+
+            /** B. Operatori        - operatorii care au clientul asociat **/
             $operators = $input['customer']->GetMyOperators();
 
-            /** 2. Masters */
+            /** C. Masteri          - toti masterii clientului */
             $masters = $input['customer']->GetMyMasters();
 
-            /** Client (daca s-a urcat in structura la care el are acces) */
+            /** D. Useri            - daca s-a urcat in structura la care el are acces */
             $users = $input['customer']->GetMyUserByFolderAccess($input['folder_id']);
 
             $users = [
@@ -179,6 +185,8 @@ class CustomerFile extends Model {
                 ...$operators,
                 ...$masters,
             ];
+
+            dd($users);
             
         }
         else
