@@ -9,6 +9,7 @@ use MyDpo\Models\Folder;
 use MyDpo\Models\Customer;
 use MyDpo\Models\MaterialStatus;
 use MyDpo\Models\User;
+use MyDpo\Models\RoleUser;
 use MyDpo\Performers\CustomerFile\ChangeFilesStatus;
 use MyDpo\Performers\CustomerFile\MoveFiles;
 use MyDpo\Performers\CustomerFile\DeleteFiles;
@@ -220,8 +221,14 @@ class CustomerFile extends Model {
 
     public static function CreateNotificationReceiversB2b($input) {
 
-        dd(__METHOD__);
-        // $user = \Auth::user();
+        $user = \Auth::user();
+
+        $role = RoleUser::where('user_id', $user->id)
+            ->where('customer_id', $input['customer']->id)
+            ->whereIn('role_id', [4, 5])
+            ->first();
+
+        dd($user->full_name, $input['customer']->name, $role);
 
         // if($user->inRoles(['sa', 'admin']))
         // {
