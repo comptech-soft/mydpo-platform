@@ -405,21 +405,37 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
     }
 
 
-    public function GetMyAdmins() {
+    public function GetMyAdmins($all) {
         /**
-         * A. Admini           - toti adminii diferiti de cel care face upload
+         * A. Admini           - toti adminii 
+         * $all = false ==> diferiti de cel care face upload
          */
-        
-        $sql = "
-            SELECT
-                `users`.id user_id
-            FROM `users`
-            LEFT JOIN `role_users` 
-            ON `role_users`.user_id = `users`.id
-            WHERE 
-                ((`role_users`.role_id = 1) OR (`role_users`.role_id = 2))
-                AND (`users`.id <> " . $this-> id . ")
-        ";
+
+        if($all)
+        {
+            $sql = "
+                SELECT
+                    `users`.id user_id
+                FROM `users`
+                LEFT JOIN `role_users` 
+                ON `role_users`.user_id = `users`.id
+                WHERE 
+                    ((`role_users`.role_id = 1) OR (`role_users`.role_id = 2))
+            ";
+        }
+        else
+        {
+            $sql = "
+                SELECT
+                    `users`.id user_id
+                FROM `users`
+                LEFT JOIN `role_users` 
+                ON `role_users`.user_id = `users`.id
+                WHERE 
+                    ((`role_users`.role_id = 1) OR (`role_users`.role_id = 2))
+                    AND (`users`.id <> " . $this-> id . ")
+            ";
+        }
 
         return \DB::select($sql);
     }

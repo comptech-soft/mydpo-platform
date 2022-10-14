@@ -165,10 +165,8 @@ class CustomerFile extends Model {
              *       D. Useri            - daca s-a urcat in structura la care el are acces
              */
 
-             /** A. Admini           - toti adminii diferiti de cel care face upload */
-            $admins = $user->GetMyAdmins();
-
-            dd($admins);
+            /** A. Admini           - toti adminii diferiti de cel care face upload */
+            $admins = $user->GetMyAdmins(false);
 
             /** B. Operatori        - operatorii care au clientul asociat **/
             $operators = $input['customer']->GetMyOperators();
@@ -180,14 +178,11 @@ class CustomerFile extends Model {
             $users = $input['customer']->GetMyUserByFolderAccess($input['folder_id']);
 
             $users = [
-
+                ...$admins,
                 ...$users,
                 ...$operators,
                 ...$masters,
-            ];
-
-            dd($users);
-            
+            ];            
         }
         else
         {
@@ -198,7 +193,16 @@ class CustomerFile extends Model {
              *       C. Masteri          - toti masterii clientului
              *       D. Useri            - daca s-a urcat in structura la care el are acces
              */
-            $users = [];
+
+            /** A. Admini           -  toti adminii */
+            $admins = $user->GetMyAdmins(true);
+
+            $users = [
+                ...$admins,
+                // ...$users,
+                // ...$operators,
+                // ...$masters,
+            ];  
         }
 
         // $x = new \StdClass();
