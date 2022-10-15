@@ -365,7 +365,12 @@ class CustomerFile extends Model {
         $files = [];
         foreach($input['files'] as $file)
         {
-            $files[] = $record = self::ProcessFile($file, $input);
+            $record = self::ProcessFile($file, $input);
+
+            if($record->status == 'public')
+            {
+                $files[] = $record;
+            } 
         }
 
         $customer = Customer::find($input['customer_id']);

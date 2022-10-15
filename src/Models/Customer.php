@@ -24,12 +24,12 @@ class Customer extends Model {
         'created_by' => 'integer',
         'updated_by' => 'integer',
         'deleted_by' => 'integer',
+		'default_folders_created' => 'integer',
     ];
 
     protected $with = [
         'mystatus', 
         'city.region.country', 
-        //'contracts.orders.services.service', 'persons.user', 'departments'
     ];
 
     protected $fillable = [
@@ -49,6 +49,7 @@ class Customer extends Model {
         'details',
         'city_id',
         'logo',
+		'default_folders_created',
         'deleted',
         'created_by',
         'updated_by',
