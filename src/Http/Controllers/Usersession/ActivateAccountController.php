@@ -9,7 +9,7 @@ use MyDpo\Helpers\UserSession;
 
 class ActivateAccountController extends Controller {
 
-    public function index(Request $r) {
+    public function index($token, Request $r) {
         return Response::View(
             '~templates.index', 
             asset('apps/activate-accont/index.js'),
