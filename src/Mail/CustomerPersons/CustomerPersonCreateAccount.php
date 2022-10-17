@@ -6,4 +6,10 @@ use MyDpo\Mail\BaseEmail;
 
 class CustomerPersonCreateAccount extends BaseEmail {
     
+    public function __construct($entity, $action, $input) {
+
+        parent::__construct($entity, $action, $input);
+
+        dd($this->email_template, $this->input['account']);
+    }
 }
