@@ -24,6 +24,8 @@ class BaseEmail extends Mailable
 
     public function __construct($entity, $action, $input) {
 
+        $this->input = $input;
+
         $this->email_template = TemplateEmail::findByEntityActionPlatform($entity, $action, config('app.platform'));
         
         if( ! $this->email_template )
