@@ -15,12 +15,10 @@ class CustomerPersonCreateAccount extends BaseEmail {
         $activation = Activation::createActivation( $this->input['account']->user_id);
         $platform = Platform::where('slug', 'b2b')->first();
 
-        dd($platform);
-
         $this->actionUrl = \Str::replace(
             '[token]', 
             $activation->token, 
-            $this->email_template->props['actionUrl']
+            $platform->url . '/' . $this->email_template->props['actionUrl']
         );
     }
 }
