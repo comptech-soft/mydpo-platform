@@ -57,9 +57,10 @@ class BaseEmail extends Mailable
                 ],
                 'outroLines' => [],
                 'actionUrl' => config('app.url'),
-                'actionText' => 'Bam vam...',
+                'actionText' => $this->email_template->props['actionText'],
                 'displayableActionUrl' => 'aaa',
                 'salutation' => 'O zi frumoasă!',
+                'team' => 'Echipa decalex!',
             ],
         );
     }
