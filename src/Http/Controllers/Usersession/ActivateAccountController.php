@@ -12,7 +12,7 @@ class ActivateAccountController extends Controller {
     public function index($token, Request $r) {
         return Response::View(
             '~templates.index', 
-            asset('apps/activate-accont/index.js'),
+            asset('apps/activate-account/index.js'),
             [], 
             [
                 'token' => $token,
