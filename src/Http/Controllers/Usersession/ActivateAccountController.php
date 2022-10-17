@@ -20,9 +20,12 @@ class ActivateAccountController extends Controller {
         );
     }
 
-    public function sendResetPasswordLink(Request $r) {
-        return UserSession::sendResetPasswordLink($r->only([
-            'email'
+    public function activateAccount(Request $r) {
+        return UserSession::activateAccount($r->only([
+            'email', 
+            'token', 
+            'password', 
+            'password_confirmation'
         ]));
     }
 
