@@ -30,8 +30,6 @@ class BaseEmail extends Mailable
         {
             throw new \Exception('Nu avem email definit pentru acțiunea ' . $this->entity . '-' . $this->action . ' pe platforma ' . config('app.platform'));
         }
-
-
     }
 
     /**
@@ -61,6 +59,7 @@ class BaseEmail extends Mailable
                 'actionUrl' => config('app.url'),
                 'actionText' => 'Bam vam...',
                 'displayableActionUrl' => 'aaa',
+                'salutation' => 'puuuf',
             ],
         );
     }
