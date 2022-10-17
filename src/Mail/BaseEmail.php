@@ -21,6 +21,7 @@ class BaseEmail extends Mailable
     public $action = NULL;
 
     public $email_template = NULL;
+    public $actionUrl = NULL;
 
     public function __construct($entity, $action, $input) {
 
@@ -58,9 +59,9 @@ class BaseEmail extends Mailable
                     $this->email_template->body,
                 ],
                 'outroLines' => [],
-                'actionUrl' => config('app.url'),
+                'actionUrl' => $this->actionUrl,
                 'actionText' => $this->email_template->props['actionText'],
-                'displayableActionUrl' => 'aaa',
+                'displayableActionUrl' => $this->actionUrl,
                 'salutation' => 'O zi frumoasă!',
                 'team' => 'Echipa decalex!',
             ],
