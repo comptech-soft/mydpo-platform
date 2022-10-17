@@ -10,6 +10,6 @@ class CustomerPersonCreateAccount extends BaseEmail {
 
         parent::__construct($entity, $action, $input);
 
-        dd($this->email_template, $this->input['account']);
+        dd($this->email_template->props['actionUrl'], $this->input['account']->user_id);
     }
 }
