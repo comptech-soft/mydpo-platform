@@ -9,7 +9,7 @@ use MyDpo\Performers\Usersession\SendResetPasswordLink;
 use MyDpo\Performers\Usersession\UpdateNewPassword;
 // use Comptech\Performers\System\Register;
 use MyDpo\Performers\Usersession\SendActivationEmail;
-
+use MyDpo\Performers\Usersession\ActivateAccount;
 
 class UserSession {
 
@@ -141,28 +141,27 @@ class UserSession {
 
     public static function activateAccount($input) {
        
-        dd($input);
-        // return (new UpdateNewPassword(
-        //     $input, 
-        //     [
-        //         'password' => [
-        //             'required', 
-        //             'confirmed', 
-        //             Rules\Password::defaults()->mixedCase()->letters()->numbers()->symbols()
-        //         ],
-        //         'token' => 'required',
-        //         'email' => 'required|email|exists:users,email',
-        //     ],
-        //     [
-        //         'token.required' => 'Codul de resetare este obligatoriu.',
-        //         'password.min' => 'Parola trebuie să fie de cel puțin 8 caractere și să conțină litere mari și mici, cifre și caractere speciale.',
-        //     ]
-        // ))
-        // ->SetSuccessMessage('Parola a fost schimbată cu success!')
-        // ->SetExceptionMessage([
-        //     \Exception::class => NULL,
-        // ])
-        // ->Perform();
+        return (new ActivateAccount(
+            $input, 
+            [
+                'password' => [
+                    'required', 
+                    'confirmed', 
+                    Rules\Password::defaults()->mixedCase()->letters()->numbers()->symbols()
+                ],
+                'token' => 'required',
+                'email' => 'required|email|exists:users,email',
+            ],
+            [
+                'token.required' => 'Codul de resetare este obligatoriu.',
+                'password.min' => 'Parola trebuie să fie de cel puțin 8 caractere și să conțină litere mari și mici, cifre și caractere speciale.',
+            ]
+        ))
+        ->SetSuccessMessage('Parola a fost schimbată cu success!')
+        ->SetExceptionMessage([
+            \Exception::class => NULL,
+        ])
+        ->Perform();
     }
 
     
