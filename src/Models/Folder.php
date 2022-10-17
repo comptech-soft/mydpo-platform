@@ -20,6 +20,7 @@ class Folder extends Model  {
         'deleted' => 'integer',
         'props'=> 'json',
         'parent_id' => 'integer',
+        'order_no' => 'integer',
     ];
 
     protected $fillable = [
@@ -30,6 +31,7 @@ class Folder extends Model  {
         'customer_id',
         'deleted',
         'parent_id',
+        'order_no',
         'props',
         'created_by',
         'updated_by',
