@@ -13,11 +13,9 @@ class CustomerPersonCreateAccount extends BaseEmail {
 
         $activation = Activation::createActivation( $this->input['account']->user_id);
 
-        dd($activation);
-
         $this->actionUrl = \Str::replace(
-            '[user_id]', 
-            $this->input['account']->user_id, 
+            '[token]', 
+            $activation->token, 
             $this->email_template->props['actionUrl']
         );
     }
