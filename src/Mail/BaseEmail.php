@@ -59,7 +59,7 @@ class BaseEmail extends Mailable
                 'actionUrl' => config('app.url'),
                 'actionText' => 'Bam vam...',
                 'displayableActionUrl' => 'aaa',
-                'salutation' => 'puuuf',
+                'salutation' => 'O zi frumoasă!',
             ],
         );
     }
