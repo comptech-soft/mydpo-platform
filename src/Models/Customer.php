@@ -156,7 +156,7 @@ class Customer extends Model {
 
         if($defaultFolder->id == 11)
         {
-            $input['order_no'] = 1000000;
+            $input['order_no'] = 32767;
         }
 
         if( ! $folder )
