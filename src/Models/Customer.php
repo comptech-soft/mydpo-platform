@@ -150,8 +150,14 @@ class Customer extends Model {
             'props' => [
                 'defaultfolder' => $defaultFolder, 
             ],
+            'order_no' => 0,
             'deleted' => 0,
         ];
+
+        if($defaultFolder->id == 11)
+        {
+            $input['order_no'] = 1000000;
+        }
 
         if( ! $folder )
         {
