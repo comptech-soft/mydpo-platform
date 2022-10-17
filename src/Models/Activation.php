@@ -27,7 +27,7 @@ class Activation extends Model {
 
         return self::create([
             'user_id' => $user_id,
-            'token' => \Hash::make(\Str::random(40)),
+            'token' => \Str::random(64),
         ]);
     }
 
