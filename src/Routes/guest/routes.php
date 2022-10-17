@@ -21,6 +21,7 @@ Route::middleware('guest')->group(function () {
     Route::post('system/reset-password', [NewPasswordController::class, 'updateNewPassword']);
 
     Route::get('activare-cont-client/{token}', [ActivateAccountController::class, 'index'])->name('activate.account');
+    Route::post('system/activare-cont-client', [ActivateAccountController::class, 'activateAccount']);
 
     /**
      * Atentie la asta! Trebuie pentru SSO
