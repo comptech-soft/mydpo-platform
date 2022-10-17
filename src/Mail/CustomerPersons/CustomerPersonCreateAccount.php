@@ -3,6 +3,7 @@
 namespace MyDpo\Mail\CustomerPersons;
 
 use MyDpo\Mail\BaseEmail;
+use MyDpo\Models\Activation;
 
 class CustomerPersonCreateAccount extends BaseEmail {
     
