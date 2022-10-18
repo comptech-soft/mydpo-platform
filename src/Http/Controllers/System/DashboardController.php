@@ -40,7 +40,12 @@ class DashboardController extends Controller {
         }
         else
         {
-            dd($user->customers, $user->settings()->where('code', 'b2b-active-customer')->first());
+            if($settings = $user->settings()->where('code', 'b2b-active-customer')->first())
+            {
+                dd($settings->value);
+
+            }
+            dd($user->customers, );
         }
 
         
