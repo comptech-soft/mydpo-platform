@@ -47,10 +47,13 @@ class ActivateAccount extends Perform {
         $user->forceFill([
             'password' => \Hash::make($this->input['password']),
             'remember_token' => \Str::random(60),
-            'email_verified_at' => \Carbon\Carbon::now(),
+            'email_verified_at' => $now = \Carbon\Carbon::now(),
         ])->save();
 
-
+        $activation->update([
+            'activated' => 1,
+            'activated_at' => $now,
+        ]);
 
     }
 
