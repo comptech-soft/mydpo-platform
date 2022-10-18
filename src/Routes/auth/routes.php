@@ -11,13 +11,13 @@ use MyDpo\Http\Controllers\System\ConfigController;
  */
 Route::middleware('auth')->group(function () {
 
-    if( config('app.platform') == 'admin' )
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    if( config('app.platform') == 'b2b' )
     {
-        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    }
-    else
-    {
-        Route::middleware('is-activated')->get('/my-dashboard/{customer_id}', [DashboardController::class, 'index'])->name('dashboard');
+        
+        Route::middleware('is-activated')->get('/my-dashboard/{customer_id}', [DashboardController::class, 'index'])->name('b2b.dashboard');
+        
     }
 
     /**

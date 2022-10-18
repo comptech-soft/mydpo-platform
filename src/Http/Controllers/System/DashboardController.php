@@ -27,6 +27,7 @@ class DashboardController extends Controller {
          */
 
         dd(config('app.platform'));
+        
         $asset = (config('app.platform') == 'admin') ? 'dashboard' : 'my-dashboard';
 
         return Response::View(
