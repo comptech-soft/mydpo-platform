@@ -18,18 +18,16 @@ class GetUserRole extends Perform {
             return NULL;
         }
 
-        $r = NULL;
-        foreach($user->roles as $i => $role) 
-        {
-            if($role->pivot->customer_id && ($role->pivot->customer_id == $this->input['customer_id']))
-            {
+        $role = $user->roles()->wherePivot('customer_id', $this->input['customer_id'])->get()->first();
 
-                
-                $r = $role;
-            }
+
+        if($activation->role_id != $role->id)
+        {
+            return NULL;
         }
 
-        $this->payload = $r;
+        $this->payload = $role;
+        
     }
     
 } 
