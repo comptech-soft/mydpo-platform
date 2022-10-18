@@ -38,17 +38,15 @@ class DashboardController extends Controller {
                 $r->all()
             );
         }
-        else
-        {
-            if($settings = $user->settings()->where('code', 'b2b-active-customer')->first())
-            {
-                return redirect(route('b2b.dashboard', [
-                    'customer_id' => $settings->value,
-                ]))
 
-            }
-            dd($user->customers);
+        if($settings = $user->settings()->where('code', 'b2b-active-customer')->first())
+        {
+            return redirect(route('b2b.dashboard', [
+                'customer_id' => $settings->value,
+            ]))
+
         }
+        dd($user->customers);
 
         
 
