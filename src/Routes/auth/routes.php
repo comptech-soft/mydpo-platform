@@ -11,8 +11,14 @@ use MyDpo\Http\Controllers\System\ConfigController;
  */
 Route::middleware('auth')->group(function () {
 
-    dd(__FILE__, config('app.platform'));
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    if( config('app.platform') == 'admin' )
+    {
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    }
+    else
+    {
+        Route::get('/my-dashboard/{customer_id}', [DashboardController::class, 'index'])->name('dashboard');
+    }
 
     /**
      * apare cand se acceseaza o ruta protejata de middelware [verified]
