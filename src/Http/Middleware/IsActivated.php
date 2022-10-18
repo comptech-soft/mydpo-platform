@@ -3,6 +3,7 @@
 namespace MyDpo\Http\Middleware;
 
 use Closure;
+use MyDpo\Models\Activation;
 
 class IsActivated {
 
@@ -10,7 +11,10 @@ class IsActivated {
 
         $user = $request->user();
 
-        dd($user->full_name, $request->customer_id);
+        $activation = Activation::byUserAndCustomer($user->id, $request->customer_id);
+
+        dd($activation);
+        
         // if( ! $user )
         // {
         //     return redirect(config('app.url'));
