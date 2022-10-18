@@ -12,7 +12,9 @@ class CustomerPersonCreateAccount extends BaseEmail {
 
         parent::__construct($entity, $action, $input);
 
-        $activation = Activation::createActivation( $this->input['account']->user_id);
+        dd($this->input);
+        
+        $activation = Activation::createActivation($this->input['account']->user_id);
         $platform = Platform::where('slug', 'b2b')->first();
 
         $this->actionUrl = \Str::replace(
