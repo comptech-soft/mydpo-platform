@@ -15,17 +15,19 @@ class Activation extends Model {
     protected $casts = [
         'id' => 'integer',
         'user_id' => 'integer',
+        'customer_id' => 'integer',
+        'role_id' => 'integer',
     ];
 
     protected $fillable = [
         'id',
         'user_id',
+        'customer_id',
+        'role_id',
         'token',
     ];
 
     public static function createActivation($user_id, $customer_id, $role_id) {
-
-        dd($user_id, $customer_id, $role_id);
 
         $record = self::where('user_id', $user_id)
             ->where('customer_id', $customer_id)
