@@ -34,6 +34,12 @@ class BaseBroadcastEvent implements ShouldBroadcast {
         $this->input = $input;
         
         $this->sender = \Auth::user();
+        
+        if( ! $this->sender )
+        {
+            throw new \Exception('Nu avem user logat pentru acțiunea ' . $this->entity . '-' . $this->action . ' pe platforma ' . config('app.platform'));
+        }
+
         $this->receiver = array_key_exists('receiver', $input) ? $input['receiver'] : NULL;
 
         if( array_key_exists('customer', $this->input))
