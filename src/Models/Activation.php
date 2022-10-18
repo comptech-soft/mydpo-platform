@@ -17,6 +17,7 @@ class Activation extends Model {
         'user_id' => 'integer',
         'customer_id' => 'integer',
         'role_id' => 'integer',
+        'activated' => 'integer',
     ];
 
     protected $fillable = [
@@ -25,6 +26,8 @@ class Activation extends Model {
         'customer_id',
         'role_id',
         'token',
+        'activated',
+        'activated_at',
     ];
 
     public static function byToken($token) {
