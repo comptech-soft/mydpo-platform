@@ -13,9 +13,14 @@ class ActivateAccount extends Perform {
         
         $activation = Activation::byToken($this->input['token']);
 
-        if(true || ! $activation )
+        if(! $activation )
         {
-            throw new \Exception('Nu există cerere de activare a contului pentru acest token.');
+            throw new \Exception('Nu există cerere de activare a contului pentru acest token sau este deja completată.');
+        }
+
+        if($activation->activated == 1)
+        {
+            throw new \Exception('Cererea de activare a contului este deja completată.');
         }
 
         dd(__METHOD__, $this->input);
