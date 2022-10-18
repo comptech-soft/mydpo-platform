@@ -34,8 +34,6 @@ class CustomerPersonCreateAccount extends BaseBroadcastEvent {
 
         $this->InsertNotification();
 
-        dd(__METHOD__, $input);
-
         \Mail::to($this->account->user)->send(new CreateAccountMail($this->entity, $this->action, $this->input));
     }
 
