@@ -20,6 +20,8 @@ class CustomerPersonCreateAccount extends BaseBroadcastEvent {
 
     public function __construct($input) {
 
+        dd(__METHOD__, $input);
+
         parent::__construct('persons', 'create', $input);
                
         $this->account = $this->input['account'];
