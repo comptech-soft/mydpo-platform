@@ -50,6 +50,8 @@ class Activation extends Model {
                 'token' => \Str::random(64),
             ]);   
         }
+
+        return $record;
     }
 
 
