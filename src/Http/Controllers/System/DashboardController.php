@@ -43,7 +43,7 @@ class DashboardController extends Controller {
         {
             return redirect(route('b2b.dashboard', [
                 'customer_id' => $settings->value,
-            ]))
+            ]));
 
         }
         dd($user->customers);
