@@ -16,7 +16,7 @@ Route::middleware('auth')->group(function () {
     if( config('app.platform') == 'b2b' )
     {
         
-        Route::middleware('is-activated')->get('/my-dashboard/{customer_id}', [DashboardController::class, 'index'])->name('b2b.dashboard');
+        Route::middleware('is-activated')->get('/my-dashboard/{customer_id}', [B2bDashboardController::class, 'index'])->name('b2b.dashboard');
         
     }
 
