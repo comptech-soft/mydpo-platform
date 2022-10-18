@@ -17,7 +17,7 @@ Route::middleware('auth')->group(function () {
     }
     else
     {
-        Route::get('/my-dashboard/{customer_id}', [DashboardController::class, 'index'])->name('dashboard');
+        Route::middleware('is-activated')->get('/my-dashboard/{customer_id}', [DashboardController::class, 'index'])->name('dashboard');
     }
 
     /**
