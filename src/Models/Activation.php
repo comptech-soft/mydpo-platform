@@ -27,6 +27,10 @@ class Activation extends Model {
         'token',
     ];
 
+    public static function byToken($token) {
+        return self::where('token', $token)->first();
+    }
+
     public static function createActivation($user_id, $customer_id, $role_id) {
 
         $record = self::where('user_id', $user_id)

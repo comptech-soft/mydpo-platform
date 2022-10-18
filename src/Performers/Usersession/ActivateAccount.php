@@ -4,13 +4,17 @@ namespace MyDpo\Performers\Usersession;
 
 use MyDpo\Helpers\Perform;
 use Illuminate\Support\Facades\Password;
-use Illuminate\Auth\Events\PasswordReset;
+use MyDpo\Models\Activation;
 
 class ActivateAccount extends Perform {
 
 
     public function Action() {
         
+        $activation = Activation::byToken($this->input['token']);
+
+        dd($activation);
+
         dd(__METHOD__, $this->input);
         // /**
         //  * Here we will attempt to reset the user's password. If it is successful we
