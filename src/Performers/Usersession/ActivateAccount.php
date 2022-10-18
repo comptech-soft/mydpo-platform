@@ -5,6 +5,7 @@ namespace MyDpo\Performers\Usersession;
 use MyDpo\Helpers\Perform;
 use Illuminate\Support\Facades\Password;
 use MyDpo\Models\Activation;
+use MyDpo\Models\User;
 
 class ActivateAccount extends Perform {
 
@@ -23,7 +24,11 @@ class ActivateAccount extends Perform {
             throw new \Exception('Cererea de activare a contului este deja completată.');
         }
 
-        dd(__METHOD__, $this->input);
+        $user = User::byEmail($this->input['email']);
+
+        dd($user);
+
+
         // /**
         //  * Here we will attempt to reset the user's password. If it is successful we
         //  * will update the password on an actual user model and persist it to the
