@@ -11,6 +11,8 @@ class DashboardController extends Controller {
 
         $user = \Auth::user();
 
+        dd($user);
+
         if(! $user->active )
         {
             return Response::View(
@@ -27,7 +29,7 @@ class DashboardController extends Controller {
          */
 
         dd(config('app.platform'));
-        
+
         $asset = (config('app.platform') == 'admin') ? 'dashboard' : 'my-dashboard';
 
         return Response::View(
