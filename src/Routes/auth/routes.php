@@ -11,6 +11,7 @@ use MyDpo\Http\Controllers\System\ConfigController;
  */
 Route::middleware('auth')->group(function () {
 
+    dd(__FILE__, config('app.plarform'));
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     /**
