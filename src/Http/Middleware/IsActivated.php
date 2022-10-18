@@ -8,9 +8,9 @@ class IsActivated {
 
     public function handle($request, Closure $next) {
 
-        dd(__METHOD__, __FILE__);
-        // $user = $request->user();
+        $user = $request->user();
 
+        dd($user->full_name, $request->customer_id);
         // if( ! $user )
         // {
         //     return redirect(config('app.url'));
