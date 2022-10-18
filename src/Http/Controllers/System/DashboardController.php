@@ -45,7 +45,7 @@ class DashboardController extends Controller {
                 dd($settings->value);
 
             }
-            dd($user->customers, );
+            dd($user->customers);
         }
 
         
