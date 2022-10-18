@@ -6,6 +6,7 @@ use MyDpo\Helpers\Perform;
 use Illuminate\Support\Facades\Password;
 use MyDpo\Models\Activation;
 use MyDpo\Models\User;
+use MyDpo\Models\Customer;
 
 class ActivateAccount extends Perform {
 
@@ -26,8 +27,14 @@ class ActivateAccount extends Perform {
 
         $user = User::byEmail($this->input['email']);
 
-        dd($user);
+        if(! $user )
+        {
+            throw new \Exception('Nu există utilizator corespunzător acestei cereri de activare a contului.');
+        }
 
+        $customer = Cistomer::find($activation->customer_id);
+
+        dd($customer);
 
         // /**
         //  * Here we will attempt to reset the user's password. If it is successful we
