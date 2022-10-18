@@ -40,7 +40,7 @@ class DashboardController extends Controller {
         }
         else
         {
-            dd('Bam bam >>>> ');
+            dd($user->customers, $user->settings);
         }
 
         
