@@ -19,7 +19,7 @@ Route::middleware('auth')->group(function () {
     {
         
         Route::middleware('is-activated')->get('/my-dashboard/{customer_id}', [B2bDashboardController::class, 'index'])->name('b2b.dashboard');
-        Route::get('/cont-inactiv', [AccountInactiveController::class, 'index'])->name('account.inactive');
+        Route::get('/cont-inactiv/{customer_id}', [AccountInactiveController::class, 'index'])->name('account.inactive');
     }
 
     /**

@@ -15,7 +15,7 @@ class IsActivated {
 
         if(! $activation )
         {
-            return redirect(route('account.inactive'));
+            return redirect(route('account.inactive', ['customer_id' => $request->customer_id]));
         }
 
         if( $activation && ($activation->activated == 0) )
