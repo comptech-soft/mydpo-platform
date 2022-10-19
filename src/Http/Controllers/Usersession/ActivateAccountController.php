@@ -34,7 +34,8 @@ class ActivateAccountController extends Controller {
             'email', 
             'token', 
             'password', 
-            'password_confirmation'
+            'password_confirmation',
+            'has_password'
         ]));
     }
 
