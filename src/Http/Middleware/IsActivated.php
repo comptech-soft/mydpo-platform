@@ -27,10 +27,12 @@ class IsActivated {
                 if($role_user)
                 {
                     $activation = Activation::createActivation($user->id, $request->customer_id, $role_user->role_id);
-                    dd($activation);
                 }
-            }
+            }            
+        }
 
+        if(! $activation )
+        {
             return redirect(route('account.inactive', ['customer_id' => $request->customer_id]));
         }
 
