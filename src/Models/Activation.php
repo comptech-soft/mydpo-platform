@@ -5,7 +5,7 @@ namespace MyDpo\Models;
 use Illuminate\Database\Eloquent\Model;
 // use MyDpo\Helpers\Performers\Datatable\GetItems;
 // use MyDpo\Helpers\Performers\Datatable\DoAction;
-// use MyDpo\Models\Curs;
+use MyDpo\Models\Customer;
 // use MyDpo\Rules\Category\UniqueName;
 
 class Activation extends Model {
@@ -29,6 +29,10 @@ class Activation extends Model {
         'activated',
         'activated_at',
     ];
+
+    public function customer() {
+        return $this->belongsTo(Customer::class, 'customer_id');
+    }
 
     public static function byToken($token) {
         return self::where('token', $token)->where('activated', 0)->first();
