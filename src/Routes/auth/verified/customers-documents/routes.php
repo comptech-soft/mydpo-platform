@@ -8,7 +8,7 @@ use MyDpo\Http\Controllers\Auth\CustomersFoldersPermssionsController;
 Route::middleware('valid-customer')->prefix('customer-documents')->group( function() {
 
     Route::get('download/{customer_id}/{file_id}', [CustomersDocumentsController::class, 'downloadFile']);
-    Route::get('/{customer_id}', [CustomersDocumentsController::class, 'index']);
+    Route::middleware('is-activated')->get('/{customer_id}', [CustomersDocumentsController::class, 'index']);
 
 });
 
