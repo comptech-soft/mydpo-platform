@@ -19,7 +19,7 @@ class IsActivated {
             return redirect( route('activate.account', ['token' => $activation->token]) );
         }
         
-        
+        dd('????');
 
         // if( ! $user )
         // {
