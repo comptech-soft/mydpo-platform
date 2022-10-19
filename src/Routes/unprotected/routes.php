@@ -18,7 +18,7 @@ Route::get('/', [WelcomeController::class, 'index']);
  */
 Route::get('activare-cont-client/{token}', [ActivateAccountController::class, 'index'])->name('activate.account');
 Route::post('system/activare-cont-client', [ActivateAccountController::class, 'activateAccount']);
-
+Route::post('activare-cont-client/get-infos-by-token', [ActivateAccountController::class, 'getInfosByToken']);
 
 Route::prefix('system')->group(function () {
     Route::get('set-locale/{locale}', [ConfigController::class, 'setLocale']);
