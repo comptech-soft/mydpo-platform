@@ -142,25 +142,29 @@ class UserSession {
 
     public static function activateAccount($input) {
        
-        dd($input);
-        
+        $rules = [
+            'token' => 'required',
+            'email' => 'required|email|exists:users,email',
+        ];
+
+        if(! $input['has_password'])
+        {
+            $rules['password'] = [
+                'required', 
+                'confirmed', 
+                Rules\Password::defaults()->mixedCase()->letters()->numbers()->symbols()
+            ];
+        }
+
         return (new ActivateAccount(
             $input, 
-            [
-                'password' => [
-                    'required', 
-                    'confirmed', 
-                    Rules\Password::defaults()->mixedCase()->letters()->numbers()->symbols()
-                ],
-                'token' => 'required',
-                'email' => 'required|email|exists:users,email',
-            ],
+            $rules,
             [
                 'token.required' => 'Codul de resetare este obligatoriu.',
                 'password.min' => 'Parola trebuie să fie de cel puțin 8 caractere și să conțină litere mari și mici, cifre și caractere speciale.',
             ]
         ))
-        ->SetSuccessMessage('Parola a fost schimbată cu success!')
+        ->SetSuccessMessage('Contul a fost activat cu success!')
         ->SetExceptionMessage([
             \Exception::class => NULL,
         ])
