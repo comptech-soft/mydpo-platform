@@ -6,5 +6,4 @@ Route::middleware(['valid-customer', 'isadmin'])->prefix('customer-dashboard')->
         
     Route::get('/{customer_id}', [CustomersDashboardController::class, 'index']);
 
-
 });

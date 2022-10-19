@@ -26,7 +26,7 @@ class ActivateAccountController extends Controller {
             );
         }
         
-        dd('????');
+        return redirect(route('dashboard'));
     }
 
     public function activateAccount(Request $r) {
