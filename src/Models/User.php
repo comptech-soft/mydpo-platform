@@ -39,6 +39,7 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
         'avatar',
         'phone',
         'email_verified_at',
+        'activated_at',
         'permissions',
         'last_login',
         'editable',
@@ -60,6 +61,7 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'activated_at' => 'datetime',
         'permissions' => 'json',
         'avatar' => 'json',
         'id' => 'integer',
