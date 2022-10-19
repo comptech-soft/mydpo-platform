@@ -13,7 +13,10 @@ class AccountInactiveController extends Controller {
             '~templates.index', 
             asset('apps/cont-inactiv/index.js'),
             [],
-            $r->all()
+            [
+                ...$r->all(),
+                'customer_id' => $customer_id,
+            ],
         );
     }
 }
