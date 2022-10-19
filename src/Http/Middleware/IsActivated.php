@@ -13,10 +13,13 @@ class IsActivated {
 
         $activation = Activation::byUserAndCustomer($user->id, $request->customer_id);
 
-        if(! $activation || ($activation->activated == 0))
+
+        if( $activation && ($activation->activated == 0) )
         {
-            dd('Nashpa');
+            return redirect( route('activate.account', ['token' => $activation->token]) );
         }
+        
+        
 
         // if( ! $user )
         // {
