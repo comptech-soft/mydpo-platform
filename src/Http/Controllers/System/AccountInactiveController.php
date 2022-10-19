@@ -9,15 +9,11 @@ use MyDpo\Helpers\Response;
 class AccountInactiveController extends Controller {
     
     public function index($customer_id, Request $r) {
-
-        dd($customer_id);
-        
         return Response::View(
             '~templates.index', 
             asset('apps/cont-inactiv/index.js'),
             [],
             $r->all()
         );
-
     }
 }
