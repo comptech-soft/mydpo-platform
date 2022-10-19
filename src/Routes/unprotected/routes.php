@@ -3,6 +3,7 @@
 use MyDpo\Http\Controllers\System\WelcomeController;
 use MyDpo\Http\Controllers\System\ConfigController;
 use MyDpo\Http\Controllers\Validation\ValidationController;
+use MyDpo\Http\Controllers\Usersession\ActivateAccountController;
 
 use MyDpo\Http\Controllers\System\ContactController;
 use MyDpo\Http\Controllers\System\TermeniController;

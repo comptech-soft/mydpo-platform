@@ -3,7 +3,6 @@
 use MyDpo\Http\Controllers\Usersession\LoginController;
 use MyDpo\Http\Controllers\Usersession\ForgotPasswordController;
 use MyDpo\Http\Controllers\Usersession\NewPasswordController;
-use MyDpo\Http\Controllers\Usersession\ActivateAccountController;
 
 use MyDpo\Http\Controllers\Auth\AuthenticatedSessionController;
 
