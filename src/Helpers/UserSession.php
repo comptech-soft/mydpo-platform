@@ -145,6 +145,7 @@ class UserSession {
         $rules = [
             'token' => 'required',
             'email' => 'required|email|exists:users,email',
+            'agree' => 'accepted',
         ];
 
         if(! $input['has_password'])
