@@ -5,6 +5,7 @@ namespace MyDpo\Http\Middleware;
 use Closure;
 use MyDpo\Models\Activation;
 use MyDpo\Models\CustomerAccount;
+use MyDpo\Models\RoleUser;
 
 class IsActivated {
 
@@ -19,7 +20,12 @@ class IsActivated {
 
             $account = CustomerAccount::where('user_id', $user->id)->where('customer_id', $request->customer_id)->first();
 
-            dd($account);
+            if($account)
+            {
+                $role_user = RoleUser::where('user_id', $user->id)->where('customer_id', $request->customer_id)->first();
+
+                dd($role_user);
+            }
 
             return redirect(route('account.inactive', ['customer_id' => $request->customer_id]));
         }
