@@ -13,28 +13,15 @@ class IsActivated {
 
         $activation = Activation::byUserAndCustomer($user->id, $request->customer_id);
 
+        if(! $activation )
+        {
+            return redirect(route('account.inactive'));
+        }
 
         if( $activation && ($activation->activated == 0) )
         {
             return redirect( route('activate.account', ['token' => $activation->token]) );
         }
-        
-        dd('????');
-
-        // if( ! $user )
-        // {
-        //     return redirect(config('app.url'));
-        // }
-
-        // if( config('app.platform') != 'admin')
-        // {
-        //     return redirect(config('app.url'));
-        // }
-
-        // if( ! $user->inRoles(['sa', 'admin', 'operator']) )
-        // {
-        //     return redirect(config('app.url'));
-        // }
         
         return $next($request);
     }
