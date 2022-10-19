@@ -17,7 +17,7 @@ class IsActivated {
         if(! $activation )
         {
 
-            $account = CustomerAccount::where('user_id', $user_id)->where('customer_id', $request->customer_id)->first();
+            $account = CustomerAccount::where('user_id', $user->id)->where('customer_id', $request->customer_id)->first();
 
             dd($account);
 
