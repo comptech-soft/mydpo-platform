@@ -6,7 +6,7 @@ use MyDpo\Http\Controllers\Usersession\MyProfileController;
  * Doar pentru userii activi
  * Daca se ajunge aici ==> redirect pe http://{url}/verify-email [verification.notice]
  */
-Route::middleware('is-verified')->group(function () {
+Route::middleware('verified')->group(function () {
 
     Route::get('my-profile', [MyProfileController::class, 'index']);
 
