@@ -142,6 +142,8 @@ class UserSession {
 
     public static function activateAccount($input) {
        
+        dd($input);
+        
         return (new ActivateAccount(
             $input, 
             [
