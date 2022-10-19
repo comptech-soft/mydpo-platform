@@ -13,8 +13,6 @@ class IsActivated {
 
         $activation = Activation::byUserAndCustomer($user->id, $request->customer_id);
 
-        dd($activation);
-        
         if(! $activation || ($activation->activated == 0))
         {
             dd('Nashpa');
