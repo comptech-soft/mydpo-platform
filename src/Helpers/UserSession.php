@@ -10,6 +10,7 @@ use MyDpo\Performers\Usersession\UpdateNewPassword;
 // use Comptech\Performers\System\Register;
 use MyDpo\Performers\Usersession\SendActivationEmail;
 use MyDpo\Performers\Usersession\ActivateAccount;
+use MyDpo\Performers\Usersession\GetInfosByToken;
 
 class UserSession {
 
@@ -164,7 +165,6 @@ class UserSession {
         ->Perform();
     }
 
-    
     public static function sendActivationEmail() {
         return 
             (new SendActivationEmail(
@@ -180,6 +180,23 @@ class UserSession {
             ])
             ->Perform();
     }
+
+    public static function getInfosByToken($input) {
+        return 
+            (new GetInfosByToken(
+                $input, 
+                [
+                ],
+                [
+                ]
+            ))
+            ->SetExceptionMessage([
+                \Exception::class => NULL,
+            ])
+            ->Perform();
+    }
+
+    
 
     
 }

@@ -38,4 +38,11 @@ class ActivateAccountController extends Controller {
         ]));
     }
 
+    public function getInfosByToken(Request $r) {
+        return UserSession::getInfosByToken($r->only([
+            'token', 
+        ]));
+    }
+    
+
 }
