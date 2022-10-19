@@ -12,7 +12,12 @@ use MyDpo\Http\Controllers\System\UploadsController;
 
 Route::get('/', [WelcomeController::class, 'index']);
 
+/**
+ * Activarea unui cont client
+ */
 Route::get('activare-cont-client/{token}', [ActivateAccountController::class, 'index'])->name('activate.account');
+Route::post('system/activare-cont-client', [ActivateAccountController::class, 'activateAccount']);
+
 
 Route::prefix('system')->group(function () {
     Route::get('set-locale/{locale}', [ConfigController::class, 'setLocale']);
