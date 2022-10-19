@@ -6,21 +6,26 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Helpers\Response;
 use MyDpo\Helpers\UserSession;
+use MyDpo\Models\Activation;
 
 class ActivateAccountController extends Controller {
 
     public function index($token, Request $r) {
 
-        dd($token);
+        $activation = Activation::byToken($token);
+
+        if($activation && ($activation->activated == 1) )
+        {
+            return Response::View(
+                '~templates.index', 
+                asset('apps/activate-account/index.js'),
+                [], 
+                [
+                    'token' => $token,
+                ]
+            );
+        }
         
-        return Response::View(
-            '~templates.index', 
-            asset('apps/activate-account/index.js'),
-            [], 
-            [
-                'token' => $token,
-            ]
-        );
     }
 
     public function activateAccount(Request $r) {
