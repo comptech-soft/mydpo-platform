@@ -14,7 +14,7 @@ class ActivateAccountController extends Controller {
 
         $activation = Activation::byToken($token);
 
-        if($activation && ($activation->activated == 1) )
+        if($activation && ($activation->activated == 0) )
         {
             return Response::View(
                 '~templates.index', 
@@ -26,6 +26,7 @@ class ActivateAccountController extends Controller {
             );
         }
         
+        dd('????');
     }
 
     public function activateAccount(Request $r) {
