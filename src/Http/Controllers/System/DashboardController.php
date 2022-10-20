@@ -49,7 +49,9 @@ class DashboardController extends Controller {
         
         if($user->customers->count());
         {
-            dd($user->customers[0]);
+            return redirect(route('b2b.dashboard', [
+                'customer_id' => $user->customers[0],
+            ]));
         }
 
     
