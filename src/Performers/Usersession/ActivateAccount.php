@@ -45,13 +45,22 @@ class ActivateAccount extends Perform {
          * database. Otherwise we will parse the error and return the response.
          */
 
-        dd($this->input);
-        $user->forceFill([
-            'password' => \Hash::make($this->input['password']),
-            'remember_token' => \Str::random(60),
-            'email_verified_at' => $now = \Carbon\Carbon::now(),
-            'activated_at' => $now,
-        ])->save();
+        if($this->input['password'])
+        {
+            $user->forceFill([
+                'password' => \Hash::make($this->input['password']),
+                'remember_token' => \Str::random(60),
+                'email_verified_at' => $now = \Carbon\Carbon::now(),
+                'activated_at' => $now,
+            ])->save();
+        }
+        else
+        {
+            $user->forceFill([
+                'email_verified_at' => $now = \Carbon\Carbon::now(),
+                'activated_at' => $now,
+            ])->save();
+        }
 
         $activation->update([
             'activated' => 1,
