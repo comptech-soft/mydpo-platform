@@ -35,7 +35,8 @@ class ActivateAccountController extends Controller {
             'token', 
             'password', 
             'password_confirmation',
-            'has_password'
+            'has_password',
+            'agree',
         ]));
     }
 
