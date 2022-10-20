@@ -286,6 +286,7 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
             'phone' => $input['phone'],
             'avatar' => array_key_exists('avatar', $input) ? $input['avatar'] : NULL,
             'password' => Hash::make($input['password']),
+            'email_verified_at' => \Carbon\Carbon::now(),
         ]);
 
         return $user;
