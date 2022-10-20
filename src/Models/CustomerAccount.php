@@ -79,7 +79,16 @@ class CustomerAccount extends Model {
     }
 
     public static function getItems($input) {
-        return (new GetItems($input, self::query()->with(['customer', 'department', 'user']), __CLASS__))->Perform();
+
+        $q = self::query()->leftJoin(
+            'users',
+            function($j) {
+                $j->on('users.id', '=', 'customers-persons.user_id');
+            }
+        )
+        ->select('customers-persons.*');
+
+        return (new GetItems($input, $q->with(['customer', 'department', 'user']), __CLASS__))->Perform();
     }
 
     public static function doAction($action, $input) {
