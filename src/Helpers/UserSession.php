@@ -157,6 +157,8 @@ class UserSession {
             ];
         }
 
+        dd($input, $rules);
+
         return (new ActivateAccount(
             $input, 
             $rules,
