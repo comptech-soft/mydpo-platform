@@ -45,7 +45,7 @@ class Permission extends Model {
         return $result;
     }
 
-    public static function doInsert($input, $folder) {
+    public static function doInsert($input, $permission) {
 
         if(! array_key_exists('parent_id', $input) )
         {
