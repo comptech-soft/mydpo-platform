@@ -90,7 +90,7 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
      ****************************/
     
     public function getActiveAttribute() {
-        return !! $this->email_verified_at;
+        return !! $this->email_verified_at && !! $this->activated_at;
     }
 
     public function getRoleAttribute() {
