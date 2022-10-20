@@ -52,12 +52,7 @@ class DashboardController extends Controller {
             dd($user->customers[0]);
         }
 
-        
-
-        
-
-        
-
+    
         
     }
 }
