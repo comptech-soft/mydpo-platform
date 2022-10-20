@@ -11,9 +11,11 @@ class CustomersAccountsController extends Controller {
     
     public function index($customer_id,Request $r) {
 
+        $asset = (config('app.platform') == 'admin') ? 'customer-accounts' : 'my-accounts';
+
         return Response::View(
             '~templates.index', 
-            asset('apps/customer-accounts/index.js'),
+            asset('apps/' . $asset . '/index.js'),
             [], 
             [
                 'customer_id' => $customer_id,
