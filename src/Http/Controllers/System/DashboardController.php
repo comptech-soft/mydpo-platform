@@ -47,7 +47,10 @@ class DashboardController extends Controller {
 
         }
         
-        dd($user->customers);
+        if($user->customers->count());
+        {
+            dd($user->customers[0]);
+        }
 
         
 
