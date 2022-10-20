@@ -1,7 +1,9 @@
 <?php
 
 use MyDpo\Http\Controllers\System\DashboardController;
+
 use MyDpo\Http\Controllers\System\B2bDashboardController;
+
 use MyDpo\Http\Controllers\System\AccountInactiveController;
 use MyDpo\Http\Controllers\Usersession\EmailVerificationPromptController;
 use MyDpo\Http\Controllers\Usersession\VerifyEmailController;
@@ -20,6 +22,8 @@ Route::middleware('auth')->group(function () {
         
         Route::middleware('is-activated')->get('/my-dashboard/{customer_id}', [B2bDashboardController::class, 'index'])->name('b2b.dashboard');
         Route::get('/cont-inactiv/{customer_id}', [AccountInactiveController::class, 'index'])->name('account.inactive');
+
+
     }
 
     /**

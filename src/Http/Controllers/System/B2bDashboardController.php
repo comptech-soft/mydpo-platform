@@ -8,7 +8,7 @@ use MyDpo\Helpers\Response;
 
 class B2bDashboardController extends Controller {
     
-    public function index(Request $r) {
+    public function index($customer_id, Request $r) {
 
         /**
          * admin ==> dashboard
@@ -23,7 +23,10 @@ class B2bDashboardController extends Controller {
             '~templates.index', 
             asset('apps/' . $asset . '/index.js'),
             [],
-            $r->all()
+            [
+                ...$r->all(),
+                'customer_id' => $customer_id,
+            ],
         );
 
     }
