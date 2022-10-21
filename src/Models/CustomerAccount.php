@@ -89,7 +89,7 @@ class CustomerAccount extends Model {
         ->leftJoin(
             'customers',
             function($j) {
-                $j->on('customer.id', '=', 'customers-persons.customer_id');
+                $j->on('customers.id', '=', 'customers-persons.customer_id');
             }
         )
         ->select('customers-persons.*');
