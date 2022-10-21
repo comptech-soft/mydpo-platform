@@ -86,6 +86,12 @@ class CustomerAccount extends Model {
                 $j->on('users.id', '=', 'customers-persons.user_id');
             }
         )
+        ->leftJoin(
+            'customers',
+            function($j) {
+                $j->on('customer.id', '=', 'customers-persons.customer_id');
+            }
+        )
         ->select('customers-persons.*');
 
         return (new GetItems($input, $q->with(['customer', 'department', 'user']), __CLASS__))->Perform();
