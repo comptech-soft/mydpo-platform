@@ -21,7 +21,7 @@ class DashboardController extends Controller {
 
         if(config('app.platform') == 'admin')
         {
-            if(! $user->active )
+            if(! $user->email_verified_at )
             {
                 return Response::View(
                     '~templates.index', 
