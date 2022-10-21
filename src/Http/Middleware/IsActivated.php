@@ -11,6 +11,11 @@ class IsActivated {
 
     public function handle($request, Closure $next) {
 
+        if(config('app.platform') == 'admin')
+        {
+            return $next($request);
+        }
+
         $user = $request->user();
 
         $activation = Activation::byUserAndCustomer($user->id, $request->customer_id);
