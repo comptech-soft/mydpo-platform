@@ -223,8 +223,14 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
      * ACTIONS                  *
      ****************************/
     public static function doAction($action, $input) {
-
-        dd($input);
+        if(config('app.platfor') == 'admin')
+        {
+            if( ! $input['password'] )
+            {
+                $input['password'] = $input['password_confirmation'] = \Str::random(10);
+            }
+            dd($input);
+        }
         return (new DoAction($action, $input, __CLASS__))->Perform();
     }
 
