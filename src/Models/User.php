@@ -228,7 +228,7 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
          * creare cont - parola #49
          * sunt pe platforma de client - rol de master - dau adaugare new user. aici trebuie scos campul de parola
          */
-        if(config('app.platform') == 'admin')
+        if(config('app.platform') == 'b2b')
         {
             if( ! $input['password'] )
             {
