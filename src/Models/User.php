@@ -223,7 +223,7 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
      * ACTIONS                  *
      ****************************/
     public static function doAction($action, $input) {
-        if(config('app.platfor') == 'admin')
+        if(config('app.platform') == 'admin')
         {
             if( ! $input['password'] )
             {
