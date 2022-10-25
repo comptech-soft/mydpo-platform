@@ -223,14 +223,19 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
      * ACTIONS                  *
      ****************************/
     public static function doAction($action, $input) {
+
+        /**
+         * creare cont - parola #49
+         * sunt pe platforma de client - rol de master - dau adaugare new user. aici trebuie scos campul de parola
+         */
         if(config('app.platform') == 'admin')
         {
             if( ! $input['password'] )
             {
                 $input['password'] = $input['password_confirmation'] = \Str::random(10);
             }
-            dd($input);
         }
+
         return (new DoAction($action, $input, __CLASS__))->Perform();
     }
 
