@@ -223,6 +223,8 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
      * ACTIONS                  *
      ****************************/
     public static function doAction($action, $input) {
+
+        dd($input);
         return (new DoAction($action, $input, __CLASS__))->Perform();
     }
 
