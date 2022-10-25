@@ -232,7 +232,7 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
         {
             if( ! $input['password'] )
             {
-                $input['password'] = $input['password_confirmation'] = \Str::random(10);
+                $input['password'] = $input['password_confirmation'] = \Str::random(10) . 'aA?1';
             }
         }
 
