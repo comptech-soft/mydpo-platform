@@ -11,8 +11,16 @@ Route::middleware('verified')->group(function () {
     Route::get('my-profile', [MyProfileController::class, 'index']);
 
     require __DIR__ . '/customers-statuses/routes.php';
+    
     require __DIR__ . '/customers-dashboard/routes.php';
     require __DIR__ . '/customers-dashboard-items/routes.php';
+
+    /**
+     * CUSTOMER DASHBOARD ITEMS
+     */
+    require __DIR__ . '/customers-analiza-gap/routes.php';
+
+
     require __DIR__ . '/customers-documents/routes.php';
     require __DIR__ . '/customers-centralizatoare/routes.php';
     require __DIR__ . '/customers-chestionare/routes.php';
