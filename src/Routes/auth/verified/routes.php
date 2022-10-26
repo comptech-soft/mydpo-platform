@@ -19,7 +19,7 @@ Route::middleware('verified')->group(function () {
      * CUSTOMER DASHBOARD ITEMS
      */
     require __DIR__ . '/customers-analiza-gap/routes.php';
-
+    require __DIR__ . '/customers-plan-conformare/routes.php';
 
     require __DIR__ . '/customers-documents/routes.php';
     require __DIR__ . '/customers-centralizatoare/routes.php';
