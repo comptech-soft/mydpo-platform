@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Helpers\Response;
 
-class CustomersReevaluareController extends Controller {
+class CustomersRegistreController extends Controller {
     
     public function index($customer_id, Request $r) {
 
