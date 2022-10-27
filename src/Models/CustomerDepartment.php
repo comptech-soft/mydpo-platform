@@ -35,6 +35,14 @@ class CustomerDepartment extends Model {
         'deleted_by'
     ];
 
+    protected $withCount = [
+        'accounts'
+    ];
+
+    function accounts() {
+        return $this->hasMany(CustomerAccount::class, 'department_id');
+    }
+
     public static function getItems($input) {
         return (new GetItems($input, self::query(), __CLASS__))->Perform();
     }
