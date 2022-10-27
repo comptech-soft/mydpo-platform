@@ -12,6 +12,7 @@ use MyDpo\Rules\CustomerContract\ContractNumber;
 class CustomerContract extends Contract {
 
     protected $appends = [
+        'days_difference',
         'last_order',
     ];
 
