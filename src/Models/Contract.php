@@ -3,86 +3,67 @@
 namespace MyDpo\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Models\Customer;
-use MyDpo\Models\Contract;
-use MyDpo\Models\CustomerService;
-use MyDpo\Rules\CustomerOrder\OrderNumber;
+use MyDpo\Rules\CustomerContract\ContractNumber;
 use MyDpo\Traits\DaysDifference;
 
-class CustomerOrder extends Model {
-    
-    use DaysDifference;
+class Contract extends Model {
 
-    protected $table = 'customers-orders';
+    use DaysDifference;
+    
+    protected $table = 'customers-contracts';
 
     protected $casts = [
         'props' => 'json',
-        'customer_id' => 'integer',
-        'contract_id' => 'integer',
         'prelungire_automata' => 'integer',
         'created_by' => 'integer',
         'updated_by' => 'integer',
-        'date_to_history' => 'json',
+        'deleted_by' => 'integer',
         'deleted' => 'integer',
+        'customer_id' => 'integer',
+        'date_to_history' => 'json',
     ];
 
     protected $fillable = [
         'id',
         'number',
-        'date',
+        'date_from',
         'date_to',
         'customer_id',
-        'contract_id',
         'prelungire_automata',
         'date_to_history',
         'deleted',
+        'status',
         'props',
         'created_by',
         'updated_by',
-        'deleted_by',
+        'deleted_by'
     ];
 
     protected $appends = [
         'days_difference',
     ];
 
-    function services() {
-        return $this->hasMany(CustomerService::class, 'order_id');
-    }
-    
     public function customer() {
         return $this->belongsTo(Customer::class, 'customer_id');
-    }
-
-    /** order->contract */
-    public function contract() {
-        return $this->belongsTo(Contract::class, 'contract_id');
-    }
-    
-    public static function getItems($input) {
-        return (new GetItems($input, self::query()->with(['Contract']), __CLASS__))->Perform();
     }
 
     public static function doAction($action, $input) {
         return (new DoAction($action, $input, __CLASS__))->Perform();
     }
 
-    public function attachService($service) {
-        CustomerService::doAction('insert', [
+    public function attachOrder($order) {
+        return CustomerOrder::doAction('insert', [
             'id' => NULL,
-            'service_id' => $service['service_id'],
-            ...$service['record'],
-            'customer_id' => $this->contract->customer_id,
-            'contract_id' => $this->contract_id,
-            'order_id' => $this->id,
+            ...$order,
+            'contract_id' => $this->id,
         ]);
     }
 
-    public static function doInsert($input, $order) {
+    public static function doInsert($input, $contract) {
         
-        $order = self::create([
+        $contract = self::create([
             ...$input,
             'date_to_history' => [
                 [
@@ -93,34 +74,44 @@ class CustomerOrder extends Model {
             ]
         ]);
 
-        if( array_key_exists('services', $input) )
+        if( array_key_exists('orders', $input) )
         {
-            foreach($input['services'] as $i => $service)
+            foreach($input['orders'] as $i => $order)
             {
-                $order->attachService($service);
+                $result = $contract->attachOrder($order);
+                if( ! $result['success'] )
+                {
+                    throw new \Exception($result['message']);
+                }
             }
         }
 
-        return $order;
+        return $contract;
     }
 
+
     public static function GetRules($action, $input) {
+       
         if($action == 'delete')
         {
             return NULL;
         }
+
         $result = [
             'customer_id' => 'required|exists:customers,id',
-            'contract_id' => 'required|exists:customers-contracts,id',
             'number' => [
                 'required',
                 'max:16',
-                new OrderNumber($input),
+                new ContractNumber($input),
             ],
-
-            'date' => 'required|date',
+            'status' => 'required',
+            'date_from' => 'required|date',
             'date_to' => 'required|date',
         ];
+
+        
         return $result;
     }
+
+
 }
