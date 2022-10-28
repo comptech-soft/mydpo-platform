@@ -1,6 +1,7 @@
 <?php
 
 use MyDpo\Http\Controllers\Auth\UsersController;
+use MyDpo\Http\Controllers\Admin\UserDashboardController;
 
 Route::prefix('users')->group( function() {
         
@@ -9,4 +10,11 @@ Route::prefix('users')->group( function() {
     Route::post('change-password', [UsersController::class, 'changePassword']);
     Route::post('save-user-settings', [UsersController::class, 'saveUserSettings']);
     
+});
+
+
+Route::prefix('utilizator-dashboard')->group( function() {
+        
+    Route::get('/{user_id}', [UserDashboardController::class, 'index']);        
+   
 });
