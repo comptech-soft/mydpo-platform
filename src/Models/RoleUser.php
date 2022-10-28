@@ -4,6 +4,7 @@ namespace MyDpo\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Models\Role;
+use MyDpo\Models\Customer;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
 
 class RoleUser extends Model {
@@ -29,6 +30,10 @@ class RoleUser extends Model {
 
     public function role() {
         return $this->belongsTo(Role::class, 'role_id');
+    }
+
+    public function customer() {
+        return $this->belongsTo(Customer::class, 'customer_id');
     }
 
     public static function getItems($input) {
