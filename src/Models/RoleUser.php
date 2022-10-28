@@ -4,6 +4,7 @@ namespace MyDpo\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Models\Role;
+use MyDpo\Helpers\Performers\Datatable\GetItems;
 
 class RoleUser extends Model {
 
@@ -28,6 +29,10 @@ class RoleUser extends Model {
 
     public function role() {
         return $this->belongsTo(Role::class, 'role_id');
+    }
+
+    public static function getItems($input) {
+        return (new GetItems($input, self::query()->with(['role']), __CLASS__))->Perform();
     }
 
     public static function CreateAccountRole($customer_id, $user_id, $role_id) {
