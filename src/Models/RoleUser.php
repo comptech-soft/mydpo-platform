@@ -37,7 +37,7 @@ class RoleUser extends Model {
     }
 
     public static function getItems($input) {
-        return (new GetItems($input, self::query()->with(['role']), __CLASS__))->Perform();
+        return (new GetItems($input, self::query()->with(['role', 'customer']), __CLASS__))->Perform();
     }
 
     public static function CreateAccountRole($customer_id, $user_id, $role_id) {
