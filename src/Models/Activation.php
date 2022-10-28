@@ -3,7 +3,7 @@
 namespace MyDpo\Models;
 
 use Illuminate\Database\Eloquent\Model;
-// use MyDpo\Helpers\Performers\Datatable\GetItems;
+use MyDpo\Helpers\Performers\Datatable\GetItems;
 // use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Models\Customer;
 use MyDpo\Models\User;
@@ -36,6 +36,10 @@ class Activation extends Model {
 
     public function user() {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public static function getItems($input) {
+        return (new GetItems($input, self::query()->with(['customer']), __CLASS__))->Perform();
     }
 
     public static function byToken($token) {

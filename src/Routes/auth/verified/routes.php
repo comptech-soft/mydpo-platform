@@ -49,6 +49,7 @@ Route::middleware('verified')->group(function () {
     require __DIR__ . '/users-statuses/routes.php';
     require __DIR__ . '/users-customers/routes.php';
     require __DIR__ . '/users-roles/routes.php';
+    require __DIR__ . '/users-activations/routes.php';
 
     require __DIR__ . '/admin/routes.php';
     require __DIR__ . '/mydpo/routes.php';
