@@ -66,4 +66,10 @@ class RoleUser extends Model {
 
     }
 
+    public static function byUserAndCustomer($user_id, $customer_id) {
+        return self::where('user_id', $user_id)
+            ->where('customer_id', $customer_id)
+            ->first();
+    }
+
 }

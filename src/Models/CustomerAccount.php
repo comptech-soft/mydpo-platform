@@ -9,6 +9,7 @@ use MyDpo\Models\User;
 use MyDpo\Models\Customer;
 use MyDpo\Models\CustomerDepartment;
 use MyDpo\Models\RoleUser;
+use MyDpo\Models\Activation;
 use MyDpo\Rules\CustomerAccount\UniqueUser;
 use MyDpo\Events\CustomerPersons\CustomerPersonCreateAccount;
 use MyDpo\Scopes\NotdeletedScope;
@@ -163,9 +164,27 @@ class CustomerAccount extends Model {
 
     public static function SyncRecords($customer_id) {
 
-        $records = self::where('customer_id', $customer_id)->get();
+        $accounts = self::where('customer_id', $customer_id)->get();
 
-        dd($records);
+        foreach($accounts as $i => $account)
+        {
+            $activation = Activation::byUserAndCustomer($account->user_id, $customer_id);
+
+            if($activation)
+            {
+                $account->activated = $activation->activated;
+                $account->activated_at = $activation->activated_at;
+            }
+
+            $roleUser = RoleUser::byUserAndCustomer($account->user_id, $customer_id);
+
+            if($roleUser)
+            {
+                $account->role_id = $roleUser->role_id;
+            }
+
+            $account->save();
+        }
     }
 
 }
