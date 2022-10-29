@@ -11,17 +11,21 @@ class CustomersAccountsController extends Controller {
     
     public function index($customer_id,Request $r) {
 
-        $asset = (config('app.platform') == 'admin') ? 'customer-accounts' : 'my-accounts';
+        // $asset = (config('app.platform') == 'admin') ? 'customer-accounts' : 'my-accounts';
+
+
+        CustomerAccount::SyncRecords($customer_id);
 
         return Response::View(
             '~templates.index', 
-            asset('apps/' . $asset . '/index.js'),
+            asset('apps/customer-accounts/index.js'),
             [], 
             [
                 'customer_id' => $customer_id,
             ]
         );
     }
+
 
     public function getItems(Request $r) {
         return CustomerAccount::getItems($r->all());

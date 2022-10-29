@@ -161,6 +161,11 @@ class CustomerAccount extends Model {
         return $result;
     }
 
-    
+    public static function SyncRecords($customer_id) {
+
+        $records = self::where('customer_id', $customer_id)->get();
+
+        dd($records);
+    }
 
 }

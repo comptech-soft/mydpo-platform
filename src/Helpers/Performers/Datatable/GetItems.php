@@ -193,6 +193,7 @@ class GetItems extends Perform {
         $this->Sort();
 
         $paginator = $this->query->paginate($this->input['per_page']);
+        
 
         $this->payload = [
             'paginator' => $paginator,
