@@ -4,6 +4,7 @@ namespace MyDpo\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
+use MyDpo\Models\Folder;
 
 class CustomerFolderPermission extends Model {
 
@@ -29,6 +30,10 @@ class CustomerFolderPermission extends Model {
         'deleted_by',
         'created_by',
     ];
+
+    public function folder() {
+        return $this->belongsTo(Folder::class, 'folder_id');
+    }
 
     public static function getItems($input) {
         return (new GetItems($input, self::query(), __CLASS__))->Perform();
