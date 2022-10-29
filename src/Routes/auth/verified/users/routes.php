@@ -15,6 +15,6 @@ Route::prefix('users')->group( function() {
 
 Route::prefix('utilizator-dashboard')->group( function() {
         
-    Route::get('/{source}/{user_id}', [UserDashboardController::class, 'index']);        
+    Route::get('/{source}/{user_id}/{customer_id?}', [UserDashboardController::class, 'index']);        
    
 });
