@@ -8,7 +8,7 @@ use MyDpo\Helpers\Response;
 
 class UserDashboardController extends Controller {
     
-    public function index($user_id, Request $r) {
+    public function index($source, $user_id, Request $r) {
 
 
         return Response::View(
@@ -17,6 +17,7 @@ class UserDashboardController extends Controller {
             [], 
             [
                 'user_id' => $user_id,
+                'source' => $source,
             ]
         );
     }
