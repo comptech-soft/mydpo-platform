@@ -3,14 +3,11 @@
 namespace MyDpo\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use MyDpo\Helpers\Response;
 
 class UserDashboardController extends Controller {
     
-    public function index($source, $user_id, $customer_id, Request $r) {
-
-
+    public function index($source, $user_id, $customer_id = NULL) {
         return Response::View(
             '~templates.index', 
             asset('apps/user-dashboard/index.js'),
@@ -22,7 +19,5 @@ class UserDashboardController extends Controller {
             ]
         );
     }
-
-    
     
 }
