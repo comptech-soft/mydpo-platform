@@ -9,6 +9,8 @@ class UpdateUserCustomers extends Perform {
 
     public function Action() {
 
+        dd($this->input);
+
         UserCustomer::where('user_id', $this->input['user_id'])->delete();
 
         if(! array_key_exists('customers_ids', $this->input))
