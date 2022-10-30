@@ -458,4 +458,8 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
 
         return \DB::select($sql);
     }
+
+    public static function syncWithUserCustomer() {
+        dd(__METHOD__);
+    }
 }
