@@ -85,4 +85,8 @@ class CustomerService extends Model {
         return $result;
     }
 
+    public static function syncWithOrders() {
+        dd(__METHOD__);
+    }
+
 }
