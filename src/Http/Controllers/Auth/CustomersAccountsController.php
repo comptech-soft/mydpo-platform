@@ -11,9 +11,6 @@ class CustomersAccountsController extends Controller {
     
     public function index($customer_id,Request $r) {
 
-        // $asset = (config('app.platform') == 'admin') ? 'customer-accounts' : 'my-accounts';
-
-
         CustomerAccount::SyncRecords($customer_id);
 
         return Response::View(

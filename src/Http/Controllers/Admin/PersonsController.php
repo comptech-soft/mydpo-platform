@@ -6,10 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Helpers\Response;
 
-class PersonsController extends Controller
-{
+class PersonsController extends Controller {
     
     public function index(Request $r) {
+        CustomerAccount::SyncRecords();
+
         return Response::View(
             '~templates.index', 
             asset('apps/persons/index.js')

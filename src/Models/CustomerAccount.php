@@ -162,9 +162,16 @@ class CustomerAccount extends Model {
         return $result;
     }
 
-    public static function SyncRecords($customer_id) {
+    public static function SyncRecords($customer_id = NULL) {
 
-        $accounts = self::where('customer_id', $customer_id)->get();
+        if($customer_id)
+        {
+            $accounts = self::where('customer_id', $customer_id)->get();
+        }
+        else
+        {
+            $accounts = self::all();
+        }
 
         foreach($accounts as $i => $account)
         {
