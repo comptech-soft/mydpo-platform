@@ -4,7 +4,7 @@ namespace MyDpo\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use MyDpo\Helpers\Response;
-use MyDpo\CustomerService;
+use MyDpo\Models\CustomerService;
 
 class ServiciiComandateController extends Controller {
 

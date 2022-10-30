@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Models\Service;
+use MyDpo\Models\CustomerOrder;
 use MyDpo\Rules\CustomerService\UniqueOrderService;
 
 class CustomerService extends Model {
@@ -15,7 +16,7 @@ class CustomerService extends Model {
     protected $casts = [
         'id' => 'integer',
         'customer_id' => 'integer',
-        'comanda_id' => 'integer',
+        'contract_id' => 'integer',
         'order_id' => 'integer',
         'service_id' => 'integer',
         'created_by' => 'integer',
@@ -34,7 +35,7 @@ class CustomerService extends Model {
     protected $fillable = [
         'id',
         'customer_id',
-        'comanda_id',
+        'contract_id',
         'order_id',
         'service_id',
         'tarif',
@@ -50,6 +51,10 @@ class CustomerService extends Model {
 
     public function service() {
         return $this->belongsTo(Service::class, 'service_id');
+    }
+
+    public function order() {
+        return $this->belongsTo(CustomerOrder::class, 'order_id');
     }
 
     public static function getItems($input) {
@@ -86,7 +91,12 @@ class CustomerService extends Model {
     }
 
     public static function syncWithOrders() {
-        dd(__METHOD__);
+        $records = self::with(['order.cntract'])->get();
+
+        foreach($records as $i => $record)
+        {
+            dd($record);
+        }
     }
 
 }
