@@ -14,6 +14,7 @@ use Laravel\Passport\HasApiTokens;
 use MyDpo\Models\Role;
 use MyDpo\Models\Customer;
 use MyDpo\Models\UserSetting;
+use MyDpo\Models\UserCustomer;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Helpers\Performers\Datatable\DoAction;
 use Illuminate\Validation\Rules;
@@ -192,6 +193,10 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
 
     function settings() {
         return $this->hasMany(UserSetting::class, 'user_id')->where('platform', config('app.platform'));
+    }
+
+    function usercustomers() {
+        return $this->hasMany(UserCustomer::class, 'user_id');
     }
 
     /** *************************
