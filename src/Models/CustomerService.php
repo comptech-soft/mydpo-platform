@@ -7,6 +7,7 @@ use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Models\Service;
 use MyDpo\Models\CustomerOrder;
+use MyDpo\Models\Customer_base as Customer;
 use MyDpo\Rules\CustomerService\UniqueOrderService;
 
 class CustomerService extends Model {
@@ -57,8 +58,12 @@ class CustomerService extends Model {
         return $this->belongsTo(CustomerOrder::class, 'order_id');
     }
 
+    public function customer() {
+        return $this->belongsTo(Customer::class, 'customer_id');
+    }
+
     public static function getItems($input) {
-        return (new GetItems($input, self::query()->with(['service.type']), __CLASS__))->Perform();
+        return (new GetItems($input, self::query()->with(['customer', 'service.type']), __CLASS__))->Perform();
     }
 
     public static function doAction($action, $input) {
