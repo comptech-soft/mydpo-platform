@@ -10,11 +10,11 @@ class TeamController extends Controller {
     
     public function index(Request $r) {
 
-        $asset = (config('app.platform') == 'admin') ? 'team' : 'my-team';
+       dd(__METHOD__);
 
         return Response::View(
             '~templates.index', 
-            asset('apps/' . $asset . '/index.js')
+            asset('apps/team/index.js')
         );
     }
 
