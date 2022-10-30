@@ -5,7 +5,7 @@ namespace MyDpo\Models;
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Helpers\Performers\Datatable\DoAction;
-use MyDpo\Models\Customer;
+use MyDpo\Models\Customer_base as Customer;
 use MyDpo\Models\Contract;
 use MyDpo\Models\CustomerService;
 use MyDpo\Rules\CustomerOrder\OrderNumber;
@@ -62,7 +62,7 @@ class CustomerOrder extends Model {
     }
     
     public static function getItems($input) {
-        return (new GetItems($input, self::query()->with(['Contract']), __CLASS__))->Perform();
+        return (new GetItems($input, self::query()->with(['Contract', 'Customer']), __CLASS__))->Perform();
     }
 
     public static function doAction($action, $input) {

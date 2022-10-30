@@ -5,7 +5,6 @@ namespace MyDpo\Models;
 use MyDpo\Models\Contract;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Helpers\Performers\Datatable\DoAction;
-
 use MyDpo\Models\CustomerOrder;
 use MyDpo\Rules\CustomerContract\ContractNumber;
 
