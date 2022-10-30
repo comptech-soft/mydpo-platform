@@ -17,6 +17,7 @@ class TeamController extends Controller {
             '~templates.index', 
             asset('apps/team/index.js')
         );
+        
     }
 
 }
