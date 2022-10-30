@@ -4,6 +4,7 @@ namespace MyDpo\Performers\UserCustomer;
 
 use MyDpo\Helpers\Perform;
 use MyDpo\Models\UserCustomer;
+use MyDpo\Models\User;
 
 class UpdateUserCustomers extends Perform {
 
@@ -24,6 +25,10 @@ class UpdateUserCustomers extends Perform {
                 'created_by' => \Auth::user()->id,
             ]);
         }
+
+        $user = User::find($this->input['user_id']);
+        $user->user_customers_count = count($this->input['customers_ids']);
+        $user->save();
         
     }
 

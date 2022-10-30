@@ -468,8 +468,11 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
         $users = self::all();
         foreach($users as $i => $user)
         {
-            $user->user_customers_count = $user->usercustomers->count();
-            $user->save();
+            if($user->user_customers_count != $user->usercustomers->count())
+            {
+                $user->user_customers_count = $user->usercustomers->count();
+                $user->save();
+            }
         }
     }
 }
