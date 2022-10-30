@@ -91,11 +91,14 @@ class CustomerService extends Model {
     }
 
     public static function syncWithOrders() {
-        $records = self::with(['order.contract'])->get();
+        $records = self::with(['order'])->get();
 
         foreach($records as $i => $record)
         {
-            dd($record);
+            $record->customer_id = $record->order->customer_id;
+            $record->contract_id = $record->order->contract_id;
+            $record->save();
+            
         }
     }
 
