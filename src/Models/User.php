@@ -44,6 +44,7 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
         'activated_at',
         'permissions',
         'last_login',
+        'user_customers_count',
         'editable',
         'deletable',
         'created_by',
@@ -71,6 +72,7 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
         'deletable' => 'integer',
         'created_by' => 'integer',
         'updated_by' => 'integer',
+        'user_customers_count' => 'integer',
     ];
 
     protected $with = [
