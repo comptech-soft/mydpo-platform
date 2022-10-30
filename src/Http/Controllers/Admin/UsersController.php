@@ -28,5 +28,10 @@ class UsersController extends Controller {
         return User::updatePassword($r->all());
     }
 
+    public function updatePermissions(Request $r) {
+        return User::updatePermissions($r->all());
+    }
+    
+
     
 }

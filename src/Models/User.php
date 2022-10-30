@@ -21,6 +21,7 @@ use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Hash;
 use MyDpo\Performers\UserSetting\SaveSetting;
 use MyDpo\Performers\User\Changepassword;
+use MyDpo\Performers\User\UpdatePermissions;
 use MyDpo\Rules\User\Oldpassword;
 
 class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
@@ -406,6 +407,15 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
             ->SetSuccessMessage('Schimbare parolă cu success!')
             ->Perform();
     }
+
+    public static function updatePermissions($input) {
+        return (new UpdatePermissions(
+            $input,
+        ))
+            ->SetSuccessMessage('Setare permissiuni cu success!')
+            ->Perform();
+    }
+
 
     /**
      * Am un array de obiecte [ ['user_id' => 15], ....]
