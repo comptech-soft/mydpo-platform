@@ -4,6 +4,6 @@ use MyDpo\Http\Controllers\Auth\CustomersDashboardController;
 
 Route::middleware(['valid-customer', 'isadmin'])->prefix('customer-dashboard')->group( function() {
         
-    Route::get('/{customer_id}', [CustomersDashboardController::class, 'index']);
+    Route::get('/{customer_id}', [CustomersDashboardController::class, 'index'])->name('admin.dashboard');
 
 });
