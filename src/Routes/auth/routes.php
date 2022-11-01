@@ -4,6 +4,7 @@ use MyDpo\Http\Controllers\System\DashboardController;
 
 // use MyDpo\Http\Controllers\System\B2bDashboardController;
 use MyDpo\Http\Controllers\Auth\CustomersDashboardController;
+use MyDpo\Http\Controllers\Auth\CustomersDepartmentsController;
 
 use MyDpo\Http\Controllers\System\AccountInactiveController;
 use MyDpo\Http\Controllers\Usersession\EmailVerificationPromptController;
@@ -22,6 +23,8 @@ Route::middleware('auth')->group(function () {
     {
         
         Route::middleware('is-activated')->get('/my-customer-dashboard/{customer_id}', [CustomersDashboardController::class, 'index'])->name('b2b.dashboard');
+        Route::middleware('is-activated')->get('/my-customer-departments/{customer_id}', [CustomersDepartmentsController::class, 'index'])->name('b2b.departments');
+
         Route::get('/cont-inactiv/{customer_id}', [AccountInactiveController::class, 'index'])->name('account.inactive');
     }
 
