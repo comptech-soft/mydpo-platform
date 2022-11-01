@@ -124,6 +124,7 @@ class CustomerAccount extends Model {
 
     public static function doInsert($input) {
 
+        dd(__METHOD__);
         $account = self::create([
             'customer_id' => $input['customer_id'],
             'user_id' => $input['user_id'],
