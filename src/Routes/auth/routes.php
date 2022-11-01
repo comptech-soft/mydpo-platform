@@ -2,7 +2,8 @@
 
 use MyDpo\Http\Controllers\System\DashboardController;
 
-use MyDpo\Http\Controllers\System\B2bDashboardController;
+// use MyDpo\Http\Controllers\System\B2bDashboardController;
+use MyDpo\Http\Controllers\Auth\CustomersDashboardController;
 
 use MyDpo\Http\Controllers\System\AccountInactiveController;
 use MyDpo\Http\Controllers\Usersession\EmailVerificationPromptController;
@@ -20,10 +21,8 @@ Route::middleware('auth')->group(function () {
     if( config('app.platform') == 'b2b' )
     {
         
-        Route::middleware('is-activated')->get('/my-dashboard/{customer_id}', [B2bDashboardController::class, 'index'])->name('b2b.dashboard');
+        Route::middleware('is-activated')->get('/customer-dashboard/{customer_id}', [CustomersDashboardController::class, 'index'])->name('b2b.dashboard');
         Route::get('/cont-inactiv/{customer_id}', [AccountInactiveController::class, 'index'])->name('account.inactive');
-
-
     }
 
     /**
