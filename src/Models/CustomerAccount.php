@@ -163,7 +163,7 @@ class CustomerAccount extends Model {
                 'exists:users,id',
                 new UniqueUser($input),
             ],
-            'user.role_id' => 'required|in:4,5'         
+            'role_id' => 'required|in:4,5'         
         ];
 
         return $result;
