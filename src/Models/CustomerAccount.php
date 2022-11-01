@@ -124,19 +124,19 @@ class CustomerAccount extends Model {
 
     public static function doInsert($input) {
 
-        dd(__METHOD__);
         $account = self::create([
             'customer_id' => $input['customer_id'],
             'user_id' => $input['user_id'],
             'department_id' => $input['department_id'],
             'newsletter' => $input['newsletter'],
             'locale' => $input['locale'],
+            'role_id' => $input['role_id'],
         ]);
 
         $roleUser = RoleUser::CreateAccountRole(
             $input['customer_id'], 
             $input['user_id'], 
-            $input['user']['role_id']
+            $account->role_id,
         );
 
         event(new CustomerPersonCreateAccount([
