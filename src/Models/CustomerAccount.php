@@ -155,6 +155,18 @@ class CustomerAccount extends Model {
             ]))->Perform();
         }
 
+        if(array_key_exists('dashboard_client', $input))
+        {
+            $permissions = $account->permissions ?  $account->permissions : [];
+            $account->permissions = [
+                ...$permissions,
+                'dashboard-client' => $input['dashboard_client'],
+            ];
+            $account->save();
+        }
+
+        
+
         return $account;
 
     } 
