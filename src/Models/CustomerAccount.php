@@ -160,7 +160,7 @@ class CustomerAccount extends Model {
             $permissions = $account->permissions ?  $account->permissions : [];
             $account->permissions = [
                 ...$permissions,
-                'dashboard-client' => $input['dashboard_client'],
+                'dashboard-client' => $input['dashboard_client']['dashboard-client'],
             ];
             $account->save();
         }
