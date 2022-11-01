@@ -10,6 +10,8 @@ class B2bDashboardController extends Controller {
     
     public function index($customer_id, Request $r) {
 
+        dd('EXPIRED.....');
+
         /**
          * admin ==> dashboard
          * b2b   ==> my-dashboard
