@@ -12,6 +12,7 @@ use MyDpo\Models\RoleUser;
 use MyDpo\Models\Activation;
 use MyDpo\Rules\CustomerAccount\UniqueUser;
 use MyDpo\Events\CustomerPersons\CustomerPersonCreateAccount;
+use MyDpo\Performers\CustomerFolder\SaveFoldersAccess;
 use MyDpo\Scopes\NotdeletedScope;
 
 class CustomerAccount extends Model {
@@ -144,6 +145,15 @@ class CustomerAccount extends Model {
             'account' => $account,
             'roleUser' => $roleUser,
         ]));
+
+        if(array_key_exists('folders_access', $input))
+        {
+            (new SaveFoldersAccess([
+                'customer_id' => $input['customer_id'],
+                'user_id' => $input['user_id'],
+                'selectedFolders' => $input['folders_access'],
+            ]))->Perform();
+        }
 
         return $account;
 
