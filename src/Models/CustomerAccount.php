@@ -125,14 +125,24 @@ class CustomerAccount extends Model {
 
     public static function doInsert($input) {
 
-        $account = self::create([
+        $accountInput = [
             'customer_id' => $input['customer_id'],
             'user_id' => $input['user_id'],
             'department_id' => $input['department_id'],
             'newsletter' => $input['newsletter'],
             'locale' => $input['locale'],
             'role_id' => $input['role_id'],
-        ]);
+        ];
+
+        if( config('app.platform') == 'b2b' )
+        {
+            $user = User::doAction('insert', $input['user']);
+            $accountInput['user_id'] = $user['payload']['record']['id'];
+        }
+
+        // dd($accountInput);
+
+        $account = self::create($accountInput);
 
         $roleUser = RoleUser::CreateAccountRole(
             $input['customer_id'], 
@@ -169,7 +179,7 @@ class CustomerAccount extends Model {
 
         return $account;
 
-    } 
+    }
 
     public static function GetRules($action, $input) {
        
@@ -181,14 +191,18 @@ class CustomerAccount extends Model {
         $result = [
             'customer_id' => 'required|exists:customers,id',
             'department_id' => 'required|exists:customers-departamente,id', 
-            'user_id' => [
-                'required',
-                'exists:users,id',
-                new UniqueUser($input),
-            ],
             'role_id' => 'required|in:4,5'         
         ];
 
+        if( config('app.platform') == 'admin')
+        {
+            $result['user_id'] = [
+                'required',
+                'exists:users,id',
+                new UniqueUser($input),
+            ];
+        }
+    
         return $result;
     }
 
