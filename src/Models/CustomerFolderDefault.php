@@ -18,5 +18,6 @@ class CustomerFolderDefault extends Model {
         'created_by',
         'updated_by',
         'deleted_by',
+        'type',
     ];
 }

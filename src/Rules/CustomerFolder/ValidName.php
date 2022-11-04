@@ -20,11 +20,13 @@ class ValidName implements Rule {
         {
             $q = CustomerFolder::where('customer_id', $this->input['customer_id'])
                 ->where('name', $this->input['name'])
+                ->where('type', $this->input['type'])
                 ->where('parent_id', $this->input['parent_id']); 
         }
         else
         {
             $q = CustomerFolder::where('customer_id', $this->input['customer_id'])
+                ->where('type', $this->input['type'])
                 ->where('name', $this->input['name']); 
         }
 

@@ -68,6 +68,7 @@ class CustomerFolder extends Folder {
         $result = [
             'customer_id' => 'required|exists:customers,id',
             'platform' => 'in:admin,b2b',
+            'type' => 'required',
             'name' => [
                 'required',
                 new ValidName($input),
