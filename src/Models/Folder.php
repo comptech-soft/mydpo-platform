@@ -32,6 +32,7 @@ class Folder extends Model  {
         'deleted',
         'parent_id',
         'order_no',
+        'type',
         'props',
         'created_by',
         'updated_by',
