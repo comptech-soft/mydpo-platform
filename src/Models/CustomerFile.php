@@ -106,7 +106,6 @@ class CustomerFile extends Model {
         return NULL;
     }
 
-
     public static function getItems($input) {
         return (new GetItems(
             $input, 
@@ -156,7 +155,7 @@ class CustomerFile extends Model {
     public static function doAction($action, $input) {
         if($action == 'update')
         {
-            $input['file_original_name'] = $input['name'];
+            $input['file_original_name'] = $input['name'] . '.' . $input['file_original_extension'];
         }
         return (new DoAction($action, $input, __CLASS__))->Perform();
     }
