@@ -9,6 +9,8 @@ class SaveOrderdFolders extends Perform {
 
     public function Action() {
 
+        dd($this->input);
+
         UserSetting::saveSetting([
             'user_id' => $this->input['user_id'], 
             'platform' => $this->input['platform'],
