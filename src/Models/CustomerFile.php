@@ -107,6 +107,8 @@ class CustomerFile extends Model {
     }
 
     public static function getItems($input) {
+
+        dd($input);
         return (new GetItems(
             $input, 
             self::query()
