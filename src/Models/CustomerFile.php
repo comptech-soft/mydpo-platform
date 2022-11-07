@@ -117,7 +117,8 @@ class CustomerFile extends Model {
                 }
             )
             ->whereRaw('((`customers-folders`.`deleted` IS NULL) OR (`customers-folders`.`deleted` = 0))')
-            ->select('customers-files.*'),
+            ->select('customers-files.*')
+            ->with(['folder']),
             __CLASS__
         ))->Perform();
     }
