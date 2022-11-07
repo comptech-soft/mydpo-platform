@@ -107,16 +107,17 @@ class CustomerFile extends Model {
     }
 
     public static function getItems($input) {
-
-        dd($input);
         return (new GetItems(
             $input, 
             self::query()
-            ->with([
-                'folder' => function($q) {
-                    $q->whereRaw('((`customers-folders`.`deleted` IS NULL) OR (`customers-folders`.`deleted` = 0))');
-                }, 
-            ]),
+            ->leftJoin(
+                'customers-folders',
+                function($j) {
+                    $j->on('customers-folders.id', '=', 'customers-files.folder_id');
+                }
+            )
+            ->whereRaw('((`customers-folders`.`deleted` IS NULL) OR (`customers-folders`.`deleted` = 0))')
+            ->select('customers-files.*'),
             __CLASS__
         ))->Perform();
     }
