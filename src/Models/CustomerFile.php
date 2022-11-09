@@ -432,15 +432,15 @@ class CustomerFile extends Model {
                 ->where('url', $inputdata['url'])
                 ->first();
 
-            if(! $exists )
+            if(! $exist )
             {
                 return self::create($inputdata);
             }
 
-            $exists->deleted = 0;
-            $exists->save();
+            $exist->deleted = 0;
+            $exist->save();
 
-            return $exists;
+            return $exist;
         }
         else
         {
