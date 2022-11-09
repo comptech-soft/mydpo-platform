@@ -427,8 +427,20 @@ class CustomerFile extends Model {
                 ];
             }
 
-            dd($inputdata);
-            return self::create($inputdata);
+            $exist = self::where('customer_id', $inputdata['customer_id'])
+                ->where('folder_id', $inputdata['folder_id'])
+                ->where('url', $inputdata['url'])
+                ->first();
+
+            if(! $exists )
+            {
+                return self::create($inputdata);
+            }
+
+            $exists->deleted = 0;
+            $exists->save();
+
+            return $exists;
         }
         else
         {
