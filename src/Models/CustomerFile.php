@@ -427,6 +427,7 @@ class CustomerFile extends Model {
                 ];
             }
 
+            dd($inputdata);
             return self::create($inputdata);
         }
         else
