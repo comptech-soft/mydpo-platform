@@ -10,6 +10,8 @@ class CustomersInfograficeController extends Controller {
     
     public function index($customer_id, Request $r) {
 
+        dd('Bam bam....');
+
         return Response::View(
             '~templates.index', 
             asset('apps/customer-infografice/index.js'),
