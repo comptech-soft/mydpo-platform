@@ -14,7 +14,7 @@ class CustomersInfograficeController extends Controller {
             ->where('name', 'Infografice')
             ->where('platform', 'admin')
             ->where('type', 'infografice')
-            ->whereIsNull('parent_id')
+            ->whereNull('parent_id')
             ->where('deleted', 0)
             ->first();
 
