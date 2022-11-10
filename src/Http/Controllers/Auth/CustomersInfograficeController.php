@@ -16,6 +16,7 @@ class CustomersInfograficeController extends Controller {
             'platform' => 'admin',
             'type' => 'infografice',
             'parent_id' => NULL,
+            'deleted' => 0,
         ]);
         $folder->save();
 
