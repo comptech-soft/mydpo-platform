@@ -428,11 +428,16 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
     }
 
     public function Activate() {
-        dd(__METHOD__);
+        $this->email_verified_at = \Carbon\Carbon::now();
+        $this->activated_at = \Carbon\Carbon::now();
+        $this->save();
+
     }
 
     public function Deactivate() {
-        dd(__METHOD__);
+        $this->email_verified_at = NULL;
+        $this->activated_at = NULL;
+        $this->save();
     }
     /**
      * Am un array de obiecte [ ['user_id' => 15], ....]

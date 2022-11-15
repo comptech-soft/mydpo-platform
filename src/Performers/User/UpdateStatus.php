@@ -14,7 +14,7 @@ class UpdateStatus extends Perform {
 
         if($this->input['status'] == 1)
         {
-            $user->Dectivate();
+            $user->Deactivate();
         }
         else
         {
