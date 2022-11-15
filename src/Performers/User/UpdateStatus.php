@@ -9,12 +9,17 @@ class UpdateStatus extends Perform {
 
     public function Action() {
       
-        dd($this->input);
-        // $user = User::find($this->input['user_id']);
+        
+        $user = User::find($this->input['id']);
 
-        // $user->update([
-        //     'permissions' => $this->input['permissions'],
-        // ]);
+        if($this->input['status'] == 1)
+        {
+            $user->Activate();
+        }
+        else
+        {
+            $user->Deactivate();
+        }
 
     }
 

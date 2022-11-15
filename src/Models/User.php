@@ -427,7 +427,13 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
             ->Perform();
     }
 
+    public function Activate() {
+        dd(__METHOD__);
+    }
 
+    public function Deactivate() {
+        dd(__METHOD__);
+    }
     /**
      * Am un array de obiecte [ ['user_id' => 15], ....]
      * Returnez collection de User
