@@ -439,6 +439,7 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
         $this->activated_at = NULL;
         $this->save();
     }
+    
     /**
      * Am un array de obiecte [ ['user_id' => 15], ....]
      * Returnez collection de User
