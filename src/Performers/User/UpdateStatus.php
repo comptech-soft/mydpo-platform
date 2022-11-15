@@ -14,11 +14,11 @@ class UpdateStatus extends Perform {
 
         if($this->input['status'] == 1)
         {
-            $user->Activate();
+            $user->Dectivate();
         }
         else
         {
-            $user->Deactivate();
+            $user->Activate();
         }
 
     }
