@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Hash;
 use MyDpo\Performers\UserSetting\SaveSetting;
 use MyDpo\Performers\User\Changepassword;
 use MyDpo\Performers\User\UpdatePermissions;
+use MyDpo\Performers\User\UpdateStatus;
 use MyDpo\Rules\User\Oldpassword;
 
 class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
@@ -415,6 +416,14 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
             $input,
         ))
             ->SetSuccessMessage('Setare permissiuni cu success!')
+            ->Perform();
+    }
+
+    public static function updateStatus($input) {
+        return (new UpdateStatus(
+            $input,
+        ))
+            ->SetSuccessMessage('Setare status cu success!')
             ->Perform();
     }
 

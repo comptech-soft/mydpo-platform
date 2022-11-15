@@ -32,6 +32,8 @@ class UsersController extends Controller {
         return User::updatePermissions($r->all());
     }
     
-
+    public function updateStatus(Request $r) {
+        return User::updateStatus($r->all());
+    }
     
 }
