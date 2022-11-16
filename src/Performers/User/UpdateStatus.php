@@ -21,6 +21,8 @@ class UpdateStatus extends Perform {
             $user->Activate();
         }
 
+        $this->payload['record'] = $user;
+
     }
 
 } 
