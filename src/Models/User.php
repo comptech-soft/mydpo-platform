@@ -251,8 +251,6 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
 
     public static function doUpdate($input, $user) {
 
-        dd($input);
-
         if( array_key_exists('avatar', $input) && $input['avatar'] && ($input['avatar'] instanceof UploadedFile))
         {
             $input['avatar'] = self::saveFile($input['avatar']);
