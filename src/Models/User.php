@@ -12,6 +12,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 use MyDpo\Models\Role;
+use MyDpo\Models\RoleUser;
 use MyDpo\Models\Customer;
 use MyDpo\Models\UserSetting;
 use MyDpo\Models\UserCustomer;
@@ -308,8 +309,20 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
             'phone' => $input['phone'],
             'avatar' => array_key_exists('avatar', $input) ? $input['avatar'] : NULL,
             'password' => Hash::make($input['password']),
-            'email_verified_at' => \Carbon\Carbon::now(),
+            'email_verified_at' => $now = \Carbon\Carbon::now(),
+            'activated_at' => $now,
         ]);
+
+        if($input['role_id'])
+        {
+            RoleUser::create([
+                'user_id' => $user->id,
+                'role_id' => $input['role_id'],
+                'customer_id' => NULL,
+            ]);
+        }
+
+        $user->refresh();
 
         return $user;
     }
