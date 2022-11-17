@@ -251,6 +251,8 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
 
     public static function doUpdate($input, $user) {
 
+        dd($input);
+
         if( array_key_exists('avatar', $input) && $input['avatar'] && ($input['avatar'] instanceof UploadedFile))
         {
             $input['avatar'] = self::saveFile($input['avatar']);
@@ -268,7 +270,7 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
             }
         }
 
-        if($input['role_id'])
+        if(array_key_exists('role_id', $input) && $input['role_id'])
         {
 
             $role = RoleUser::where('user_id', $user->id)->whereNull('customer_id')->first();
@@ -336,7 +338,7 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
             'activated_at' => $now,
         ]);
 
-        if($input['role_id'])
+        if(array_key_exists('role_id', $input) && $input['role_id'])
         {
             RoleUser::create([
                 'user_id' => $user->id,
