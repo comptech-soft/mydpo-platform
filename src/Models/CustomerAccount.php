@@ -13,6 +13,7 @@ use MyDpo\Models\Activation;
 use MyDpo\Rules\CustomerAccount\UniqueUser;
 use MyDpo\Events\CustomerPersons\CustomerPersonCreateAccount;
 use MyDpo\Performers\CustomerFolder\SaveFoldersAccess;
+use MyDpo\Performers\CustomerAccount\UpdateRole;
 use MyDpo\Scopes\NotdeletedScope;
 
 class CustomerAccount extends Model {
@@ -178,7 +179,11 @@ class CustomerAccount extends Model {
 
     public static function updateRole($action, $input) {
 
-        dd($action, $input);
+        return (new UpdateRole([
+            'customer_id' => $input['customer_id'],
+            'user_id' => $input['user_id'],
+            'role_id' => $input['role_id'],
+        ]))->Perform();
     }
 
     public static function GetRules($action, $input) {
