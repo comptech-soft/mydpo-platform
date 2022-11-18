@@ -16,7 +16,19 @@ class UpdateRole extends Perform {
         );
 
 
-        dd($this->input);
+        if($this->input['checked'] == 1)
+        {
+            if($this->input['activated'] == 1)
+            {
+
+            }
+            else
+            {
+                $activation = createActivation($this->input['user_id'], $this->input['customer_id'], $this->input['role_id']);
+
+                dd($activation);
+            }
+        }
     
     }
 }
