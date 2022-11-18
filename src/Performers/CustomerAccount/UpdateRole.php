@@ -14,6 +14,9 @@ class UpdateRole extends Perform {
             $this->input['user_id'], 
             $this->input['role_id']
         );
+
+
+        dd($input);
     
     }
 }

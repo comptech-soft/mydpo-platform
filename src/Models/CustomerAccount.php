@@ -178,12 +178,7 @@ class CustomerAccount extends Model {
     }
 
     public static function updateRole($action, $input) {
-
-        return (new UpdateRole([
-            'customer_id' => $input['customer_id'],
-            'user_id' => $input['user_id'],
-            'role_id' => $input['role_id'],
-        ]))->Perform();
+        return (new UpdateRole($input))->Perform();
     }
 
     public static function GetRules($action, $input) {
