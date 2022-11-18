@@ -16,7 +16,7 @@ class UpdateRole extends Perform {
         );
 
 
-        dd($input);
+        dd($this->input);
     
     }
 }
