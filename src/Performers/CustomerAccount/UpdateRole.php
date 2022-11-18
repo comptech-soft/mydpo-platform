@@ -10,9 +10,9 @@ class UpdateRole extends Perform {
     public function Action() {
 
         RoleUser::CreateAccountRole(
-            $input['customer_id'], 
-            $input['user_id'], 
-            $input['role_id']
+            $this->input['customer_id'], 
+            $this->input['user_id'], 
+            $this->input['role_id']
         );
     
     }
