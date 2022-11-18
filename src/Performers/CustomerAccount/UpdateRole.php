@@ -32,9 +32,9 @@ class UpdateRole extends Perform {
 
                 $activation->activated = $account->activated = 1;
                 $activation->activated_at = $account->activated_at = \Carbon\Carbon::now();
-                
+
                 $activation->save();
-                $roleuser->save();
+                $account->save();
             }
         }
     
