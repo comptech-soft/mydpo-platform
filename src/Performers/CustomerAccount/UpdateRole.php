@@ -4,6 +4,7 @@ namespace MyDpo\Performers\CustomerAccount;
 
 use MyDpo\Helpers\Perform;
 use MyDpo\Models\RoleUser;
+use MyDpo\Models\Activation;
 
 class UpdateRole extends Perform {
 
@@ -24,7 +25,7 @@ class UpdateRole extends Perform {
             }
             else
             {
-                $activation = createActivation($this->input['user_id'], $this->input['customer_id'], $this->input['role_id']);
+                $activation = Activation::createActivation($this->input['user_id'], $this->input['customer_id'], $this->input['role_id']);
 
                 dd($activation);
             }
