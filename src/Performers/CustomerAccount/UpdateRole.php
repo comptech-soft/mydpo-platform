@@ -10,7 +10,7 @@ class UpdateRole extends Perform {
 
     public function Action() {
 
-        RoleUser::CreateAccountRole(
+        $roleuser = RoleUser::CreateAccountRole(
             $this->input['customer_id'], 
             $this->input['user_id'], 
             $this->input['role_id']
@@ -27,7 +27,10 @@ class UpdateRole extends Perform {
             {
                 $activation = Activation::createActivation($this->input['user_id'], $this->input['customer_id'], $this->input['role_id']);
 
-                dd($activation);
+                $activation->activated = $roleuser->activated = 1;
+                $activation->activated_at = $roleuser->activated_at = \Carbon\Carbon::now();
+                $activation->save();
+                $roleuser->save();
             }
         }
     
