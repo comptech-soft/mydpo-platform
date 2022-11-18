@@ -32,4 +32,9 @@ class CustomersAccountsController extends Controller {
         return CustomerAccount::doAction($action, $r->all());
     }
 
+    public function updateRole($action, Request $r) {
+        return CustomerAccount::updateRole($action, $r->all());
+    }
+    
+
 }

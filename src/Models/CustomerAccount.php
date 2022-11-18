@@ -140,8 +140,6 @@ class CustomerAccount extends Model {
             $accountInput['user_id'] = $user['payload']['record']['id'];
         }
 
-        // dd($accountInput);
-
         $account = self::create($accountInput);
 
         $roleUser = RoleUser::CreateAccountRole(
@@ -175,10 +173,12 @@ class CustomerAccount extends Model {
             $account->save();
         }
 
-        
-
         return $account;
+    }
 
+    public static function updateRole($action, $input) {
+
+        dd($action, $input);
     }
 
     public static function GetRules($action, $input) {
