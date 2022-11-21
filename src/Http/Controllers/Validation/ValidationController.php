@@ -19,6 +19,4 @@ class ValidationController extends Controller
         
     }
 
-    
-
 }

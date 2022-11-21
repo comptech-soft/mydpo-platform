@@ -4,17 +4,20 @@ namespace MyDpo\Http\Controllers\Database;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use MyDpo\Helpers\Database;
+use MyDpo\Performers\Database\UpdateField;
 
 class DatabaseController extends Controller
 {
 
     public function updateField(Request $r) {
-        dd($r->all());
+        return 
+            (new UpdateField(NULL))
+            ->SetSuccessMessage(NULL)
+            ->SetExceptionMessage([
+                \Exception::class => NULL,
+            ])
+            ->Perform();
     }
 
-   
-
-    
 
 }
