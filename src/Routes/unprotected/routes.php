@@ -39,6 +39,12 @@ Route::prefix('validation')->group(function () {
     
 });
 
+Route::prefix('database')->group(function () {
+
+    Route::post('update-field', [DatabaseController::class, 'updateField']);
+    
+});
+
 Route::prefix('translations')->group(function () {
 
     Route::post('create-key', [TranslationsController::class, 'createKey']);
