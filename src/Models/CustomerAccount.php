@@ -135,17 +135,19 @@ class CustomerAccount extends Model {
             'role_id' => $input['role_id'],
         ];
 
-        if( config('app.platform') == 'b2b' )
-        {
-            $user = User::doAction('insert', $input['user']);
-            $accountInput['user_id'] = $user['payload']['record']['id'];
-        }
+        $input['user']['password'] = $password = (\Str::random(10) . 'aA1!');
+        $input['user']['password_confirmation'] = $password;
+        $input['user']['type'] = 'b2b';
+
+        $user = User::doAction('insert', $input['user']);
+
+        $accountInput['user_id'] = $user['payload']['record']['id'];
 
         $account = self::create($accountInput);
 
         $roleUser = RoleUser::CreateAccountRole(
             $input['customer_id'], 
-            $input['user_id'], 
+            $accountInput['user_id'], 
             $account->role_id,
         );
 
@@ -155,24 +157,24 @@ class CustomerAccount extends Model {
             'roleUser' => $roleUser,
         ]));
 
-        if(array_key_exists('folders_access', $input))
-        {
-            (new SaveFoldersAccess([
-                'customer_id' => $input['customer_id'],
-                'user_id' => $input['user_id'],
-                'selectedFolders' => $input['folders_access'],
-            ]))->Perform();
-        }
+        // if(array_key_exists('folders_access', $input))
+        // {
+        //     (new SaveFoldersAccess([
+        //         'customer_id' => $input['customer_id'],
+        //         'user_id' => $input['user_id'],
+        //         'selectedFolders' => $input['folders_access'],
+        //     ]))->Perform();
+        // }
 
-        if(array_key_exists('dashboard_client', $input))
-        {
-            $permissions = $account->permissions ?  $account->permissions : [];
-            $account->permissions = [
-                ...$permissions,
-                'dashboard-client' => $input['dashboard_client']['dashboard-client'],
-            ];
-            $account->save();
-        }
+        // if(array_key_exists('dashboard_client', $input))
+        // {
+        //     $permissions = $account->permissions ?  $account->permissions : [];
+        //     $account->permissions = [
+        //         ...$permissions,
+        //         'dashboard-client' => $input['dashboard_client']['dashboard-client'],
+        //     ];
+        //     $account->save();
+        // }
 
         return $account;
     }
@@ -191,17 +193,20 @@ class CustomerAccount extends Model {
         $result = [
             'customer_id' => 'required|exists:customers,id',
             'department_id' => 'required|exists:customers-departamente,id', 
-            'role_id' => 'required|in:4,5'         
+            'role_id' => 'required|in:4,5',
+            'user.first_name' => 'required', 
+            'user.last_name' => 'required',
+            'user.email' => 'required|email',      
         ];
 
-        if( config('app.platform') == 'admin')
-        {
-            $result['user_id'] = [
-                'required',
-                'exists:users,id',
-                new UniqueUser($input),
-            ];
-        }
+        // if( config('app.platform') == 'admin')
+        // {
+        //     $result['user_id'] = [
+        //         'required',
+        //         'exists:users,id',
+        //         new UniqueUser($input),
+        //     ];
+        // }
     
         return $result;
     }
