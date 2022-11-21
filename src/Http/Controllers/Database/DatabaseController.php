@@ -11,7 +11,13 @@ class DatabaseController extends Controller
 
     public function updateField(Request $r) {
         return 
-            (new UpdateField($r->all()))
+            (
+                new UpdateField
+                (
+                    $r->input,
+                    $r->rules,
+                )
+            )
             ->SetSuccessMessage(NULL)
             ->SetExceptionMessage([
                 \Exception::class => NULL,
