@@ -10,6 +10,7 @@ class UpdateField extends Perform {
         
         $record = \DB::table($this->input['table'])
             ->where('id', $this->input['id'])
+            ->first()
             ->update([
                 $this->input['field'] => $this->input['value'],
             ]);
