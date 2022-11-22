@@ -183,6 +183,12 @@ class CustomerAccount extends Model {
         return (new UpdateRole($input))->Perform();
     }
 
+    public static function saveDashboardPermissions($input) {
+
+        dd($input);
+        // return (new UpdateRole($input))->Perform();
+    }
+
     public static function GetRules($action, $input) {
        
         if($action == 'delete')

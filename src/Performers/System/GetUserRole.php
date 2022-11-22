@@ -4,6 +4,7 @@ namespace MyDpo\Performers\System;
 
 use MyDpo\Helpers\Perform;
 use MyDpo\Models\Activation;
+use MyDpo\Models\CustomerAccount;
 
 class GetUserRole extends Perform {
 
@@ -25,6 +26,10 @@ class GetUserRole extends Perform {
         {
             return NULL;
         }
+
+        $account = CustomerAccount::where('user_id', $user->id)->where('customer_id', $this->input['customer_id'])->first();
+
+        $role->account_permissions = $account ? $account->permissions : null;
 
         $this->payload = $role;
         

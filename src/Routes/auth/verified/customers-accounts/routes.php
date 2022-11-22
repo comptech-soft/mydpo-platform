@@ -12,6 +12,7 @@ Route::prefix('customers-accounts')->group( function() {
         
     Route::post('items', [CustomersAccountsController::class, 'getItems']);
     Route::post('action/{action}', [CustomersAccountsController::class, 'doAction']);
+    Route::post('save-dashboard-permissions', [CustomersAccountsController::class, 'saveDashboardPermissions']);
 
 });
 
