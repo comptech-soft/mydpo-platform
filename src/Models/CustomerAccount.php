@@ -14,6 +14,7 @@ use MyDpo\Rules\CustomerAccount\UniqueUser;
 use MyDpo\Events\CustomerPersons\CustomerPersonCreateAccount;
 use MyDpo\Performers\CustomerFolder\SaveFoldersAccess;
 use MyDpo\Performers\CustomerAccount\UpdateRole;
+use MyDpo\Performers\CustomerAccount\SaveDashboardPermissions;
 use MyDpo\Scopes\NotdeletedScope;
 
 class CustomerAccount extends Model {
