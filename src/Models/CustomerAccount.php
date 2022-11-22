@@ -185,9 +185,7 @@ class CustomerAccount extends Model {
     }
 
     public static function saveDashboardPermissions($input) {
-
-        dd($input);
-        // return (new UpdateRole($input))->Perform();
+        return (new SaveDashboardPermissions($input))->Perform();
     }
 
     public static function GetRules($action, $input) {
