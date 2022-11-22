@@ -41,7 +41,6 @@ class CustomersAccountsController extends Controller {
     }
     
     public function saveFolderPermissions(Request $r) {
-        dd($r->all());
         return CustomerAccount::saveFolderPermissions($r->all());
     }
 

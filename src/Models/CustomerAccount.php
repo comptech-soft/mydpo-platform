@@ -15,6 +15,7 @@ use MyDpo\Events\CustomerPersons\CustomerPersonCreateAccount;
 use MyDpo\Performers\CustomerFolder\SaveFoldersAccess;
 use MyDpo\Performers\CustomerAccount\UpdateRole;
 use MyDpo\Performers\CustomerAccount\SaveDashboardPermissions;
+use MyDpo\Performers\CustomerAccount\SaveFolderPermissions;
 use MyDpo\Scopes\NotdeletedScope;
 
 class CustomerAccount extends Model {
@@ -186,6 +187,10 @@ class CustomerAccount extends Model {
 
     public static function saveDashboardPermissions($input) {
         return (new SaveDashboardPermissions($input))->Perform();
+    }
+
+    public static function saveFolderPermissions($input) {
+        return (new SaveFolderPermissions($input))->Perform();
     }
 
     public static function GetRules($action, $input) {
