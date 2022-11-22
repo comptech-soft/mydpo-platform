@@ -40,6 +40,10 @@ class CustomersAccountsController extends Controller {
         return CustomerAccount::saveDashboardPermissions($r->all());
     }
     
-    
+    public function saveFolderPermissions(Request $r) {
+        dd($r->all());
+        return CustomerAccount::saveFolderPermissions($r->all());
+    }
+
 
 }
