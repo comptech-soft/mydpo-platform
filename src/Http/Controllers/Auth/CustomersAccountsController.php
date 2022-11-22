@@ -36,7 +36,7 @@ class CustomersAccountsController extends Controller {
         return CustomerAccount::updateRole($action, $r->all());
     }
 
-    public function saveDashboardPermissions($action, Request $r) {
+    public function saveDashboardPermissions(Request $r) {
         return CustomerAccount::saveDashboardPermissions($r->all());
     }
     
