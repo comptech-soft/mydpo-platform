@@ -15,7 +15,7 @@ class SaveDashboardPermissions extends Perform {
 
         $account->permissions = [
             ...$account->permissions,
-            'dashboard-client' => $this->input['selected'],
+            'dashboard-client' => $this->input['selected']['dashboard-client'],
         ];
 
         $account->save();
