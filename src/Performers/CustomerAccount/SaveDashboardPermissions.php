@@ -11,7 +11,14 @@ class SaveDashboardPermissions extends Perform {
 
     public function Action() {
 
-        dd($this->input, __METHOD__);
+        $account = CustomerAccount::where('user_id', $this->input['user_id'])->where('customer_id', $this->input['customer_id'])->first();
+
+        $account->permissions = [
+            ...$account->permissions,
+            'dashboard-client' => $this->input['selected'],
+        ];
+
+        $account->save();
     
     }
 }
