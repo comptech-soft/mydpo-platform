@@ -14,7 +14,7 @@ class SaveDashboardPermissions extends Perform {
         $account = CustomerAccount::where('user_id', $this->input['user_id'])->where('customer_id', $this->input['customer_id'])->first();
 
         $account->permissions = [
-            ...$account->permissions,
+            ...($account->permissions ? $account->permissions : []),
             'dashboard-client' => $this->input['selected']['dashboard-client'],
         ];
 
