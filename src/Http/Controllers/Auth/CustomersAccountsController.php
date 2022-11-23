@@ -48,6 +48,4 @@ class CustomersAccountsController extends Controller {
         return CustomerAccount::saveFolderAccess($r->all());
     }
 
-    
-
 }
