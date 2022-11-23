@@ -17,12 +17,15 @@ class SaveFolderAccess extends Perform {
             function($j) {
                 $j->on('customers-folders.id', '=', 'customers-folders-permissions.folder_id');
             }
-        )->where('customers-folders-permissions.customer_id', $this->input['customer_id'])
+        )
+        ->where('customers-folders-permissions.customer_id', $this->input['customer_id'])
         ->where('customers-folders-permissions.user_id',  $this->input['user_id'])
         ->where('customers-folders.type',  $type)
         ->update([
             'has_access' => 0,
         ]);
+
+        ff($folders);
 
         if( ! array_key_exists('selected', $this->input ) )
         {
