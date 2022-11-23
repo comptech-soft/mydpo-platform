@@ -14,6 +14,7 @@ Route::prefix('customers-accounts')->group( function() {
     Route::post('action/{action}', [CustomersAccountsController::class, 'doAction']);
     Route::post('save-dashboard-permissions', [CustomersAccountsController::class, 'saveDashboardPermissions']);
     Route::post('save-folder-permissions', [CustomersAccountsController::class, 'saveFolderPermissions']);
+    Route::post('save-folder-access', [CustomersAccountsController::class, 'saveFolderAccess']);
 
 });
 
