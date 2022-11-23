@@ -36,6 +36,14 @@ class CustomerFolderPermission extends Model {
     }
 
     public static function getItems($input) {
-        return (new GetItems($input, self::query()->with(['folder']), __CLASS__))->Perform();
+
+        $q = self::query()->leftJoin(
+            'customers-folders',
+            function($j) {
+                $j->on('customers-folders.id', '=', 'customers-folders-permissions.folder_id');
+            }
+        );
+
+        return (new GetItems($input, $q->with(['folder']), __CLASS__))->Perform();
     }
 }
