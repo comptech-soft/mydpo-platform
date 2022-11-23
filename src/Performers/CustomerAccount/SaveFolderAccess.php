@@ -25,8 +25,6 @@ class SaveFolderAccess extends Perform {
             'has_access' => 0,
         ]);
 
-        dd($folders);
-
         if( ! array_key_exists('selected', $this->input ) )
         {
             $this->input['selected'] = [];
