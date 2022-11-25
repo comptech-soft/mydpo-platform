@@ -23,7 +23,7 @@ class UpdateStatus extends Perform {
 
 
         $activation->activated = $account->activated = ($activation->activated == 1 ? 0 : 1);
-        $activation->activated_at = $account->activated_at = ($activation->activated == 1 ? NULL : \Carbon\Carbon::now());
+        $activation->activated_at = $account->activated_at = ($activation->activated == 0 ? NULL : \Carbon\Carbon::now());
 
         $activation->save();
         $account->save();
