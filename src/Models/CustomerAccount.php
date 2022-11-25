@@ -14,6 +14,7 @@ use MyDpo\Rules\CustomerAccount\UniqueUser;
 use MyDpo\Events\CustomerPersons\CustomerPersonCreateAccount;
 use MyDpo\Performers\CustomerFolder\SaveFoldersAccess;
 use MyDpo\Performers\CustomerAccount\UpdateRole;
+use MyDpo\Performers\CustomerAccount\UpdateStatus;
 use MyDpo\Performers\CustomerAccount\SaveDashboardPermissions;
 use MyDpo\Performers\CustomerAccount\SaveFolderPermissions;
 use MyDpo\Performers\CustomerAccount\SaveFolderAccess;
@@ -184,6 +185,10 @@ class CustomerAccount extends Model {
 
     public static function updateRole($action, $input) {
         return (new UpdateRole($input))->Perform();
+    }
+
+    public static function updateStatus($action, $input) {
+        return (new UpdateStatus($input))->Perform();
     }
 
     public static function saveDashboardPermissions($input) {

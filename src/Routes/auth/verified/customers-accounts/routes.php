@@ -23,3 +23,9 @@ Route::prefix('customers-accounts-role')->group( function() {
     Route::post('action/{action}', [CustomersAccountsController::class, 'updateRole']);
 
 });
+
+Route::prefix('customers-accounts-status')->group( function() {
+        
+    Route::post('action/{action}', [CustomersAccountsController::class, 'updateStatus']);
+
+});
