@@ -11,12 +11,25 @@ class UpdateStatus extends Perform {
 
     public function Action() {
 
-        dd($this->input);
-        // $roleuser = RoleUser::CreateAccountRole(
-        //     $this->input['customer_id'], 
-        //     $this->input['user_id'], 
-        //     $this->input['role_id']
-        // );
+        $account = CustomerAccount::find($this->input['id']);
+
+        if($account->activated == 0)
+        {
+            $roleuser = RoleUser::CreateAccountRole(
+                $this->input['customer_id'], 
+                $this->input['user_id'], 
+                $this->input['role_id']
+            );
+
+            $activation = Activation::createActivation($this->input['user_id'], $this->input['customer_id'], $this->input['role_id']);
+
+            $activation->activated = $account->activated = 1;
+            $activation->activated_at = $account->activated_at = \Carbon\Carbon::now();
+
+            $activation->save();
+            $account->save();
+        }
+        
 
 
         // if($this->input['checked'] == 1)
@@ -29,13 +42,11 @@ class UpdateStatus extends Perform {
         //     {
         //         $account = CustomerAccount::find($this->input['id']);
 
-        //         $activation = Activation::createActivation($this->input['user_id'], $this->input['customer_id'], $this->input['role_id']);
+        //         
 
-        //         $activation->activated = $account->activated = 1;
-        //         $activation->activated_at = $account->activated_at = \Carbon\Carbon::now();
+                
 
-        //         $activation->save();
-        //         $account->save();
+                
         //     }
         // }
     
