@@ -21,9 +21,9 @@ class UpdateStatus extends Perform {
 
         $activation = Activation::createActivation($this->input['user_id'], $this->input['customer_id'], $this->input['role_id']);
 
-
         $activation->activated = $account->activated = ($activation->activated == 1 ? 0 : 1);
         $activation->activated_at = $account->activated_at = ($activation->activated == 0 ? NULL : \Carbon\Carbon::now());
+        $account->role_id = $this->input['role_id'];
 
         $activation->save();
         $account->save();
