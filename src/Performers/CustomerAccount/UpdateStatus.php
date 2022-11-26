@@ -42,5 +42,7 @@ class UpdateStatus extends Perform {
         
         $activation->save();
         $account->save();
+
+        $this->payload = $account;
     }
 }
