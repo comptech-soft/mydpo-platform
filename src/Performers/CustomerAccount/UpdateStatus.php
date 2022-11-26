@@ -21,6 +21,7 @@ class UpdateStatus extends Perform {
 
         $activation = Activation::createActivation($this->input['user_id'], $this->input['customer_id'], $this->input['role_id']);
 
+        \Log::info('A: ' . $activation->activated);
         if($activation->activated == 1)
         {
             $activation->activated = 0;
@@ -42,6 +43,8 @@ class UpdateStatus extends Perform {
         
         $activation->save();
         $account->save();
+
+        \Log::info('B: ' . $activation->activated);
     
     }
 }
