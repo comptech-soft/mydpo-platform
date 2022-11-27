@@ -197,28 +197,20 @@ class CustomerAccount extends Model {
         $result = [
             'customer_id' => 'required|exists:customers,id',
             'department_id' => 'required|exists:customers-departamente,id', 
-            'role_id' => 'required|in:4,5',
-            'user.first_name' => 'required', 
-            'user.last_name' => 'required',    
+            'role_id' => 'required|in:4,5', 
         ];
 
         if($action == 'insert')
         {
+            $result['user.first_name'] = 'required';
+            $result['user.last_name'] = 'required';
+            
             $result['user.email'] = [
                 'required',
                 'email',
                 new ValidAccountEmail($input)
             ];
         }
-        dd($result);
-        // if( config('app.platform') == 'admin')
-        // {
-        //     $result['user_id'] = [
-        //         'required',
-        //         'exists:users,id',
-        //         new UniqueUser($input),
-        //     ];
-        // }
     
         return $result;
     }
