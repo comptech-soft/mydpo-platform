@@ -10,7 +10,7 @@ use MyDpo\Models\Customer;
 use MyDpo\Models\CustomerDepartment;
 use MyDpo\Models\RoleUser;
 use MyDpo\Models\Activation;
-use MyDpo\Rules\CustomerAccount\UniqueUser;
+use MyDpo\Rules\CustomerAccount\ValidAccountEmail;
 use MyDpo\Events\CustomerPersons\CustomerPersonCreateAccount;
 use MyDpo\Performers\CustomerFolder\SaveFoldersAccess;
 use MyDpo\Performers\CustomerAccount\UpdateRole;
@@ -164,25 +164,6 @@ class CustomerAccount extends Model {
             'roleUser' => $roleUser,
         ]));
 
-        // if(array_key_exists('folders_access', $input))
-        // {
-        //     (new SaveFoldersAccess([
-        //         'customer_id' => $input['customer_id'],
-        //         'user_id' => $input['user_id'],
-        //         'selectedFolders' => $input['folders_access'],
-        //     ]))->Perform();
-        // }
-
-        // if(array_key_exists('dashboard_client', $input))
-        // {
-        //     $permissions = $account->permissions ?  $account->permissions : [];
-        //     $account->permissions = [
-        //         ...$permissions,
-        //         'dashboard-client' => $input['dashboard_client']['dashboard-client'],
-        //     ];
-        //     $account->save();
-        // }
-
         return $account;
     }
 
@@ -218,10 +199,18 @@ class CustomerAccount extends Model {
             'department_id' => 'required|exists:customers-departamente,id', 
             'role_id' => 'required|in:4,5',
             'user.first_name' => 'required', 
-            'user.last_name' => 'required',
-            'user.email' => 'required|email',      
+            'user.last_name' => 'required',    
         ];
 
+        if($action == 'insert')
+        {
+            $result['user.email'] = [
+                'required',
+                'email',
+                new ValidAccountEmail($input)
+            ];
+        }
+        dd($result);
         // if( config('app.platform') == 'admin')
         // {
         //     $result['user_id'] = [
