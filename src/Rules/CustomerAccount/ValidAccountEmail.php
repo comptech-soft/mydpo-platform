@@ -4,11 +4,13 @@ namespace MyDpo\Rules\CustomerAccount;
 
 use Illuminate\Contracts\Validation\Rule;
 use MyDpo\Models\CustomerAccount;
+use MyDpo\Models\User;
 
 class ValidAccountEmail implements Rule {
 
     public $input = NULL;
     public $record = NULL;
+    public $message = NULL;
 
     public function __construct($input) {
         $this->input = $input;
@@ -16,22 +18,25 @@ class ValidAccountEmail implements Rule {
 
     public function passes($attribute, $value) {   
 
-        dd($input);
+    
+        $exists = User::where('email', $email = $this->input['user']['email'])->first();
 
-        $q = CustomerAccount::where('customer_id', $this->input['customer_id'])
-            ->where('user_id', $this->input['user_id'])
-            ->where('deleted', 0);
-
-        if(array_key_exists('id', $this->input) && $this->input['id'])
+        if($exists)
         {
-            $q->where('id', '<>', $this->input['id']);
+            $this->message = 'Adresa de email este deja folosită';
+            return FALSE;
         }
 
-        $this->record = $q->first();
-
-        if($this->record)
+        if( config('app.platform') == 'b2b')
         {
-            return FALSE;
+            $domain_name_1 = substr(strrchr($email, "@"), 1);
+            $domain_name_2 = substr(strrchr(\Auth::user()->email, "@"), 1);
+
+            if($domain_name_1 != $domain_name_2)
+            {
+                $this->message = 'Adresa de email trebuie să aibă domeniul [' .  $domain_name_2 . ']';
+                return FALSE;
+            }
         }
         
         return TRUE;
@@ -39,6 +44,6 @@ class ValidAccountEmail implements Rule {
 
     public function message()
     {
-        return 'Utiliatorul este deja definit.';
+        return $this->message;
     }
 }
