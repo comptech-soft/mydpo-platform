@@ -119,7 +119,7 @@ class CustomerAccount extends Model {
 
         $account->update($input);
 
-        if(array_key_exists('user', $input) && (array_key_exists('role_id', $input['user']) )
+        if(array_key_exists('user', $input) && array_key_exists('role_id', $input['user']) )
         {
             $roleUser = RoleUser::CreateAccountRole(
                 $input['customer_id'], 
