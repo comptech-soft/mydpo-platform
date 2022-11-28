@@ -10,11 +10,9 @@ use MyDpo\Models\Curs;
 class CursuriController extends Controller {
     
     public function index(Request $r) {
-
-        dd(__METHOD__);
         return Response::View(
             '~templates.index', 
-            asset('apps/cursuri/index.js')
+            asset('apps/elearning/index.js')
         );
     }
 
