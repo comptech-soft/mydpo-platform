@@ -9,8 +9,8 @@ use MyDpo\Models\Cursadresare;
 
 class CursuriadresareController extends Controller {
 
-    public function getItems($type = NULL, Request $r) {
-        return Cursadresare::getItems($r->all(), $type);
+    public function getItems(Request $r) {
+        return Cursadresare::getItems($r->all());
     }
 
     public function doAction($action, Request $r) {
