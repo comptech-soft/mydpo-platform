@@ -187,6 +187,10 @@ class Curs extends Model {
         {
             $input['file'] = self::saveFile($input['file']);
         }
+        else
+        {
+            $input['file'] = NULL;
+        }
 
         $curs->update($input);
 
