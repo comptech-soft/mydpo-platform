@@ -66,6 +66,7 @@ class Curs extends Model {
         'days_difference',
         'my_url',
         'my_image',
+        'status'
     ];
 
     protected static function booted() {
@@ -77,6 +78,11 @@ class Curs extends Model {
      * ATTRIBUTES
      * 
      */
+
+    public function getStatusAttribute() {
+        return 'Status';
+    }
+
     public function getMyUrlAttribute() {
         if( ($this->type == 'knolyx') && $this->k_id)
         {
