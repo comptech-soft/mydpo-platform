@@ -322,6 +322,12 @@ class Curs extends Model {
                     $j->on('categories.id', '=', 'cursuri.category_id');
                 }
             )
+            ->leftJoin(
+                'cursuri-adresare',
+                function($j) {
+                    $j->on('cursuri-adresare.id', '=', 'cursuri.adresare_id');
+                }
+            )
             ->select('cursuri.*')
         ;
     }
