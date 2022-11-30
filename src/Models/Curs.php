@@ -207,6 +207,8 @@ class Curs extends Model {
 
     public static function doInsert($input, $curs) {
         
+        dd($input);
+        
         if($input['file'] && ($input['file'] instanceof UploadedFile))
         {
             $input['file'] = self::saveFile($input['file']);
@@ -264,6 +266,7 @@ class Curs extends Model {
             'name' => 'required|unique:cursuri,name',
             'category_id' => 'required|exists:categories,id',
             'type' => 'required',
+            'adresare_id' => 'required',
         ];
 
 
