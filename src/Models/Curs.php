@@ -84,7 +84,7 @@ class Curs extends Model {
         {
             return 2;
         }
-        return $this->days_difference['hours'] > 0 ? 1 : 0;
+        return $this->days_difference['hours'] > 0 ? 0 : 1;
     }
 
     public function getMyUrlAttribute() {
