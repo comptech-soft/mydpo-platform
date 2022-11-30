@@ -35,6 +35,7 @@ class Curs extends Model {
         'adresare_id' => 'integer',
         'deleted' => 'integer',
         'tematica' => 'json',
+        'preview_image' => 'json',
         'file' => 'json',
         'k_avatar' => 'json',
     ];
@@ -43,8 +44,10 @@ class Curs extends Model {
         'id',
         'category_id',
         'adresare_id',
+        'preview_image',
         'name',
         'type',
+        'tip',
         'descriere',
         'tematica',
         'url',
