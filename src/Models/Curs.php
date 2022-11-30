@@ -7,6 +7,7 @@ use Illuminate\Http\UploadedFile;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Models\Category;
+use MyDpo\Models\Cursadresare;
 use MyDpo\Traits\DaysDifference;
 use MyDpo\Performers\Curs\OpenKnolyxCourse;
 use MyDpo\Performers\Curs\GetKnolyxCourses;
@@ -21,7 +22,7 @@ class Curs extends Model {
 
     protected $table = 'cursuri';
 
-    protected $with = ['category'];
+    protected $with = ['category', 'adresare'];
 
     // protected $withCount = ['fisiere'];
 
@@ -140,6 +141,10 @@ class Curs extends Model {
      */
     public function category() {
         return $this->belongsTo(Category::class, 'category_id');
+    }
+
+    public function adresare() {
+        return $this->belongsTo(Cursadresare::class, 'adresare_id');
     }
 
     // public function customercursuri() {
