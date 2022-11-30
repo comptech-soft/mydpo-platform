@@ -255,78 +255,6 @@ class Curs extends Model {
         ];
     }
 
-    public static function doDelete($input, $curs) {
-        $curs->deleted = true;
-        $curs->deleted_by = \Auth::user()->id;
-
-        if(! $curs->props )
-        {
-            $curs->props = [];
-        }
-
-        $curs->props = [
-            ...$curs->props,
-            'k_id' => $curs->k_id,
-            'name' => $curs->name,
-        ];
-
-        $curs->k_id = NULL;
-        $curs->name = '#' . $curs->id . '-' . $curs->name;
-
-        $curs->save();
-        return $curs;
-    }
-
-    public static function doInsert($input, $curs) {
-        
-        if($input['file'] && ($input['file'] instanceof UploadedFile))
-        {
-            $input['file'] = self::saveFile($input['file']);
-        }
-
-        $curs = self::create($input);
-
-        return $curs;
-    }
-
-    public static function saveFile($file) {
-        $ext = strtolower($file->extension());
-
-        if(in_array($ext, ['pdf']))
-        {
-            $filename = md5(time()) . '-' . \Str::slug(str_replace($file->extension(), '', $file->getClientOriginalName())) . '.' .  strtolower($file->extension());
-            
-            $result = $file->storeAs('cursuri/' .  \Auth::user()->id, $filename, 's3');
-
-            $inputdata = [
-                'file_original_name' => $file->getClientOriginalName(),
-                'file_original_extension' => $file->extension(),
-                'file_full_name' => $filename,
-                'file_mime_type' => $file->getMimeType(),
-                'file_upload_ip' => request()->ip(),
-                'file_size' => $file->getSize(),
-                'url' => config('filesystems.disks.s3.url') . $result,
-                'created_by' => \Auth::user()->id,
-            ];
-            
-            return $inputdata;
-        }
-        else
-        {
-            throw new \Exception('Fișier incorect.');
-        }
-    }
-
-    public static function GetMessages($action, $input) {
-
-        return [
-            'name.required' => 'Denumirea cursului trebuie completată.',
-            'category_id.required' => 'Categoria trebuie selectată.',
-            'type.required' => 'Tipul cursului trebuie selectat.',
-            'url.url' => 'Linkul nu pare sa fie valid.',
-        ];
-    }
-
     public static function GetRules($action, $input) {
         if($action == 'delete')
         {
@@ -337,6 +265,7 @@ class Curs extends Model {
             'category_id' => 'required|exists:categories,id',
             'type' => 'required',
         ];
+
 
         if($input['type'] == 'fisier')
         {
