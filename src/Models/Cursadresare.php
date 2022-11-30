@@ -30,7 +30,7 @@ class Cursadresare extends Model {
     ];
 
     function cursuri() {
-        return $this->hasMany(Curs::class, 'category_id');
+        return $this->hasMany(Curs::class, 'adresare_id');
     }
 
     public static function getItems($input) {
