@@ -32,6 +32,7 @@ class Curs extends Model {
         'created_by' => 'integer',
         'updated_by' => 'integer',
         'deleted_by' => 'integer',
+        'adresare_id' => 'integer',
         'deleted' => 'integer',
         'tematica' => 'json',
         'file' => 'json',
@@ -41,6 +42,7 @@ class Curs extends Model {
     protected $fillable = [
         'id',
         'category_id',
+        'adresare_id',
         'name',
         'type',
         'descriere',
