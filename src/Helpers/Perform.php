@@ -104,14 +104,9 @@ class Perform {
 
         if($this->rules)
         {   
-            $validationInput = $this->GetValidationInput();
-
-            
+            $validationInput = $this->GetValidationInput();            
 
             $valid = (new Validator($validationInput, $this->rules, $this->messages))->Validate();
-
-
-            dd($valid);
 
             if( ! ($valid === true) )
             {
