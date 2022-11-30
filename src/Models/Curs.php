@@ -84,7 +84,7 @@ class Curs extends Model {
         {
             return 2;
         }
-        return $this->day_difference;
+        return $this->days_difference;
     }
 
     public function getMyUrlAttribute() {
