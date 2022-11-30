@@ -313,24 +313,23 @@ class Curs extends Model {
         return $result;
     }
 
-
-    // public static function getQuery() {
-    //     return 
-    //         self::query()
-    //         ->leftJoin(
-    //             'categories',
-    //             function($j) {
-    //                 $j->on('categories.id', '=', 'cursuri.category_id');
-    //             }
-    //         )
-    //         ->select('cursuri.*')
-    //     ;
-    // }
+    public static function getQuery() {
+        return 
+            self::query()
+            ->leftJoin(
+                'categories',
+                function($j) {
+                    $j->on('categories.id', '=', 'cursuri.category_id');
+                }
+            )
+            ->select('cursuri.*')
+        ;
+    }
 
     public static function getItems($input) {
         return (new GetItems(
             $input, 
-            self::query(), 
+            self::getQuery(), 
             __CLASS__
         ))
         ->Perform();
