@@ -80,7 +80,11 @@ class Curs extends Model {
      */
 
     public function getStatusAttribute() {
-        return 'Status';
+        if(! $this->date_from && ! $this->date_to )
+        {
+            return 2;
+        }
+        return $this->day_difference;
     }
 
     public function getMyUrlAttribute() {
