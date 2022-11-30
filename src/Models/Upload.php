@@ -134,7 +134,8 @@ class Upload extends Model {
             $fileRule
         ];
 
-
+        dd($rules);
+        
         return $rules;
     }
 
