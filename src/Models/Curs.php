@@ -189,7 +189,8 @@ class Curs extends Model {
         }
         else
         {
-            $input['file'] = NULL;
+
+            // $input['file'] = NULL;
         }
 
         $curs->update($input);
