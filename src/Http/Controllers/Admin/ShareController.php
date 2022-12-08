@@ -15,7 +15,7 @@ class ShareController extends Controller {
         {
             return Response::View(
                 '~templates.index', 
-                asset('apps/share' + $entity + '/index.js'), 
+                asset('apps/share' . $entity . '/index.js'), 
                 [], 
                 [
                     'entity' => $entity
