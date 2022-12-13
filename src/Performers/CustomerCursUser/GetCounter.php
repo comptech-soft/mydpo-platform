@@ -16,7 +16,8 @@ class GetCounter extends Perform {
             SELECT 
                 COUNT(*) count_all,
                 SUM(IF(`status` = 'sended', 1, 0)) count_pending,
-                SUM(IF(`status` = 'done', 1, 0)) count_done
+                SUM(IF(`status` = 'done', 1, 0)) count_done,
+                SUM(IF(`status` = 'started', 1, 0)) count_started
             FROM `customers-cursuri-users`
             WHERE 
                 (user_id = " . $this->input['user_id'] . ") AND
