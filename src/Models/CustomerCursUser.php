@@ -95,7 +95,7 @@ class CustomerCursUser extends Model {
             if( $this->trimitere->date_to )
             {
                 $now = Carbon::now();
-                $expire = Carbon::createFromFormat('Y-m-d', $this->date_to);
+                $expire = Carbon::createFromFormat('Y-m-d', $this->trimitere->date_to);
         
                 $daysDiff = $expire->diffInDays($now, false);
                 $hoursDiff = $expire->diffInHours($now, false);
