@@ -57,7 +57,7 @@ class CustomerCursUser extends Model {
         return (new GetItems($input, self::query(), __CLASS__))->Perform();
     }
 
-    public static function getCounter($action, $input) {
+    public static function getCounter($input) {
         return (new GetCounter($input))->Perform();
     }
 }
