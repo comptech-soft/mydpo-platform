@@ -260,6 +260,4 @@ class Sharematerial extends Model {
         return $result;
     }
 
-    
-
 }

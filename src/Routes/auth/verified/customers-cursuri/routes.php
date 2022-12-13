@@ -1,6 +1,7 @@
 <?php
 
 use MyDpo\Http\Controllers\Auth\CustomersCursuriController;
+use MyDpo\Http\Controllers\Auth\CustomersCursuriUsersController;
 use MyDpo\Http\Controllers\Admin\CursuriController;
 
 
@@ -17,13 +18,16 @@ Route::prefix('customers-cursuri')->group( function() {
 
 });
 
-
-
 Route::prefix('cursuri')->group( function() {
         
-
     Route::post('open-knolyx-course', [CursuriController::class, 'openKnolyxCourse']);
 
-    
+});
+
+
+Route::prefix('customers-cursuri-users')->group( function() {
+        
+    Route::post('items', [CustomersCursuriUsersController::class, 'getItems']);
+
 
 });
