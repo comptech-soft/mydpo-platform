@@ -86,7 +86,8 @@ class CustomerCursUser extends Model {
 
         $daysDiff = $hoursDiff = NULL;
 
-        $color = 'green';
+        $color = NULL;
+        $text = NULL;
 
         if($this->status == 'done')
         {
@@ -94,6 +95,7 @@ class CustomerCursUser extends Model {
         }
         else
         {
+            $color = 'green';
             if( $this->trimitere->date_to )
             {
                 $now = Carbon::now();
@@ -106,6 +108,21 @@ class CustomerCursUser extends Model {
                 if( ($daysDiff > 0) || ( ($daysDiff == 0) && ($hoursDiff > 0)))
                 {
                     $color = 'red';
+                    $text = 'Depășit';
+                }
+
+                else
+                {
+                    if(-5 <= $daysDiff && $daysDiff <= 0 )
+                    {
+                        $color = 'orange';
+                        $text = 'În curând';
+                    }
+                    else
+                    {
+                        $color = 'blue';
+                        $text = 'Asignate';
+                    }
                 }
                 
             }
@@ -117,6 +134,7 @@ class CustomerCursUser extends Model {
             'days' => $daysDiff,
             'hours' => $hoursDiff,
             'color' => $color,
+            'caption' => $text,
         ];
     }
 
