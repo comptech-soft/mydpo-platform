@@ -109,6 +109,11 @@ class Curs extends Model {
 
     public function getMyImageAttribute() {
 
+        if( $this->preview_image )
+        {
+            return $this->preview_image['url'];
+        }
+
         if( $this->type == 'youtube')
         {
             $code= \Str::of($this->url)->explode('=')->last();
