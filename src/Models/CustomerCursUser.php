@@ -42,7 +42,8 @@ class CustomerCursUser extends Model {
     ];
 
     protected $appends = [
-        'my_status'
+        'my_status',
+        'status_termen',
     ];
 
     protected $with = [
@@ -80,6 +81,13 @@ class CustomerCursUser extends Model {
         ];
     }
 
+    public function getStatusTermenAttribute() {
+
+        return [
+            'date_from' => $this->trimitere->date_from,
+            'date_to' => $this->trimitere->date_to
+        ];
+    }
 
     public function user() {
         return $this->belongsTo(User::class, 'user_id');
