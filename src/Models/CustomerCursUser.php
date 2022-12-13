@@ -58,6 +58,14 @@ class CustomerCursUser extends Model {
             $status = 'Neînceput';
             $color = 'red';
         }
+        else
+        {
+            if($this->status == 'done')
+            {
+                $status = 'Finalizat';
+                $color = 'green';
+            }
+        }
         return [
             'status' => $status,
             'color' => $color,
