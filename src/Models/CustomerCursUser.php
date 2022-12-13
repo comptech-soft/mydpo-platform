@@ -41,11 +41,20 @@ class CustomerCursUser extends Model {
         'deleted_by'
     ];
 
+    protected $append = [
+        'my_status'
+    ];
+
     protected $with = [
         'user',
         'curs',
         'trimitere'
     ];
+
+    public function getMyStatusAttribute() {
+        return $this->status;
+    }
+
 
     public function user() {
         return $this->belongsTo(User::class, 'user_id');
