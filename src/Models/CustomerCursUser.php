@@ -86,6 +86,8 @@ class CustomerCursUser extends Model {
 
         $daysDiff = $hoursDiff = NULL;
 
+        $color = 'green';
+
         if($this->status == 'done')
         {
 
@@ -99,6 +101,13 @@ class CustomerCursUser extends Model {
         
                 $daysDiff = $expire->diffInDays($now, false);
                 $hoursDiff = $expire->diffInHours($now, false);
+
+                
+                if( ($daysDiff > 0) || ( ($daysDiff == 0) && ($hoursDiff > 0)))
+                {
+                    $color = 'red';
+                }
+                
             }
         }
 
