@@ -3,7 +3,7 @@
 namespace MyDpo\Performers\CustomerCursUser;
 
 use MyDpo\Helpers\Perform;
-use MyDpo\Models\CustomerCursUser;
+
 
 class GetCounter extends Perform {
 
@@ -12,7 +12,18 @@ class GetCounter extends Perform {
      */
     public function Action() {
 
-        dd(__METHOD__, $this->input);
+        $sql = "
+            SELECT 
+                COUNT(*) count_all,
+                SUM(IF(`status` = 'sended', 1, 0)) count_pending,
+                SUM(IF(`status` = 'done', 1, 0)) count_done
+            FROM `customers-cursuri-users`
+            WHERE 
+                (user_id = " . $this->input['user_id'] . ") AND
+                (customer_id = " . $this->input['customer_id'] . ")
+            ";
+            
+        $this->payload = \DB::select($sql);
     
     }
 }
