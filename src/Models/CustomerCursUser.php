@@ -83,9 +83,16 @@ class CustomerCursUser extends Model {
 
     public function getStatusTermenAttribute() {
 
+        $number_of_days = NULL;
+
+        if($this->status == 'done')
+        {
+
+        }
         return [
             'date_from' => $this->trimitere->date_from,
-            'date_to' => $this->trimitere->date_to
+            'date_to' => $this->trimitere->date_to,
+            'number_of_days' => $number_of_days,
         ];
     }
 
