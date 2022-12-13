@@ -41,7 +41,7 @@ class CustomerCursUser extends Model {
         'deleted_by'
     ];
 
-    protected $append = [
+    protected $appends = [
         'my_status'
     ];
 
