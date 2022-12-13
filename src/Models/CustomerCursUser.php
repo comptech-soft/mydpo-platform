@@ -116,6 +116,7 @@ class CustomerCursUser extends Model {
             'date_to' => $this->trimitere->date_to,
             'days' => $daysDiff,
             'hours' => $hoursDiff,
+            'color' => $color,
         ];
     }
 
