@@ -13,8 +13,8 @@ class CustomersCursuriUsersController extends Controller {
         return CustomerCursUser::getItems($r->all());
     }
 
-    public function getSummary(Request $r) {
-        return CustomerCursUser::getSummary($r->all());
+    public function getCounter(Request $r) {
+        return CustomerCursUser::getCounter($r->all());
     }
     
 }

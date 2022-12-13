@@ -28,6 +28,7 @@ Route::prefix('cursuri')->group( function() {
 Route::prefix('customers-cursuri-users')->group( function() {
         
     Route::post('items', [CustomersCursuriUsersController::class, 'getItems']);
+    Route::post('counter', [CustomersCursuriUsersController::class, 'getCounter']);
 
 
 });

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use MyDpo\Models\User;
 use MyDpo\Models\Curs;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
+use MyDpo\Performers\CustomerCursUser\GetCounter;
 
 class CustomerCursUser extends Model {
 
@@ -56,5 +57,7 @@ class CustomerCursUser extends Model {
         return (new GetItems($input, self::query(), __CLASS__))->Perform();
     }
 
-
+    public static function getCounter($action, $input) {
+        return (new GetCounter($input))->Perform();
+    }
 }
