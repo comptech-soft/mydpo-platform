@@ -4,6 +4,7 @@ namespace MyDpo\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Models\User;
+use MyDpo\Helpers\Performers\Datatable\GetItems;
 
 class CustomerCursUser extends Model {
 
@@ -44,5 +45,10 @@ class CustomerCursUser extends Model {
     public function user() {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public static function getItems($input) {
+        return (new GetItems($input, self::query(), __CLASS__))->Perform();
+    }
+
 
 }
