@@ -5,6 +5,7 @@ namespace MyDpo\Models;
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Models\User;
 use MyDpo\Models\Curs;
+use MyDpo\Models\Sharematerial;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Performers\CustomerCursUser\GetCounter;
 
@@ -42,7 +43,8 @@ class CustomerCursUser extends Model {
 
     protected $with = [
         'user',
-        'curs'
+        'curs',
+        'trimitere'
     ];
 
     public function user() {
@@ -51,6 +53,10 @@ class CustomerCursUser extends Model {
 
     public function curs() {
         return $this->belongsTo(Curs::class, 'curs_id');
+    }
+
+    public function trimitere() {
+        return $this->belongsTo(Sharematerial::class, 'trimitere_id');
     }
 
     public static function getItems($input) {
