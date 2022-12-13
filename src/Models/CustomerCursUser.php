@@ -52,6 +52,12 @@ class CustomerCursUser extends Model {
     ];
 
     public function getMyStatusAttribute() {
+        $status = $color = '';
+        if($this->status == 'sended')
+        {
+            $status = 'Neînceput';
+            $color = 'red';
+        }
         return $this->status;
     }
 
