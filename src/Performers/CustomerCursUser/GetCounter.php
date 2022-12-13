@@ -22,8 +22,10 @@ class GetCounter extends Perform {
                 (user_id = " . $this->input['user_id'] . ") AND
                 (customer_id = " . $this->input['customer_id'] . ")
             ";
-            
-        $this->payload = \DB::select($sql);
+
+        $result = \DB::select($sql);
+        
+        $this->payload = $result[0];
     
     }
 }
