@@ -58,7 +58,10 @@ class CustomerCursUser extends Model {
             $status = 'Neînceput';
             $color = 'red';
         }
-        return $this->status;
+        return [
+            'status' => $status,
+            'color' => $color,
+        ];
     }
 
 
