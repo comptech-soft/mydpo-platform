@@ -17,4 +17,8 @@ class CustomersCursuriUsersController extends Controller {
         return CustomerCursUser::getCounter($r->all());
     }
     
+    public function changeStatus(Request $r) {
+        return CustomerCursUser::changeStatus($r->all());
+    }
+
 }

@@ -8,6 +8,7 @@ use MyDpo\Models\Curs;
 use MyDpo\Models\Sharematerial;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Performers\CustomerCursUser\GetCounter;
+use MyDpo\Performers\CustomerCursUser\ChangeStatus;
 use Carbon\Carbon;
 
 class CustomerCursUser extends Model {
@@ -156,5 +157,9 @@ class CustomerCursUser extends Model {
 
     public static function getCounter($input) {
         return (new GetCounter($input))->Perform();
+    }
+
+    public static function changeStatus($input) {
+        return (new ChangeStatus($input))->Perform();
     }
 }
