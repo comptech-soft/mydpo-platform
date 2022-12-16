@@ -3,7 +3,7 @@
 namespace MyDpo\Performers\CustomerCursUser;
 
 use MyDpo\Helpers\Perform;
-
+use MyDpo\Models\CustomerCursUser;
 
 class ChangeStatus extends Perform {
 
@@ -12,7 +12,16 @@ class ChangeStatus extends Perform {
      */
     public function Action() {
 
-        dd(__METHOD__, $this->input);
+        $record = CustomerCursUser::find($this->input['id']);
+
+        if($record->status == 'sended')
+        {
+            $record->status = 'started';
+        }
+
+        $record->save();
+        
+        $this->payload = $record;
     
     }
 }
