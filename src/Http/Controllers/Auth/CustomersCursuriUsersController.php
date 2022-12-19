@@ -21,4 +21,10 @@ class CustomersCursuriUsersController extends Controller {
         return CustomerCursUser::changeStatus($r->all());
     }
 
+    public function assignCursuri(Request $r) {
+        return CustomerCursUser::assignCursuri($r->all());
+    }
+
+    
+
 }

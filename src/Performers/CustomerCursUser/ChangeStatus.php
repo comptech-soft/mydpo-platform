@@ -7,9 +7,6 @@ use MyDpo\Models\CustomerCursUser;
 
 class ChangeStatus extends Perform {
 
-    /**
-     * Cate cursuri are asociate un customer
-     */
     public function Action() {
 
         $record = CustomerCursUser::find($this->input['id']);
