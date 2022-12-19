@@ -5,6 +5,7 @@ namespace MyDpo\Performers\CustomerCursUser;
 use MyDpo\Helpers\Perform;
 use MyDpo\Models\CustomerCursUser;
 use MyDpo\Models\Sharematerial;
+use MyDpo\Models\SharematerialDetail;
 
 class AssignCursuri extends Perform {
 
@@ -27,8 +28,9 @@ class AssignCursuri extends Perform {
         ];
 
         $trimitere = Sharematerial::create($shareinput);
-        
 
-        dd($trimitere);
+        $trimitere->CreateDetailsRecords();
+        $trimitere->CreateCustomersMaterials();
+
     }
 }
