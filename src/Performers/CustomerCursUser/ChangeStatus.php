@@ -7,15 +7,12 @@ use MyDpo\Models\CustomerCursUser;
 
 class ChangeStatus extends Perform {
 
+
     public function Action() {
 
         $record = CustomerCursUser::find($this->input['id']);
 
-        if($record->status == 'sended')
-        {
-            $record->status = 'started';
-        }
-
+        $record->status = $this->input['status'];
         $record->save();
         
         $this->payload = $record;
