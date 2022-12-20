@@ -350,6 +350,17 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
         return $user;
     }
 
+    public static function doDelete($input, $user) {
+        $user->deleted = 1;
+        $user->email = $user->id . '#' . $user->email;
+        
+        $user->save();
+        
+        $user->refresh();
+
+        return $user;
+    }
+
     public static function GetRules($action, $input) {
         
         if($action == 'delete')
