@@ -8,9 +8,6 @@ use MyDpo\Models\User;
 class UpdatePermissions extends Perform {
 
     public function Action() {
-      
-        dd($input);
-        
         $user = User::find($this->input['user_id']);
 
         $user->update([
