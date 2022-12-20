@@ -25,6 +25,7 @@ use MyDpo\Performers\User\Changepassword;
 use MyDpo\Performers\User\UpdatePermissions;
 use MyDpo\Performers\User\UpdateStatus;
 use MyDpo\Rules\User\Oldpassword;
+use MyDpo\Scopes\NotdeletedScope;
 
 class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
 {
@@ -90,6 +91,10 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
         'role',
         'my_settings'
     ];
+
+    protected static function booted() {
+        static::addGlobalScope( new NotdeletedScope() );
+    }
 
     /** *************************
      * ATTRIBUTES               *
@@ -355,7 +360,7 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
         $user->email = $user->id . '#' . $user->email;
         
         $user->save();
-        
+
         $user->refresh();
 
         return $user;
