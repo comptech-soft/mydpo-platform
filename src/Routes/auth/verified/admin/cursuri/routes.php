@@ -1,6 +1,7 @@
 <?php
 
 use MyDpo\Http\Controllers\Admin\CursuriController;
+use MyDpo\Http\Controllers\Admin\AccesCursController;
 
 Route::prefix('cursuri')->group( function() {
         
