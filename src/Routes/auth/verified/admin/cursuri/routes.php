@@ -11,3 +11,10 @@ Route::prefix('cursuri')->group( function() {
     Route::post('get-knolyx-courses', [CursuriController::class, 'getKnolyxCourses']);
 
 });
+
+Route::prefix('acces-curs')->group( function() {
+        
+    Route::get('/{curs_id}', [AccesCursController::class, 'index']);        
+
+
+});
