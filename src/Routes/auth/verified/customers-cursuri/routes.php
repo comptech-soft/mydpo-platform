@@ -1,10 +1,12 @@
 <?php
 
 use MyDpo\Http\Controllers\Auth\CustomersCursuriController;
+use MyDpo\Http\Controllers\Auth\CustomersCursuriAccesCursController;
 use MyDpo\Http\Controllers\Auth\CustomersCursuriUsersController;
 use MyDpo\Http\Controllers\Admin\CursuriController;
 
 Route::middleware('valid-customer')->prefix('customer-cursuri')->group( function() {
+    Route::get('/{customer_id}/acces-curs/{customer_curs_id}', [CustomersCursuriAccesCursController::class, 'index']);
     Route::get('/{customer_id}', [CustomersCursuriController::class, 'index']);
 });
 
