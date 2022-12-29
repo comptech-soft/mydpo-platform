@@ -64,4 +64,11 @@ class CustomerCurs extends Model {
     public static function getSummary($input) {
         return (new GetSummary($input))->Perform();
     }
+
+    /**
+     * actualizeaza numarul de utilizatori care au cursurile: sended, startde, done
+     */
+    public static function syncUsersCounts($customer_id) {
+
+    }
 }

@@ -17,9 +17,7 @@ class GetSummary extends Perform {
         $count = CustomerCurs::where('customer_id', $customer_id)->has('curs')->count();
         
         $this->payload = [
-
             'count' => $count,
-
         ];
     
     }

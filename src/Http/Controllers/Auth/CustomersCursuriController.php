@@ -11,7 +11,7 @@ class CustomersCursuriController extends Controller {
     
     public function index($customer_id,Request $r) {
 
-        dd(__METHOD__);
+        CustomerCurs::syncUsersCounts($customer_id);
 
         return Response::View(
             '~templates.index', 
