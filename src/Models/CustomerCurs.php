@@ -33,6 +33,10 @@ class CustomerCurs extends Model {
         'status',
         'effective_time',
         'assigned_users',
+        'users_count',
+        'users_count_sended',
+        'users_count_started',
+        'users_count_done',
         'props',
         'deleted',
         'created_by',
@@ -69,6 +73,30 @@ class CustomerCurs extends Model {
      * actualizeaza numarul de utilizatori care au cursurile: sended, startde, done
      */
     public static function syncUsersCounts($customer_id) {
+        $sql = "
+            SELECT
+                `customers-cursuri-users`.customer_curs_id,
+                COUNT(*) AS users_count,
+                SUM(IF(`customers-cursuri-users`.`status` = 'sended', 1, 0)) AS users_count_sended,
+                SUM(IF(`customers-cursuri-users`.`status` = 'started', 1, 0)) AS users_count_started,
+                SUM(IF(`customers-cursuri-users`.`status` = 'done', 1, 0)) AS users_count_done
+            FROM `customers-cursuri-users`
+            WHERE `customers-cursuri-users`.customer_id = " . $customer_id . "
+            GROUP BY 1
+        ";
 
+        $results = \DB::select($sql);
+
+        foreach($results as $i => $result)
+        {
+            $record = self::find($result->customer_curs_id);
+
+            $record->users_count = $result->users_count;
+            $record->users_count_sended = $result->users_count_sended;
+            $record->users_count_started = $result->users_count_started;
+            $record->users_count_done = $result->users_count_done;
+            
+            $record->save();
+        }
     }
 }
