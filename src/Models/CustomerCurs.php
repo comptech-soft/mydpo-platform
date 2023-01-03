@@ -38,6 +38,7 @@ class CustomerCurs extends Model {
         'users_count_started',
         'users_count_done',
         'props',
+        'platform',
         'deleted',
         'created_by',
         'updated_by',

@@ -144,8 +144,10 @@ class Sharematerial extends Model {
     }
 
     public static function doInsert($input, $share) {
-
-        $share = self::create($input);
+        $share = self::create([
+            ...$input,
+            'platform' => config('app.platform'),
+        ]);
 
         $share->CreateDetailsRecords();
 
@@ -178,6 +180,8 @@ class Sharematerial extends Model {
             'trimitere_id' => $trimitere_id,
             'effective_time' => $calculated_time * count($users),
             'assigned_users' => $users,
+            'platform' => config('app.platform'),
+            'created_by' => \Auth::user()->id,
         ]);
 
         /**
@@ -192,6 +196,7 @@ class Sharematerial extends Model {
                 'trimitere_id' => $trimitere_id,
                 'user_id' => $user_id,
                 'status' => 'sended',
+                'platform' => config('app.platform'),
                 'created_by' => \Auth::user()->id,
             ]);
         }
@@ -227,6 +232,8 @@ class Sharematerial extends Model {
             'assigned_to' => $user_id,
             'sended_document_id' => $material_id,
             'effective_time' => $calculated_time,
+            'created_by' => \Auth::user()->id,
+            'platform' => config('app.platform'),
             'created_by' => \Auth::user()->id,
 
         ]);

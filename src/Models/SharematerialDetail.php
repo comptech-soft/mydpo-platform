@@ -31,6 +31,7 @@ class SharematerialDetail extends Model {
         'status',
         'props',
         'effective_time',
+        'platform',
         'created_at',
         'updated_at',
         'created_by',

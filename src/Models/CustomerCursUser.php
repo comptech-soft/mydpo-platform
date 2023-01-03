@@ -38,6 +38,7 @@ class CustomerCursUser extends Model {
         'user_id',
         'status',
         'props',
+        'platform',
         'deleted',
         'created_by',
         'updated_by',
