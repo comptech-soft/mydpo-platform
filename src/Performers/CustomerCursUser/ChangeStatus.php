@@ -13,6 +13,12 @@ class ChangeStatus extends Perform {
         $record = CustomerCursUser::find($this->input['id']);
 
         $record->status = $this->input['status'];
+
+        if($record->status == 'done')
+        {
+            $record->done_at = \Carbon\Carbon::now();
+        }
+
         $record->save();
         
         $this->payload = $record;

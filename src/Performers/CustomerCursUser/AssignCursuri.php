@@ -25,6 +25,7 @@ class AssignCursuri extends Perform {
             'materiale_trimise' => $this->input['materiale_trimise'],
             'customers' => $this->input['customers'],
             'created_by' => \Auth::user()->id,
+            'platform' => config('app.platform'),
         ];
 
         $trimitere = Sharematerial::create($shareinput);

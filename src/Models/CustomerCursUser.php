@@ -37,6 +37,7 @@ class CustomerCursUser extends Model {
         'trimitere_id',
         'user_id',
         'status',
+        'done_at',
         'props',
         'platform',
         'deleted',
