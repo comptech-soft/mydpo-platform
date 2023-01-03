@@ -53,7 +53,8 @@ class CustomerCursUser extends Model {
     protected $with = [
         'user',
         'curs',
-        'trimitere'
+        'trimitere',
+        'createdby',
     ];
 
     public function getMyStatusAttribute() {
@@ -143,6 +144,10 @@ class CustomerCursUser extends Model {
 
     public function user() {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function createdby() {
+        return $this->belongsTo(User::class, 'created_by');
     }
 
     public function curs() {
