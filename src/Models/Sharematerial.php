@@ -12,6 +12,7 @@ use MyDpo\Rules\Sharematerial\AtLeastOneMaterial;
 use MyDpo\Models\SharematerialDetail;
 use MyDpo\Models\CustomerCurs;
 use MyDpo\Models\CustomerCursUser;
+use MyDpo\Models\User;
 
 class Sharematerial extends Model {
 
@@ -110,6 +111,10 @@ class Sharematerial extends Model {
         return $this->hasMany(SharematerialDetail::class, 'trimitere_id');
     }
 
+    public function createdby() {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
     public static function getItems($input) {
 
         if( array_key_exists('jsons', $input) && $input['jsons'])
@@ -121,7 +126,7 @@ class Sharematerial extends Model {
             $query = self::query();
         }
         
-        return (new GetItems($input, $query, __CLASS__))->Perform();
+        return (new GetItems($input, $query->with(['createdby']), __CLASS__))->Perform();
     }
 
     public static function applyJsonsFilter($query, $jsons) {
