@@ -14,10 +14,7 @@ class ChangeStatus extends Perform {
 
         $record->status = $this->input['status'];
 
-        if($record->status == 'done')
-        {
-            $record->done_at = \Carbon\Carbon::now();
-        }
+        $record->done_at = \Carbon\Carbon::now();
 
         $record->save();
         
