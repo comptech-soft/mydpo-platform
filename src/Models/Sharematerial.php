@@ -192,6 +192,7 @@ class Sharematerial extends Model {
                 'trimitere_id' => $trimitere_id,
                 'user_id' => $user_id,
                 'status' => 'sended',
+                'created_by' => \Auth::user()->id,
             ]);
         }
     }   
