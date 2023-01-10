@@ -13,11 +13,12 @@ class Importer implements ToCollection {
 
 
 
-
-
     public function collection(Collection $rows) {
         
-       dd($rows);
+        foreach($rows as $i => $row)
+        {
+            dd($i, $row);
+        }
     }
 
     
