@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Performers\CustomerCursUser;
+namespace MyDpo\Performers\CustomerCursFile;
 
 use MyDpo\Helpers\Perform;
 
