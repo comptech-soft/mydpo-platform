@@ -39,5 +39,5 @@ Route::prefix('customers-cursuri-participants')->group( function() {
     Route::post('items', [CustomersCursuriParticipantsController::class, 'getItems']);
     // Route::post('counter', [CustomersCursuriUsersController::class, 'getCounter']);
     // Route::post('change-status', [CustomersCursuriUsersController::class, 'changeStatus']);
-    // Route::post('assign-cursuri', [CustomersCursuriUsersController::class, 'assignCursuri']);
+    Route::post('import-participants', [CustomersCursuriParticipantsController::class, 'importParticipants']);
 });

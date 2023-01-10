@@ -13,16 +13,9 @@ class CustomersCursuriParticipantsController extends Controller {
         return CustomerCursParticipant::getItems($r->all());
     }
 
-    // public function getCounter(Request $r) {
-    //     return CustomerCursUser::getCounter($r->all());
-    // }
+    public function importParticipants(Request $r) {
+        return CustomerCursParticipant::importParticipants($r->all());
+    }
     
-    // public function changeStatus(Request $r) {
-    //     return CustomerCursUser::changeStatus($r->all());
-    // }
-
-    // public function assignCursuri(Request $r) {
-    //     return CustomerCursUser::assignCursuri($r->all());
-    // }
 
 }
