@@ -125,6 +125,10 @@ class CustomerCurs extends Model {
         foreach($records as $i => $record)
         {
             $record->files_count =  $record->cursfiles()->count();
+            $record->participants_count =  $record->cursparticipants()->count();
+            $record->trimitere_number =  $record->trimitere->number;
+            $record->trimitere_date =  $record->trimitere->date;
+            $record->trimitere_sended_by =  $record->trimitere->createdby->full_name;
 
             $record->save();
         }
