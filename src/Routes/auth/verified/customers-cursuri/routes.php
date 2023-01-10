@@ -3,6 +3,7 @@
 use MyDpo\Http\Controllers\Auth\CustomersCursuriController;
 use MyDpo\Http\Controllers\Auth\CustomersCursuriAccesCursController;
 use MyDpo\Http\Controllers\Auth\CustomersCursuriUsersController;
+use MyDpo\Http\Controllers\Auth\CustomersCursuriFilesController;
 use MyDpo\Http\Controllers\Admin\CursuriController;
 
 Route::middleware('valid-customer')->prefix('customer-cursuri')->group( function() {
@@ -24,4 +25,11 @@ Route::prefix('customers-cursuri-users')->group( function() {
     Route::post('counter', [CustomersCursuriUsersController::class, 'getCounter']);
     Route::post('change-status', [CustomersCursuriUsersController::class, 'changeStatus']);
     Route::post('assign-cursuri', [CustomersCursuriUsersController::class, 'assignCursuri']);
+});
+
+Route::prefix('customers-cursuri-files')->group( function() {        
+    Route::post('items', [CustomersCursuriFilesController::class, 'getItems']);
+    // Route::post('counter', [CustomersCursuriUsersController::class, 'getCounter']);
+    // Route::post('change-status', [CustomersCursuriUsersController::class, 'changeStatus']);
+    // Route::post('assign-cursuri', [CustomersCursuriUsersController::class, 'assignCursuri']);
 });
