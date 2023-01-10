@@ -4,6 +4,7 @@ namespace MyDpo\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
+use MyDpo\Performers\CustomerCursFile\AttachFiles;
 
 class CustomerCursFile extends Model {
 
@@ -46,5 +47,8 @@ class CustomerCursFile extends Model {
         return (new GetItems($input, self::query(), __CLASS__))->Perform();
     }
 
-    
+    public static function attachFiles($input) {
+        return (new AttachFiles($input))->Perform();
+    }
+
 }

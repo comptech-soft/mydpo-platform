@@ -13,17 +13,8 @@ class CustomersCursuriFilesController extends Controller {
         return CustomerCursFile::getItems($r->all());
     }
 
-    // public function getCounter(Request $r) {
-    //     return CustomerCursUser::getCounter($r->all());
-    // }
-    
-    // public function changeStatus(Request $r) {
-    //     return CustomerCursUser::changeStatus($r->all());
-    // }
-
     public function attachFiles(Request $r) {
-        dd($r->all());
-        // return CustomerCursUser::assignCursuri($r->all());
+        return CustomerCursFile::attachFiles($r->all());
     }
 
 }
