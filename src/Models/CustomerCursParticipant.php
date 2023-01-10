@@ -5,9 +5,9 @@ namespace MyDpo\Models;
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
 
-class CustomerCursFile extends Model {
+class CustomerCursParticipant extends Model {
 
-    protected $table = 'customers-cursuri-files';
+    protected $table = 'customers-cursuri-participants';
 
     protected $casts = [
         'props' => 'json',
@@ -24,17 +24,10 @@ class CustomerCursFile extends Model {
         'customer_curs_id',
         'customer_id',
         'platform',
-        'name',
-        'description',
-        'file_original_name',
-        'file_original_extension',
-        'file_full_name',
-        'file_mime_type',
-        'file_upload_ip',
-        'url',
-        'file_size',
-        'file_width',
-        'file_height',
+        'last_name',
+        'first_name',
+        'functiie',
+        'data',
         'props',
         'deleted',
         'created_by',
