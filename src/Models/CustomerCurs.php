@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Models\Curs;
 use MyDpo\Models\CustomerCursUser;
+use MyDpo\Models\CustomerCursFile;
+use MyDpo\Models\CustomerCursParticipant;
+use MyDpo\Models\Sharematerial;
 use MyDpo\Performers\CustomerCurs\GetSummary;
 
 class CustomerCurs extends Model {
@@ -37,6 +40,11 @@ class CustomerCurs extends Model {
         'users_count_sended',
         'users_count_started',
         'users_count_done',
+        'files_count',
+        'participants_count',
+        'trimitere_number',
+        'trimitere_date',
+        'trimitere_sended_by',
         'props',
         'platform',
         'deleted',
@@ -54,8 +62,20 @@ class CustomerCurs extends Model {
         return $this->belongsTo(Curs::class, 'curs_id');
     }
 
+    public function trimitere() {
+        return $this->belongsTo(Sharematerial::class, 'trimitere_id');
+    }
+
     public function cursusers() {
         return $this->hasMany(CustomerCursUser::class, 'customer_curs_id');
+    }
+
+    public function cursfiles() {
+        return $this->hasMany(CustomerCursFile::class, 'customer_curs_id');
+    }
+
+    public function cursparticipants() {
+        return $this->hasMany(CustomerCursParticipant::class, 'customer_curs_id');
     }
 
     public static function getItems($input) {
@@ -96,11 +116,16 @@ class CustomerCurs extends Model {
             $record->users_count_sended = $result->users_count_sended;
             $record->users_count_started = $result->users_count_started;
             $record->users_count_done = $result->users_count_done;
-            
+
             $record->save();
         }
 
-        dd(__METHODS__);
+        $records = self::where('customer_id', $customer_id)->get();
+
+        foreach($records as $i => $record)
+        {
+            dd($record);
+        }
     }
 
     
