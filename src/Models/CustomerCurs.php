@@ -124,7 +124,9 @@ class CustomerCurs extends Model {
 
         foreach($records as $i => $record)
         {
-            dd($record);
+            $record->files_count =  $record->cursfiles()->count();
+
+            $record->save();
         }
     }
 
