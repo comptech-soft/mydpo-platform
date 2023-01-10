@@ -8,8 +8,10 @@ use MyDpo\Models\CustomerCursParticipant;
 
 class Importer implements ToCollection {
 
+    public $input = NULL;
     
-    public function __construct() {
+    public function __construct($input) {
+        $this->input = $input;
     }
 
     public function collection(Collection $rows) {
