@@ -4,6 +4,7 @@ namespace MyDpo\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
+use MyDpo\Performers\CustomerCursParticipant\ImportParticipants;
 
 class CustomerCursParticipant extends Model {
 
@@ -39,5 +40,7 @@ class CustomerCursParticipant extends Model {
         return (new GetItems($input, self::query(), __CLASS__))->Perform();
     }
 
-    
+    public static function importParticipants($input) {
+        return (new ImportParticipants($input))->Perform();
+    }
 }
