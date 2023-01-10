@@ -12,7 +12,7 @@ class ImportParticipants extends Perform {
 
         $importer = new Importer();
 
-        dd($importer);
+        \Excel::import($importer, $this->input['file']);
 
     }
 
