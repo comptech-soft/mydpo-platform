@@ -10,8 +10,12 @@ class AttachFiles extends Perform {
 
         foreach($this->input['files'] as $i => $file)
         {
-            dd($file);
+            $this->procesFile($file);
         }
 
+    }
+
+    private function procesFile($file) {
+        
     }
 }
