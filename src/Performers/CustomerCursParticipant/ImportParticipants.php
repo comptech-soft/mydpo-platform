@@ -4,12 +4,15 @@ namespace MyDpo\Performers\CustomerCursParticipant;
 
 use MyDpo\Helpers\Perform;
 use MyDpo\Models\CustomerCursFile;
+use MyDpo\Imports\CustomerCursParticipant\Importer;
 
 class ImportParticipants extends Perform {
 
     public function Action() {
 
-        dd($this->input);
+        $importer = new Importer();
+
+        dd($importer);
 
     }
 
