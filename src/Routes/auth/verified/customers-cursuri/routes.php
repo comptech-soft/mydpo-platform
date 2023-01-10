@@ -32,7 +32,7 @@ Route::prefix('customers-cursuri-files')->group( function() {
     Route::post('items', [CustomersCursuriFilesController::class, 'getItems']);
     // Route::post('counter', [CustomersCursuriUsersController::class, 'getCounter']);
     // Route::post('change-status', [CustomersCursuriUsersController::class, 'changeStatus']);
-    Route::post('attach-files', [CustomersCursuriUsersController::class, 'attachFiles']);
+    Route::post('attach-files', [CustomersCursuriFilesController::class, 'attachFiles']);
 });
 
 Route::prefix('customers-cursuri-participants')->group( function() {        
