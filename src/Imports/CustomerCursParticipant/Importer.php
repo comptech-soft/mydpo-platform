@@ -9,7 +9,7 @@ use MyDpo\Models\CustomerCursParticipant;
 class Importer implements ToCollection {
 
     public $input = NULL;
-    
+
     public function __construct($input) {
         $this->input = $input;
     }
@@ -37,7 +37,7 @@ class Importer implements ToCollection {
             
         ];
 
-        dd($row, $input);
+        CustomerCursParticipant::create($input);
 
     }    
 
