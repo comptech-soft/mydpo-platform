@@ -4,6 +4,7 @@ namespace MyDpo\Imports\CustomerCursParticipant;
 
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
+use MyDpo\Models\CustomerCursParticipant;
 
 class Importer implements ToCollection {
 
@@ -23,8 +24,19 @@ class Importer implements ToCollection {
 
     private function processRow($row) {
 
-        dd($row);
-        
+        $input = [
+            'customer_curs_id' => $this->input['customer_curs_id'],
+            'customer_id' => $this->input['customer_id'],
+            'platform' => config('app.platform'),
+            'last_name' => $row[0],
+            'first_name' => $row[1],
+            'functiie' => $row[2],
+            'data' => $row[3],
+            
+        ];
+
+        dd($row, $input);
+
     }    
 
 }
