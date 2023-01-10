@@ -21,8 +21,9 @@ class CustomersCursuriFilesController extends Controller {
     //     return CustomerCursUser::changeStatus($r->all());
     // }
 
-    // public function assignCursuri(Request $r) {
-    //     return CustomerCursUser::assignCursuri($r->all());
-    // }
+    public function attachFiles(Request $r) {
+        dd($r->all());
+        // return CustomerCursUser::assignCursuri($r->all());
+    }
 
 }
