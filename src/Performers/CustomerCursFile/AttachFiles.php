@@ -8,7 +8,10 @@ class AttachFiles extends Perform {
 
     public function Action() {
 
-        dd($this->input);
+        foreach($this->input['files'] as $i => $file)
+        {
+            dd($file);
+        }
 
     }
 }

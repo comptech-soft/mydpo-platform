@@ -234,7 +234,6 @@ class CustomerFile extends Model {
         }
         
         return User::GetUsersByIds($users);
-    
     }
 
     public static function CreateNotificationReceiversB2b($input) {
