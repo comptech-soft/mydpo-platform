@@ -99,5 +99,9 @@ class CustomerCurs extends Model {
             
             $record->save();
         }
+
+        dd(__METHODS__);
     }
+
+    
 }
