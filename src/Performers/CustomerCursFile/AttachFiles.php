@@ -35,6 +35,7 @@ class AttachFiles extends Perform {
                 'file_upload_ip' => request()->ip(),
                 'file_size' => $file->getSize(),
                 'url' => config('filesystems.disks.s3.url') . $result,
+                'platform' => config('app.platform'),
                 'created_by' => \Auth::user()->id,
             ];
 
