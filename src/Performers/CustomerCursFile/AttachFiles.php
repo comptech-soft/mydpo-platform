@@ -19,7 +19,7 @@ class AttachFiles extends Perform {
     private function procesFile($file) {
         $ext = strtolower($file->extension());
 
-        if(in_array($ext, ['xls', 'xlsx']))
+        if(in_array($ext, ['xls', 'xlsx', 'pdf']))
         {
             $filename = \Str::slug(str_replace($file->extension(), '', $file->getClientOriginalName())) . '.' .  strtolower($file->extension());
             
