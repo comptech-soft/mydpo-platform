@@ -12,6 +12,18 @@ Route::middleware('valid-customer')->prefix('customer-cursuri')->group( function
     Route::get('/{customer_id}', [CustomersCursuriController::class, 'index']);
 });
 
+if( config('app.platform') == 'b2b' )
+{
+    Route::middleware('valid-customer')->prefix('cursurile-mele')->group( function() {
+        Route::get('/{customer_id}', [CustomersCursuriController::class, 'indexMyCursuri']);
+    });
+}
+
+Route::middleware('valid-customer')->prefix('customer-cursuri')->group( function() {
+    Route::get('/{customer_id}/acces-curs/{customer_curs_id}', [CustomersCursuriAccesCursController::class, 'index']);
+    Route::get('/{customer_id}', [CustomersCursuriController::class, 'index']);
+});
+
 Route::prefix('customers-cursuri')->group( function() {
     Route::post('items', [CustomersCursuriController::class, 'getItems']);
     Route::post('get-summary', [CustomersCursuriController::class, 'getSummary']);
