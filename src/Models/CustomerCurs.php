@@ -10,6 +10,7 @@ use MyDpo\Models\CustomerCursFile;
 use MyDpo\Models\CustomerCursParticipant;
 use MyDpo\Models\Sharematerial;
 use MyDpo\Performers\CustomerCurs\GetSummary;
+use MyDpo\Performers\CustomerCurs\DesasociereUtilizatori;
 
 class CustomerCurs extends Model {
 
@@ -84,6 +85,10 @@ class CustomerCurs extends Model {
             self::query()->has('curs'), 
             __CLASS__
         ))->Perform();
+    }
+
+    public static function desasociereUtilizatori($input) {
+        return (new DesasociereUtilizatori($input))->Perform();
     }
 
     public static function getSummary($input) {
