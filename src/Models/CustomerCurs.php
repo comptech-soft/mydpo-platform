@@ -88,7 +88,9 @@ class CustomerCurs extends Model {
     }
 
     public static function desasociereUtilizatori($input) {
-        return (new DesasociereUtilizatori($input))->Perform();
+        $r = (new DesasociereUtilizatori($input))->Perform();
+        self::syncUsersCounts($input['customer_id']);
+        return $r;
     }
 
     public static function getSummary($input) {
