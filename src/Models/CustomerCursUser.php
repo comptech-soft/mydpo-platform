@@ -6,11 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 use MyDpo\Models\User;
 use MyDpo\Models\Curs;
 use MyDpo\Models\Sharematerial;
+use MyDpo\Models\SharematerialDetail;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Performers\CustomerCursUser\GetCounter;
 use MyDpo\Performers\CustomerCursUser\ChangeStatus;
 use MyDpo\Performers\CustomerCursUser\AssignCursuri;
 use Carbon\Carbon;
+
 
 class CustomerCursUser extends Model {
 
@@ -160,7 +162,15 @@ class CustomerCursUser extends Model {
     }
 
     public function removeRecord() {
-        dd(__METHOD__);
+        $record = SharematerialDetail::where('trimitere_id', $this->trimitere_id)
+            ->where('customer_id', $this->customer_id)
+            ->where('assigned_to', $this->user_id)
+            ->where('sended_document_id', $this->curs_id)
+            ->first();
+
+        $record->delete();
+
+        $this->delete();
     }
 
     public static function getItems($input) {
