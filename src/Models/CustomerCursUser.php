@@ -159,6 +159,10 @@ class CustomerCursUser extends Model {
         return $this->belongsTo(Sharematerial::class, 'trimitere_id');
     }
 
+    public function removeRecord() {
+        dd(__METHOD__);
+    }
+
     public static function getItems($input) {
         return (new GetItems($input, self::query(), __CLASS__))->Perform();
     }

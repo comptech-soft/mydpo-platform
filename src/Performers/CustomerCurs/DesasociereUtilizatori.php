@@ -3,13 +3,18 @@
 namespace MyDpo\Performers\CustomerCurs;
 
 use MyDpo\Helpers\Perform;
-use MyDpo\Models\CustomerCurs;
+use MyDpo\Models\CustomerCursUser;
 
 class DesasociereUtilizatori extends Perform {
 
     public function Action() {
 
-        dd($this->input);
+        foreach($this->input['ids'] as $i => $id)
+        {
+            $record = CustomerCursUser::find($id);
+
+            $record->removeRecord();
+        }
     
     }
 }
