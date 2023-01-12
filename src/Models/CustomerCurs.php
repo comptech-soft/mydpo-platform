@@ -101,6 +101,26 @@ class CustomerCurs extends Model {
      * actualizeaza numarul de utilizatori care au cursurile: sended, startde, done
      */
     public static function syncUsersCounts($customer_id) {
+
+        $records = self::where('customer_id', $customer_id)->get();
+
+        foreach($records as $i => $record)
+        {
+            $record->files_count =  $record->cursfiles()->count();
+            $record->participants_count =  $record->cursparticipants()->count();
+            $record->trimitere_number =  $record->trimitere->number;
+            $record->trimitere_date =  $record->trimitere->date;
+            $record->trimitere_sended_by =  $record->trimitere->createdby->full_name;
+
+            $record->users_count = 0;
+            $record->users_count_sended = 0;
+            $record->users_count_started = 0;
+            $record->users_count_done = 0;
+
+            $record->save();
+        }
+
+
         $sql = "
             SELECT
                 `customers-cursuri-users`.customer_curs_id,
@@ -127,18 +147,7 @@ class CustomerCurs extends Model {
             $record->save();
         }
 
-        $records = self::where('customer_id', $customer_id)->get();
-
-        foreach($records as $i => $record)
-        {
-            $record->files_count =  $record->cursfiles()->count();
-            $record->participants_count =  $record->cursparticipants()->count();
-            $record->trimitere_number =  $record->trimitere->number;
-            $record->trimitere_date =  $record->trimitere->date;
-            $record->trimitere_sended_by =  $record->trimitere->createdby->full_name;
-
-            $record->save();
-        }
+        
     }
 
     
