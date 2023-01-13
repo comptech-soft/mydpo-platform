@@ -34,6 +34,10 @@ class CustomersCursuriController extends Controller {
         );
     }
 
+    public function downloadFile($customer_id, $file_id, Request $r) {
+        return CustomerCurs::downloadFile($customer_id, $file_id);
+    }
+
     public function getItems(Request $r) {
         return CustomerCurs::getItems($r->all());
     }
