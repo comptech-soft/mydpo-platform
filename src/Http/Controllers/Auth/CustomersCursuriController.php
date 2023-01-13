@@ -12,23 +12,26 @@ class CustomersCursuriController extends Controller {
     
     public function index($customer_id, Request $r) {
 
-        $activation = Activation::byUserAndCustomer($user_id = \Auth::user()->id, $customer_id);
-
-        if( ! $activation || ($activation->activated == 0))
+        if( config('app.platform') == 'b2b')
         {
-            return redirect('/');
-        }
+            $activation = Activation::byUserAndCustomer($user_id = \Auth::user()->id, $customer_id);
 
-        $role = \Auth::user()->roles()->wherePivot('customer_id', $customer_id)->get()->first();
+            if( ! $activation || ($activation->activated == 0))
+            {
+                return redirect('/');
+            }
 
-        if($activation->role_id != $role->id)
-        {
-            return redirect('/');
-        }
+            $role = \Auth::user()->roles()->wherePivot('customer_id', $customer_id)->get()->first();
 
-        if($role->slug == 'customer')
-        {
-            return redirect('/cursurile-mele/' . $customer_id);
+            if($activation->role_id != $role->id)
+            {
+                return redirect('/');
+            }
+
+            if($role->slug == 'customer')
+            {
+                return redirect('/cursurile-mele/' . $customer_id);
+            }
         }
 
         CustomerCurs::syncUsersCounts($customer_id);
