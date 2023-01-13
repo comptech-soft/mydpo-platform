@@ -10,6 +10,7 @@ use MyDpo\Http\Controllers\Admin\CursuriController;
 Route::middleware('valid-customer')->prefix('customer-cursuri')->group( function() {
     Route::get('/{customer_id}/acces-curs/{customer_curs_id}', [CustomersCursuriAccesCursController::class, 'index']);
     Route::get('/{customer_id}', [CustomersCursuriController::class, 'index']);
+    Route::get('download-file/{file_id}', [CustomersCursuriController::class, 'downloadFile']);
 });
 
 if( config('app.platform') == 'b2b' )
