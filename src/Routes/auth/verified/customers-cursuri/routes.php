@@ -40,6 +40,7 @@ Route::prefix('customers-cursuri')->group( function() {
 
 Route::prefix('cursuri')->group( function() {
     Route::post('open-knolyx-course', [CursuriController::class, 'openKnolyxCourse']);
+    Route::post('items', [CursuriController::class, 'getItems']);
 });
 
 Route::prefix('customers-cursuri-users')->group( function() {        
