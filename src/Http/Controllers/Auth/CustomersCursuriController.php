@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Helpers\Response;
 use MyDpo\Models\CustomerCurs;
+use MyDpo\Models\CustomerCursFile;
 
 class CustomersCursuriController extends Controller {
     
@@ -35,7 +36,7 @@ class CustomersCursuriController extends Controller {
     }
 
     public function downloadFile($customer_id, $file_id, Request $r) {
-        return CustomerCurs::downloadFile($customer_id, $file_id);
+        return CustomerCursFile::downloadFile($customer_id, $file_id);
     }
 
     public function getItems(Request $r) {
