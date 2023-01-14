@@ -39,16 +39,6 @@ class AttachFiles extends Perform {
                 'created_by' => \Auth::user()->id,
             ];
 
-            // if(in_array($ext, ['jpg', 'jpeg', 'png']))
-            // {
-            //     $image = \Image::make($file);
-            //     $inputdata = [
-            //         ...$inputdata,
-            //         'file_size' => $image->filesize(),
-            //         'file_width' => $image->width(),
-            //         'file_height' => $image->height(),
-            //     ];
-            // }
 
             $exist = CustomerCursFile::where('customer_curs_id', $this->input['customer_curs_id'])
                 ->where('url', $inputdata['url'])

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Helpers\Response;
 use MyDpo\Models\CustomerCurs;
+use MyDpo\Models\CustomerCursFile;
 use MyDpo\Models\Activation;
 
 class CustomersCursuriController extends Controller {
@@ -55,6 +56,10 @@ class CustomersCursuriController extends Controller {
                 'customer_id' => $customer_id,
             ]
         );
+    }
+
+    public function downloadFile($customer_id, $file_id, Request $r) {
+        return CustomerCursFile::downloadFile($customer_id, $file_id);
     }
 
     public function getItems(Request $r) {
