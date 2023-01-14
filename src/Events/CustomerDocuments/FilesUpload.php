@@ -14,12 +14,10 @@ use MyDpo\Events\BaseBroadcastEvent;
 
 use MyDpo\Models\Folder;
 
-
 class FilesUpload extends BaseBroadcastEvent {
 
     public $file = NULL;
     public $folder = NULL;
-
 
     public function __construct($input) {
 
@@ -39,5 +37,4 @@ class FilesUpload extends BaseBroadcastEvent {
 
     }
 
-    
 }
