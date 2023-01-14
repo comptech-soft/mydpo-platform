@@ -195,7 +195,7 @@ class Sharematerial extends Model {
          */
         foreach($users as $i => $user_id) 
         {
-            CustomerCursUser::create([
+            $customercurs = CustomerCursUser::create([
                 'customer_curs_id' => $customer_curs->id,
                 'customer_id' => $customer_id,
                 'curs_id' => $material_id,
@@ -206,6 +206,8 @@ class Sharematerial extends Model {
                 'created_by' => \Auth::user()->id,
             ]);
 
+            dd($customercurs);
+            
             event(new CursShareEvent([
                 // ...$input,
                 // 'file' => $file,
