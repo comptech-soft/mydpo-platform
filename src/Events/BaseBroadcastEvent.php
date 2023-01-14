@@ -82,8 +82,6 @@ class BaseBroadcastEvent implements ShouldBroadcast {
             'created_by' => $this->sender->id,
         ];
 
-        dd($this->notification_record);
-
     }
 
     public function broadcastAs() {

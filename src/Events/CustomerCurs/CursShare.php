@@ -14,24 +14,22 @@ use MyDpo\Events\BaseBroadcastEvent;
 
 class CursShare extends BaseBroadcastEvent {
 
-    public $file = NULL;
-    public $folder = NULL;
-
+    public $curs = NULL;
+    
     public function __construct($input) {
 
         parent::__construct('curs', 'share', $input);
                
-        // $this->file = $this->input['file'];
-        // $this->folder = Folder::find($this->input['folder_id']);
+        $this->curs = $this->input['curs'];
 
-        // $this->SetSubject(__CLASS__, $this->file->id);
+        $this->SetSubject(__CLASS__, $this->file->id);
 
-        // $this->CreateMessage([
-        //     'nume-fisier' => $this->file->file_original_name,
-        //     'nume-folder' => $this->folder->name,
-        // ]);
+        $this->CreateMessage([
+            // 'nume-fisier' => $this->file->file_original_name,
+            // 'nume-folder' => $this->folder->name,
+        ]);
 
-        // $this->InsertNotification();
+        $this->InsertNotification();
 
     }
     
