@@ -22,7 +22,7 @@ class CursShare extends BaseBroadcastEvent {
                
         $this->curs = $this->input['curs'];
 
-        $this->SetSubject(__CLASS__, $this->file->id);
+        $this->SetSubject(__CLASS__, $this->curs->id);
 
         $this->CreateMessage([
             // 'nume-fisier' => $this->file->file_original_name,
