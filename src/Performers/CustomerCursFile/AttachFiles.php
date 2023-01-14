@@ -4,6 +4,7 @@ namespace MyDpo\Performers\CustomerCursFile;
 
 use MyDpo\Helpers\Perform;
 use MyDpo\Models\CustomerCursFile;
+use MyDpo\Models\CustomerCurs;
 
 class AttachFiles extends Perform {
 
@@ -13,6 +14,10 @@ class AttachFiles extends Perform {
         {
             $this->procesFile($file);
         }
+
+        $customer_curs = CustomerCurs::find($this->input['customer_curs_id']);
+
+        dd($customer_curs);
 
     }
 
