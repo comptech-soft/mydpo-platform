@@ -16,7 +16,6 @@ use MyDpo\Performers\CustomerFile\DeleteFiles;
 use MyDpo\Events\CustomerDocuments\FilesUpload as FilesUploadEvent;
 
 class CustomerFile extends Model {
-
     
     protected $table = 'customers-files';
 

@@ -13,6 +13,7 @@ use MyDpo\Models\SharematerialDetail;
 use MyDpo\Models\CustomerCurs;
 use MyDpo\Models\CustomerCursUser;
 use MyDpo\Models\User;
+use MyDpo\Events\CustomerCurs\CursShare as CursShareEvent;
 
 class Sharematerial extends Model {
 
@@ -156,7 +157,6 @@ class Sharematerial extends Model {
         ]);
 
         $share->CreateDetailsRecords();
-
         $share->CreateCustomersMaterials();
 
         return $share;
@@ -205,6 +205,12 @@ class Sharematerial extends Model {
                 'platform' => config('app.platform'),
                 'created_by' => \Auth::user()->id,
             ]);
+
+            event(new CursShareEvent([
+                // ...$input,
+                // 'file' => $file,
+                // 'receiver' => $receiver,
+            ]));
         }
     }   
 
