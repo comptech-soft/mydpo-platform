@@ -23,6 +23,7 @@ if( config('app.platform') == 'b2b' )
     Route::prefix('share')->group( function() {
         Route::post('action/{action}', [ShareController::class, 'doAction']);
         Route::post('get-next-number', [ShareController::class, 'getNextNumber']);
+        Route::post('items', [ShareController::class, 'getItems']);
     });    
 }
 
