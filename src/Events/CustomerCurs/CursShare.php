@@ -25,8 +25,7 @@ class CursShare extends BaseBroadcastEvent {
         $this->SetSubject(__CLASS__, $this->curs->id);
 
         $this->CreateMessage([
-            // 'nume-fisier' => $this->file->file_original_name,
-            // 'nume-folder' => $this->folder->name,
+            'nume-curs' => $this->curs->name,
         ]);
 
         $this->InsertNotification();
