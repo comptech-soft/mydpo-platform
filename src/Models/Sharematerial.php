@@ -206,12 +206,12 @@ class Sharematerial extends Model {
                 'created_by' => \Auth::user()->id,
             ]);
 
-            dd($customercurs);
+            dd($customercurs->customer);
             
             event(new CursShareEvent([
                 // ...$input,
                 // 'file' => $file,
-                // 'receiver' => $receiver,
+                'receiver' => $customercurs->user,
             ]));
         }
     }   

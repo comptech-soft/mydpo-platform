@@ -7,6 +7,7 @@ use MyDpo\Models\User;
 use MyDpo\Models\Curs;
 use MyDpo\Models\Sharematerial;
 use MyDpo\Models\SharematerialDetail;
+use MyDpo\Models\Customer;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Performers\CustomerCursUser\GetCounter;
 use MyDpo\Performers\CustomerCursUser\ChangeStatus;
@@ -159,6 +160,10 @@ class CustomerCursUser extends Model {
 
     public function trimitere() {
         return $this->belongsTo(Sharematerial::class, 'trimitere_id');
+    }
+
+    public function customer() {
+        return $this->belongsTo(Customer::class, 'customer_id');
     }
 
     public function removeRecord() {
