@@ -16,8 +16,8 @@ class AttachFiles extends Perform {
         }
 
         $customer_curs = CustomerCurs::find($this->input['customer_curs_id']);
-
-        dd($customer_curs);
+        $customer_curs->files_count = $customer_curs->cursfiles()->count();
+        $customer_curs->save();
 
     }
 
