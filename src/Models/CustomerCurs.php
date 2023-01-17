@@ -12,6 +12,7 @@ use MyDpo\Models\Sharematerial;
 use MyDpo\Performers\CustomerCurs\GetSummary;
 use MyDpo\Performers\CustomerCurs\DesasociereUtilizatori;
 use MyDpo\Performers\CustomerCurs\StergereParticipant;
+use MyDpo\Performers\CustomerCurs\StergereFisier;
 
 class CustomerCurs extends Model {
 
@@ -96,6 +97,12 @@ class CustomerCurs extends Model {
 
     public static function stergereParticipant($input) {
         $r = (new StergereParticipant($input))->Perform();
+        self::syncUsersCounts($input['customer_id']);
+        return $r;
+    }
+
+    public static function stergereFisier($input) {
+        $r = (new StergereFisier($input))->Perform();
         self::syncUsersCounts($input['customer_id']);
         return $r;
     }

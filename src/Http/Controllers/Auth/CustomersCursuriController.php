@@ -74,9 +74,12 @@ class CustomersCursuriController extends Controller {
         return CustomerCurs::stergereParticipant($r->all());
     }
 
+    public function stergereFisier(Request $r) {
+        return CustomerCurs::stergereFisier($r->all());
+    }
+
     public function desasociereUtilizatori(Request $r) {
         return CustomerCurs::desasociereUtilizatori($r->all());
     }
-
     
 }
