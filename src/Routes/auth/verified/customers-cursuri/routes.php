@@ -36,6 +36,7 @@ Route::prefix('customers-cursuri')->group( function() {
     Route::post('items', [CustomersCursuriController::class, 'getItems']);
     Route::post('get-summary', [CustomersCursuriController::class, 'getSummary']);
     Route::post('desasociere-utilizatori', [CustomersCursuriController::class, 'desasociereUtilizatori']);
+    Route::post('stergere-participant', [CustomersCursuriController::class, 'stergereParticipant']);
 });
 
 Route::prefix('cursuri')->group( function() {
