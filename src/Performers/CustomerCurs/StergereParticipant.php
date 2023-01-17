@@ -3,13 +3,14 @@
 namespace MyDpo\Performers\CustomerCurs;
 
 use MyDpo\Helpers\Perform;
-use MyDpo\Models\CustomerCursUser;
+use MyDpo\Models\CustomerCursParticipant;
 
 class StergereParticipant extends Perform {
 
     public function Action() {
 
-        dd(__METHOD__, $this->input);
+        $record = CustomerCursParticipant::find($this->input['id']);
+        $record->delete();
     
     }
 }
