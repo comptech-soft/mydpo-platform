@@ -280,13 +280,16 @@ class Sharematerial extends Model {
         return $result;
     }
 
+    public function syncValues() {
+        dd($this);
+    }
 
     public static function sync() {
         $records = self::all();
 
         foreach($records as $i => $record)
         {
-            dd($record);
+            $record->syncValues();
         }
     }
 
