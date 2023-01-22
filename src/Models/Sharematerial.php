@@ -282,7 +282,12 @@ class Sharematerial extends Model {
 
 
     public static function sync() {
-        dd(__METHOD__);
+        $records = self::all();
+
+        foreach($records as $i => $record)
+        {
+            dd($record);
+        }
     }
 
 }
