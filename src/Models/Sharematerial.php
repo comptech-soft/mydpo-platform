@@ -280,4 +280,9 @@ class Sharematerial extends Model {
         return $result;
     }
 
+
+    public static function sync() {
+        dd(__METHOD__);
+    }
+
 }

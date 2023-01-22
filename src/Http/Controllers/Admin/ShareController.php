@@ -14,7 +14,8 @@ class ShareController extends Controller {
         if( in_array($entity, ['curs', 'centralizator', 'chestionar']) )
         {
 
-            dd(__FILE__);
+            Sharematerial::sync();
+            
             return Response::View(
                 '~templates.index', 
                 asset('apps/share-' . $entity . '/index.js'), 
