@@ -13,6 +13,8 @@ class CustomersCursuriController extends Controller {
     
     public function index($customer_id, Request $r) {
 
+        dd(__METHOD__);
+
         if( config('app.platform') == 'b2b')
         {
             $activation = Activation::byUserAndCustomer($user_id = \Auth::user()->id, $customer_id);
