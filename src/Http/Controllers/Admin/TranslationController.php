@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use MyDpo\Helpers\Response;
 use MyDpo\Models\Translation;
 
-class TranslationsController extends Controller {
+class TranslationController extends Controller {
     
     public function index($customer_id,Request $r) {
 

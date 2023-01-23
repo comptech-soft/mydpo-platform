@@ -1,12 +1,12 @@
 <?php
 
-use MyDpo\Http\Controllers\Admin\TranslationsController;
+use MyDpo\Http\Controllers\Admin\TranslationController;
 
 
 Route::prefix('translations')->group( function() {
         
-    Route::get('/', [TranslationsController::class, 'index']);        
-    Route::post('items', [TranslationsController::class, 'getItems']);
-    Route::post('action/{action}', [TranslationsController::class, 'doAction']);
+    Route::get('/', [TranslationController::class, 'index']);        
+    Route::post('items', [TranslationController::class, 'getItems']);
+    Route::post('action/{action}', [TranslationController::class, 'doAction']);
    
 });
