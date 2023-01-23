@@ -285,7 +285,7 @@ class Sharematerial extends Model {
 
         $this->cursuri_count = $this->count_materiale;
         $this->customers_count = $this->count_customers;
-        $this->users_count = $this->createdby->count_users;
+        $this->users_count = $this->count_users;
 
         $this->save();
     }
