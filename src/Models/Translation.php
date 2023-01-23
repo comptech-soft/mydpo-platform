@@ -4,7 +4,8 @@ namespace MyDpo\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Performers\Translation\CreateKey;
-use MyDpo\Helpers\Performers\Datatable\GetItems;    
+use MyDpo\Helpers\Performers\Datatable\GetItems;   
+use MyDpo\Helpers\Performers\Datatable\DoAction; 
 
 class Translation extends Model 
 {
@@ -21,6 +22,10 @@ class Translation extends Model
 
     public static function getItems($input) {
         return (new GetItems($input, self::query(), __CLASS__))->Perform();
+    }
+
+    public static function doAction($action, $input) {
+        return (new DoAction($action, $input, __CLASS__))->Perform();
     }
 
     public static function createKey($input) {
