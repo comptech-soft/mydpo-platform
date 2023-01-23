@@ -19,6 +19,10 @@ class TranslationsController extends Controller {
         );
     }
 
+    public function createFile(Request $r) {
+        return Translation::createFile($r->all());
+    }
+
     public function getItems(Request $r) {
         return Translation::getItems($r->all());
     }
