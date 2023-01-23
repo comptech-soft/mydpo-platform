@@ -8,7 +8,7 @@ use MyDpo\Helpers\Response;
 
 class CustomersRapoarteLunareController extends Controller {
     
-    public function index($customer_id,Request $r) {
+    public function index($customer_id, Request $r) {
 
         return Response::View(
             '~templates.index', 

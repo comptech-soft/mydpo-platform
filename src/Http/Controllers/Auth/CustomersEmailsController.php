@@ -8,7 +8,7 @@ use MyDpo\Helpers\Response;
 
 class CustomersEmailsController extends Controller {
     
-    public function index($customer_id,Request $r) {
+    public function index($customer_id, Request $r) {
 
         return Response::View(
             '~templates.index', 

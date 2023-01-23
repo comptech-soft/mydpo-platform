@@ -9,7 +9,7 @@ use MyDpo\Models\CustomerAccount;
 
 class CustomersAccountsController extends Controller {
     
-    public function index($customer_id,Request $r) {
+    public function index($customer_id, Request $r) {
 
         CustomerAccount::SyncRecords($customer_id);
 

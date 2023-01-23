@@ -47,7 +47,7 @@ class CustomersCursuriController extends Controller {
         );
     }
 
-    public function indexMyCursuri($customer_id,Request $r) {
+    public function indexMyCursuri($customer_id, Request $r) {
         return Response::View(
             '~templates.index', 
             asset('apps/cursurile-mele/index.js'),
