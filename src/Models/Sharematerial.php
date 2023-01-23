@@ -159,6 +159,8 @@ class Sharematerial extends Model {
         $share->CreateDetailsRecords();
         $share->CreateCustomersMaterials();
 
+        $share->syncValues();
+
         return $share;
     } 
 
