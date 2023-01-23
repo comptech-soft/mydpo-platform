@@ -1,13 +1,13 @@
 <?php
 
-namespace MyDpo\Http\Controllers\Auth;
+namespace MyDpo\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Helpers\Response;
 use MyDpo\Models\Translation;
 
-class TranslationController extends Controller {
+class TranslationsController extends Controller {
     
     public function index($customer_id,Request $r) {
 
