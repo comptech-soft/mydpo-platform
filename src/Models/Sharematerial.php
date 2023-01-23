@@ -281,9 +281,11 @@ class Sharematerial extends Model {
     }
 
     public function syncValues() {
-        // dd($this);
-
         $this->sender_full_name = $this->createdby->full_name;
+
+        $this->cursuri_count = $this->count_materiale;
+        $this->customers_count = $this->count_customers;
+        $this->users_count = $this->createdby->count_users;
 
         $this->save();
     }
