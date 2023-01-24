@@ -16,7 +16,7 @@ class CreateFile extends Perform {
 
             if(!! $record->en)
             {
-                $str .= ('"' . $record->ro . '": "' . $record->en . '"' . chr(13) . chr(10));
+                $str .= ('"' . $record->ro . '": "' . $record->en . '",' . chr(13) . chr(10));
             }
         }
         $str .= chr(13) . chr(10). "}";
