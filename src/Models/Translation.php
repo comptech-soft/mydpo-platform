@@ -33,11 +33,21 @@ class Translation extends Model
         return (new CreateFile($input))->Perform();
     }
 
-
     public static function createKey($input) {
         return (new CreateKey($input))->Perform();
     }
 
+    public static function ToJavascriptVars($locale) {
 
+        $records = self::whereNotNull($locale)->get();
+
+        $r = [];
+        foreach($records as $i => $record)
+        {
+            $r[$record->ro] = $record->en;
+        }
+
+        return $r;
+    }
 
 }
