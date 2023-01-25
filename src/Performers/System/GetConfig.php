@@ -7,6 +7,7 @@ use MyDpo\Models\SysConfig;
 use MyDpo\Models\Platform;
 use MyDpo\Models\MaterialStatus;
 use MyDpo\Models\Language;
+use MyDpo\Models\Translation;
 use MyDpo\Models\Role;
 
 class GetConfig extends Perform {
@@ -40,7 +41,8 @@ class GetConfig extends Perform {
                 'post_max_size' => self::parseSize(ini_get('post_max_size')),
                 'upload_max_filesize' => self::parseSize(ini_get('upload_max_filesize')),
                 'upload_max_size' => self::fileUploadMaxSize(),
-            ]
+            ],
+            'translations' => Translation::ToJavascriptVars(app()->getLocale()),
         ];
 
     }
