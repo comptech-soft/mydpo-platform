@@ -42,7 +42,7 @@ class GetConfig extends Perform {
                 'upload_max_filesize' => self::parseSize(ini_get('upload_max_filesize')),
                 'upload_max_size' => self::fileUploadMaxSize(),
             ],
-            'translations' => Translation::ToJavascriptVars(app()->getLocale()),
+            'translations' => $locale == 'ro' ? [] : Translation::ToJavascriptVars($locale),
         ];
 
     }
