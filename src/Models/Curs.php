@@ -416,7 +416,28 @@ class Curs extends Model {
     }
 
     public static function calculateInfos() {
-        dd(__METHOD__);
+        foreach(self::all() as $i => $curs)
+        {
+            $curs->tematica_count = ($curs->tematica ? count($curs->tematica) : 0);
+            
+            if($curs->status == 2)
+            {
+                $curs->curs_status = 'Activ (Nelimitat)';
+            }
+            else
+            {
+                if($curs->status == 1)
+                {
+                    $curs->curs_status = 'Activ';
+                }
+                else
+                {
+                    $curs->curs_status = 'Inactiv';
+                }
+            }
+
+            $curs->save();
+        }
     }
 
 }
