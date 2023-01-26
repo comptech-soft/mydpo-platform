@@ -4,6 +4,7 @@ namespace MyDpo\Performers\CustomerCursParticipant;
 
 use MyDpo\Helpers\Perform;
 use MyDpo\Models\CustomerCursFile;
+use MyDpo\Models\CustomerCurs;
 use MyDpo\Imports\CustomerCursParticipant\Importer;
 
 class ImportParticipants extends Perform {
@@ -14,6 +15,7 @@ class ImportParticipants extends Perform {
 
         \Excel::import($importer, $this->input['file']);
 
+        CustomerCurs::syncUsersCounts($this->input['customer_id']);
     }
 
 }
