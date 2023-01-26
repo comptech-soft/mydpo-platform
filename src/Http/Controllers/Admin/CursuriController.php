@@ -11,8 +11,8 @@ class CursuriController extends Controller {
     
     public function index(Request $r) {
 
-        dd(__METHOD__);
-        
+        Curs::calculateInfos();
+
         return Response::View(
             '~templates.index', 
             asset('apps/elearning/index.js')

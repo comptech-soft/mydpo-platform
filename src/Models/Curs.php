@@ -24,8 +24,6 @@ class Curs extends Model {
 
     protected $with = ['category', 'adresare'];
 
-    // protected $withCount = ['fisiere'];
-
     protected $casts = [
         'id' => 'integer',
         'props' => 'json',
@@ -84,7 +82,6 @@ class Curs extends Model {
      * ATTRIBUTES
      * 
      */
-
     public function getStatusAttribute() {
         if(! $this->date_from && ! $this->date_to )
         {
@@ -416,6 +413,10 @@ class Curs extends Model {
         {
             $curs->update($input);
         }
+    }
+
+    public static function calculateInfos() {
+        dd(__METHOD__);
     }
 
 }
