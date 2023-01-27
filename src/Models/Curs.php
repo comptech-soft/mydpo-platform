@@ -53,6 +53,7 @@ class Curs extends Model {
         'date_from',
         'date_to',
         'props',
+        'public_private',
         'file',
         'k_id',
         'k_level',
