@@ -163,8 +163,6 @@ class Sharematerial extends Model {
             'platform' => config('app.platform'),
         ]);
 
-        dd($input);
-
         $share->CreateDetailsRecords();
 
         $share->CreateCustomersMaterials();
@@ -192,31 +190,69 @@ class Sharematerial extends Model {
     }
 
     public static function CreateCustomerCursRecord($trimitere_id, $calculated_time, $customer_id, $users, $material_id) {
-        $customer_curs = CustomerCurs::create([
-            'customer_id' => $customer_id,
-            'curs_id' => $material_id,
-            'trimitere_id' => $trimitere_id,
-            'effective_time' => $calculated_time * count($users),
-            'assigned_users' => $users,
-            'platform' => config('app.platform'),
-            'created_by' => \Auth::user()->id,
-        ]);
+
+        $customer_curs = CustomerCurs::where('customer_id', $customer_id)
+            ->where('curs_id', $material_id)
+            ->first();
+
+        if($customer_curs)
+        {
+            $customer_curs->update([
+                'trimitere_id' => $trimitere_id,
+                'effective_time' => $calculated_time * count($users),
+                'assigned_users' => $users,
+                'platform' => config('app.platform'),
+                'created_by' => \Auth::user()->id,
+                'deleted' => 0,
+            ]);
+        }
+        else
+        {
+            $customer_curs = CustomerCurs::create([
+                'customer_id' => $customer_id,
+                'curs_id' => $material_id,
+                'trimitere_id' => $trimitere_id,
+                'effective_time' => $calculated_time * count($users),
+                'assigned_users' => $users,
+                'platform' => config('app.platform'),
+                'created_by' => \Auth::user()->id,
+            ]);
+        }
 
         /**
          * Se face inregistrare pentru fiecare user in parte
          */
         foreach($users as $i => $user_id) 
         {
-            $customercurs = CustomerCursUser::create([
-                'customer_curs_id' => $customer_curs->id,
-                'customer_id' => $customer_id,
-                'curs_id' => $material_id,
-                'trimitere_id' => $trimitere_id,
-                'user_id' => $user_id,
-                'status' => 'sended',
-                'platform' => config('app.platform'),
-                'created_by' => \Auth::user()->id,
-            ]);
+
+            $customercurs = CustomerCursUser::where('customer_id', $customer_id)
+                ->where('curs_id', $material_id)
+                ->where('user_id', $user_id)
+                ->first();
+
+            if($customercurs)
+            {
+                $customercurs->update([
+                    'customer_curs_id' => $customer_curs->id,
+                    'trimitere_id' => $trimitere_id,
+                    'status' => 'sended',
+                    'platform' => config('app.platform'),
+                    'created_by' => \Auth::user()->id,
+                ]);
+            }
+            else
+            {
+                $customercurs = CustomerCursUser::create([
+                    'customer_curs_id' => $customer_curs->id,
+                    'customer_id' => $customer_id,
+                    'curs_id' => $material_id,
+                    'trimitere_id' => $trimitere_id,
+                    'user_id' => $user_id,
+                    'status' => 'sended',
+                    'platform' => config('app.platform'),
+                    'created_by' => \Auth::user()->id,
+                ]);
+            }
 
             event(new CursShareEvent([
                 'customer' => $customercurs->customer,
