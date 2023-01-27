@@ -46,6 +46,13 @@ class Sharematerial extends Model {
         'customers',
         'materiale_trimise',
         'props',
+
+        'tip_curs',
+        'location',
+        'data_curs',
+        'ora_curs',
+        'durata_curs',
+        
         'platform',
         'deleted',
         'created_by',
