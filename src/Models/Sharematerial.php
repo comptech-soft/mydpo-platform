@@ -52,7 +52,7 @@ class Sharematerial extends Model {
         'data_curs',
         'ora_curs',
         'durata_curs',
-        
+
         'platform',
         'deleted',
         'created_by',
@@ -163,7 +163,10 @@ class Sharematerial extends Model {
             'platform' => config('app.platform'),
         ]);
 
+        dd($input);
+
         $share->CreateDetailsRecords();
+
         $share->CreateCustomersMaterials();
 
         $share->syncValues();
