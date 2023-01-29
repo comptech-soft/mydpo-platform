@@ -81,5 +81,9 @@ class CustomersCursuriController extends Controller {
     public function desasociereUtilizatori(Request $r) {
         return CustomerCurs::desasociereUtilizatori($r->all());
     }
+
+    public function desasociereUsers(Request $r) {
+        return CustomerCurs::desasociereUsers($r->all());
+    }
     
 }

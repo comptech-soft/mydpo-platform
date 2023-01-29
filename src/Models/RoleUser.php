@@ -14,7 +14,6 @@ class RoleUser extends Model {
     protected $casts = [
         'user_id' => 'integer',
         'role_id' => 'integer',
-        'user_id' => 'integer',
         'customer_id' => 'integer',
         'created_by' => 'integer',
         'updated_by' => 'integer',

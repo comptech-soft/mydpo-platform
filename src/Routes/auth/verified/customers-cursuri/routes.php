@@ -38,6 +38,7 @@ Route::prefix('customers-cursuri')->group( function() {
     Route::post('desasociere-utilizatori', [CustomersCursuriController::class, 'desasociereUtilizatori']);
     Route::post('stergere-participant', [CustomersCursuriController::class, 'stergereParticipant']);
     Route::post('stergere-fisier', [CustomersCursuriController::class, 'stergereFisier']);
+    Route::post('desasociaza-users', [CustomersCursuriController::class, 'desasociereUsers']);
 });
 
 Route::prefix('cursuri')->group( function() {
