@@ -46,9 +46,11 @@ class Knolyx {
         ->get(config('knolyx.endpoint') . 'business-rule/course/' . $course->k_id)
         ->json();
 
+		\Log::info('Bum bum....');
+		
         if(count($response) == 0)
 		{
-			\Log::info('Bum bum....');
+			
 			$response[] = [
 				'name' => "All",
 				'type' => "PRIVATE",
