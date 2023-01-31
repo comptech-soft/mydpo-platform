@@ -58,8 +58,8 @@ class Knolyx {
 			$response[] = [
 				'name' => "All",
 				'type' => "PRIVATE",
-				'startDateTime' => "2022-07-21 21:00:00",
-				'endDateTime' => "2022-11-29 22:00:00",
+				'startDateTime' => $startDateTime,
+				'endDateTime' => $endDateTime,
 				'restrictions' => [
 					'minimumTime' => false,
 					'browseOrder' => "anyOrder",
@@ -76,8 +76,8 @@ class Knolyx {
 			$response[0] = [
 				'name' => "All",
 				'type' => "PRIVATE",
-				'startDateTime' => "2022-07-21 21:00:00",
-				'endDateTime' => "2022-11-29 22:00:00",
+				'startDateTime' => $startDateTime,
+				'endDateTime' => $endDateTime,
 				'restrictions' => [
 					'minimumTime' => false,
 					'browseOrder' => "anyOrder",
