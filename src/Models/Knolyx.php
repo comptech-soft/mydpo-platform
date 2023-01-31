@@ -46,7 +46,11 @@ class Knolyx {
         ->get(config('knolyx.endpoint') . 'business-rule/course/' . $course->k_id)
         ->json();
 
-		\Log::info('Bum bum....');
+
+		$startDateTime = \Carbon\Carbon::now()->format('Y-m-d') . ' 00:00:00';
+		$endDateTime = \Carbon\Carbon::now()->format('Y-m-d') . ' 23:59:59';
+
+		\Log::info('Bum bum....' . $startDateTime . ' - ' . $endDateTime);
 		
         if(count($response) == 0)
 		{
