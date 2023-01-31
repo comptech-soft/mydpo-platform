@@ -48,6 +48,7 @@ class Knolyx {
 
         if(count($response) == 0)
 		{
+			\Log::info('Bum bum....');
 			$response[] = [
 				'name' => "All",
 				'type' => "PRIVATE",
