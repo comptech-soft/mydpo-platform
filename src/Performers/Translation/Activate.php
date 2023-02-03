@@ -3,13 +3,15 @@
 namespace MyDpo\Performers\Translation;
 
 use MyDpo\Helpers\Perform;
-use MyDpo\Models\Translation;
+use MyDpo\Models\SysConfig;
 
 class Activate extends Perform {
 
     public function Action() {
         
-        dd($__METHOD__);
+        $record = \SysConfig::where('code', 'translations-activated')->first();
+
+        dd($record);
     }
 
 }
