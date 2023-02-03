@@ -20,6 +20,8 @@ class Activate extends Perform {
             $record->value == '1';
         }
 
+        $record->save();
+
         $this->payload = $record;
     }
 
