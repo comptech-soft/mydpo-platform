@@ -11,7 +11,16 @@ class Activate extends Perform {
         
         $record = SysConfig::where('code', 'translations-activated')->first();
 
-        dd($record);
+        if($record->value == '1')
+        {
+            $record->value == '0';
+        }
+        else
+        {
+            $record->value == '1';
+        }
+
+        $this->payload = $record;
     }
 
 }
