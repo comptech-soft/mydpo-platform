@@ -9,7 +9,7 @@ class Activate extends Perform {
 
     public function Action() {
         
-        $record = \SysConfig::where('code', 'translations-activated')->first();
+        $record = SysConfig::where('code', 'translations-activated')->first();
 
         dd($record);
     }
