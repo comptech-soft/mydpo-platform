@@ -13,11 +13,11 @@ class Activate extends Perform {
 
         if($record->value == '1')
         {
-            $record->value == '0';
+            $record->value = '0';
         }
         else
         {
-            $record->value == '1';
+            $record->value = '1';
         }
 
         $record->save();
