@@ -8,13 +8,19 @@ use MyDpo\Models\Translation;
 class CreateKey extends Perform {
 
     public function Action() {
-        $record = Translation::where('ro', $this->input['key'])->first();
 
-        if( ! $record )
+        foreach($this->input['keys'] as $i => $key)
         {
-            Translation::create([
-                'ro' => $this->input['key'],
-            ]);
+            if(!! $key)
+            {
+                $record = Translation::where('ro', $key)->first();
+                if( ! $record )
+                {
+                    Translation::create([
+                        'ro' => $key,
+                    ]);
+                }
+            }
         }
     }
 
