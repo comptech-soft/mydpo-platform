@@ -5,6 +5,7 @@ namespace MyDpo\Models;
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Performers\Translation\CreateKey;
 use MyDpo\Performers\Translation\CreateFile;
+use MyDpo\Performers\Translation\Activate;
 use MyDpo\Helpers\Performers\Datatable\GetItems;   
 use MyDpo\Helpers\Performers\Datatable\DoAction; 
 
@@ -32,6 +33,12 @@ class Translation extends Model
     public static function createFile($input) {
         return (new CreateFile($input))->Perform();
     }
+
+    public static function activate($input) {
+        return (new Activate($input))->Perform();
+    }
+
+    
 
     public static function createKey($input) {
         return (new CreateKey($input))->Perform();

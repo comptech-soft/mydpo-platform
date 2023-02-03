@@ -46,7 +46,6 @@ class Knolyx {
         ->get(config('knolyx.endpoint') . 'business-rule/course/' . $course->k_id)
         ->json();
 
-
 		$startDateTime = \Carbon\Carbon::now()->format('Y-m-d') . ' 00:00:00';
 		$endDateTime = \Carbon\Carbon::now()->addMonth()->format('Y-m-d') . ' 23:59:59';
 

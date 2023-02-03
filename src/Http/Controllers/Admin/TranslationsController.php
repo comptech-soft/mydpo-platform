@@ -23,6 +23,10 @@ class TranslationsController extends Controller {
         return Translation::createFile($r->all());
     }
 
+    public function activate(Request $r) {
+        return Translation::activate($r->all());
+    }
+
     public function getItems(Request $r) {
         return Translation::getItems($r->all());
     }
