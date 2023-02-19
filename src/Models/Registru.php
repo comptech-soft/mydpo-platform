@@ -47,7 +47,7 @@ class Registru extends Model {
     ];
 
     public function getColumnsAttribute() {
-        $r = $this->coloane->filter( function($item) {
+        $t = $this->coloane->filter( function($item) {
             if($item->is_group == 1)
             {
                 return TRUE;
@@ -63,6 +63,12 @@ class Registru extends Model {
             return $item;
         })->toArray();
 
+        $r = [];
+        foreach($t as $i => $item)
+        {
+            $r[]  = $item;
+        }
+       
         foreach($r as $i => $record)
         {
             $r[$i]['children'] = [];
@@ -80,6 +86,7 @@ class Registru extends Model {
 
         return $r;
     }
+
 
     function coloane() {
         return $this->hasMany(RegistruColoana::class, 'register_id');
