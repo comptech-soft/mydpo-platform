@@ -38,7 +38,15 @@ class RegistruColoana extends Model {
     ];
 
     public static function doInsert($input, $record) {
-        dd($input);
+        if($input['column_type'] == 'group')
+        {
+            $input = [
+                ...$input,
+                'slug' => \Str::slug(md5(time())),
+            ];
+
+            dd($input);
+        }
     }
 
     public static function doAction($action, $input) {
