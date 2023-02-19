@@ -54,6 +54,17 @@ class RegistruColoana extends Model {
         return $record;
     }
 
+    public static function doUpdate($input, $record) {
+        $input = [
+            ...$input,
+            'type' => $input['column_type'],
+        ];
+
+        $record->update($input);
+
+        return $record;
+    }
+
     public static function doAction($action, $input) {
         return (new DoAction($action, $input, __CLASS__))->Perform();
     }

@@ -61,7 +61,7 @@ class Registru extends Model {
         })->map(function($item) {
             $item->column_type = $item->is_group == 1 ? 'group' : 'single';
             return $item;
-        })->toArray();
+        })->sortBy('order_no')->toArray();
 
         $r = [];
         foreach($t as $i => $item)
