@@ -45,6 +45,7 @@ class RegistruColoana extends Model {
                 'slug' => $input['register_id'] . \Str::slug(md5(time())),
                 'is_group' => 1,
                 'order_no' => self::getNextOrderNo($input['register_id']),
+                'type' => $input['column_type'],
             ];
 
             $record = self::create($input);
