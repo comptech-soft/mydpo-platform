@@ -47,8 +47,10 @@ class RegistruColoana extends Model {
                 'order_no' => self::getNextOrderNo($input['register_id']),
             ];
 
-            dd($input);
+            $record = self::create($input);
         }
+
+        return $record;
     }
 
     public static function doAction($action, $input) {
