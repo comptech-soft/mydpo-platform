@@ -42,6 +42,45 @@ class Registru extends Model {
         'deleted_by'
     ];
 
+    protected $appends = [
+        'columns',
+    ];
+
+    public function getColumnsAttribute() {
+        $r = $this->coloane->filter( function($item) {
+            if($item->is_group == 1)
+            {
+                return TRUE;
+            }
+
+            if($item->is_group == 0 && $item->group_id == 0)
+            {
+                return TRUE;
+            }
+            return FALSE;
+        })->map(function($item) {
+            $item->column_type = $item->is_group == 1 ? 'group' : 'single';
+            return $item;
+        })->toArray();
+
+        foreach($r as $i => $record)
+        {
+            $r[$i]['children'] = [];
+            if($record['is_group'] == 1)
+            {
+                $r[$i]['children'] = $this->coloane->filter( function($item) use ($record) {
+                    if($item->group_id == $record['id'])
+                    {
+                        return TRUE;
+                    }
+                    return FALSE;
+                })->sortBy('order_no')->toArray();
+            }
+        }
+
+        return $r;
+    }
+
     function coloane() {
         return $this->hasMany(RegistruColoana::class, 'register_id');
     }
