@@ -42,9 +42,12 @@ class Registru extends Model {
         'deleted_by'
     ];
 
-    
+    function coloane() {
+        return $this->hasMany(RegistruColoana::class, 'register_id');
+    }
+
     public static function getItems($input) {
-        return (new GetItems($input, self::query(), __CLASS__))->Perform();
+        return (new GetItems($input, self::query()->with(['coloane']), __CLASS__))->Perform();
     }
 
     public static function GetRules($action, $input) {
