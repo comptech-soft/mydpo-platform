@@ -17,7 +17,7 @@ class RegistreController extends Controller {
     }
 
     public function getItems(Request $r) {
-        return Registru::getItems($r->all(), $type);
+        return Registru::getItems($r->all());
     }
 
     public function doAction($action, Request $r) {
