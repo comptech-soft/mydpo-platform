@@ -42,7 +42,9 @@ class RegistruColoana extends Model {
         {
             $input = [
                 ...$input,
-                'slug' => \Str::slug(md5(time())),
+                'slug' => $input['register_id'] . \Str::slug(md5(time())),
+                'is_group' => 1,
+                'order_no' => self::getNextOrderNo($input['register_id']),
             ];
 
             dd($input);
@@ -51,6 +53,16 @@ class RegistruColoana extends Model {
 
     public static function doAction($action, $input) {
         return (new DoAction($action, $input, __CLASS__))->Perform();
+    }
+
+    public static function getNextOrderNo($register_id) {
+        $records = \DB::select("
+            SELECT 
+                MAX(CAST(`order_no` AS UNSIGNED)) as max_order_no 
+            FROM `registers-columns` 
+            WHERE (register_id=" . $register_id . ') AND ( (is_group = 1) OR (group_id IS NULL))'
+        );
+        return number_format(1 + $records[0]->max_order_no, 0, '', '');
     }
 
 }
