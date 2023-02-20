@@ -38,18 +38,32 @@ class RegistruColoana extends Model {
     ];
 
     public static function doInsert($input, $record) {
+
+        $input = [
+            ...$input,
+            'slug' => $input['register_id'] . \Str::slug(md5(time())),
+            'type' => $input['column_type'],
+
+        ];
+
         if($input['column_type'] == 'group')
         {
             $input = [
                 ...$input,
-                'slug' => $input['register_id'] . \Str::slug(md5(time())),
                 'is_group' => 1,
                 'order_no' => self::getNextOrderNo($input['register_id']),
-                'type' => $input['column_type'],
             ];
-
-            $record = self::create($input);
         }
+        else
+        {
+            $input = [
+                ...$input,
+                'is_group' => NULL,
+                'order_no' => self::getNextOrderNo($input['register_id']),
+            ];
+        }
+
+        $record = self::create($input);
 
         return $record;
     }
