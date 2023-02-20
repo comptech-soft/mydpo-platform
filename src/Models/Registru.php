@@ -84,7 +84,7 @@ class Registru extends Model {
 
                 foreach($children as $j => $child)
                 {
-                    $r[$i]['children'] = $child;
+                    $r[$i]['children'][] = $child;
                 }
             }
         }
