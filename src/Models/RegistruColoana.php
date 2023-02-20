@@ -37,6 +37,10 @@ class RegistruColoana extends Model {
         'updated_by'
     ];
 
+    public static function reorderColumns($input) {
+        dd($input);
+    }
+
     public static function doInsert($input, $record) {
 
         $input = [
