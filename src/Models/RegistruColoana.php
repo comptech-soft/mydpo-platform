@@ -42,8 +42,6 @@ class RegistruColoana extends Model {
         $input = [
             ...$input,
             'slug' => $input['register_id'] . \Str::slug(md5(time())),
-            'type' => $input['column_type'],
-
         ];
 
         if($input['column_type'] == 'group')
@@ -52,6 +50,8 @@ class RegistruColoana extends Model {
                 ...$input,
                 'is_group' => 1,
                 'order_no' => self::getNextOrderNo($input['register_id']),
+                'width' => NULL,
+                'type' => $input['column_type'],
             ];
         }
         else
@@ -69,10 +69,10 @@ class RegistruColoana extends Model {
     }
 
     public static function doUpdate($input, $record) {
-        $input = [
-            ...$input,
-            'type' => $input['column_type'],
-        ];
+        // $input = [
+        //     ...$input,
+        //     'type' => $input['column_type'],
+        // ];
 
         $record->update($input);
 
