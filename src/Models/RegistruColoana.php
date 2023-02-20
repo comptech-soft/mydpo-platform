@@ -3,7 +3,7 @@
 namespace MyDpo\Models;
 
 use Illuminate\Database\Eloquent\Model;
-// use MyDpo\Helpers\Performers\Datatable\GetItems;
+use MyDpo\Performers\RegistruColoana\ReorderColumns;
 use MyDpo\Helpers\Performers\Datatable\DoAction;
 
 class RegistruColoana extends Model {
@@ -38,7 +38,8 @@ class RegistruColoana extends Model {
     ];
 
     public static function reorderColumns($input) {
-        dd($input);
+        return (new ReorderColumns($input))
+            ->Perform();
     }
 
     public static function doInsert($input, $record) {

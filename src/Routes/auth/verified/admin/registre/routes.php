@@ -16,6 +16,4 @@ Route::prefix('registre-columns')->group( function() {
     Route::post('action/{action}', [RegistreColumnsController::class, 'doAction']);
     Route::post('reorder-columns', [RegistreColumnsController::class, 'reorderColumns']);
 
-    
-
 });
