@@ -74,13 +74,18 @@ class Registru extends Model {
             $r[$i]['children'] = [];
             if($record['is_group'] == 1)
             {
-                $r[$i]['children'] = $this->coloane->filter( function($item) use ($record) {
+                $children = $this->coloane->filter( function($item) use ($record) {
                     if($item->group_id == $record['id'])
                     {
                         return TRUE;
                     }
                     return FALSE;
                 })->sortBy('order_no')->toArray();
+
+                foreach($children as $j => $child)
+                {
+                    $r[$i]['children'] = $child;
+                }
             }
         }
 
