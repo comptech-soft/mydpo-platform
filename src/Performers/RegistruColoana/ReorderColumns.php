@@ -9,23 +9,12 @@ class ReorderColumns extends Perform {
 
     public function Action() {
 
-        dd(__METHOD__);
-        // $role = Role::find($this->input['id']);
+        foreach($this->input as $i => $item)
+        {
+            $record = RegistruColoana::find($item['id']);
+            $record->order_no = $item['order_no'];
+            $record->save();
+        }
 
-        // if(! $role->permissions) {
-        //     $permissions = $this->input['permissions'];
-        // }
-        // else
-        // {
-        //     $permissions = [
-        //         ...$role->permissions,
-        //         ...$this->input['permissions'],
-        //     ];
-        // }
-
-        // $role->permissions = $permissions;
-
-        // $role->save();
-    
     }
 }
