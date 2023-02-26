@@ -2,6 +2,7 @@
 
 use MyDpo\Http\Controllers\Auth\CustomersRegistreController;
 use MyDpo\Http\Controllers\Auth\CustomersRegistreAsociateController;
+use MyDpo\Http\Controllers\Auth\CustomerRegistruController;
 
 Route::middleware('valid-customer')->prefix('/customer-registre')->group( function() {
 
@@ -14,5 +15,10 @@ Route::prefix('/customers-registers-asociate')->group( function() {
     Route::post('items', [CustomersRegistreAsociateController::class, 'getItems']);
     Route::post('save-asociere', [CustomersRegistreAsociateController::class, 'saveAsociere']);
     
+});
+
+Route::middleware('valid-customer')->prefix('/customer-registru')->group( function() {
+
+    Route::middleware('is-activated')->get('/{customer_id}/{registru_id}', [CustomerRegistruController::class, 'index']);
 
 });
