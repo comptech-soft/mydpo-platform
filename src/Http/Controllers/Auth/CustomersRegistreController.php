@@ -12,7 +12,7 @@ class CustomersRegistreController extends Controller {
 
         return Response::View(
             '~templates.index', 
-            asset('apps/customer-reevaluare/index.js'),
+            asset('apps/customer-registre/index.js'),
             [], 
             [
                 'customer_id' => $customer_id,

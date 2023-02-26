@@ -394,7 +394,8 @@ class CustomerFile extends Model {
 
     public static function ProcessFile($file, $input) {
         
-        $ext = strtolower($file->extension());
+        //$ext = strtolower($file->extension());
+		$ext = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
 
         if(in_array($ext, ['jpg', 'jpeg', 'png', 'doc', 'docx', 'xls', 'xlsx', 'pdf', 'txt', 'rar', 'zip']))
         {
