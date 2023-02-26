@@ -4,12 +4,12 @@ namespace MyDpo\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use MyDpo\Models\RegistruAsociat;
+use MyDpo\Models\CustomerRegistruAsociat;
 
-class RegistreController extends Controller {
+class CustomersRegistreAsociateController extends Controller {
     
     public function getItems(Request $r) {
-        return RegistruAsociat::getItems($r->all());
+        return CustomerRegistruAsociat::getItems($r->all());
     }
 
 }
