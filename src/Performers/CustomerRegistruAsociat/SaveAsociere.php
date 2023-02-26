@@ -9,8 +9,6 @@ class SaveAsociere extends Perform {
 
     public function Action() {
 
-        dd($this->input);
-
         CustomerRegistruAsociat::where('customer_id', $this->input['customer_id'])->delete();
 
         foreach($this->input['registre'] as $i => $register_id)
