@@ -11,12 +11,15 @@ class SaveAsociere extends Perform {
 
         CustomerRegistruAsociat::where('customer_id', $this->input['customer_id'])->delete();
 
-        foreach($this->input['registre'] as $i => $register_id)
+        if(array_key_exists('registre', $this->input))
         {
-            CustomerRegistruAsociat::create([
-                'register_id' => $register_id,
-                'customer_id' => $this->input['customer_id'],
-            ]);
+            foreach($this->input['registre'] as $i => $register_id)
+            {
+                CustomerRegistruAsociat::create([
+                    'register_id' => $register_id,
+                    'customer_id' => $this->input['customer_id'],
+                ]);
+            }
         }
     
     }
