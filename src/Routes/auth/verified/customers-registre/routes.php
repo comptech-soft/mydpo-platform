@@ -12,5 +12,7 @@ Route::middleware('valid-customer')->prefix('/customer-registre')->group( functi
 Route::prefix('/customers-registers-asociate')->group( function() {
 
     Route::post('items', [CustomersRegistreAsociateController::class, 'getItems']);
+    Route::post('save-asociere', [CustomersRegistreAsociateController::class, 'saveAsociere']);
+    
 
 });

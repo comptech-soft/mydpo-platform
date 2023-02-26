@@ -12,4 +12,8 @@ class CustomersRegistreAsociateController extends Controller {
         return CustomerRegistruAsociat::getItems($r->all());
     }
 
+    public function saveAsociere(Request $r) {
+        return CustomerRegistruAsociat::saveAsociere($r->all());
+    }
+
 }
