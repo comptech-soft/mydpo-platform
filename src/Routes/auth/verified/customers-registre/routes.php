@@ -9,7 +9,7 @@ Route::middleware('valid-customer')->prefix('/customer-registre')->group( functi
 
 });
 
-Route::middleware('valid-customer')->prefix('/customers-registers-asociate')->group( function() {
+Route::prefix('/customers-registers-asociate')->group( function() {
 
     Route::post('items', [CustomersRegistreAsiciateController::class, 'getItems']);
 
