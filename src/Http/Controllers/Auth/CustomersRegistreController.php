@@ -25,4 +25,8 @@ class CustomersRegistreController extends Controller {
         return CustomerRegister::getItems($r->all());
     }
 
+    public function doAction($action, Request $r) {
+        return CustomerRegister::doAction($action, $r->all());
+    }
+
 }

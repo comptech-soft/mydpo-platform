@@ -47,4 +47,29 @@ class CustomerRegister extends Model {
         return (new GetItems($input, self::query(), __CLASS__))->Perform();
     }
 
+    public static function doAction($action, $input) {
+        return (new DoAction($action, $input, __CLASS__))->Perform();
+    }
+
+    public static function GetRules($action, $input) {
+
+        if($action == 'delete')
+        {
+            return NULL;
+        }
+
+        $result = [
+            'customer_id' => 'required|exists:customers,id',
+            'register_id' => 'required|exists:registers,id',
+            'number' => 'required',
+            'date' => [
+                'required',
+                'date',
+                // new UniqueOrderService($input),
+            ],
+        ];
+        return $result;
+    }
+
+
 }
