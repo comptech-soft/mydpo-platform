@@ -4,7 +4,7 @@ namespace MyDpo\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
-// use MyDpo\Helpers\Performers\Datatable\DoAction;
+use MyDpo\Helpers\Performers\Datatable\DoAction;
 // use MyDpo\Performers\CustomerRegistruAsociat\SaveAsociere;
 
 class CustomerRegister extends Model {
