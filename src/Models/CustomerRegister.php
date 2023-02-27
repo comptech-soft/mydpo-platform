@@ -74,9 +74,7 @@ class CustomerRegister extends Model {
     }
 
     public static function nextNumberWhere($input) {
-
-        dd($input);
-        return "type = '" . $input['type'] . "'";
+        return "(customer_id = " . $input['customer_id'] . ") AND (register_id = " . $input['register_id'] . ")";
     }
 
 
