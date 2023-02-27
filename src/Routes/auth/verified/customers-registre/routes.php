@@ -22,3 +22,10 @@ Route::middleware('valid-customer')->prefix('/customer-registru')->group( functi
     Route::middleware('is-activated')->get('/{customer_id}/{registru_id}', [CustomerRegistruController::class, 'index']);
 
 });
+
+Route::prefix('/customers-registers')->group( function() {
+
+    Route::post('items', [CustomersRegistreController::class, 'getItems']);
+    // Route::post('save-asociere', [CustomersRegistreAsociateController::class, 'saveAsociere']);
+    
+});
