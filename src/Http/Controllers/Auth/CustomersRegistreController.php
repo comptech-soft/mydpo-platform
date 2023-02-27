@@ -20,4 +20,8 @@ class CustomersRegistreController extends Controller {
         );
     }
 
+    public function getItems(Request $r) {
+        return CustomerRegister::getItems($r->all());
+    }
+
 }
