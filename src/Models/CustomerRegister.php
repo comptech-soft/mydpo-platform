@@ -41,9 +41,7 @@ class CustomerRegister extends Model {
         'deleted_by'
     ];
 
-    // public static function saveAsociere($input) {
-    //     return (new SaveAsociere($input))->Perform();
-    // }
+    public $nextNumberColumn = 'number';
 
     public static function getItems($input) {
         return (new GetItems($input, self::query(), __CLASS__))->Perform();
