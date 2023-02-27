@@ -5,9 +5,11 @@ namespace MyDpo\Models;
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Helpers\Performers\Datatable\DoAction;
-// use MyDpo\Performers\CustomerRegistruAsociat\SaveAsociere;
+use MyDpo\Traits\NextNumber;
 
 class CustomerRegister extends Model {
+
+    use NextNumber;
 
     protected $table = 'customers-registers';
 
@@ -70,6 +72,13 @@ class CustomerRegister extends Model {
         ];
         return $result;
     }
+
+    public static function nextNumberWhere($input) {
+
+        dd($input);
+        return "type = '" . $input['type'] . "'";
+    }
+
 
 
 }

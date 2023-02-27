@@ -27,6 +27,6 @@ Route::prefix('/customers-registers')->group( function() {
 
     Route::post('items', [CustomersRegistreController::class, 'getItems']);
     Route::post('action/{action}', [CustomersRegistreController::class, 'doAction']);
-    // Route::post('save-asociere', [CustomersRegistreAsociateController::class, 'saveAsociere']);
+    Route::post('get-next-number', [CustomersRegistreAsociateController::class, 'getNextNumber']);
     
 });
