@@ -124,7 +124,7 @@ class Registru extends Model {
             'caption' => 'Departament',
             'is_group' => 0,
             'group_id' => NULL,
-            'type' => 'DEPARTAMENT',
+            'type' => 'departament',
             'order_no' => -1,
             'width' => 200,
         ];
@@ -156,7 +156,7 @@ class Registru extends Model {
             'caption' => 'Status',
             'is_group' => 0,
             'group_id' => NULL,
-            'type' => 'STATUS',
+            'type' => 'status',
             'order_no' => -2,
             'width' => 200,
         ];
