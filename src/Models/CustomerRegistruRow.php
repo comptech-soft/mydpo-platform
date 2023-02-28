@@ -52,8 +52,19 @@ class CustomerRegistruRow extends Model {
             
         ]);
 
-        dd($record);
+        if(array_key_exists('rowvalues', $input))
+        {
+            foreach($input['rowvalues'] as $key => $value)
+            {
+                CustomerRegistruRowValue::create([
+                    'row_id' => $record->id,
+                    'column_id' => \Str::replace('col-', '', $key),
+                    'value' => $value,
+                ]);
+            }
+        }
 
+        return $record;
     } 
 
     public static function doAction($action, $input) {
