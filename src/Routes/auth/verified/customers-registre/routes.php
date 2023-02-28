@@ -3,6 +3,7 @@
 use MyDpo\Http\Controllers\Auth\CustomersRegistreController;
 use MyDpo\Http\Controllers\Auth\CustomersRegistreAsociateController;
 use MyDpo\Http\Controllers\Auth\CustomerRegistruController;
+use MyDpo\Http\Controllers\Auth\CustomersRegistreRowsController;
 
 Route::middleware('valid-customer')->prefix('/customer-registre')->group( function() {
 
@@ -29,4 +30,8 @@ Route::prefix('/customers-registers')->group( function() {
     Route::post('action/{action}', [CustomersRegistreController::class, 'doAction']);
     Route::post('get-next-number', [CustomersRegistreController::class, 'getNextNumber']);
     
+});
+
+Route::prefix('/customers-registers-rows')->group( function() {
+    Route::post('action/{action}', [CustomersRegistreRowsController::class, 'doAction']);    
 });

@@ -3,12 +3,11 @@
 namespace MyDpo\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use MyDpo\Helpers\Performers\Datatable\GetItems;
-use MyDpo\Performers\CustomerRegistruAsociat\SaveAsociere;
+use MyDpo\Helpers\Performers\Datatable\DoAction;
 
-class CustomerRegistruAsociat extends Model {
+class CustomerRegistruRow extends Model {
 
-    protected $table = 'customers-registers-asociate';
+    protected $table = 'customers-registers-rows';
 
     protected $casts = [
         'props' => 'json',
@@ -31,12 +30,10 @@ class CustomerRegistruAsociat extends Model {
         'deleted_by'
     ];
 
-    public static function saveAsociere($input) {
-        return (new SaveAsociere($input))->Perform();
-    }
+    public static function doAction($action, $input) {
 
-    public static function getItems($input) {
-        return (new GetItems($input, self::query(), __CLASS__))->Perform();
+        dd($input);
+        return (new DoAction($action, $input, __CLASS__))->Perform();
     }
 
 }
