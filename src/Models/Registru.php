@@ -115,4 +115,41 @@ class Registru extends Model {
         return (new DoAction($action, $input, __CLASS__))->Perform();
     }
 
+    public static function doUpdate($input, $record) {
+        $record->update($input);
+
+        $data = [
+            'register_id' => $record->id,
+            'slug' => 'departament' . $record->id . md5(time()) ,
+            'caption' => 'Departament',
+            'is_group' => 0,
+            'group_id' => NULL,
+            'type' => 'DEPARTAMENT',
+            'order_no' => -1,
+        ];
+
+        $exists = RegistruColoana::where('register_id', $record->id)->where('type', 'DEPARTAMENT')->first(); 
+
+        if($record->has_departamente_column == 1)
+        {
+            if($exists) 
+            {
+                $exists->update($data);    
+            }
+            else
+            {
+                RegistruColoana::create($data);
+            }
+        }
+        else
+        {
+            if($exists) 
+            {
+                $exists->delete();
+            }
+        }
+
+        return $record;
+    }
+
 }
