@@ -43,6 +43,10 @@ class CustomerRegister extends Model {
 
     public $nextNumberColumn = 'number';
 
+    function rows() {
+        return $this->hasMany(CustomerRegistruRow::class, 'customer_register_id');
+    }
+
     public static function getItems($input) {
         return (new GetItems($input, self::query(), __CLASS__))->Perform();
     }
