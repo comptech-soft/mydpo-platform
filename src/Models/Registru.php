@@ -92,7 +92,6 @@ class Registru extends Model {
         return $r;
     }
 
-
     function coloane() {
         return $this->hasMany(RegistruColoana::class, 'register_id');
     }
