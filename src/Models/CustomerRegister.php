@@ -48,7 +48,7 @@ class CustomerRegister extends Model {
     }
 
     public static function getItems($input) {
-        return (new GetItems($input, self::query(), __CLASS__))->Perform();
+        return (new GetItems($input, self::query()->with(['rows.values']), __CLASS__))->Perform();
     }
 
     public static function doAction($action, $input) {
