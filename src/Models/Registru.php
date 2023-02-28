@@ -126,6 +126,7 @@ class Registru extends Model {
             'group_id' => NULL,
             'type' => 'DEPARTAMENT',
             'order_no' => -1,
+            'width' => 200,
         ];
 
         $exists = RegistruColoana::where('register_id', $record->id)->where('type', 'DEPARTAMENT')->first(); 
