@@ -150,6 +150,38 @@ class Registru extends Model {
             }
         }
 
+        $data = [
+            'register_id' => $record->id,
+            'slug' => 'status' . $record->id . md5(time()) ,
+            'caption' => 'Status',
+            'is_group' => 0,
+            'group_id' => NULL,
+            'type' => 'STATUS',
+            'order_no' => -2,
+            'width' => 200,
+        ];
+
+        $exists = RegistruColoana::where('register_id', $record->id)->where('type', 'STATUS')->first(); 
+
+        if($record->has_status_column == 1)
+        {
+            if($exists) 
+            {
+                $exists->update($data);    
+            }
+            else
+            {
+                RegistruColoana::create($data);
+            }
+        }
+        else
+        {
+            if($exists) 
+            {
+                $exists->delete();
+            }
+        }
+
         return $record;
     }
 
