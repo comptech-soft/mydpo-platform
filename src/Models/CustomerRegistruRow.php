@@ -42,7 +42,7 @@ class CustomerRegistruRow extends Model {
     }
 
     public static function doDelete($input, $record) {
-        $record->values->delete();
+        $record->values()->delete();
         $record->delete();
 
         return $record;
