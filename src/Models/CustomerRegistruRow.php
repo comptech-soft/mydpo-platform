@@ -41,6 +41,13 @@ class CustomerRegistruRow extends Model {
         return $this->hasMany(CustomerRegistruRowValue::class, 'row_id');
     }
 
+    public static function doDelete($input, $record) {
+        $record->values->delete();
+        $record->delete();
+
+        return $record;
+    }
+
     public static function doInsert($input, $record) {
 
         $record = self::create([
