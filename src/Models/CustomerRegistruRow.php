@@ -48,6 +48,10 @@ class CustomerRegistruRow extends Model {
         return $record;
     }
 
+    public function deleteRowWithValues() {
+        dd(__METHOD__);
+    }
+
     public static function doInsert($input, $record) {
 
         $record = self::create([
