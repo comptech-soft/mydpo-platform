@@ -52,7 +52,17 @@ class CustomerRegister extends Model {
     }
 
     public static function doDelete($input, $record) {
-        dd($input, $record);
+
+        $rows = CustomerRegistruRow::where('customer_register_id', $record->id)->get();
+
+        foreach($rows as $i => $row)
+        {
+            $row->deleteRowWithValues();
+        }
+
+        $record->delete();
+
+        return $record;
     }
 
     public static function doAction($action, $input) {
