@@ -45,9 +45,38 @@ class CustomerRegister extends Model {
     public $nextNumberColumn = 'number';
 
     public function getRealColumnsAttribute() {
-        dd(__METHOD__);
-    }
+        $r = [];
 
+        $columns = collect($this->columns)->sortBy('order_no')->toArray();
+
+        foreach($columns as $i => $column)
+        {
+            if($column['column_type'] == 'single')
+            {
+                $r[$column['id']] = [
+                    ...$column,
+                    'value' => NULL,
+                ];
+            }
+            else
+            {
+                if( array_key_exists('children', $column) && count($column['children']) )
+                {
+                    $children = collect($column['children'])->sortBy('order_no')->toArray();
+                    foreach($children as $i => $child)
+                    {
+                        $r[$child['id']] = [
+                            ...$child,
+                            'value' => NULL,
+                        ];
+                    }
+                }
+            }
+        }
+
+        return $r;
+    }
+    
     function rows() {
         return $this->hasMany(CustomerRegistruRow::class, 'customer_register_id');
     }
