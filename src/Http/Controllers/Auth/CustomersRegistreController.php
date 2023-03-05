@@ -38,30 +38,7 @@ class CustomersRegistreController extends Controller {
 
         $registru = CustomerRegister::where('id', $id)->first();
 
-        $valuecolumns = [];
-        foreach($registru->columns as $i => $column)
-        {
-            if($column['column_type'] == 'single')
-            {
-                $valuecolumns[$column['id']] = [
-                    'column' => $column,
-                    'value' => NULL,
-                ];
-            }
-            else
-            {
-                if( array_key_exists('children', $column) )
-                {
-                    foreach($column['children'] as $j => $child)
-                    {
-                        $valuecolumns[$child['id']] = [
-                            'column' => $child,
-                            'value' => NULL,
-                        ];;
-                    }
-                }
-            }
-        }
+        dd($registru->real_columns);
 
         $records = [];
         foreach($registru->rows as $i => $row)
