@@ -44,6 +44,10 @@ class CustomerRegister extends Model {
 
     public $nextNumberColumn = 'number';
 
+    public function getRealColumnsAttribute() {
+        dd(__METHOD__);
+    }
+
     function rows() {
         return $this->hasMany(CustomerRegistruRow::class, 'customer_register_id');
     }
