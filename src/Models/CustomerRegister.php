@@ -51,6 +51,10 @@ class CustomerRegister extends Model {
         return (new GetItems($input, self::query()->with(['rows.values']), __CLASS__))->Perform();
     }
 
+    public static function doDelete($input, $record) {
+        dd($input, $record);
+    }
+
     public static function doAction($action, $input) {
         return (new DoAction($action, $input, __CLASS__))->Perform();
     }
