@@ -23,5 +23,13 @@ class CustomerRegistruRowValue extends Model {
         'created_by',
         'updated_by'
     ];
+
+    public function row() {
+        return $this->belongsTo(CustomerRegistruRow::class, 'row_id');
+    }
+
+    public function column() {
+        return $this->belongsTo(RegistruColoana::class, 'column_id');
+    }
     
 }

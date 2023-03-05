@@ -37,8 +37,24 @@ class CustomerRegistruRow extends Model {
         'deleted_by'
     ];
 
+    public function registru() {
+        return $this->belongsTo(CustomerRegister::class, 'customer_register_id');
+    }
+
     function values() {
         return $this->hasMany(CustomerRegistruRowValue::class, 'row_id');
+    }
+
+    public function getMyvaluesAttribute() {
+        $r = [];
+        foreach($this->values()->get() as $i => $item)
+        {
+            $r[$item->column_id] = $item->value;
+
+            dd($item->row->registru->columns);
+        }
+
+        dd($r);
     }
 
     public static function doDelete($input, $record) {
@@ -78,7 +94,7 @@ class CustomerRegistruRow extends Model {
         }
         return $record;
     }
-    
+
     public static function doInsert($input, $record) {
 
         $record = self::create([

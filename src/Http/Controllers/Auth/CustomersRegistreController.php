@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Helpers\Response;
 use MyDpo\Models\CustomerRegister;
+use MyDpo\Models\CustomerDepartment;
 
 class CustomersRegistreController extends Controller {
     
@@ -35,13 +36,83 @@ class CustomersRegistreController extends Controller {
 
     public function registerDownloadPreview($id) {
 
-        $registru = CustomerRegister::where('id', $id)->with(['rows.values'])->first();
+        $registru = CustomerRegister::where('id', $id)->first();
 
-        dd($registru->rows);
+        $valuecolumns = [];
+        foreach($registru->columns as $i => $column)
+        {
+            if($column['column_type'] == 'single')
+            {
+                $valuecolumns[$column['id']] = [
+                    'column' => $column,
+                    'value' => NULL,
+                ];
+            }
+            else
+            {
+                if( array_key_exists('children', $column) )
+                {
+                    foreach($column['children'] as $j => $child)
+                    {
+                        $valuecolumns[$child['id']] = [
+                            'column' => $child,
+                            'value' => NULL,
+                        ];;
+                    }
+                }
+            }
+        }
+
+        $records = [];
+        foreach($registru->rows as $i => $row)
+        {
+
+            dd($row->myvalues);
+
+            $values = [];
+            foreach($row->values()->get() as $j => $item) 
+            {
+                $values[$item->column_id] = $item->value;
+            }
+
+            $record = [];
+
+            foreach($valuecolumns as $column_id => $column)
+            {
+                $record[$column_id] = $values[$column_id];
+
+                if($column['column']['type'] == 'O')
+                {
+                    $options = [];
+                    foreach($column['column']['props']['options'] as $k => $option)
+                    {
+
+                        $options[$option['value']] = $option['text'];
+                    }
+
+                    $record[$column_id] = $options[$record[$column_id]];
+                }
+                else
+                {
+                    if($column['column']['type'] == 'departament')
+                    {
+                        $record[$column_id] = CustomerDepartment::find($record[$column_id])->departament;
+
+                    }
+                }
+
+            }
+
+            $records[$row->id] = $record;
+
+        }
+
+        
 
        
         return view('exports.customer-register.export', [
             'columns' => $registru->columns,
+            'records' => $records,
             'children' => collect($registru->columns)->filter( function($item) {
 
                 if($item['column_type'] != 'group')
@@ -66,7 +137,6 @@ class CustomersRegistreController extends Controller {
 
         
     }
-
 
     public function registerDownload(Request $r) {
         return CustomerRegister::registerDownload($r->all());
