@@ -35,8 +35,10 @@ class CustomersRegistreController extends Controller {
 
     public function registerDownloadPreview($id) {
 
-        dd($id);
-        
+        return view('exports.customer-register.export', [
+
+        ]);
+
         // $centralizator = Centralizator::where('id', $id)->with(['columns'])->first();
         // return view('exports.centralizator.xls-export', [
         //    'records' => $centralizator->columns,
