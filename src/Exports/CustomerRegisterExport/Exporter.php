@@ -12,11 +12,10 @@ use Illuminate\Contracts\View\View;
 class Exporter implements FromView, WithStrictNullComparison, ShouldAutoSize {
     
     public function __construct() {
-        dd(__METHOD__);
     }
 
     public function view(): View {
-        return view('aaaa', [
+        return view('exports.customer-register.export', [
 
         ]);
     }

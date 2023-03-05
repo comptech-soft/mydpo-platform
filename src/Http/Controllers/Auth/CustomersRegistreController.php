@@ -33,6 +33,17 @@ class CustomersRegistreController extends Controller {
         return CustomerRegister::getNextNumber($r->all());
     }
 
+    public function registerDownloadPreview($id) {
+
+        dd($id);
+        
+        // $centralizator = Centralizator::where('id', $id)->with(['columns'])->first();
+        // return view('exports.centralizator.xls-export', [
+        //    'records' => $centralizator->columns,
+        // ]);
+        
+    }
+
     public function registerDownload(Request $r) {
         return CustomerRegister::registerDownload($r->all());
     }
