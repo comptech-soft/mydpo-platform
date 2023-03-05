@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Traits\NextNumber;
+use MyDpo\Performers\CustomerRegister\ExportRegister;
 
 class CustomerRegister extends Model {
 
@@ -90,7 +91,7 @@ class CustomerRegister extends Model {
     }
 
     public static function registerDownload($input) {
-        dd(__METHOD__, $input);
+        return (new ExportRegister($input))->Perform();
     }
 
     
