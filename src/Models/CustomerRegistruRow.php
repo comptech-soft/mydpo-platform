@@ -44,12 +44,12 @@ class CustomerRegistruRow extends Model {
     public static function doDelete($input, $record) {
         $record->values()->delete();
         $record->delete();
-
         return $record;
     }
 
     public function deleteRowWithValues() {
-        dd(__METHOD__);
+        CustomerRegistruRowValue::where('row_id', $this->id)->delete();
+        $this->delete();
     }
 
     public static function doInsert($input, $record) {
