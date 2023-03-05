@@ -35,20 +35,38 @@ class CustomersRegistreController extends Controller {
 
     public function registerDownloadPreview($id) {
 
-        $registru = CustomerRegister::where('id', $id)->first();
+        $registru = CustomerRegister::where('id', $id)->with(['rows.values'])->first();
 
-        dd($registru);
+        dd($registru->rows);
 
+       
         return view('exports.customer-register.export', [
+            'columns' => $registru->columns,
+            'children' => collect($registru->columns)->filter( function($item) {
 
+                if($item['column_type'] != 'group')
+                {
+                    return FALSE;
+                }
+                if( ! array_key_exists('children', $item) )
+                {
+                    return FALSE;
+                }
+    
+                if( count($item['children']) == 0)
+                {
+                    return FALSE;
+                }
+    
+                return TRUE;
+    
+            })->toArray(),
         ]);
 
-        // 
-        // return view('exports.centralizator.xls-export', [
-        //    'records' => $centralizator->columns,
-        // ]);
+
         
     }
+
 
     public function registerDownload(Request $r) {
         return CustomerRegister::registerDownload($r->all());
