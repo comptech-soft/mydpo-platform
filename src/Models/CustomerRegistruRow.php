@@ -53,9 +53,32 @@ class CustomerRegistruRow extends Model {
     }
 
     public static function doUpdate($input, $record) {
-        dd($input, $record);
-    }
+        $record->update([
+            'customer_register_id' => $input['customer_register_id'],
+            'customer_id' => $input['customer_id'],
+            'register_id' => $input['register_id'],
+            'props' => [
+                'rowvalues' => $input['rowvalues'],
+            ],
+            
+        ]);
 
+        if(array_key_exists('rowvalues', $input))
+        {
+            foreach($input['rowvalues'] as $key => $value)
+            {
+                $column_id = \Str::replace('col-', '', $key);
+                $rowvalue = CustomerRegistruRowValue::where('column_id', $column_id)->where('row_id', $record->id)->first();
+
+                if($rowvalue)
+                {
+                    $rowvalue->update(['value' => $value]);
+                }
+            }
+        }
+        return $record;
+    }
+    
     public static function doInsert($input, $record) {
 
         $record = self::create([
