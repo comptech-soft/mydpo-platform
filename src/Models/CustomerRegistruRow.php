@@ -52,6 +52,10 @@ class CustomerRegistruRow extends Model {
         $this->delete();
     }
 
+    public static function doUpdate($input, $record) {
+        dd($input, $record);
+    }
+
     public static function doInsert($input, $record) {
 
         $record = self::create([
