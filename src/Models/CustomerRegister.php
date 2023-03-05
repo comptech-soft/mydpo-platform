@@ -89,10 +89,13 @@ class CustomerRegister extends Model {
         return $result;
     }
 
+    public static function registerDownload($input) {
+        dd(__METHOD__, $input);
+    }
+
+    
     public static function nextNumberWhere($input) {
         return "(customer_id = " . $input['customer_id'] . ") AND (register_id = " . $input['register_id'] . ")";
     }
-
-
 
 }

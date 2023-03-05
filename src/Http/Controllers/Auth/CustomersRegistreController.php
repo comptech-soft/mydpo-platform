@@ -33,4 +33,8 @@ class CustomersRegistreController extends Controller {
         return CustomerRegister::getNextNumber($r->all());
     }
 
+    public function registerDownload(Request $r) {
+        return CustomerRegister::registerDownload($r->all());
+    }
+
 }
