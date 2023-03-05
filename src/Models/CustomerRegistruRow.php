@@ -46,17 +46,22 @@ class CustomerRegistruRow extends Model {
     }
 
     public function getMyvaluesAttribute() {
-        $r = [];
-        foreach($this->values()->get() as $i => $item)
-        {
-            $r[$item->column_id] = $item->value;
+        $r = [...$this->registru->real_columns];
+        $values = $this->values()->pluck('value', 'column_id')->toArray();
 
-            dd($item->row->registru->columns);
+
+        foreach($r as $i => $item)
+        {
+            // dd($item);
+
+           $r[$i]['value'] = $values[$item['id']];
         }
 
-        dd($r);
+        return collect($r)->map(function($item){
+            return $item['value'];
+        })->toArray();
     }
-
+    
     public static function doDelete($input, $record) {
         $record->values()->delete();
         $record->delete();
