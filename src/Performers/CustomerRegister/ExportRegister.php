@@ -10,6 +10,8 @@ class ExportRegister extends Perform {
 
     public function Action() {
 
+        dd($this->input);
+
         $exporter = new Exporter();
 
 
