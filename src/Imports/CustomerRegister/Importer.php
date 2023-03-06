@@ -4,14 +4,16 @@ namespace MyDpo\Imports\CustomerRegister;
 
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
-// use MyDpo\Models\CustomerCursParticipant;
+use MyDpo\Models\CustomerRegister;
 
 class Importer implements ToCollection {
 
     public $input = NULL;
+    public $registru = NULL;
 
     public function __construct($input) {
         $this->input = $input;
+        $this->registru = CustomerRegister::where('id', $id)->first();
     }
 
     public function collection(Collection $rows) {
@@ -26,7 +28,7 @@ class Importer implements ToCollection {
 
     private function processRow($row) {
 
-        dd($this->input, $row);
+        dd($this->register, $this->input, $row);
 
         CustomerCursParticipant::create($input);
 

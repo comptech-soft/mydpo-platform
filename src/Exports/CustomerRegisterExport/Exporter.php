@@ -12,7 +12,6 @@ use Illuminate\Contracts\View\View;
 
 class Exporter implements FromView, WithStrictNullComparison, ShouldAutoSize {
 
-
     public $registru = NULL;
 
     public function __construct($id) {
