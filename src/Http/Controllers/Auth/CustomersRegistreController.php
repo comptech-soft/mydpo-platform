@@ -45,31 +45,10 @@ class CustomersRegistreController extends Controller {
             $records[$row->id] =$row->myvalues;
         }
 
-        
-
-       
         return view('exports.customer-register.export', [
             'columns' => $registru->columns,
             'records' => $records,
-            'children' => collect($registru->columns)->filter( function($item) {
-
-                if($item['column_type'] != 'group')
-                {
-                    return FALSE;
-                }
-                if( ! array_key_exists('children', $item) )
-                {
-                    return FALSE;
-                }
-    
-                if( count($item['children']) == 0)
-                {
-                    return FALSE;
-                }
-    
-                return TRUE;
-    
-            })->toArray(),
+            'children' => $registru->children_columns,
         ]);
 
 

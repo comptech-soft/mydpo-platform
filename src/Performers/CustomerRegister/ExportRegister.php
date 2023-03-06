@@ -10,9 +10,7 @@ class ExportRegister extends Perform {
 
     public function Action() {
 
-        dd($this->input);
-
-        $exporter = new Exporter();
+        $exporter = new Exporter($this->input['id']);
 
 
         \Excel::store($exporter, 'aaaa.xlsx', NULL, NULL, ['visibility' => 'public']);

@@ -46,6 +46,8 @@ class Registru extends Model {
         'columns',
     ];
 
+
+
     public function getColumnsAttribute() {
         $t = $this->coloane->filter( function($item) {
             if($item->is_group == 1)

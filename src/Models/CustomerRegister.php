@@ -44,6 +44,28 @@ class CustomerRegister extends Model {
 
     public $nextNumberColumn = 'number';
 
+    public function getChildrenColumnsAttribute() {
+        return collect($this->columns)->filter( function($item) {
+
+            if($item['column_type'] != 'group')
+            {
+                return FALSE;
+            }
+            if( ! array_key_exists('children', $item) )
+            {
+                return FALSE;
+            }
+
+            if( count($item['children']) == 0)
+            {
+                return FALSE;
+            }
+
+            return TRUE;
+
+        })->toArray();
+    }
+
     public function getRealColumnsAttribute() {
         $r = [];
 
@@ -76,7 +98,7 @@ class CustomerRegister extends Model {
 
         return $r;
     }
-    
+
     function rows() {
         return $this->hasMany(CustomerRegistruRow::class, 'customer_register_id');
     }
