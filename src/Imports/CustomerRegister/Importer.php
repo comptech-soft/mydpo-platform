@@ -56,7 +56,7 @@ class Importer implements ToCollection {
             {
                 $valueinput = [
                     ...$valueinput,
-                    'value' => $this->departamente[$valueinput['value']],
+                    'value' => array_key_exists($valueinput['value'], $this->departamente) ? $this->departamente[$valueinput['value']] : NULL,
                 ];
                 
             }
@@ -68,7 +68,7 @@ class Importer implements ToCollection {
 
                     $valueinput = [
                         ...$valueinput,
-                        'value' => $options[$valueinput['value']],
+                        'value' => array_key_exists($valueinput['value'], $options) ? $options[$valueinput['value']] : NULL,
                     ];
                 }
             }
