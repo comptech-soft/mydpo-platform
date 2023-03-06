@@ -46,7 +46,7 @@ class CustomerRegister extends Model {
     protected $appends = [
         'children_columns',
         'real_columns',
-        'records',
+        // 'records',
     ];
 
     public $nextNumberColumn = 'number';
