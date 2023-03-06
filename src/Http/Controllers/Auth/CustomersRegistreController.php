@@ -50,11 +50,8 @@ class CustomersRegistreController extends Controller {
     }
 
     public function registerUpload(Request $r) {
+
         return CustomerRegister::registerUpload($r->all());
     }
-
-
-    
-
 
 }
