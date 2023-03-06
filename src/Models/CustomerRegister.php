@@ -43,6 +43,12 @@ class CustomerRegister extends Model {
         'deleted_by'
     ];
 
+    protected $appends = [
+        'children_columns',
+        'real_columns',
+        'records',
+    ];
+
     public $nextNumberColumn = 'number';
 
     public function getChildrenColumnsAttribute() {
