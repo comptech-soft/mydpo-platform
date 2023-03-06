@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Helpers\Response;
 use MyDpo\Models\CustomerRegister;
-use MyDpo\Models\CustomerDepartment;
 
 class CustomersRegistreController extends Controller {
     
