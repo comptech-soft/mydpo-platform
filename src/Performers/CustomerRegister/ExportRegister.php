@@ -20,9 +20,6 @@ class ExportRegister extends Perform {
         \Excel::store($exporter, $filename, NULL, NULL, ['visibility' => 'public']);
 
         $this->payload = $url = asset($file);
-
-
-    
     }
 
     public function createUserFolder() {
