@@ -13,7 +13,7 @@ class Importer implements ToCollection {
 
     public function __construct($input) {
         $this->input = $input;
-        $this->registru = CustomerRegister::where('id', $id)->first();
+        $this->registru = CustomerRegister::where('id', $this->input['id'])->first();
     }
 
     public function collection(Collection $rows) {
