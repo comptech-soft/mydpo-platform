@@ -38,21 +38,11 @@ class CustomersRegistreController extends Controller {
 
         $registru = CustomerRegister::where('id', $id)->first();
 
-     
-        $records = [];
-        foreach($registru->rows as $i => $row)
-        {
-            $records[$row->id] =$row->myvalues;
-        }
-
         return view('exports.customer-register.export', [
             'columns' => $registru->columns,
-            'records' => $records,
+            'records' => $registru->records,
             'children' => $registru->children_columns,
         ]);
-
-
-        
     }
 
     public function registerDownload(Request $r) {

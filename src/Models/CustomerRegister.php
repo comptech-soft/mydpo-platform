@@ -99,6 +99,15 @@ class CustomerRegister extends Model {
         return $r;
     }
 
+    public function getRecordsAttribute() {
+        $records = [];
+        foreach($this->rows as $i => $row)
+        {
+            $records[$row->id] =$row->myvalues;
+        }
+        return $records;
+    }
+
     function rows() {
         return $this->hasMany(CustomerRegistruRow::class, 'customer_register_id');
     }
