@@ -18,14 +18,13 @@ class Exporter implements FromView, WithStrictNullComparison, ShouldAutoSize {
     public function __construct($id) {
 
         $this->registru = CustomerRegister::where('id', $id)->first();
-
-        dd($this->registru);
-        
     }
 
     public function view(): View {
         return view('exports.customer-register.export', [
-
+            'columns' => $this->registru->columns,
+            'records' => $this->registru->records,
+            'children' => $this->registru->children_columns,
         ]);
     }
 
