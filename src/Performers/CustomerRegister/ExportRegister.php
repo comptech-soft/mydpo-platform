@@ -9,7 +9,7 @@ class ExportRegister extends Perform {
 
     public function Action() {
 
-        $exporter = new Exporter($this->input['id']);
+        $exporter = new Exporter($this->input['id'], $this->input['juststructure']);
 
         
         $this->createUserFolder();

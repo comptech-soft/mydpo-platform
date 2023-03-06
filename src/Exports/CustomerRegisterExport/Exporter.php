@@ -13,8 +13,11 @@ use Illuminate\Contracts\View\View;
 class Exporter implements FromView, WithStrictNullComparison, ShouldAutoSize {
 
     public $registru = NULL;
+    public $juststructure = 1;
 
-    public function __construct($id) {
+    public function __construct($id, $juststructure) {
+
+        $this->juststructure = $juststructure;
 
         $this->registru = CustomerRegister::where('id', $id)->first();
     }
@@ -22,9 +25,10 @@ class Exporter implements FromView, WithStrictNullComparison, ShouldAutoSize {
     public function view(): View {
         return view('exports.customer-register.export', [
             'columns' => $this->registru->columns,
-            'records' => $this->registru->records,
+            'records' => $this->juststructure == 1 ? [] : $this->registru->records,
             'children' => $this->registru->children_columns,
         ]);
     }
 
 }
+
