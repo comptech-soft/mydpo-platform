@@ -64,7 +64,7 @@ class Importer implements ToCollection {
             {
                 if($column['type'] == 'O')
                 {
-                    $options = collect($column['props']['options'])->pluck('value', 'text');
+                    $options = collect($column['props']['options'])->pluck('value', 'text')->toArray();
 
                     $valueinput = [
                         ...$valueinput,
