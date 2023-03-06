@@ -49,12 +49,24 @@ class CustomerRegistruRow extends Model {
         $r = [...$this->registru->real_columns];
         $values = $this->values()->pluck('value', 'column_id')->toArray();
 
+        $departamente = CustomerDepartment::where('customer_id', $this->registru->customer_id)->pluck('departament', 'id')->toArray();
 
         foreach($r as $i => $item)
         {
-            // dd($item);
+            $r[$i]['value'] = $values[$item['id']];
 
-           $r[$i]['value'] = $values[$item['id']];
+            if($item['type'] == 'departament')
+            {
+                $r[$i]['value'] = $departamente[$r[$i]['value']];
+            }
+            else
+            {
+                if($item['type'] == 'O')
+                {
+                    $options = collect($item['props']['options'])->pluck('text', 'value')->toArray();
+                    $r[$i]['value'] = $options[$r[$i]['value']];
+                }
+            }
         }
 
         return collect($r)->map(function($item){
@@ -62,6 +74,7 @@ class CustomerRegistruRow extends Model {
         })->toArray();
     }
     
+
     public static function doDelete($input, $record) {
         $record->values()->delete();
         $record->delete();
