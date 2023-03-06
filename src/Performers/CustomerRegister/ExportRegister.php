@@ -11,12 +11,22 @@ class ExportRegister extends Perform {
 
         $exporter = new Exporter($this->input['id']);
 
-        // storage/app
+        
+        $this->createUserFolder();
+
         \Excel::store($exporter, $file = 'aaaa.xlsx', NULL, NULL, ['visibility' => 'public']);
 
         $this->payload = $url = asset($file);
 
 
     
+    }
+
+    public function createUserFolder() {
+            
+        if(! \Storage::exists('public/exports/' . \Auth::user()->id) )
+        {
+            \Storage::disk('public')->makeDirectory('exports/' . \Auth::user()->id, 0777);
+        }
     }
 }
