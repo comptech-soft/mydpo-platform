@@ -28,7 +28,7 @@ class Importer implements ToCollection {
 
     private function processRow($row) {
 
-        dd($this->register, $this->input, $row);
+        dd($this->registru, $this->input, $row);
 
         CustomerCursParticipant::create($input);
 
