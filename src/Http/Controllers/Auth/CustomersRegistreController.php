@@ -38,50 +38,11 @@ class CustomersRegistreController extends Controller {
 
         $registru = CustomerRegister::where('id', $id)->first();
 
-        dd($registru->real_columns);
-
+     
         $records = [];
         foreach($registru->rows as $i => $row)
         {
-
-            dd($row->myvalues);
-
-            $values = [];
-            foreach($row->values()->get() as $j => $item) 
-            {
-                $values[$item->column_id] = $item->value;
-            }
-
-            $record = [];
-
-            foreach($valuecolumns as $column_id => $column)
-            {
-                $record[$column_id] = $values[$column_id];
-
-                if($column['column']['type'] == 'O')
-                {
-                    $options = [];
-                    foreach($column['column']['props']['options'] as $k => $option)
-                    {
-
-                        $options[$option['value']] = $option['text'];
-                    }
-
-                    $record[$column_id] = $options[$record[$column_id]];
-                }
-                else
-                {
-                    if($column['column']['type'] == 'departament')
-                    {
-                        $record[$column_id] = CustomerDepartment::find($record[$column_id])->departament;
-
-                    }
-                }
-
-            }
-
-            $records[$row->id] = $record;
-
+            $records[$row->id] =$row->myvalues;
         }
 
         
