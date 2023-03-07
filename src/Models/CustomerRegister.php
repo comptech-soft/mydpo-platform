@@ -120,6 +120,7 @@ class CustomerRegister extends Model {
     }
 
     public static function getItems($input) {
+        dd(__METHOD__);
         return (new GetItems($input, self::query()->with(['rows.values']), __CLASS__))->Perform();
     }
 
