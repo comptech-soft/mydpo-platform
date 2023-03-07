@@ -1,9 +1,27 @@
 <?php
 
+use MyDpo\Http\Controllers\Admin\RegistreController;
+use MyDpo\Http\Controllers\Admin\RegistreColumnsController;
 use MyDpo\Http\Controllers\Auth\CustomersRegistreController;
 use MyDpo\Http\Controllers\Auth\CustomersRegistreAsociateController;
 use MyDpo\Http\Controllers\Auth\CustomerRegistruController;
 use MyDpo\Http\Controllers\Auth\CustomersRegistreRowsController;
+
+Route::prefix('registre')->group( function() {
+        
+    Route::get('/', [RegistreController::class, 'index']);        
+    Route::post('items', [RegistreController::class, 'getItems']);
+    Route::post('action/{action}', [RegistreController::class, 'doAction']);
+
+});
+
+Route::prefix('registre-columns')->group( function() {
+        
+    Route::post('action/{action}', [RegistreColumnsController::class, 'doAction']);
+    Route::post('reorder-columns', [RegistreColumnsController::class, 'reorderColumns']);
+
+});
+
 
 Route::middleware('valid-customer')->prefix('/customer-registre')->group( function() {
 
