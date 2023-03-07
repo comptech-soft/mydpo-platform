@@ -37,6 +37,10 @@ class CustomerRegistruRow extends Model {
         'deleted_by'
     ];
 
+    protected $appends = [
+        'myvalues',
+    ];
+
     public function registru() {
         return $this->belongsTo(CustomerRegister::class, 'customer_register_id');
     }

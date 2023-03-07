@@ -110,7 +110,7 @@ class CustomerRegister extends Model {
         $records = [];
         foreach($this->rows as $i => $row)
         {
-            $records[$row->id] =$row->myvalues;
+            $records[$row->id] = $row->myvalues;
         }
         return $records;
     }
