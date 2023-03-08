@@ -120,7 +120,11 @@ class CustomerRegister extends Model {
     }
 
     public static function getItems($input) {
-        dd(__METHOD__);
+        $query = self::query();
+        if(config('app.platform') == 'b2b')
+        {
+            $query->where('status', 'public');
+        }
         return (new GetItems($input, self::query()->with(['rows.values']), __CLASS__))->Perform();
     }
 
