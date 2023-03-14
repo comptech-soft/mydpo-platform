@@ -3,13 +3,14 @@
 namespace MyDpo\Performers\CustomerRegister;
 
 use MyDpo\Helpers\Perform;
+use MyDpo\Models\CustomerRegistruUser;
 
 class RegisterSaveAccess extends Perform {
 
     public function Action() {
 
       
-        dd($this->input);
+        //$record = CustomerRegistruUser::find($this->input['']);
     }
     
 }
