@@ -6,6 +6,7 @@ use MyDpo\Http\Controllers\Auth\CustomersRegistreController;
 use MyDpo\Http\Controllers\Auth\CustomersRegistreAsociateController;
 use MyDpo\Http\Controllers\Auth\CustomerRegistruController;
 use MyDpo\Http\Controllers\Auth\CustomersRegistreRowsController;
+use MyDpo\Http\Controllers\Auth\CustomersRegistreUsersController;
 
 Route::prefix('registre')->group( function() {
         
