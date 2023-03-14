@@ -3,7 +3,6 @@
 namespace MyDpo\Performers\CustomerRegister;
 
 use MyDpo\Helpers\Perform;
-use MyDpo\Exports\CustomerRegisterExport\Exporter;
 use MyDpo\Imports\CustomerRegister\Importer;
 
 class ImportRegister extends Perform {

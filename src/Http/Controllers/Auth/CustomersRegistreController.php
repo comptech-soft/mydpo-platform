@@ -49,8 +49,13 @@ class CustomersRegistreController extends Controller {
     }
 
     public function registerUpload(Request $r) {
-
         return CustomerRegister::registerUpload($r->all());
     }
+
+    public function registerSaveAccess(Request $r) {
+        return CustomerRegister::registerSaveAccess($r->all());
+    }
+
+    
 
 }

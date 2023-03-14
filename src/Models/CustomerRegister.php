@@ -8,6 +8,7 @@ use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Traits\NextNumber;
 use MyDpo\Performers\CustomerRegister\ExportRegister;
 use MyDpo\Performers\CustomerRegister\ImportRegister;
+use MyDpo\Performers\CustomerRegister\RegisterSaveAccess;
 
 class CustomerRegister extends Model {
 
@@ -173,6 +174,13 @@ class CustomerRegister extends Model {
     public static function registerUpload($input) {
         return (new ImportRegister($input))->Perform();
     }
+
+    public static function registerSaveAccess($input) {
+        return (new RegisterSaveAccess($input))->Perform();
+    }
+
+
+    
 
     public static function nextNumberWhere($input) {
         return "(customer_id = " . $input['customer_id'] . ") AND (register_id = " . $input['register_id'] . ")";

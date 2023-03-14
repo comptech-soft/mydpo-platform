@@ -49,7 +49,8 @@ Route::prefix('/customers-registers')->group( function() {
     Route::post('get-next-number', [CustomersRegistreController::class, 'getNextNumber']);
     Route::post('register-download', [CustomersRegistreController::class, 'registerDownload']);
     Route::get('register-download-preview/{id}', [CustomersRegistreController::class, 'registerDownloadPreview']);
-    Route::post('register-upload ', [CustomersRegistreController::class, 'registerUpload']);
+    Route::post('register-upload', [CustomersRegistreController::class, 'registerUpload']);
+    Route::post('register-save-access', [CustomersRegistreController::class, 'registerSaveAccess']);
     
 });
 
