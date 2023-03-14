@@ -57,3 +57,7 @@ Route::prefix('/customers-registers')->group( function() {
 Route::prefix('/customers-registers-rows')->group( function() {
     Route::post('action/{action}', [CustomersRegistreRowsController::class, 'doAction']);    
 });
+
+Route::prefix('/customers-registers-users')->group( function() {
+    Route::post('items', [CustomersRegistreUsersController::class, 'getItems']);    
+});
