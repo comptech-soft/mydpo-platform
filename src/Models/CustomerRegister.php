@@ -131,6 +131,8 @@ class CustomerRegister extends Model {
 
     public static function doDelete($input, $record) {
 
+        CustomerRegistruUser::where('customer_registru_id', $record->id)->delete();
+        
         $rows = CustomerRegistruRow::where('customer_register_id', $record->id)->get();
 
         foreach($rows as $i => $row)
