@@ -68,7 +68,10 @@ class CustomerRegistruRow extends Model {
                 if($item['type'] == 'O')
                 {
                     $options = collect($item['props']['options'])->pluck('text', 'value')->toArray();
-                    $r[$i]['value'] = $options[$r[$i]['value']];
+                    if($r[$i]['value'])
+                    {
+                        $r[$i]['value'] = $options[$r[$i]['value']];
+                    }
                 }
             }
         }
