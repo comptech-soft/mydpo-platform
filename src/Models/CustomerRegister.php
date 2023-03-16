@@ -179,9 +179,6 @@ class CustomerRegister extends Model {
         return (new RegisterSaveAccess($input))->Perform();
     }
 
-
-    
-
     public static function nextNumberWhere($input) {
         return "(customer_id = " . $input['customer_id'] . ") AND (register_id = " . $input['register_id'] . ")";
     }

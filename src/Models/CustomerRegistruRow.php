@@ -51,17 +51,22 @@ class CustomerRegistruRow extends Model {
 
     public function getMyvaluesAttribute() {
         $r = [...$this->registru->real_columns];
+
         $values = $this->values()->pluck('value', 'column_id')->toArray();
 
         $departamente = CustomerDepartment::where('customer_id', $this->registru->customer_id)->pluck('departament', 'id')->toArray();
 
         foreach($r as $i => $item)
         {
-            $r[$i]['value'] = $values[$item['id']];
+            $r[$i]['value'] = array_key_exists($item['id'], $values) ? $values[$item['id']] : NULL;
 
+    
             if($item['type'] == 'departament')
             {
-                $r[$i]['value'] = $departamente[$r[$i]['value']];
+                if($r[$i]['value'])
+                {
+                    $r[$i]['value'] = $departamente[$r[$i]['value']];
+                }
             }
             else
             {
@@ -81,7 +86,6 @@ class CustomerRegistruRow extends Model {
         })->toArray();
     }
     
-
     public static function doDelete($input, $record) {
         $record->values()->delete();
         $record->delete();
