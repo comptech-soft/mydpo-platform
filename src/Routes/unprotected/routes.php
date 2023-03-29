@@ -11,6 +11,7 @@ use MyDpo\Http\Controllers\System\TermeniController;
 use MyDpo\Http\Controllers\System\NotaController;
 use MyDpo\Http\Controllers\System\TranslationsController;
 use MyDpo\Http\Controllers\System\UploadsController;
+use MyDpo\Http\Controllers\System\KnolyxController;
 
 Route::get('/', [WelcomeController::class, 'index']);
 
@@ -56,3 +57,5 @@ Route::prefix('translations')->group(function () {
 Route::get('/contact', [ContactController::class, 'index']);
 Route::get('/termeni-si-conditii', [TermeniController::class, 'index']);
 Route::get('/nota-informare', [NotaController::class, 'index']);
+
+Route::get('/knolyx/webhook-process', [KnolyxController::class, 'webhookProcess']);
