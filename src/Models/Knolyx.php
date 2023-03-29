@@ -157,7 +157,23 @@ class Knolyx {
 
 		if( $sysconfig && ($sysconfig->value == 0))
 		{
-			dd($sysconfig);
+
+			$params = [
+				'name' => "Knolyx-MyDpo-webhook",
+				'url' => config('app.url') . 'knolyx/webhook-process',
+				'securityToken' => $token = \Str::random(32),
+			];
+
+			$response =  \Http::withHeaders([
+				'X-Project-Id' => config('knolyx.project_id'),
+				'X-Api-Key' => config('knolyx.app_key')
+			])
+			->post(
+				config('knolyx.endpoint') . 'webhook',  
+				$params
+			)->json();
+
+			dd($response);
 		}
 	}
 }
