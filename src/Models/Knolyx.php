@@ -153,7 +153,12 @@ class Knolyx {
     }
 
 	public static function createWebhook() {
-		dd(__METHOD__);
+		$sysconfig = SysConfig::where('code', 'knolyx-webhook-created')->first();
+
+		if( $sysconfig && ($sysconfig->value == 0))
+		{
+			dd($sysconfig);
+		}
 	}
 }
 
