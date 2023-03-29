@@ -337,8 +337,8 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
             'phone' => $input['phone'],
             'avatar' => array_key_exists('avatar', $input) ? $input['avatar'] : NULL,
             'password' => Hash::make($input['password']),
-            'email_verified_at' => $now = \Carbon\Carbon::now(),
-            'activated_at' => $now,
+            'email_verified_at' => ($input['type'] == 'b2b' ? NULL : $now = \Carbon\Carbon::now()),
+            'activated_at' => ($input['type'] == 'b2b' ? NULL : $now),
         ]);
 
         if(array_key_exists('role_id', $input) && $input['role_id'])
