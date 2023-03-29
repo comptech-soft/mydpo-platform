@@ -404,6 +404,7 @@ class Curs extends Model {
             'k_avatar' => $course['avatar'],
             'created_by' => \Auth::user()->id,
             'updated_by' => \Auth::user()->id,
+            'deleted' => 0,
         ];
 
         if(! $curs )
