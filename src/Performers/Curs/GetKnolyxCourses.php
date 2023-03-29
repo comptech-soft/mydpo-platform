@@ -11,11 +11,14 @@ class GetKnolyxCourses extends Perform {
 
     public function GetCourses($page, $size) {
 
+        Curs::whereNotNull('k_id')->update([
+            'deleted' => 1,
+        ]);
+
         $result = Knolyx::GetCourses($page, $size);
 
         if( count($result['list']) > 0 )
         {
-
             Curs::saveCoursesFromKnolyx($result['list']);
             $this->GetCourses($page + 1, $size);
         }

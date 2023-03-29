@@ -5,11 +5,14 @@ namespace MyDpo\Http\Controllers\System;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Helpers\Response;
+use MyDpo\Models\Knolyx;
 
 class DashboardController extends Controller {
     
     public function index(Request $r) {
 
+        Knolyx::createWebhook();
+        
         /**
          * admin ==> dashboard
          * b2b   ==> my-dashboard

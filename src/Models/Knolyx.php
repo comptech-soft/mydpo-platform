@@ -151,6 +151,10 @@ class Knolyx {
         
 		return NULL;
     }
+
+	public static function createWebhook() {
+		dd(__METHOD__);
+	}
 }
 
 
