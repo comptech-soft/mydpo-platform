@@ -9,7 +9,15 @@ use Illuminate\Http\Request;
 class KnolyxController extends Controller {
 
     public function webhookProcess(Request $r) {
-        return 'OK';
+        $params = [
+            "id" => "af46ec07-de79-40b5-916c-0058b54b2d2b", // unique id, messages with the same id should be ignored
+            "type" => "PING",
+            "data" => [
+                "message" => "PING"
+            ]
+        ];
+
+        return $params;
     }
 
 }
