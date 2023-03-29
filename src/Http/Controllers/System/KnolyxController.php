@@ -24,6 +24,8 @@ class KnolyxController extends Controller {
 			'done_at' => \Carbon\Carbon::now()->format('Y-m-d'),
 		]);
 
+        \Log::info($user->id . '#' . $curs->id . '#' . $cursuser);
+
         return $cursuser;
 
         // $params = [
