@@ -58,4 +58,4 @@ Route::get('/contact', [ContactController::class, 'index']);
 Route::get('/termeni-si-conditii', [TermeniController::class, 'index']);
 Route::get('/nota-informare', [NotaController::class, 'index']);
 
-Route::get('/knolyx/webhook-process', [KnolyxController::class, 'webhookProcess']);
+Route::post('/knolyx/webhook-process', [KnolyxController::class, 'webhookProcess']);
