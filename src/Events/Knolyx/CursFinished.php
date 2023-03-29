@@ -1,0 +1,35 @@
+<?php
+
+namespace MyDpo\Events\Knolyx;
+
+use Illuminate\Broadcasting\Channel;
+use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Broadcasting\PresenceChannel;
+use Illuminate\Broadcasting\PrivateChannel;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Queue\SerializesModels;
+
+use MyDpo\Events\BaseBroadcastEvent;
+
+class CursFinished extends BaseBroadcastEvent {
+
+    public $curs = NULL;
+    
+    public function __construct($input) {
+
+        parent::__construct('curs', 'finished', $input);
+               
+        $this->curs = $this->input['curs'];
+
+        $this->SetSubject(__CLASS__, $this->curs->id);
+
+        $this->CreateMessage([
+            'nume-curs' => $this->curs->name,
+        ]);
+
+        $this->InsertNotification();
+
+    }
+    
+}

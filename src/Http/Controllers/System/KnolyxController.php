@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use MyDpo\Models\User;
 use MyDpo\Models\Curs;
 use MyDpo\Models\CustomerCursUser;
+use MyDpo\Events\Knolyx\CursFinished;
 
 class KnolyxController extends Controller {
 
@@ -21,8 +22,7 @@ class KnolyxController extends Controller {
 			
 		$records = CustomerCursUser::where('user_id', $user->id)->where('curs_id', $curs->id)->get();
 
-
-        foreach($record as $i => $record) 
+        foreach($records as $i => $record) 
         {
             $record->update([
                 'status' => 'done',
@@ -31,6 +31,12 @@ class KnolyxController extends Controller {
 
             \Log::info($user->id . '#' . $curs->id . '#' . $record->id . '#' . $record->status . '#' . $record->done_at);
         }
+
+        event(new CursFinished([
+            'customer' => NULL,
+            'curs' => $curs,
+            'receiver' => $user,
+        ]));
 
         $params = [
             "id" => "af46ec07-de79-40b5-916c-0058b54b2d2b", // unique id, messages with the same id should be ignored
