@@ -117,6 +117,10 @@ class CustomerRegistruRow extends Model {
 
                 if($rowvalue)
                 {
+                    if($rowvalue->type == 'STARE')
+                    {
+                        $value = 'edited';
+                    }
                     $rowvalue->update(['value' => $value]);
                 }
             }
