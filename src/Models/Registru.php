@@ -17,6 +17,7 @@ class Registru extends Model {
         'has_departamente_column' => 'integer',
         'allow_versions' => 'integer',
         'has_status_column' => 'integer',
+        'has_stare_column' => 'integer',
         'upload_folder_id' => 'integer',
         'deleted' => 'integer',
         'created_by' => 'integer',
@@ -34,6 +35,7 @@ class Registru extends Model {
         'upload_folder_id',
         'has_departamente_column',
         'has_status_column',
+        'has_stare_column',
         'description',
         'props',
         'deleted',
@@ -45,8 +47,6 @@ class Registru extends Model {
     protected $appends = [
         'columns',
     ];
-
-
 
     public function getColumnsAttribute() {
         $t = $this->coloane->filter( function($item) {
@@ -119,70 +119,46 @@ class Registru extends Model {
 
     public static function doUpdate($input, $record) {
         $record->update($input);
+        
+        $columns = ['DEPARTAMENT', 'STATUS', 'STARE'];
+        $fields = ['has_departamente_column', 'has_status_column', 'has_stare_column'];
 
-        $data = [
-            'register_id' => $record->id,
-            'slug' => 'departament' . $record->id . md5(time()) ,
-            'caption' => 'Departament',
-            'is_group' => 0,
-            'group_id' => NULL,
-            'type' => 'departament',
-            'order_no' => -1,
-            'width' => 80,
-        ];
-
-        $exists = RegistruColoana::where('register_id', $record->id)->where('type', 'DEPARTAMENT')->first(); 
-
-        if($record->has_departamente_column == 1)
+        foreach($columns as $i => $column)
         {
-            if($exists) 
+            $data = [
+                'register_id' => $record->id,
+                'slug' => $column . $record->id . md5($i . time()) ,
+                'caption' => ucfirst(strtolower($column)),
+                'is_group' => 0,
+                'group_id' => NULL,
+                'type' => $column,
+                'order_no' => - $i - 1,
+                'width' => 100,
+            ];
+
+            $exists = RegistruColoana::where('register_id', $record->id)->where('type', $column)->first(); 
+
+            if($record->{$fields[$i]} == 1)
             {
-                $exists->update($data);    
+                if($exists) 
+                {
+                    $exists->update($data);    
+                }
+                else
+                {
+                    RegistruColoana::create($data);
+                }
             }
             else
             {
-                RegistruColoana::create($data);
-            }
-        }
-        else
-        {
-            if($exists) 
-            {
-                $exists->delete();
+                if($exists) 
+                {
+                    $exists->delete();
+                }
             }
         }
 
-        $data = [
-            'register_id' => $record->id,
-            'slug' => 'status' . $record->id . md5(time()) ,
-            'caption' => 'Status',
-            'is_group' => 0,
-            'group_id' => NULL,
-            'type' => 'status',
-            'order_no' => -2,
-            'width' => 40,
-        ];
 
-        $exists = RegistruColoana::where('register_id', $record->id)->where('type', 'STATUS')->first(); 
-
-        if($record->has_status_column == 1)
-        {
-            if($exists) 
-            {
-                $exists->update($data);    
-            }
-            else
-            {
-                RegistruColoana::create($data);
-            }
-        }
-        else
-        {
-            if($exists) 
-            {
-                $exists->delete();
-            }
-        }
 
         return $record;
     }
