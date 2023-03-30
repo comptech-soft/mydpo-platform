@@ -20,6 +20,7 @@ class CustomerRegistruRowValue extends Model {
         'column_id',
         'deleted',
         'value',
+        'type',
         'created_by',
         'updated_by'
     ];

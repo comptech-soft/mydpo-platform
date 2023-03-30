@@ -126,6 +126,8 @@ class CustomerRegistruRow extends Model {
 
     public static function doInsert($input, $record) {
 
+        dd($input);
+        
         $record = self::create([
             'customer_register_id' => $input['customer_register_id'],
             'customer_id' => $input['customer_id'],
