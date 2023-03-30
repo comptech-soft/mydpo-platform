@@ -32,6 +32,8 @@ class CustomerRegistruRow extends Model {
         'status',
         'props',
         'deleted',
+        'customer',
+        'createdby',
         'created_by',
         'updated_by',
         'deleted_by'
@@ -137,6 +139,9 @@ class CustomerRegistruRow extends Model {
             'departament_id' => $input['departament_id'],
             'order_no' => $input['order_no'],
             'status' => $input['status'],
+            'createdby' => \Auth::user()->name,
+            'created_by' => Auth::user()->id,
+            'customer' => Customer::find($input['customer_id'])->name,
             'props' => [
                 'rowvalues' => $input['rowvalues'],
             ],
