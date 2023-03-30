@@ -140,7 +140,7 @@ class CustomerRegistruRow extends Model {
             'order_no' => $input['order_no'],
             'status' => $input['status'],
             'createdby' => \Auth::user()->name,
-            'created_by' => Auth::user()->id,
+            'created_by' => \Auth::user()->id,
             'customer' => Customer::find($input['customer_id'])->name,
             'props' => [
                 'rowvalues' => $input['rowvalues'],
