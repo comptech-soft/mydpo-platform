@@ -133,7 +133,7 @@ class Registru extends Model {
                 'group_id' => NULL,
                 'type' => $column,
                 'order_no' => - $i - 1,
-                'width' => 100,
+                'width' => 160,
             ];
 
             $exists = RegistruColoana::where('register_id', $record->id)->where('type', $column)->first(); 

@@ -126,8 +126,6 @@ class CustomerRegistruRow extends Model {
 
     public static function doInsert($input, $record) {
 
-        dd($input);
-        
         $record = self::create([
             'customer_register_id' => $input['customer_register_id'],
             'customer_id' => $input['customer_id'],
@@ -145,10 +143,15 @@ class CustomerRegistruRow extends Model {
         {
             foreach($input['rowvalues'] as $key => $value)
             {
+                $column_id =  \Str::replace('col-', '', $key);
+
+                $column = RegistruColoana::find($column_id);
+
                 CustomerRegistruRowValue::create([
                     'row_id' => $record->id,
                     'column_id' => \Str::replace('col-', '', $key),
-                    'value' => $value,
+                    'value' => $column->type == 'STARE' ? 'new' : $value,
+                    'type' => $column->type,
                 ]);
             }
         }
