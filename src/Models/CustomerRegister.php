@@ -118,6 +118,10 @@ class CustomerRegister extends Model {
         return $records;
     }
 
+    public function department() {
+        return $this->belongsTo(CustomerDepartment::class, 'departament_id');
+    }
+
     function rows() {
         return $this->hasMany(CustomerRegistruRow::class, 'customer_register_id');
     }
@@ -128,7 +132,7 @@ class CustomerRegister extends Model {
         {
             $query->where('status', 'public');
         }
-        return (new GetItems($input, self::query()->with(['rows.values']), __CLASS__))->Perform();
+        return (new GetItems($input, self::query()->with(['rows.values', 'department']), __CLASS__))->Perform();
     }
 
     public static function doDelete($input, $record) {
@@ -165,7 +169,6 @@ class CustomerRegister extends Model {
             'date' => [
                 'required',
                 'date',
-                // new UniqueOrderService($input),
             ],
         ];
         return $result;
