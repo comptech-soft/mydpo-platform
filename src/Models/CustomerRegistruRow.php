@@ -141,7 +141,7 @@ class CustomerRegistruRow extends Model {
             'status' => $input['status'],
             'createdby' => \Auth::user()->full_name,
             'created_by' => \Auth::user()->id,
-            'customer' => Customer::find($input['customer_id'])->name,
+            'customer' => config('app.platform') == 'b2b' ? Customer::find($input['customer_id'])->name : 'Decalex',
             'props' => [
                 'rowvalues' => $input['rowvalues'],
             ],
