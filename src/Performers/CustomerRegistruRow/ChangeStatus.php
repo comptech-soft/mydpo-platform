@@ -14,7 +14,9 @@ class ChangeStatus extends Perform {
         $row->status = $this->input['status'];
         $row->save();
 
-        
+        $value = CustomerRegistruRowValue::where('row_id', $this->input['row_id'])->where('type', 'STATUS')->first();
+        $value->value = $this->input['status'];
+        $value->save();
 
     }
 }
