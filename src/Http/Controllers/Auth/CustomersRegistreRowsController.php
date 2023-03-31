@@ -15,4 +15,8 @@ class CustomersRegistreRowsController extends Controller {
     public function changeStatus(Request $r) {
         return CustomerRegistruRow::changeStatus($r->all());
     }
+
+    public function changeStare(Request $r) {
+        return CustomerRegistruRow::changeStare($r->all());
+    }
 }

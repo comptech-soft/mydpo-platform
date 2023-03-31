@@ -5,6 +5,7 @@ namespace MyDpo\Models;
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Performers\CustomerRegistruRow\ChangeStatus;
+use MyDpo\Performers\CustomerRegistruRow\ChangeStare;
 
 class CustomerRegistruRow extends Model {
 
@@ -175,6 +176,10 @@ class CustomerRegistruRow extends Model {
 
     public static function changeStatus($input) {
         return (new ChangeStatus($input))->Perform();
+    }
+
+    public static function changeStare($input) {
+        return (new ChangeStare($input))->Perform();
     }
 
 }
