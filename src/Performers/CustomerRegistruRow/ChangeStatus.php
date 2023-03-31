@@ -3,13 +3,18 @@
 namespace MyDpo\Performers\CustomerRegistruRow;
 
 use MyDpo\Helpers\Perform;
-// use MyDpo\Models\CustomerRegistruAsociat;
+use MyDpo\Models\CustomerRegistruRow;
+use MyDpo\Models\CustomerRegistruRowValue;
 
 class ChangeStatus extends Perform {
 
     public function Action() {
 
-        dd($this->input);
+        $row = CustomerRegistruRow::find($this->input['row_id']);
+        $row->status = $this->input['status'];
+        $row->save();
+
         
+
     }
 }
