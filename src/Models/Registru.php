@@ -127,7 +127,7 @@ class Registru extends Model {
         {
             $data = [
                 'register_id' => $record->id,
-                'slug' => $column . $record->id . md5($i . time()) ,
+                'slug' => $column . $record->id . md5($i . time()),
                 'caption' => ucfirst(strtolower($column)),
                 'is_group' => 0,
                 'group_id' => NULL,

@@ -65,7 +65,7 @@ class CustomerRegistruRow extends Model {
             $r[$i]['value'] = array_key_exists($item['id'], $values) ? $values[$item['id']] : NULL;
 
     
-            if($item['type'] == 'departament')
+            if($item['type'] == 'DEPARTAMENT')
             {
                 if($r[$i]['value'])
                 {
