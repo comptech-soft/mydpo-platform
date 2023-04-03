@@ -9,9 +9,8 @@ class ExportRegister extends Perform {
 
     public function Action() {
 
-        $exporter = new Exporter($this->input['id'], $this->input['juststructure']);
+        $exporter = new Exporter($this->input['id'], $this->input['juststructure'], $this->input['departamente_ids']);
 
-        
         $this->createUserFolder();
 
         $filename = 'public/exports/' . \Auth::user()->id. '/' . $this->input['filename'] . '.xlsx';
