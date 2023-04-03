@@ -50,9 +50,10 @@ class Importer implements ToCollection {
                 'row_id' => $rowrecord->id,
                 'column_id' => $column_id,
                 'value' => $row[$i],
+                'type' => $column['type'],
             ];
 
-            if($column['type'] == 'departament')
+            if($column['type'] == 'DEPARTAMENT')
             {
                 $valueinput = [
                     ...$valueinput,
