@@ -122,13 +122,14 @@ class Registru extends Model {
         
         $columns = ['DEPARTAMENT', 'STATUS', 'STARE'];
         $fields = ['has_departamente_column', 'has_status_column', 'has_stare_column'];
+        $captions = ['Departament', 'Vizibilitate', 'Status'];
 
         foreach($columns as $i => $column)
         {
             $data = [
                 'register_id' => $record->id,
                 'slug' => $column . $record->id . md5($i . time()),
-                'caption' => ucfirst(strtolower($column)),
+                'caption' => $captions[$i],
                 'is_group' => 0,
                 'group_id' => NULL,
                 'type' => $column,
