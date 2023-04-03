@@ -51,6 +51,7 @@ class Importer implements ToCollection {
                 'column_id' => $column_id,
                 'value' => $row[$i],
                 'type' => $column['type'],
+                'createdby' => \Auth::user()->full_name,
             ];
 
             if($column['type'] == 'DEPARTAMENT')
