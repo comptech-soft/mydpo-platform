@@ -8,6 +8,7 @@ use MyDpo\Models\CustomerRegister;
 use MyDpo\Models\CustomerRegistruRow;
 use MyDpo\Models\CustomerRegistruRowValue;
 use MyDpo\Models\CustomerDepartment;
+use MyDpo\Models\Customer;
 
 class Importer implements ToCollection {
 
@@ -39,6 +40,7 @@ class Importer implements ToCollection {
             'customer_id' => $this->registru->customer_id,
             'register_id' => $this->registru->props['registru']['id'],
             'status' => 'protected',
+            'customer' => config('app.platform') == 'b2b' ? Customer::find($this->registru->customer_id)->name : 'Decalex',
             'createdby' => \Auth::user()->full_name,
         ];
 
