@@ -39,6 +39,7 @@ class Importer implements ToCollection {
             'customer_id' => $this->registru->customer_id,
             'register_id' => $this->registru->props['registru']['id'],
             'status' => 'protected',
+            'createdby' => \Auth::user()->full_name,
         ];
 
         $rowrecord = CustomerRegistruRow::create($rowinput);
@@ -51,7 +52,6 @@ class Importer implements ToCollection {
                 'column_id' => $column_id,
                 'value' => $row[$i],
                 'type' => $column['type'],
-                'createdby' => \Auth::user()->full_name,
             ];
 
             if($column['type'] == 'DEPARTAMENT')
