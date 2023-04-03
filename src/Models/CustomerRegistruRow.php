@@ -106,6 +106,7 @@ class CustomerRegistruRow extends Model {
             'customer_register_id' => $input['customer_register_id'],
             'customer_id' => $input['customer_id'],
             'register_id' => $input['register_id'],
+            'createdby' => \Auth::user()->full_name,
             'props' => [
                 'rowvalues' => $input['rowvalues'],
             ],
