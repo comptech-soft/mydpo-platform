@@ -179,7 +179,19 @@ class CustomerCursUser extends Model {
     }
 
     public static function getItems($input) {
-        return (new GetItems($input, self::query(), __CLASS__))->Perform();
+
+        $q = self::query()
+        ->leftJoin(
+            'cursuri',
+            function($j) {
+                $j->on('cursuri.id', '=', 'customers-cursuri-users.curs_id');
+                
+            }
+        );
+  
+        $input['permanent_filters']['not-deletede'] = "( (cursuri.deleted = 0) OR (cursuri.deleted IS NULL))";
+
+        return (new GetItems($input, $q, __CLASS__))->Perform();
     }
 
     public static function getCounter($input) {
