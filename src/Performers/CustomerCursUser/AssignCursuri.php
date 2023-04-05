@@ -25,9 +25,14 @@ class AssignCursuri extends Perform {
             'materiale_trimise' => $this->input['materiale_trimise'],
             'customers' => $this->input['customers'],
             'created_by' => \Auth::user()->id,
+            'tip_curs' =>  $this->input['tip_curs'],
+            'location' =>  $this->input['location'],
+            'data_curs' =>  $this->input['data_curs'],
+            'ora_curs' =>  $this->input['ora_curs'],
+            'durata_curs' =>  $this->input['durata_curs'],
             'platform' => config('app.platform'),
         ];
-
+        
         $trimitere = Sharematerial::create($shareinput);
 
         $trimitere->CreateDetailsRecords();
