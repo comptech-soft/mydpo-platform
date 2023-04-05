@@ -19,10 +19,11 @@ class GetCounter extends Perform {
                 SUM(IF(`status` = 'done', 1, 0)) count_done,
                 SUM(IF(`status` = 'started', 1, 0)) count_started
             FROM `customers-cursuri-users`
+            LEFT JOIN `cursuri` ON `cursuri`.`id` = `customers-cursuri-users`.`curs_id`
             WHERE 
                 (user_id = " . $this->input['user_id'] . ") AND
                 (customer_id = " . $this->input['customer_id'] . ") AND
-                ( (deleted = 0) OR (deleted IS NULL) )
+                ( (cursuri.deleted = 0) OR (cursuri.deleted IS NULL) )
             ";
 
         $result = \DB::select($sql);
