@@ -21,7 +21,8 @@ class GetCounter extends Perform {
             FROM `customers-cursuri-users`
             WHERE 
                 (user_id = " . $this->input['user_id'] . ") AND
-                (customer_id = " . $this->input['customer_id'] . ")
+                (customer_id = " . $this->input['customer_id'] . ") AND
+                ( (deleted = 0) OR (deleted IS NULL) )
             ";
 
         $result = \DB::select($sql);
