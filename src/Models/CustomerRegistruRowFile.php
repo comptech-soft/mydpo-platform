@@ -22,7 +22,10 @@ class CustomerRegistruRowFile extends Model {
         'updated_by'
     ];
 
-    protected $appends = ['is_image', 'is_office'];
+    protected $appends = [
+        'is_image', 
+        'is_office'
+    ];
 
     public function getIsImageAttribute() {
         $ext = strtolower($this->file['file_original_extension']);
