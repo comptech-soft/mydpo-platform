@@ -7,7 +7,7 @@ use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Performers\CustomerRegistruRow\ChangeStatus;
 use MyDpo\Performers\CustomerRegistruRow\ChangeStare;
 use MyDpo\Performers\CustomerRegistruRow\DeleteRows;
-use MyDpo\Performers\CustomerRegistruRow\UploaFile;
+use MyDpo\Performers\CustomerRegistruRow\UploadFile;
 
 class CustomerRegistruRow extends Model {
 
