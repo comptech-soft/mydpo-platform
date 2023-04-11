@@ -33,6 +33,10 @@ class CustomersRegistreController extends Controller {
         return CustomerRegister::getNextNumber($r->all());
     }
 
+    public function registerCopy(Request $r) {
+        return CustomerRegister::registerCopy($r->all());
+    }
+
     public function registerDownloadPreview($id) {
 
         $registru = CustomerRegister::where('id', $id)->first();

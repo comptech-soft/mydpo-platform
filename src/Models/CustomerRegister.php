@@ -9,6 +9,7 @@ use MyDpo\Traits\NextNumber;
 use MyDpo\Performers\CustomerRegister\ExportRegister;
 use MyDpo\Performers\CustomerRegister\ImportRegister;
 use MyDpo\Performers\CustomerRegister\RegisterSaveAccess;
+use MyDpo\Performers\CustomerRegister\RegisterCopy;
 
 class CustomerRegister extends Model {
 
@@ -184,6 +185,10 @@ class CustomerRegister extends Model {
 
     public static function registerSaveAccess($input) {
         return (new RegisterSaveAccess($input))->Perform();
+    }
+
+    public static function registerCopy($input) {
+        return (new RegisterCopy($input))->Perform();
     }
 
     public static function nextNumberWhere($input) {
