@@ -12,7 +12,7 @@ class UpdateStatus extends Perform {
         
         $user = User::find($this->input['id']);
 
-        if($this->input['status'] == 1)
+        if(array_key_exists('status', $this->input) && $this->input['status'] == 1)
         {
             $user->Deactivate();
         }

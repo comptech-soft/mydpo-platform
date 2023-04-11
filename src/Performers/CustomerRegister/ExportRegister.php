@@ -9,7 +9,13 @@ class ExportRegister extends Perform {
 
     public function Action() {
 
-        $exporter = new Exporter($this->input['id'], $this->input['juststructure'], $this->input['departamente_ids']);
+        $departamente_ids = [];
+        if( array_key_exists('departamente_ids', $this->input) )
+        {
+            $departamente_ids = $this->input['departamente_ids'];
+        }
+
+        $exporter = new Exporter($this->input['id'], $this->input['juststructure'], $departamente_ids);
 
         $this->createUserFolder();
 

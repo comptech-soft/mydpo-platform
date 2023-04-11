@@ -7,8 +7,7 @@ use Illuminate\Http\Request;
 use MyDpo\Helpers\System\Config;
 use MyDpo\Models\UserSetting;
 
-class ConfigController extends Controller
-{
+class ConfigController extends Controller {
 
     public function getConfig(Request $r) {
         return Config::getConfig();
