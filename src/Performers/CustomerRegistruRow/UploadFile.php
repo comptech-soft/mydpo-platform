@@ -3,7 +3,7 @@
 namespace MyDpo\Performers\CustomerRegistruRow;
 
 use MyDpo\Helpers\Perform;
-// use MyDpo\Models\CustomerRegistruRow;
+use MyDpo\Models\CustomerRegistruRowFile;
 
 class UploadFile extends Perform {
 
@@ -28,7 +28,11 @@ class UploadFile extends Perform {
             'created_by' => \Auth::user()->id,
         ];
 
-        dd($inputdata);
+        CustomerRegistruRowFile::create([
+            'row_id' => $this->input['row_id'],
+            'file' => $inputdata,
+            'created_by' => \Auth::user()->id,
+        ]);
         
     }
 }
