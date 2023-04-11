@@ -7,6 +7,7 @@ use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Performers\CustomerRegistruRow\ChangeStatus;
 use MyDpo\Performers\CustomerRegistruRow\ChangeStare;
 use MyDpo\Performers\CustomerRegistruRow\DeleteRows;
+use MyDpo\Performers\CustomerRegistruRow\UploaFile;
 
 class CustomerRegistruRow extends Model {
 
@@ -190,6 +191,10 @@ class CustomerRegistruRow extends Model {
 
     public static function deleteRows($input) {
         return (new DeleteRows($input))->Perform();
+    }
+
+    public static function uploaFile($input) {
+        return (new UploaFile($input))->Perform();
     }
 
 }
