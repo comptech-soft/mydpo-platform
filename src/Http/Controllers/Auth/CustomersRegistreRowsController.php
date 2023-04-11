@@ -5,6 +5,7 @@ namespace MyDpo\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Models\CustomerRegistruRow;
+use MyDpo\Models\CustomerRegistruRowFile;
 
 class CustomersRegistreRowsController extends Controller {
     
@@ -37,6 +38,6 @@ class CustomersRegistreRowsController extends Controller {
     }
 
     public function downloadFile(Request $r) {
-        return CustomerRegister::registerDownload($r->all());
+        return CustomerRegistruRowFile::downloadFile($r->all());
     }
 }
