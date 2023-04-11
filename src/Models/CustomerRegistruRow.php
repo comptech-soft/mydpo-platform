@@ -8,6 +8,7 @@ use MyDpo\Performers\CustomerRegistruRow\ChangeStatus;
 use MyDpo\Performers\CustomerRegistruRow\ChangeStare;
 use MyDpo\Performers\CustomerRegistruRow\DeleteRows;
 use MyDpo\Performers\CustomerRegistruRow\UploadFile;
+use MyDpo\Performers\CustomerRegistruRow\LoadFiles;
 
 class CustomerRegistruRow extends Model {
 
@@ -195,6 +196,10 @@ class CustomerRegistruRow extends Model {
 
     public static function uploadFile($input) {
         return (new UploadFile($input))->Perform();
+    }
+
+    public static function loadFiles($input) {
+        return (new LoadFiles($input))->Perform();
     }
 
 }

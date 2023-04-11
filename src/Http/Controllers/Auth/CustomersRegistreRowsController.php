@@ -27,4 +27,8 @@ class CustomersRegistreRowsController extends Controller {
     public function uploadFile(Request $r) {
         return CustomerRegistruRow::uploadFile($r->all());
     }
+
+    public function loadFiles(Request $r) {
+        return CustomerRegistruRow::loadFiles($r->all());
+    }
 }
