@@ -49,15 +49,17 @@ class CustomerRegistruRow extends Model {
         'myvalues',
     ];
 
+    protected $withCount = ['files'];
+
     public function registru() {
         return $this->belongsTo(CustomerRegister::class, 'customer_register_id');
     }
 
-    function values() {
+    public function values() {
         return $this->hasMany(CustomerRegistruRowValue::class, 'row_id');
     }
 
-    function files() {
+    public function files() {
         return $this->hasMany(CustomerRegistruRowFile::class, 'row_id');
     }
 
