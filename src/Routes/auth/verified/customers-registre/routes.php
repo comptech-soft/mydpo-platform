@@ -59,6 +59,7 @@ Route::prefix('/customers-registers-rows')->group( function() {
     Route::post('action/{action}', [CustomersRegistreRowsController::class, 'doAction']);
     Route::post('change-status', [CustomersRegistreRowsController::class, 'changeStatus']);  
     Route::post('change-stare', [CustomersRegistreRowsController::class, 'changeStare']);    
+    Route::post('delete-rows', [CustomersRegistreRowsController::class, 'deleteRows']);    
 });
 
 Route::prefix('/customers-registers-users')->group( function() {
