@@ -64,6 +64,10 @@ class RegisterCopy extends Perform {
 
         }
 
+        $this->payload = [
+            'record' => $createdRegister,
+        ];
+
     }
     
 }
