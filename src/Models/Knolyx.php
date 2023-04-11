@@ -48,9 +48,7 @@ class Knolyx {
 
 		$startDateTime = \Carbon\Carbon::now()->format('Y-m-d') . ' 00:00:00';
 		$endDateTime = \Carbon\Carbon::now()->addMonth()->format('Y-m-d') . ' 23:59:59';
-
-		\Log::info('Bum bum....' . $startDateTime . ' - ' . $endDateTime);
-		
+	
         if(count($response) == 0)
 		{
 			

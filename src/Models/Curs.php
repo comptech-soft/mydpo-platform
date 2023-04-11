@@ -390,6 +390,9 @@ class Curs extends Model {
     }
 
     public static function saveCourseFromKnolyx($course) {
+		
+		
+		
         $curs = self::where('k_id', $course['id'])->first();
 
         $input = [
@@ -406,10 +409,10 @@ class Curs extends Model {
             'updated_by' => \Auth::user()->id,
             'deleted' => 0,
         ];
-
+		
         if(! $curs )
         {
-            $curs = self::create($input);
+			$curs = self::create($input);
         }
         else
         {
