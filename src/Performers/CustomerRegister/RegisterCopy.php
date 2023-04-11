@@ -6,6 +6,7 @@ use MyDpo\Helpers\Perform;
 use MyDpo\Models\CustomerRegister;
 use MyDpo\Models\CustomerRegistruRow;
 use MyDpo\Models\CustomerRegistruRowValue;
+use MyDpo\Models\CustomerDepartment;
 
 class RegisterCopy extends Perform {
 
@@ -44,6 +45,7 @@ class RegisterCopy extends Perform {
                     if( in_array($value->value, $this->input['selectedDepartamente']) )
                     {
                         $toCopy = true;
+                        $departament_id = $this->CreateDrpartament($value->value, $this->input['customer_id']);
                     }
                 }
             }
@@ -58,6 +60,11 @@ class RegisterCopy extends Perform {
                 {
                     $createValue = $value->replicate();
                     $createValue->row_id = $createdRow->id;
+                    if($value['type'] == 'DEPARTAMENT')
+                    {
+                        $createValue->value = $departament_id;
+                    }
+
                     $createValue->save();
                 }
             }
@@ -67,6 +74,24 @@ class RegisterCopy extends Perform {
         $this->payload = [
             'record' => $createdRegister,
         ];
+
+    }
+
+    public function CreateDrpartament($departament_id, $customer_id) {
+
+        $targetDep = CustomerDepartment::find($departament_id);
+
+        $exists = CustomerDepartment::where('departament', $targetDep->departament)->where('customer_id', $customer_id)->first();
+
+        if( ! $exists )
+        {
+            $exists = CustomerDepartment::create([
+                'departament' => $targetDep->departament,
+                'customer_id' => $customer_id
+            ]);
+        }
+
+        return $exists->id;
 
     }
     
