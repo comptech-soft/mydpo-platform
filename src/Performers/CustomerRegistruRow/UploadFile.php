@@ -28,6 +28,17 @@ class UploadFile extends Perform {
             'created_by' => \Auth::user()->id,
         ];
 
+        if(in_array($ext, ['jpg', 'jpeg', 'png']))
+        {
+            $image = \Image::make($file);
+            $inputdata = [
+                ...$inputdata,
+                'file_size' => $image->filesize(),
+                'file_width' => $image->width(),
+                'file_height' => $image->height(),
+            ];
+        }
+
         CustomerRegistruRowFile::create([
             'row_id' => $this->input['row_id'],
             'file' => $inputdata,
