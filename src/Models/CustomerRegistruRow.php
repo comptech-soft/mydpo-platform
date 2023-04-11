@@ -193,8 +193,8 @@ class CustomerRegistruRow extends Model {
         return (new DeleteRows($input))->Perform();
     }
 
-    public static function uploaFile($input) {
-        return (new UploaFile($input))->Perform();
+    public static function uploadFile($input) {
+        return (new UploadFile($input))->Perform();
     }
 
 }
