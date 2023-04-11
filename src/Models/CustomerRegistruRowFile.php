@@ -22,22 +22,20 @@ class CustomerRegistruRowFile extends Model {
         'updated_by'
     ];
 
-    public static function downloadFile($file_id) {
+    public static function downloadFile($id) {
 
-        $record = self::where('id', $file_id)->first();
+        $record = self::where('id', $id)->first();
 
         if(!! $record )
         {
-            $path = $record->file->url;
+            $path = $record->file['url'];
             
-            dd($path);
             $path = \Str::replace(config('filesystems.disks.s3.url'), '', $path);
-            return \Storage::disk('s3')->download($path, $record->file_original_name);
+
+            return \Storage::disk('s3')->download($path, $record->file['file_original_name']);
         }
 
         return NULL;
     }
 
-    
-    
 }
