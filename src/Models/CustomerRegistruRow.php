@@ -57,6 +57,10 @@ class CustomerRegistruRow extends Model {
         return $this->hasMany(CustomerRegistruRowValue::class, 'row_id');
     }
 
+    function files() {
+        return $this->hasMany(CustomerRegistruRowFile::class, 'row_id');
+    }
+
     public function getMyvaluesAttribute() {
         $r = [...$this->registru->real_columns];
 

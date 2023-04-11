@@ -133,7 +133,7 @@ class CustomerRegister extends Model {
         {
             $query->where('status', 'public');
         }
-        return (new GetItems($input, self::query()->with(['rows.values', 'department']), __CLASS__))->Perform();
+        return (new GetItems($input, self::query()->with(['rows.values', 'department'])->withCount('rows.files'), __CLASS__))->Perform();
     }
 
     public static function doDelete($input, $record) {
