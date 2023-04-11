@@ -22,6 +22,18 @@ class CustomerRegistruRowFile extends Model {
         'updated_by'
     ];
 
+    protected $appends = ['is_image', 'is_office'];
+
+    public function getIsImageAttribute() {
+        $ext = strtolower($this->file['file_original_extension']);
+        return in_array($ext, ['jpg', 'jpeg', 'png']);
+    }   
+
+    public function getIsOfficeAttribute() {
+        $ext = strtolower($this->file['file_original_extension']);
+        return in_array($ext, ['doc', 'docx', 'xls', 'xlsx']);
+    }  
+
     public static function downloadFile($id) {
 
         $record = self::where('id', $id)->first();
