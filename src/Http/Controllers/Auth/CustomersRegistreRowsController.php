@@ -19,4 +19,8 @@ class CustomersRegistreRowsController extends Controller {
     public function changeStare(Request $r) {
         return CustomerRegistruRow::changeStare($r->all());
     }
+
+    public function deleteRows(Request $r) {
+        return CustomerRegistruRow::deleteRows($r->all());
+    }
 }
