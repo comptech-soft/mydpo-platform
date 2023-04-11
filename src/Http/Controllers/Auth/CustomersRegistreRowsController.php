@@ -31,4 +31,8 @@ class CustomersRegistreRowsController extends Controller {
     public function loadFiles(Request $r) {
         return CustomerRegistruRow::loadFiles($r->all());
     }
+
+    public function deleteFile(Request $r) {
+        return CustomerRegistruRow::deleteFile($r->all());
+    }
 }

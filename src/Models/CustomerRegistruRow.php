@@ -9,6 +9,7 @@ use MyDpo\Performers\CustomerRegistruRow\ChangeStare;
 use MyDpo\Performers\CustomerRegistruRow\DeleteRows;
 use MyDpo\Performers\CustomerRegistruRow\UploadFile;
 use MyDpo\Performers\CustomerRegistruRow\LoadFiles;
+use MyDpo\Performers\CustomerRegistruRow\DeleteFile;
 
 class CustomerRegistruRow extends Model {
 
@@ -200,6 +201,10 @@ class CustomerRegistruRow extends Model {
 
     public static function loadFiles($input) {
         return (new LoadFiles($input))->Perform();
+    }
+
+    public static function deleteFile($input) {
+        return (new DeleteFile($input))->Perform();
     }
 
 }

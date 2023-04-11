@@ -62,7 +62,8 @@ Route::prefix('/customers-registers-rows')->group( function() {
     Route::post('change-stare', [CustomersRegistreRowsController::class, 'changeStare']);    
     Route::post('delete-rows', [CustomersRegistreRowsController::class, 'deleteRows']);    
     Route::post('upload-file', [CustomersRegistreRowsController::class, 'uploadFile']);    
-    Route::post('load-files', [CustomersRegistreRowsController::class, 'loadFiles']);    
+    Route::post('load-files', [CustomersRegistreRowsController::class, 'loadFiles']); 
+    Route::post('delete-file', [CustomersRegistreRowsController::class, 'deleteFile']);      
 });
 
 Route::prefix('/customers-registers-users')->group( function() {
