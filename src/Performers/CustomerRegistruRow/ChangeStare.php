@@ -19,6 +19,7 @@ class ChangeStare extends Perform {
         {
             $row = CustomerRegistruRow::find($row_id);
             $row->stare = $this->input['status'];
+            $row->createdby = \Auth::user()->full_name;
             $row->save();
 
             $value = CustomerRegistruRowValue::where('row_id', $row_id)->where('type', 'STARE')->first();
