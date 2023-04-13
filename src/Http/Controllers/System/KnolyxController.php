@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Models\User;
 use MyDpo\Models\Curs;
+use MyDpo\Models\Customer;
 use MyDpo\Models\CustomerCursUser;
 use MyDpo\Events\Knolyx\CursFinished;
 
@@ -40,6 +41,8 @@ class KnolyxController extends Controller {
 			$user = User::where('k_id', $q['data']['user']['id'])->first();
 			
 			$curs = Curs::where('k_id', $q['data']['course']['id'])->first();
+
+			$customer = NULL;
 				
 			$records = CustomerCursUser::where('user_id', $user->id)->where('curs_id', $curs->id)->get();
 
@@ -50,11 +53,16 @@ class KnolyxController extends Controller {
 					'done_at' => \Carbon\Carbon::now()->format('Y-m-d'),
 				]);
 
+				if( ! $customer )
+				{
+					$customer = Customer::find( $record->customer_id);
+				}
+
 				\Log::info($user->id . '#' . $curs->id . '#' . $record->id . '#' . $record->status . '#' . $record->done_at);
 			}
 
 			event(new CursFinished([
-				'customer' => NULL,
+				'customer' => $customer,
 				'curs' => $curs,
 				'receiver' => $user,
 			]));
