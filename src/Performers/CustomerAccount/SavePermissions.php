@@ -3,9 +3,9 @@
 namespace MyDpo\Performers\CustomerAccount;
 
 use MyDpo\Helpers\Perform;
-// use MyDpo\Models\Role;
+use MyDpo\Models\CustomerAccount;
 
-class SaveAccountPermissions extends Perform {
+class SavePermissions extends Perform {
 
     public function Action() {
 
