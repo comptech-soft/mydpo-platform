@@ -9,24 +9,22 @@ class SavePermissions extends Perform {
 
     public function Action() {
 
-        dd($this->input);
+        $account = CustomerAccount::find($this->input['account_id']);
 
-        $role = Role::find($this->input['id']);
-
-        if(! $role->permissions) {
+        if(! $account->permissions) {
             $permissions = $this->input['permissions'];
         }
         else
         {
             $permissions = [
-                ...$role->permissions,
+                ...$account->permissions,
                 ...$this->input['permissions'],
             ];
         }
 
-        $role->permissions = $permissions;
+        $account->permissions = $permissions;
 
-        $role->save();
+        $account->save();
     
     }
 }
