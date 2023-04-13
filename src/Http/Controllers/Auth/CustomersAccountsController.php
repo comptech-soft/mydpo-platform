@@ -52,4 +52,8 @@ class CustomersAccountsController extends Controller {
         return CustomerAccount::saveFolderAccess($r->all());
     }
 
+    public function savePermissions(Request $r) {
+        return CustomerAccount::savePermissions($r->all());
+    }
+
 }

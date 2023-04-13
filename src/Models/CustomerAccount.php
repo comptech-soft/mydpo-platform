@@ -17,6 +17,7 @@ use MyDpo\Performers\CustomerAccount\UpdateRole;
 use MyDpo\Performers\CustomerAccount\UpdateStatus;
 use MyDpo\Performers\CustomerAccount\SaveDashboardPermissions;
 use MyDpo\Performers\CustomerAccount\SaveFolderPermissions;
+use MyDpo\Performers\CustomerAccount\SavePermissions;
 use MyDpo\Performers\CustomerAccount\SaveFolderAccess;
 use MyDpo\Scopes\NotdeletedScope;
 
@@ -181,6 +182,10 @@ class CustomerAccount extends Model {
 
     public static function saveFolderPermissions($input) {
         return (new SaveFolderPermissions($input))->Perform();
+    }
+
+    public static function savePermissions($input) {
+        return (new SavePermissions($input))->Perform();
     }
 
     public static function saveFolderAccess($input) {
