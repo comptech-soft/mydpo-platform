@@ -67,7 +67,7 @@ class KnolyxController extends Controller {
 				'receiver' => $user,
 			]));
 			
-			\Log::info('== END ==' . __METHOD__);
+			\Log::info(__METHOD__ . '== END ==' . __METHOD__);
 			
 			return __METHOD__;
 		}
