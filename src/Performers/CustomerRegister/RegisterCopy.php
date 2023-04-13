@@ -53,16 +53,34 @@ class RegisterCopy extends Perform {
             if($toCopy)
             {
 
-                $createdRow = $targetRow->replicate();
-                $createdRow->customer_register_id = $createdRegister->id;
-                $createdRow->save();
+                $fields = $targetRow->getFillable();
+
+                $inputRow = [];
+
+                foreach($fields as $j => $field)
+                {
+                    $inputRow[$field] = $targetRow->{$field};
+                }
+
+                $inputRow['customer_register_id'] = $createdRegister->id;
+                $inputRow['createdby'] = \Auth::user()->full_name . ' (copy)';
+                $inputRow['id'] = NULL;
+                
+                $createdRow = CustomerRegistruRow::create($inputRow);        
+
                 foreach($values as $j => $value)
                 {
                     $createValue = $value->replicate();
                     $createValue->row_id = $createdRow->id;
+
                     if($value['type'] == 'DEPARTAMENT')
                     {
                         $createValue->value = $departament_id;
+                    }
+
+                    if($value['type'] == 'STARE')
+                    {
+                        $createValue->value = 'new';
                     }
 
                     $createValue->save();
