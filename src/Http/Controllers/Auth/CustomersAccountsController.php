@@ -56,4 +56,8 @@ class CustomersAccountsController extends Controller {
         return CustomerAccount::savePermissions($r->all());
     }
 
+    public function assignUser(Request $r) {
+        return CustomerAccount::assignUser($r->all());
+    }
+
 }
