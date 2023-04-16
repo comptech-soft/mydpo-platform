@@ -12,6 +12,11 @@ class ActivateAccountController extends Controller {
 
     public function index($token, Request $r) {
 
+        \Session::flush();
+ 
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
+
         $activation = Activation::byToken($token);
 
         if($activation && ($activation->activated == 0) )

@@ -7,7 +7,6 @@ use MyDpo\Performers\Usersession\Logout;
 use MyDpo\Performers\Usersession\UserLogin;
 use MyDpo\Performers\Usersession\SendResetPasswordLink;
 use MyDpo\Performers\Usersession\UpdateNewPassword;
-// use Comptech\Performers\System\Register;
 use MyDpo\Performers\Usersession\SendActivationEmail;
 use MyDpo\Performers\Usersession\ActivateAccount;
 use MyDpo\Performers\Usersession\GetInfosByToken;

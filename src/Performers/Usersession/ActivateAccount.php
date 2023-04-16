@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Password;
 use MyDpo\Models\Activation;
 use MyDpo\Models\User;
 use MyDpo\Models\Customer;
+use MyDpo\Models\UserSetting;
+use Illuminate\Auth\Events\Login;
 
 class ActivateAccount extends Perform {
 
@@ -67,7 +69,26 @@ class ActivateAccount extends Perform {
             'activated_at' => $now,
         ]);
 
+        $credentials = [
+            'email' => $this->input['email'],
+            'password' => $this->input['password'],
+        ];
+
+        $attempt = \Auth::attempt($credentials, false);
+
+        event(new Login(
+            \Auth::guard(), 
+            \Auth::user(),
+            false,
+        ));
+
+        UserSetting::saveActiveCustomer([
+            'user_id' => $user->id,
+            'platform' => config('app.platform'),
+            'customer_id' => $customer->id,
+        ]);
+
     }
 
    
-} 
+}
