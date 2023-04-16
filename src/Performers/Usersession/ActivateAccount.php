@@ -69,6 +69,11 @@ class ActivateAccount extends Perform {
             'activated_at' => $now,
         ]);
 
+        \Session::flush();
+ 
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
+
         $credentials = [
             'email' => $this->input['email'],
             'password' => $this->input['password'],
