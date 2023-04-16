@@ -69,12 +69,7 @@ class ActivateAccount extends Perform {
             'activated_at' => $now,
         ]);
 
-        $credentials = [
-            'email' => $this->input['email'],
-            'password' => $this->input['password'],
-        ];
-
-        $attempt = \Auth::attempt($credentials, false);
+        \Auth::login($user);
 
         event(new Login(
             \Auth::guard(), 
