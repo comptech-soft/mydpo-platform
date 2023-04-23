@@ -69,14 +69,29 @@ class Response {
     }
 
     public static function View($template = '~templates.index', $scripts = [], $styles = [], $payload = []) {
+        
         if( is_string($scripts) )
         {
             $scripts = [$scripts];
         }
+        
         if( is_string($styles) )
         {
             $styles = [$styles];
         }
+
+        $payload = [
+            ...$payload,
+            'status' => session('status'),
+            'old' => old(), 
+            'app-name' =>  config('app.name'),
+            'base-url' => config('app.url'),
+            'csrf-token' => csrf_token(),
+            'locale' => app()->getLocale(),
+            'platform' => config('app.platform'),
+            'env' => config('app.env'),
+        ];
+
         return view($template)->withScripts($scripts)->withPayload($payload)->withStyles($styles);
     }
 
