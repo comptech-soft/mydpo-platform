@@ -1,6 +1,6 @@
 <?php
 
-namespace ComptechSoft\MyHelpers\Performers\Data;
+namespace MyDpo\Actions\Items;
 
 class Initialfilter {
 
