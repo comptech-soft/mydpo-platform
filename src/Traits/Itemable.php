@@ -2,18 +2,16 @@
 
 namespace MyDpo\Traits;
 
-// use Comptech\Helpers\Performers\Datatable\GetItems;
+use MyDpo\Actions\Items\Dataprovider;
 // use Comptech\Helpers\Performers\Datatable\DoAction;
 
 trait Itemable { 
 
     public static function getItems($input) {
 
-        dd('11111');
-
         $query = method_exists(__CLASS__, 'GetQuery') ? self::GetQuery() : self::query();
 
-        return (new GetItems($input, $query, __CLASS__))->Perform();
+        return (new Dataprovider($input, $query, __CLASS__))->Perform();
     }
 
     // public static function doAction($action, $input) {
