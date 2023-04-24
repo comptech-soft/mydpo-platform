@@ -74,9 +74,8 @@ class Permission extends Model {
         return (new DoAction($action, $input, __CLASS__))->Perform();
     }
 
-    public static function getItems($input) {
-        dd(__METHOD__, $input);
-        return (new GetItems($input, self::query(), __CLASS__))->Perform();
-    }
+    // public static function getItems($input) {
+    //     return (new GetItems($input, self::query(), __CLASS__))->Perform();
+    // }
 
 }
