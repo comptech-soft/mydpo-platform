@@ -11,6 +11,7 @@ use MyDpo\Rules\Permission\UniquePermission;
 // https://github.com/lazychaser/laravel-nestedset#installation
 
 class Permission extends Model {
+
     use NodeTrait;
     
     protected $table = 'permissions';
@@ -73,6 +74,7 @@ class Permission extends Model {
     }
 
     public static function getItems($input) {
+        dd(__METHOD__, $input);
         return (new GetItems($input, self::query(), __CLASS__))->Perform();
     }
 
