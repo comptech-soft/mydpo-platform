@@ -12,7 +12,7 @@ trait Reorderable {
             ...$input, 
             'table' => (new (__CLASS__)())->getTable(),
         ]))
-            ->SetSuccessMessage(NULL)
+            ->SetSuccessMessage('Înregistrările au fost reordonate cu succes.')
             ->Perform();
     }
 
