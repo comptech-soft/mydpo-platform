@@ -23,5 +23,9 @@ class PermissionsController extends Controller {
     public function doAction($action, Request $r) {
         return Permission::doAction($action, $r->all());
     }
+
+    public function reorder(Request $r) {
+        return Permission::reorder($r->all());
+    }
     
 }
