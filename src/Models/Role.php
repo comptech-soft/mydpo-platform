@@ -9,7 +9,7 @@ use MyDpo\Performers\Role\SaveRolePermissions;
 
 class Role extends Model {
 
-    use NodeTrait, Itemable;
+    use Itemable;
 
     protected $table = 'roles';
 
