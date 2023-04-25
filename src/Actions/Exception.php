@@ -1,6 +1,6 @@
 <?php
 
-namespace ComptechSoft\MyHelpers\Classes\Core;
+namespace MyDpo\Actions;
 
 class Exception {
 
