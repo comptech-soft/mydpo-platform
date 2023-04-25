@@ -4,14 +4,16 @@ namespace MyDpo\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Kalnoy\Nestedset\NodeTrait;
-use MyDpo\Traits\Itemable;
 use MyDpo\Rules\Permission\UniquePermission;
+
+use MyDpo\Traits\Itemable;
+use MyDpo\Traits\Reorderable;
 
 // https://github.com/lazychaser/laravel-nestedset#installation
 
 class Permission extends Model {
 
-    use NodeTrait, Itemable;
+    use NodeTrait, Itemable, Reorderable;
     
     protected $table = 'permissions';
 
@@ -70,12 +72,6 @@ class Permission extends Model {
     public static function doAction($action, $input) {
         $input['slug'] = \Str::slug($input['name']);
         return (new DoAction($action, $input, __CLASS__))->Perform();
-    }
-
-    public static function reorder($input) {
-
-        dd($input);
-        // return (new GetItems($input, self::query(), __CLASS__))->Perform();
     }
 
 }
