@@ -4,7 +4,7 @@ namespace MyDpo\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Model;
-use MyDpo\Helpers\Performers\Datatable\GetItems;
+use MyDpo\Traits\Itemable;
 use MyDpo\Performers\Role\SaveRolePermissions;
 
 class Role extends Model {
@@ -40,10 +40,6 @@ class Role extends Model {
             'role_id', 
             'user_id'
         )->withPivot('customer_id')->withTimestamps();
-    }
-
-    public static function getItems($input) {
-        return (new GetItems($input, self::query(), __CLASS__))->Perform();
     }
 
     public static function saveRolePermissions($input) {
