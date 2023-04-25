@@ -2,7 +2,7 @@
 
 namespace MyDpo\Actions\Items;
 
-use  MyDpo\Actions\Perform;
+use MyDpo\Actions\Perform;
 
 class Dataprovider extends Perform {
 

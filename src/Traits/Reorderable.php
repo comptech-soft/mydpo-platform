@@ -2,15 +2,18 @@
 
 namespace MyDpo\Traits;
 
-// use MyDpo\Actions\Items\Dataprovider;
-// use Comptech\Helpers\Performers\Datatable\DoAction;
+use MyDpo\Performers\Traits\Reorder;
 
 trait Reorderable { 
 
     public static function reorder($input) {
 
-        dd($input);
-        // return (new GetItems($input, self::query(), __CLASS__))->Perform();
+        return (new Reorder([
+            ...$input, 
+            'table' => (new (__CLASS__)())->getTable(),
+        ]))
+            ->SetSuccessMessage(NULL)
+            ->Perform();
     }
 
     // public static function getItems($input) {
