@@ -19,54 +19,43 @@ class DoAction extends Perform {
          *      - modelul 
          */
 
-        dd($action, $input, $model);
-
         parent::__construct($input, NULL, NULL);
 
         $this->action = $action;
         $this->model = $model;
 
-        $this->rules = $this->GetRules();
-        $this->messages = $this->GetMessages();
+        $this->rules = method_exists($this->model, 'GetRules') 
+            ? call_user_func([$this->model, 'GetRules'], $this->action, $this->input) 
+            : [];
+        
+        $this->messages = method_exists($this->model, 'GetMessages') 
+            ? call_user_func([$this->model, 'GetMessages'], $this->action, $this->input) 
+            : [];
 
-        $this->SetSuccessMessage($this->GetSuccessMessage());
+        $this->SetSuccessMessage(
+            method_exists($this->model, 'GetSuccessMessage') 
+            ? call_user_func([$this->model, 'GetSuccessMessage'], $this->action, $this->input) 
+            : $this->DefaultSuccessMessage()
+        );
     }
 
     public function DefaultSuccessMessage() {
         if($this->action == 'insert')
         {
-            return 'Adăugare reușită'; //'The record successfully added.';
+            return 'Adăugare reușită'; 
         }
         if($this->action == 'duplicate')
         {
-            return 'Duplicare reușită'; //'The record successfully duplicated.';
+            return 'Duplicare reușită'; 
         }
         if($this->action == 'update')
         {
-            return 'Modificare reușită'; //'The record successfully updated.';
+            return 'Modificare reușită';
         }
         if($this->action == 'delete')
         {
-            return 'Ștergere reușită'; //'The record successfully deleted.';
+            return 'Ștergere reușită'; 
         }
-    }
-
-    public function GetSuccessMessage() {
-        return method_exists($this->model, 'GetSuccessMessage') 
-            ? call_user_func([$this->model, 'GetSuccessMessage'], $this->action, $this->input) 
-            : $this->DefaultSuccessMessage();
-    }
-
-    public function GetRules() {
-        return method_exists($this->model, 'GetRules') 
-            ? call_user_func([$this->model, 'GetRules'], $this->action, $this->input) 
-            : [];
-    }
-
-    public function GetMessages() {
-        return method_exists($this->model, 'GetMessages') 
-            ? call_user_func([$this->model, 'GetMessages'], $this->action, $this->input) 
-            : [];
     }
 
     public function GetValidationInput() {
@@ -176,5 +165,3 @@ class DoAction extends Perform {
     }
 
 }
-
-} 
