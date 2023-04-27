@@ -33,6 +33,15 @@ class Permission extends Model {
         'updated_by',
     ];
 
+    protected $casts = [
+        'props' => 'json',
+        'platform' => 'integer',
+        'order_no' => 'integer',
+        'created_by' => 'integer',
+        'updated_by' => 'integer',
+        'deleted' => 'integer',
+    ];
+
     public static function GetRules($action, $input) {
         if($action == 'delete')
         {
