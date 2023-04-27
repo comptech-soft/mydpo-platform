@@ -35,7 +35,7 @@ class Permission extends Model {
 
     protected $casts = [
         'props' => 'json',
-        'platform' => 'integer',
+        'platform' => 'json',
         'order_no' => 'integer',
         'created_by' => 'integer',
         'updated_by' => 'integer',
