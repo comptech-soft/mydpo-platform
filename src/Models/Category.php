@@ -3,14 +3,14 @@
 namespace MyDpo\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use MyDpo\Traits\Itemable;
+use MyDpo\Helpers\Performers\Datatable\GetItems;
+use MyDpo\Actions\Items\Dataprovider;
+use MyDpo\Helpers\Performers\Datatable\DoAction;
 
 use MyDpo\Rules\Category\UniqueName;
 
 class Category extends Model {
-    
-    use Itemable;
-
+   
     protected $table = 'categories';
 
     protected $casts = [
@@ -39,18 +39,23 @@ class Category extends Model {
         return $this->hasMany(Curs::class, 'category_id');
     }
 
-    // public static function getItems($input, $type = NULL) {
-    //     if(! $type )
-    //     {
-    //         return (new GetItems($input, self::query(), __CLASS__))->Perform();
-    //     }
+    public static function getItems($input, $type = NULL) {
+        if(! $type )
+        {
+            return (new GetItems($input, self::query(), __CLASS__))->Perform();
+        }
 
-    //     return (new GetItems(
-    //         $input, 
-    //         self::query()->where('type', $type)->withCount($type), 
-    //         __CLASS__
-    //     ))->Perform();
-    // }
+        if($type == 'centralizatoare')
+        {
+            return (new Dataprovider($input, self::query()->where('type', $type), __CLASS__))->Perform();
+        }
+
+        return (new GetItems(
+            $input, 
+            self::query()->where('type', $type)->withCount($type), 
+            __CLASS__
+        ))->Perform();
+    }
 
     public static function doAction($action, $input) {
         return (new DoAction($action, $input, __CLASS__))->Perform();
