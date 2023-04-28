@@ -74,6 +74,14 @@ class CentralizatorColoana extends Model {
         return $record;
     }
 
+    
+    public static function doDelete($input, $record) {
+        dd($input, $record->id);
+        
+        return $record;
+    }
+
+
     // public static function doUpdate($input, $record) {
     //     $record->update($input);
     //     return $record;
