@@ -4,12 +4,13 @@ namespace MyDpo\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
+use MyDpo\Traits\Actionable;
 use MyDpo\Models\Category;
 use MyDpo\Scopes\NotdeletedScope;
 
 class Centralizator extends Model {
 
-    use Itemable;
+    use Itemable, Actionable;
 
     protected $table = 'centralizatoare';
 
@@ -58,14 +59,5 @@ class Centralizator extends Model {
             ->select('centralizatoare.*')
         ;
     }
-
-    // public static function getItems($input) {
-    //     return (new GetItems(
-    //         $input, 
-    //         self::getQuery(), 
-    //         __CLASS__
-    //     ))
-    //     ->Perform();
-    // }
 
 }
