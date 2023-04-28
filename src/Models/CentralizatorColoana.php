@@ -41,36 +41,38 @@ class CentralizatorColoana extends Model {
     //         ->Perform();
     // }
 
-    // public static function doInsert($input, $record) {
+    public static function doInsert($input, $record) {
 
-    //     $input = [
-    //         ...$input,
-    //         'slug' => $input['register_id'] . \Str::slug(md5(time())),
-    //     ];
+        $input = [
+            ...$input,
+            'slug' => $input['register_id'] . \Str::slug(md5(time())),
+        ];
 
-    //     if($input['column_type'] == 'group')
-    //     {
-    //         $input = [
-    //             ...$input,
-    //             'is_group' => 1,
-    //             'order_no' => self::getNextOrderNo($input['register_id']),
-    //             'width' => NULL,
-    //             'type' => $input['column_type'],
-    //         ];
-    //     }
-    //     else
-    //     {
-    //         $input = [
-    //             ...$input,
-    //             'is_group' => NULL,
-    //             'order_no' => !! $input['group_id']  ? self::getNextGroupOrderNo($input['group_id']) : self::getNextOrderNo($input['register_id']),
-    //         ];
-    //     }
+        dd($input);
 
-    //     $record = self::create($input);
+        if($input['column_type'] == 'group')
+        {
+            $input = [
+                ...$input,
+                'is_group' => 1,
+                'order_no' => self::getNextOrderNo($input['register_id']),
+                'width' => NULL,
+                'type' => $input['column_type'],
+            ];
+        }
+        else
+        {
+            $input = [
+                ...$input,
+                'is_group' => NULL,
+                'order_no' => !! $input['group_id']  ? self::getNextGroupOrderNo($input['group_id']) : self::getNextOrderNo($input['register_id']),
+            ];
+        }
 
-    //     return $record;
-    // }
+        $record = self::create($input);
+
+        return $record;
+    }
 
     // public static function doUpdate($input, $record) {
     //     $record->update($input);
