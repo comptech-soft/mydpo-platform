@@ -30,6 +30,7 @@ class CentralizatorColoana extends Model {
         'slug',
         'caption',
         'type',
+        'width',
         'deleted',
         'props',
         'created_by',
