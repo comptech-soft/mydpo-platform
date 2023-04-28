@@ -66,6 +66,8 @@ class Centralizator extends Model {
         $record->deleted_by = \Auth::user()->id;
         $record->save();
 
+        CentralizatorColoana::where('centralizator_id')->delete();
+
         return $record;
 
     }

@@ -13,9 +13,5 @@ trait Itemable {
 
         return (new Dataprovider($input, $query, __CLASS__))->Perform();
     }
-
-    // public static function doAction($action, $input) {
-    //     return (new DoAction($action, $input, __CLASS__))->Perform();
-    // }
-    
+        
 }
