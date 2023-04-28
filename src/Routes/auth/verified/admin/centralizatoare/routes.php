@@ -1,6 +1,7 @@
 <?php
 
 use MyDpo\Http\Controllers\Admin\CentralizatoareController;
+use MyDpo\Http\Controllers\Admin\CentralizatoareColumnsController;
 
 Route::prefix('centralizatoare')->group( function() {
         
@@ -8,5 +9,13 @@ Route::prefix('centralizatoare')->group( function() {
     
     Route::post('items', [CentralizatoareController::class, 'getItems']);
     Route::post('action/{action}', [CentralizatoareController::class, 'doAction']);
+
+});
+
+Route::prefix('centralizatoare-columns')->group( function() {
+       
+    
+    Route::post('items', [CentralizatoareColumnsController::class, 'getItems']);
+    Route::post('action/{action}', [CentralizatoareColumnsController::class, 'doAction']);
 
 });
