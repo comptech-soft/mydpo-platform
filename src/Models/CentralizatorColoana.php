@@ -45,7 +45,7 @@ class CentralizatorColoana extends Model {
 
         $input = [
             ...$input,
-            'slug' => $input['register_id'] . \Str::slug(md5(time())),
+            'slug' => $input['centralizator_id'] . \Str::slug(md5(time())),
         ];
 
         dd($input);
