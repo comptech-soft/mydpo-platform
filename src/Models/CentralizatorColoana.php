@@ -48,24 +48,23 @@ class CentralizatorColoana extends Model {
             'slug' => $input['centralizator_id'] . \Str::slug(md5(time())),
         ];
 
-        dd($input);
+        
 
-        if($input['column_type'] == 'group')
+        if($input['is_group'] == 1)
         {
             $input = [
                 ...$input,
-                'is_group' => 1,
-                'order_no' => self::getNextOrderNo($input['register_id']),
+                'order_no' => $input['order_no'],
                 'width' => NULL,
-                'type' => $input['column_type'],
+                'type' => NULL,
             ];
+
         }
         else
         {
             $input = [
                 ...$input,
-                'is_group' => NULL,
-                'order_no' => !! $input['group_id']  ? self::getNextGroupOrderNo($input['group_id']) : self::getNextOrderNo($input['register_id']),
+                'order_no' => $input['order_no'],
             ];
         }
 
