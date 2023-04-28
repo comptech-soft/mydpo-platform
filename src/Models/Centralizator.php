@@ -3,12 +3,13 @@
 namespace MyDpo\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use MyDpo\Helpers\Performers\Datatable\GetItems;
-use MyDpo\Helpers\Performers\Datatable\DoAction;
+use MyDpo\Traits\Itemable;
 use MyDpo\Models\Category;
 use MyDpo\Scopes\NotdeletedScope;
 
 class Centralizator extends Model {
+
+    use Itemable;
 
     protected $table = 'centralizatoare';
 
@@ -45,7 +46,7 @@ class Centralizator extends Model {
         return $this->belongsTo(Category::class, 'category_id');
     }
 
-    public static function getQuery() {
+    public static function GetQuery() {
         return 
             self::query()
             ->leftJoin(
@@ -58,13 +59,13 @@ class Centralizator extends Model {
         ;
     }
 
-    public static function getItems($input) {
-        return (new GetItems(
-            $input, 
-            self::getQuery(), 
-            __CLASS__
-        ))
-        ->Perform();
-    }
+    // public static function getItems($input) {
+    //     return (new GetItems(
+    //         $input, 
+    //         self::getQuery(), 
+    //         __CLASS__
+    //     ))
+    //     ->Perform();
+    // }
 
 }
