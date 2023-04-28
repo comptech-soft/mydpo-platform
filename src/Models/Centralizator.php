@@ -62,8 +62,7 @@ class Centralizator extends Model {
 
     public static function GetRules($action, $input) {
 
-        dd($action, $input);
-        
+
         if($action == 'delete')
         {
             return NULL;
@@ -71,7 +70,10 @@ class Centralizator extends Model {
         $result = [
             'name' => [
                 'required',
-                new UniquePermission($input),
+                // new UniquePermission($input),
+            ],
+            'category_id' => [
+                'required',
             ],
            
         ];
