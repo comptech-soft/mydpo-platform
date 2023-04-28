@@ -60,6 +60,16 @@ class Centralizator extends Model {
         ;
     }
 
+    public static function doDelete($input, $record) {
+
+        $record->deleted = 1;
+        $record->deleted_by = \Auth::user()->id;
+        $record->save();
+
+        return $record;
+
+    }
+
     public static function GetRules($action, $input) {
 
 
