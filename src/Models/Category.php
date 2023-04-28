@@ -3,13 +3,14 @@
 namespace MyDpo\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use MyDpo\Helpers\Performers\Datatable\GetItems;
-use MyDpo\Helpers\Performers\Datatable\DoAction;
-use MyDpo\Models\Curs;
+use MyDpo\Traits\Itemable;
+
 use MyDpo\Rules\Category\UniqueName;
 
 class Category extends Model {
-   
+    
+    use Itemable;
+
     protected $table = 'categories';
 
     protected $casts = [
@@ -30,22 +31,26 @@ class Category extends Model {
         'deleted_by'
     ];
 
+    function centralizatoare() {
+        return $this->hasMany(Centralizator::class, 'category_id');
+    }
+
     function cursuri() {
         return $this->hasMany(Curs::class, 'category_id');
     }
 
-    public static function getItems($input, $type = NULL) {
-        if(! $type )
-        {
-            return (new GetItems($input, self::query(), __CLASS__))->Perform();
-        }
+    // public static function getItems($input, $type = NULL) {
+    //     if(! $type )
+    //     {
+    //         return (new GetItems($input, self::query(), __CLASS__))->Perform();
+    //     }
 
-        return (new GetItems(
-            $input, 
-            self::query()->where('type', $type)->withCount($type), 
-            __CLASS__
-        ))->Perform();
-    }
+    //     return (new GetItems(
+    //         $input, 
+    //         self::query()->where('type', $type)->withCount($type), 
+    //         __CLASS__
+    //     ))->Perform();
+    // }
 
     public static function doAction($action, $input) {
         return (new DoAction($action, $input, __CLASS__))->Perform();
