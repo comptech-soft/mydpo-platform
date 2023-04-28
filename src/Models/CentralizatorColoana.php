@@ -4,12 +4,11 @@ namespace MyDpo\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
-// use MyDpo\Performers\RegistruColoana\ReorderColumns;
-// use MyDpo\Helpers\Performers\Datatable\DoAction;
+use MyDpo\Traits\Actionable;
 
 class CentralizatorColoana extends Model {
 
-    use Itemable;
+    use Itemable, Actionable;
     
     protected $table = 'centralizatoare-columns';
 

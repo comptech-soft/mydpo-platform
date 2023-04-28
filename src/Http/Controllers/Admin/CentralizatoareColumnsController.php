@@ -12,9 +12,9 @@ class CentralizatoareColumnsController extends Controller {
         return CentralizatorColoana::getItems($r->all());
     }
 
-    // public function doAction($action, Request $r) {
-    //     return CentralizatorColoana::doAction($action, $r->all());
-    // }
+    public function doAction($action, Request $r) {
+        return CentralizatorColoana::doAction($action, $r->all());
+    }
 
     // public function reorderColumns(Request $r) {
     //     return CentralizatorColoana::reorderColumns($r->all());
