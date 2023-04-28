@@ -62,11 +62,11 @@ class Centralizator extends Model {
 
     public static function doDelete($input, $record) {
 
+        CentralizatorColoana::where('centralizator_id', $record->id)->delete();
+
         $record->deleted = 1;
         $record->deleted_by = \Auth::user()->id;
         $record->save();
-
-        CentralizatorColoana::where('centralizator_id')->delete();
 
         return $record;
 
