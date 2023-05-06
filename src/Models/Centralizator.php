@@ -21,6 +21,7 @@ class Centralizator extends Model {
         'category_id' => 'integer',
         'deleted' => 'integer',
         'body' => 'json',
+        'status' => 'json',
         'created_by' => 'integer',
         'updated_by' => 'integer',
         'deleted_by' => 'integer',
@@ -57,7 +58,14 @@ class Centralizator extends Model {
                     $j->on('categories.id', '=', 'centralizatoare.category_id');
                 }
             )
-            ->select(['centralizatoare.id', 'centralizatoare.name', 'centralizatoare.category_id', 'centralizatoare.description', 'centralizatoare.body'])
+            ->select([
+                'centralizatoare.id', 
+                'centralizatoare.name', 
+                'centralizatoare.category_id', 
+                'centralizatoare.description', 
+                'centralizatoare.body', 
+                'centralizatoare.status'
+            ]);
         ;
     }
 
