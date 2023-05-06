@@ -57,7 +57,7 @@ class Centralizator extends Model {
                     $j->on('categories.id', '=', 'centralizatoare.category_id');
                 }
             )
-            ->select(['centralizatoare.id', 'centralizatoare.name', 'centralizatoare.category_id', 'centralizatoare.description'])
+            ->select(['centralizatoare.id', 'centralizatoare.name', 'centralizatoare.category_id', 'centralizatoare.description', 'centralizatoare.body'])
         ;
     }
 
