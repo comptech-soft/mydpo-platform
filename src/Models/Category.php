@@ -42,17 +42,17 @@ class Category extends Model {
     public static function getItems($input, $type = NULL) {
         if(! $type )
         {
-            return (new GetItems($input, self::query(), __CLASS__))->Perform();
+            return (new GetItems($input, self::query()->select(['id', 'name', 'type']), __CLASS__))->Perform();
         }
 
         if($type == 'centralizatoare')
         {
-            return (new Dataprovider($input, self::query()->where('type', $type), __CLASS__))->Perform();
+            return (new Dataprovider($input, self::query()->select(['id', 'name'])->where('type', $type), __CLASS__))->Perform();
         }
 
         return (new GetItems(
             $input, 
-            self::query()->where('type', $type)->withCount($type), 
+            self::query()->select(['id', 'name'])->where('type', $type)->withCount($type), 
             __CLASS__
         ))->Perform();
     }
