@@ -20,6 +20,7 @@ class Centralizator extends Model {
         'id' => 'integer',
         'category_id' => 'integer',
         'deleted' => 'integer',
+        'body' => 'json',
         'created_by' => 'integer',
         'updated_by' => 'integer',
         'deleted_by' => 'integer',
