@@ -74,11 +74,14 @@ class CentralizatorColoana extends Model {
         return $record;
     }
 
-    
     public static function doDelete($input, $record) {
-        dd($input, $record->id);
+
+        self::where('group_id', $record->id)->delete();
+        
+        $record->delete();
         
         return $record;
+        
     }
 
 

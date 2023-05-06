@@ -44,7 +44,7 @@ class Centralizator extends Model {
     }
 
     public function category() {
-        return $this->belongsTo(Category::class, 'category_id');
+        return $this->belongsTo(Category::class, 'category_id')->select(['id', 'name']);
     }
 
     public static function GetQuery() {
