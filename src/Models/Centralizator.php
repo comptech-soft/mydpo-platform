@@ -80,9 +80,13 @@ class Centralizator extends Model {
                 $record->{'AddColumn' . ucfirst($key)}();
             }
         }
+
+        return $record;
     }
 
     public static function doUpdate($input, $record) {
+
+        $record->update($input);
 
         foreach($input['body'] as $key => $value)
         {
@@ -95,6 +99,8 @@ class Centralizator extends Model {
                 $record->{'DeleteColumn' . ucfirst($key)}();
             }
         }
+
+        return $record;
     }
 
     public function DeleteColumnStatus() {
