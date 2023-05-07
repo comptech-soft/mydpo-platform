@@ -83,10 +83,15 @@ class Centralizator extends Model {
     }
 
     public function AddColumnVizibilitate() {
-
         $this->AddColumn('Vizibilitate', 'VISIBILITY', -100, 100);
-        
-        
+    }
+
+    public function AddColumnStatus() {
+        $this->AddColumn('Status', 'STATUS', -90, 100);
+    }
+
+    public function AddColumnDepartament() {
+        $this->AddColumn('Departament', 'DEPARTMENT', -80, 200);
     }
 
     public function AddColumn($caption, $type, $order_no, $width) {
@@ -102,7 +107,7 @@ class Centralizator extends Model {
             'width' => $width,
         ];
 
-        $record = CentralizatorColoana::where('centralizator_id', $this->id)->where('type', 'VISIBILITY')->first();
+        $record = CentralizatorColoana::where('centralizator_id', $this->id)->where('type', $type)->first();
 
         if(!! $record)
         {
