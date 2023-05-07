@@ -37,19 +37,16 @@ class CentralizatorColoana extends Model {
         'updated_by'
     ];
 
-    // public static function reorderColumns($input) {
-    //     return (new ReorderColumns($input))
-    //         ->Perform();
-    // }
+    public static function GetQuery() {
+        return self::query()->whereNotIn('type', ['VISIBILITY', 'STATUS', 'DEPARTMENT']);
+    }
 
     public static function doInsert($input, $record) {
 
         $input = [
             ...$input,
-            'slug' => $input['centralizator_id'] . \Str::slug(md5(time())),
+            'slug' => md5(time()),
         ];
-
-        
 
         if($input['is_group'] == 1)
         {
@@ -83,41 +80,5 @@ class CentralizatorColoana extends Model {
         return $record;
         
     }
-
-
-    // public static function doUpdate($input, $record) {
-    //     $record->update($input);
-    //     return $record;
-    // }
-
-    // public static function doAction($action, $input) {
-    //     return (new DoAction($action, $input, __CLASS__))->Perform();
-    // }
-
-    // public static function getNextOrderNo($register_id) {
-    //     $records = \DB::select("
-    //         SELECT 
-    //             MAX(CAST(`order_no` AS SIGNED)) as max_order_no 
-    //         FROM `registers-columns` 
-    //         WHERE (register_id=" . $register_id . ') AND ( (is_group = 1) OR (group_id IS NULL))'
-    //     );
-    //     if($records[0]->max_order_no < 0)
-    //     {
-    //         $records[0]->max_order_no = 0;
-    //     }
-    //     return number_format(1 + $records[0]->max_order_no, 0, '', '');
-    // }
-
-    // public static function getNextGroupOrderNo($group_id) {
-    //     $records = \DB::select("
-    //         SELECT MAX(CAST(`order_no` AS SIGNED)) as max_order_no 
-    //         FROM `registers-columns` WHERE (group_id=" . $group_id . ')'
-    //     );
-    //     if($records[0]->max_order_no < 0)
-    //     {
-    //         $records[0]->max_order_no = 0;
-    //     }
-    //     return number_format(1 + $records[0]->max_order_no, 0, '', '');
-    // }
 
 }
