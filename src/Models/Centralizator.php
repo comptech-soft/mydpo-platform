@@ -82,6 +82,33 @@ class Centralizator extends Model {
         }
     }
 
+    public static function doUpdate($input, $record) {
+
+        foreach($input['body'] as $key => $value)
+        {
+            if($value == 1)
+            {
+                $record->{'AddColumn' . ucfirst($key)}();
+            }
+            else
+            {
+                $record->{'DeleteColumn' . ucfirst($key)}();
+            }
+        }
+    }
+
+    public function DeleteColumnStatus() {
+        $this->DeleteColumn('STATUS');
+    }
+
+    public function DeleteColumnDepartament() {
+        $this->DeleteColumn('DEPARTMENT');
+    }
+
+    public function DeleteColumnVizibilitate() {
+        $this->DeleteColumn('VISIBILITY');
+    }
+
     public function AddColumnVizibilitate() {
         $this->AddColumn('Vizibilitate', 'VISIBILITY', -100, 100);
     }
@@ -92,6 +119,10 @@ class Centralizator extends Model {
 
     public function AddColumnDepartament() {
         $this->AddColumn('Departament', 'DEPARTMENT', -80, 200);
+    }
+
+    public function DeleteColumn($type) {
+        $record = CentralizatorColoana::where('centralizator_id', $this->id)->where('type', $type)->delete();
     }
 
     public function AddColumn($caption, $type, $order_no, $width) {
@@ -119,7 +150,6 @@ class Centralizator extends Model {
         }
 
     }
-
 
     public static function doDelete($input, $record) {
 
