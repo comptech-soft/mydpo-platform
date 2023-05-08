@@ -49,6 +49,11 @@ class CentralizatorColoana extends Model {
             'slug' => md5(time()),
         ];
 
+        if( ! array_key_exists('props', $input) )
+        {
+            $input['props'] = NULL;
+        }
+
         if($input['is_group'] == 1)
         {
             $input = [
@@ -68,6 +73,18 @@ class CentralizatorColoana extends Model {
         }
 
         $record = self::create($input);
+
+        return $record;
+    }
+
+    public static function doUpdate($input, $record) {
+
+        if( ! array_key_exists('props', $input) )
+        {
+            $input['props'] = NULL;
+        }
+
+        $record->update($input);
 
         return $record;
     }
