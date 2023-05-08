@@ -95,10 +95,13 @@ class Centralizator extends Model {
             'is_associated'
         ]);
 
-        $records = $q->get();
+        $records = $q->get()->filter(function($item) {
+
+            return !! $item->status && ($item->status['centralizatoare'] == 1);
+
+        });
 
         return $records;
-        
     }
 
     public static function doInsert($input, $record) {
