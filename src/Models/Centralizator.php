@@ -69,6 +69,12 @@ class Centralizator extends Model {
         ;
     }
 
+
+    public static function getCustomerAsociere($input) {
+
+        dd($input);
+    }
+
     public static function doInsert($input, $record) {
 
         $record = self::create($input);
