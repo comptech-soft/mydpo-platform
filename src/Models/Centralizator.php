@@ -13,9 +13,7 @@ class Centralizator extends Model {
     use Itemable, Actionable;
 
     protected $table = 'centralizatoare';
-
-    protected $with = ['category'];
-
+    
     protected $casts = [
         'id' => 'integer',
         'category_id' => 'integer',
@@ -39,6 +37,10 @@ class Centralizator extends Model {
         'created_by',
         'updated_by',
         'deleted_by',
+    ];
+
+    protected $with = [
+        'category'
     ];
 
     protected static function booted() {
@@ -69,10 +71,34 @@ class Centralizator extends Model {
         ;
     }
 
-
     public static function getCustomerAsociere($input) {
 
-        dd($input);
+        $customer_id = $input['customer_id'];
+
+        $q = self::query()->leftJoin(
+
+            'customers-centralizatoare-asociere',
+            
+            function($j) use ($customer_id){
+                $j
+                    ->on('customers-centralizatoare-asociere.centralizator_id', '=', 'centralizatoare.id')
+                    ->where('customers-centralizatoare-asociere.customer_id', $customer_id);
+            }
+
+        )->select([
+            'centralizatoare.id',
+            'centralizatoare.name',
+            'centralizatoare.category_id',
+            'centralizatoare.description',
+            'centralizatoare.status',
+            'centralizatoare.body',
+            'is_associated'
+        ]);
+
+        $records = $q->get();
+
+        return $records;
+        
     }
 
     public static function doInsert($input, $record) {
