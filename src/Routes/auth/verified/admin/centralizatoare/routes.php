@@ -14,8 +14,6 @@ Route::prefix('centralizatoare')->group( function() {
 
 Route::prefix('centralizatoare-columns')->group( function() {
        
-    
-    Route::post('items', [CentralizatoareColumnsController::class, 'getItems']);
     Route::post('action/{action}', [CentralizatoareColumnsController::class, 'doAction']);
 
 });
