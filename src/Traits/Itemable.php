@@ -3,11 +3,10 @@
 namespace MyDpo\Traits;
 
 use MyDpo\Actions\Items\Dataprovider;
-// use Comptech\Helpers\Performers\Datatable\DoAction;
 
 trait Itemable { 
 
-    public static function getItems($input) {
+    public static function getRecords($input) {
 
         $query = method_exists(__CLASS__, 'GetQuery') ? self::GetQuery() : self::query();
 

@@ -21,6 +21,10 @@ class CustomersController extends Controller
         return Customer::getItems($r->all());
     }
 
+    public function getRecords(Request $r) {
+        return Customer::getRecords($r->all());
+    }
+
     public function getItemsWithPersons(Request $r) {
         return Customer::getItemsWithPersons($r->all());
     }
