@@ -101,7 +101,7 @@ class Centralizator extends Model {
 
         });
 
-        return $records;
+        return $records->toArray();
     }
 
     public static function doInsert($input, $record) {
