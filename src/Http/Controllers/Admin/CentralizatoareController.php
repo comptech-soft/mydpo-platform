@@ -16,8 +16,8 @@ class CentralizatoareController extends Controller {
         );
     }
 
-    public function getItems(Request $r) {
-        return Centralizator::getItems($r->all());
+    public function getRecords(Request $r) {
+        return Centralizator::getRecords($r->all());
     }
 
     public function doAction($action, Request $r) {
