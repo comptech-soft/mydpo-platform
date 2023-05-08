@@ -13,8 +13,12 @@ use MyDpo\Models\CustomerFolder;
 use MyDpo\Models\UserCustomer;
 use MyDpo\Performers\Customer\GetCustomersByIds;
 
+use MyDpo\Traits\Itemable;
+
 class Customer_base extends Model {
 
+    use Itemable;
+    
     protected $table = 'customers';
 
     protected $casts = [
