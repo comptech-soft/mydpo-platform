@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use MyDpo\Helpers\Response;
 // use MyDpo\Models\CustomerCentralizator;
 
-class CustomersCentralizatoareController extends Controller {
+class CustomerCentralizatorController extends Controller {
     
     public function index($customer_id, $centralizator_id, Request $r) {
 
