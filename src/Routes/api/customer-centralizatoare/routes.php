@@ -7,8 +7,4 @@ Route::prefix('customer-centralizatoare')->group( function() {
             
     Route::post('get-records', [CustomersCentralizatoareController::class, 'getRecords']);
 
-   
-    
-    
-
 });

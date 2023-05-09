@@ -3,13 +3,16 @@
 namespace MyDpo\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use MyDpo\Helpers\Performers\Datatable\GetItems;
-use MyDpo\Models\Centralizator;
+use MyDpo\Traits\Itemable;
+// use MyDpo\Helpers\Performers\Datatable\GetItems;
+// use MyDpo\Models\Centralizator;
 // use MyDpo\Models\CustomerCentralizatorUser;
-use MyDpo\Performers\CustomerCentralizator\GetSummary;
+// use MyDpo\Performers\CustomerCentralizator\GetSummary;
 
 class CustomerCentralizator extends Model {
 
+    use Itemable;
+    
     protected $table = 'customers-centralizatoare';
 
     protected $casts = [
@@ -40,28 +43,28 @@ class CustomerCentralizator extends Model {
         // 'deleted_by'
     ];
 
-    protected $with = [
-        'centralizator',
-        // 'cursusers',
-    ];
+    // protected $with = [
+    //     'centralizator',
+    //     // 'cursusers',
+    // ];
 
-    public function centralizator() {
-        return $this->belongsTo(Curs::class, 'centralizator_id');
-    }
-
-    // public function cursusers() {
-    //     return $this->hasMany(CustomerCursUser::class, 'customer_curs_id');
+    // public function centralizator() {
+    //     return $this->belongsTo(Curs::class, 'centralizator_id');
     // }
 
-    public static function getItems($input) {
-        return (new GetItems(
-            $input, 
-            self::query()->has('centralizator'), 
-            __CLASS__
-        ))->Perform();
-    }
+    // // public function cursusers() {
+    // //     return $this->hasMany(CustomerCursUser::class, 'customer_curs_id');
+    // // }
 
-    public static function getSummary($input) {
-        return (new GetSummary($input))->Perform();
-    }
+    // public static function getItems($input) {
+    //     return (new GetItems(
+    //         $input, 
+    //         self::query()->has('centralizator'), 
+    //         __CLASS__
+    //     ))->Perform();
+    // }
+
+    // public static function getSummary($input) {
+    //     return (new GetSummary($input))->Perform();
+    // }
 }
