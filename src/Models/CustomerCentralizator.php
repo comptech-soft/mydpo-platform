@@ -81,7 +81,7 @@ class CustomerCentralizator extends Model {
                 'group_id' => NULL, 
                 'caption' => 'a', 
                 'type' => NULL, 
-                'width' => 2, 
+                'width' => NULL, 
                 'props' => NULL,
             ])
 
