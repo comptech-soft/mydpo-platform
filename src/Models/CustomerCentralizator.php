@@ -74,6 +74,17 @@ class CustomerCentralizator extends Model {
 
         $sorted = collect($this->current_columns)            
             
+            ->push([
+                'id' => -1,
+                'order_no' => 999999, 
+                'is_group' => 0, 
+                'group_id' => NULL, 
+                'caption' => 'a', 
+                'type' => NULL, 
+                'width' => 2, 
+                'props' => NULL,
+            ])
+            
             ->map(function($item) use ($children) {
 
                 $item = collect($item)->only(['id', 'order_no', 'is_group', 'group_id', 'caption', 'type', 'width', 'props'])->toArray();
