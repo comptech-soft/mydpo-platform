@@ -134,4 +134,22 @@ class Perform {
 
     }
 
+    public function __get($property) {
+
+        if( array_key_exists($property, $this->input) )
+        {
+            return $this->input[$property];
+        }
+        return NULL;
+    }
+
+    public function __set($property, $value) {
+
+        if( array_key_exists($property, $this->input) )
+        {
+            $this->input[$property] = $value;
+        }
+
+    }
+
 }
