@@ -29,4 +29,20 @@ class CustomerCentralizatorAsociat extends Model {
         'updated_by',
     ];
 
+    public static function UpdateOrCreateAsociere($input) {
+
+        $record = self::where('customer_id', $input['customer_id'])
+            ->where('centralizator_id', $input['centralizator_id'])
+            ->first();
+        
+        if( ! $record )
+        {
+            $record = self::create($input);
+        }
+        else
+        {
+            $record->update($input);
+        }
+    }
+
 }

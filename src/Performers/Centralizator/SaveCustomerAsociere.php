@@ -3,15 +3,23 @@
 namespace MyDpo\Performers\Centralizator;
 
 use MyDpo\Helpers\Perform;
-// use MyDpo\Models\SysConfig;
-// use MyDpo\Models\Knolyx;
-// use MyDpo\Models\Curs;
+use MyDpo\Models\CustomerCentralizatorAsociat;
 
 class SaveCustomerAsociere extends Perform {
 
     public function Action() {
 
-        dd($this->customer, $this->centralizatoare);
+        $customer_id = $this->customer_id; 
+
+        foreach($this->centralizatoare as $i => $centralizator)
+        {
+            $input = [
+                ...$centralizator,
+                'customer_id' => $customer_id,
+            ];
+
+            CustomerCentralizatorAsociat::UpdateOrCreateAsociere($input);
+        }
     }
 
 }
