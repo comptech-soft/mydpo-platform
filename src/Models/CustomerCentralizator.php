@@ -97,12 +97,23 @@ class CustomerCentralizator extends Model {
             ])
 
             ->push([
-                'id' => -2,
+                'id' => -3,
                 'order_no' => -150, 
                 'is_group' => 0, 
                 'group_id' => NULL, 
                 'caption' => 'Selectare', 
                 'type' => 'CHECK', 
+                'width' => 80, 
+                'props' => NULL,
+            ])
+
+            ->push([
+                'id' => -4,
+                'order_no' => -120, 
+                'is_group' => 0, 
+                'group_id' => NULL, 
+                'caption' => 'Fișiere', 
+                'type' => 'FILES', 
                 'width' => 80, 
                 'props' => NULL,
             ])
