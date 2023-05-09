@@ -11,7 +11,7 @@ class SaveCustomerAsociere extends Perform {
 
     public function Action() {
 
-        dd($this->input);
+        dd($this->customer, $this->centralizatoare);
     }
 
 }
