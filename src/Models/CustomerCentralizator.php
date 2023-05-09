@@ -43,10 +43,18 @@ class CustomerCentralizator extends Model {
         'deleted_by'
     ];
 
+    protected $appends = [
+        'columns',
+    ];
+
     protected $with = [
         'department',
     ];
 
+    public function getColumnsAttribute() {
+        return __METHOD__;
+    }
+    
     public function department() {
         return $this->belongsTo(CustomerDepartment::class, 'department_id')->select(['id', 'departament']);
     }
