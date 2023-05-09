@@ -71,6 +71,10 @@ class Centralizator extends Model {
         ;
     }
 
+    public static function saveCustomerAsociere($input) {
+        dd($input);
+    }
+    
     public static function getCustomerAsociere($input) {
 
         $customer_id = $input['customer_id'];
