@@ -6,9 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Rules\CustomerDepartment\UniqueName;
+use MyDpo\Traits\Itemable;
 
 class CustomerDepartment extends Model {
 
+    use Itemable;
+    
     protected $table = 'customers-departamente';
 
     protected $casts = [
