@@ -84,6 +84,28 @@ class CustomerCentralizator extends Model {
                 'width' => 2, 
                 'props' => NULL,
             ])
+
+            ->push([
+                'id' => -2,
+                'order_no' => -200, 
+                'is_group' => 0, 
+                'group_id' => NULL, 
+                'caption' => ['Nr.', 'crt'], 
+                'type' => 'NRCRT', 
+                'width' => 80, 
+                'props' => NULL,
+            ])
+
+            ->push([
+                'id' => -2,
+                'order_no' => -150, 
+                'is_group' => 0, 
+                'group_id' => NULL, 
+                'caption' => 'Selectare', 
+                'type' => 'CHECK', 
+                'width' => 80, 
+                'props' => NULL,
+            ])
             
             ->map(function($item) use ($children) {
 
