@@ -4,43 +4,41 @@ namespace MyDpo\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
-// use MyDpo\Helpers\Performers\Datatable\GetItems;
-// use MyDpo\Models\Centralizator;
-// use MyDpo\Models\CustomerCentralizatorUser;
-// use MyDpo\Performers\CustomerCentralizator\GetSummary;
+use MyDpo\Helpers\Performers\Datatable\DoAction;
 
 class CustomerCentralizator extends Model {
 
     use Itemable;
-    
+
     protected $table = 'customers-centralizatoare';
 
     protected $casts = [
-        // 'props' => 'json',
-        // 'customer_id' => 'integer',
-        // 'curs_id' => 'integer',
-        // 'trimitere_id' => 'integer',
-        // 'created_by' => 'integer',
-        // 'updated_by' => 'integer',
-        // 'deleted_by' => 'integer',
-        // 'deleted' => 'integer',
-        // 'effective_time' => 'float',
-        // 'assigned_users' => 'json',
+        'props' => 'json',
+        'customer_id' => 'integer',
+        'centralizator_id' => 'integer',
+        'department_id' => 'integer',
+        'visibility' => 'integer',
+        'created_by' => 'integer',
+        'updated_by' => 'integer',
+        'deleted_by' => 'integer',
+        'deleted' => 'integer',
     ];
 
     protected $fillable = [
-        // 'id',
-        // 'customer_id',
-        // 'curs_id',
-        // 'trimitere_id',
-        // 'status',
-        // 'effective_time',
-        // 'assigned_users',
-        // 'props',
-        // 'deleted',
-        // 'created_by',
-        // 'updated_by',
-        // 'deleted_by'
+        'id',
+        'customer_id',
+        'centralizator_id',
+        'department_id',
+        'visibility',
+        'number',
+        'date',
+        'responsabil_nume',
+        'responsabil_functie',
+        'props',
+        'deleted',
+        'created_by',
+        'updated_by',
+        'deleted_by'
     ];
 
     // protected $with = [
