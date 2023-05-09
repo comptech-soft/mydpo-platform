@@ -14,6 +14,7 @@ class CustomerCentralizator extends Model {
 
     protected $casts = [
         'props' => 'json',
+        'current_columns' => 'json',
         'customer_id' => 'integer',
         'centralizator_id' => 'integer',
         'department_id' => 'integer',
@@ -35,6 +36,7 @@ class CustomerCentralizator extends Model {
         'responsabil_nume',
         'responsabil_functie',
         'props',
+        'current_columns',
         'deleted',
         'created_by',
         'updated_by',
@@ -47,6 +49,24 @@ class CustomerCentralizator extends Model {
 
     public function department() {
         return $this->belongsTo(CustomerDepartment::class, 'department_id')->select(['id', 'departament']);
+    }
+
+    public static function doInsert($input, $record) {
+
+
+        $coloane = CentralizatorColoana::where('centralizator_id', $input['centralizator_id'])->get()->toArray();
+
+        $input = [
+            ...$input,
+            'current_columns' => $coloane,
+        ];
+
+        $record = self::create($input);
+
+        return $record;
+
+
+
     }
 
 }
