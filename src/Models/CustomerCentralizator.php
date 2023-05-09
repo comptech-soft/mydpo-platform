@@ -41,28 +41,12 @@ class CustomerCentralizator extends Model {
         'deleted_by'
     ];
 
-    // protected $with = [
-    //     'centralizator',
-    //     // 'cursusers',
-    // ];
+    protected $with = [
+        'department',
+    ];
 
-    // public function centralizator() {
-    //     return $this->belongsTo(Curs::class, 'centralizator_id');
-    // }
+    public function department() {
+        return $this->belongsTo(CustomerDepartment::class, 'department_id')->select(['id', 'departament']);
+    }
 
-    // // public function cursusers() {
-    // //     return $this->hasMany(CustomerCursUser::class, 'customer_curs_id');
-    // // }
-
-    // public static function getItems($input) {
-    //     return (new GetItems(
-    //         $input, 
-    //         self::query()->has('centralizator'), 
-    //         __CLASS__
-    //     ))->Perform();
-    // }
-
-    // public static function getSummary($input) {
-    //     return (new GetSummary($input))->Perform();
-    // }
 }
