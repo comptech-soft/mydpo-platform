@@ -52,9 +52,54 @@ class CustomerCentralizator extends Model {
     ];
 
     public function getColumnsAttribute() {
-        return __METHOD__;
+
+        if(! $this->current_columns )
+        {
+            return [];
+        }
+
+        $children = collect($this->current_columns)
+            ->map(function($item) {
+
+                $item = collect($item)->only(['id', 'order_no', 'is_group', 'group_id', 'caption', 'type', 'width', 'props'])->toArray();
+
+                return $item;
+
+            })
+
+            ->filter( function($item) {
+                return !! $item['group_id'];
+            });
+
+
+        $sorted = collect($this->current_columns)            
+            
+            ->map(function($item) use ($children) {
+
+                $item = collect($item)->only(['id', 'order_no', 'is_group', 'group_id', 'caption', 'type', 'width', 'props'])->toArray();
+
+                $parent_id = $item['id'];
+
+                return [
+                    ...$item, 
+                    'children' => $children->filter( function($child) use ($parent_id) {
+                        return $child['group_id'] == $parent_id;
+                    })->sortBy('order_no')->values()->toArray(),
+                ];
+
+            })
+
+            ->filter( function($item) {
+                return ! $item['group_id'];
+            })
+            
+            ->sortBy('order_no');
+
+        return $sorted->values()->toArray();
+
     }
-    
+
+
     public function department() {
         return $this->belongsTo(CustomerDepartment::class, 'department_id')->select(['id', 'departament']);
     }
