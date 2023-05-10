@@ -161,9 +161,7 @@ class CustomerCentralizator extends Model {
         $record = self::create($input);
 
         return $record;
-
-
-
+    
     }
 
 }
