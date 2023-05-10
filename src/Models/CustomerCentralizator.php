@@ -46,6 +46,10 @@ class CustomerCentralizator extends Model {
     protected $appends = [
         'columns',
         'visible',
+
+        'visible_column_id',
+        'status_column_id',
+        'department_column_id'
     ];
 
     protected $with = [
@@ -143,6 +147,38 @@ class CustomerCentralizator extends Model {
         return $sorted->values()->toArray();
 
     }
+
+    public function getVisibleColumnIdAttribute() {
+        return self::GetColumnIdByType('VISIBILITY');
+    }
+
+    public function getStatusColumnIdAttribute() {
+        return self::GetColumnIdByType('STATUS');
+    }
+
+    public function getDepartmentColumnIdAttribute() {
+        return self::GetColumnIdByType('DEPARTMENT');
+    }
+
+    protected static function GetColumnIdByType($type) {
+
+        if( ! $this->columns )
+        {
+            return NULL;
+        }
+
+        $first = collect($this->columns)->first( function($column) use ($type) {
+            return $column['type'] == $type;
+        });
+
+        if(!! $first)
+        {
+            return 1 * $first['id'];
+        }
+
+        return NULL;
+
+    } 
 
     public function getVisibleAttribute() {
         return [
