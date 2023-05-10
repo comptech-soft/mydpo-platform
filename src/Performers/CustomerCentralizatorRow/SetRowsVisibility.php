@@ -11,6 +11,8 @@ class SetRowsVisibility extends Perform {
 
     public function Action() {
 
+        $records = NULL;
+        
         if(!! count($this->selected_rows) )
         {
             $customer_centralizator = CustomerCentralizator::find($this->customer_centralizator_id);
@@ -21,6 +23,11 @@ class SetRowsVisibility extends Perform {
                     'value' => $this->visibility,
                 ]);
         }
+
+        $this->payload = [
+
+            'record' => $records,
+        ];
     
     }
 }
