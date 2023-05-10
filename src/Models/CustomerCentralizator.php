@@ -149,18 +149,18 @@ class CustomerCentralizator extends Model {
     }
 
     public function getVisibleColumnIdAttribute() {
-        return self::GetColumnIdByType('VISIBILITY');
+        return $this->GetColumnIdByType('VISIBILITY');
     }
 
     public function getStatusColumnIdAttribute() {
-        return self::GetColumnIdByType('STATUS');
+        return $this->GetColumnIdByType('STATUS');
     }
 
     public function getDepartmentColumnIdAttribute() {
-        return self::GetColumnIdByType('DEPARTMENT');
+        return $this->GetColumnIdByType('DEPARTMENT');
     }
 
-    protected static function GetColumnIdByType($type) {
+    private function GetColumnIdByType($type) {
 
         if( ! $this->columns )
         {
