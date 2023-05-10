@@ -143,6 +143,10 @@ class CustomerCentralizatorRow extends Model {
         return $this->hasMany(CustomerCentralizatorRowValue::class, 'row_id')->select(['id', 'row_id', 'column_id', 'value']);
     }
 
+    public static function setRowsVisibility($input) {
+        dd(__METHOD__, $input);
+    }
+
     // public static function doInsert($input, $record) {
 
 

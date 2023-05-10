@@ -12,5 +12,9 @@ class CustomersCentralizatoareRowsController extends Controller {
     public function getRecords(Request $r) {
         return CustomerCentralizatorRow::getRecords($r->all());
     }
+
+    public function setRowsVisibility(Request $r) {
+        return CustomerCentralizatorRow::setRowsVisibility($r->all());
+    }
     
 }

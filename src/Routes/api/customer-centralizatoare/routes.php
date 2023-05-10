@@ -13,5 +13,8 @@ Route::prefix('customer-centralizatoare')->group( function() {
 Route::prefix('customers-centralizatoare-rows')->group( function() {
             
     Route::post('get-records', [CustomersCentralizatoareRowsController::class, 'getRecords']);
+
+
+    Route::post('action/setrowsvisibility', [CustomersCentralizatoareRowsController::class, 'setRowsVisibility']);
    
 });
