@@ -3,22 +3,24 @@
 namespace MyDpo\Performers\CustomerCentralizatorRow;
 
 use MyDpo\Helpers\Perform;
-// use MyDpo\Models\CustomerCurs;
+use MyDpo\Models\CustomerCentralizator;
+use MyDpo\Models\CustomerCentralizatorRowValue;
 
 class SetRowsVisibility extends Perform {
 
 
     public function Action() {
 
-        dd($this->input);
+        if(!! count($this->selected_rows) )
+        {
+            $customer_centralizator = CustomerCentralizator::find($this->customer_centralizator_id);
 
-        // $customer_id = $this->input['customer_id'];
-        
-        // $count = CustomerCurs::where('customer_id', $customer_id)->has('curs')->count();
-        
-        // $this->payload = [
-        //     'count' => $count,
-        // ];
+            $records = CustomerCentralizatorRowValue::where('column_id', $customer_centralizator->visible_column_id)
+                ->whereIn('id', $this->selected_rows)
+                ->update([
+                    'value' => $this->visibility,
+                ]);
+        }
     
     }
 }
