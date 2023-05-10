@@ -42,9 +42,9 @@ class CustomerCentralizatorRow extends Model {
     //     'columns',
     // ];
 
-    // protected $with = [
-    //     'department',
-    // ];
+    protected $with = [
+        'rowvalues',
+    ];
 
     // public function getColumnsAttribute() {
 
@@ -139,9 +139,9 @@ class CustomerCentralizatorRow extends Model {
     // }
 
 
-    // public function department() {
-    //     return $this->belongsTo(CustomerDepartment::class, 'department_id')->select(['id', 'departament']);
-    // }
+    public function rowvalues() {
+        return $this->hasMany(CustomerCentralizatorRowValue::class, 'row_id')->select(['id', 'row_id', 'column_id', 'value']);
+    }
 
     // public static function doInsert($input, $record) {
 
