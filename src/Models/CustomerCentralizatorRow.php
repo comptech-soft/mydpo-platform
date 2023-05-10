@@ -4,6 +4,7 @@ namespace MyDpo\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
+use MyDpo\Performers\CustomerCentralizatorRow\SetRowsVisibility;
 
 class CustomerCentralizatorRow extends Model {
 
@@ -144,8 +145,9 @@ class CustomerCentralizatorRow extends Model {
     }
 
     public static function setRowsVisibility($input) {
-        dd(__METHOD__, $input);
+        return (new SetRowsVisibility($input))->Perform();
     }
+
 
     // public static function doInsert($input, $record) {
 
