@@ -10,22 +10,13 @@ class DeleteRow extends Perform {
 
     public function Action() {
 
+        $values = CustomerCentralizatorRowValue::where('row_id', $this->id)->delete();
+        $record = CustomerCentralizatorRow::where('id', $this->id)->delete();
 
-        dd($this->input);
-        // $input = collect($this->input)->except(['rowvalues'])->toArray();
 
-        // $record = CustomerCentralizatorRow::create($input);
-
-        // foreach($this->rowvalues as $i => $input)
-        // {
-        //     $input['row_id'] = $record->id;
-
-        //     CustomerCentralizatorRowValue::create($input);
-        // }
-
-        // $this->payload = [
-        //     'record' => CustomerCentralizatorRow::find($record->id),
-        // ];
+        $this->payload = [
+            'record' => $record,
+        ];
     
     }
 }
