@@ -32,5 +32,9 @@ class CustomersCentralizatoareRowsController extends Controller {
     public function setRowsVisibility(Request $r) {
         return CustomerCentralizatorRow::setRowsVisibility($r->all());
     }
+
+    public function deleteRows(Request $r) {
+        return CustomerCentralizatorRow::deleteRows($r->all());
+    }
     
 }

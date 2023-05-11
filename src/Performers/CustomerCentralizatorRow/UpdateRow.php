@@ -10,22 +10,21 @@ class UpdateRow extends Perform {
 
     public function Action() {
 
-        dd($this->input);
-        
-        // $input = collect($this->input)->except(['rowvalues'])->toArray();
+        $input = collect($this->input)->except(['rowvalues'])->toArray();
 
-        // $record = CustomerCentralizatorRow::create($input);
+        $record = CustomerCentralizatorRow::find($this->id);
+        $record->update($input);
 
-        // foreach($this->rowvalues as $i => $input)
-        // {
-        //     $input['row_id'] = $record->id;
+        foreach($this->rowvalues as $i => $input)
+        {
+            $rowvalue = CustomerCentralizatorRowValue::find($input['id']);
 
-        //     CustomerCentralizatorRowValue::create($input);
-        // }
+            $rowvalue->update($input);
+        }
 
-        // $this->payload = [
-        //     'record' => CustomerCentralizatorRow::find($record->id),
-        // ];
+        $this->payload = [
+            'record' => CustomerCentralizatorRow::find($record->id),
+        ];
     
     }
 }

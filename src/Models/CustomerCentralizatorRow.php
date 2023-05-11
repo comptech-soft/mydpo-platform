@@ -9,6 +9,7 @@ use MyDpo\Performers\CustomerCentralizatorRow\DeleteRow;
 use MyDpo\Performers\CustomerCentralizatorRow\UpdateRow;
 use MyDpo\Performers\CustomerCentralizatorRow\SetRowsStatus;
 use MyDpo\Performers\CustomerCentralizatorRow\SetRowsVisibility;
+use MyDpo\Performers\CustomerCentralizatorRow\DeleteRows;
 
 class CustomerCentralizatorRow extends Model {
 
@@ -70,5 +71,10 @@ class CustomerCentralizatorRow extends Model {
     public static function setRowsVisibility($input) {
         return (new SetRowsVisibility($input))->Perform();
     }
+
+    public static function deleteRows($input) {
+        return (new DeleteRows($input))->Perform();
+    }
+    
 
 }

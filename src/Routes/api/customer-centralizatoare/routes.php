@@ -19,5 +19,6 @@ Route::prefix('customers-centralizatoare-rows')->group( function() {
     Route::post('action/delete', [CustomersCentralizatoareRowsController::class, 'deleteRow']);
     Route::post('action/setrowsstatus', [CustomersCentralizatoareRowsController::class, 'setRowsStatus']);
     Route::post('action/setrowsvisibility', [CustomersCentralizatoareRowsController::class, 'setRowsVisibility']);
+    Route::post('action/deleterows', [CustomersCentralizatoareRowsController::class, 'deleteRows']);
    
 });
