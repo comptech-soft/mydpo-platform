@@ -119,7 +119,7 @@ class CustomerCentralizator extends Model {
                 'group_id' => NULL, 
                 'caption' => 'Fișiere', 
                 'type' => 'FILES', 
-                'width' => 80, 
+                'width' => 60, 
                 'props' => NULL,
             ])
             
