@@ -19,7 +19,7 @@ class SetRowsStatus extends Perform {
             $records = CustomerCentralizatorRowValue::where('column_id', $customer_centralizator->visible_column_id)
                 ->whereIn('id', $this->selected_rows)
                 ->update([
-                    'value' => $this->visibility,
+                    'value' => $this->status,
                 ]);
         }
 
