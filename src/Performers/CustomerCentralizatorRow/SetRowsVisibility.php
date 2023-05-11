@@ -16,7 +16,7 @@ class SetRowsVisibility extends Perform {
         {
             $customer_centralizator = CustomerCentralizator::find($this->customer_centralizator_id);
 
-            $records = CustomerCentralizatorRowValue::where('column_id', $customer_centralizator->status_column_id)
+            $records = CustomerCentralizatorRowValue::where('column_id', $customer_centralizator->visible_column_id)
                 ->whereIn('id', $this->selected_rows)
                 ->update([
                     'value' => $this->visibility,
