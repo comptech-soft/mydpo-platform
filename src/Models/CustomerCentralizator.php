@@ -106,9 +106,9 @@ class CustomerCentralizator extends Model {
                 'order_no' => -150, 
                 'is_group' => 0, 
                 'group_id' => NULL, 
-                'caption' => 'Selectare', 
+                'caption' => '', 
                 'type' => 'CHECK', 
-                'width' => 80, 
+                'width' => 50, 
                 'props' => NULL,
             ])
 
