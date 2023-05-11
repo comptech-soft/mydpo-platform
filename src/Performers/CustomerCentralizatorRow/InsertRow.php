@@ -3,32 +3,27 @@
 namespace MyDpo\Performers\CustomerCentralizatorRow;
 
 use MyDpo\Helpers\Perform;
-// use MyDpo\Models\CustomerCentralizator;
-// use MyDpo\Models\CustomerCentralizatorRowValue;
+use MyDpo\Models\CustomerCentralizatorRow;
+use MyDpo\Models\CustomerCentralizatorRowValue;
 
 class InsertRow extends Perform {
 
     public function Action() {
 
-        dd(__METHOD__, $this->input);
-        // $records = NULL;
-        
-        // if(!! count($this->selected_rows) )
-        // {
-        //     $customer_centralizator = CustomerCentralizator::find($this->customer_centralizator_id);
+        $input = collect($this->input)->except(['rowvalues'])->toArray();
 
-        //     $records = CustomerCentralizatorRowValue::where('column_id', $customer_centralizator->status_column_id)
-        //         ->whereIn('row_id', $this->selected_rows)
-        //         ->update([
-        //             'value' => $this->status,
-        //         ]);
-        // }
+        $record = CustomerCentralizatorRow::create($input);
 
-        // $this->payload = [
-        //     'record' => $records,
-        //     'visible_column_id' => $customer_centralizator->status_column_id,
-        //     'input' => $this->input,
-        // ];
+        foreach($this->rowvalues as $i => $input)
+        {
+            $input['row_id'] = $record->id;
+
+            CustomerCentralizatorRowValue::create($input);
+        }
+
+        $this->payload = [
+            'record' => CustomerCentralizatorRow::find($record->id),
+        ];
     
     }
 }
