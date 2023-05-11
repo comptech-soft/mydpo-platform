@@ -3,27 +3,21 @@
 namespace MyDpo\Performers\CustomerCentralizatorRow;
 
 use MyDpo\Helpers\Perform;
-use MyDpo\Models\CustomerCentralizator;
+use MyDpo\Models\CustomerCentralizatorRow;
 use MyDpo\Models\CustomerCentralizatorRowValue;
 
 class DeleteRows extends Perform {
 
     public function Action() {
-
-
-        dd($this->input);
-        
+      
         $records = NULL;
 
         if(!! count($this->selected_rows) )
         {
-            $customer_centralizator = CustomerCentralizator::find($this->customer_centralizator_id);
+            
 
-            $records = CustomerCentralizatorRowValue::where('column_id', $customer_centralizator->visible_column_id)
-                ->whereIn('row_id', $this->selected_rows)
-                ->update([
-                    'value' => $this->visibility,
-                ]);
+            $values = CustomerCentralizatorRowValue::whereIn('row_id', $this->selected_rows)->delete();
+            $records = CustomerCentralizatorRow::whereIn('id', $this->selected_rows)->delete();
         }
 
         $this->payload = [
