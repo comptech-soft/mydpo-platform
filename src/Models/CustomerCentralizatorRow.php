@@ -5,6 +5,7 @@ namespace MyDpo\Models;
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
 use MyDpo\Performers\CustomerCentralizatorRow\InsertRow;
+use MyDpo\Performers\CustomerCentralizatorRow\DeleteRow;
 use MyDpo\Performers\CustomerCentralizatorRow\SetRowsStatus;
 use MyDpo\Performers\CustomerCentralizatorRow\SetRowsVisibility;
 
@@ -51,6 +52,10 @@ class CustomerCentralizatorRow extends Model {
 
     public static function insertRow($input) {
         return (new InsertRow($input))->Perform();
+    }
+
+    public static function deleteRow($input) {
+        return (new DeleteRow($input))->Perform();
     }
 
     public static function setRowsStatus($input) {
