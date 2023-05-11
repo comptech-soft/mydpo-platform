@@ -25,6 +25,8 @@ class SetRowsVisibility extends Perform {
 
         $this->payload = [
             'record' => $records,
+            'visible_column_id' => $customer_centralizator->visible_column_id,
+            'input' => $this->input,
         ];
     
     }
