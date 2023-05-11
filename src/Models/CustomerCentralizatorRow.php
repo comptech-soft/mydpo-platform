@@ -4,6 +4,7 @@ namespace MyDpo\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
+use MyDpo\Performers\CustomerCentralizatorRow\SetRowsStatus;
 use MyDpo\Performers\CustomerCentralizatorRow\SetRowsVisibility;
 
 class CustomerCentralizatorRow extends Model {
@@ -142,6 +143,10 @@ class CustomerCentralizatorRow extends Model {
 
     public function rowvalues() {
         return $this->hasMany(CustomerCentralizatorRowValue::class, 'row_id')->select(['id', 'row_id', 'column_id', 'value']);
+    }
+
+    public static function setRowsStatus($input) {
+        return (new SetRowsStatus($input))->Perform();
     }
 
     public static function setRowsVisibility($input) {
