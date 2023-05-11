@@ -10,6 +10,9 @@ class DeleteRows extends Perform {
 
     public function Action() {
 
+
+        dd($this->input);
+        
         $records = NULL;
 
         if(!! count($this->selected_rows) )
