@@ -48,9 +48,21 @@ class CustomerDepartment extends Model {
 
     public static function CreateIfNecessary($customer_id, $new_customer_id, $department_id) {
 
-        dd($customer_id, $new_customer_id, $department_id);
-    }
+        $record = self::find($department_id);
 
+        $exists = self::where('customer_id', $new_customer_id)->where('departament', $record->departament)->first();
+
+        if(! $exists )
+        {
+            $exists = self::create([
+                'customer_id' => $new_customer_id,
+                'departament' => $record->departament,
+            ]);
+        }
+    
+        return $exists; 
+
+    }
 
     public static function getItems($input) {
         return (new GetItems($input, self::query(), __CLASS__))->Perform();
