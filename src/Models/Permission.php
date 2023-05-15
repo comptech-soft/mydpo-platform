@@ -10,6 +10,8 @@ use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 use MyDpo\Traits\Reorderable;
 
+use MyDpo\Helpers\Performers\Datatable\GetItems;
+
 // https://github.com/lazychaser/laravel-nestedset#installation
 
 class Permission extends Model {
@@ -41,6 +43,10 @@ class Permission extends Model {
         'updated_by' => 'integer',
         'deleted' => 'integer',
     ];
+
+    public static function getItems($input) {
+        return (new GetItems($input, self::query(), __CLASS__))->Perform();
+    }
 
     public static function GetRules($action, $input) {
         if($action == 'delete')
