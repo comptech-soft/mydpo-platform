@@ -253,8 +253,25 @@ class CustomerCentralizator extends Model {
     
     }
 
+    public function DeleteRows() {
+        $rows = CustomerCentralizatorRow::where('customer_centralizator_id', $this->id)->get();
+
+        foreach($rows as $i => $row)
+        {
+            $row->DeleteValues();
+
+            $row->delete();
+        }
+
+    }
+
     public static function doDelete($input, $record) {
-        dd($input, $record);
+        
+        $record->DeleteRows();
+
+        $record->delete();
+
+        return $record;
     }
 
 }

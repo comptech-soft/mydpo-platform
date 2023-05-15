@@ -77,6 +77,10 @@ class CustomerCentralizatorRow extends Model {
         }
     }
 
+    public function DeleteValues() {
+        CustomerCentralizatorRowValue::where('row_id', $this->id)->delete();
+    }
+
     public static function insertRow($input) {
         return (new InsertRow($input))->Perform();
     }
