@@ -191,6 +191,22 @@ class CustomerCentralizator extends Model {
         return $this->belongsTo(CustomerDepartment::class, 'department_id')->select(['id', 'departament']);
     }
 
+    protected function DuplicateRows($id, $input) {
+
+        $rows = CustomerCentralizatorRow::where('customer_centralizator_id', $this->id)->get();
+
+        foreach($rows as $i => $row)
+        {
+            $row->replicate();
+
+            $row->customer_centralizator_id = $id;
+            $row->save();
+
+            $row->DuplicateValues($row->id, $input);
+        }
+        // dd($this->id, $id, $input);
+    }
+
     public static function doDuplicate($input, $record) {
 
         $newrecord = $record->replicate();
