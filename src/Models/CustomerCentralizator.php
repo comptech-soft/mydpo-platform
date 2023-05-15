@@ -197,6 +197,9 @@ class CustomerCentralizator extends Model {
 
         foreach($rows as $i => $row)
         {
+
+            dd($row->department_id);
+            
             $newrow = $row->replicate();
 
             $newrow->customer_centralizator_id = $id;
