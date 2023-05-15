@@ -6,6 +6,9 @@ use MyDpo\Http\Controllers\Auth\CustomersCentralizatoareRowsController;
 Route::prefix('customer-centralizatoare')->group( function() {
             
     Route::post('get-records', [CustomersCentralizatoareController::class, 'getRecords']);
+
+    Route::post('get-next-number', [CustomersCentralizatoareController::class, 'getNextNumber']);
+
     Route::post('action/{action}', [CustomersCentralizatoareController::class, 'doAction']);
 
 });
@@ -13,6 +16,8 @@ Route::prefix('customer-centralizatoare')->group( function() {
 Route::prefix('customers-centralizatoare-rows')->group( function() {
             
     Route::post('get-records', [CustomersCentralizatoareRowsController::class, 'getRecords']);
+
+    
 
     Route::post('action/insert', [CustomersCentralizatoareRowsController::class, 'insertRow']);
     Route::post('action/update', [CustomersCentralizatoareRowsController::class, 'updateRow']);

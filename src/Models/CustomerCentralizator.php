@@ -213,7 +213,6 @@ class CustomerCentralizator extends Model {
 
     }
 
-
     public static function doDuplicate($input, $record) {
 
         $newrecord = $record->replicate();
@@ -272,6 +271,10 @@ class CustomerCentralizator extends Model {
         $record->delete();
 
         return $record;
+    }
+
+    public static function getNextNumber($input) {
+        dd($input);
     }
 
 }
