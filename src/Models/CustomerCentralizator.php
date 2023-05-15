@@ -5,6 +5,7 @@ namespace MyDpo\Models;
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
+use MyDpo\Performers\CustomerCentralizator\GetNextNumber;
 
 class CustomerCentralizator extends Model {
 
@@ -274,7 +275,7 @@ class CustomerCentralizator extends Model {
     }
 
     public static function getNextNumber($input) {
-        dd($input);
+        return (new GetNextNumber($input))->Perform();
     }
 
 }
