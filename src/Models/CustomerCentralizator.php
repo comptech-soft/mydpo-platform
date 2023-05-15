@@ -192,7 +192,26 @@ class CustomerCentralizator extends Model {
     }
 
     public static function doDuplicate($input, $record) {
-        dd($input);
+
+        $newrecord = $record->replicate();
+
+        
+        $newrecord->customer_id = $input['customer_id'];
+        $newrecord->department_id = $input['department_id'];
+
+
+        $newrecord->visibility = $input['visibility'];
+        $newrecord->number = $input['number'];
+        $newrecord->date = $input['date'];
+        $newrecord->responsabil_nume = $input['responsabil_nume'];
+        $newrecord->responsabil_functie = $input['responsabil_functie'];
+
+        $newrecord->save();
+
+        $record->DuplicateRows($newrecord->id, $input);
+
+        return $newrecord;
+
     }
 
     public static function doInsert($input, $record) {
