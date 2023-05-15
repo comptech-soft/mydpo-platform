@@ -63,7 +63,7 @@ class CustomerCentralizatorRow extends Model {
         return $this->hasMany(CustomerCentralizatorRowValue::class, 'row_id')->select(['id', 'row_id', 'column_id', 'value']);
     }
 
-    public function DuplicateValues($id, $input){
+    public function DuplicateValues($id){
 
         $rowvalues = CustomerCentralizatorRowValue::where('row_id', $this->id)->get();
 
@@ -75,8 +75,6 @@ class CustomerCentralizatorRow extends Model {
 
             $newrowvalue->save();
         }
-        // dd($this->id, $id, $input);
-
     }
 
     public static function insertRow($input) {
