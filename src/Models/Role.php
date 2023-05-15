@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
 use MyDpo\Performers\Role\SaveRolePermissions;
+use MyDpo\Helpers\Performers\Datatable\GetItems;
 
 class Role extends Model {
 
