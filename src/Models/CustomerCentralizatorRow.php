@@ -66,12 +66,18 @@ class CustomerCentralizatorRow extends Model {
     public function DuplicateValues($id){
 
         $rowvalues = CustomerCentralizatorRowValue::where('row_id', $this->id)->get();
+        $column_id = $this->customercentralizator->department_column_id;
 
         foreach($rowvalues as $i => $rowvalue)
         {
             $newrowvalue = $rowvalue->replicate();
 
             $newrowvalue->row_id = $id;
+
+            if($newrowvalue->column_id == $column_id)
+            {
+                dd('Bam bam....');
+            }
 
             $newrowvalue->save();
         }
