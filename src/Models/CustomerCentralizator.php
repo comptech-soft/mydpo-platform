@@ -237,7 +237,6 @@ class CustomerCentralizator extends Model {
 
     }
 
-
     public static function doInsert($input, $record) {
 
 
@@ -252,6 +251,10 @@ class CustomerCentralizator extends Model {
 
         return $record;
     
+    }
+
+    public static function doDelete($input, $record) {
+        dd($input, $record);
     }
 
 }
