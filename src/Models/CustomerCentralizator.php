@@ -191,24 +191,28 @@ class CustomerCentralizator extends Model {
         return $this->belongsTo(CustomerDepartment::class, 'department_id')->select(['id', 'departament']);
     }
 
-    protected function DuplicateRows($id, $input) {
+    protected function DuplicateRows($id, $department_ids) {
 
         $rows = CustomerCentralizatorRow::where('customer_centralizator_id', $this->id)->get();
 
         foreach($rows as $i => $row)
         {
 
-            dd($row->department_id);
-            
-            $newrow = $row->replicate();
+            $department_id = !! $row->department_id ? $row->department_id : 'none';
 
-            $newrow->customer_centralizator_id = $id;
-            $newrow->save();
+            if( in_array($department_id, $department_ids) )
+            {
+                $newrow = $row->replicate();
 
-            $row->DuplicateValues($newrow->id, $input);
+                $newrow->customer_centralizator_id = $id;
+                $newrow->save();
+
+                $row->DuplicateValues($newrow->id, $input);
+            }
         }
 
     }
+
 
     public static function doDuplicate($input, $record) {
 
@@ -227,11 +231,12 @@ class CustomerCentralizator extends Model {
 
         $newrecord->save();
 
-        $record->DuplicateRows($newrecord->id, $input);
+        $record->DuplicateRows($newrecord->id, $input['department_ids']);
 
         return $newrecord;
 
     }
+
 
     public static function doInsert($input, $record) {
 
