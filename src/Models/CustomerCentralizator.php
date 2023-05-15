@@ -207,7 +207,7 @@ class CustomerCentralizator extends Model {
                 $newrow->customer_centralizator_id = $id;
                 $newrow->save();
 
-                $row->DuplicateValues($newrow->id);
+                $row->DuplicateValues($newrow->id, $new_customer_id);
             }
         }
 
@@ -231,7 +231,7 @@ class CustomerCentralizator extends Model {
 
         $newrecord->save();
 
-        $record->DuplicateRows($newrecord->id, $input['department_ids']);
+        $record->DuplicateRows($newrecord->id, $input['department_ids'], $input['customer_id']);
 
         return $newrecord;
 
