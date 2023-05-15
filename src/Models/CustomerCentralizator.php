@@ -191,7 +191,7 @@ class CustomerCentralizator extends Model {
         return $this->belongsTo(CustomerDepartment::class, 'department_id')->select(['id', 'departament']);
     }
 
-    protected function DuplicateRows($id, $department_ids) {
+    protected function DuplicateRows($id, $department_ids, $new_customer_id) {
 
         $rows = CustomerCentralizatorRow::where('customer_centralizator_id', $this->id)->get();
 
