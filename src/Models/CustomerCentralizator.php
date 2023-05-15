@@ -197,14 +197,14 @@ class CustomerCentralizator extends Model {
 
         foreach($rows as $i => $row)
         {
-            $row->replicate();
+            $newrow = $row->replicate();
 
-            $row->customer_centralizator_id = $id;
-            $row->save();
+            $newrow->customer_centralizator_id = $id;
+            $newrow->save();
 
-            $row->DuplicateValues($row->id, $input);
+            $row->DuplicateValues($newrow->id, $input);
         }
-        // dd($this->id, $id, $input);
+
     }
 
     public static function doDuplicate($input, $record) {

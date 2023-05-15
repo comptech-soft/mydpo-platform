@@ -52,6 +52,22 @@ class CustomerCentralizatorRow extends Model {
         return $this->hasMany(CustomerCentralizatorRowValue::class, 'row_id')->select(['id', 'row_id', 'column_id', 'value']);
     }
 
+    public function DuplicateValues($id, $input){
+
+        $rowvalues = CustomerCentralizatorRowValue::where('row_id', $this->id)->get();
+
+        foreach($rowvalues as $i => $rowvalue)
+        {
+            $newrowvalue = $rowvalue->replicate();
+
+            $newrowvalue->row_id = $id;
+
+            $newrowvalue->save();
+        }
+        // dd($this->id, $id, $input);
+
+    }
+    
     public static function insertRow($input) {
         return (new InsertRow($input))->Perform();
     }
