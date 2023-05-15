@@ -156,15 +156,15 @@ class Centralizator extends Model {
     }
 
     public function AddColumnVizibilitate() {
-        $this->AddColumn('Vizibilitate', 'VISIBILITY', -100, 80);
+        $this->AddColumn('Vizibilitate', 'VISIBILITY', -100, 150);
     }
 
     public function AddColumnStatus() {
-        $this->AddColumn('Status', 'STATUS', -90, 60);
+        $this->AddColumn('Status', 'STATUS', -90, 150);
     }
 
     public function AddColumnDepartament() {
-        $this->AddColumn('Departament', 'DEPARTMENT', -80, 150);
+        $this->AddColumn('Departament', 'DEPARTMENT', -80, 200);
     }
 
     public function DeleteColumn($type) {

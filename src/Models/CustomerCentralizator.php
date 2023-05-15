@@ -191,6 +191,10 @@ class CustomerCentralizator extends Model {
         return $this->belongsTo(CustomerDepartment::class, 'department_id')->select(['id', 'departament']);
     }
 
+    public static function doDuplicate($input, $record) {
+        dd($input);
+    }
+
     public static function doInsert($input, $record) {
 
 
