@@ -32,7 +32,11 @@ class Export extends Perform {
 
         \Excel::store($exporter, $file_name, NULL, NULL, ['visibility' => 'public']);
 
-        $this->payload = asset($file_name);
+        $this->payload = [
+            'record' => [
+                'url' => asset($file_name),
+            ],
+        ];
     
     }
 }
