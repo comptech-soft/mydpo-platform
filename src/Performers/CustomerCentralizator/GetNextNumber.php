@@ -7,9 +7,6 @@ use MyDpo\Models\CustomerCentralizator;
 
 class GetNextNumber extends Perform {
 
-    /**
-     * Cate centralizator are asociate un customer
-     */
     public function Action() {
 
         
