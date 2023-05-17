@@ -8,6 +8,7 @@ use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\FromView;
 use MyDpo\Models\CustomerCentralizator;
 use MyDpo\Models\CustomerDepartment;
+use MyDpo\Models\CustomerCentralizatorRow;
 
 use Illuminate\Contracts\View\View;
 
@@ -81,11 +82,88 @@ class Exporter implements FromView, WithStrictNullComparison, ShouldAutoSize {
             ];
         });
 
+        $rows = CustomerCentralizatorRow::where('customer_centralizator_id', $this->id)->get();
+
+        $value_columns = [];
+        foreach($columns as $i => $column)
+        {
+            if( count($column['children']) == 0)
+            {
+                $value_columns[] = $column;
+            }
+            else
+            {
+                foreach( $column['children'] as $j => $child)
+                {
+                    $value_columns[] = $child;
+                }
+            }
+        }
+
+        // dd($value_columns);
+
+        $records = [];
+        foreach($rows as $i => $row)
+        {
+            $item = [];
+
+            // dd($row->rowvalues);
+
+            foreach($value_columns as $j => $column)
+            {
+          
+                $rowvalue = $row->rowvalues->where('column_id', $column['id'])->first();
+
+                if(! $rowvalue )
+                {
+                    $item[] = NULL;
+                }
+                else
+                {
+                    if($column['type'] == 'DEPARTMENT')
+                    {
+                        if(array_key_exists($rowvalue->value, $this->departamente))
+                        {
+                            $item[] = $this->departamente[$rowvalue->value];
+                        }
+                        else
+                        {
+                            $item[] = NULL;
+                        }
+                    }
+                    else
+                    {
+                        if($column['type'] == 'O')
+                        {
+                            $options = collect($column['props'])->pluck('text', 'value')->toArray();
+
+                            if(array_key_exists($rowvalue->value, $options))
+                            {
+                                $item[] = $options[$rowvalue->value];
+                            }
+                            else
+                            {
+                                $item[] = NULL;
+                            }
+                        }
+                        else
+                        {
+                            $item[] = $rowvalue->value;
+                        }
+                    }
+                }
+                    
+            }
+
+            $records[] = $item;
+        }
+
+
 
         return view('exports.customer-centralizator.export', [
             'columns' => $columns->toArray(),
             'children_columns' => $children_columns->toArray(),
-            // 'children' => $this->registru->children_columns,
+            'records' => $records,
         ]);
     }
 
