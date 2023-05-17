@@ -10,21 +10,23 @@ class Export extends Perform {
 
     public function Action() {
 
-        
-        
         // $departamente_ids = [];
         // if( array_key_exists('departamente_ids', $this->input) )
         // {
         //     $departamente_ids = $this->input['departamente_ids'];
         // }
 
-        $exporter = new Exporter();
+        $exporter = new Exporter($this->department_ids, $this->id);
 
         // dd($this->file_name);
 
         // $this->createUserFolder();
 
-        $file_name = 'storage/exports/' . \Auth::user()->id. '/' . $this->file_name;
+        $file_name = 'public/exports/' . \Auth::user()->id. '/' . $this->file_name;
+
+        $file = \Str::replace('public', 'storage', $file_name);
+
+
 
         // dd(asset($file_name));
 
@@ -34,7 +36,7 @@ class Export extends Perform {
 
         $this->payload = [
             'record' => [
-                'url' => asset($file_name),
+                'url' => asset($file),
             ],
         ];
     

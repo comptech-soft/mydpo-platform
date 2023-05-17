@@ -6,29 +6,47 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithStrictNullComparison;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\FromView;
-// use MyDpo\Models\CustomerRegister;
-// use MyDpo\Models\CustomerDepartment;
+use MyDpo\Models\CustomerCentralizator;
+use MyDpo\Models\CustomerDepartment;
 
 use Illuminate\Contracts\View\View;
 
 class Exporter implements FromView, WithStrictNullComparison, ShouldAutoSize {
 
-    // public $registru = NULL;
-    // public $juststructure = 1;
-    // public $departamente_ids = NULL;
+    /**
+     * Departamentele ce se exporta
+     */
+    public $department_ids = NULL;
 
-    public function __construct() {
+    /**
+     * Departamentele
+     */
+    public $departamente = [];
+    // public $juststructure = 1;
+
+    /**
+     * Id-ul registrului
+     */
+    public $id = NULL;
+    public $centralizator = NULL;
+
+    public function __construct($department_ids, $id) {
 
         // $this->juststructure = $juststructure;
-        // $this->departamente_ids = $departamente_ids;
+        $this->department_ids = $department_ids;
+        $this->id = $id;
 
-        // $this->departamente = CustomerDepartment::whereIn('id', $departamente_ids)
-        //     ->select('departament')
-        //     ->get()
-        //     ->map( function($item) {return $item->departament; })
-        //     ->toArray();
 
-        // $this->registru = CustomerRegister::where('id', $id)->first();
+        if(!! $this->department_ids)
+        {
+            $this->departamente = CustomerDepartment::whereIn('id', $this->department_ids)
+                ->pluck('departament', 'id')
+                ->toArray();
+        }
+
+        $this->centralizator = CustomerCentralizator::where('id', $this->id)->first();
+
+        dd($this->centralizator->columns);
     }
 
     public function view(): View {
