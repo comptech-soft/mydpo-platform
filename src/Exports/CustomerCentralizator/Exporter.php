@@ -46,16 +46,45 @@ class Exporter implements FromView, WithStrictNullComparison, ShouldAutoSize {
 
         $this->centralizator = CustomerCentralizator::where('id', $this->id)->first();
 
-        dd($this->centralizator->columns);
     }
 
     public function view(): View {
 
         
+        $columns = collect($this->centralizator->columns)->filter(function($item){
+
+            if( in_array($item['type'], ['NRCRT', 'CHECK', 'FILES']) )
+            {
+                return false;
+            }
+
+            if( ! $item['type']  )
+            {
+                return count($item['children']) > 0;
+            }
+
+            return true;
+        });
+
+        $children_columns = collect($this->centralizator->columns)->filter(function($item){
+
+            return count($item['children']) > 0;
+        });
+
+        $has_children = $children_columns->count() > 0;
+
+        $columns = $columns->map(function($item) use ($has_children){
+            return [
+                ...$item,
+                'colspan' => count($item['children']) == 0 ? NULL : count($item['children']) ,
+                'rowspan' => count($item['children']) > 0 ? NULL : ($has_children ? 2 : NULL),
+            ];
+        });
+
 
         return view('exports.customer-centralizator.export', [
-            // 'columns' => $this->registru->columns,
-            // 'records' => $records,
+            'columns' => $columns->toArray(),
+            'children_columns' => $children_columns->toArray(),
             // 'children' => $this->registru->children_columns,
         ]);
     }
