@@ -238,7 +238,7 @@ class CustomerCentralizator extends Model {
         return $record;
     }
 
-    public static function doExport($input, $record) {
+    public static function doExport($input) {
         return (new Export($input))->Perform();
     }
 
