@@ -47,7 +47,6 @@ class CustomerCentralizator extends Model {
     protected $appends = [
         'columns',
         'visible',
-
         'visible_column_id',
         'status_column_id',
         'department_column_id'
@@ -192,26 +191,21 @@ class CustomerCentralizator extends Model {
         return $this->belongsTo(CustomerDepartment::class, 'department_id')->select(['id', 'departament']);
     }
 
-    protected function DuplicateRows($id, $department_ids, $new_customer_id) {
+    
 
-        $rows = CustomerCentralizatorRow::where('customer_centralizator_id', $this->id)->get();
+    
 
-        foreach($rows as $i => $row)
-        {
+    public static function doInsert($input, $record) {
+        $coloane = CentralizatorColoana::where('centralizator_id', $input['centralizator_id'])->get()->toArray();
 
-            $department_id = !! $row->department_id ? $row->department_id : 'none';
+        $input = [
+            ...$input,
+            'current_columns' => $coloane,
+        ];
 
-            if( in_array($department_id, $department_ids) )
-            {
-                $newrow = $row->replicate();
+        $record = self::create($input);
 
-                $newrow->customer_centralizator_id = $id;
-                $newrow->save();
-
-                $row->DuplicateValues($newrow->id, $new_customer_id);
-            }
-        }
-
+        return $record;
     }
 
     public static function doDuplicate($input, $record) {
@@ -237,41 +231,48 @@ class CustomerCentralizator extends Model {
 
     }
 
-    public static function doInsert($input, $record) {
-
-
-        $coloane = CentralizatorColoana::where('centralizator_id', $input['centralizator_id'])->get()->toArray();
-
-        $input = [
-            ...$input,
-            'current_columns' => $coloane,
-        ];
-
-        $record = self::create($input);
-
+    public static function doDelete($input, $record) {
+        $record->DeleteRows();
+        $record->delete();
         return $record;
-    
+    }
+
+    public static function doExport($input, $record) {
+        
+        dd(__METHOD__, $input);
+    }
+
+
+    protected function DuplicateRows($id, $department_ids, $new_customer_id) {
+
+        $rows = CustomerCentralizatorRow::where('customer_centralizator_id', $this->id)->get();
+
+        foreach($rows as $i => $row)
+        {
+
+            $department_id = !! $row->department_id ? $row->department_id : 'none';
+
+            if( in_array($department_id, $department_ids) )
+            {
+                $newrow = $row->replicate();
+
+                $newrow->customer_centralizator_id = $id;
+                $newrow->save();
+
+                $row->DuplicateValues($newrow->id, $new_customer_id);
+            }
+        }
+
     }
 
     public function DeleteRows() {
         $rows = CustomerCentralizatorRow::where('customer_centralizator_id', $this->id)->get();
-
         foreach($rows as $i => $row)
         {
             $row->DeleteValues();
 
             $row->delete();
         }
-
-    }
-
-    public static function doDelete($input, $record) {
-        
-        $record->DeleteRows();
-
-        $record->delete();
-
-        return $record;
     }
 
     public static function getNextNumber($input) {

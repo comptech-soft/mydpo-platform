@@ -11,7 +11,6 @@ class CustomerCentralizatorRowValue extends Model {
     protected $casts = [
         'row_id' => 'integer',
         'column_id' => 'integer',
-       
         'props' => 'json',
         'columns' => 'json',
     ];
@@ -24,6 +23,5 @@ class CustomerCentralizatorRowValue extends Model {
         'columns',
         'props',
     ];
-
 
 }
