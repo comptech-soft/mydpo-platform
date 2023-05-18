@@ -17,7 +17,7 @@ class InsertRow extends Perform {
             ...$input, 
             'props' => [
                 'action' => [
-                    'name' => 'import',
+                    'name' => 'insert',
                     'action_at' => Carbon::now()->format('Y-m-d'),
                     'tooltip' => 'Creat de :user_full_name la :action_at. (:customer_name)',
                     'user' => [

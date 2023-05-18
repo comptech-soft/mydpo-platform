@@ -13,7 +13,28 @@ class UpdateRow extends Perform {
         $input = collect($this->input)->except(['rowvalues'])->toArray();
 
         $record = CustomerCentralizatorRow::find($this->id);
-        $record->update($input);
+
+        $record->update([
+            ...$input, 
+            'props' => [
+                'action' => [
+                    'name' => 'update',
+                    'action_at' => Carbon::now()->format('Y-m-d'),
+                    'tooltip' => 'Editat de :user_full_name la :action_at. (:customer_name)',
+                    'user' => [
+                        'id' => \Auth::user()->id,
+                        'full_name' => \Auth::user()->full_name,
+                        'role' => [
+                            'name' => \Auth::user()->role->name,
+                        ]
+                    ],
+                    'customer' => [
+                        'id' => $this->customer_id,
+                        'name' => $this->customer,
+                    ],
+                ],
+            ],
+        ]);
 
         foreach($this->rowvalues as $i => $input)
         {
