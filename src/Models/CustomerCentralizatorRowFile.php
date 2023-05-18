@@ -29,6 +29,7 @@ class CustomerCentralizatorRowFile extends Model {
     protected $appends = [
         'is_image', 
         'is_office',
+        'is_pdf',
         'icon'
     ];
 
@@ -42,8 +43,13 @@ class CustomerCentralizatorRowFile extends Model {
         return in_array($ext, ['doc', 'docx', 'xls', 'xlsx']);
     }  
 
+    public function getIsPdfAttribute() {
+        $ext = strtolower($this->file['file_original_extension']);
+        return in_array($ext, ['pdf']);
+    } 
+
     public function getIconAttribute() {
-        return config('app.url') . '/imgs/extensions/'. strtolower($this->file_original_extension) . '.png';
+        return config('app.url') . '/imgs/extensions/'. strtolower($this->file['file_original_extension']) . '.png';
     }
 
     public static function uploadFiles($input) {
