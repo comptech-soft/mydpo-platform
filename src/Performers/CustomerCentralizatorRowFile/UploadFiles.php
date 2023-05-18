@@ -9,6 +9,17 @@ class UploadFiles extends Perform {
 
     public function Action() {
 
-        dd($this->input);
+        if($this->files)
+        {
+            foreach($this->files as $i => $file)
+            {
+                $this->attachFile($file);
+            }
+        }
+    }
+
+    protected function attachFile($file) {
+
+        dd($file);
     }
 }
