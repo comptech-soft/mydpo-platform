@@ -25,7 +25,7 @@ class SetRowsStatus extends Perform {
                 $props = [
                     ...$props,
                     'action' => [
-                        'name' => 'visibility',
+                        'name' => 'status',
                         'action_at' => Carbon::now()->format('Y-m-d'),
                         'tooltip' => 'Setat ' . $this->status . ' de :user_full_name la :action_at. (:customer_name)',
                         'user' => [
