@@ -4,6 +4,7 @@ namespace MyDpo\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
+use MyDpo\Performers\CustomerCentralizatorRowFile\UploadFiles;
 
 class CustomerCentralizatorRowFile extends Model {
 
@@ -25,5 +26,8 @@ class CustomerCentralizatorRowFile extends Model {
         'updated_by'
     ];
 
+    public static function uploadFiles($input) {
+        return (new UploadFiles($input))->Perform();
+    }
 
 }
