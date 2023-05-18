@@ -13,6 +13,10 @@ class Import extends Perform {
         $importer = new Importer($this->input);
 
         \Excel::import($importer, $this->file);
+
+        $this->payload = [
+            'record' => NULL,
+        ];
     
     }
 }

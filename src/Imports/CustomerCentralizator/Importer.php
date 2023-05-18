@@ -142,12 +142,8 @@ class Importer implements ToCollection {
             return $options[$value];
         }
 
-        
         return NULL;
     }
-
-    
-    
 
     protected function valueN($value, $column) {
         return $value;
