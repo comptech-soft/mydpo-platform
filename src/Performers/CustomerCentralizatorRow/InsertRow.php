@@ -10,8 +10,6 @@ class InsertRow extends Perform {
 
     public function Action() {
 
-        dd($this->input);
-
         $input = collect($this->input)->except(['rowvalues'])->toArray();
 
         $record = CustomerCentralizatorRow::create([
@@ -29,8 +27,8 @@ class InsertRow extends Perform {
                         ]
                     ],
                     'customer' => [
-                        'id' => $this->centralizator->customer_id,
-                        'name' => $this->customer->name,
+                        'id' => $this->customer_id,
+                        'name' => $this->customer,
                     ],
                 ],
             ],
