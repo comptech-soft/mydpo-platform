@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Models\CustomerCentralizatorRowFile;
 
-class CustomersCentralizatoareRowsController extends Controller {
+class CustomersCentralizatoareRowsFilesController extends Controller {
     
     public function getRecords(Request $r) {
         return CustomerCentralizatorRowFile::getRecords($r->all());
