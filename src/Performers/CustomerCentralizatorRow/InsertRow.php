@@ -10,9 +10,31 @@ class InsertRow extends Perform {
 
     public function Action() {
 
+        dd($this->input);
+
         $input = collect($this->input)->except(['rowvalues'])->toArray();
 
-        $record = CustomerCentralizatorRow::create($input);
+        $record = CustomerCentralizatorRow::create([
+            ...$input, 
+            'props' => [
+                'action' => [
+                    'name' => 'import',
+                    'action_at' => Carbon::now()->format('Y-m-d'),
+                    'tooltip' => 'Creat de :user_full_name la :action_at. (:customer_name)',
+                    'user' => [
+                        'id' => \Auth::user()->id,
+                        'full_name' => \Auth::user()->full_name,
+                        'role' => [
+                            'name' => \Auth::user()->role->name,
+                        ]
+                    ],
+                    'customer' => [
+                        'id' => $this->centralizator->customer_id,
+                        'name' => $this->customer->name,
+                    ],
+                ],
+            ],
+        ]);
 
         foreach($this->rowvalues as $i => $input)
         {

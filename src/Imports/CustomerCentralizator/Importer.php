@@ -81,7 +81,6 @@ class Importer implements ToCollection {
                         'name' => $this->customer->name,
                     ],
                 ],
-                
             ],
         ];
 
