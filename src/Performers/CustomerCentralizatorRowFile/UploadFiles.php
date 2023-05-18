@@ -26,6 +26,13 @@ class UploadFiles extends Perform {
 
         $ext = strtolower($file->extension());
 
+        $ext = strtolower($file->extension());
+
+        if(! in_array( strtolower($ext), ['pdf', 'jpeg', 'jpg', 'png', 'xls', 'xlsx', 'doc', 'docx']))
+        {
+            return NULL;
+        }
+        
         $filename = md5(time()) . '-' . \Str::slug(str_replace($file->extension(), '', $file->getClientOriginalName())) . '.' .  strtolower($file->extension());
 
         $result = $file->storeAs('registre-rows/' .  \Auth::user()->id, $filename, 's3');
