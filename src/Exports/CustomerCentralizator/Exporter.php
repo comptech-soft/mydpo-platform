@@ -72,10 +72,26 @@ class Exporter implements FromView, WithStrictNullComparison, ShouldAutoSize {
 
         foreach($rows as $i => $row)
         {
-            $records[] = $this->item($value_columns, $row);
+            
+            if($this->row_department_is_selected($row))
+            {
+                $records[] = $this->item($value_columns, $row);
+            }
         }
 
         return $records;
+    }
+
+    protected function row_department_is_selected($row) {
+
+        $rowvalue = $row->rowvalues->where('column_id', $this->centralizator->department_column_id)->first();
+
+        if(! $rowvalue)
+        {
+            return false;
+        }
+
+        return in_array($rowvalue->value, $this->department_ids);
     }
 
     protected function item($value_columns, $row) {
