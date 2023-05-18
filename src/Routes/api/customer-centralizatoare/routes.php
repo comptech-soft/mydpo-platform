@@ -2,6 +2,7 @@
 
 use MyDpo\Http\Controllers\Auth\CustomersCentralizatoareController;
 use MyDpo\Http\Controllers\Auth\CustomersCentralizatoareRowsController;
+use MyDpo\Http\Controllers\Auth\CustomersCentralizatoareRowsFilesController;
 
 Route::prefix('customer-centralizatoare')->group( function() {
             
@@ -26,5 +27,13 @@ Route::prefix('customers-centralizatoare-rows')->group( function() {
     Route::post('action/setrowsstatus', [CustomersCentralizatoareRowsController::class, 'setRowsStatus']);
     Route::post('action/setrowsvisibility', [CustomersCentralizatoareRowsController::class, 'setRowsVisibility']);
     Route::post('action/deleterows', [CustomersCentralizatoareRowsController::class, 'deleteRows']);
+   
+});
+
+Route::prefix('customers-centralizatoare-rows-files')->group( function() {
+            
+    Route::post('get-records', [CustomersCentralizatoareRowsFilesController::class, 'getRecords']);
+
+   
    
 });
