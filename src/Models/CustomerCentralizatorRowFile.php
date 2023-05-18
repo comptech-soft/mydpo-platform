@@ -26,6 +26,26 @@ class CustomerCentralizatorRowFile extends Model {
         'updated_by'
     ];
 
+    protected $appends = [
+        'is_image', 
+        'is_office',
+        'icon'
+    ];
+
+    public function getIsImageAttribute() {
+        $ext = strtolower($this->file['file_original_extension']);
+        return in_array($ext, ['jpg', 'jpeg', 'png']);
+    }   
+
+    public function getIsOfficeAttribute() {
+        $ext = strtolower($this->file['file_original_extension']);
+        return in_array($ext, ['doc', 'docx', 'xls', 'xlsx']);
+    }  
+
+    public function getIconAttribute() {
+        return config('app.url') . '/imgs/extensions/'. strtolower($this->file_original_extension) . '.png';
+    }
+
     public static function uploadFiles($input) {
         return (new UploadFiles($input))->Perform();
     }
