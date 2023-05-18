@@ -17,6 +17,8 @@ class SetRowsVisibility extends Perform {
         if(!! count($this->selected_rows) )
         {
 
+            $items = collect($this->items)->pluck('text', 'value')->toArray();
+
             $rows = CustomerCentralizatorRow::whereIn('id', $this->selected_rows)->get();
 
             foreach($rows as $i => $row)
@@ -28,7 +30,7 @@ class SetRowsVisibility extends Perform {
                     'action' => [
                         'name' => 'visibility',
                         'action_at' => Carbon::now()->format('Y-m-d'),
-                        'tooltip' => 'Setat ' . ($this->visibility == 1 ? 'public' : 'privat') . ' de :user_full_name la :action_at. (:customer_name)',
+                        'tooltip' => 'Setat ' . $items[$this->visibility] . ' de :user_full_name la :action_at. (:customer_name)',
                         'user' => [
                             'id' => \Auth::user()->id,
                             'full_name' => \Auth::user()->full_name,
