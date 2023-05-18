@@ -15,5 +15,9 @@ class CustomersCentralizatoareRowsFilesController extends Controller {
     public function uploadFiles(Request $r) {
         return CustomerCentralizatorRowFile::uploadFiles($r->all());
     }
+
+    public function doAction($action, Request $r) {
+        return CustomerCentralizatorRowFile::doAction($action, $r->all());
+    }
     
 }
