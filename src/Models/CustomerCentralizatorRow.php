@@ -48,6 +48,10 @@ class CustomerCentralizatorRow extends Model {
         'rowvalues',
     ];
 
+    protected $withCount = [
+        'files',
+    ];
+
     public function getDepartmentIdAttribute() {
         $column_id = $this->customercentralizator->department_column_id;
         $rowvalue = $this->rowvalues()->where('column_id', $column_id)->first();
@@ -61,6 +65,10 @@ class CustomerCentralizatorRow extends Model {
      
     public function rowvalues() {
         return $this->hasMany(CustomerCentralizatorRowValue::class, 'row_id')->select(['id', 'row_id', 'column_id', 'value']);
+    }
+
+    public function files() {
+        return $this->hasMany(CustomerCentralizatorRowFile::class, 'row_id');
     }
 
     public function DuplicateValues($id, $new_customer_id){
