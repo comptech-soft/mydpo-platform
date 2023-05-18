@@ -4,11 +4,12 @@ namespace MyDpo\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
+use MyDpo\Traits\Actionable;
 use MyDpo\Performers\CustomerCentralizatorRowFile\UploadFiles;
 
 class CustomerCentralizatorRowFile extends Model {
 
-    use Itemable;
+    use Itemable, Actionable;
 
     protected $table = 'customers-centralizatoare-rows-files';
 
