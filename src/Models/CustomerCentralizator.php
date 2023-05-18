@@ -7,6 +7,7 @@ use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 use MyDpo\Performers\CustomerCentralizator\GetNextNumber;
 use MyDpo\Performers\CustomerCentralizator\Export;
+use MyDpo\Performers\CustomerCentralizator\Import;
 
 class CustomerCentralizator extends Model {
 
@@ -236,6 +237,10 @@ class CustomerCentralizator extends Model {
 
     public static function doExport($input) {
         return (new Export($input))->Perform();
+    }
+
+    public static function doImport($input) {
+        return (new Import($input))->Perform();
     }
 
     protected function DuplicateRows($id, $department_ids, $new_customer_id) {

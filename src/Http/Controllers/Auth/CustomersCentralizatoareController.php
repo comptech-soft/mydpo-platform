@@ -33,6 +33,10 @@ class CustomersCentralizatoareController extends Controller {
         return CustomerCentralizator::doExport($r->all());
     }
 
+    public function doImport(Request $r) {
+        return CustomerCentralizator::doImport($r->all());
+    }
+
     public function doAction($action, Request $r) {
         return CustomerCentralizator::doAction($action, $r->all());
     }

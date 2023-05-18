@@ -10,6 +10,8 @@ Route::prefix('customer-centralizatoare')->group( function() {
     Route::post('get-next-number', [CustomersCentralizatoareController::class, 'getNextNumber']);
 
     Route::post('action/export', [CustomersCentralizatoareController::class, 'doExport']);
+    Route::post('action/import', [CustomersCentralizatoareController::class, 'doImport']);
+    
     Route::post('action/{action}', [CustomersCentralizatoareController::class, 'doAction']);
 
 });
