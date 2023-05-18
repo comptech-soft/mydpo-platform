@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 use MyDpo\Performers\CustomerCentralizatorRowFile\UploadFiles;
+use MyDpo\Performers\CustomerCentralizatorRowFile\DownloadFile;
 
 class CustomerCentralizatorRowFile extends Model {
 
@@ -56,5 +57,11 @@ class CustomerCentralizatorRowFile extends Model {
     public static function uploadFiles($input) {
         return (new UploadFiles($input))->Perform();
     }
+
+    public static function downloadFile($input) {
+        return (new DownloadFile($input))->Perform();
+    }
+
+    
 
 }

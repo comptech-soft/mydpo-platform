@@ -34,6 +34,7 @@ Route::prefix('customers-centralizatoare-rows-files')->group( function() {
             
     Route::post('get-records', [CustomersCentralizatoareRowsFilesController::class, 'getRecords']);
     Route::post('action/insert', [CustomersCentralizatoareRowsFilesController::class, 'uploadFiles']);
+    Route::post('action/download', [CustomersCentralizatoareRowsFilesController::class, 'downloadFile']);
     Route::post('action/{action}', [CustomersCentralizatoareRowsFilesController::class, 'doAction']);
    
    

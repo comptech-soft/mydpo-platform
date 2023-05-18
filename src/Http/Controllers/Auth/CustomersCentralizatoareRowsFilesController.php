@@ -16,6 +16,10 @@ class CustomersCentralizatoareRowsFilesController extends Controller {
         return CustomerCentralizatorRowFile::uploadFiles($r->all());
     }
 
+    public function downloadFile(Request $r) {
+        return CustomerCentralizatorRowFile::downloadFile($r->all());
+    }
+
     public function doAction($action, Request $r) {
         return CustomerCentralizatorRowFile::doAction($action, $r->all());
     }
