@@ -33,10 +33,8 @@ class Exporter implements FromView, WithStrictNullComparison, ShouldAutoSize {
 
     public function __construct($department_ids, $id) {
 
-        // $this->juststructure = $juststructure;
         $this->department_ids = $department_ids;
         $this->id = $id;
-
 
         if(!! $this->department_ids)
         {
@@ -46,45 +44,102 @@ class Exporter implements FromView, WithStrictNullComparison, ShouldAutoSize {
         }
 
         $this->centralizator = CustomerCentralizator::where('id', $this->id)->first();
-
     }
 
+    
     public function view(): View {
-
         
-        $columns = collect($this->centralizator->columns)->filter(function($item){
+        $columns = $this->columns();
 
-            if( in_array($item['type'], ['NRCRT', 'CHECK', 'FILES']) )
-            {
-                return false;
-            }
+        $children_columns = $this->children_columns();
 
-            if( ! $item['type']  )
-            {
-                return count($item['children']) > 0;
-            }
+        $columns = $this->columns_colspan_rowspan($columns, $children_columns->count() > 0);
 
-            return true;
-        });
+        return view('exports.customer-centralizator.export', [
+            'columns' => $columns->toArray(),
+            'children_columns' => $children_columns->toArray(),
+            'records' => $this->records($columns),
+        ]);
+    }
 
-        $children_columns = collect($this->centralizator->columns)->filter(function($item){
-
-            return count($item['children']) > 0;
-        });
-
-        $has_children = $children_columns->count() > 0;
-
-        $columns = $columns->map(function($item) use ($has_children){
-            return [
-                ...$item,
-                'colspan' => count($item['children']) == 0 ? NULL : count($item['children']) ,
-                'rowspan' => count($item['children']) > 0 ? NULL : ($has_children ? 2 : NULL),
-            ];
-        });
+    protected function records($columns) {
 
         $rows = CustomerCentralizatorRow::where('customer_centralizator_id', $this->id)->get();
 
+        $value_columns = $this->value_columns($columns);
+
+        $records = [];
+
+        foreach($rows as $i => $row)
+        {
+            $records[] = $this->item($value_columns, $row);
+        }
+
+        return $records;
+    }
+
+    protected function item($value_columns, $row) {
+        $item = [];
+
+        foreach($value_columns as $j => $column)
+        {
+            $rowvalue = $row->rowvalues->where('column_id', $column['id'])->first();
+
+            $item[] = $this->value($rowvalue, $column);   
+        }
+
+        return $item;
+    }
+
+    protected function valueVisibility($rowvalue, $column) {
+        return $rowvalue->value;
+    }
+
+    protected function valueStatus($rowvalue, $column) {
+        return $rowvalue->value;
+    }
+
+    protected function valueDepartment($rowvalue, $column) {
+        return array_key_exists($rowvalue->value, $this->departamente) ? $this->departamente[$rowvalue->value] : NULL;
+    }
+
+    protected function valueC($rowvalue, $column) {
+        return $rowvalue->value;
+    }
+
+    protected function valueN($rowvalue, $column) {
+        return $rowvalue->value;
+    }
+
+    protected function valueD($rowvalue, $column) {
+        return $rowvalue->value;
+    }
+
+    protected function valueT($rowvalue, $column) {
+        return $rowvalue->value;
+    }
+
+    protected function valueO($rowvalue, $column) {
+        $options = collect($column['props'])->pluck('text', 'value')->toArray();
+
+        return array_key_exists($rowvalue->value, $options) ? $options[$rowvalue->value] : NULL;
+    }
+
+    protected function value($rowvalue, $column) {
+        if(! $rowvalue )
+        {
+            return NULL;
+        }
+
+        $method = 'value' . ucfirst(strtolower($column['type']));
+
+        return $this->{$method}($rowvalue, $column);
+    }
+
+    protected function value_columns($columns) {
+
         $value_columns = [];
+        
         foreach($columns as $i => $column)
         {
             if( count($column['children']) == 0)
@@ -100,71 +155,44 @@ class Exporter implements FromView, WithStrictNullComparison, ShouldAutoSize {
             }
         }
 
-        // dd($value_columns);
+        return $value_columns;
+    }
 
-        $records = [];
-        foreach($rows as $i => $row)
-        {
-            $item = [];
+    protected function columns_colspan_rowspan($columns, $has_children) {
 
-            // dd($row->rowvalues);
+        return $columns->map(function($item) use ($has_children){
+            return [
+                ...$item,
+                'colspan' => count($item['children']) == 0 ? NULL : count($item['children']) ,
+                'rowspan' => count($item['children']) > 0 ? NULL : ($has_children ? 2 : NULL),
+            ];
+        });
 
-            foreach($value_columns as $j => $column)
+    }
+
+    protected function columns() {
+        return collect($this->centralizator->columns)->filter(function($item){
+
+            if( in_array($item['type'], ['NRCRT', 'CHECK', 'FILES']) )
             {
-          
-                $rowvalue = $row->rowvalues->where('column_id', $column['id'])->first();
-
-                if(! $rowvalue )
-                {
-                    $item[] = NULL;
-                }
-                else
-                {
-                    if($column['type'] == 'DEPARTMENT')
-                    {
-                        if(array_key_exists($rowvalue->value, $this->departamente))
-                        {
-                            $item[] = $this->departamente[$rowvalue->value];
-                        }
-                        else
-                        {
-                            $item[] = NULL;
-                        }
-                    }
-                    else
-                    {
-                        if($column['type'] == 'O')
-                        {
-                            $options = collect($column['props'])->pluck('text', 'value')->toArray();
-
-                            if(array_key_exists($rowvalue->value, $options))
-                            {
-                                $item[] = $options[$rowvalue->value];
-                            }
-                            else
-                            {
-                                $item[] = NULL;
-                            }
-                        }
-                        else
-                        {
-                            $item[] = $rowvalue->value;
-                        }
-                    }
-                }
-                    
+                return false;
             }
 
-            $records[] = $item;
-        }
+            if( ! $item['type']  )
+            {
+                return count($item['children']) > 0;
+            }
 
+            return true;
+        });
+    }
 
+    protected function children_columns() {
+        return collect($this->centralizator->columns)->filter(function($item){
 
-        return view('exports.customer-centralizator.export', [
-            'columns' => $columns->toArray(),
-            'children_columns' => $children_columns->toArray(),
-            'records' => $records,
-        ]);
+            return count($item['children']) > 0;
+
+        });
     }
 
 }
