@@ -16,6 +16,9 @@ class SetRowsStatus extends Perform {
         
         if(!! count($this->selected_rows) )
         {
+
+            $statuses = collect($this->statuses)->pluck('text', 'value')->toArray();
+
             $rows = CustomerCentralizatorRow::whereIn('id', $this->selected_rows)->get();
 
             foreach($rows as $i => $row)
@@ -27,7 +30,7 @@ class SetRowsStatus extends Perform {
                     'action' => [
                         'name' => 'status',
                         'action_at' => Carbon::now()->format('Y-m-d'),
-                        'tooltip' => 'Setat ' . $this->status . ' de :user_full_name la :action_at. (:customer_name)',
+                        'tooltip' => 'Setat ' . $statuses[$this->status] . ' de :user_full_name la :action_at. (:customer_name)',
                         'user' => [
                             'id' => \Auth::user()->id,
                             'full_name' => \Auth::user()->full_name,
