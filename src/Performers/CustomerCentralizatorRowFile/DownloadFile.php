@@ -9,10 +9,10 @@ class DownloadFile extends Perform {
 
     public function Action() {
 
-            dd($input);
-
         $this->payload = [
-            'record' => NULL,
+            'record' => [
+                'url' => $this->file['url']
+            ],
         ];
     }
 

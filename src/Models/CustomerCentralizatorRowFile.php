@@ -59,6 +59,8 @@ class CustomerCentralizatorRowFile extends Model {
     }
 
     public static function downloadFile($input) {
+
+        dd(__METHOD__, $input);
         return (new DownloadFile($input))->Perform();
     }
 
