@@ -100,7 +100,7 @@ class CustomerCentralizator extends Model {
                 'group_id' => NULL, 
                 'caption' => ['Nr.', 'crt'], 
                 'type' => 'NRCRT', 
-                'width' => 50, 
+                'width' => !!$this->props ? $this->props[-2] : 50, 
                 'props' => NULL,
             ])
 
@@ -111,7 +111,7 @@ class CustomerCentralizator extends Model {
                 'group_id' => NULL, 
                 'caption' => '', 
                 'type' => 'CHECK', 
-                'width' => 50, 
+                'width' => !!$this->props ? $this->props[-3] : 50, 
                 'props' => NULL,
             ])
 
@@ -122,7 +122,7 @@ class CustomerCentralizator extends Model {
                 'group_id' => NULL, 
                 'caption' => 'Fișiere', 
                 'type' => 'FILES', 
-                'width' => 60, 
+                'width' => !!$this->props ? $this->props[-4] : 60, 
                 'props' => NULL,
             ])
             
