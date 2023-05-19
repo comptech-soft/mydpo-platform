@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 use MyDpo\Performers\CustomerCentralizatorRowFile\UploadFiles;
-use MyDpo\Performers\CustomerCentralizatorRowFile\DownloadFile;
 
 class CustomerCentralizatorRowFile extends Model {
 
@@ -66,7 +65,7 @@ class CustomerCentralizatorRowFile extends Model {
         {
             $path = $record->file['url']; 
             $path = \Str::replace(config('filesystems.disks.s3.url'), '', $path);
-            
+
             return \Storage::disk('s3')->download($path, $record->file['file_original_name']);
         }
 
