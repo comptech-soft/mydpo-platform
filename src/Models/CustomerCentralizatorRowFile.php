@@ -60,10 +60,17 @@ class CustomerCentralizatorRowFile extends Model {
 
     public static function downloadFile($id) {
 
-        dd(__METHOD__, $id);
-        return (new DownloadFile($input))->Perform();
-    }
+        $record = self::where('id', $id)->first();
 
-    
+        if(!! $record )
+        {
+            $path = $record->file['url']; 
+            $path = \Str::replace(config('filesystems.disks.s3.url'), '', $path);
+            
+            return \Storage::disk('s3')->download($path, $record->file['file_original_name']);
+        }
+
+        return NULL;
+    }
 
 }
