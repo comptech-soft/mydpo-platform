@@ -35,7 +35,7 @@ class UploadFiles extends Perform {
         
         $filename = md5(time()) . '-' . \Str::slug(str_replace($file->extension(), '', $file->getClientOriginalName())) . '.' .  strtolower($file->extension());
 
-        $result = $file->storeAs('registre-rows/' .  \Auth::user()->id, $filename, 's3');
+        $result = $file->storeAs('centralizatoare-rows/' .  \Auth::user()->id, $filename, 's3');
 
         $input = [
             'file_original_name' => $file->getClientOriginalName(),
