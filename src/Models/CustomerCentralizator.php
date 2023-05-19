@@ -8,6 +8,7 @@ use MyDpo\Traits\Actionable;
 use MyDpo\Performers\CustomerCentralizator\GetNextNumber;
 use MyDpo\Performers\CustomerCentralizator\Export;
 use MyDpo\Performers\CustomerCentralizator\Import;
+use MyDpo\Performers\CustomerCentralizator\SaveSettings;
 
 class CustomerCentralizator extends Model {
 
@@ -237,6 +238,10 @@ class CustomerCentralizator extends Model {
 
     public static function doExport($input) {
         return (new Export($input))->Perform();
+    }
+
+    public static function saveSettings($input) {
+        return (new SaveSettings($input))->Perform();
     }
 
     public static function doImport($input) {
