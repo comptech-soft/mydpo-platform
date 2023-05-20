@@ -17,6 +17,7 @@ class UpdateRow extends Perform {
 
         $record->update([
             ...$input, 
+            'department_id' => NULL,
             'props' => [
                 'action' => [
                     'name' => 'update',

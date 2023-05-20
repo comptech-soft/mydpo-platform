@@ -11,6 +11,7 @@ Route::prefix('customer-centralizatoare')->group( function() {
     Route::post('action/export', [CustomersCentralizatoareController::class, 'doExport']);
     Route::post('action/save-settings', [CustomersCentralizatoareController::class, 'saveSettings']);
     Route::post('action/import', [CustomersCentralizatoareController::class, 'doImport']);
+    Route::post('action/setaccess', [CustomersCentralizatoareController::class, 'setAccess']);
     Route::post('action/{action}', [CustomersCentralizatoareController::class, 'doAction']);
 
 });
