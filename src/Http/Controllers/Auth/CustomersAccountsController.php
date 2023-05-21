@@ -23,9 +23,12 @@ class CustomersAccountsController extends Controller {
         );
     }
 
-
     public function getItems(Request $r) {
         return CustomerAccount::getItems($r->all());
+    }
+
+    public function getRecords(Request $r) {
+        return CustomerAccount::getRecords($r->all());
     }
     
     public function doAction($action, Request $r) {
