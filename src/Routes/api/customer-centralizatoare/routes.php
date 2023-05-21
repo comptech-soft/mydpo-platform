@@ -2,6 +2,7 @@
 
 use MyDpo\Http\Controllers\Auth\CustomersCentralizatoareController;
 use MyDpo\Http\Controllers\Auth\CustomersCentralizatoareRowsController;
+use MyDpo\Http\Controllers\Auth\CustomersCentralizatoareAccessController;
 use MyDpo\Http\Controllers\Auth\CustomersCentralizatoareRowsFilesController;
 
 Route::prefix('customer-centralizatoare')->group( function() {
@@ -14,6 +15,10 @@ Route::prefix('customer-centralizatoare')->group( function() {
     Route::post('action/setaccess', [CustomersCentralizatoareController::class, 'setAccess']);
     Route::post('action/{action}', [CustomersCentralizatoareController::class, 'doAction']);
 
+});
+
+Route::prefix('customers-centralizatoare-access')->group( function() {
+    Route::post('get-records', [CustomersCentralizatoareAccessController::class, 'getRecords']);
 });
 
 Route::prefix('customers-centralizatoare-rows')->group( function() {
