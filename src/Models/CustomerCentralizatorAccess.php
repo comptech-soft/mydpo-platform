@@ -3,9 +3,11 @@
 namespace MyDpo\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use MyDpo\Helpers\Performers\Datatable\GetItems;
+use MyDpo\Traits\Itemable;
 
 class CustomerCentralizatorAccess extends Model {
+
+    use Itemable;
 
     protected $table = 'customers-centralizatoare-access';
 
@@ -35,9 +37,5 @@ class CustomerCentralizatorAccess extends Model {
         'updated_by',
         'deleted_by'
     ];
-
-    // public static function getItems($input) {
-    //     return (new GetItems($input, self::query(), __CLASS__))->Perform();
-    // }
 
 }
