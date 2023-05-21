@@ -26,6 +26,8 @@ use MyDpo\Scopes\NotdeletedScope;
 
 class CustomerAccount extends Model {
 
+    use Itemable;
+    
     protected $table = 'customers-persons';
 
     protected $casts = [
