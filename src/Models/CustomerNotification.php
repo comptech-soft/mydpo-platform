@@ -4,14 +4,14 @@ namespace MyDpo\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
-// use MyDpo\Helpers\Performers\Datatable\DoAction;
+use MyDpo\Traits\Itemable;
 use MyDpo\Models\TemplateNotification;
 use MyDpo\Models\User;
 use MyDpo\Models\Customer;
-// use MyDpo\Models\RoleUser;
-// use MyDpo\Rules\CustomerAccount\UniqueUser;
 
 class CustomerNotification extends Model {
+
+    use Itemable;
 
     protected $table = 'customers-notifications';
 
@@ -94,65 +94,5 @@ class CustomerNotification extends Model {
     public static function getItems($input) {
         return (new GetItems($input, self::query(), __CLASS__))->Perform();
     }
-
-    // public static function doAction($action, $input) {
-    //     return (new DoAction($action, $input, __CLASS__))->Perform();
-    // }
-
-    // public static function doUpdate($input, $account) {
-
-    //     $account->update($input);
-
-    //     $roleUser = RoleUser::CreateAccountRole(
-    //         $input['customer_id'], 
-    //         $input['user_id'], 
-    //         $input['user']['role_id']
-    //     );
-
-    //     return $account;
-    // }
-
-    // public static function doInsert($input) {
-
-    //     $account = self::create([
-    //         'customer_id' => $input['customer_id'],
-    //         'user_id' => $input['user_id'],
-    //         'department_id' => $input['department_id'],
-    //         'newsletter' => $input['newsletter'],
-    //         'locale' => $input['locale'],
-    //     ]);
-
-    //     $roleUser = RoleUser::CreateAccountRole(
-    //         $input['customer_id'], 
-    //         $input['user_id'], 
-    //         $input['user']['role_id']
-    //     );
-
-    //     return $account;
-
-    // } 
-
-    // public static function GetRules($action, $input) {
-       
-    //     if($action == 'delete')
-    //     {
-    //         return NULL;
-    //     }
-
-    //     $result = [
-    //         'customer_id' => 'required|exists:customers,id',
-    //         'department_id' => 'required|exists:customers-departamente,id', 
-    //         'user_id' => [
-    //             'required',
-    //             'exists:users,id',
-    //             new UniqueUser($input),
-    //         ],
-    //         'user.role_id' => 'required|in:4,5'         
-    //     ];
-
-    //     return $result;
-    // }
-
-    
 
 }
