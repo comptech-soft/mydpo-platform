@@ -60,7 +60,7 @@ class CustomerNotification extends Model {
     ];
 
     public function getIconAttribute() {
-        return $this->template->props['icon'];
+        return !! $this->props ? $this->template->props['icon'] : NULL;
     }
 
     public function getNotyStatusAttribute() {
