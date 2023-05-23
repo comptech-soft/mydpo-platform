@@ -5,9 +5,6 @@ namespace MyDpo\Models;
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Traits\Itemable;
-use MyDpo\Models\TemplateNotification;
-use MyDpo\Models\User;
-use MyDpo\Models\Customer;
 
 class CustomerNotification extends Model {
 
@@ -64,7 +61,7 @@ class CustomerNotification extends Model {
         {
             return NULL;
         }
-        
+
         return !! $this->template->props ? $this->template->props['icon'] : NULL;
     }
 
@@ -93,6 +90,10 @@ class CustomerNotification extends Model {
     }
 
     public function sender() {
+        return $this->belongsTo(User::class, 'sender_id');
+    }
+
+    public function type() {
         return $this->belongsTo(User::class, 'sender_id');
     }
 
