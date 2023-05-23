@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Helpers\Response;
 
-class CustomersAnalizaGapController extends Controller {
+class CustomersAnalizaGapCentralizatoareController extends Controller {
     
     public function index($customer_id, Request $r) {
 
