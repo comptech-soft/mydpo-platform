@@ -17,6 +17,8 @@ class CustomersCentralizatoareController extends Controller {
             [], 
             [
                 'customer_id' => $customer_id,
+                'gap' => 0,
+                'centralizatoare' => 1,
             ]
         );
     }
