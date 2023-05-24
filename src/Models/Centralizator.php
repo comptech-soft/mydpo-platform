@@ -108,6 +108,14 @@ class Centralizator extends Model {
 
         });
 
+        if(config('app.platform') == 'b2b')
+        {
+            $records = $records->filter( function($item) {
+
+                return !! $item->is_associated;
+            });
+        }
+
         return $records->toArray();
     }
 
