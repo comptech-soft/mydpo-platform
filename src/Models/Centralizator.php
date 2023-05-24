@@ -100,9 +100,11 @@ class Centralizator extends Model {
             'is_associated'
         ]);
 
-        $records = $q->get()->filter(function($item) {
+        $records = $q->get()->filter(function($item) use ($input){
 
-            return !! $item->status && ($item->status['centralizatoare'] == 1);
+            $visible = $input['gap'] * $item->status['gap'] + $input['centralizatoare'] * $item->status['centralizatoare'];
+
+            return !! $item->status && $visible;
 
         });
 
