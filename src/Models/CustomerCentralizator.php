@@ -289,4 +289,16 @@ class CustomerCentralizator extends Model {
         return (new GetNextNumber($input))->Perform();
     }
 
+    public static function GetQuery() {
+
+        $q = self::query();
+
+        if(config('app.platform') == 'b2b')
+        {
+            $q = $q->where('visibility', 1);
+        }
+        
+        return $q;
+    }
+
 }
