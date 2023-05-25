@@ -10,7 +10,9 @@ use Carbon\Carbon;
 class InsertRow extends Perform {
 
     public function Action() {
-
+		
+		$role = $this->getUserRole();
+		
         $input = collect($this->input)->except(['rowvalues'])->toArray();
 
         $record = CustomerCentralizatorRow::create([
@@ -24,7 +26,8 @@ class InsertRow extends Perform {
                         'id' => \Auth::user()->id,
                         'full_name' => \Auth::user()->full_name,
                         'role' => [
-                            'name' => \Auth::user()->role->name,
+							'id' => !! $role ? $role->id : NULL,
+                            'name' => !! $role ? $role->name : NULL,
                         ]
                     ],
                     'customer' => [
@@ -47,4 +50,15 @@ class InsertRow extends Perform {
         ];
     
     }
+	
+	public function getUserRole() {
+		$user = \Auth::user();
+		
+		if(config('app.platform') == 'admin')
+		{
+			return $user->role;
+		}
+		
+		return $user->roles()->wherePivot('customer_id', $this->customer_id)->first();
+	}
 }
