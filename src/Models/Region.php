@@ -4,6 +4,7 @@ namespace MyDpo\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
+use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Traits\Itemable;
 use MyDpo\Models\Country;
 use MyDpo\Models\City;
@@ -35,6 +36,10 @@ class Region extends Model {
 
     public static function getItems($input) {
         return (new GetItems($input, self::query()->withCount(['cities']), __CLASS__))->Perform();
+    }
+
+    public static function doAction($action, $input) {
+        return (new DoAction($action, $input, __CLASS__))->Perform();
     }
 
     public static function GetQuery() {

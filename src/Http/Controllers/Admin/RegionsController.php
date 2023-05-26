@@ -16,4 +16,9 @@ class RegionsController extends Controller {
         return Region::getRecords($r->all());
     }
 
+    public function doAction($action, Request $r) {
+        return Region::doAction($action, $r->all());
+    }
+
+
 }
