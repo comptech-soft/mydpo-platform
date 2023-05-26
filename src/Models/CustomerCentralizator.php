@@ -225,7 +225,11 @@ class CustomerCentralizator extends Model {
 
         $newrecord->save();
 
-        $record->DuplicateRows($newrecord->id, $input['department_ids'], $input['customer_id']);
+        $record->DuplicateRows(
+            $newrecord->id, 
+            array_key_exists('department_ids', $input) ? $input['department_ids'] : [], 
+            $input['customer_id']
+        );
 
         return $newrecord;
 
