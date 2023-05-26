@@ -4,10 +4,13 @@ namespace MyDpo\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
+use MyDpo\Traits\Itemable;
 use MyDpo\Models\Region;
 
 class City extends Model {
 
+    use Itemable;
+    
     protected $table = 'cities';
 
     protected $fillable = [
