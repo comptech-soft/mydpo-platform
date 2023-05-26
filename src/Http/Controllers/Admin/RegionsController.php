@@ -13,7 +13,7 @@ class RegionsController extends Controller {
     }
 
     public function getRecords(Request $r) {
-        return Country::getRecords($r->all());
+        return Region::getRecords($r->all());
     }
 
 }
