@@ -7,8 +7,7 @@ use Illuminate\Http\Request;
 use MyDpo\Helpers\Response;
 use MyDpo\Models\City;
 
-class LocalitatiController extends Controller
-{
+class LocalitatiController extends Controller {
     
     public function index(Request $r) {
         return Response::View(
@@ -19,6 +18,10 @@ class LocalitatiController extends Controller
 
     public function getItems(Request $r) {
         return City::getItems($r->all());
+    }
+
+    public function getRecords(Request $r) {
+        return City::getRecords($r->all());
     }
 
 }
