@@ -212,10 +212,17 @@ class CustomerCentralizator extends Model {
 
         $newrecord = $record->replicate();
 
-        $department = CustomerDepartment::CreateIfNecessary($record->customer_id, $input['customer_id'], $input['department_id']);
+        if(!! $input['customer_id'])
+        {
+            $department = CustomerDepartment::CreateIfNecessary($record->customer_id, $input['customer_id'], $input['department_id']);
+        }
+        else
+        {
+            $department = NULL;
+        }
 
         $newrecord->customer_id = $input['customer_id'];
-        $newrecord->department_id = $department->id;
+        $newrecord->department_id = !! $department ? $department->id : NULL;
 
         $newrecord->visibility = $input['visibility'];
         $newrecord->number = $input['number'];
