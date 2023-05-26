@@ -23,7 +23,7 @@ class SetRowsStatus extends Perform {
             }
             else
             {
-                $role = \Auth::user()->roles()->where('customer_id', $this->customer_id)->first();
+                $role = \Auth::user()->roles()->wherePivot('customer_id', $this->customer_id)->first();
             }
 
             $statuses = collect($this->statuses)->pluck('text', 'value')->toArray();

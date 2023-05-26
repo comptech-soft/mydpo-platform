@@ -15,6 +15,15 @@ class UpdateRow extends Perform {
 
         $record = CustomerCentralizatorRow::find($this->id);
 
+        if(config('app.platform') == 'admin')
+        {
+            $role = \Auth::user()->role;
+        }
+        else
+        {
+            $role = \Auth::user()->roles()->wherePivot('customer_id', $this->customer_id)->first();
+        }
+        
         $record->update([
             ...$input, 
             'department_id' => NULL,
@@ -27,7 +36,8 @@ class UpdateRow extends Perform {
                         'id' => \Auth::user()->id,
                         'full_name' => \Auth::user()->full_name,
                         'role' => [
-                            'name' => \Auth::user()->role->name,
+                            'id' => $role ? $role->id : NULL,
+                            'name' => $role ? $role->name : NULL,
                         ]
                     ],
                     'customer' => [

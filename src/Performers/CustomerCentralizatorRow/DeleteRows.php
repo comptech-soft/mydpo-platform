@@ -14,8 +14,6 @@ class DeleteRows extends Perform {
 
         if(!! count($this->selected_rows) )
         {
-            
-
             $values = CustomerCentralizatorRowValue::whereIn('row_id', $this->selected_rows)->delete();
             $records = CustomerCentralizatorRow::whereIn('id', $this->selected_rows)->delete();
         }

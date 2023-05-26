@@ -14,7 +14,7 @@ class InsertRow extends Perform {
 		$role = $this->getUserRole();
 		
         $input = collect($this->input)->except(['rowvalues'])->toArray();
-
+        
         $record = CustomerCentralizatorRow::create([
             ...$input, 
             'props' => [

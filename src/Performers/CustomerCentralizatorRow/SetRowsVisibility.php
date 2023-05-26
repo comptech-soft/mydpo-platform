@@ -17,6 +17,15 @@ class SetRowsVisibility extends Perform {
         if(!! count($this->selected_rows) )
         {
 
+            if(config('app.platform') == 'admin')
+            {
+                $role = \Auth::user()->role;
+            }
+            else
+            {
+                $role = \Auth::user()->roles()->wherePivot('customer_id', $this->customer_id)->first();
+            }
+
             $items = collect($this->items)->pluck('text', 'value')->toArray();
 
             $rows = CustomerCentralizatorRow::whereIn('id', $this->selected_rows)->get();
@@ -35,7 +44,8 @@ class SetRowsVisibility extends Perform {
                             'id' => \Auth::user()->id,
                             'full_name' => \Auth::user()->full_name,
                             'role' => [
-                                'name' => \Auth::user()->role->name,
+                                'id' => $role ? $role->id : NULL,
+                                'name' => $role ? $role->name : NULL,
                             ]
                         ],
                         'customer' => [
