@@ -16,4 +16,8 @@ class CountriesController extends Controller {
         return Country::getRecords($r->all());
     }
 
+    public function doAction($action, Request $r) {
+        return Country::doAction($action, $r->all());
+    }
+
 }
