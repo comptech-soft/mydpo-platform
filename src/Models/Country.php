@@ -32,6 +32,10 @@ class Country extends Model {
         return (new GetItems($input, self::query()->withCount('regions'), __CLASS__))->Perform();
     }
 
+    public static function GetQuery() {
+        return self::query()->withCount('regions');
+    }
+
     
 
 }
