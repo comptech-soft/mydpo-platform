@@ -37,5 +37,8 @@ class Region extends Model {
         return (new GetItems($input, self::query()->withCount(['cities']), __CLASS__))->Perform();
     }
 
+    public static function GetQuery() {
+        return self::query()->withCount('cities');
+    }
 
 }
