@@ -45,7 +45,7 @@ class Importer implements ToCollection {
     public function collection(Collection $rows) {
 
         $value_columns = $this->value_columns($this->columns());
-        $start_row = $this->has_children_header() ? 3 : 2;
+        $start_row = $this->has_children_header() ? 2 : 1;
         $rows_count = CustomerCentralizatorRow::where('customer_centralizator_id', $this->input['id'])->count();
 
         foreach($rows as $i => $row)
