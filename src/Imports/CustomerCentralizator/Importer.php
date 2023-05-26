@@ -59,6 +59,15 @@ class Importer implements ToCollection {
 
     private function processRow($value_columns, $row, $order_no) {
         
+		if(config('app.platform') == 'admin')
+		{
+			$role = \Auth::user()->role;
+		}
+		else
+		{
+			$role = \Auth::user()->roles()->where('customer_id', $this->centralizator->customer_id)->first();
+		}
+		
         $input = [
             'customer_centralizator_id' => $this->input['id'],
             'customer_id' => $this->centralizator->customer_id,
@@ -73,7 +82,8 @@ class Importer implements ToCollection {
                         'id' => \Auth::user()->id,
                         'full_name' => \Auth::user()->full_name,
                         'role' => [
-                            'name' => \Auth::user()->role->name,
+                            'id' => $role ? $role->id : NULL,
+							'name' => $role ? $role->name : NULL,
                         ]
                     ],
                     'customer' => [
@@ -88,7 +98,7 @@ class Importer implements ToCollection {
 
         $this->AttachRowValues($rowrecord, $value_columns, $row->toArray());
     
-    }    
+    }      
 
     protected function AttachRowValues($rowrecord, $value_columns, $rows) {
 
