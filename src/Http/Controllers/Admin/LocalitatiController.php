@@ -24,4 +24,8 @@ class LocalitatiController extends Controller {
         return City::getRecords($r->all());
     }
 
+    public function doAction($action, Request $r) {
+        return City::doAction($action, $r->all());
+    }
+
 }
