@@ -102,6 +102,8 @@ class Centralizator extends Model {
 
         $records = $q->get()->filter(function($item) use ($input){
 
+            dd($input);
+            
             $visible = $input['gap'] * $item->status['gap'] + $input['centralizatoare'] * $item->status['centralizatoare'];
 
             return !! $item->status && $visible;
@@ -123,11 +125,14 @@ class Centralizator extends Model {
 
         $record = self::create($input);
 
-        foreach($input['body'] as $key => $value)
+        if(array_key_exists('body', $input))
         {
-            if($value == 1)
+            foreach($input['body'] as $key => $value)
             {
-                $record->{'AddColumn' . ucfirst($key)}();
+                if($value == 1)
+                {
+                    $record->{'AddColumn' . ucfirst($key)}();
+                }
             }
         }
 
@@ -137,16 +142,19 @@ class Centralizator extends Model {
     public static function doUpdate($input, $record) {
 
         $record->update($input);
-
-        foreach($input['body'] as $key => $value)
+        
+        if(array_key_exists('body', $input))
         {
-            if($value == 1)
+            foreach($input['body'] as $key => $value)
             {
-                $record->{'AddColumn' . ucfirst($key)}();
-            }
-            else
-            {
-                $record->{'DeleteColumn' . ucfirst($key)}();
+                if($value == 1)
+                {
+                    $record->{'AddColumn' . ucfirst($key)}();
+                }
+                else
+                {
+                    $record->{'DeleteColumn' . ucfirst($key)}();
+                }
             }
         }
 
