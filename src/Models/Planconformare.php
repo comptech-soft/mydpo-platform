@@ -5,14 +5,14 @@ namespace MyDpo\Models;
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
 use Kalnoy\Nestedset\NodeTrait;
-// use MyDpo\Traits\Actionable;
+use MyDpo\Traits\Actionable;
 // use MyDpo\Models\Category;
 // use MyDpo\Scopes\NotdeletedScope;
 // use MyDpo\Performers\Centralizator\SaveCustomerAsociere;
 
 class Planconformare extends Model {
 
-    use Itemable, NodeTrait;
+    use Itemable, Actionable, NodeTrait;
 
     protected $table = 'plan-conformare';
     
