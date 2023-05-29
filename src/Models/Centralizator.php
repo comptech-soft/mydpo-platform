@@ -102,8 +102,8 @@ class Centralizator extends Model {
 
         $records = $q->get()->filter(function($item) use ($input){
 
-            dd($input);
-            
+            dd($input, $item);
+
             $visible = $input['gap'] * $item->status['gap'] + $input['centralizatoare'] * $item->status['centralizatoare'];
 
             return !! $item->status && $visible;
