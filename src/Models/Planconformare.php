@@ -50,7 +50,7 @@ class Planconformare extends Model {
         else
         {
             $parent = self::find($input['parent_id']);
-            $parent->children()->create($input);
+            $record = $parent->children()->create($input);
         }
 
         return self::find($record->id);
