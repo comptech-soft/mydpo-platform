@@ -275,7 +275,7 @@ class CustomerCentralizator extends Model {
 
             if( in_array($department_id, $department_ids) )
             {
-                $newrow = $row->replicate();
+                $newrow = $row->replicate(['files_count']);
 
                 $newrow->customer_centralizator_id = $id;
                 $newrow->save();
