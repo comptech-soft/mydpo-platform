@@ -7,9 +7,6 @@ use MyDpo\Traits\Itemable;
 use Kalnoy\Nestedset\NodeTrait;
 use MyDpo\Traits\Actionable;
 use MyDpo\Traits\NextNumber;
-// use MyDpo\Models\Category;
-// use MyDpo\Scopes\NotdeletedScope;
-// use MyDpo\Performers\Centralizator\SaveCustomerAsociere;
 
 class Planconformare extends Model {
 
@@ -22,6 +19,7 @@ class Planconformare extends Model {
         'order_no' => 'integer',
         'props' => 'json',
         'status' => 'json',
+        'pondere' => 'decimal:2',
         'created_by' => 'integer',
         'updated_by' => 'integer',
     ];
@@ -30,10 +28,13 @@ class Planconformare extends Model {
         'id',
         'actiune',
         'order_no',
+        'pondere',
         'props',
         'created_by',
         'updated_by',
     ];
+
+    public $nextNumberColumn = 'order_no';
 
     public static function doInsert($input, $record) {
 
@@ -49,8 +50,10 @@ class Planconformare extends Model {
 
         if($action == 'insert')
         {
-            $input['order_no'] = self::GetNextFieldNumber([]);   
+            $input['order_no'] = !! $input['order_no'] ? $input['order_no'] : self::GetNextFieldNumber([]);   
         }
+
+        return $input;
     }
 
 }
