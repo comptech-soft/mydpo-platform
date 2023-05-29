@@ -47,6 +47,11 @@ class Planconformare extends Model {
         {
             $record = self::create($input); 
         }
+        else
+        {
+            $parent = self::find($input['parent_id']);
+            $parent->children()->create($input);
+        }
 
         return self::find($record->id);
     }
