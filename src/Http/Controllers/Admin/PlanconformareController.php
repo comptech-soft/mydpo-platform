@@ -20,6 +20,10 @@ class PlanconformareController extends Controller {
         return Planconformare::getRecords($r->all());
     }
 
+    public function doAction($action, Request $r) {
+        return Planconformare::doAction($action, $r->all());
+    }
+
     // public function getCustomerAsociere(Request $r) {
     //     return Centralizator::getCustomerAsociere($r->all());
     // }
@@ -28,8 +32,6 @@ class PlanconformareController extends Controller {
     //     return Centralizator::saveCustomerAsociere($r->all());
     // }
     
-    // public function doAction($action, Request $r) {
-    //     return Centralizator::doAction($action, $r->all());
-    // }
+
 
 }

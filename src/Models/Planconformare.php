@@ -34,5 +34,11 @@ class Planconformare extends Model {
         'updated_by',
     ];
 
+    public static function doInsert($input, $record) {
+
+        dd(__METHOD__, $input);
+    }
+
+
 
 }
