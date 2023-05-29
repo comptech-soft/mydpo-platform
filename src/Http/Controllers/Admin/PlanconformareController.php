@@ -12,7 +12,7 @@ class PlanconformareController extends Controller {
     public function index(Request $r) {
         return Response::View(
             '~templates.index', 
-            asset('apps/centralizatoare/index.js')
+            asset('apps/plan-conformare/index.js')
         );
     }
 
