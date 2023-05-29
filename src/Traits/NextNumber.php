@@ -16,4 +16,22 @@ trait NextNumber {
             ->Perform();
         
     }
+
+    public static function GetNextFieldNumber($input) {
+
+        $r = (new GetNextNumber([
+            ...$input, 
+            'model' => __CLASS__
+        ]))
+            ->SetSuccessMessage(NULL)
+            ->Perform();
+
+        if($r['success'])
+        {
+            return $r['payload'];
+        }
+
+        return NULL;
+        
+    }
 }

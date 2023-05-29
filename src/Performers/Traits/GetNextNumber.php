@@ -8,7 +8,7 @@ class GetNextNumber extends Perform {
 
     public function Action() {
         
-        $model = $this->input['model'];
+        $model = $this->model;
 
         $instance = new $model();
 
@@ -17,9 +17,14 @@ class GetNextNumber extends Perform {
         $sql = "
             SELECT 
                 MAX(CAST(`" . $instance->nextNumberColumn . "` AS UNSIGNED)) as max_number 
-            FROM `" . $table . "` 
-            WHERE " . call_user_func([$model, 'nextNumberWhere'], $this->input)
+            FROM `" . $table . "`" 
         ;
+
+        if(method_exists($this->model, 'NextNumberWhere'))
+        {
+            $where = " WHERE " . call_user_func([$model, 'NextNumberWhere'], $this->input);
+            $sql .= $where;
+        }
 
         $records = \DB::select($sql);
 

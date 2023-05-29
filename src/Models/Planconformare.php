@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
 use Kalnoy\Nestedset\NodeTrait;
 use MyDpo\Traits\Actionable;
+use MyDpo\Traits\NextNumber;
 // use MyDpo\Models\Category;
 // use MyDpo\Scopes\NotdeletedScope;
 // use MyDpo\Performers\Centralizator\SaveCustomerAsociere;
@@ -46,7 +47,10 @@ class Planconformare extends Model {
 
     public static function PrepareActionInput($action, $input) {
 
-        dd($action, $input);
+        if($action == 'insert')
+        {
+            $input['order_no'] = self::GetNextFieldNumber([]);   
+        }
     }
 
 }
