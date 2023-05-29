@@ -36,6 +36,10 @@ class Planconformare extends Model {
 
     public $nextNumberColumn = 'order_no';
 
+    protected $with = [
+        'children',
+    ];
+
     public static function doInsert($input, $record) {
 
         if(! $input['parent_id'])
