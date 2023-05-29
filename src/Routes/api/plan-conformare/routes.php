@@ -7,6 +7,8 @@ Route::prefix('plan-conformare')->group( function() {
             
     Route::post('get-records', [PlanconformareController::class, 'getRecords']);
 
+    Route::post('action/{action}', [PlanconformareController::class, 'doAction']);
+
     /**
      * Returneaza toate centralizatoarele din sistem
      * Cu customers-centralizatoare-asociere.is_associated 
