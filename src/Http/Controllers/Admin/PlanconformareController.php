@@ -5,7 +5,7 @@ namespace MyDpo\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Helpers\Response;
-use MyDpo\Models\Centralizator;
+use MyDpo\Models\Planconformare;
 
 class PlanconformareController extends Controller {
     
@@ -16,9 +16,9 @@ class PlanconformareController extends Controller {
         );
     }
 
-    // public function getRecords(Request $r) {
-    //     return Centralizator::getRecords($r->all());
-    // }
+    public function getRecords(Request $r) {
+        return Planconformare::getRecords($r->all());
+    }
 
     // public function getCustomerAsociere(Request $r) {
     //     return Centralizator::getCustomerAsociere($r->all());
