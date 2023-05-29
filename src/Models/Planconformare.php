@@ -44,6 +44,9 @@ class Planconformare extends Model {
         return self::find($record->id);
     }
 
+    public static function PrepareActionInput($action, $input) {
 
+        dd($action, $input);
+    }
 
 }
