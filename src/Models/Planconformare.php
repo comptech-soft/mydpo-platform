@@ -13,7 +13,7 @@ use MyDpo\Traits\NextNumber;
 
 class Planconformare extends Model {
 
-    use Itemable, Actionable, NodeTrait;
+    use Itemable, Actionable, NextNumber, NodeTrait;
 
     protected $table = 'plan-conformare';
     
