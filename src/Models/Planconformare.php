@@ -36,7 +36,12 @@ class Planconformare extends Model {
 
     public static function doInsert($input, $record) {
 
-        dd(__METHOD__, $input);
+        if(! $input['parent_id'])
+        {
+            $record = self::create($input); 
+        }
+
+        return self::find($record->id);
     }
 
 
