@@ -24,6 +24,10 @@ class PlanconformareController extends Controller {
         return Planconformare::doAction($action, $r->all());
     }
 
+    public function reorder(Request $r) {
+        return Planconformare::reorder($r->all());
+    }
+
     // public function getCustomerAsociere(Request $r) {
     //     return Centralizator::getCustomerAsociere($r->all());
     // }

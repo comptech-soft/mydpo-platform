@@ -7,10 +7,11 @@ use MyDpo\Traits\Itemable;
 use Kalnoy\Nestedset\NodeTrait;
 use MyDpo\Traits\Actionable;
 use MyDpo\Traits\NextNumber;
+use MyDpo\Traits\Reorderable;
 
 class Planconformare extends Model {
 
-    use Itemable, Actionable, NextNumber, NodeTrait;
+    use Itemable, Actionable, NextNumber, Reorderable, NodeTrait;
 
     protected $table = 'plan-conformare';
     
