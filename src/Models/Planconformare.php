@@ -49,7 +49,18 @@ class Planconformare extends Model {
     ];
 
     public function getProcentPondereAttribute() {
-        return 76;
+
+        if( !! $this->children()->count() )
+        {
+            $sum = 0;
+            foreach($this->children as $i => $child)
+            {
+                $sum += $child->procent_pondere;
+            }
+            return $sum;
+        }
+
+        return $this->pondere;
     }
 
     public static function doInsert($input, $record) {
