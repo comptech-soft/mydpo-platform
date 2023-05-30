@@ -29,6 +29,9 @@ class Planconformare extends Model {
         'id',
         'actiune',
         'order_no',
+        'type',
+        'frecventa',
+        'responsabil',
         'pondere',
         'props',
         'created_by',
@@ -60,7 +63,8 @@ class Planconformare extends Model {
 
         if($action == 'insert')
         {
-            $input['order_no'] = !! $input['order_no'] ? $input['order_no'] : self::GetNextFieldNumber([]);   
+            $input['order_no'] = !! $input['order_no'] ? $input['order_no'] : self::GetNextFieldNumber([]); 
+            $input['pondere'] = !! $input['pondere'] ? $input['pondere'] : 0; 
         }
 
         return $input;
