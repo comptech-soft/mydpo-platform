@@ -64,13 +64,19 @@ class CustomerPlanconformare extends Model {
         return $this->belongsTo(CustomerDepartment::class, 'department_id')->select(['id', 'departament']);
     }
 
-    public static function doInsert($input, $record) {
-       
-        dd($input);
-        
+    public static function doInsert($input, $record) { 
+        $current_lines = PlanConformare::whereNull('parent_id')->get()->toArray();
+
+        $input = [
+            ...$input,
+            'current_lines' => $current_lines,
+        ];
+
+        $record = self::create($input);
+
         return $record;
     }
-
+    
     public static function doDuplicate($input, $record) {
 
        
