@@ -1,13 +1,13 @@
 <?php
 
-use MyDpo\Http\Controllers\Auth\CustomersPlanuriconformareController;
+use MyDpo\Http\Controllers\Auth\CustomersPlanConformareController;
 // use MyDpo\Http\Controllers\Auth\CustomersCentralizatoareRowsController;
 // use MyDpo\Http\Controllers\Auth\CustomersCentralizatoareAccessController;
 // use MyDpo\Http\Controllers\Auth\CustomersCentralizatoareRowsFilesController;
 
 Route::prefix('customers-planuri-conformare')->group( function() {
             
-    Route::post('get-records', [CustomersPlanuriconformareController::class, 'getRecords']);
+    Route::post('get-records', [CustomersPlanConformareController::class, 'getRecords']);
     // Route::post('get-next-number', [CustomersCentralizatoareController::class, 'getNextNumber']);
     // Route::post('action/export', [CustomersCentralizatoareController::class, 'doExport']);
     // Route::post('action/save-settings', [CustomersCentralizatoareController::class, 'saveSettings']);
