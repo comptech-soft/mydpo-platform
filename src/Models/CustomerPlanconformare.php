@@ -41,7 +41,7 @@ class CustomerPlanconformare extends Model {
         'responsabil_nume',
         'responsabil_functie',
         'props',
-        'current_columns',
+        'current_lines',
         'deleted',
         'created_by',
         'updated_by',
@@ -76,7 +76,7 @@ class CustomerPlanconformare extends Model {
 
         return $record;
     }
-    
+
     public static function doDuplicate($input, $record) {
 
        
