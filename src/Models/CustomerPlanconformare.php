@@ -5,7 +5,7 @@ namespace MyDpo\Models;
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
-// use MyDpo\Performers\CustomerCentralizator\GetNextNumber;
+use MyDpo\Performers\CustomerPlanconformare\GetNextNumber;
 // use MyDpo\Performers\CustomerCentralizator\Export;
 // use MyDpo\Performers\CustomerCentralizator\Import;
 // use MyDpo\Performers\CustomerCentralizator\SaveSettings;
@@ -130,9 +130,9 @@ class CustomerPlanconformare extends Model {
     //     }
     // }
 
-    // public static function getNextNumber($input) {
-    //     return (new GetNextNumber($input))->Perform();
-    // }
+    public static function getNextNumber($input) {
+        return (new GetNextNumber($input))->Perform();
+    }
 
     // public static function GetQuery() {
 

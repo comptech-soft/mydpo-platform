@@ -26,4 +26,8 @@ class CustomersPlanConformareController extends Controller {
         return CustomerPlanconformare::getRecords($r->all());
     }
 
+    public function getNextNumber(Request $r) {
+        return CustomerPlanconformare::getNextNumber($r->all());
+    }
+
 }
