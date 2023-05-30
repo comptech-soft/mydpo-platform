@@ -44,6 +44,14 @@ class Planconformare extends Model {
         'children',
     ];
 
+    protected $appends = [
+        'procent_pondere',
+    ];
+
+    public function getProcentPondereAttribute() {
+        return 76;
+    }
+
     public static function doInsert($input, $record) {
 
         if(! $input['parent_id'])
