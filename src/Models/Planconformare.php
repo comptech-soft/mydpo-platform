@@ -89,4 +89,107 @@ class Planconformare extends Model {
         return $input;
     }
 
-}
+    public static function GetColumns() {
+        return [
+            [
+                'id' => 1,
+                'caption' => ['Capitol, acțiune, subacțiune'],
+                'width' => 400,
+                'order_no' => 1,
+                'type' => 'C',
+            ],
+
+            [
+                'id' => 2,
+                'caption' => ['Modalitate de realizare', '(discuții, raport, meeting-uri etc)'],
+                'width' => 400,
+                'order_no' => 2,
+                'type' => 'C',
+            ],
+
+            [
+                'id' => 3,
+                'caption' => ['Frecvența', '(anuală / trimestrială / lunară)'],
+                'width' => 200,
+                'order_no' => 3,
+                'type' => 'C',
+            ],
+
+            [
+                'id' => 4,
+                'caption' => ['Responsabil', '(DPO / persoane de care depinde realizarea acțiunii)'],
+                'width' => 200,
+                'order_no' => 4,
+                'type' => 'C',
+            ],
+
+            [
+                'id' => 5,
+                'caption' => ['Pondere în total'],
+                'width' => 100,
+                'order_no' => 5,
+                'type' => 'P',
+            ],
+
+            [
+                'id' => 6,
+                'caption' => ['Grad de îndeplinire', 'început de an :year'],
+                'width' => 100,
+                'order_no' => 6,
+                'type' => 'P',
+            ],
+
+            [
+                'id' => 7,
+                'caption' => ['Grad de îndeplinire', 'final S1 :year'],
+                'width' => 100,
+                'order_no' => 7,
+                'type' => 'P',
+            ],
+
+            [
+                'id' => 8,
+                'caption' => ['Grad de îndeplinire', 'final S2 :year'],
+                'width' => 100,
+                'order_no' => 8,
+                'type' => 'P',
+            ],
+
+            [
+                'id' => 9,
+                'caption' => ['Total pondere realizat', 'început de an :year'],
+                'width' => 100,
+                'order_no' => 9,
+                'type' => 'P',
+            ],
+
+            [
+                'id' => 10,
+                'caption' => ['Total pondere realizat', 'final S1 :year'],
+                'width' => 100,
+                'order_no' => 10,
+                'type' => 'P',
+            ],
+
+            [
+                'id' => 11,
+                'caption' => ['Total pondere realizat', 'final S2 :year'],
+                'width' => 100,
+                'order_no' => 11,
+                'type' => 'P',
+            ],
+
+            [
+                'id' => 12,
+                'caption' => ['Observații'],
+                'width' => 400,
+                'order_no' => 1,
+                'type' => 'C',
+            ],
+        ];
+    }
+
+     
+
+
+} 

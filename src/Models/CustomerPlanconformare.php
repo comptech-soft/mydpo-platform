@@ -20,6 +20,7 @@ class CustomerPlanconformare extends Model {
     protected $casts = [
         'props' => 'json',
         'current_lines' => 'json',
+        'columns' => 'json',
         'customer_id' => 'integer',
         'department_id' => 'integer',
         'visibility' => 'integer',
@@ -42,6 +43,7 @@ class CustomerPlanconformare extends Model {
         'responsabil_functie',
         'props',
         'current_lines',
+        'columns',
         'deleted',
         'created_by',
         'updated_by',
@@ -77,6 +79,7 @@ class CustomerPlanconformare extends Model {
         $input = [
             ...$input,
             'current_lines' => $current_lines,
+            'columns' => PlanConformare::GetColumns(),
         ];
 
         $record = self::create($input);
