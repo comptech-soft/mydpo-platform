@@ -50,7 +50,7 @@ class CustomerPlanconformare extends Model {
 
     protected $appends = [
         // 'columns',
-        // 'visible',
+        'visible',
         // 'visible_column_id',
         // 'status_column_id',
         // 'department_column_id'
@@ -59,6 +59,13 @@ class CustomerPlanconformare extends Model {
     protected $with = [
         'department',
     ];
+
+    public function getVisibleAttribute() {
+        return [
+            'color' => !! $this->visibility ? 'green' : 'red',
+            'icon' => !! $this->visibility ? 'mdi-check' : 'mdi-cancel',
+        ];
+    }
 
     public function department() {
         return $this->belongsTo(CustomerDepartment::class, 'department_id')->select(['id', 'departament']);
