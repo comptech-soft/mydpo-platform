@@ -84,6 +84,8 @@ class CustomerPlanconformare extends Model {
 
         $record = self::create($input);
 
+        $record->CreateRows();
+
         return $record;
     }
 
@@ -151,6 +153,14 @@ class CustomerPlanconformare extends Model {
         return (new GetNextNumber($input))->Perform();
     }
 
+    public static function CreateRows() {
+
+        $rows = Planconformare::all();
+
+        dd($rows);
+    }
+
+    
     // public static function GetQuery() {
 
     //     $q = self::query();
