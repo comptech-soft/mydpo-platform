@@ -153,14 +153,26 @@ class CustomerPlanconformare extends Model {
         return (new GetNextNumber($input))->Perform();
     }
 
-    public static function CreateRows() {
+    public function CreateRows() {
 
-        $rows = Planconformare::all();
+        foreach(Planconformare::all() as $i => $row) 
+        {
+            $input = [
+                'customer_plan_id' => $this->id,
+                'customer_id' => $this->customer_id,
+                'plan_id' => $row->id,
+                'pondere' => $row->procent_pondere,
+                ...collect($row->toArray())
+                    ->except(['created_at', 'updated_at', 'created_by', 'updated_by', 'children', 'id', 'pondere', 'procent_pondere'])
+                    ->toArray(),
+                
+            ];
 
-        dd($rows);
+            CustomerPlanconformareRow::create($input);
+        }
     }
 
-    
+
     // public static function GetQuery() {
 
     //     $q = self::query();

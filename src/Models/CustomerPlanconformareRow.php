@@ -13,9 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class CustomerPlanconformareRow extends Model {
 
-    use Itemable, Actionable;
-
-    protected $table = 'customers-planuri-conformare';
+    protected $table = 'customers-planuri-conformare-rows';
 
     protected $casts = [
         'props' => 'json',
