@@ -5,7 +5,7 @@ use MyDpo\Http\Controllers\Auth\CustomersPlanuriconformareController;
 // use MyDpo\Http\Controllers\Auth\CustomersCentralizatoareAccessController;
 // use MyDpo\Http\Controllers\Auth\CustomersCentralizatoareRowsFilesController;
 
-Route::prefix('customer-planuri-conformare')->group( function() {
+Route::prefix('customers-planuri-conformare')->group( function() {
             
     Route::post('get-records', [CustomersPlanuriconformareController::class, 'getRecords']);
     // Route::post('get-next-number', [CustomersCentralizatoareController::class, 'getNextNumber']);
@@ -17,11 +17,11 @@ Route::prefix('customer-planuri-conformare')->group( function() {
 
 });
 
-Route::prefix('customers-centralizatoare-access')->group( function() {
+// Route::prefix('customers-centralizatoare-access')->group( function() {
     // Route::post('get-records', [CustomersCentralizatoareAccessController::class, 'getRecords']);
-});
+// });
 
-Route::prefix('customers-centralizatoare-rows')->group( function() {
+// Route::prefix('customers-centralizatoare-rows')->group( function() {
             
     // Route::post('get-records', [CustomersCentralizatoareRowsController::class, 'getRecords']);
 
@@ -32,7 +32,7 @@ Route::prefix('customers-centralizatoare-rows')->group( function() {
     // Route::post('action/setrowsvisibility', [CustomersCentralizatoareRowsController::class, 'setRowsVisibility']);
     // Route::post('action/deleterows', [CustomersCentralizatoareRowsController::class, 'deleteRows']);
    
-});
+// });
 
 Route::prefix('customers-centralizatoare-rows-files')->group( function() {
         
