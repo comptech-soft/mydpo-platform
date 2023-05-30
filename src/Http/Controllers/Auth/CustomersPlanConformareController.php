@@ -26,6 +26,10 @@ class CustomersPlanConformareController extends Controller {
         return CustomerPlanconformare::getRecords($r->all());
     }
 
+    public function doAction($action, Request $r) {
+        return CustomerPlanconformare::doAction($action, $r->all());
+    }
+
     public function getNextNumber(Request $r) {
         return CustomerPlanconformare::getNextNumber($r->all());
     }

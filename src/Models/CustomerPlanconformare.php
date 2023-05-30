@@ -66,7 +66,8 @@ class CustomerPlanconformare extends Model {
 
     public static function doInsert($input, $record) {
        
-
+        dd($input);
+        
         return $record;
     }
 
