@@ -96,7 +96,7 @@ class CustomerPlanconformare extends Model {
     }
 
     public static function doDelete($input, $record) {
-   
+        $record->DeleteRows();
         $record->delete();
         return $record;
     }
@@ -139,15 +139,13 @@ class CustomerPlanconformare extends Model {
 
     }
 
-    // public function DeleteRows() {
-    //     $rows = CustomerCentralizatorRow::where('customer_centralizator_id', $this->id)->get();
-    //     foreach($rows as $i => $row)
-    //     {
-    //         $row->DeleteValues();
-
-    //         $row->delete();
-    //     }
-    // }
+    public function DeleteRows() {
+        $rows = CustomerPlanconformareRow::where('customer_plan_id', $this->id)->get();
+        foreach($rows as $i => $row)
+        {
+            $row->delete();
+        }
+    }
 
     public static function getNextNumber($input) {
         return (new GetNextNumber($input))->Perform();
