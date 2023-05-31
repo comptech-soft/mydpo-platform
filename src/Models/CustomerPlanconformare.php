@@ -91,7 +91,7 @@ class CustomerPlanconformare extends Model {
 
         $record->CreateRows();
 
-        return self::finf($record->id);
+        return self::find($record->id);
     }
 
     public static function doDuplicate($input, $record) {
