@@ -60,6 +60,7 @@ class CustomerPlanconformare extends Model {
 
     protected $with = [
         'department',
+        'rows'
     ];
 
     public function getVisibleAttribute() {
@@ -71,6 +72,10 @@ class CustomerPlanconformare extends Model {
 
     public function department() {
         return $this->belongsTo(CustomerDepartment::class, 'department_id')->select(['id', 'departament']);
+    }
+
+    function rows() {
+        return $this->hasMany(CustomerPlanconformareRow::class, 'customer_plan_id');
     }
 
     public static function doInsert($input, $record) { 
