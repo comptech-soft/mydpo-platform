@@ -6,10 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 use MyDpo\Performers\CustomerPlanconformare\GetNextNumber;
-// use MyDpo\Performers\CustomerCentralizator\Export;
-// use MyDpo\Performers\CustomerCentralizator\Import;
-// use MyDpo\Performers\CustomerCentralizator\SaveSettings;
-// use MyDpo\Performers\CustomerCentralizator\SetAccess;
+use MyDpo\Performers\CustomerPlanconformare\SaveRows;
 
 class CustomerPlanconformare extends Model {
 
@@ -51,11 +48,7 @@ class CustomerPlanconformare extends Model {
     ];
 
     protected $appends = [
-        // 'columns',
         'visible',
-        // 'visible_column_id',
-        // 'status_column_id',
-        // 'department_column_id'
     ];
 
     protected $with = [
@@ -106,44 +99,6 @@ class CustomerPlanconformare extends Model {
         return $record;
     }
 
-    // public static function doExport($input) {
-    //     return (new Export($input))->Perform();
-    // }
-
-    // public static function saveSettings($input) {
-    //     return (new SaveSettings($input))->Perform();
-    // }
-
-    // public static function setAccess($input) {
-    //     return (new SetAccess($input))->Perform();
-    // }
-
-    // public static function doImport($input) {
-    //     return (new Import($input))->Perform();
-    // }
-
-    protected function DuplicateRows($id, $department_ids, $new_customer_id) {
-
-        // $rows = CustomerCentralizatorRow::where('customer_centralizator_id', $this->id)->get();
-
-        // foreach($rows as $i => $row)
-        // {
-
-        //     $department_id = !! $row->department_id ? $row->department_id : 'none';
-
-        //     if( in_array($department_id, $department_ids) )
-        //     {
-        //         $newrow = $row->replicate(['files_count']);
-
-        //         $newrow->customer_centralizator_id = $id;
-        //         $newrow->save();
-
-        //         $row->DuplicateValues($newrow->id, $new_customer_id);
-        //     }
-        // }
-
-    }
-
     public function DeleteRows() {
         $rows = CustomerPlanconformareRow::where('customer_plan_id', $this->id)->get();
         foreach($rows as $i => $row)
@@ -154,6 +109,10 @@ class CustomerPlanconformare extends Model {
 
     public static function getNextNumber($input) {
         return (new GetNextNumber($input))->Perform();
+    }
+
+    public static function saveRows($input) {
+        return (new SaveRows($input))->Perform();
     }
 
     public function CreateRows() {
@@ -174,18 +133,5 @@ class CustomerPlanconformare extends Model {
             CustomerPlanconformareRow::create($input);
         }
     }
-
-
-    // public static function GetQuery() {
-
-    //     $q = self::query();
-
-    //     if(config('app.platform') == 'b2b')
-    //     {
-    //         $q = $q->where('visibility', 1);
-    //     }
-        
-    //     return $q;
-    // }
 
 }

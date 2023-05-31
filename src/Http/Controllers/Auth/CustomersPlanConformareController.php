@@ -34,4 +34,8 @@ class CustomersPlanConformareController extends Controller {
         return CustomerPlanconformare::getNextNumber($r->all());
     }
 
+    public function saveRows(Request $r) {
+        return CustomerPlanconformare::saveRows($r->all());
+    }
+
 }
