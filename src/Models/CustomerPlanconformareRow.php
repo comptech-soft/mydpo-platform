@@ -54,9 +54,9 @@ class CustomerPlanconformareRow extends Model {
         return $this->hasMany(CustomerPlanconformareRow::class, 'parent_id', 'plan_id');
     }
 
-    public function allChildren()
+    public function allchildren()
     {
-        return $this->children()->with('allChildren');
+        return $this->children()->with('allchildren');
     }
 
 }
