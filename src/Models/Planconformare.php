@@ -148,7 +148,7 @@ class Planconformare extends Model {
             [
                 'id' => 7,
                 'caption' => ['Grad de îndeplinire', 'final S1 :year'],
-                'slug' => 'grad-final-s1'
+                'slug' => 'grad-final-s1',
                 'width' => 124,
                 'order_no' => 7,
                 'type' => 'P',
@@ -157,7 +157,7 @@ class Planconformare extends Model {
             [
                 'id' => 8,
                 'caption' => ['Grad de îndeplinire', 'final S2 :year'],
-                'slug' => 'grad-final-s2'
+                'slug' => 'grad-final-s2',
                 'width' => 124,
                 'order_no' => 8,
                 'type' => 'P',
@@ -175,7 +175,7 @@ class Planconformare extends Model {
             [
                 'id' => 10,
                 'caption' => ['Total pondere realizat', 'final S1 :year'],
-                'slug' => 'total-realizat-s1'
+                'slug' => 'total-realizat-s1',
                 'width' => 140,
                 'order_no' => 10,
                 'type' => 'P',
@@ -184,7 +184,7 @@ class Planconformare extends Model {
             [
                 'id' => 11,
                 'caption' => ['Total pondere realizat', 'final S2 :year'],
-                'slug' => 'total-realizat-s2'
+                'slug' => 'total-realizat-s2',
                 'width' => 140,
                 'order_no' => 11,
                 'type' => 'P',
@@ -193,7 +193,7 @@ class Planconformare extends Model {
             [
                 'id' => 12,
                 'caption' => ['Observații'],
-                'slug' => 'observatii'
+                'slug' => 'observatii',
                 'width' => 400,
                 'order_no' => 12,
                 'type' => 'C',
