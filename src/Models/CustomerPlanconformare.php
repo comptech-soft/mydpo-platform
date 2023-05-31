@@ -75,7 +75,7 @@ class CustomerPlanconformare extends Model {
     }
 
     function rows() {
-        return $this->hasMany(CustomerPlanconformareRow::class, 'customer_plan_id');
+        return $this->hasMany(CustomerPlanconformareRow::class, 'customer_plan_id')->whereNull('parent_id');
     }
 
     public static function doInsert($input, $record) { 
