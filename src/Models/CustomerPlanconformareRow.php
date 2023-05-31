@@ -43,6 +43,7 @@ class CustomerPlanconformareRow extends Model {
         'frecventa',
         'responsabil',
         'pondere',
+        'parent_id',
         'value',
         'props',
         'created_by',
@@ -51,6 +52,11 @@ class CustomerPlanconformareRow extends Model {
 
     public function children() {
         return $this->hasMany(CustomerPlanconformareRow::class, 'parent_id', 'plan_id');
+    }
+
+    public function allChildren()
+    {
+        return $this->children()->with('allChildren');
     }
 
 }
