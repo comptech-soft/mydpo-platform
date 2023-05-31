@@ -183,7 +183,15 @@ class Planconformare extends Model {
                 'id' => 12,
                 'caption' => ['Observații'],
                 'width' => 400,
-                'order_no' => 1,
+                'order_no' => 12,
+                'type' => 'C',
+            ],
+
+            [
+                'id' => 13,
+                'caption' => null,
+                'width' => null,
+                'order_no' => 13,
                 'type' => 'C',
             ],
         ];
