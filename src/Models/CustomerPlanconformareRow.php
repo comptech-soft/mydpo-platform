@@ -3,7 +3,7 @@
 namespace MyDpo\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Kalnoy\Nestedset\NodeTrait;
+// use Kalnoy\Nestedset\NodeTrait;
 // use MyDpo\Traits\Itemable;
 // use MyDpo\Traits\Actionable;
 // use MyDpo\Performers\CustomerPlanconformare\GetNextNumber;
@@ -14,8 +14,8 @@ use Kalnoy\Nestedset\NodeTrait;
 
 class CustomerPlanconformareRow extends Model {
 
-    use NodeTrait;
-    
+    // use NodeTrait;
+
     protected $table = 'customers-planuri-conformare-rows';
 
     protected $casts = [
@@ -49,6 +49,8 @@ class CustomerPlanconformareRow extends Model {
         'updated_by',
     ];
 
-    
+    function children() {
+        return $this->hasMany(CustomerPlanconformareRow::class, 'plan_id', 'parent_id');
+    }
 
 }
