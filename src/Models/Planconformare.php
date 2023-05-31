@@ -139,7 +139,7 @@ class Planconformare extends Model {
             [
                 'id' => 6,
                 'caption' => ['Grad de îndeplinire', 'început de an :year'],
-                'slug' => 'grad-initial-an'
+                'slug' => 'grad-initial-an',
                 'width' => 124,
                 'order_no' => 6,
                 'type' => 'P',
