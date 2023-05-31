@@ -60,7 +60,7 @@ class CustomerPlanconformare extends Model {
 
     protected $with = [
         'department',
-        'rows.allchildren'
+        'rows.children'
     ];
 
     public function getVisibleAttribute() {
