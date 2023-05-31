@@ -126,7 +126,7 @@ class Planconformare extends Model {
             [
                 'id' => 5,
                 'caption' => ['Pondere în total'],
-                'width' => 100,
+                'width' => 76,
                 'order_no' => 5,
                 'type' => 'P',
             ],
@@ -134,7 +134,7 @@ class Planconformare extends Model {
             [
                 'id' => 6,
                 'caption' => ['Grad de îndeplinire', 'început de an :year'],
-                'width' => 100,
+                'width' => 124,
                 'order_no' => 6,
                 'type' => 'P',
             ],
@@ -142,7 +142,7 @@ class Planconformare extends Model {
             [
                 'id' => 7,
                 'caption' => ['Grad de îndeplinire', 'final S1 :year'],
-                'width' => 100,
+                'width' => 124,
                 'order_no' => 7,
                 'type' => 'P',
             ],
@@ -150,7 +150,7 @@ class Planconformare extends Model {
             [
                 'id' => 8,
                 'caption' => ['Grad de îndeplinire', 'final S2 :year'],
-                'width' => 100,
+                'width' => 124,
                 'order_no' => 8,
                 'type' => 'P',
             ],
@@ -158,7 +158,7 @@ class Planconformare extends Model {
             [
                 'id' => 9,
                 'caption' => ['Total pondere realizat', 'început de an :year'],
-                'width' => 100,
+                'width' => 140,
                 'order_no' => 9,
                 'type' => 'P',
             ],
@@ -166,7 +166,7 @@ class Planconformare extends Model {
             [
                 'id' => 10,
                 'caption' => ['Total pondere realizat', 'final S1 :year'],
-                'width' => 100,
+                'width' => 140,
                 'order_no' => 10,
                 'type' => 'P',
             ],
@@ -174,7 +174,7 @@ class Planconformare extends Model {
             [
                 'id' => 11,
                 'caption' => ['Total pondere realizat', 'final S2 :year'],
-                'width' => 100,
+                'width' => 140,
                 'order_no' => 11,
                 'type' => 'P',
             ],
