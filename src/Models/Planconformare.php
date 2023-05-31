@@ -166,7 +166,7 @@ class Planconformare extends Model {
             [
                 'id' => 9,
                 'caption' => ['Total pondere realizat', 'început de an :year'],
-                'total-realizat-an',
+                'slug' => 'total-realizat-an',
                 'width' => 140,
                 'order_no' => 9,
                 'type' => 'P',
