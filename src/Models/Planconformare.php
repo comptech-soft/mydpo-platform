@@ -94,6 +94,7 @@ class Planconformare extends Model {
             [
                 'id' => 1,
                 'caption' => ['Capitol, acțiune, subacțiune'],
+                'slug' => 'capitol',
                 'width' => 400,
                 'order_no' => 1,
                 'type' => 'C',
@@ -103,6 +104,7 @@ class Planconformare extends Model {
                 'id' => 2,
                 'caption' => ['Modalitate de realizare', '(discuții, raport, meeting-uri etc)'],
                 'width' => 400,
+                'slug' => 'modalitate-realizare',
                 'order_no' => 2,
                 'type' => 'C',
             ],
@@ -110,6 +112,7 @@ class Planconformare extends Model {
             [
                 'id' => 3,
                 'caption' => ['Frecvența', '(anuală / trimestrială / lunară)'],
+                'slug' => 'frecventa',
                 'width' => 200,
                 'order_no' => 3,
                 'type' => 'C',
@@ -118,6 +121,7 @@ class Planconformare extends Model {
             [
                 'id' => 4,
                 'caption' => ['Responsabil', '(DPO / persoane de care depinde realizarea acțiunii)'],
+                'slug' => 'responsabil',
                 'width' => 200,
                 'order_no' => 4,
                 'type' => 'C',
@@ -126,6 +130,7 @@ class Planconformare extends Model {
             [
                 'id' => 5,
                 'caption' => ['Pondere în total'],
+                'slug' => 'pondere',
                 'width' => 76,
                 'order_no' => 5,
                 'type' => 'P',
@@ -134,6 +139,7 @@ class Planconformare extends Model {
             [
                 'id' => 6,
                 'caption' => ['Grad de îndeplinire', 'început de an :year'],
+                'slug' => 'grad-initial-an'
                 'width' => 124,
                 'order_no' => 6,
                 'type' => 'P',
@@ -142,6 +148,7 @@ class Planconformare extends Model {
             [
                 'id' => 7,
                 'caption' => ['Grad de îndeplinire', 'final S1 :year'],
+                'slug' => 'grad-final-s1'
                 'width' => 124,
                 'order_no' => 7,
                 'type' => 'P',
@@ -150,6 +157,7 @@ class Planconformare extends Model {
             [
                 'id' => 8,
                 'caption' => ['Grad de îndeplinire', 'final S2 :year'],
+                'slug' => 'grad-final-s2'
                 'width' => 124,
                 'order_no' => 8,
                 'type' => 'P',
@@ -158,6 +166,7 @@ class Planconformare extends Model {
             [
                 'id' => 9,
                 'caption' => ['Total pondere realizat', 'început de an :year'],
+                'total-realizat-an',
                 'width' => 140,
                 'order_no' => 9,
                 'type' => 'P',
@@ -166,6 +175,7 @@ class Planconformare extends Model {
             [
                 'id' => 10,
                 'caption' => ['Total pondere realizat', 'final S1 :year'],
+                'slug' => 'total-realizat-s1'
                 'width' => 140,
                 'order_no' => 10,
                 'type' => 'P',
@@ -174,6 +184,7 @@ class Planconformare extends Model {
             [
                 'id' => 11,
                 'caption' => ['Total pondere realizat', 'final S2 :year'],
+                'slug' => 'total-realizat-s2'
                 'width' => 140,
                 'order_no' => 11,
                 'type' => 'P',
@@ -182,6 +193,7 @@ class Planconformare extends Model {
             [
                 'id' => 12,
                 'caption' => ['Observații'],
+                'slug' => 'observatii'
                 'width' => 400,
                 'order_no' => 12,
                 'type' => 'C',
@@ -190,6 +202,7 @@ class Planconformare extends Model {
             [
                 'id' => 13,
                 'caption' => null,
+                'slug' => null,
                 'width' => null,
                 'order_no' => 13,
                 'type' => 'C',
