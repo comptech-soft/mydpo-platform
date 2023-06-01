@@ -5,6 +5,7 @@ namespace MyDpo\Performers\CustomerCentralizatorRow;
 use MyDpo\Helpers\Perform;
 use MyDpo\Models\CustomerCentralizatorRow;
 use MyDpo\Models\CustomerCentralizatorRowValue;
+use MyDpo\Models\CustomerCentralizator;
 use Carbon\Carbon;
 
 class UpdateRow extends Perform {
@@ -23,6 +24,8 @@ class UpdateRow extends Perform {
         {
             $role = \Auth::user()->roles()->wherePivot('customer_id', $this->customer_id)->first();
         }
+
+       
         
         $record->update([
             ...$input, 
@@ -47,11 +50,18 @@ class UpdateRow extends Perform {
                 ],
             ],
         ]);
+        
+        $customer_centralizator = CustomerCentralizator::find($this->customer_centralizator_id);
+        $status_column_id = $customer_centralizator->status_column_id;
 
         foreach($this->rowvalues as $i => $input)
         {
-            $rowvalue = CustomerCentralizatorRowValue::find($input['id']);
+            if($input['column_id'] == $status_column_id)
+            {
+                $input['value'] = 'updated';
+            }
 
+            $rowvalue = CustomerCentralizatorRowValue::find($input['id']);
             $rowvalue->update($input);
         }
 
