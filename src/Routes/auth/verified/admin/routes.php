@@ -18,7 +18,6 @@ Route::middleware(['isadmin'])->prefix('admin')->group(function () {
     require __DIR__ . '/planificare/routes.php';
     require __DIR__ . '/timesheet/routes.php';
 
-    require __DIR__ . '/centralizatoare/routes.php';
     require __DIR__ . '/plan-conformare/routes.php';
     require __DIR__ . '/chestionare/routes.php';
     require __DIR__ . '/cursuri/routes.php';
