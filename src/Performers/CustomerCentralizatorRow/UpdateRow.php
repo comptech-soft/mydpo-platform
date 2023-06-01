@@ -24,9 +24,7 @@ class UpdateRow extends Perform {
         {
             $role = \Auth::user()->roles()->wherePivot('customer_id', $this->customer_id)->first();
         }
-
-       
-        
+         
         $record->update([
             ...$input, 
             'department_id' => NULL,
