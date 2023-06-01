@@ -1,6 +1,6 @@
 <?php
 
-// use MyDpo\Http\Controllers\Admin\CentralizatoareController;
+use MyDpo\Http\Controllers\System\RoutesController;
 // use MyDpo\Http\Controllers\Admin\CentralizatoareColumnsController;
 
 Route::prefix('routes')->group( function() {
