@@ -12,7 +12,7 @@ use MyDpo\Models\CustomerAccount;
 use MyDpo\Models\CustomerFolder;
 use MyDpo\Models\UserCustomer;
 use MyDpo\Performers\Customer\GetCustomersByIds;
-
+use MyDpo\Scopes\NotdeletedScope;
 use MyDpo\Traits\Itemable;
 
 class Customer_base extends Model {
@@ -54,6 +54,10 @@ class Customer_base extends Model {
         'updated_by',
         'deleted_by',
     ];
+
+    protected static function booted() {
+        static::addGlobalScope( new NotdeletedScope() );
+    }
 
     public function getMylogoAttribute() {
         
@@ -203,6 +207,13 @@ class Customer_base extends Model {
     
     public static function doAction($action, $input) {
         return (new DoAction($action, $input, __CLASS__))->Perform();
+    }
+
+    public static function doDelete($action, $record) {
+        $record->deleted = 1;
+        $record->save();
+
+        return $record;
     }
     
     public static function GetRules($action, $input) {
