@@ -1,5 +1,7 @@
 <?php
 
+require __DIR__ . '/system/routes.php';
+
 require __DIR__ . '/unprotected/routes.php';
 
 require __DIR__ . '/guest/routes.php';
