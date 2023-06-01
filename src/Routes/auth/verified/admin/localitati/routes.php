@@ -17,7 +17,7 @@ Route::prefix('countries')->group( function() {
     
     // Route::post('items', [CountriesController::class, 'getItems']);
     // Route::post('get-items', [CountriesController::class, 'getRecords']);
-    Route::post('action/{action}', [CountriesController::class, 'doAction']);
+    // Route::post('action/{action}', [CountriesController::class, 'doAction']);
 
 });
 
