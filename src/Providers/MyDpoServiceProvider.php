@@ -22,7 +22,7 @@ class MyDpoServiceProvider extends ServiceProvider {
 
     private function RegisterSysRoutes() {
 
-        $routes = SysRoute::whereIsRoot()->whereType('Route')->get();
+        $routes = SysRoute::whereIsRoot()->whereType('Route')->orderBy('order_no')->get();
 
         foreach($routes as $i => $route)
         {

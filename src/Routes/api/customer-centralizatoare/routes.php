@@ -7,8 +7,7 @@ use MyDpo\Http\Controllers\Auth\CustomersCentralizatoareRowsFilesController;
 
 Route::prefix('customer-centralizatoare')->group( function() {
             
-    // Route::post('get-records', [CustomersCentralizatoareController::class, 'getRecords']);
-    // Route::post('get-next-number', [CustomersCentralizatoareController::class, 'getNextNumber']);
+
     // Route::post('action/export', [CustomersCentralizatoareController::class, 'doExport']);
     // Route::post('action/save-settings', [CustomersCentralizatoareController::class, 'saveSettings']);
     // Route::post('action/import', [CustomersCentralizatoareController::class, 'doImport']);
