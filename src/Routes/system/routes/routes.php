@@ -5,7 +5,7 @@
 
 Route::prefix('routes')->group( function() {
             
-    Route::post('/', [RoutesController::class, 'index']);
+    Route::get('/', [RoutesController::class, 'index']);
 
     // /**
     //  * Returneaza toate centralizatoarele din sistem
