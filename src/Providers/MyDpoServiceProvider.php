@@ -4,9 +4,9 @@ namespace MyDpo\Providers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use MyDpo\Models\System\SysRoute;
 
-class MyDpoServiceProvider extends ServiceProvider
-{
+class MyDpoServiceProvider extends ServiceProvider {
 
     public function boot() {
 
@@ -14,6 +14,9 @@ class MyDpoServiceProvider extends ServiceProvider
 
 
             $this->loadRoutesFrom(__DIR__ . '/../Routes/routes.php');
+
+
+            $this->RegisterSysRoutes();
 
             // $this->loadTranslationsFrom(__DIR__ . '/../Lang', 'mydpo-platform');
 
@@ -107,5 +110,29 @@ class MyDpoServiceProvider extends ServiceProvider
         });
 
         // $this->loadViewsFrom(__DIR__ . '/../Views', 'decalex-b2b-commons');
+    }
+
+    private function RegisterSysRoutes() {
+
+        $routes = SysRoute::whereIsRoot()->whereType('Route')->get();
+
+        foreach($routes as $i => $route)
+        {
+            $route_registrar = Route::prefix($route['prefix']);
+
+            if($route['middleware'])
+            {
+                $route_registrar->middleware($route['middleware']);
+            }
+
+            $route_registrar->{$route['verb']}(
+                $route['path'],
+                [
+                    $route['controller'],
+                    $route['method'],
+                ]
+            );
+
+        }
     }
 }

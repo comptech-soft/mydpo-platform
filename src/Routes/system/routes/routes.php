@@ -5,7 +5,7 @@ use MyDpo\Http\Controllers\System\RoutesController;
 
 Route::prefix('routes')->group( function() {
             
-    Route::get('/', [RoutesController::class, 'index']);
+    // Route::get('/', [RoutesController::class, 'index']);
 
     // /**
     //  * Returneaza toate centralizatoarele din sistem
