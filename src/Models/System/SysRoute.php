@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class SysRoute extends Model {
 
-    use Itemable;
+    // use Itemable;
     
     protected $table = 'system-routes';
 
