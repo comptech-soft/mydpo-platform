@@ -9,8 +9,15 @@ class SaveRows extends Perform {
 
     public function Action() {
 
-        
-       dd($this->input);
-    
+        if($this->rows && is_array($this->rows))
+        {
+       
+            foreach($this->rows as $i => $input)
+            {
+                $row = CustomerPlanconformareRow::find($input['id']);
+
+                $row->update($input);
+            }
+        }
     }
 }

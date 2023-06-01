@@ -26,9 +26,12 @@ class CustomerPlanconformareRow extends Model {
         'plan_id' => 'integer',
         'created_by' => 'integer',
         'updated_by' => 'integer',
+        'parent_id' => 'integer',
 
         'pondere' => 'decimal:2',
-        'value' => 'decimal:2',
+        'value_inceput_an' => 'decimal:2',
+        'value_final_s1' => 'decimal:2',
+        'value_final_s2' => 'decimal:2',
        
     ];
 
@@ -43,6 +46,10 @@ class CustomerPlanconformareRow extends Model {
         'frecventa',
         'responsabil',
         'pondere',
+        'value_inceput_an', 
+        'value_final_s1', 
+        'value_final_s2', 
+        'observatii',
         'parent_id',
         'value',
         'props',
