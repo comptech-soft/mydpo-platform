@@ -32,6 +32,9 @@ class CustomerPlanconformareRow extends Model {
         'value_inceput_an' => 'decimal:2',
         'value_final_s1' => 'decimal:2',
         'value_final_s2' => 'decimal:2',
+        'realizat_inceput_an' => 'decimal:2',
+        'realizat_final_s1' => 'decimal:2',
+        'realizat_final_s2' => 'decimal:2',
        
     ];
 
@@ -49,6 +52,9 @@ class CustomerPlanconformareRow extends Model {
         'value_inceput_an', 
         'value_final_s1', 
         'value_final_s2', 
+        'realizat_inceput_an',
+        'realizat_final_s1',
+        'realizat_final_s2',
         'observatii',
         'parent_id',
         'value',
