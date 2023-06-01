@@ -6,7 +6,7 @@ use MyDpo\Http\Controllers\Admin\LocalitatiController;
 
 Route::prefix('localitati')->group( function() {
         
-    Route::get('/', [LocalitatiController::class, 'index']);        
+    // Route::get('/', [LocalitatiController::class, 'index']);        
     Route::post('items', [LocalitatiController::class, 'getItems']);
     Route::post('get-items', [LocalitatiController::class, 'getRecords']);
     Route::post('action/{action}', [LocalitatiController::class, 'doAction']);
