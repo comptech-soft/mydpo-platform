@@ -118,21 +118,23 @@ class MyDpoServiceProvider extends ServiceProvider {
 
         foreach($routes as $i => $route)
         {
-            $route_registrar = Route::prefix($route['prefix']);
-
-            if($route['middleware'])
+            if(!! $route->platform && in_array(config('app.platform'), $route->platform) )
             {
-                $route_registrar->middleware($route['middleware']);
+                $route_registrar = Route::prefix($route->prefix);
+
+                if($route->middleware)
+                {
+                    $route_registrar->middleware($route->middleware);
+                }
+
+                $route_registrar->{$route->verb}(
+                    $route->path,
+                    [
+                        $route->controller,
+                        $route->method,
+                    ]
+                );
             }
-
-            $route_registrar->{$route['verb']}(
-                $route['path'],
-                [
-                    $route['controller'],
-                    $route['method'],
-                ]
-            );
-
         }
     }
 }
