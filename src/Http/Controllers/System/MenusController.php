@@ -5,6 +5,7 @@ namespace MyDpo\Http\Controllers\System;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Helpers\Response;
+use MyDpo\Models\System\SysMenu;
 
 class MenusController extends Controller {
 
@@ -16,5 +17,10 @@ class MenusController extends Controller {
             $r->all()
         );
     }
+
+    public function getRecords(Request $r) {
+        return SysMenu::getRecords($r->all());
+    }
+
 
 }
