@@ -54,7 +54,6 @@ Route::middleware('auth')->group(function () {
          * Iesirea din platforma
          */
         Route::post('logout', [LogoutController::class, 'logout']);
-        // Route::post('save-active-customer', [ConfigController::class, 'saveActiveCustomer']);
 
     });
 

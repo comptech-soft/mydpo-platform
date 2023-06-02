@@ -24,7 +24,7 @@ Route::post('system/activare-cont-client/get-infos-by-token', [ActivateAccountCo
 
 Route::prefix('system')->group(function () {
     Route::get('set-locale/{locale}', [ConfigController::class, 'setLocale']);
-    Route::post('get-user-role', [ConfigController::class, 'getUserRole']);
+    // Route::post('get-user-role', [ConfigController::class, 'getUserRole']);
 
     Route::post('get-file-properties', [UploadsController::class, 'getFileProperties']);
 });
