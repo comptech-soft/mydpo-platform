@@ -9,7 +9,7 @@ use Kalnoy\Nestedset\NodeTrait;
 // use MyDpo\Traits\Itemable;
 // use MyDpo\Models\Region;
 
-class SysRoute extends Model {
+class SysMenu extends Model {
 
     use NodeTrait;
     
@@ -21,13 +21,8 @@ class SysRoute extends Model {
         'type',
         'platform',
         'order_no',
-        'name',
-        'prefix',
-        'middleware',
-        'path',
-        'verb',
-        'controller',
-        'method',
+        'caption',
+        'icon',
         'description',
         'props',
         'created_by',
@@ -36,7 +31,6 @@ class SysRoute extends Model {
 
     protected $casts = [
         'id' => 'integer',
-        'middleware' => 'json',
         'platform' => 'json',
         'props' => 'json',
         'order_no' => 'integer',
