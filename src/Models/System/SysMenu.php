@@ -38,4 +38,9 @@ class SysMenu extends Model {
         'updated_by' => 'integer',
     ];
 
+    public static function GetBySlug($slug) {
+
+        return self::whereSlug($slug)->first();
+    }
+
 }
