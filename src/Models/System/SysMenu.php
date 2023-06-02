@@ -13,7 +13,7 @@ class SysMenu extends Model {
 
     use NodeTrait;
     
-    protected $table = 'system-routes';
+    protected $table = 'system-menus';
 
     protected $fillable = [
         'id',
