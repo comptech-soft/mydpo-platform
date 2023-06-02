@@ -19,6 +19,7 @@ class SysMenuRole extends Model {
         'menu_id',
         'role_id',
         'customer_id',
+        'platform',
         'visible',
         'disabled',
     ];
