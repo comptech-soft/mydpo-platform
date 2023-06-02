@@ -37,6 +37,10 @@ class SysMenu extends Model {
         'updated_by' => 'integer',
     ];
 
+    protected $with = [
+        'children',
+    ];
+
     public static function GetBySlug($slug) {
 
         return self::whereSlug($slug)->first();
