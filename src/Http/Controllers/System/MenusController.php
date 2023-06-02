@@ -6,12 +6,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Helpers\Response;
 
-class RoutesController extends Controller {
+class MenusController extends Controller {
 
     public function index(Request $r) {
         return Response::View(
             '~templates.index', 
-            asset('apps/system-routes/index.js'),
+            asset('apps/system-menus/index.js'),
             [],
             $r->all()
         );
