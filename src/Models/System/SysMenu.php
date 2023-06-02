@@ -45,5 +45,6 @@ class SysMenu extends Model {
 
         return self::whereSlug($slug)->first();
     }
+    
 
 }
