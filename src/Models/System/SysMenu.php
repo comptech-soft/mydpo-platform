@@ -4,9 +4,8 @@ namespace MyDpo\Models\System;
 
 use Illuminate\Database\Eloquent\Model;
 use Kalnoy\Nestedset\NodeTrait;
-// use MyDpo\Helpers\Performers\Datatable\DoAction;
+use MyDpo\Performers\SysMenu\GetVisibilities;
 use MyDpo\Traits\Itemable;
-// use MyDpo\Models\Region;
 
 class SysMenu extends Model {
 
@@ -44,6 +43,10 @@ class SysMenu extends Model {
     public static function GetBySlug($slug) {
 
         return self::whereSlug($slug)->first();
+    }
+
+    public static function getVisibilities($input) {
+        return (new GetVisibilities($input))->Perform();
     }
     
 
