@@ -12,7 +12,7 @@ class GetVisibilities extends Perform {
 
         $this->payload = [
             'menus' => SysMenuRole::where('role_id', $this->role_id)->wherePlatform($this->platform)->get(),
-            'actions' => SysActionRole::where('role_id', $this->role_id)->get(),
+            'actions' => SysActionRole::where('role_id', $this->role_id)->with(['action'])->get(),
             
         ];
     }

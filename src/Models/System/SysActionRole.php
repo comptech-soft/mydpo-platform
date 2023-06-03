@@ -28,5 +28,7 @@ class SysActionRole extends Model {
         'disabled' => 'integer',
     ];
 
-
+    public function action() {
+        return $this->belongsTo(SysAction::class, 'action_id');
+    }
 }
