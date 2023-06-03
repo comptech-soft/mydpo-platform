@@ -22,6 +22,10 @@ class MenusController extends Controller {
         return SysMenu::getRecords($r->all());
     }
 
+    public function doAction($action, Request $r) {
+        return SysMenu::doAction($action, $r->all());
+    }
+
     public function getVisibilities(Request $r) {
         return SysMenu::getVisibilities($r->all());
     }

@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 use Kalnoy\Nestedset\NodeTrait;
 use MyDpo\Performers\SysMenu\GetVisibilities;
 use MyDpo\Traits\Itemable;
+use MyDpo\Traits\Actionable;
 
 class SysMenu extends Model {
 
-    use NodeTrait, Itemable;
+    use NodeTrait, Itemable, Actionable;
     
     protected $table = 'system-menus';
 
@@ -42,6 +43,11 @@ class SysMenu extends Model {
 
     public static function GetBySlug($slug) {
         return self::whereSlug($slug)->first();
+    }
+
+    public static function doInsert($input, $record) {
+
+        dd($input);
     }
 
     public static function getVisibilities($input) {
