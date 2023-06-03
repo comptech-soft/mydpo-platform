@@ -8,13 +8,10 @@ class Quicksearch {
     protected $raw = '';
 
     public function __construct($query) {
-
         $this->query = $query;
-
     }
 
     public function Search($search) {
-
 
         $this->raw = '';
         
@@ -26,8 +23,6 @@ class Quicksearch {
             ];
         }
 
-        
-        
         foreach($words = explode(',', $searched) as $i => $value)
         {
             $value = trim($value);
@@ -37,7 +32,7 @@ class Quicksearch {
                 if($value[0] == '*') 
                 {
                     //  Daca incepem cu * cautam si in interior
-                    $value = \DB::connection()->getPdo()->quote('%' . substr($value, 0) . '%');
+                    $value = \DB::connection()->getPdo()->quote('%' . substr($value, 1) . '%');
                 }
                 else 
                 {
