@@ -10,7 +10,7 @@ class SysAction extends Model {
 
     use NodeTrait, Itemable;
     
-    protected $table = 'system-menus';
+    protected $table = 'system-actions';
 
     protected $fillable = [
         'id',
