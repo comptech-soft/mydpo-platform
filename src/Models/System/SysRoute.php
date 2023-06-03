@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 use Kalnoy\Nestedset\NodeTrait;
 // use MyDpo\Helpers\Performers\Datatable\GetItems;
 // use MyDpo\Helpers\Performers\Datatable\DoAction;
-// use MyDpo\Traits\Itemable;
+use MyDpo\Traits\Itemable;
 // use MyDpo\Models\Region;
 
 class SysRoute extends Model {
 
-    use NodeTrait;
+    use NodeTrait, Itemable;
     
     protected $table = 'system-routes';
 
