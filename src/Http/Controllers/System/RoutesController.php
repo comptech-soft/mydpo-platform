@@ -5,6 +5,7 @@ namespace MyDpo\Http\Controllers\System;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Helpers\Response;
+use MyDpo\Models\System\SysRoute;
 
 class RoutesController extends Controller {
 
@@ -15,6 +16,10 @@ class RoutesController extends Controller {
             [],
             $r->all()
         );
+    }
+
+    public function getRecords(Request $r) {
+        return SysRoute::getRecords($r->all());
     }
 
 }
