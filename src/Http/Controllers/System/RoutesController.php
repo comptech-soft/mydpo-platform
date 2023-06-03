@@ -22,4 +22,8 @@ class RoutesController extends Controller {
         return SysRoute::getRecords($r->all());
     }
 
+    public function doAction($action, Request $r) {
+        return SysRoute::doAction($action, $r->all());
+    }
+
 }
