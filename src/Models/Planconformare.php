@@ -210,7 +210,4 @@ class Planconformare extends Model {
         ];
     }
 
-     
-
-
 } 
