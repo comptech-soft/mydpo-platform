@@ -51,6 +51,11 @@ class SysMenu extends Model {
         {
             $record = self::create($input);
         }
+        else
+        {
+            $parent = self::find( $input['parent_id'] );
+            $record = $parent->children()->create($input);
+        }
 
         return self::find($record->id);
     }
