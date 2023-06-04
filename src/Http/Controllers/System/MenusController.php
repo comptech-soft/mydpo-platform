@@ -30,5 +30,9 @@ class MenusController extends Controller {
         return SysMenu::getVisibilities($r->all());
     }
 
+    public function reorder(Request $r) {
+        return SysMenu::reorder($r->all());
+    }
+
 
 }
