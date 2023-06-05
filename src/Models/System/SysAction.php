@@ -34,9 +34,17 @@ class SysAction extends Model {
         'updated_by' => 'integer',
     ];
 
+    protected $appends = [
+        'name',
+    ];
+
     protected $with = [
         'children',
     ];
+
+    public function getNameAttribute() {
+        return $this->caption;
+    }
 
     public static function GetBySlug($slug) {
         return self::whereSlug($slug)->first();
