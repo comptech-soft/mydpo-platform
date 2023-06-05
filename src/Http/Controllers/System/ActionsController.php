@@ -5,7 +5,7 @@ namespace MyDpo\Http\Controllers\System;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Helpers\Response;
-// use MyDpo\Models\System\SysMenu;
+use MyDpo\Models\System\SysAction;
 
 class ActionsController extends Controller {
 
@@ -18,9 +18,9 @@ class ActionsController extends Controller {
         );
     }
 
-    // public function getRecords(Request $r) {
-    //     return SysMenu::getRecords($r->all());
-    // }
+    public function getRecords(Request $r) {
+        return SysAction::getRecords($r->all());
+    }
 
     // public function doAction($action, Request $r) {
     //     return SysMenu::doAction($action, $r->all());

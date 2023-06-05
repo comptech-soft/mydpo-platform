@@ -10,6 +10,7 @@ class SysController extends Model {
 
     protected $fillable = [
         'id',
+        'namespace',
         'controller'
     ];
 
