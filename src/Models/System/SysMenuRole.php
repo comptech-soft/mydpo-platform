@@ -4,10 +4,11 @@ namespace MyDpo\Models\System;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Actionable;
+use MyDpo\Traits\Itemable;
 
 class SysMenuRole extends Model {
 
-    use Actionable;
+    use Actionable, Itemable;
     
     protected $table = 'system-menus-roles';
 
