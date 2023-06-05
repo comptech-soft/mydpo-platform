@@ -40,7 +40,7 @@ class SysMenuRole extends Model {
             {
                 $data = [
                     ...$role,
-                    'platform' => !! $role['platform'] ? implode(',', $role['platform']): '',
+                    'platform' => array_key_exists('platform', $role) ? implode(',', $role['platform']): '',
                     'menu_id' => $input['menu_id'],
                 ];
 
