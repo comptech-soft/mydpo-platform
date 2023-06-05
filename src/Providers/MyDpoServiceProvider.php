@@ -38,7 +38,7 @@ class MyDpoServiceProvider extends ServiceProvider {
                 $route_registrar->{$route->verb}(
                     $route->path,
                     [
-                        $route->controller->controller,
+                        'MyDpo\\Http\Controllers\\' . $route->controller->namespace . '\\' . $route->controller->controller,
                         $route->method,
                     ]
                 );
