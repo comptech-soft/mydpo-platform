@@ -86,8 +86,11 @@ class Dataprovider extends Perform {
             $this->per_page = $initialfilter['count'];
         }
 
-        // /** column filtering */
-        // $this->ColumnSearchBy();
+        if(!! $this->select)
+        {
+            $this->query->select($this->select);
+        }
+
 
         $this->payload = [
             'recordcount' => call_user_func([$this->model, 'count']), 
