@@ -3,14 +3,11 @@
 namespace MyDpo\Models\System;
 
 use Illuminate\Database\Eloquent\Model;
-// use Kalnoy\Nestedset\NodeTrait;
-// use MyDpo\Helpers\Performers\Datatable\DoAction;
-// use MyDpo\Traits\Itemable;
-// use MyDpo\Models\Region;
+use MyDpo\Traits\Actionable;
 
 class SysMenuRole extends Model {
 
-    // use NodeTrait, Itemable;
+    use Actionable;
     
     protected $table = 'system-menus-roles';
 
@@ -33,5 +30,8 @@ class SysMenuRole extends Model {
         'disabled' => 'integer',
     ];
 
+    public static function doInsert($input, $record) {
+        dd($input);
+    }
 
 }
