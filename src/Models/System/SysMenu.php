@@ -23,6 +23,7 @@ class SysMenu extends Model {
         'order_no',
         'caption',
         'icon',
+        'link',
         'description',
         'props',
         'created_by',
