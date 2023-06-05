@@ -33,6 +33,6 @@ class SysActionRole extends Model {
     }
 
     public function role() {
-        return $this->belongsTo(SysRole::class, 'role_id');
+        return $this->belongsTo(SysRole::class, 'role_id')->select(['id', 'slug', 'name', 'color']);
     }
 }
