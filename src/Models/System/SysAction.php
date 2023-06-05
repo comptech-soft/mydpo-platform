@@ -40,10 +40,15 @@ class SysAction extends Model {
 
     protected $with = [
         'children',
+        'roles',
     ];
 
     public function getNameAttribute() {
         return $this->caption;
+    }
+
+    function roles() {
+        return $this->hasMany(SysActionRole::class, 'action_id');
     }
 
     public static function GetBySlug($slug) {
