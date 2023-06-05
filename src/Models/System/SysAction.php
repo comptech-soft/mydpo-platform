@@ -40,7 +40,7 @@ class SysAction extends Model {
 
     protected $with = [
         'children',
-        'roles',
+        'roles.role',
     ];
 
     public function getNameAttribute() {

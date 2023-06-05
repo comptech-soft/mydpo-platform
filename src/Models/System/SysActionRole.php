@@ -31,4 +31,8 @@ class SysActionRole extends Model {
     public function action() {
         return $this->belongsTo(SysAction::class, 'action_id');
     }
+
+    public function role() {
+        return $this->belongsTo(SysRole::class, 'role_id');
+    }
 }
