@@ -30,7 +30,7 @@ class SysMenuRole extends Model {
         'disabled' => 'integer',
     ];
 
-    public static function doInsert($input, $record) {
+    public static function doMenusroles($input, $record) {
         dd($input);
     }
 
