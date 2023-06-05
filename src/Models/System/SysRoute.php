@@ -47,7 +47,7 @@ class SysRoute extends Model {
     ];
 
     public function controller() {
-        return $this->belongsTo(SysController::class, 'contrller_id');
+        return $this->belongsTo(SysController::class, 'controller_id');
     }
 
 
