@@ -56,6 +56,7 @@ class DoAction extends Perform {
         {
             return 'Ștergere reușită'; 
         }
+        return 'Success';
     }
 
     public function GetValidationInput() {

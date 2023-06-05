@@ -31,7 +31,48 @@ class SysMenuRole extends Model {
     ];
 
     public static function doMenusroles($input, $record) {
-        dd($input);
+
+        $record = [];
+
+        if($input['roles'] && is_array($input['roles']))
+        {
+            foreach($input['roles'] as $i => $role)
+            {
+                $data = [
+                    ...$role,
+                    'platform' => !! $role['platform'] ? implode(',', $role['platform']): '',
+                    'menu_id' => $input['menu_id'],
+                ];
+
+                $record[] = self::CreateOrUpdate($data);
+            }
+        }
+
+        return $record;
+    }
+
+    public static function CreateOrUpdate($input) {
+
+        $record = self::where('menu_id', $input['menu_id'])
+            ->where('role_id', $input['role_id']);
+        
+        if($input['customer_id'])
+        {
+            $record = $record->where('customer_id', $input['customer_id']);
+        }
+            
+            
+        $record = $record->first();
+
+        if($record)
+        {
+            $record->update($input);
+        }
+        else
+        {
+            $record = self::create($input);
+        }
+
     }
 
 }
