@@ -42,4 +42,13 @@ class SysRoute extends Model {
         'updated_by' => 'integer',
     ];
 
+    protected $with = [
+        'controller',
+    ];
+
+    public function controller() {
+        return $this->belongsTo(SysController::class, 'contrller_id');
+    }
+
+
 }
