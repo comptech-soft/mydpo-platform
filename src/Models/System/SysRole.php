@@ -1,8 +1,7 @@
 <?php
 
-namespace MyDpo\Models;
+namespace MyDpo\Models\System;
 
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
 
