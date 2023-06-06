@@ -5,10 +5,11 @@ namespace MyDpo\Models\System;
 use Illuminate\Database\Eloquent\Model;
 use Kalnoy\Nestedset\NodeTrait;
 use MyDpo\Traits\Itemable;
+use MyDpo\Traits\Actionable;
 
 class SysAction extends Model {
 
-    use NodeTrait, Itemable;
+    use NodeTrait, Itemable, Actionable;
     
     protected $table = 'system-actions';
 
@@ -53,5 +54,20 @@ class SysAction extends Model {
 
     public static function GetBySlug($slug) {
         return self::whereSlug($slug)->first();
+    }
+
+    public static function doInsert($input, $record) {
+
+        if(! $input['parent_id'] )
+        {
+            $record = self::create($input);
+        }
+        else
+        {
+            $parent = self::find( $input['parent_id'] );
+            $record = $parent->children()->create($input);
+        }
+
+        return self::find($record->id);
     }
 }
