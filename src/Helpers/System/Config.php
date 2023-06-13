@@ -8,7 +8,6 @@ use MyDpo\Performers\System\GetUserRole;
 class Config {
 
     public static function getConfig() {
-
         return 
             (new GetConfig(NULL))
             ->SetSuccessMessage(NULL)
@@ -19,7 +18,6 @@ class Config {
     }
     
     public static function getUserRole($input) {
-
         return 
             (new GetUserRole($input))
             ->SetSuccessMessage(NULL)
