@@ -3,6 +3,7 @@
 namespace MyDpo\Core\Http\Response;
 
 use Illuminate\View\View;
+use MyDpo\Models\System\SysMenu;
 
 class Index {
 
@@ -34,6 +35,7 @@ class Index {
             'locale' => app()->getLocale(),
             'platform' => config('app.platform'),
             'env' => config('app.env'),
+            'menus' => SysMenu::whereIsRoot()->get(),
         ];
 
         return view($template)->withScripts($scripts)->withPayload($payload)->withStyles($styles);

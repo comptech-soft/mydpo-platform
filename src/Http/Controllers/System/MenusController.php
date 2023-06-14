@@ -17,18 +17,10 @@ class MenusController extends Controller {
      */
     public function index(Request $r) 
     {
-        
         return Index::View(
             styles: ['css/app.css'],
             scripts: ['apps/system/menus/index.js']
         );
-
-        // return Response::View(
-        //     '~templates.index', 
-        //     asset('apps/system-menus/index.js'),
-        //     [],
-        //     $r->all()
-        // );
     }
 
     public function getRecords(Request $r) {
