@@ -10,12 +10,14 @@ use MyDpo\Models\System\SysMenu;
 class MenusController extends Controller {
 
     public function index(Request $r) {
-        return Response::View(
-            '~templates.index', 
-            asset('apps/system-menus/index.js'),
-            [],
-            $r->all()
-        );
+        
+        dd(__METHOD__);
+        // return Response::View(
+        //     '~templates.index', 
+        //     asset('apps/system-menus/index.js'),
+        //     [],
+        //     $r->all()
+        // );
     }
 
     public function getRecords(Request $r) {
