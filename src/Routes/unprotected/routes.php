@@ -6,9 +6,6 @@ use MyDpo\Http\Controllers\Validation\ValidationController;
 use MyDpo\Http\Controllers\Database\DatabaseController;
 use MyDpo\Http\Controllers\Usersession\ActivateAccountController;
 
-use MyDpo\Http\Controllers\System\ContactController;
-use MyDpo\Http\Controllers\System\TermeniController;
-use MyDpo\Http\Controllers\System\NotaController;
 use MyDpo\Http\Controllers\System\TranslationsController;
 use MyDpo\Http\Controllers\System\UploadsController;
 use MyDpo\Http\Controllers\System\KnolyxController;
@@ -50,10 +47,5 @@ Route::prefix('translations')->group(function () {
     Route::post('create-key', [TranslationsController::class, 'createKey']);
     
 });
-
-
-// Route::get('/contact', [ContactController::class, 'index']);
-// Route::get('/termeni-si-conditii', [TermeniController::class, 'index']);
-// Route::get('/nota-informare', [NotaController::class, 'index']);
 
 Route::put('/knolyx/webhook-process', [KnolyxController::class, 'webhookProcess']);
