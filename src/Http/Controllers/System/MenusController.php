@@ -9,7 +9,6 @@ use MyDpo\Models\System\SysMenu;
 
 class MenusController extends Controller {
 
-
     /**
      * Afisarea paginii system/menus
      * Definirea meniurilor

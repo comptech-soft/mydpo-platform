@@ -13,7 +13,7 @@ class ContactController extends Controller
     {
         return Index::View(
             styles: ['css/app.css'],
-            scripts: ['apps/system/contact/index.js']
+            scripts: ['apps/footer/contact/index.js']
         );
     }
 
