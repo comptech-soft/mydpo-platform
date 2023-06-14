@@ -4,7 +4,7 @@ namespace MyDpo\Http\Controllers\System;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-// use MyDpo\Helpers\Response;
+use MyDpo\Core\Http\Response\Index;
 use MyDpo\Models\System\SysMenu;
 
 class MenusController extends Controller {
