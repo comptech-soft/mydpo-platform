@@ -4,14 +4,25 @@ namespace MyDpo\Http\Controllers\System;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use MyDpo\Helpers\Response;
+// use MyDpo\Helpers\Response;
 use MyDpo\Models\System\SysMenu;
 
 class MenusController extends Controller {
 
-    public function index(Request $r) {
+
+    /**
+     * Afisarea paginii system/menus
+     * Definirea meniurilor
+     * Tabela: system-menus
+     */
+    public function index(Request $r) 
+    {
         
-        dd(__METHOD__);
+        return Index::View(
+            styles: ['css/app.css'],
+            scripts: ['apps/system/menus/index.js']
+        );
+
         // return Response::View(
         //     '~templates.index', 
         //     asset('apps/system-menus/index.js'),
