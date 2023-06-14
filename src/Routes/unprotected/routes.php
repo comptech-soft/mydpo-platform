@@ -52,8 +52,8 @@ Route::prefix('translations')->group(function () {
 });
 
 
-Route::get('/contact', [ContactController::class, 'index']);
-Route::get('/termeni-si-conditii', [TermeniController::class, 'index']);
-Route::get('/nota-informare', [NotaController::class, 'index']);
+// Route::get('/contact', [ContactController::class, 'index']);
+// Route::get('/termeni-si-conditii', [TermeniController::class, 'index']);
+// Route::get('/nota-informare', [NotaController::class, 'index']);
 
 Route::put('/knolyx/webhook-process', [KnolyxController::class, 'webhookProcess']);
