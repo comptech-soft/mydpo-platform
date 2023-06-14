@@ -35,7 +35,7 @@ class Index {
             'locale' => app()->getLocale(),
             'platform' => config('app.platform'),
             'env' => config('app.env'),
-            'menus' => SysMenu::whereIsRoot()->get(),
+            'menus' => SysMenu::getMenus(),
         ];
 
         return view($template)->withScripts($scripts)->withPayload($payload)->withStyles($styles);
