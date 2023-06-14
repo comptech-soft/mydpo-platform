@@ -17,13 +17,4 @@ class ContactController extends Controller
         );
     }
 
-    // public function index(Request $r) {
-    //     return Response::View(
-    //         '~templates.index', 
-    //         asset('apps/contact/index.js'),
-    //         [],
-    //         $r->all()
-    //     );
-    // }
-
 }

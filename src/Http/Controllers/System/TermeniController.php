@@ -4,17 +4,16 @@ namespace MyDpo\Http\Controllers\System;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use MyDpo\Helpers\Response;
+use MyDpo\Core\Http\Response\Index;
 
 class TermeniController extends Controller
 {
 
-    public function index(Request $r) {
-        return Response::View(
-            '~templates.index', 
-            asset('apps/termeni/index.js'),
-            [],
-            $r->all()
+    public function index(Request $r) 
+    {
+        return Index::View(
+            styles: ['css/app.css'],
+            scripts: ['apps/footer/termeni/index.js']
         );
     }
 
