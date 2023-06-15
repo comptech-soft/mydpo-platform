@@ -3,14 +3,18 @@
 namespace MyDpo\Models\System;
 
 use Illuminate\Database\Eloquent\Model;
-use MyDpo\Performers\Translation\CreateKey;
-use MyDpo\Performers\Translation\CreateFile;
-use MyDpo\Performers\Translation\Activate;
-use MyDpo\Helpers\Performers\Datatable\GetItems;   
-use MyDpo\Helpers\Performers\Datatable\DoAction; 
+use MyDpo\Traits\Itemable;
+
+// use MyDpo\Performers\Translation\CreateKey;
+// use MyDpo\Performers\Translation\CreateFile;
+// use MyDpo\Performers\Translation\Activate;
+// use MyDpo\Helpers\Performers\Datatable\GetItems;   
+// use MyDpo\Helpers\Performers\Datatable\DoAction; 
 
 class Translation extends Model 
 {
+
+    use Itemable;
 
     protected $table = 'translations';
 
@@ -22,39 +26,39 @@ class Translation extends Model
         'updated_by',
     ];
 
-    public static function getItems($input) {
-        return (new GetItems($input, self::query(), __CLASS__))->Perform();
-    }
+    // public static function getItems($input) {
+    //     return (new GetItems($input, self::query(), __CLASS__))->Perform();
+    // }
 
-    public static function doAction($action, $input) {
-        return (new DoAction($action, $input, __CLASS__))->Perform();
-    }
+    // public static function doAction($action, $input) {
+    //     return (new DoAction($action, $input, __CLASS__))->Perform();
+    // }
 
-    public static function createFile($input) {
-        return (new CreateFile($input))->Perform();
-    }
+    // public static function createFile($input) {
+    //     return (new CreateFile($input))->Perform();
+    // }
 
-    public static function activate($input) {
-        return (new Activate($input))->Perform();
-    }
+    // public static function activate($input) {
+    //     return (new Activate($input))->Perform();
+    // }
 
     
 
-    public static function createKey($input) {
-        return (new CreateKey($input))->Perform();
-    }
+    // public static function createKey($input) {
+    //     return (new CreateKey($input))->Perform();
+    // }
 
-    public static function ToJavascriptVars($locale) {
+    // public static function ToJavascriptVars($locale) {
 
-        $records = self::whereNotNull($locale)->get();
+    //     $records = self::whereNotNull($locale)->get();
 
-        $r = [];
-        foreach($records as $i => $record)
-        {
-            $r[$record->ro] = $record->en;
-        }
+    //     $r = [];
+    //     foreach($records as $i => $record)
+    //     {
+    //         $r[$record->ro] = $record->en;
+    //     }
 
-        return $r;
-    }
+    //     return $r;
+    // }
 
 }
