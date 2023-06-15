@@ -19,7 +19,7 @@ use MyDpo\Http\Controllers\System\ConfigController;
  */
 Route::middleware('auth')->group(function () {
 
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    // Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     if( config('app.platform') == 'b2b' )
     {

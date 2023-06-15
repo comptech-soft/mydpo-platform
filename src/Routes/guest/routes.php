@@ -1,15 +1,11 @@
 <?php
 
-use MyDpo\Http\Controllers\Usersession\LoginController;
 use MyDpo\Http\Controllers\Usersession\ForgotPasswordController;
 use MyDpo\Http\Controllers\Usersession\NewPasswordController;
 
 use MyDpo\Http\Controllers\Auth\AuthenticatedSessionController;
 
 Route::middleware('guest')->group(function () {
-
-    // Route::get('login',  [LoginController::class, 'index']);
-    // Route::post('system/login',  [LoginController::class, 'login']);
 
     /**
      * Resetarea parolei
