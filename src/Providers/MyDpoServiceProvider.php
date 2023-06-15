@@ -35,6 +35,14 @@ class MyDpoServiceProvider extends ServiceProvider {
                     $route_registrar->middleware($route->middleware);
                 }
 
+                if(!! $route->props)
+                {
+                    if( array_key_exists('name', $route->props))
+                    {
+                        $route_registrar->name($route->props['name']);
+                    }
+                }
+
                 $route_registrar->{$route->verb}(
                     $route->path,
                     [
