@@ -4,21 +4,11 @@ namespace MyDpo\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use MyDpo\Core\Http\Response\Index;
-use MyDpo\Models\Translation;
+
 
 class TranslationsController extends Controller {
     
-    public function index(Request $r) {
-
-
-        return Index::View(
-            styles: ['css/app.css'],
-            scripts: ['apps/admin/translations/index.js']
-        );
-
-        
-    }
+   
 
     // public function createFile(Request $r) {
     //     return Translation::createFile($r->all());

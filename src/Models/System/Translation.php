@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Models;
+namespace MyDpo\Models\System;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Performers\Translation\CreateKey;
