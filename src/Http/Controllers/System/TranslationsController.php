@@ -21,6 +21,10 @@ class TranslationsController extends Controller
         
     }
 
+    public function getRecords(Request $r) {
+        return Translation::getRecords($r->all());
+    }
+
     public function createKey(Request $r) {
         return Translation::createKey($r->all());
     }
