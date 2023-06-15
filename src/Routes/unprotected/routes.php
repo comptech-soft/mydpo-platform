@@ -1,7 +1,6 @@
 <?php
 
 use MyDpo\Http\Controllers\System\WelcomeController;
-use MyDpo\Http\Controllers\System\ConfigController;
 use MyDpo\Http\Controllers\Validation\ValidationController;
 use MyDpo\Http\Controllers\Database\DatabaseController;
 use MyDpo\Http\Controllers\Usersession\ActivateAccountController;
@@ -20,8 +19,6 @@ Route::post('system/activare-cont-client', [ActivateAccountController::class, 'a
 Route::post('system/activare-cont-client/get-infos-by-token', [ActivateAccountController::class, 'getInfosByToken']);
 
 Route::prefix('system')->group(function () {
-    // Route::get('set-locale/{locale}', [ConfigController::class, 'setLocale']);
-
     Route::post('get-file-properties', [UploadsController::class, 'getFileProperties']);
 });
 
