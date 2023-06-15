@@ -9,7 +9,7 @@ use MyDpo\Http\Controllers\System\TranslationsController;
 use MyDpo\Http\Controllers\System\UploadsController;
 use MyDpo\Http\Controllers\System\KnolyxController;
 
-Route::get('/', [WelcomeController::class, 'index']);
+// Route::get('/', [WelcomeController::class, 'index']);
 
 /**
  * Activarea unui cont client
