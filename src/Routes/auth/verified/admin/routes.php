@@ -36,8 +36,4 @@ Route::middleware(['isadmin'])->prefix('admin')->group(function () {
 
 
     require __DIR__ . '/config/routes.php';
-
-    require __DIR__ . '/translations/routes.php';
-
-
 });

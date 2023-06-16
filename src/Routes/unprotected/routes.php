@@ -37,10 +37,10 @@ Route::prefix('database')->group(function () {
     
 });
 
-Route::prefix('translations')->group(function () {
+// Route::prefix('translations')->group(function () {
 
-    Route::post('create-key', [TranslationsController::class, 'createKey']);
+//     Route::post('create-key', [TranslationsController::class, 'createKey']);
     
-});
+// });
 
 Route::put('/knolyx/webhook-process', [KnolyxController::class, 'webhookProcess']);
