@@ -11,18 +11,18 @@ class TranslationsController extends Controller
 {
 
     public function index(Request $r) {
-
-
         return Index::View(
             styles: ['css/app.css'],
             scripts: ['apps/admin/translations/index.js']
-        );
-
-        
+        );        
     }
 
     public function getRecords(Request $r) {
         return Translation::getRecords($r->all());
+    }
+
+    public function doAction($action, Request $r) {
+        return Translation::doAction($action, $r->all());
     }
 
     public function createKey(Request $r) {
