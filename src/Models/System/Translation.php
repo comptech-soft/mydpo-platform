@@ -4,7 +4,7 @@ namespace MyDpo\Models\System;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
-
+use MyDpo\Traits\Actionable;
 // use MyDpo\Performers\Translation\CreateKey;
 // use MyDpo\Performers\Translation\CreateFile;
 // use MyDpo\Performers\Translation\Activate;
@@ -14,7 +14,7 @@ use MyDpo\Traits\Itemable;
 class Translation extends Model 
 {
 
-    use Itemable;
+    use Itemable, Actionable;
 
     protected $table = 'translations';
 
