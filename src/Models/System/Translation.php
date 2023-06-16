@@ -7,7 +7,7 @@ use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 // use MyDpo\Performers\Translation\CreateKey;
 // use MyDpo\Performers\Translation\CreateFile;
-// use MyDpo\Performers\Translation\Activate;
+use MyDpo\Performers\Translation\Activate;
 // use MyDpo\Helpers\Performers\Datatable\GetItems;   
 // use MyDpo\Helpers\Performers\Datatable\DoAction; 
 
@@ -26,21 +26,14 @@ class Translation extends Model
         'updated_by',
     ];
 
-    // public static function getItems($input) {
-    //     return (new GetItems($input, self::query(), __CLASS__))->Perform();
-    // }
-
-    // public static function doAction($action, $input) {
-    //     return (new DoAction($action, $input, __CLASS__))->Perform();
-    // }
 
     // public static function createFile($input) {
     //     return (new CreateFile($input))->Perform();
     // }
 
-    // public static function activate($input) {
-    //     return (new Activate($input))->Perform();
-    // }
+    public static function activate($input) {
+        return (new Activate($input))->Perform();
+    }
 
     
 
