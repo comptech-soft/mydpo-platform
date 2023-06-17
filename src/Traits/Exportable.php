@@ -13,7 +13,7 @@ trait Exportable {
 
         $file_name = 'public/exports/' . \Auth::user()->id. '/' . $input['file_name'];
 
-        dd($file_name);
+        dd(self::GetExporter($input));
 
     }
     

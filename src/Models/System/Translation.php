@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 use MyDpo\Traits\Exportable;
+use MyDpo\Exports\Translation\Exporter;
+
 // use MyDpo\Performers\Translation\CreateKey;
 // use MyDpo\Performers\Translation\CreateFile;
 use MyDpo\Performers\Translation\Activate;
@@ -27,6 +29,10 @@ class Translation extends Model
         'created_by',
         'updated_by',
     ];
+
+    protected static function GetExporter($input) {
+        return new Exporter($input); 
+    }
 
 
     // public static function createFile($input) {
