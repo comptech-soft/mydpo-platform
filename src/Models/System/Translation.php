@@ -35,6 +35,9 @@ class Translation extends Model
         return (new Activate($input))->Perform();
     }
 
+    public static function doExport($input, $record) {
+        dd($input, $record);
+    }
     
 
     // public static function createKey($input) {
