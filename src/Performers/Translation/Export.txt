@@ -35,11 +35,6 @@ class Export extends Perform {
 
     }
 	
-	public function createUserFolder() {            
-        if(! \Storage::exists('public/exports/' . \Auth::user()->id) )
-        {
-            \Storage::disk('public')->makeDirectory('exports/' . \Auth::user()->id, 0777);
-        }
-    }
+
 	
 }

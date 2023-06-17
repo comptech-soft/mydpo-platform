@@ -2,14 +2,16 @@
 
 namespace MyDpo\Traits;
 
-// use MyDpo\Performers\Traits\DoAction;
-
 trait Exportable { 
 
     public static function doExport($input, $record) {
        
-        dd(__METHOD__);
-        // return (new DoAction($action, $input, __CLASS__))->Perform();
+        if(! \Storage::exists('public/exports/' . \Auth::user()->id) )
+        {
+            \Storage::disk('public')->makeDirectory('exports/' . \Auth::user()->id, 0777);
+        }
+
+        dd($input);
 
     }
     
