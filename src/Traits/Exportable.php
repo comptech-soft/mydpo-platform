@@ -13,7 +13,7 @@ trait Exportable {
 
         $file_name = 'public/exports/' . \Auth::user()->id. '/' . $input['file_name'];
 
-        $result = \Excel::store(
+        \Excel::store(
             self::GetExporter($input), 
             $file_name, 
             NULL, 
@@ -21,7 +21,11 @@ trait Exportable {
             ['visibility' => 'public']
         );
 
-        dd($result);
+        $file = \Str::replace('public', 'storage', $file_name);
+
+        return [
+            'url' => asset($file),
+        ];
 
     }
     

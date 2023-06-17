@@ -13,24 +13,14 @@ class Export extends Perform {
 		
         // $exporter = new Exporter();
 		
-		$file_name = 'public/exports/' . \Auth::user()->id. '/' . $this->file_name;
 		
-		$result = \Excel::store(
-            new Exporter(), 
-            $file_name, 
-            NULL, 
-            NULL, 
-            ['visibility' => 'public']
-        );
-
-        dd($result);
+		
+		
 			
-		$file = \Str::replace('public', 'storage', $file_name);
+		
 		
         $this->payload = [
-            'record' => [
-                'url' => asset($file),
-            ],
+            'record' => ,
         ];
 
     }
