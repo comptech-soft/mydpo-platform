@@ -11,7 +11,7 @@ trait Exportable {
             \Storage::disk('public')->makeDirectory('exports/' . \Auth::user()->id, 0777);
         }
 
-        $file_name = 'public/exports/' . \Auth::user()->id. '/' . $this->file_name;
+        $file_name = 'public/exports/' . \Auth::user()->id. '/' . $input['file_name'];
 
         dd($file_name);
 
