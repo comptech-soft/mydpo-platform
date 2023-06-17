@@ -5,17 +5,18 @@ namespace MyDpo\Models\System;
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
+use MyDpo\Traits\Exportable;
 // use MyDpo\Performers\Translation\CreateKey;
 // use MyDpo\Performers\Translation\CreateFile;
 use MyDpo\Performers\Translation\Activate;
-use MyDpo\Performers\Translation\Export;
+// use MyDpo\Performers\Translation\Export;
 // use MyDpo\Helpers\Performers\Datatable\GetItems;   
 // use MyDpo\Helpers\Performers\Datatable\DoAction; 
 
 class Translation extends Model 
 {
 
-    use Itemable, Actionable;
+    use Itemable, Actionable, Exportable;
 
     protected $table = 'translations';
 
@@ -36,9 +37,9 @@ class Translation extends Model
         return (new Activate($input))->Perform();
     }
 
-    public static function doExport($input, $record) {
-        return (new Export($input))->Perform();
-    }
+    // public static function doExport($input, $record) {
+    //     // return (new Export($input))->Perform();
+    // }
     
 
     // public static function createKey($input) {
