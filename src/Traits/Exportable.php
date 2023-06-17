@@ -13,7 +13,15 @@ trait Exportable {
 
         $file_name = 'public/exports/' . \Auth::user()->id. '/' . $input['file_name'];
 
-        dd(self::GetExporter($input));
+        $result = \Excel::store(
+            self::GetExporter($input), 
+            $file_name, 
+            NULL, 
+            NULL, 
+            ['visibility' => 'public']
+        );
+
+        dd($result);
 
     }
     
