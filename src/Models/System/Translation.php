@@ -19,7 +19,7 @@ use MyDpo\Performers\Translation\Activate;
 class Translation extends Model 
 {
 
-    use Itemable, Actionable, Exportable;
+    use Itemable, Actionable, Exportable, Importable;
 
     protected $table = 'translations';
 
