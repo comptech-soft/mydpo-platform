@@ -4,28 +4,17 @@ namespace MyDpo\Imports\Admin\Translation;
 
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
-use MyDpo\Models\CustomerRegister;
-use MyDpo\Models\CustomerRegistruRow;
-use MyDpo\Models\CustomerRegistruRowValue;
-use MyDpo\Models\CustomerDepartment;
-use MyDpo\Models\Customer;
 
 class Importer implements ToCollection {
 
-    public $input = NULL;
-    public $registru = NULL;
-    public $departamente = NULL;
-
     public function __construct($input) {
-
-        dd($input);
         $this->input = $input;
-        $this->registru = CustomerRegister::where('id', $this->input['id'])->first();
-
-        $this->departamente = CustomerDepartment::where('customer_id', $this->registru->customer_id)->pluck('id', 'departament')->toArray();
     }
 
     public function collection(Collection $rows) {
+
+        dd($rows);
+        
         foreach($rows as $i => $row)
         {
             if($i > 1)
