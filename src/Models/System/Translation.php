@@ -8,6 +8,7 @@ use MyDpo\Traits\Actionable;
 // use MyDpo\Performers\Translation\CreateKey;
 // use MyDpo\Performers\Translation\CreateFile;
 use MyDpo\Performers\Translation\Activate;
+use MyDpo\Performers\Translation\Export;
 // use MyDpo\Helpers\Performers\Datatable\GetItems;   
 // use MyDpo\Helpers\Performers\Datatable\DoAction; 
 
@@ -36,7 +37,7 @@ class Translation extends Model
     }
 
     public static function doExport($input, $record) {
-        dd($input, $record);
+        return (new Export($input))->Perform();
     }
     
 
