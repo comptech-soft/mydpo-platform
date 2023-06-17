@@ -8,7 +8,7 @@ use MyDpo\Traits\Actionable;
 use MyDpo\Traits\Exportable;
 use MyDpo\Traits\Importable;
 use MyDpo\Exports\Translation\Exporter;
-
+use MyDpo\Imports\Admin\Translation\Importer;
 // use MyDpo\Performers\Translation\CreateKey;
 // use MyDpo\Performers\Translation\CreateFile;
 use MyDpo\Performers\Translation\Activate;
@@ -35,6 +35,9 @@ class Translation extends Model
         return new Exporter($input); 
     }
 
+    protected static function GetImporter($input) {
+        return new Importer($input); 
+    }
 
     // public static function createFile($input) {
     //     return (new CreateFile($input))->Perform();
