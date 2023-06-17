@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 use MyDpo\Traits\Exportable;
+use MyDpo\Traits\Importable;
 use MyDpo\Exports\Translation\Exporter;
 
 // use MyDpo\Performers\Translation\CreateKey;
