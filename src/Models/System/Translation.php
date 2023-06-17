@@ -37,7 +37,9 @@ class Translation extends Model
     }
 
     public static function doExport($input, $record) {
-        return (new Export($input))->Perform();
+
+        $result = (new Export($input))->Perform();
+        dd($result); 
     }
     
 
