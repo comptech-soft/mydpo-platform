@@ -1,9 +1,9 @@
 <?php
 
-namespace MyDpo\Performers\CustomerCentralizator;
+namespace MyDpo\Performers\Translation;
 
 use MyDpo\Helpers\Perform;
-use MyDpo\Exports\CustomerCentralizator\Exporter;
+// use MyDpo\Exports\CustomerCentralizator\Exporter;
 
 class Export extends Perform {
 
