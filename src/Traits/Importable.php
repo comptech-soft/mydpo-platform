@@ -5,6 +5,15 @@ namespace MyDpo\Traits;
 trait Importable { 
 
     public static function doImport($input, $record) {
+
+        dd($input['file']);
+
+        \Excel::import(self::GetExporter($input), $this->file);
+
+        $this->payload = [
+            'record' => NULL,
+        ];
+
        
         dd($input, $record);
         // if(! \Storage::exists('public/exports/' . \Auth::user()->id) )
@@ -15,7 +24,7 @@ trait Importable {
         // $file_name = 'public/exports/' . \Auth::user()->id. '/' . $input['file_name'];
 
         // \Excel::store(
-        //     self::GetExporter($input), 
+        //     , 
         //     $file_name, 
         //     NULL, 
         //     NULL, 
