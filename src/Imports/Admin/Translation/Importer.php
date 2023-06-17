@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Imports\Admin\Translations;
+namespace MyDpo\Imports\Admin\Translation;
 
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
