@@ -9,7 +9,7 @@ class Export extends Perform {
 
     public function Action() {
 
-        dd(__METHOD__);
+        dd($this->input);
 		
 		// $this->createUserFolder();
 		
