@@ -11,11 +11,19 @@ class Export extends Perform {
 	
 		$this->createUserFolder();
 		
-        $exporter = new Exporter();
+        // $exporter = new Exporter();
 		
 		$file_name = 'public/exports/' . \Auth::user()->id. '/' . $this->file_name;
 		
-		\Excel::store($exporter, $file_name, NULL, NULL, ['visibility' => 'public']);
+		$result = \Excel::store(
+            new Exporter(), 
+            $file_name, 
+            NULL, 
+            NULL, 
+            ['visibility' => 'public']
+        );
+
+        dd($result);
 			
 		$file = \Str::replace('public', 'storage', $file_name);
 		
