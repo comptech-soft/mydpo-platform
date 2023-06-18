@@ -10,12 +10,8 @@ use MyDpo\Traits\Importable;
 use MyDpo\Traits\Truncable;
 use MyDpo\Exports\Translation\Exporter;
 use MyDpo\Imports\Admin\Translation\Importer;
-// use MyDpo\Performers\Translation\CreateKey;
-// use MyDpo\Performers\Translation\CreateFile;
+use MyDpo\Performers\Translation\CreateKeys;
 use MyDpo\Performers\Translation\Activate;
-// use MyDpo\Performers\Translation\Export;
-// use MyDpo\Helpers\Performers\Datatable\GetItems;   
-// use MyDpo\Helpers\Performers\Datatable\DoAction; 
 
 class Translation extends Model 
 {
@@ -53,9 +49,9 @@ class Translation extends Model
     // }
     
 
-    // public static function createKey($input) {
-    //     return (new CreateKey($input))->Perform();
-    // }
+    public static function createKeys($input) {
+        return (new CreateKeys($input))->Perform();
+    }
 
     public static function GetRules($action, $input) {
        

@@ -29,8 +29,8 @@ class TranslationsController extends Controller
         return Translation::activate($r->all());
     }
 
-    public function createKey(Request $r) {
-        return Translation::createKey($r->all());
+    public function createKeys(Request $r) {
+        return Translation::createKeys($r->all());
     }
 
 }

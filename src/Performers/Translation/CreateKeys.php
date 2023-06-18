@@ -3,9 +3,9 @@
 namespace MyDpo\Performers\Translation;
 
 use MyDpo\Helpers\Perform;
-use MyDpo\Models\Translation;
+use MyDpo\Models\System\Translation;
 
-class CreateKey extends Perform {
+class CreateKeys extends Perform {
 
     public function Action() {
 
