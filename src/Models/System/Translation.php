@@ -7,6 +7,7 @@ use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 use MyDpo\Traits\Exportable;
 use MyDpo\Traits\Importable;
+use MyDpo\Traits\Truncable;
 use MyDpo\Exports\Translation\Exporter;
 use MyDpo\Imports\Admin\Translation\Importer;
 // use MyDpo\Performers\Translation\CreateKey;
@@ -19,7 +20,7 @@ use MyDpo\Performers\Translation\Activate;
 class Translation extends Model 
 {
 
-    use Itemable, Actionable, Exportable, Importable;
+    use Itemable, Actionable, Exportable, Importable, Truncable;
 
     protected $table = 'translations';
 
