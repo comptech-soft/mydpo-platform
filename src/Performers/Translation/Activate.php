@@ -3,7 +3,7 @@
 namespace MyDpo\Performers\Translation;
 
 use MyDpo\Helpers\Perform;
-use MyDpo\Models\SysConfig;
+use MyDpo\Models\System\SysConfig;
 
 class Activate extends Perform {
 

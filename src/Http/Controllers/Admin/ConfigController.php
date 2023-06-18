@@ -5,7 +5,7 @@ namespace MyDpo\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Helpers\Response;
-use MyDpo\Models\SysConfig;
+use MyDpo\Models\System\SysConfig;
 
 class ConfigController extends Controller
 {

@@ -3,7 +3,7 @@
 namespace MyDpo\Performers\Curs;
 
 use MyDpo\Helpers\Perform;
-use MyDpo\Models\SysConfig;
+use MyDpo\Models\System\SysConfig;
 use App\Models\User;
 use MyDpo\Models\Knolyx;
 use MyDpo\Models\Curs;
