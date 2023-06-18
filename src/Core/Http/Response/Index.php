@@ -4,6 +4,7 @@ namespace MyDpo\Core\Http\Response;
 
 use Illuminate\View\View;
 use MyDpo\Models\System\SysMenu;
+use MyDpo\Models\System\Translation;
 
 class Index {
 
@@ -32,7 +33,8 @@ class Index {
             'app-name' =>  config('app.name'),
             'base-url' => config('app.url'),
             'csrf-token' => csrf_token(),
-            'locale' => app()->getLocale(),
+            'locale' => $locale,
+            'translations' => ($locale == 'ro' ? [] : Translation::pluck('en', 'ro')->toArray()),
             'platform' => config('app.platform'),
             'env' => config('app.env'),
             'menus' => SysMenu::getMenus(),
