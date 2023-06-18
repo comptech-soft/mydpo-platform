@@ -13,18 +13,19 @@ use Illuminate\Contracts\View\View;
 class Exporter implements FromView, WithStrictNullComparison, ShouldAutoSize 
 {
 
-    // public $registru = NULL;
-    // public $juststructure = 1;
-    // public $departamente_ids = NULL;
+    public $input = NULL;
 
-    public function __construct() {
-
-        
+    public function __construct($input) 
+    {
+        $this->input = $input;    
     }
 
-    public function view(): View {
+    public function view(): View 
+    {
+        $records = ( ($this->input['structure'] == 1) ? [] : Translation::orderBy('ro')->get());
+
         return view('exports.admin.translations.export', [
-            'records' => Translation::orderBy('ro')->get(),
+            'records' => $records,
         ]);
     }
 
