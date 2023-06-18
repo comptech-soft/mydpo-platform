@@ -4,6 +4,7 @@ namespace MyDpo\Core\Http\Response;
 
 use Illuminate\View\View;
 use MyDpo\Models\System\SysMenu;
+use MyDpo\Models\System\SysConfig;
 use MyDpo\Models\System\Translation;
 
 class Index {
@@ -45,6 +46,7 @@ class Index {
             'platform' => config('app.platform'),
             'env' => config('app.env'),
             'menus' => SysMenu::getMenus(),
+            'sysconfig' => SysConfig::all()->pluck('value', 'code'),
         ];
 
         return view($template)->withScripts($scripts)->withPayload($payload)->withStyles($styles);
