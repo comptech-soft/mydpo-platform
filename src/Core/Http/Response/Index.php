@@ -26,6 +26,13 @@ class Index {
             $styles = [$styles];
         }
 
+        $locale = app()->getLocale();
+
+        if( ! in_array($locale, ['ro', 'en']) )
+        {
+            $locale = config('app.locale');
+        }
+
         $payload = [
             ...$payload,
             'session' => session()->all(),
