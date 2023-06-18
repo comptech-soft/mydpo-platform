@@ -69,4 +69,18 @@ class Translation extends Model
     //     return $r;
     // }
 
+    public static function GetRules($action, $input) {
+       
+        if( ! in_array($action, ['insert', 'update']) )
+        {
+            return NULL;
+        }
+
+        $result = [
+            'ro' => 'required|unique:translations,ro',
+        ];
+
+        return $result;
+    }
+
 }
