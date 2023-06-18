@@ -6,8 +6,9 @@ trait Truncable {
 
     public static function doTruncate($input, $record) {
        
-        dd(__METHOD__);
+        self::query()->delete();
 
+        return TRUE;
     }
     
 }
