@@ -7,7 +7,7 @@ use MyDpo\Models\SysConfig;
 use MyDpo\Models\Platform;
 use MyDpo\Models\MaterialStatus;
 use MyDpo\Models\Language;
-use MyDpo\Models\Translation;
+use MyDpo\Models\System\Translation;
 use MyDpo\Models\Role;
 
 class GetConfig extends Perform {
