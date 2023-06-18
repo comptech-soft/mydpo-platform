@@ -36,18 +36,9 @@ class Translation extends Model
         return new Importer($input); 
     }
 
-    // public static function createFile($input) {
-    //     return (new CreateFile($input))->Perform();
-    // }
-
     public static function activate($input) {
         return (new Activate($input))->Perform();
     }
-
-    // public static function doExport($input, $record) {
-    //     // return (new Export($input))->Perform();
-    // }
-    
 
     public static function createKeys($input) {
         return (new CreateKeys($input))->Perform();
@@ -63,6 +54,11 @@ class Translation extends Model
         $result = [
             'ro' => 'required|unique:translations,ro',
         ];
+
+        if($action == 'update')
+        {
+            $result['ro'] .= (',' . $input['id']);
+        }
 
         return $result;
     }

@@ -4,7 +4,6 @@ use MyDpo\Http\Controllers\Validation\ValidationController;
 use MyDpo\Http\Controllers\Database\DatabaseController;
 use MyDpo\Http\Controllers\Usersession\ActivateAccountController;
 
-use MyDpo\Http\Controllers\System\TranslationsController;
 use MyDpo\Http\Controllers\System\UploadsController;
 use MyDpo\Http\Controllers\System\KnolyxController;
 
@@ -36,11 +35,5 @@ Route::prefix('database')->group(function () {
     Route::post('update-field', [DatabaseController::class, 'updateField']);
     
 });
-
-// Route::prefix('translations')->group(function () {
-
-//     Route::post('create-key', [TranslationsController::class, 'createKey']);
-    
-// });
 
 Route::put('/knolyx/webhook-process', [KnolyxController::class, 'webhookProcess']);
