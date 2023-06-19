@@ -1,6 +1,6 @@
 <?php
 
-use MyDpo\Http\Controllers\Admin\CategoriesController;
+use MyDpo\Http\Controllers\Admin\Livrabile\CategoriesController;
 use MyDpo\Http\Controllers\Admin\CursuriadresareController;
 
 Route::prefix('categories')->group( function() {
