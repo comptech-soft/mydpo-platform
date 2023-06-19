@@ -21,6 +21,10 @@ class CentralizatoareController extends Controller
         return Centralizator::getRecords($r->all());
     }
 
+    public function doAction($action, Request $r) {
+        return Centralizator::doAction($action, $r->all());
+    }
+
     // public function getCustomerAsociere(Request $r) {
     //     return Centralizator::getCustomerAsociere($r->all());
     // }
@@ -29,8 +33,6 @@ class CentralizatoareController extends Controller
     //     return Centralizator::saveCustomerAsociere($r->all());
     // }
     
-    // public function doAction($action, Request $r) {
-    //     return Centralizator::doAction($action, $r->all());
-    // }
+
 
 }
