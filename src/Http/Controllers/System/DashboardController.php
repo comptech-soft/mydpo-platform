@@ -36,11 +36,13 @@ class DashboardController extends Controller {
 
             return Response::View(
                 '~templates.index', 
-                asset('apps/' . $asset . '/index.js'),
+                asset('apps/system/dashboard/index.js'),
                 [],
                 $r->all()
             );
         }
+
+        dd(__METHOD__);
 
         if($settings = $user->settings()->where('code', 'b2b-active-customer')->first())
         {
