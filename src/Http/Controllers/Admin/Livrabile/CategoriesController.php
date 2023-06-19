@@ -13,7 +13,7 @@ class CategoriesController extends Controller
     public function index(Request $r) {
         return Index::View(
             styles: ['css/app.css'],
-            scripts: ['apps/admin/centralizatoare/index.js']
+            scripts: ['apps/admin/categories/index.js']
         );        
     }
 
