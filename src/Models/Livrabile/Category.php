@@ -12,7 +12,7 @@ use MyDpo\Traits\Itemable;
 class Category extends Model {
     
     use Itemable;
-    
+
     protected $table = 'categories';
 
     protected $casts = [
@@ -61,6 +61,17 @@ class Category extends Model {
 
     public static function doAction($action, $input) {
         return (new DoAction($action, $input, __CLASS__))->Perform();
+    }
+
+    public static function doDelete($input, $record) {
+
+        $record->deleted = 1;
+        $record->deleted_by = \Auth::user()->id;
+
+        $record->name = '#' . $record->id . '-' . $record->name;
+
+        $record->save();
+        return $record;
     }
 
     public static function isValidName($input) {
