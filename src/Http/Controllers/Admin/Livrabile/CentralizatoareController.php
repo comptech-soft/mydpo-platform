@@ -5,7 +5,7 @@ namespace MyDpo\Http\Controllers\Admin\Livrabile;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
-use MyDpo\Models\Centralizator;
+use MyDpo\Models\Livrabile\Centralizator;
 
 class CentralizatoareController extends Controller 
 {
@@ -17,9 +17,9 @@ class CentralizatoareController extends Controller
         );        
     }
 
-    // public function getRecords(Request $r) {
-    //     return Centralizator::getRecords($r->all());
-    // }
+    public function getRecords(Request $r) {
+        return Centralizator::getRecords($r->all());
+    }
 
     // public function getCustomerAsociere(Request $r) {
     //     return Centralizator::getCustomerAsociere($r->all());
