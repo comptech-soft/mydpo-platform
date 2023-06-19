@@ -1,24 +1,32 @@
 <?php
 
-namespace MyDpo\Http\Controllers\Admin;
+namespace MyDpo\Http\Controllers\Admin\Livrabile;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
-use MyDpo\Models\Centralizator;
+use MyDpo\Models\Planconformare;
 
-class CentralizatoareController extends Controller 
+class PlanconformareController extends Controller 
 {
     
     public function index(Request $r) {
         return Index::View(
             styles: ['css/app.css'],
-            scripts: ['apps/admin/centralizatoare/index.js']
+            scripts: ['apps/admin/planuri-conformare/index.js']
         );        
     }
 
     // public function getRecords(Request $r) {
-    //     return Centralizator::getRecords($r->all());
+    //     return Planconformare::getRecords($r->all());
+    // }
+
+    // public function doAction($action, Request $r) {
+    //     return Planconformare::doAction($action, $r->all());
+    // }
+
+    // public function reorder(Request $r) {
+    //     return Planconformare::reorder($r->all());
     // }
 
     // public function getCustomerAsociere(Request $r) {
@@ -29,8 +37,6 @@ class CentralizatoareController extends Controller
     //     return Centralizator::saveCustomerAsociere($r->all());
     // }
     
-    // public function doAction($action, Request $r) {
-    //     return Centralizator::doAction($action, $r->all());
-    // }
+
 
 }
