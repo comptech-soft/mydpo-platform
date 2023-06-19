@@ -5,7 +5,6 @@ namespace MyDpo\Models\Livrabile;
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
-use MyDpo\Models\Category;
 use MyDpo\Scopes\NotdeletedScope;
 use MyDpo\Performers\Centralizator\SaveCustomerAsociere;
 

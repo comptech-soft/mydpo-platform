@@ -5,7 +5,7 @@ namespace MyDpo\Http\Controllers\Admin\Livrabile;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
-use MyDpo\Models\Category;
+use MyDpo\Models\Livrabile\Category;
 
 class CategoriesController extends Controller 
 {
@@ -17,9 +17,9 @@ class CategoriesController extends Controller
         );        
     }
 
-    // public function getItems($type = NULL, Request $r) {
-    //     return Category::getItems($r->all(), $type);
-    // }
+    public function getRecords(Request $r) {
+        return Category::getRecords($r->all());
+    }
 
     // public function doAction($action, Request $r) {
     //     return Category::doAction($action, $r->all());

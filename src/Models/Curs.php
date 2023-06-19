@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Helpers\Performers\Datatable\DoAction;
-use MyDpo\Models\Category;
+use MyDpo\Models\Livrabile\Category;
 use MyDpo\Models\Cursadresare;
 use MyDpo\Traits\DaysDifference;
 use MyDpo\Performers\Curs\OpenKnolyxCourse;

@@ -3,7 +3,7 @@
 namespace MyDpo\Rules\Category;
 
 use Illuminate\Contracts\Validation\Rule;
-use MyDpo\Models\Category;
+use MyDpo\Models\Livrabile\Category;
 
 class UniqueName implements Rule {
 
