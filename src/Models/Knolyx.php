@@ -2,6 +2,8 @@
 
 namespace MyDpo\Models;
 
+use MyDpo\Models\System\SysConfig;
+
 class Knolyx {
 
     /**
