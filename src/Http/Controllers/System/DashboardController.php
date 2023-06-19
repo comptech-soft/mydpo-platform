@@ -38,14 +38,7 @@ class DashboardController extends Controller {
             return Index::View(
                 styles: ['css/app.css'],
                 scripts: ['apps/system/dashboard/index.js']
-            );  
-
-            // return Response::View(
-            //     '~templates.index', 
-            //     asset('apps/system/dashboard/index.js'),
-            //     [],
-            //     $r->all()
-            // );
+            );
         }
 
         dd(__METHOD__);
