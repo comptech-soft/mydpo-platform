@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
 use MyDpo\Models\Planconformare;
 
-class PlanconformareController extends Controller 
+class PlanuriconformareController extends Controller 
 {
     
     public function index(Request $r) {
