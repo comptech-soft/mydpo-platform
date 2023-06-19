@@ -13,7 +13,7 @@ class TranslationsController extends Controller
     public function index(Request $r) {
         return Index::View(
             styles: ['css/app.css'],
-            scripts: ['apps/admin/translations/index.js']
+            scripts: ['apps/system/translations/index.js']
         );        
     }
 
