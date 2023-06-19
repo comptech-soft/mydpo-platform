@@ -21,9 +21,9 @@ class CategoriesController extends Controller
         return Category::getRecords($r->all());
     }
 
-    // public function doAction($action, Request $r) {
-    //     return Category::doAction($action, $r->all());
-    // }
+    public function doAction($action, Request $r) {
+        return Category::doAction($action, $r->all());
+    }
 
     // public function isValidName(Request $r) {
     //     return Category::isValidName($r->all());
