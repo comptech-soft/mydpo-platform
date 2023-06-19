@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Models;
+namespace MyDpo\Models\Livrabile;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
