@@ -1,10 +1,10 @@
 <?php
 
-namespace MyDpo\Http\Controllers\Admin;
+namespace MyDpo\Http\Controllers\Admin\Livrabile;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use MyDpo\Models\CentralizatorColoana;
+use MyDpo\Models\Livrabile\CentralizatorColoana;
 
 class CentralizatoareColumnsController extends Controller {
     
