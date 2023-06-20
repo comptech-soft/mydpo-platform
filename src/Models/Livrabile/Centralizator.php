@@ -51,6 +51,10 @@ class Centralizator extends Model {
         return $this->belongsTo(Category::class, 'category_id')->select(['id', 'name']);
     }
 
+    public function columns() {
+        return $this->hasMany(CentralizatorColoana::class, 'centralizator_id');
+    }
+
     public static function GetQuery() {
         return 
             self::query()
@@ -67,8 +71,8 @@ class Centralizator extends Model {
                 'centralizatoare.description', 
                 'centralizatoare.body', 
                 'centralizatoare.status'
-            ]);
-        ;
+            ])
+            ->withCount('columns');
     }
 
     public static function saveCustomerAsociere($input) {
