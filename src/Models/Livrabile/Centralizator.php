@@ -138,7 +138,7 @@ class Centralizator extends Model {
             }
         }
 
-        return $record;
+        return self::find($record->id);
     }
 
     public static function doUpdate($input, $record) {
