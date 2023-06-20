@@ -37,11 +37,6 @@ class CentralizatorColoana extends Model {
         'updated_by'
     ];
 
-    public static function GetQuery() {
-        return self::query()
-            ->whereraw("( (`centralizatoare-columns`.`type` NOT IN ('VISIBILITY', 'STATUS', 'DEPARTMENT')) OR (`centralizatoare-columns`.`type` IS NULL))");
-    }
-
     public static function doInsert($input, $record) {
 
         $input = [
