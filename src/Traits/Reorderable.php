@@ -6,7 +6,7 @@ use MyDpo\Performers\Traits\Reorder;
 
 trait Reorderable { 
 
-    public static function reorder($input) {
+    public static function doReorder($input) {
 
         return (new Reorder([
             ...$input, 

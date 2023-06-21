@@ -5,10 +5,11 @@ namespace MyDpo\Models\Livrabile;
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
+use MyDpo\Traits\Reorderable;
 
 class CentralizatorColoana extends Model {
 
-    use Itemable, Actionable;
+    use Itemable, Actionable, Reorderable;
     
     protected $table = 'centralizatoare-columns';
 
