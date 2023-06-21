@@ -5,7 +5,7 @@ namespace MyDpo\Http\Controllers\Admin\Livrabile;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
-use MyDpo\Models\Planconformare;
+use MyDpo\Models\Livrabile\Planconformare;
 
 class PlanuriconformareController extends Controller 
 {
@@ -17,9 +17,9 @@ class PlanuriconformareController extends Controller
         );        
     }
 
-    // public function getRecords(Request $r) {
-    //     return Planconformare::getRecords($r->all());
-    // }
+    public function getRecords(Request $r) {
+        return Planconformare::getRecords($r->all());
+    }
 
     // public function doAction($action, Request $r) {
     //     return Planconformare::doAction($action, $r->all());
