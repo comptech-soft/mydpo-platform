@@ -21,9 +21,9 @@ class PlanuriconformareController extends Controller
         return Planconformare::getRecords($r->all());
     }
 
-    // public function doAction($action, Request $r) {
-    //     return Planconformare::doAction($action, $r->all());
-    // }
+    public function doAction($action, Request $r) {
+        return Planconformare::doAction($action, $r->all());
+    }
 
     // public function reorder(Request $r) {
     //     return Planconformare::reorder($r->all());
