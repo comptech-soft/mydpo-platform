@@ -13,4 +13,8 @@ class CustomersStatusesController extends Controller
         return CustomerStatus::getItems($r->all());
     }
 
+    public function getRecords(Request $r) {
+        return CustomerStatus::getRecords($r->all());
+    }
+
 }
