@@ -12,7 +12,7 @@ class LocalitatiController extends Controller {
     public function index(Request $r) {
         return Response::View(
             '~templates.index', 
-            asset('apps/localitati/index.js')
+            asset('apps/admin/localitati/index.js')
         );
     }
 
