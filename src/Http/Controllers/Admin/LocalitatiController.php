@@ -4,16 +4,16 @@ namespace MyDpo\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use MyDpo\Helpers\Response;
+use MyDpo\Core\Http\Response\Index;
 use MyDpo\Models\City;
 
 class LocalitatiController extends Controller {
     
     public function index(Request $r) {
-        return Response::View(
-            '~templates.index', 
-            asset('apps/admin/localitati/index.js')
-        );
+        return Index::View(
+            styles: ['css/app.css'],
+            scripts: ['apps/admin/localitati/index.js']
+        );        
     }
 
     public function getItems(Request $r) {
