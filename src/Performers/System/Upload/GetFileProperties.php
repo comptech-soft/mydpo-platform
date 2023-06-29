@@ -1,15 +1,16 @@
 <?php
 
-namespace MyDpo\Performers\Upload;
+namespace MyDpo\Performers\System\Upload;
 
 use MyDpo\Helpers\Perform;
-use MyDpo\Models\Upload;
+use MyDpo\Models\System\Upload;
 use MyDpo\Models\User;
 
 class GetFileProperties extends Perform {
 
-
     public function Action() {
+        
+        dd($this->input);
         
         $user = (array_key_exists('user_id', $this->input) && $this->input['user_id'])
             ? User::find($this->input['user_id'])
