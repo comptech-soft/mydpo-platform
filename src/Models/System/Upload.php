@@ -63,8 +63,11 @@ class Upload extends Model {
 
     public static function getFileProperties($input) {
 
-        dd($input);
-        
+        $input = [
+            ...$input,
+            'user_id' => \Auth::user()->id,
+        ];
+
         return 
             (new GetFileProperties(
                 $input, 

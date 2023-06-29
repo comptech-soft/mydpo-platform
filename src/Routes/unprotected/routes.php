@@ -4,7 +4,6 @@ use MyDpo\Http\Controllers\Validation\ValidationController;
 use MyDpo\Http\Controllers\Database\DatabaseController;
 use MyDpo\Http\Controllers\Usersession\ActivateAccountController;
 
-// use MyDpo\Http\Controllers\System\UploadsController;
 use MyDpo\Http\Controllers\System\KnolyxController;
 
 
@@ -14,10 +13,6 @@ use MyDpo\Http\Controllers\System\KnolyxController;
 Route::get('activare-cont-client/{token}', [ActivateAccountController::class, 'index'])->name('activate.account');
 Route::post('system/activare-cont-client', [ActivateAccountController::class, 'activateAccount']);
 Route::post('system/activare-cont-client/get-infos-by-token', [ActivateAccountController::class, 'getInfosByToken']);
-
-// Route::prefix('system')->group(function () {
-//     Route::post('get-file-properties', [UploadsController::class, 'getFileProperties']);
-// });
 
 Route::prefix('validation')->group(function () {
 
