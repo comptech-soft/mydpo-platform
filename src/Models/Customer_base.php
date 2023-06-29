@@ -29,6 +29,8 @@ class Customer_base extends Model {
         'updated_by' => 'integer',
         'deleted_by' => 'integer',
 		'default_folders_created' => 'integer',
+        'has_contract' => 'integer',
+        'has_order' => 'integer',
     ];
 
     protected $fillable = [
@@ -53,6 +55,11 @@ class Customer_base extends Model {
         'created_by',
         'updated_by',
         'deleted_by',
+        'country',
+        'region',
+        'city_name',
+        'has_contract',
+        'has_order',
     ];
 
     protected static function booted() {
@@ -362,8 +369,26 @@ class Customer_base extends Model {
     }
 
     public static function beforeShowIndex() {
+        foreach(self::whereStatus('active')->get() as $i => $customer)
+        {
 
-        dd(__METHOD__);
+            $customer->city_name = $customer->city 
+                ? $customer->city->name 
+                : NULL;
+            
+            $customer->region = $customer->city && $customer->city->region 
+                ? $customer->city->region->name 
+                : NULL;
+            
+            $customer->country = $customer->city && $customer->city->region && $customer->city->region->country 
+                ? $customer->city->region->country->name 
+                : NULL;
+
+            $customer->has_contract = !! $customer->contracts->count() ? 1 : 0;
+                
+
+            $customer->save();
+        }
     }
 
 }
