@@ -9,17 +9,10 @@ use MyDpo\Models\User;
 class GetFileProperties extends Perform {
 
     public function Action() {
-        
-        dd($this->input);
-        
+               
         $user = (array_key_exists('user_id', $this->input) && $this->input['user_id'])
             ? User::find($this->input['user_id'])
-            : NULL;
-
-        if(! $user)
-        {
-            $user = \Auth::check();
-        }
+            : \Auth::user();
 
         if( ! $user )
         {
