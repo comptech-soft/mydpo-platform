@@ -11,10 +11,14 @@ class CustomersController extends Controller
 {
     
     public function index(Request $r) {
+
+        Customer::beforeShowIndex();
+
         return Index::View(
             styles: ['css/app.css'],
             scripts: ['apps/admin/customers/index.js']
-        );        
+        );
+        
     }
 
     public function getItems(Request $r) {

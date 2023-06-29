@@ -184,7 +184,8 @@ class Customer_base extends Model {
         {
             $defaultFolders = CustomerFolderDefault::whereNull('parent_id')->get();
 
-            foreach($defaultFolders as $i => $defaultFolder) {
+            foreach($defaultFolders as $i => $defaultFolder) 
+            {
                 $this->createDefaultFolder($defaultFolder, NULL);
             }
 
@@ -358,6 +359,11 @@ class Customer_base extends Model {
         }
 
         return \DB::select($sql);
+    }
+
+    public static function beforeShowIndex() {
+
+        dd(__METHOD__);
     }
 
 }
