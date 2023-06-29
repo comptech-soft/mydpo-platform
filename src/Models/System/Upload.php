@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Models;
+namespace MyDpo\Models\System;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -62,6 +62,9 @@ class Upload extends Model {
     }
 
     public static function getFileProperties($input) {
+
+        dd($input);
+        
         return 
             (new GetFileProperties(
                 $input, 
@@ -70,7 +73,7 @@ class Upload extends Model {
                 ], 
                 []
             ))
-            ->SetSuccessMessage('OKKK...')
+            ->SetSuccessMessage(NULL)
             ->SetExceptionMessage([
                 \Exception::class => NULL,
             ])
