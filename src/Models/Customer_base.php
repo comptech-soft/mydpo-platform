@@ -73,7 +73,7 @@ class Customer_base extends Model {
             return NULL;
         }
 
-        return $this->logo['url'];
+        return array_key_exists('url', $this->logo) ? $this->logo['url'] : NULL;
     }
 
     public function getFullCityAttribute() {
