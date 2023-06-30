@@ -32,13 +32,39 @@ class CustomerDashboardItem extends Model {
         'props',
     ];
 
-    protected $with = ['ancestors'];
+    // protected $with = ['ancestors'];
 
     
     public static function getItems($input) {
         return (new GetItems($input, self::query()->with(['children']), __CLASS__))->Perform();
     }
 
+    public static function getByColumns() {
+
+        $r = [];
+
+        foreach(self::all() as $i => $record)
+        {
+            // dd($record->column_no);
+
+            if( ! array_key_exists($record->column_no, $r) )
+            {
+                $r[$record->column_no] = [];
+            }
+
+            $r[$record->column_no][] = $record;
+
+        }
+
+        foreach($r as $key => $items)
+        {
+
+            $r[$key] = collect($items)->sortBy('order_no');
+        }
+
+        return $r;
+    }
+    
     public static function saveReorderedItems($input) {
         return 
             (new SaveReorderedItems($input))
