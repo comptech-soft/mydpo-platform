@@ -384,7 +384,13 @@ class Customer_base extends Model {
                 ? $customer->city->region->country->name 
                 : NULL;           
             
-            $customer->has_contract = (!! $customer->contracts->count() ? 1 : 0);       
+            $customer->has_contract = (!! $customer->contracts->count() ? 1 : 0);    
+            
+            if($customer->has_contract)
+            {
+                $days_difference = $customer->contracts->first()->days_difference;
+                $customer->contract_expirat = ($days_difference['days'] > 0 ? 1 : 0);
+            }
 
             $customer->save();
         }
