@@ -13,7 +13,7 @@ class CustomerDashboardController extends Controller {
     public function index(Request $r) {
         return Index::View(
             styles: ['css/app.css'],
-            scripts: ['apps/admin/customer-dashboard/index.js']
+            scripts: ['apps/customer/dashboard/index.js']
         );        
     }
 
