@@ -59,7 +59,4 @@ class CustomerDashboardItem extends Model {
             ->Perform();
     }
 
-
-
-    
 }
