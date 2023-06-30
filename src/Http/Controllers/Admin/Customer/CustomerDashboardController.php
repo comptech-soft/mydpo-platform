@@ -18,7 +18,7 @@ class CustomerDashboardController extends Controller {
             payload: [
                 'customer_id' => $customer_id,
                 'customer' => Customer::find($customer_id),
-                'dashboard_items' => CustomerDashboardItem::all(),
+                'dashboard_items' => CustomerDashboardItem::getByColumns(),
             ],
         );        
     }
