@@ -31,10 +31,7 @@ class CustomerDashboardItem extends Model {
         'visible_on_b2b',
         'props',
     ];
-
-    // protected $with = ['ancestors'];
-
-    
+   
     public static function getItems($input) {
         return (new GetItems($input, self::query()->with(['children']), __CLASS__))->Perform();
     }
@@ -45,44 +42,39 @@ class CustomerDashboardItem extends Model {
 
         foreach(self::all() as $i => $record)
         {
-            // dd($record->column_no);
-
             if( ! array_key_exists($record->column_no, $r) )
             {
                 $r[$record->column_no] = [];
             }
-
             $r[$record->column_no][] = $record;
-
         }
 
         foreach($r as $key => $items)
         {
-
             $r[$key] = collect($items)->sortBy('order_no');
         }
 
         return $r;
     }
-    
-    public static function saveReorderedItems($input) {
-        return 
-            (new SaveReorderedItems($input))
-            ->SetSuccessMessage(NULL)
-            ->SetExceptionMessage([
-                \Exception::class => NULL,
-            ])
-            ->Perform();
-    }
 
-    public static function saveProfileReorderedItems($input) {
-        return 
-            (new SaveProfileReorderedItems($input))
-            ->SetSuccessMessage(NULL)
-            ->SetExceptionMessage([
-                \Exception::class => NULL,
-            ])
-            ->Perform();
-    }
+    // public static function saveReorderedItems($input) {
+    //     return 
+    //         (new SaveReorderedItems($input))
+    //         ->SetSuccessMessage(NULL)
+    //         ->SetExceptionMessage([
+    //             \Exception::class => NULL,
+    //         ])
+    //         ->Perform();
+    // }
+
+    // public static function saveProfileReorderedItems($input) {
+    //     return 
+    //         (new SaveProfileReorderedItems($input))
+    //         ->SetSuccessMessage(NULL)
+    //         ->SetExceptionMessage([
+    //             \Exception::class => NULL,
+    //         ])
+    //         ->Perform();
+    // }
 
 }
