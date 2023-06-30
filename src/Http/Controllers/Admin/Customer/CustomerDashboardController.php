@@ -10,10 +10,13 @@ use MyDpo\Models\UserCustomer;
 class CustomerDashboardController extends Controller {
 
 
-    public function index(Request $r) {
+    public function index($customer_id, Request $r) {
         return Index::View(
             styles: ['css/app.css'],
-            scripts: ['apps/customer/dashboard/index.js']
+            scripts: ['apps/customer/dashboard/index.js'],
+            payload: [
+                'customer_id' => $customer_id,
+            ],
         );        
     }
 
