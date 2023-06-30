@@ -219,9 +219,14 @@ class Customer_base extends Model {
 
     public static function doDelete($action, $record) {
         $record->deleted = 1;
+        $record->name = '#' . $record->id . '#' . $record->name;
         $record->save();
 
         return $record;
+    }
+
+    public static function AfterAction($action, $input, $payload) {
+        $payload['record']->SyncronizeField();
     }
     
     public static function GetRules($action, $input) {
@@ -368,31 +373,35 @@ class Customer_base extends Model {
         return \DB::select($sql);
     }
 
+    public function SyncronizeField() {
+        $this->city_name = $this->city 
+            ? $this->city->name 
+            : NULL;
+            
+        $this->region = $this->city && $this->city->region 
+            ? $this->city->region->name 
+            : NULL;
+            
+        $this->country = $this->city && $this->city->region && $this->city->region->country 
+            ? $this->city->region->country->name 
+            : NULL;           
+            
+        $this->has_contract = (!! $this->contracts->count() ? 1 : 0);    
+            
+        if($this->has_contract)
+        {
+            $days_difference = $this->contracts->first()->days_difference;
+            $this->contract_expirat = ($days_difference['days'] > 0 ? 1 : 0);
+        }
+
+        $this->save();
+    }
+
     public static function beforeShowIndex() {
         foreach(self::all() as $i => $customer)
         {
-
-            $customer->city_name = $customer->city 
-                ? $customer->city->name 
-                : NULL;
+            $customer->SyncronizeField();
             
-            $customer->region = $customer->city && $customer->city->region 
-                ? $customer->city->region->name 
-                : NULL;
-            
-            $customer->country = $customer->city && $customer->city->region && $customer->city->region->country 
-                ? $customer->city->region->country->name 
-                : NULL;           
-            
-            $customer->has_contract = (!! $customer->contracts->count() ? 1 : 0);    
-            
-            if($customer->has_contract)
-            {
-                $days_difference = $customer->contracts->first()->days_difference;
-                $customer->contract_expirat = ($days_difference['days'] > 0 ? 1 : 0);
-            }
-
-            $customer->save();
         }
     }
 
