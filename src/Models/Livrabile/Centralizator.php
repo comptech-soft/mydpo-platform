@@ -142,7 +142,7 @@ class Centralizator extends Model {
             }
         }
 
-        return self::find($record->id);
+        return self::withCount('columns')->find($record->id);
     }
 
     public static function doUpdate($input, $record) {
