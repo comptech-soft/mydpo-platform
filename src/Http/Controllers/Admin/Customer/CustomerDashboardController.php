@@ -5,7 +5,7 @@ namespace MyDpo\Http\Controllers\Admin\Customer;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
-use MyDpo\Models\UserCustomer;
+use MyDpo\Models\Customer_base as Customer;
 
 class CustomerDashboardController extends Controller {
 
@@ -16,6 +16,7 @@ class CustomerDashboardController extends Controller {
             scripts: ['apps/customer/dashboard/index.js'],
             payload: [
                 'customer_id' => $customer_id,
+                'customer' => Customer::find($customer_id),
             ],
         );        
     }
