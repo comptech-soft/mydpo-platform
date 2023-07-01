@@ -9,8 +9,6 @@ use MyDpo\Helpers\Performers\Datatable\GetItems;
 
 class CustomerDashboardItem extends Model {
 
-    use NodeTrait;
-
     protected $table = 'customers-entities-items';
 
     protected $casts = [
