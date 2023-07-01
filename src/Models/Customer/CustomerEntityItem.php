@@ -10,27 +10,31 @@ class CustomerEntityItem extends Model {
 
     protected $casts = [
         'props' => 'json',
+        'platform' => 'json',
     ];
     
     protected $fillable = [
         'id',
-        'name',
-        'slug',
-        'icon',
-        'image',
         'title',
-        'slot',
+        'slug',
+        'platform',
+        'image',
         'order_no',
-        'visible_on_admin',
-        'visible_on_b2b',
         'props',
     ];
+   
    
     public static function getByPlatform() {
 
         $r = [];
 
-        
+        foreach(self::all() as $i => $record)
+        {
+            if( in_array(config('app.platform'), $record->platform) )
+            {
+                $r[] = $record;
+            }
+        }
 
         return $r;
     }

@@ -13,19 +13,22 @@ class CustomerDashboardItem extends Model {
 
     protected $casts = [
         'props' => 'json',
-        'platform' => 'json',
     ];
-    
+
     protected $fillable = [
         'id',
-        'title',
+        'name',
         'slug',
-        'platform',
+        'icon',
         'image',
+        'title',
+        'slot',
         'order_no',
+        'visible_on_admin',
+        'visible_on_b2b',
         'props',
     ];
-   
+    
     public static function getByColumns() {
 
         $r = [];
