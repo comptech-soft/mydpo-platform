@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
 use MyDpo\Models\Customer;
-use MyDpo\Models\CustomerDashboardItem;
+use MyDpo\Models\Customer\CustomerDashboardItem;
+use MyDpo\Models\Customer\CustomerEntityItem;
 
 class CustomerDashboardController extends Controller {
 
@@ -19,6 +20,7 @@ class CustomerDashboardController extends Controller {
                 'customer_id' => $customer_id,
                 'customer' => Customer::find($customer_id),
                 'dashboard_items' => CustomerDashboardItem::getByColumns(),
+                'entities_items' => CustomerEntityItem::getByPlatform(),
             ],
         );        
     }
