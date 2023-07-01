@@ -5,7 +5,7 @@ namespace MyDpo\Models\Customer;
 use Illuminate\Database\Eloquent\Model;
 // use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Models\TemplateNotification;
-use MyDpo\Models\Customer;
+use MyDpo\Models\Customer_base as Customer;
 use MyDpo\Models\User;
 use MyDpo\Traits\Itemable;
 
