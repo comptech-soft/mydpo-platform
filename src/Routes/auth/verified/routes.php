@@ -30,7 +30,6 @@ Route::middleware('verified')->group(function () {
     // require __DIR__ . '/customers-instrumente-lucru/routes.php';
 
     require __DIR__ . '/customers-cursuri/routes.php';
-    require __DIR__ . '/customers-departments/routes.php';
     require __DIR__ . '/customers-contracte/routes.php';
     require __DIR__ . '/customers-orders/routes.php';
     require __DIR__ . '/customers-services/routes.php';
