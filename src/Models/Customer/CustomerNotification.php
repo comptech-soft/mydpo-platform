@@ -3,7 +3,10 @@
 namespace MyDpo\Models\Customer;
 
 use Illuminate\Database\Eloquent\Model;
-use MyDpo\Helpers\Performers\Datatable\GetItems;
+// use MyDpo\Helpers\Performers\Datatable\GetItems;
+use MyDpo\Models\TemplateNotification;
+use MyDpo\Models\Customer;
+use MyDpo\Models\User;
 use MyDpo\Traits\Itemable;
 
 class CustomerNotification extends Model {
@@ -97,8 +100,8 @@ class CustomerNotification extends Model {
         return $this->belongsTo(User::class, 'sender_id');
     }
 
-    public static function getItems($input) {
-        return (new GetItems($input, self::query(), __CLASS__))->Perform();
-    }
+    // public static function getItems($input) {
+    //     return (new GetItems($input, self::query(), __CLASS__))->Perform();
+    // }
 
 }
