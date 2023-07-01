@@ -6,8 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class CustomerEntityItem extends Model {
 
-    use NodeTrait;
-
     protected $table = 'customers-dashboard-items';
 
     protected $casts = [
