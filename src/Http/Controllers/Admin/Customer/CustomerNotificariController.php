@@ -33,9 +33,9 @@ class CustomerNotificariController extends Controller {
     //     );
     // }
 
-    // public function getRecords(Request $r) {
-    //     return CustomerNotification::getRecords($r->all());
-    // }
+    public function getRecords(Request $r) {
+        return CustomerNotification::getRecords($r->all());
+    }
 
     // public function getItems(Request $r) {
     //     return CustomerNotification::getItems($r->all());
