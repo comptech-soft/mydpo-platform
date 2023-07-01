@@ -1,9 +1,9 @@
 <?php
 
-use MyDpo\Http\Controllers\Admin\TeamController;
+// use MyDpo\Http\Controllers\Admin\TeamController;
 
-Route::prefix('team')->group( function() {
+// Route::prefix('team')->group( function() {
         
-    Route::get('/', [TeamController::class, 'index']);        
+//     Route::get('/', [TeamController::class, 'index']);        
 
-});
+// });
