@@ -10,7 +10,7 @@ use MyDpo\Core\Http\Response\Index;
 use MyDpo\Models\Customer;
 
 
-class CustomersPlanConformareController extends Controller {
+class CustomerPlanConformareController extends Controller {
     
     public function index($customer_id, Request $r) {
         return Index::View(
