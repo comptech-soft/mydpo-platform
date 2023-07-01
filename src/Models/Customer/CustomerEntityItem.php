@@ -28,7 +28,7 @@ class CustomerEntityItem extends Model {
 
         $r = [];
 
-        foreach(self::all() as $i => $record)
+        foreach(self::orderBy('order_no')->get() as $i => $record)
         {
             if( in_array(config('app.platform'), $record->platform) )
             {
