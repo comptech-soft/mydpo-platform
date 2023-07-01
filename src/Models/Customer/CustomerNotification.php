@@ -96,9 +96,9 @@ class CustomerNotification extends Model {
         return $this->belongsTo(User::class, 'sender_id')->select(['email', 'first_name', 'last_name']);
     }
 
-    public function type() {
-        return $this->belongsTo(User::class, 'sender_id');
-    }
+    // public function type() {
+    //     return $this->belongsTo(User::class, 'sender_id');
+    // }
 
     // public static function getItems($input) {
     //     return (new GetItems($input, self::query(), __CLASS__))->Perform();
