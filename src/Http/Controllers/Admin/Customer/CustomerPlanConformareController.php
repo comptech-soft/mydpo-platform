@@ -1,14 +1,11 @@
 <?php
 
-namespace MyDpo\Http\Controllers\Auth;
-
 namespace MyDpo\Http\Controllers\Admin\Customer;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
 use MyDpo\Models\Customer;
-
 
 class CustomerPlanConformareController extends Controller {
     
