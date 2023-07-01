@@ -4,38 +4,30 @@ namespace MyDpo\Models\Customer;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
-use Kalnoy\Nestedset\NodeTrait;
-use MyDpo\Performers\CustomerDashboardItem\SaveReorderedItems;
-use MyDpo\Performers\CustomerDashboardItem\SaveProfileReorderedItems;
+// use MyDpo\Performers\CustomerDashboardItem\SaveReorderedItems;
+// use MyDpo\Performers\CustomerDashboardItem\SaveProfileReorderedItems;
 
 class CustomerDashboardItem extends Model {
 
     use NodeTrait;
 
-    protected $table = 'customers-dashboard-items';
+    protected $table = 'customers-entities-items';
 
     protected $casts = [
         'props' => 'json',
+        'platform' => 'json',
     ];
     
     protected $fillable = [
         'id',
-        'name',
-        'slug',
-        'icon',
-        'image',
         'title',
-        'slot',
+        'slug',
+        'platform',
+        'image',
         'order_no',
-        'visible_on_admin',
-        'visible_on_b2b',
         'props',
     ];
    
-    public static function getItems($input) {
-        return (new GetItems($input, self::query()->with(['children']), __CLASS__))->Perform();
-    }
-
     public static function getByColumns() {
 
         $r = [];
