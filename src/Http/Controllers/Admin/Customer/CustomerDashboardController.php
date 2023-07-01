@@ -5,7 +5,7 @@ namespace MyDpo\Http\Controllers\Admin\Customer;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
-use MyDpo\Models\Customer_base as Customer;
+use MyDpo\Models\Customer;
 use MyDpo\Models\CustomerDashboardItem;
 
 class CustomerDashboardController extends Controller {
