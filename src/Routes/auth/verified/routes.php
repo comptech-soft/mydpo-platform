@@ -23,7 +23,7 @@ Route::middleware('verified')->group(function () {
     // require __DIR__ . '/customers-documents/routes.php';
     // require __DIR__ . '/customers-registre/routes.php';    
     // require __DIR__ . '/customers-chestionare/routes.php';
-    require __DIR__ . '/customers-studii-caz/routes.php';
+    // require __DIR__ . '/customers-studii-caz/routes.php';
     require __DIR__ . '/customers-infografice/routes.php';
     require __DIR__ . '/customers-sfaturi-dpo/routes.php';
     require __DIR__ . '/customers-dpia-tool/routes.php';
