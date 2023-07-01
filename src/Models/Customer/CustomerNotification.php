@@ -93,7 +93,7 @@ class CustomerNotification extends Model {
     }
 
     public function sender() {
-        return $this->belongsTo(User::class, 'sender_id')->select(['email']);
+        return $this->belongsTo(User::class, 'sender_id')->select(['email', 'first_name', 'last_name']);
     }
 
     public function type() {
