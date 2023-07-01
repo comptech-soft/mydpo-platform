@@ -37,7 +37,7 @@ Route::middleware('verified')->group(function () {
     require __DIR__ . '/customers-materiale/routes.php';
     // require __DIR__ . '/customers-team/routes.php';
     // require __DIR__ . '/customers-rapoarte-lunare/routes.php';
-    require __DIR__ . '/customers-taskuri/routes.php';
+    // require __DIR__ . '/customers-taskuri/routes.php';
     require __DIR__ . '/customers-emails/routes.php';
     require __DIR__ . '/customers-notificari/routes.php';
 
