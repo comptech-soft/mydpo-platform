@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
 use MyDpo\Models\Customer;
 
-
 class CustomerRapoarteLunareController extends Controller {
     
     public function index($customer_id, Request $r) {
@@ -20,6 +19,5 @@ class CustomerRapoarteLunareController extends Controller {
             ],
         );        
     }
-
   
 }
