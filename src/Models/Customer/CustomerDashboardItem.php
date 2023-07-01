@@ -9,7 +9,7 @@ use MyDpo\Helpers\Performers\Datatable\GetItems;
 
 class CustomerDashboardItem extends Model {
 
-    protected $table = 'customers-entities-items';
+    protected $table = 'customers-dashboard-items';
 
     protected $casts = [
         'props' => 'json',

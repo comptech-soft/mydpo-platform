@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class CustomerEntityItem extends Model {
 
-    protected $table = 'customers-dashboard-items';
+    protected $table = 'customers-entities-items';
 
     protected $casts = [
         'props' => 'json',
