@@ -75,13 +75,13 @@ class CustomerNotification extends Model {
             return [
                 'color' => 'green',
                 'icon' => 'mdi-checkbox-marked-circle',
-                'text' => 'Citit',
+                'text' => 'Citită',
             ];
         }
         return [
             'color' => 'red',
             'icon' => 'mdi-circle',
-            'text' => 'Necitit',
+            'text' => 'Necitită',
         ];
     }
 
