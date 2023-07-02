@@ -51,6 +51,7 @@ class CustomerNotification extends Model {
 
     protected $with = [
         'sender', 
+        'receiver',
         'customer'
     ];
 
@@ -95,12 +96,10 @@ class CustomerNotification extends Model {
     public function sender() {
         return $this->belongsTo(User::class, 'sender_id');
     }
-
     
-
-    // public function type() {
-    //     return $this->belongsTo(User::class, 'sender_id');
-    // }
+    public function receiver() {
+        return $this->belongsTo(User::class, 'receiver_id');
+    }
 
     public static function doAction($action, $input) {
         return (new DoAction($action, $input, __CLASS__))->Perform();
