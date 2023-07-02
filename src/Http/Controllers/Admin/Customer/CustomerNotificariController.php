@@ -21,21 +21,12 @@ class CustomerNotificariController extends Controller {
         );        
     }
 
-
-    // public function index($customer_id, Request $r) {
-
-    //     return Response::View(
-    //         '~templates.index', 
-    //         asset('apps/customer-notificari/index.js'),
-    //         [], 
-    //         [
-    //             'customer_id' => $customer_id,
-    //         ]
-    //     );
-    // }
-
     public function getRecords(Request $r) {
         return CustomerNotification::getRecords($r->all());
+    }
+
+    public function doAction($action, Request $r) {
+        return CustomerNotification::doAction($action, $r->all());
     }
 
     // public function getItems(Request $r) {
