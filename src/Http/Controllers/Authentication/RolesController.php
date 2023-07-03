@@ -24,7 +24,7 @@ class RolesController extends Controller {
     // }
 
     public function getRecords(Request $r) {
-        return Role::getItems($r->all());
+        return Role::getRecords($r->all());
     }
 
     // // public function doAction($action, Request $r) {
