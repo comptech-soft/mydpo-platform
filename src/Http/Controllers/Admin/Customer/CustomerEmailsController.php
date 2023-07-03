@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
 use MyDpo\Models\Customer;
+use MyDpo\Models\Customer\CustomerEmail;
 
 class CustomerEmailsController extends Controller {
 
@@ -20,18 +21,8 @@ class CustomerEmailsController extends Controller {
         );        
     }
 
-    
-    // public function index($customer_id, Request $r) {
-
-    //     return Response::View(
-    //         '~templates.index', 
-    //         asset('apps/customer-emails/index.js'),
-    //         [], 
-    //         [
-    //             'customer_id' => $customer_id,
-    //         ]
-    //     );
-    // }
-
+    public function getRecords(Request $r) {
+        return CustomerEmail::getRecords($r->all());
+    }
   
 }
