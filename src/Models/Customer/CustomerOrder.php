@@ -3,17 +3,18 @@
 namespace MyDpo\Models\Customer;
 
 use Illuminate\Database\Eloquent\Model;
-use MyDpo\Helpers\Performers\Datatable\GetItems;
-use MyDpo\Helpers\Performers\Datatable\DoAction;
-use MyDpo\Models\Customer_base as Customer;
-use MyDpo\Models\Contract;
-use MyDpo\Models\CustomerService;
+// use MyDpo\Helpers\Performers\Datatable\GetItems;
+// use MyDpo\Helpers\Performers\Datatable\DoAction;
+// use MyDpo\Models\Customer_base as Customer;
+// use MyDpo\Models\Contract;
+// use MyDpo\Models\CustomerService;
 use MyDpo\Rules\CustomerOrder\OrderNumber;
 use MyDpo\Traits\DaysDifference;
+use MyDpo\Traits\Itemable;
 
 class CustomerOrder extends Model {
     
-    use DaysDifference;
+    use Itemable, DaysDifference;
 
     protected $table = 'customers-orders';
 

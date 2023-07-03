@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
 use MyDpo\Models\Customer;
+use MyDpo\Models\Customer\CustomerOrder;
 
 class CustomerComenziController extends Controller {
 
@@ -19,23 +20,11 @@ class CustomerComenziController extends Controller {
             ],
         );        
     }
-    
-    // public function index($customer_id, Request $r) {
+       
+    public function getRecords(Request $r) {
+        return CustomerOrder::getRecords($r->all());
+    }
 
-    //     return Response::View(
-    //         '~templates.index', 
-    //         asset('apps/customer-comenzi/index.js'),
-    //         [], 
-    //         [
-    //             'customer_id' => $customer_id,
-    //         ]
-    //     );
-    // }
-
-    // public function getItems(Request $r) {
-    //     return CustomerOrder::getItems($r->all());
-    // }
-    
     // public function doAction($action, Request $r) {
     //     return CustomerOrder::doAction($action, $r->all());
     // }
