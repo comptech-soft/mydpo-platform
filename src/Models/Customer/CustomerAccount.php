@@ -75,7 +75,9 @@ class CustomerAccount extends Model {
         'department'
     ];
 
-    protected $appends = ['role'];
+    protected $appends = [
+        'role'
+    ];
 
     public function getRoleAttribute() {
         $r = NULL;
