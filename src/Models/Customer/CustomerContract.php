@@ -1,8 +1,7 @@
 <?php
 
-namespace MyDpo\Models;
+namespace MyDpo\Models\Customer;
 
-use MyDpo\Models\Contract;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Models\CustomerOrder;

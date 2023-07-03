@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
 use MyDpo\Models\Customer;
+use MyDpo\Models\Customer\CustomerContract;
 
 class CustomerContracteController extends Controller {
     
@@ -20,22 +21,9 @@ class CustomerContracteController extends Controller {
         );        
     }
 
-    // public function index($customer_id, Request $r) {
-
-    //     return Response::View(
-    //         '~templates.index', 
-    //         asset('apps/customer-contracte/index.js'),
-    //         [], 
-    //         [
-    //             'customer_id' => $customer_id,
-    //             'insert' => $r->insert,
-    //         ]
-    //     );
-    // }
-
-    // public function getItems(Request $r) {
-    //     return CustomerContract::getItems($r->all());
-    // }
+    public function getRecords(Request $r) {
+        return CustomerContract::getRecords($r->all());
+    }
     
     // public function doAction($action, Request $r) {
     //     return CustomerContract::doAction($action, $r->all());
