@@ -22,8 +22,8 @@ class CustomerContract extends Contract {
         return $this->hasMany(CustomerOrder::class, 'contract_id')->orderBy('date_to', 'desc');
     }
     
-    public static function getItems($input) {
-        return (new GetItems($input, self::query()->with(['orders.services.service.type', 'customer']), __CLASS__))->Perform();
-    }
+    // public static function getItems($input) {
+    //     return (new GetItems($input, self::query()->with(['orders.services.service.type', 'customer']), __CLASS__))->Perform();
+    // }
 
 }
