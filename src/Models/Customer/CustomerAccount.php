@@ -3,7 +3,7 @@
 namespace MyDpo\Models\Customer;
 
 use Illuminate\Database\Eloquent\Model;
-use MyDpo\Helpers\Performers\Datatable\GetItems;
+// use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Traits\Itemable;
 use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Models\User;
@@ -98,24 +98,24 @@ class CustomerAccount extends Model {
         return $this->belongsTo(CustomerDepartment::class, 'department_id');
     }
 
-    public static function getItems($input) {
+    // public static function getItems($input) {
 
-        $q = self::query()->leftJoin(
-            'users',
-            function($j) {
-                $j->on('users.id', '=', 'customers-persons.user_id');
-            }
-        )
-        ->leftJoin(
-            'customers',
-            function($j) {
-                $j->on('customers.id', '=', 'customers-persons.customer_id');
-            }
-        )
-        ->select('customers-persons.*');
+    //     $q = self::query()->leftJoin(
+    //         'users',
+    //         function($j) {
+    //             $j->on('users.id', '=', 'customers-persons.user_id');
+    //         }
+    //     )
+    //     ->leftJoin(
+    //         'customers',
+    //         function($j) {
+    //             $j->on('customers.id', '=', 'customers-persons.customer_id');
+    //         }
+    //     )
+    //     ->select('customers-persons.*');
 
-        return (new GetItems($input, $q->with(['customer', 'department', 'user']), __CLASS__))->Perform();
-    }
+    //     return (new GetItems($input, $q->with(['customer', 'department', 'user']), __CLASS__))->Perform();
+    // }
 
     public static function doAction($action, $input) {
         return (new DoAction($action, $input, __CLASS__))->Perform();
