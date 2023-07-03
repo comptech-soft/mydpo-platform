@@ -3,7 +3,7 @@
 namespace MyDpo\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use MyDpo\Models\Role;
+use MyDpo\Models\Authentication\Role;
 use MyDpo\Models\Customer;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
 

@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
-use MyDpo\Models\Role;
+use MyDpo\Models\Authentication\Role;
 use MyDpo\Models\RoleUser;
 use MyDpo\Models\Customer;
 use MyDpo\Models\UserSetting;
