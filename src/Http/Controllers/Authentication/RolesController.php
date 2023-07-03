@@ -16,20 +16,13 @@ class RolesController extends Controller {
         );        
     }
 
-    // public function index(Request $r) {
-    //     return Response::View(
-    //         '~templates.index', 
-    //         asset('apps/roles/index.js')
-    //     );
-    // }
-
     public function getRecords(Request $r) {
         return Role::getRecords($r->all());
     }
 
-    // // public function doAction($action, Request $r) {
-    // //     return User::doAction($action, $r->all());
-    // // }
+    public function doAction($action, Request $r) {
+        return Role::doAction($action, $r->all());
+    }
 
     // public function saveRolePermissions(Request $r) {
     //     return Role::saveRolePermissions($r->all());
