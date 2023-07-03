@@ -8,7 +8,7 @@ use MyDpo\Models\Platform;
 use MyDpo\Models\MaterialStatus;
 use MyDpo\Models\Language;
 use MyDpo\Models\System\Translation;
-use MyDpo\Models\Role;
+use MyDpo\Models\Authentication\Role;
 
 class GetConfig extends Perform {
 

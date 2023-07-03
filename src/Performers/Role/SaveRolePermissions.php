@@ -3,7 +3,7 @@
 namespace MyDpo\Performers\Role;
 
 use MyDpo\Helpers\Perform;
-use MyDpo\Models\Role;
+use MyDpo\Models\Authentication\Role;
 
 class SaveRolePermissions extends Perform {
 
