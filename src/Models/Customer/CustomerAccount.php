@@ -8,7 +8,7 @@ use MyDpo\Traits\Itemable;
 use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Models\User;
 use MyDpo\Models\Customer;
-use MyDpo\Models\CustomerDepartment;
+// use MyDpo\Models\CustomerDepartment;
 use MyDpo\Models\RoleUser;
 use MyDpo\Models\Activation;
 use MyDpo\Rules\CustomerAccount\ValidAccountEmail;
