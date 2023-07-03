@@ -59,4 +59,10 @@ class CustomerTeam extends Model {
     //         ->Perform();
     // }
 
+    public static function GetQuery() {
+        return 
+            self::query()
+            ->whereHas('user');
+    }
+
 }
