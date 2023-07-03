@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
 use MyDpo\Models\Customer;
+use MyDpo\Models\Customer\CustomerAccount;
 
 class CustomerConturiController extends Controller {
     
@@ -38,9 +39,9 @@ class CustomerConturiController extends Controller {
     //     return CustomerAccount::getItems($r->all());
     // }
 
-    // public function getRecords(Request $r) {
-    //     return CustomerAccount::getRecords($r->all());
-    // }
+    public function getRecords(Request $r) {
+        return CustomerAccount::getRecords($r->all());
+    }
     
     // public function doAction($action, Request $r) {
     //     return CustomerAccount::doAction($action, $r->all());
