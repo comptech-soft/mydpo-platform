@@ -5,12 +5,13 @@ namespace MyDpo\Models\Authentication;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
-use MyDpo\Performers\Role\SaveRolePermissions;
-// use MyDpo\Helpers\Performers\Datatable\GetItems;
+use MyDpo\Traits\Actionable;
+
+// use MyDpo\Performers\Role\SaveRolePermissions;
 
 class Role extends Model {
 
-    use Itemable;
+    use Itemable, Actionable;
 
     protected $table = 'roles';
 
@@ -45,24 +46,21 @@ class Role extends Model {
         )->withPivot('customer_id')->withTimestamps();
     }
 
-    public static function saveRolePermissions($input) {
-        return (new SaveRolePermissions($input))->Perform();
-    }
-    
-    public static function getBySlug() {
-
-        $result = [];
-        
-        foreach(self::all() as $role)
-        {
-            $result[$role->slug] = $role;
-        }
-
-        return $result;
-    }
-
-    // public static function getItems($input) {
-    //     return (new GetItems($input, self::query(), __CLASS__))->Perform();
+    // public static function saveRolePermissions($input) {
+    //     return (new SaveRolePermissions($input))->Perform();
     // }
+    
+    // public static function getBySlug() {
+
+    //     $result = [];
+        
+    //     foreach(self::all() as $role)
+    //     {
+    //         $result[$role->slug] = $role;
+    //     }
+
+    //     return $result;
+    // }
+
 
 }
