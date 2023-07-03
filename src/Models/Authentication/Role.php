@@ -50,17 +50,17 @@ class Role extends Model {
     //     return (new SaveRolePermissions($input))->Perform();
     // }
     
-    // public static function getBySlug() {
-
-    //     $result = [];
-        
-    //     foreach(self::all() as $role)
-    //     {
-    //         $result[$role->slug] = $role;
-    //     }
-
-    //     return $result;
-    // }
+    /**
+     * Se foloseste in config
+     */
+    public static function getBySlug() {
+        $result = [];
+        foreach(self::all() as $role)
+        {
+            $result[$role->slug] = $role;
+        }
+        return $result;
+    }
 
 
 }
