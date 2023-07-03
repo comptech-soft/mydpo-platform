@@ -266,11 +266,20 @@ class CustomerAccount extends Model {
     }
 
     public static function GetQuery() {
-        return self::query()->leftJoin(
-            'users',
-            function($q) {
-                $q->on('users.id', '=', 'customers-persons.user_id');
-            }
-        )->select('customers-persons.*');
+        return 
+            self::query()
+            ->leftJoin(
+                'users',
+                function($q) {
+                    $q->on('users.id', '=', 'customers-persons.user_id');
+                }
+            )
+            ->leftJoin(
+                'customers-departamente',
+                function($q) {
+                    $q->on('customers-departamente.id', '=', 'customers-persons.department_id');
+                }
+            )
+            ->select('customers-persons.*');
     }
 }
