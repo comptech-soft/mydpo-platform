@@ -5,7 +5,7 @@ namespace MyDpo\Http\Controllers\Authentication;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
-// use MyDpo\Models\Role;
+use MyDpo\Models\Authentication\Role;
 
 class RolesController extends Controller {
     
@@ -23,9 +23,9 @@ class RolesController extends Controller {
     //     );
     // }
 
-    // public function getItems(Request $r) {
-    //     return Role::getItems($r->all());
-    // }
+    public function getRecords(Request $r) {
+        return Role::getItems($r->all());
+    }
 
     // // public function doAction($action, Request $r) {
     // //     return User::doAction($action, $r->all());
