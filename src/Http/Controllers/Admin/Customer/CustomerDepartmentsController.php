@@ -20,28 +20,12 @@ class CustomerDepartmentsController extends Controller {
         );        
     }    
 
-    // public function index($customer_id, Request $r) {
-
-    //     return Response::View(
-    //         '~templates.index', 
-    //         asset('apps/customer-departments/index.js'),
-    //         [], 
-    //         [
-    //             'customer_id' => $customer_id,
-    //         ]
-    //     );
-    // }
-
-    // public function getItems(Request $r) {
-    //     return CustomerDepartment::getItems($r->all());
-    // }
-
-    // public function getRecords(Request $r) {
-    //     return CustomerDepartment::getRecords($r->all());
-    // }
+    public function getRecords(Request $r) {
+        return CustomerDepartment::getRecords($r->all());
+    }
     
-    // public function doAction($action, Request $r) {
-    //     return CustomerDepartment::doAction($action, $r->all());
-    // }
+    public function doAction($action, Request $r) {
+        return CustomerDepartment::doAction($action, $r->all());
+    }
 
 }
