@@ -6,9 +6,12 @@ namespace MyDpo\Models\Customer;
 // use MyDpo\Helpers\Performers\Datatable\DoAction;
 
 use MyDpo\Rules\CustomerContract\ContractNumber;
+use MyDpo\Traits\Itemable;
 
 class CustomerContract extends Contract {
 
+    use Itemable;
+    
     protected $appends = [
         'days_difference',
         'last_order',
