@@ -8,7 +8,7 @@ use MyDpo\Traits\Itemable;
 use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Models\User;
 use MyDpo\Models\Customer;
-// use MyDpo\Models\CustomerDepartment;
+use MyDpo\Models\Customer\CustomerDepartment;
 use MyDpo\Models\RoleUser;
 use MyDpo\Models\Activation;
 use MyDpo\Rules\CustomerAccount\ValidAccountEmail;
@@ -70,7 +70,10 @@ class CustomerAccount extends Model {
         static::addGlobalScope( new NotdeletedScope() );
     }
 
-    protected $with = ['user', 'department'];
+    protected $with = [
+        'user', 
+        'department'
+    ];
 
     protected $appends = ['role'];
 
