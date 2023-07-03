@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
 use MyDpo\Models\Customer;
+use MyDpo\Models\Customer\CustomerTeam;
 
 class CustomerTeamController extends Controller {
     
@@ -20,21 +21,9 @@ class CustomerTeamController extends Controller {
         );        
     }
 
-    // public function index($customer_id, Request $r) {
-
-    //     return Response::View(
-    //         '~templates.index', 
-    //         asset('apps/customer-team/index.js'),
-    //         [], 
-    //         [
-    //             'customer_id' => $customer_id,
-    //         ]
-    //     );
-    // }
-
-    // public function getItems(Request $r) {
-    //     return UserCustomer::getItems($r->all());
-    // }
+    public function getRecords(Request $r) {
+        return CustomerTeam::getRecords($r->all());
+    }
     
     // public function doAction($action, Request $r) {
     //     return UserCustomer::doAction($action, $r->all());
