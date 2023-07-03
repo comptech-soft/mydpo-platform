@@ -2,9 +2,9 @@
 
 namespace MyDpo\Models\Customer;
 
-use MyDpo\Helpers\Performers\Datatable\GetItems;
-use MyDpo\Helpers\Performers\Datatable\DoAction;
-use MyDpo\Models\CustomerOrder;
+// use MyDpo\Helpers\Performers\Datatable\GetItems;
+// use MyDpo\Helpers\Performers\Datatable\DoAction;
+
 use MyDpo\Rules\CustomerContract\ContractNumber;
 
 class CustomerContract extends Contract {
