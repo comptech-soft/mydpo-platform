@@ -262,4 +262,7 @@ class CustomerAccount extends Model {
         }
     }
 
+    public static function GetQuery() {
+        dd(__METHOD__);
+    }
 }
