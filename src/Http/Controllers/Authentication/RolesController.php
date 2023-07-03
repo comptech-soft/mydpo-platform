@@ -9,7 +9,7 @@ use MyDpo\Core\Http\Response\Index;
 
 class RolesController extends Controller {
     
-    public function index($customer_id, Request $r) {
+    public function index(Request $r) {
         return Index::View(
             styles: ['css/app.css'],
             scripts: ['apps/authentication/roles/index.js'],
