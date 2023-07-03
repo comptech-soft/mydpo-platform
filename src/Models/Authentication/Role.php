@@ -1,12 +1,12 @@
 <?php
 
-namespace MyDpo\Models;
+namespace MyDpo\Models\Authentication;
 
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
 use MyDpo\Performers\Role\SaveRolePermissions;
-use MyDpo\Helpers\Performers\Datatable\GetItems;
+// use MyDpo\Helpers\Performers\Datatable\GetItems;
 
 class Role extends Model {
 
@@ -61,8 +61,8 @@ class Role extends Model {
         return $result;
     }
 
-    public static function getItems($input) {
-        return (new GetItems($input, self::query(), __CLASS__))->Perform();
-    }
+    // public static function getItems($input) {
+    //     return (new GetItems($input, self::query(), __CLASS__))->Perform();
+    // }
 
 }
