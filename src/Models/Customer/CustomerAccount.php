@@ -263,6 +263,11 @@ class CustomerAccount extends Model {
     }
 
     public static function GetQuery() {
-        dd(__METHOD__);
+        return self::query()->leftJoin(
+            'users',
+            function($q) {
+                $q->on('users.id', '=', 'customers-persons.user_id');
+            }
+        )->select('customers-persons.*');
     }
 }
