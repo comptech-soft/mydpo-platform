@@ -4,11 +4,18 @@ namespace MyDpo\Http\Controllers\Authentication;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use MyDpo\Helpers\Response;
-use MyDpo\Models\Role;
+use MyDpo\Core\Http\Response\Index;
+// use MyDpo\Models\Role;
 
 class RolesController extends Controller {
     
+    public function index($customer_id, Request $r) {
+        return Index::View(
+            styles: ['css/app.css'],
+            scripts: ['apps/authentication/roles/index.js'],
+        );        
+    }
+
     // public function index(Request $r) {
     //     return Response::View(
     //         '~templates.index', 
