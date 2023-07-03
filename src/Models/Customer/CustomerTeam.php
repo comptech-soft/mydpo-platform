@@ -1,14 +1,17 @@
 <?php
 
-namespace MyDpo\Models;
+namespace MyDpo\Models\Customer;
 
 use Illuminate\Database\Eloquent\Model;
-use MyDpo\Helpers\Performers\Datatable\GetItems;
+// use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Models\Customer;
 use MyDpo\Models\User;
-use MyDpo\Performers\UserCustomer\UpdateUserCustomers;
+// use MyDpo\Performers\UserCustomer\UpdateUserCustomers;
+use MyDpo\Traits\Itemable;
 
-class UserCustomer extends Model {
+class CustomerTeam extends Model {
+
+    use Itemable;
 
     protected $table = 'users-customers';
 
@@ -42,14 +45,14 @@ class UserCustomer extends Model {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public static function getItems($input) {
-        return (new GetItems($input, self::query()->with(['user', 'customer']), __CLASS__))->Perform();
-    }
+    // public static function getItems($input) {
+    //     return (new GetItems($input, self::query()->with(['user', 'customer']), __CLASS__))->Perform();
+    // }
 
-    public static function updateUserCustomers($input) {
-        return (new UpdateUserCustomers($input))
-            ->SetSuccessMessage('Setare cu succes')
-            ->Perform();
-    }
+    // public static function updateUserCustomers($input) {
+    //     return (new UpdateUserCustomers($input))
+    //         ->SetSuccessMessage('Setare cu succes')
+    //         ->Perform();
+    // }
 
 }
