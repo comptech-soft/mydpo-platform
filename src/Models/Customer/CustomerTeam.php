@@ -62,7 +62,14 @@ class CustomerTeam extends Model {
     public static function GetQuery() {
         return 
             self::query()
-            ->whereHas('user');
+            ->leftJoin(
+                'users',
+                function($q) {
+                    $q->on('users.id', '=', 'users-customers.user_id');
+                }
+            )
+            ->whereHas('user')
+            ->select('users-customers.*');;
     }
 
 }

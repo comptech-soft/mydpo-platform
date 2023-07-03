@@ -12,7 +12,7 @@ Route::middleware(['isadmin'])->prefix('admin')->group(function () {
 
     require __DIR__ . '/persons/routes.php';
     require __DIR__ . '/users/routes.php';
-    require __DIR__ . '/roles/routes.php';
+    // require __DIR__ . '/roles/routes.php';
     require __DIR__ . '/permissions/routes.php';
 
     require __DIR__ . '/planificare/routes.php';
