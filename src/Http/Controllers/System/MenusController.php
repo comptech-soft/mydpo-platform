@@ -22,21 +22,21 @@ class MenusController extends Controller {
         );
     }
 
-    public function getRecords(Request $r) {
-        return SysMenu::getRecords($r->all());
-    }
+    // public function getRecords(Request $r) {
+    //     return SysMenu::getRecords($r->all());
+    // }
 
-    public function doAction($action, Request $r) {
-        return SysMenu::doAction($action, $r->all());
-    }
+    // public function doAction($action, Request $r) {
+    //     return SysMenu::doAction($action, $r->all());
+    // }
 
-    public function getVisibilities(Request $r) {
-        return SysMenu::getVisibilities($r->all());
-    }
+    // public function getVisibilities(Request $r) {
+    //     return SysMenu::getVisibilities($r->all());
+    // }
 
-    public function reorder(Request $r) {
-        return SysMenu::reorder($r->all());
-    }
+    // public function reorder(Request $r) {
+    //     return SysMenu::reorder($r->all());
+    // }
 
 
 }
