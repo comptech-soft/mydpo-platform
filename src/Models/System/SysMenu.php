@@ -47,20 +47,20 @@ class SysMenu extends Model {
     //     return self::whereSlug($slug)->first();
     // }
 
-    // public static function doInsert($input, $record) {
+    public static function doInsert($input, $record) {
 
-    //     if(! $input['parent_id'] )
-    //     {
-    //         $record = self::create($input);
-    //     }
-    //     else
-    //     {
-    //         $parent = self::find( $input['parent_id'] );
-    //         $record = $parent->children()->create($input);
-    //     }
+        if(! $input['parent_id'] )
+        {
+            $record = self::create($input);
+        }
+        else
+        {
+            $parent = self::find( $input['parent_id'] );
+            $record = $parent->children()->create($input);
+        }
 
-    //     return self::find($record->id);
-    // }
+        return self::find($record->id);
+    }
 
     // public static function getVisibilities($input) {
     //     return (new GetVisibilities($input))->Perform();
