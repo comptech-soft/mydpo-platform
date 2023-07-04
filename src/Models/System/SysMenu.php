@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 use Kalnoy\Nestedset\NodeTrait;
 // use MyDpo\Performers\SysMenu\GetVisibilities;
 use MyDpo\Traits\Itemable;
-// use MyDpo\Traits\Actionable;
+use MyDpo\Traits\Actionable;
 // use MyDpo\Traits\Reorderable;
 
 class SysMenu extends Model {
 
-    use NodeTrait, Itemable; //, Actionable, Reorderable;
+    use NodeTrait, Itemable, Actionable; //, Reorderable;
     
     protected $table = 'system-menus';
 
