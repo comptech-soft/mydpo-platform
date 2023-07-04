@@ -4,17 +4,18 @@ namespace MyDpo\Http\Controllers\Authentication;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-// use MyDpo\Helpers\Response;
+use MyDpo\Core\Http\Response\Index;
 // use MyDpo\Models\Permission;
 
 class PermissionsController extends Controller {
     
-    // public function index(Request $r) {
-    //     return Response::View(
-    //         '~templates.index', 
-    //         asset('apps/permissions/index.js')
-    //     );
-    // }
+    public function index(Request $r) {
+        return Index::View(
+            styles: ['css/app.css'],
+            scripts: ['apps/authentication/permissions/index.js'],
+        );        
+    }
+
 
     // public function getItems(Request $r) {
     //     return Permission::getItems($r->all());
