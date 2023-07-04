@@ -43,7 +43,7 @@ Route::middleware('verified')->group(function () {
 
     require __DIR__ . '/clienti/routes.php';
     require __DIR__ . '/users/routes.php';
-    require __DIR__ . '/permissions/routes.php';
+    // require __DIR__ . '/permissions/routes.php';
     require __DIR__ . '/users-statuses/routes.php';
     require __DIR__ . '/users-customers/routes.php';
     require __DIR__ . '/users-roles/routes.php';
