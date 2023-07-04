@@ -26,6 +26,7 @@ class SysMenu extends Model {
         'link',
         'description',
         'props',
+        'parent_id',
         'created_by',
         'updated_by'
     ];
