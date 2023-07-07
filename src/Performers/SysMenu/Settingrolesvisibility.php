@@ -10,8 +10,12 @@ class Settingrolesvisibility extends Perform {
 
     public function Action() {
 
-        
-        dd($this->input);
+        foreach($this->roles as $i => $input)
+        {
+            dd($this->menu_id, $input);
+        }
+
+        // dd($this->input);
     }
 
 }
