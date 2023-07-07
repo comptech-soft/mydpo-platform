@@ -67,6 +67,27 @@ class SysMenu extends Model {
 
     public static function doSettingrolesvisibility($input, $record) {
 
+       
+        $menu = self::find($input['menu_id']);
+
+        $result = $menu->Settingrolesvisibility($input);
+
+        foreach($menu->children as $i => $child)
+        {
+            $input = [
+                ...$input,
+                'menu_id' => $child->id,
+            ];
+
+            self::doSettingrolesvisibility($input, $record);
+        }
+
+        return $result;
+        
+    }
+
+    public function Settingrolesvisibility($input) {
+
         $r = [];
         foreach($input['roles'] as $i => $item)
         {
