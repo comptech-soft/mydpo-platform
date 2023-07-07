@@ -36,6 +36,7 @@ class SysMenu extends Model {
         'platform' => 'json',
         'props' => 'json',
         'order_no' => 'integer',
+        'parent_id' => 'integer',
         'created_by' => 'integer',
         'updated_by' => 'integer',
     ];
