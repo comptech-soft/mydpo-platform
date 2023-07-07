@@ -66,15 +66,25 @@ class SysMenu extends Model {
 
     public static function doSettingrolesvisibility($input, $record) {
 
-        dd($input);
-        // $result =  (new Settingrolesvisibility($input))->Perform();
+        $r = [];
+        foreach($input['roles'] as $i => $item)
+        {
+            
+            foreach(collect($item)->except(['role_id', 'slug'])->toArray() as $key => $data)
+            {
+                $input = [
+                    'menu_id' => $input['menu_id'],
+                    'role_id' => $item['role_id'],
+                    'platform' => $key,
+                    'visible' => $data['visible'],
+                    'disabled' => $data['disabled'],
+                ];
 
-        // if( ! $result['payload']['success'])
-        // {
-        //     return ! $result['payload'];
-        // }
+                $r[] = SysMenuRole::CreateOrUpdate($input);
+            }
+        }
 
-        // dd($result);
+        return $r;
     }
 
     // public static function getVisibilities($input) {
