@@ -45,9 +45,9 @@ class SysMenu extends Model {
         'children',
     ];
 
-    // public static function GetBySlug($slug) {
-    //     return self::whereSlug($slug)->first();
-    // }
+    function roles() {
+        return $this->hasMany(SysMenuRole::class, 'menu_id');
+    }
 
     public static function doInsert($input, $record) {
 
