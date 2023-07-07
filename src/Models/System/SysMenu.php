@@ -43,6 +43,7 @@ class SysMenu extends Model {
 
     protected $with = [
         'children',
+        'roles',
     ];
 
     function roles() {
