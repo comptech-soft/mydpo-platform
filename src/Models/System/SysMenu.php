@@ -4,7 +4,7 @@ namespace MyDpo\Models\System;
 
 use Illuminate\Database\Eloquent\Model;
 use Kalnoy\Nestedset\NodeTrait;
-use MyDpo\Performers\SysMenu\Settingrolesvisibility;
+// use MyDpo\Performers\SysMenu\Settingrolesvisibility;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 use MyDpo\Traits\Reorderable;
@@ -65,14 +65,16 @@ class SysMenu extends Model {
     }
 
     public static function doSettingrolesvisibility($input, $record) {
-        $result =  (new Settingrolesvisibility($input))->Perform();
 
-        if( ! $result['payload']['success'])
-        {
-            return ! $result['payload'];
-        }
+        dd($input);
+        // $result =  (new Settingrolesvisibility($input))->Perform();
 
-        dd($result);
+        // if( ! $result['payload']['success'])
+        // {
+        //     return ! $result['payload'];
+        // }
+
+        // dd($result);
     }
 
     // public static function getVisibilities($input) {
