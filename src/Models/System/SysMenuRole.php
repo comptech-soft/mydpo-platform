@@ -31,33 +31,34 @@ class SysMenuRole extends Model {
         'disabled' => 'integer',
     ];
 
-    public static function doMenusroles($input, $record) {
+    // public static function doMenusroles($input, $record) {
 
-        $record = [];
+    //     $record = [];
 
-        if($input['roles'] && is_array($input['roles']))
-        {
-            foreach($input['roles'] as $i => $role)
-            {
-                $data = [
-                    ...$role,
-                    'platform' => array_key_exists('platform', $role) ? implode(',', $role['platform']): '',
-                    'menu_id' => $input['menu_id'],
-                ];
+    //     if($input['roles'] && is_array($input['roles']))
+    //     {
+    //         foreach($input['roles'] as $i => $role)
+    //         {
+    //             $data = [
+    //                 ...$role,
+    //                 'platform' => array_key_exists('platform', $role) ? implode(',', $role['platform']): '',
+    //                 'menu_id' => $input['menu_id'],
+    //             ];
 
-                $record[] = self::CreateOrUpdate($data);
-            }
-        }
+    //             $record[] = self::CreateOrUpdate($data);
+    //         }
+    //     }
 
-        return $record;
-    }
+    //     return $record;
+    // }
 
     public static function CreateOrUpdate($input) {
 
         $record = self::where('menu_id', $input['menu_id'])
-            ->where('role_id', $input['role_id']);
+            ->where('role_id', $input['role_id'])
+            ->where('platform', $input['platform']);
         
-        if($input['customer_id'])
+        if(array_key_exists('customer_id', $input) && $input['customer_id'])
         {
             $record = $record->where('customer_id', $input['customer_id']);
         }
@@ -73,6 +74,8 @@ class SysMenuRole extends Model {
         {
             $record = self::create($input);
         }
+
+        return $record;
 
     }
 
