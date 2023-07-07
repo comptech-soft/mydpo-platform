@@ -4,18 +4,28 @@ namespace MyDpo\Performers\SysMenu;
 
 use MyDpo\Helpers\Perform;
 use MyDpo\Models\System\SysMenuRole;
-// use MyDpo\Models\System\SysActionRole;
 
 class Settingrolesvisibility extends Perform {
 
     public function Action() {
 
-        foreach($this->roles as $i => $input)
+        foreach($this->roles as $i => $item)
         {
-            dd($this->menu_id, $input);
+            
+            foreach(collect($item)->except(['role_id', 'slug'])->toArray() as $key => $data)
+            {
+                $input = [
+                    'menu_id' => $this->menu_id,
+                    'role_id' => $item['role_id'],
+                    'platform' => $key,
+                    'visible' => $data['visible'],
+                    'disabled' => $data['disabled'],
+                ];
+
+                SysMenuRole::CreateOrUpdate($input);
+            }
         }
 
-        // dd($this->input);
     }
 
 }
