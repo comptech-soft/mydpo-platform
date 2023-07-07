@@ -67,6 +67,11 @@ class SysMenu extends Model {
     public static function doSettingrolesvisibility($input, $record) {
         $result =  (new Settingrolesvisibility($input))->Perform();
 
+        if( ! $result['success'])
+        {
+            return $result;
+        }
+        
         dd($result);
     }
 
