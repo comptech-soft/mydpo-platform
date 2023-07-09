@@ -109,10 +109,6 @@ class SysMenu extends Model {
         return $r;
     }
 
-    // public static function getVisibilities($input) {
-    //     return (new GetVisibilities($input))->Perform();
-    // }
-    
     /**
      * 14.06.2023
      * Returneaza meniurile definite in sistem
