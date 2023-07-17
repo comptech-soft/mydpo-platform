@@ -115,16 +115,58 @@ class SysAction extends Model {
         return $r;
     }
 
-    public static function getActions() 
-    {
+    public static function getActions() {
+        
+        $user = \Auth::user();
+
+        if( ! $user )
+        {
+            return [];
+        }
+
         $r = [];
+        
         foreach(self::whereIsRoot()->get() as $i => $item)
         {
             if(in_array(config('app.platform'), $item->platform))
             {
-                $r[$item->slug] = $item;
+                $r[$item->slug] = $item->MakeAction($user);
             }
         }
+
         return $r;
+    }
+
+
+    protected function MakeAction($user) {
+        $r = [];
+
+        foreach($this->children as $i => $item)
+        {
+            $r[$item->slug] = $item->MakeVisibility($user);
+        }
+
+        return $r;
+    }
+
+    protected function MakeVisibility($user) {
+
+        if( config('app.platform') == 'admin')
+        {   
+            $action_role = $this->roles()
+                ->wherePlatform(config('app.platform'))
+                ->where('role_id', $user->role->id)
+                ->first();
+
+            $children = $this->MakeAction($user);
+
+            return [
+                'visible' => !! $action_role ? $action_role->attributes['visible'] : 0,
+                'disabled' => !! $action_role ? $action_role->attributes['disabled'] : 1,
+                ...$children,
+            ];
+        }
+
+        return [];
     }
 }

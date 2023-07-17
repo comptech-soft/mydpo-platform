@@ -41,8 +41,7 @@ class SysMenuRole extends Model {
         {
             $record = $record->where('customer_id', $input['customer_id']);
         }
-            
-            
+        
         $record = $record->first();
 
         if($record)
