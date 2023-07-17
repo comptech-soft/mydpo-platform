@@ -4,7 +4,7 @@ namespace MyDpo\Http\Controllers\System;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use MyDpo\Helpers\Response;
+use MyDpo\Core\Http\Response\Index;
 use MyDpo\Models\System\SysAction;
 
 class ActionsController extends Controller {
@@ -16,17 +16,6 @@ class ActionsController extends Controller {
             scripts: ['apps/system/actions/index.js']
         );
     }
-
-    // public function index(Request $r) {
-
-    //     dd();
-    //     return Response::View(
-    //         '~templates.index', 
-    //         asset('apps/system-actions/index.js'),
-    //         [],
-    //         $r->all()
-    //     );
-    // }
 
     public function getRecords(Request $r) {
         return SysAction::getRecords($r->all());
