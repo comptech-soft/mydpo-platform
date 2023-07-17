@@ -38,7 +38,7 @@ class SysActionRole extends Model {
 
     public static function CreateOrUpdate($input) {
 
-        $record = self::where('action_id', $input['menu_id'])
+        $record = self::where('action_id', $input['action_id'])
             ->where('role_id', $input['role_id'])
             ->where('platform', $input['platform']);
         
