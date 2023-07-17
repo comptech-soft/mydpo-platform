@@ -70,4 +70,26 @@ class SysAction extends Model {
 
         return self::find($record->id);
     }
+
+    public static function doSettingrolesvisibility($input, $record) {
+
+        dd($input);
+       
+        $menu = self::find($input['menu_id']);
+
+        $result = $menu->Settingrolesvisibility($input);
+
+        foreach($menu->children as $i => $child)
+        {
+            $input = [
+                ...$input,
+                'menu_id' => $child->id,
+            ];
+
+            self::doSettingrolesvisibility($input, $record);
+        }
+
+        return $result;
+        
+    }
 }
