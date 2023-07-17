@@ -31,27 +31,6 @@ class SysMenuRole extends Model {
         'disabled' => 'integer',
     ];
 
-    // public static function doMenusroles($input, $record) {
-
-    //     $record = [];
-
-    //     if($input['roles'] && is_array($input['roles']))
-    //     {
-    //         foreach($input['roles'] as $i => $role)
-    //         {
-    //             $data = [
-    //                 ...$role,
-    //                 'platform' => array_key_exists('platform', $role) ? implode(',', $role['platform']): '',
-    //                 'menu_id' => $input['menu_id'],
-    //             ];
-
-    //             $record[] = self::CreateOrUpdate($data);
-    //         }
-    //     }
-
-    //     return $record;
-    // }
-
     public static function CreateOrUpdate($input) {
 
         $record = self::where('menu_id', $input['menu_id'])

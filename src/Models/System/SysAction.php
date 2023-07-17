@@ -73,17 +73,16 @@ class SysAction extends Model {
 
     public static function doSettingrolesvisibility($input, $record) {
 
-        dd($input);
        
-        $menu = self::find($input['menu_id']);
+        $action = self::find($input['action_id']);
 
-        $result = $menu->Settingrolesvisibility($input);
+        $result = $action->Settingrolesvisibility($input);
 
-        foreach($menu->children as $i => $child)
+        foreach($action->children as $i => $child)
         {
             $input = [
                 ...$input,
-                'menu_id' => $child->id,
+                'action_id' => $child->id,
             ];
 
             self::doSettingrolesvisibility($input, $record);
@@ -91,5 +90,28 @@ class SysAction extends Model {
 
         return $result;
         
+    }
+
+    public function Settingrolesvisibility($input) {
+
+        $r = [];
+        foreach($input['roles'] as $i => $item)
+        {
+            
+            foreach(collect($item)->except(['role_id', 'slug'])->toArray() as $key => $data)
+            {
+                $input = [
+                    'action_id' => $input['action_id'],
+                    'role_id' => $item['role_id'],
+                    'platform' => $key,
+                    'visible' => $data['visible'],
+                    'disabled' => $data['disabled'],
+                ];
+
+                $r[] = SysActionRole::CreateOrUpdate($input);
+            }
+        }
+
+        return $r;
     }
 }
