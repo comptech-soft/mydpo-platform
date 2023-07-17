@@ -35,8 +35,11 @@ class Index {
             $locale = config('app.locale');
         }
 
+        $user = \Auth::user();
+
         $payload = [
             ...$payload,
+            'user' => $user,
             'session' => session()->all(),
             'old' => old(), 
             'app-name' =>  config('app.name'),
