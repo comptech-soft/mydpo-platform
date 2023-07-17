@@ -4,6 +4,7 @@ namespace MyDpo\Core\Http\Response;
 
 use Illuminate\View\View;
 use MyDpo\Models\System\SysMenu;
+use MyDpo\Models\System\SysAction;
 use MyDpo\Models\System\SysConfig;
 use MyDpo\Models\System\Translation;
 
@@ -46,6 +47,7 @@ class Index {
             'platform' => config('app.platform'),
             'env' => config('app.env'),
             'menus' => SysMenu::getMenus(),
+            'actions' => SysAction::getActions(),
             'sysconfig' => SysConfig::all()->pluck('value', 'code'),
         ];
 

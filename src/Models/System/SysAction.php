@@ -114,4 +114,17 @@ class SysAction extends Model {
 
         return $r;
     }
+
+    public static function getActions() 
+    {
+        $r = [];
+        foreach(self::whereIsRoot()->get() as $i => $item)
+        {
+            if(in_array(config('app.platform'), $item->platform))
+            {
+                $r[$item->slug] = $item;
+            }
+        }
+        return $r;
+    }
 }
