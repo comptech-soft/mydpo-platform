@@ -9,14 +9,24 @@ use MyDpo\Models\System\SysAction;
 
 class ActionsController extends Controller {
 
-    public function index(Request $r) {
-        return Response::View(
-            '~templates.index', 
-            asset('apps/system-actions/index.js'),
-            [],
-            $r->all()
+    public function index(Request $r) 
+    {
+        return Index::View(
+            styles: ['css/app.css'],
+            scripts: ['apps/system/actions/index.js']
         );
     }
+
+    // public function index(Request $r) {
+
+    //     dd();
+    //     return Response::View(
+    //         '~templates.index', 
+    //         asset('apps/system-actions/index.js'),
+    //         [],
+    //         $r->all()
+    //     );
+    // }
 
     public function getRecords(Request $r) {
         return SysAction::getRecords($r->all());
