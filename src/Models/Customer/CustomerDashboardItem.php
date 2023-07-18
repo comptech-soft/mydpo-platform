@@ -11,7 +11,7 @@ use MyDpo\Traits\Actionable;
 class CustomerDashboardItem extends Model {
 
     use Actionable;
-    
+
     protected $table = 'customers-dashboard-items';
 
     protected $casts = [
@@ -51,6 +51,11 @@ class CustomerDashboardItem extends Model {
         }
 
         return $r;
+    }
+
+    public static function doGlobalsettingsave($input) {
+
+        dd($input);
     }
 
     // public static function saveReorderedItems($input) {
