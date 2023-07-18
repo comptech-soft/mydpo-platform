@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 use Kalnoy\Nestedset\NodeTrait;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
+use MyDpo\Traits\Reorderable;
 
 class SysAction extends Model {
 
-    use NodeTrait, Itemable, Actionable;
+    use NodeTrait, Itemable, Actionable, Reorderable;
     
     protected $table = 'system-actions';
 
