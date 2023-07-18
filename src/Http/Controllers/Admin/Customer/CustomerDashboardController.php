@@ -10,8 +10,7 @@ use MyDpo\Models\Customer\CustomerDashboardItem;
 use MyDpo\Models\Customer\CustomerEntityItem;
 
 class CustomerDashboardController extends Controller {
-
-
+    
     public function index($customer_id, Request $r) {
         return Index::View(
             styles: ['css/app.css'],
@@ -23,6 +22,10 @@ class CustomerDashboardController extends Controller {
                 'entities_items' => CustomerEntityItem::getByPlatform(),
             ],
         );        
+    }
+
+    public function doAction($action, Request $r) {
+        return CustomerDashboardItem::doAction($action, $r->all());
     }
 
     
