@@ -4,11 +4,14 @@ namespace MyDpo\Models\Customer;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
+use MyDpo\Traits\Actionable;
 // use MyDpo\Performers\CustomerDashboardItem\SaveReorderedItems;
 // use MyDpo\Performers\CustomerDashboardItem\SaveProfileReorderedItems;
 
 class CustomerDashboardItem extends Model {
 
+    use Actionable;
+    
     protected $table = 'customers-dashboard-items';
 
     protected $casts = [
