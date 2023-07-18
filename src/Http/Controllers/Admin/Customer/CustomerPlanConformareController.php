@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
 use MyDpo\Models\Customer;
+use MyDpo\Models\Customer\CustomerPlanconformare;
 
 class CustomerPlanConformareController extends Controller {
     
