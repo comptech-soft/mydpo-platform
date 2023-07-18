@@ -42,6 +42,7 @@ class SysAction extends Model {
 
     protected $with = [
         'children',
+
         'roles.role',
     ];
 
@@ -92,8 +93,7 @@ class SysAction extends Model {
     }
 
     public static function doSettingrolesvisibility($input, $record) {
-
-       
+        
         $action = self::find($input['action_id']);
 
         $result = $action->Settingrolesvisibility($input);
@@ -117,7 +117,6 @@ class SysAction extends Model {
         $r = [];
         foreach($input['roles'] as $i => $item)
         {
-            
             foreach(collect($item)->except(['role_id', 'slug'])->toArray() as $key => $data)
             {
                 $input = [
@@ -188,5 +187,11 @@ class SysAction extends Model {
         }
 
         return [];
+    }
+
+    public static function GetQuery() {
+
+        dd(11);
+        return self::query()->withCount('regions');
     }
 }
