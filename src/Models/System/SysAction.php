@@ -71,6 +71,25 @@ class SysAction extends Model {
         return self::find($record->id);
     }
 
+    public static function doDelete($input, $record) {
+
+        $record->DeleteNode();
+        
+        return $record;
+    }
+
+    protected function DeleteNode() {
+
+        foreach($this->children as $i => $child)
+        {
+            $child->DeleteNode();
+        }
+
+        SysActionRole::where('action_id', $this->id)->delete();
+
+        $this->delete();
+    }
+
     public static function doSettingrolesvisibility($input, $record) {
 
        
