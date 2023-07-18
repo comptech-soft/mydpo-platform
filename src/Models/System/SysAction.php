@@ -42,7 +42,6 @@ class SysAction extends Model {
 
     protected $with = [
         'children',
-
         'roles.role',
     ];
 
@@ -188,10 +187,5 @@ class SysAction extends Model {
 
         return [];
     }
-
-    public static function GetQuery() {
-
-        dd(11);
-        return self::query()->withCount('regions');
-    }
+    
 }
