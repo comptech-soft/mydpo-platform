@@ -53,9 +53,39 @@ class CustomerDashboardItem extends Model {
         return $r;
     }
 
+    /**
+     * Vizibilitatea globala a itemurilor
+     */
     public static function doGlobalsettingsave($input) {
 
-        dd($input);
+        foreach($input['dashboard'] as $i => $item)
+        {
+            $record = self::find($item['id']);
+
+            if(! $record->props )
+            {
+                $record->props = [];
+            }
+
+            $settings = array_key_exists('settings', $record->props) ? $record->props['settings'] : [];
+
+            $settings = [
+                ...$settings,
+                'visible' => $item['visible'],
+                'disabled' => $item['disabled'],
+            ];
+
+            $record->props = [
+                ...$record->props,
+                'settings' => $settings,
+            ];
+
+            $record->save();
+
+        }
+
+        return self::getByColumns();
+
     }
 
     // public static function saveReorderedItems($input) {
