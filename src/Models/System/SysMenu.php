@@ -65,6 +65,25 @@ class SysMenu extends Model {
         return self::find($record->id);
     }
 
+    public static function doDelete($input, $record) {
+
+        $record->DeleteNode();
+        
+        return $record;
+    }
+
+    protected function DeleteNode() {
+
+        foreach($this->children as $i => $child)
+        {
+            $child->DeleteNode();
+        }
+
+        SysMenuRole::where('menu_id', $this->id)->delete();
+
+        $this->delete();
+    }
+
     public static function doSettingrolesvisibility($input, $record) {
 
        
