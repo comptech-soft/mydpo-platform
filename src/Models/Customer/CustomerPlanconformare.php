@@ -109,8 +109,16 @@ class CustomerPlanconformare extends Model {
 
     public static function doGetnextnumber($input) {
 
-        dd($input);
-        // return (new GetNextNumber($input))->Perform();
+        $sql = "
+            SELECT 
+                MAX(CAST(`number` AS UNSIGNED)) as max_number 
+            FROM `customers-planuri-conformare` 
+            WHERE (customer_id=" . $input['customer_id'] . ")"
+        ;
+
+        $records = \DB::select($sql);
+
+        return 1 + (count($records) > 0 ? $records[0]->max_number : 0);
     }
 
     public static function saveRows($input) {
