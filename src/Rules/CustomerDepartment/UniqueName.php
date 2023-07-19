@@ -3,7 +3,7 @@
 namespace MyDpo\Rules\CustomerDepartment;
 
 use Illuminate\Contracts\Validation\Rule;
-use MyDpo\Models\Cystomer\CustomerDepartment;
+use MyDpo\Models\Customer\CustomerDepartment;
 
 class UniqueName implements Rule {
 
