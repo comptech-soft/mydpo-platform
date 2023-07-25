@@ -5,18 +5,26 @@ namespace MyDpo\Http\Controllers\Admin\Customer;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
-// use MyDpo\Models\Customer;
+use MyDpo\Models\Customer\CustomerPlanconformare;
 // use MyDpo\Models\Customer\CustomerPlanconformare;
 
 class CustomerPlanConformareDetailsController extends Controller {
     
     public function index($plan_id, Request $r) {
+
+        $plan = CustomerPlanconformare::find($plan_id);
+
+        if( ! $plan )
+        {
+            return redirect()->back();
+        }
+
         return Index::View(
             styles: ['css/app.css'],
             scripts: ['apps/customer/plan-conformare-details/index.js'],
             payload: [
-                // 'customer_id' => $customer_id,
-                // 'customer' => Customer::find($customer_id),
+                'plan_id' => $plan_id,
+                'plan' => $plan,
             ],
         );        
     }
