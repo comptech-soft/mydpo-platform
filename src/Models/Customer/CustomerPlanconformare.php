@@ -119,6 +119,8 @@ class CustomerPlanconformare extends Model {
 
     public static function doSaverows($input) {
 
+        dd($input);
+        
         $result = [];
 
         if($input['rows'] && is_array($input['rows']))
