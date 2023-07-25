@@ -23,13 +23,12 @@ class Exporter implements FromView, WithStrictNullComparison, ShouldAutoSize
     public function view(): View 
     {
 
-        dd($this->input);
-        
-        // $records = ( ($this->input['structure'] == 1) ? [] : Translation::orderBy('ro')->get());
+        $plan = CustomerPlanconformare::find($this->input['plan_id']);
 
-        // return view('exports.admin.translations.export', [
-        //     'records' => $records,
-        // ]);
+        return view('exports.customer.plan-conformare.export', [
+            'plan' => $plan,
+            'records' => $plan->GetRowsAsTable(),
+        ]);
     }
 
 }
