@@ -13,6 +13,11 @@ trait Exportable {
 
         $file_name = 'public/exports/' . \Auth::user()->id. '/' . $input['file_name'];
 
+        if( array_key_exists('html', $input) && ($input['html'] == 1))
+        {
+            return self::GetExporter($input)->view()->render();
+        }
+
         \Excel::store(
             self::GetExporter($input), 
             $file_name, 
