@@ -76,25 +76,20 @@ class CustomerPlanconformareRow extends Model {
 
         foreach($rows as $i => $row)
         {
-           
+            
+            $r[] = [
+                ...$row->toArray(),
+                'level' => $level,
+                'children' =>  self::where('customer_plan_id', $customer_plan_id)->where('parent_id', $row->plan_id)->orderBy('order_no')->get(),
+            ];
+
+
             if($level < 3)
             {
-                $r[] = [
-                    ...$row->toArray(),
-                    'level' => $level,
-                    'children' =>  self::where('customer_plan_id', $customer_plan_id)->where('parent_id', $row->plan_id)->orderBy('order_no')->get(),
-                ];
-
+                
                 self::AddRows($customer_plan_id, $row->plan_id, $r, $level + 1);
             }
-            else
-            {
-                $r[] = [
-                    ...$row->toArray(),
-                    'level' => $level,
-                    'children' =>  self::where('customer_plan_id', $customer_plan_id)->where('parent_id', $row->plan_id)->orderBy('order_no')->get(),
-                ];
-            }
+            
         }
     }
 
