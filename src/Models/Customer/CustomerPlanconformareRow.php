@@ -63,15 +63,32 @@ class CustomerPlanconformareRow extends Model {
         'updated_by',
     ];
 
+    public function mychildren() {
+        return $this->hasMany(CustomerPlanconformareRow::class, 'parent_id', 'plan_id');
+    }
+
+    public function children()
+    {
+        return $this->mychildren()->with('children');
+    }
+
     public static function AddRows($customer_plan_id, $parent_id, &$r, $level) {
+
+        $rows = self::where('customer_plan_id', $customer_plan_id)->orderBy('order_no')->with([
+            
+            'children' => function($q) use ($customer_plan_id){
+
+                $q->where('customer_plan_id', $customer_plan_id);
+            },
+        ]);
 
         if(! $parent_id )
         {
-            $rows = self::where('customer_plan_id', $customer_plan_id)->whereNull('parent_id')->orderBy('order_no')->get();
+            $rows = $rows->whereNull('parent_id')->get();
         }
         else
         {
-            $rows = self::where('customer_plan_id', $customer_plan_id)->where('parent_id', $parent_id)->orderBy('order_no')->get();
+            $rows = $rows->where('parent_id', $parent_id)->get();
         }
 
         foreach($rows as $i => $row)
@@ -80,13 +97,12 @@ class CustomerPlanconformareRow extends Model {
             $r[] = [
                 ...$row->toArray(),
                 'level' => $level,
-                'children' =>  self::where('customer_plan_id', $customer_plan_id)->where('parent_id', $row->plan_id)->orderBy('order_no')->get(),
+                // 'children' => self::where('customer_plan_id', $customer_plan_id)->where('parent_id', $row->plan_id)->orderBy('order_no')->with(['children'])->get()->toArray(),
             ];
 
 
             if($level < 3)
             {
-                
                 self::AddRows($customer_plan_id, $row->plan_id, $r, $level + 1);
             }
             

@@ -136,6 +136,8 @@ class CustomerPlanconformare extends Model {
                 
             ];
 
+            dd($input);
+
             CustomerPlanconformareRow::create($input);
         }
     }
