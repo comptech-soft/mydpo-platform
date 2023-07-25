@@ -121,10 +121,10 @@ class CustomerPlanconformare extends Model {
 
         $result = [];
 
-        if($this->input['rows'] && is_array($this->input['rows']))
+        if($input['rows'] && is_array($input['rows']))
         {
        
-            foreach($this->input['rows'] as $i => $input)
+            foreach($input['rows'] as $i => $input)
             {
                 $row = CustomerPlanconformareRow::find($input['id']);
                 $row->update($input);
