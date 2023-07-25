@@ -21,19 +21,6 @@ class CustomerPlanConformareController extends Controller {
         );        
     }
 
-    // public function index($customer_id, Request $r) {
-
-    //     return Response::View(
-    //         '~templates.index', 
-    //         asset('apps/customer-plan-conformare/index.js'),
-    //         [], 
-    //         [
-    //             'customer_id' => $customer_id,
-    //         ]
-    //     );
-           
-    // }
-
     public function getRecords(Request $r) {
         return CustomerPlanconformare::getRecords($r->all());
     }
