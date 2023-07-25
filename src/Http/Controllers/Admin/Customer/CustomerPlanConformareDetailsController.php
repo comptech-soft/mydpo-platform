@@ -13,7 +13,7 @@ class CustomerPlanConformareDetailsController extends Controller {
     
     public function index($plan_id, Request $r) {
 
-        $plan = CustomerPlanconformare::find($plan_id);
+        $plan = CustomerPlanconformare::where('id', $plan_id)->with(['rows.children'])->first();
 
         if( ! $plan )
         {
@@ -30,7 +30,7 @@ class CustomerPlanConformareDetailsController extends Controller {
                 'plan_id' => $plan_id,
                 'plan' => $plan,
                 'customer' => $customer,
-                'rows' => $plan->rows,
+                // 'rows' => $plan->rows,
             ],
         );        
     }
