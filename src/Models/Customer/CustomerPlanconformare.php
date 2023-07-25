@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 use MyDpo\Models\Livrabile\PlanConformare;
-use MyDpo\Performers\CustomerPlanconformare\SaveRows;
+// use MyDpo\Performers\CustomerPlanconformare\SaveRows;
 
 class CustomerPlanconformare extends Model {
 
@@ -119,8 +119,21 @@ class CustomerPlanconformare extends Model {
 
     public static function doSaverows($input) {
 
-        dd($input);
-        return (new SaveRows($input))->Perform();
+        $result = [];
+
+        if($this->input['rows'] && is_array($this->input['rows']))
+        {
+       
+            foreach($this->input['rows'] as $i => $input)
+            {
+                $row = CustomerPlanconformareRow::find($input['id']);
+                $row->update($input);
+
+                $result[] = $row;
+            }
+        }
+
+        return $result;
     }
 
     public function CreateRows() {
