@@ -140,4 +140,8 @@ class CustomerPlanconformare extends Model {
         }
     }
 
+    public static function GetRowsAsTable() {
+        return [];
+    }
+
 }
