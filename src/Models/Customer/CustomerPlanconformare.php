@@ -123,10 +123,10 @@ class CustomerPlanconformare extends Model {
         if($input['rows'] && is_array($input['rows']))
         {
        
-            foreach($input['rows'] as $i => $input)
+            foreach($input['rows'] as $i => $data)
             {
-                $row = CustomerPlanconformareRow::find($input['id']);
-                $row->update($input);
+                $row = CustomerPlanconformareRow::find($data['id']);
+                $row->update($data);
 
                 $result[] = $row;
             }
