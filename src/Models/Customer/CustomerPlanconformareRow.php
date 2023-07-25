@@ -82,7 +82,7 @@ class CustomerPlanconformareRow extends Model {
                 $r[] = [
                     ...$row->toArray(),
                     'level' => $level,
-                    'children' => [],
+                    'children' =>  self::where('customer_plan_id', $customer_plan_id)->where('parent_id', $row->plan_id)->orderBy('order_no')->get(),
                 ];
 
                 self::AddRows($customer_plan_id, $row->plan_id, $r, $level + 1);
