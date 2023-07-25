@@ -117,7 +117,9 @@ class CustomerPlanconformare extends Model {
         return 1 + (count($records) > 0 ? $records[0]->max_number : 0);
     }
 
-    public static function saveRows($input) {
+    public static function doSaverows($input) {
+
+        dd($input);
         return (new SaveRows($input))->Perform();
     }
 
