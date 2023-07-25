@@ -53,7 +53,7 @@ class CustomerPlanconformare extends Model {
 
     protected $with = [
         'department',
-        'rows.children'
+        // 'rows.children'
     ];
 
     public function getVisibleAttribute() {
@@ -88,9 +88,6 @@ class CustomerPlanconformare extends Model {
     }
 
     public static function doDuplicate($input, $record) {
-
-       
-
     }
 
     public static function doDelete($input, $record) {
@@ -142,10 +139,6 @@ class CustomerPlanconformare extends Model {
 
             CustomerPlanconformareRow::create($input);
         }
-    }
-
-    public static function GetQuery() {
-        dd(__METHOD__);
     }
 
 }
