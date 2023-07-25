@@ -133,7 +133,7 @@ class CustomerPlanconformare extends Model {
             }
         }
 
-        return $result;
+        return $this->GetRowsAsTable();
     }
 
     public function CreateRows() {
