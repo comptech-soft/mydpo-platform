@@ -5,7 +5,7 @@ namespace MyDpo\Models\Customer;
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
-// use MyDpo\Performers\CustomerPlanconformare\GetNextNumber;
+use MyDpo\Models\Livrabile\PlanConformare;
 use MyDpo\Performers\CustomerPlanconformare\SaveRows;
 
 class CustomerPlanconformare extends Model {
