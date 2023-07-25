@@ -144,8 +144,8 @@ class CustomerPlanconformare extends Model {
 
         $r = [];
         
-        CustomerPlanconformareRow::AddRows($this->id, NULL, $r);
-       
+        CustomerPlanconformareRow::AddRows($this->id, NULL, $r, 1);
+        
         return $r;
     }
 
