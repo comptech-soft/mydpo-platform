@@ -63,15 +63,6 @@ class CustomerPlanconformareRow extends Model {
         'updated_by',
     ];
 
-    // public function mychildren() {
-    //     return $this->hasMany(CustomerPlanconformareRow::class, 'parent_id', 'plan_id');
-    // }
-
-    // public function children()
-    // {
-    //     return $this->mychildren()->with('children');
-    // }
-
     public static function AddRows($customer_plan_id, $parent_id, &$r, $level) {
 
         if(! $parent_id )
@@ -85,12 +76,25 @@ class CustomerPlanconformareRow extends Model {
 
         foreach($rows as $i => $row)
         {
-            $r[] = [
-                ...$row->toArray(),
-                'level' => $level,
-            ];
+           
+            if($level < 3)
+            {
+                $r[] = [
+                    ...$row->toArray(),
+                    'level' => $level,
+                    'children' => [],
+                ];
 
-            self::AddRows($customer_plan_id, $row->plan_id, $r, $level + 1);
+                self::AddRows($customer_plan_id, $row->plan_id, $r, $level + 1);
+            }
+            else
+            {
+                $r[] = [
+                    ...$row->toArray(),
+                    'level' => $level,
+                    'children' =>  self::where('customer_plan_id', $customer_plan_id)->where('parent_id', $row->plan_id)->orderBy('order_no')->get(),
+                ];
+            }
         }
     }
 
