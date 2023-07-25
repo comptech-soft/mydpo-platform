@@ -7,6 +7,7 @@ use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 use MyDpo\Models\Livrabile\PlanConformare;
 use MyDpo\Traits\Exportable;
+use MyDpo\Exports\CustomerPlanconformare\Exporter;
 
 class CustomerPlanconformare extends Model {
 
@@ -68,6 +69,10 @@ class CustomerPlanconformare extends Model {
 
     function rows() {
         return $this->hasMany(CustomerPlanconformareRow::class, 'customer_plan_id')->whereIn('type', ['capitol', 'actiune', 'subactiune'])->orderBy('order_no');
+    }
+
+    protected static function GetExporter($input) {
+        return new Exporter($input); 
     }
 
     public static function doInsert($input, $record) { 

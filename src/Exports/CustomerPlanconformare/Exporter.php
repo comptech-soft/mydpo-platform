@@ -1,0 +1,35 @@
+<?php
+
+namespace MyDpo\Exports\CustomerPlanconformare;
+
+use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithStrictNullComparison;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\FromView;
+use MyDpo\Models\Customer\CustomerPlanconformare;
+
+use Illuminate\Contracts\View\View;
+
+class Exporter implements FromView, WithStrictNullComparison, ShouldAutoSize 
+{
+
+    public $input = NULL;
+
+    public function __construct($input) 
+    {
+        $this->input = $input;    
+    }
+
+    public function view(): View 
+    {
+
+        dd($this->input);
+        
+        // $records = ( ($this->input['structure'] == 1) ? [] : Translation::orderBy('ro')->get());
+
+        // return view('exports.admin.translations.export', [
+        //     'records' => $records,
+        // ]);
+    }
+
+}
