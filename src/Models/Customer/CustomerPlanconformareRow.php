@@ -3,7 +3,7 @@
 namespace MyDpo\Models\Customer;
 
 use Illuminate\Database\Eloquent\Model;
-use Kalnoy\Nestedset\NodeTrait;
+// use Kalnoy\Nestedset\NodeTrait;
 // use MyDpo\Traits\Itemable;
 // use MyDpo\Traits\Actionable;
 // use MyDpo\Performers\CustomerPlanconformare\GetNextNumber;
@@ -14,7 +14,7 @@ use Kalnoy\Nestedset\NodeTrait;
 
 class CustomerPlanconformareRow extends Model {
 
-    use NodeTrait;
+    // use NodeTrait;
 
     protected $table = 'customers-planuri-conformare-rows';
 
