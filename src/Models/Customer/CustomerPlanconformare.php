@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 use MyDpo\Models\Livrabile\PlanConformare;
-// use MyDpo\Performers\CustomerPlanconformare\SaveRows;
+use MyDpo\Traits\Exportable;
 
 class CustomerPlanconformare extends Model {
 
-    use Itemable, Actionable;
+    use Itemable, Actionable, Exportable;
 
     protected $table = 'customers-planuri-conformare';
 
