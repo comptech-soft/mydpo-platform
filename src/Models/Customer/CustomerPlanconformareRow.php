@@ -63,13 +63,18 @@ class CustomerPlanconformareRow extends Model {
         'updated_by',
     ];
 
-    public function mychildren() {
-        return $this->hasMany(CustomerPlanconformareRow::class, 'parent_id', 'plan_id');
-    }
+    // public function mychildren() {
+    //     return $this->hasMany(CustomerPlanconformareRow::class, 'parent_id', 'plan_id');
+    // }
 
-    public function children()
-    {
-        return $this->mychildren()->with('children');
+    // public function children()
+    // {
+    //     return $this->mychildren()->with('children');
+    // }
+
+    public static function AddRows($customer_plan_id, $parent_id, $r) {
+
+        return [];
     }
 
 }

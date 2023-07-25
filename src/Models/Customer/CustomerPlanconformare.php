@@ -140,8 +140,13 @@ class CustomerPlanconformare extends Model {
         }
     }
 
-    public static function GetRowsAsTable() {
-        return [];
+    public function GetRowsAsTable() {
+
+        $r = [];
+        
+        CustomerPlanconformareRow::AddRows($this->id, NULL, $r);
+       
+        return $r;
     }
 
 }
