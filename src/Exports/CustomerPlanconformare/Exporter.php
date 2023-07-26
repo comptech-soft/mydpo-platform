@@ -25,6 +25,8 @@ class Exporter implements FromView, WithStrictNullComparison, ShouldAutoSize
 
         $plan = CustomerPlanconformare::find($this->input['plan_id']);
 
+        $plan->CalculateTree();
+
         $year = $plan->year;
 
         $columns = collect($plan->columns)->map( function($column) use ($year) {
