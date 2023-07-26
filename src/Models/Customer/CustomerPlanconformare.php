@@ -169,4 +169,10 @@ class CustomerPlanconformare extends Model {
         return $r;
     }
 
+    public function CalculateTree() {
+
+        CustomerPlanconformareRow::CalculateTree($this->id);
+    
+    }
+
 }
