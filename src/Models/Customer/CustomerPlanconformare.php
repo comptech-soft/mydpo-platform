@@ -195,8 +195,23 @@ class CustomerPlanconformare extends Model {
         return $r;
     }
 
+    /**
+     * Actualizeaza planul
+     */
+    public function UpdateSummary() {
+        $nodes = CustomerPlanconformareRow::where('customer_plan_id', $this->id)->whereNull('parent_id')->get();
+
+        dd($nodes);
+    }
+
+    /**
+     * Calculeaza valorile pentru toate randurile
+     * Actualizeaza planul
+     */
+
     public function CalculateTree() {
         CustomerPlanconformareRow::CalculateTree($this->id);
+        $this->UpdateSummary();
     }
 
 }
