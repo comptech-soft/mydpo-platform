@@ -97,43 +97,6 @@ class CustomerPlanconformareRow extends Model {
             $r[] = [
                 ...$row->toArray(),
                 'level' => $level,
-                // 'children' => self::where('customer_plan_id', $customer_plan_id)->where('parent_id', $row->plan_id)->orderBy('order_no')->with(['children'])->get()->toArray(),
-            ];
-
-
-            if($level < 3)
-            {
-                self::AddRows($customer_plan_id, $row->plan_id, $r, $level + 1);
-            }
-            
-        }
-    }
-
-    public static function AddRows($customer_plan_id, $parent_id, &$r, $level) {
-
-        $rows = self::where('customer_plan_id', $customer_plan_id)->orderBy('order_no')->with([
-            
-            'children' => function($q) use ($customer_plan_id){
-
-                $q->where('customer_plan_id', $customer_plan_id);
-            },
-        ]);
-
-        if(! $parent_id )
-        {
-            $rows = $rows->whereNull('parent_id')->get();
-        }
-        else
-        {
-            $rows = $rows->where('parent_id', $parent_id)->get();
-        }
-
-        foreach($rows as $i => $row)
-        {
-            
-            $r[] = [
-                ...$row->toArray(),
-                'level' => $level,
             ];
 
             if($level < 3)
