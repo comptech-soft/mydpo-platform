@@ -147,7 +147,7 @@ class CustomerPlanconformare extends Model {
             $input = [
                 'customer_plan_id' => $this->id,
                 'customer_id' => $this->customer_id,
-                'plan_id' => NULL, //$this->id * 10000000 + $row->id,
+                'plan_id' => $row->id, //$this->id * 10000000 + $row->id,
                 'pondere' => $row->procent_pondere,
                 ...collect($row->toArray())
                     ->except(['created_at', 'updated_at', 'created_by', 'updated_by', 'children', 'id', 'pondere', 'procent_pondere'])
