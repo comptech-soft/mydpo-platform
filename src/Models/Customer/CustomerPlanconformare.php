@@ -28,6 +28,12 @@ class CustomerPlanconformare extends Model {
         'deleted_by' => 'integer',
         'deleted' => 'integer',
         'pondere_total' => 'decimal:2',
+        'value_inceput_an' => 'decimal:2',
+        'value_final_s1' => 'decimal:2',
+        'value_final_s2' => 'decimal:2',
+        'realizat_inceput_an' => 'decimal:2',
+        'realizat_final_s1' => 'decimal:2',
+        'realizat_final_s2' => 'decimal:2',
     ];
 
     protected $fillable = [
@@ -44,6 +50,12 @@ class CustomerPlanconformare extends Model {
         'current_lines',
         'columns',
         'pondere_total',
+        'value_inceput_an',
+        'value_final_s1',
+        'value_final_s2',
+        'realizat_inceput_an',
+        'realizat_final_s1',
+        'realizat_final_s2',
         'deleted',
         'created_by',
         'updated_by',
@@ -86,6 +98,12 @@ class CustomerPlanconformare extends Model {
             'current_lines' => $current_lines,
             'columns' => PlanConformare::GetColumns(),
             'pondere_total' => 100,
+            'value_inceput_an' => 0,
+            'value_final_s1' => 0,
+            'value_final_s2' => 0,
+            'realizat_inceput_an' => 0,
+            'realizat_final_s1' => 0,
+            'realizat_final_s2' => 0,
         ];
 
         $record = self::create($input);
