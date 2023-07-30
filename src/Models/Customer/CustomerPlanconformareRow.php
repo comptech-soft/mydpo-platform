@@ -22,11 +22,9 @@ class CustomerPlanconformareRow extends Model {
         'props' => 'json',
 
         'customer_id' => 'integer',
-        'customer_plan_id' => 'integer',
-        'plan_id' => 'integer',
+        'customer_plan_id' => 'integer',       
         'created_by' => 'integer',
         'updated_by' => 'integer',
-        'parent_id' => 'integer',
 
         'pondere' => 'decimal:2',
         'value_inceput_an' => 'decimal:2',
