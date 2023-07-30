@@ -163,7 +163,10 @@ class CustomerPlanconformare extends Model {
 
         $record->CalculateTree();
 
-        return $record->GetRowsAsTable();
+        return [
+            'rows' => $record->GetRowsAsTable(),
+            'plan' => $record,
+        ];
     }
 
     public function CreateRows() {
