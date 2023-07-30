@@ -171,8 +171,25 @@ class CustomerPlanconformare extends Model {
 
     public static function doUpdaterows($input, $record) {
 
-        dd($input, $record);
+        if(array_key_exists('nodes', $input))
+        {
+            foreach($input['nodes'] as $id => $node)
+            {
+                $row = CustomerPlanconformareRow::find($id);
 
+                $row->value_inceput_an = $node['value_inceput_an'];
+                $row->value_final_s1 = $node['value_final_s1'];
+                $row->value_final_s2 = $node['value_final_s2'];
+
+                $row->save();
+            }
+        }
+
+        $record = self::find($input['plan_id']);
+
+        $record->CalculateTree();
+
+        return $record;
     }
 
     public static function doRefresh($input, $record) {
