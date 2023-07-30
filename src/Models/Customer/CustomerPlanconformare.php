@@ -169,6 +169,14 @@ class CustomerPlanconformare extends Model {
         ];
     }
 
+    public static function doRefresh() {
+        $record = self::find($input['plan_id']);
+
+        $record->CalculateTree();
+
+        return $record;
+    }
+
     public function CreateRows() {
 
         foreach(Planconformare::all() as $i => $row) 
