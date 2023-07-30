@@ -67,7 +67,7 @@ class CustomerPlanconformareRow extends Model {
 
     public function children()
     {
-        return $this->mychildren()->with('children');
+        return $this->mychildren()->orderBy('order_no')->with('children');
     }
 
     public static function AddRows($customer_plan_id, $parent_id, &$r, $level) {

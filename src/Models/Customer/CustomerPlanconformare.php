@@ -166,6 +166,7 @@ class CustomerPlanconformare extends Model {
         return [
             'rows' => $record->GetRowsAsTable(),
             'plan' => $record,
+            'tree' => $record->GetTree(),
         ];
     }
 
