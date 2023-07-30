@@ -27,6 +27,7 @@ class CustomerPlanconformare extends Model {
         'updated_by' => 'integer',
         'deleted_by' => 'integer',
         'deleted' => 'integer',
+        'pondere_total' => 'decimal:2',
     ];
 
     protected $fillable = [
@@ -42,6 +43,7 @@ class CustomerPlanconformare extends Model {
         'props',
         'current_lines',
         'columns',
+        'pondere_total',
         'deleted',
         'created_by',
         'updated_by',
@@ -76,12 +78,14 @@ class CustomerPlanconformare extends Model {
     }
 
     public static function doInsert($input, $record) { 
+
         $current_lines = PlanConformare::whereNull('parent_id')->get()->toArray();
 
         $input = [
             ...$input,
             'current_lines' => $current_lines,
             'columns' => PlanConformare::GetColumns(),
+            'pondere_total' => 100,
         ];
 
         $record = self::create($input);
@@ -156,11 +160,7 @@ class CustomerPlanconformare extends Model {
                 'parent_id' => (!! $row->parent_id ?  $this->id . '#' . $row->parent_id : NULL),
             ];
             
-            $record = CustomerPlanconformareRow::create($input);
-
-            // $record->plan_id = $record->id;
-            // $record->parent_id = (!! $row->parent_id ? $record->id : NULL);
-            // $record->save();
+            CustomerPlanconformareRow::create($input);
         }
     }
 
@@ -174,9 +174,7 @@ class CustomerPlanconformare extends Model {
     }
 
     public function CalculateTree() {
-
         CustomerPlanconformareRow::CalculateTree($this->id);
-    
     }
 
 }
