@@ -169,7 +169,7 @@ class CustomerPlanconformare extends Model {
         ];
     }
 
-    public static function doRefresh() {
+    public static function doRefresh($input, $record) {
         $record = self::find($input['plan_id']);
 
         $record->CalculateTree();
