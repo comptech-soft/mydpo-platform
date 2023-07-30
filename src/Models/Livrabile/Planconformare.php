@@ -98,7 +98,6 @@ class Planconformare extends Model {
 
         $nodes = self::whereNull('parent_id')->get();
 
-
         foreach($nodes as $i => $node)
         {
             $total += $node->procent_pondere;
@@ -106,7 +105,7 @@ class Planconformare extends Model {
 
         return $total;
     }
-    
+
     public static function GetColumns() {
         return [
             [

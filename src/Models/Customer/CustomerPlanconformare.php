@@ -159,7 +159,11 @@ class CustomerPlanconformare extends Model {
             }
         }
 
-        return self::find($input['plan_id'])->GetRowsAsTable();
+        $record = self::find($input['plan_id']);
+
+        dd($record);
+
+        return $record->GetRowsAsTable();
     }
 
     public function CreateRows() {
