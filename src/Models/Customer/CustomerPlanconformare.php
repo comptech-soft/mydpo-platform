@@ -169,6 +169,12 @@ class CustomerPlanconformare extends Model {
         ];
     }
 
+    public static function doUpdaterows($input, $record) {
+
+        dd($input, $record);
+
+    }
+
     public static function doRefresh($input, $record) {
         $record = self::find($input['plan_id']);
 
