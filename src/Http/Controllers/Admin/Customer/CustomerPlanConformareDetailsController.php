@@ -29,6 +29,7 @@ class CustomerPlanConformareDetailsController extends Controller {
                 'plan' => $plan,
                 'customer' => $customer,
                 'rows' => $plan->GetRowsAsTable(),
+                'tree' => $plan->GetTree(),
             ],
         );        
     }

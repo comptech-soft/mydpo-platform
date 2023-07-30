@@ -198,12 +198,14 @@ class CustomerPlanconformare extends Model {
     }
 
     public function GetRowsAsTable() {
-
         $r = [];
-        
         CustomerPlanconformareRow::AddRows($this->id, NULL, $r, 1);
-        
         return $r;
+    }
+
+    public function GetTree() {
+        $nodes = CustomerPlanconformareRow::where('customer_plan_id', $this->id)->whereNull('parent_id')->with(['children'])->get();
+        return $nodes->toArray();
     }
 
     /**
