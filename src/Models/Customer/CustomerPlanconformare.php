@@ -201,7 +201,25 @@ class CustomerPlanconformare extends Model {
     public function UpdateSummary() {
         $nodes = CustomerPlanconformareRow::where('customer_plan_id', $this->id)->whereNull('parent_id')->get();
 
-        dd($nodes);
+        $sum_inceput_an = $sum_final_s1 = $sum_final_s2 = 0;
+
+        foreach($nodes as $i => $node)
+        {
+            $sum_inceput_an += $node->realizat_inceput_an;
+            $sum_final_s1 += $node->realizat_final_s1;
+            $sum_final_s2 += $node->realizat_final_s2;
+            
+        }
+
+        $this->realizat_inceput_an = $sum_inceput_an;
+        $this->realizat_final_s1 = $sum_final_s1;
+        $this->realizat_final_s2 = $sum_final_s2;
+
+        $this->value_inceput_an = $this->realizat_inceput_an * 100/$this->pondere_total;
+        $this->value_final_s1 = $this->realizat_final_s1 * 100/$this->pondere_total;
+        $this->value_final_s2 = $this->realizat_final_s2 * 100/$this->pondere_total;
+
+        $this->save();
     }
 
     /**
