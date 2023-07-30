@@ -161,7 +161,7 @@ class CustomerPlanconformare extends Model {
 
         $record = self::find($input['plan_id']);
 
-        dd($record);
+        $record->CalculateTree();
 
         return $record->GetRowsAsTable();
     }
