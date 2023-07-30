@@ -218,9 +218,9 @@ class CustomerPlanconformare extends Model {
 
         foreach($nodes as $i => $node)
         {
-            $sum_inceput_an += $node->realizat_inceput_an;
-            $sum_final_s1 += $node->realizat_final_s1;
-            $sum_final_s2 += $node->realizat_final_s2;
+            $sum_inceput_an += round($node->realizat_inceput_an, 2);
+            $sum_final_s1 += round($node->realizat_final_s1, 2);
+            $sum_final_s2 += round($node->realizat_final_s2, 2);
             
         }
 
@@ -228,9 +228,9 @@ class CustomerPlanconformare extends Model {
         $this->realizat_final_s1 = $sum_final_s1;
         $this->realizat_final_s2 = $sum_final_s2;
 
-        $this->value_inceput_an = $this->realizat_inceput_an * 100/$this->pondere_total;
-        $this->value_final_s1 = $this->realizat_final_s1 * 100/$this->pondere_total;
-        $this->value_final_s2 = $this->realizat_final_s2 * 100/$this->pondere_total;
+        $this->value_inceput_an = round($this->realizat_inceput_an * 100/$this->pondere_total, 2);
+        $this->value_final_s1 = round($this->realizat_final_s1 * 100/$this->pondere_total, 2);
+        $this->value_final_s2 = round($this->realizat_final_s2 * 100/$this->pondere_total, 2);
 
         $this->save();
     }
