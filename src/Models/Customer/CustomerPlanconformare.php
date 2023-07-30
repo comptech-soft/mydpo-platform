@@ -147,13 +147,13 @@ class CustomerPlanconformare extends Model {
             $input = [
                 'customer_plan_id' => $this->id,
                 'customer_id' => $this->customer_id,
-                'plan_id' => ($plan_id = $this->id . '#' . $row->id),
+                'plan_id' => $this->id . '#' .  $row->id,
                 'pondere' => $row->procent_pondere,
                 ...collect($row->toArray())
                     ->except(['created_at', 'updated_at', 'created_by', 'updated_by', 'children', 'id', 'pondere', 'procent_pondere'])
                     ->toArray(),
                 
-                'parent_id' => (!! $row->parent_id ?  $plan_id : NULL),
+                'parent_id' => (!! $row->parent_id ?  $this->id . '#' . $row->parent_id : NULL),
             ];
             
             $record = CustomerPlanconformareRow::create($input);
