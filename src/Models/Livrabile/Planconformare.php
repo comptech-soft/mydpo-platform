@@ -89,6 +89,24 @@ class Planconformare extends Model {
         return $input;
     }
 
+    /**
+     * Returneaza total pondere pe intreguul plan de conformare
+     */
+    public static function TotalPondere() {
+        
+        $total = 0;
+
+        $nodes = self::whereNull('parent_id')->get();
+
+
+        foreach($nodes as $i => $node)
+        {
+            $total += $node->procent_pondere;
+        }
+
+        return $total;
+    }
+    
     public static function GetColumns() {
         return [
             [

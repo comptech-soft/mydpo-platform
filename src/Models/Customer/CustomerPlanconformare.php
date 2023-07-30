@@ -97,7 +97,7 @@ class CustomerPlanconformare extends Model {
             ...$input,
             'current_lines' => $current_lines,
             'columns' => PlanConformare::GetColumns(),
-            'pondere_total' => 100,
+            'pondere_total' => PlanConformare::TotalPondere(),
             'value_inceput_an' => 0,
             'value_final_s1' => 0,
             'value_final_s2' => 0,
