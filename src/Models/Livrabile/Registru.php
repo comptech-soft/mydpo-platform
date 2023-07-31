@@ -4,11 +4,11 @@ namespace MyDpo\Models\Livrabile;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
-// use MyDpo\Helpers\Performers\Datatable\DoAction;
+use MyDpo\Traits\Actionable;
 
 class Registru extends Model {
 
-    use Itemable;
+    use Itemable, Actionable;
 
     protected $table = 'registers';
 
