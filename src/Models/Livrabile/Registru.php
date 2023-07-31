@@ -188,7 +188,7 @@ class Registru extends Model {
 
         $record->deleted = 1;
         $record->deleted_by = \Auth::user()->id;
-        $record->name .= ($record->id . '#');
+        $record->name = $record->id . '#' . $record->name;
         $record->save();
 
         return $record;
