@@ -5,7 +5,7 @@ namespace MyDpo\Http\Controllers\Admin\Livrabile;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
-// use MyDpo\Models\Registru;
+use MyDpo\Models\Livrabile\Registru;
 
 class RegistreController extends Controller {
     
@@ -16,12 +16,12 @@ class RegistreController extends Controller {
         );        
     }
 
-    // public function getItems(Request $r) {
-    //     return Registru::getItems($r->all());
-    // }
+    public function getItems(Request $r) {
+        return Registru::getItems($r->all());
+    }
 
-    // public function doAction($action, Request $r) {
-    //     return Registru::doAction($action, $r->all());
-    // }
+    public function doAction($action, Request $r) {
+        return Registru::doAction($action, $r->all());
+    }
 
 }
