@@ -46,10 +46,16 @@ class Registru extends Model {
         'deleted_by'
     ];
 
-    // protected $appends = [
-    //     'columns',
-    // ];
+    protected $appends = [
+        // 'columns',
+        'human_type'
+    ];
 
+    public function getHumanTypeAttribute() {
+        return $this->type;
+    }
+
+    
     // public function getColumnsAttribute() {
     //     $t = $this->coloane->filter( function($item) {
     //         if($item->is_group == 1)
