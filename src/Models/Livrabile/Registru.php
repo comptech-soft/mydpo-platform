@@ -188,6 +188,7 @@ class Registru extends Model {
         if($action == 'insert')
         {
             $input['slug'] = \Str::slug($input['name']); 
+            $input['description'] = '-'; 
             
         }
 
