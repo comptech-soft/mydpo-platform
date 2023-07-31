@@ -183,4 +183,15 @@ class Registru extends Model {
     //     return $record;
     // }
 
+    public static function PrepareActionInput($action, $input) {
+
+        if($action == 'insert')
+        {
+            $input['slug'] = \Str::slug($input['name']); 
+            
+        }
+
+        return $input;
+    }
+
 }
