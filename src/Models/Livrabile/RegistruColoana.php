@@ -3,10 +3,13 @@
 namespace MyDpo\Models\Livrabile;
 
 use Illuminate\Database\Eloquent\Model;
+use MyDpo\Traits\Itemable;
 // use MyDpo\Performers\RegistruColoana\ReorderColumns;
 // use MyDpo\Helpers\Performers\Datatable\DoAction;
 
 class RegistruColoana extends Model {
+
+    use Itemable;
 
     protected $table = 'registers-columns';
 
