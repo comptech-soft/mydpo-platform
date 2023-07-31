@@ -26,13 +26,8 @@ class UniqueName implements Rule {
         }
 
         $this->record = $q->first();
-
-        if($this->record)
-        {
-            return FALSE;
-        }
         
-        return TRUE;
+        return ! $this->record;
     }
 
     public function message()
@@ -40,3 +35,4 @@ class UniqueName implements Rule {
         return 'Registrul (' . $this->input['name'] . ') este deja definit.';
     }
 }
+
