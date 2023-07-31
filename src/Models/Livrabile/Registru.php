@@ -56,6 +56,11 @@ class Registru extends Model {
         'human_type'
     ];
 
+    protected $columnsDefinition = [
+        'model' => \MyDpo\Models\Livrabile\RegistruColoana::class,
+        'foreign_key' => 'register_id',
+    ];
+
     protected static function booted() {
         static::addGlobalScope(new NotdeletedScope());
     }
@@ -184,8 +189,6 @@ class Registru extends Model {
     // }
 
     public static function doUpdate($input, $record) {
-
-        dd($input);
 
         $record->update($input);
         

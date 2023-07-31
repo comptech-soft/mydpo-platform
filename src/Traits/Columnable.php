@@ -18,19 +18,38 @@ trait Columnable {
 
     public function DeleteColumn($type) {
 
-        dd($type);
+        $model = new ($this->columnsDefinition['model']);
         
-        $record = CentralizatorColoana::where('centralizator_id', $this->id)->where('type', $type)->delete();
+        $record = $model->where($this->columnsDefinition['foreign_key'], $this->id)->whereType($type)->first();
+
+        if(!! $record)
+        {
+            return $record->delete();
+        }
+
+        return $record;
     }
 
-    // public function AddColumnVizibilitate() {
-    //     $this->AddColumn('Vizibilitate', 'VISIBILITY', -100, 150);
-    // }
+    public function AddColumnVizibilitate() {
+        $this->AddColumn('Vizibilitate', 'VISIBILITY', -100, 150);
+    }
+
+    public function AddColumnStatus() {
+        $this->AddColumn('Status', 'STATUS', -90, 150);
+    }
+
+    public function AddColumnDepartament() {
+        $this->AddColumn('Departament', 'DEPARTMENT', -80, 200);
+    }
 
     public function AddColumn($caption, $type, $order_no, $width) {
         
+        $model = new ($this->columnsDefinition['model']);
+
+        $record = $model->where($this->columnsDefinition['foreign_key'], $this->id)->whereType($type)->first();
+
         $input = [
-            'centralizator_id' => $this->id,
+            $this->columnsDefinition['foreign_key'] => $this->id,
             'caption' => $caption,
             'slug' => md5($caption . time()),
             'is_group' => 0,
@@ -40,18 +59,16 @@ trait Columnable {
             'width' => $width,
         ];
 
-        dd($input);
+        if(!! $record)
+        {
+            $record->update($input);
+        }
+        else
+        {
+            $record = $model->create($input);
+        }
 
-        // $record = CentralizatorColoana::where('centralizator_id', $this->id)->where('type', $type)->first();
-
-        // if(!! $record)
-        // {
-        //     $record->update($input);
-        // }
-        // else
-        // {
-        //     $record = CentralizatorColoana::create($input);
-        // }
+        return $record;
 
     }
     
