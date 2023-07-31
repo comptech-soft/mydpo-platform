@@ -52,7 +52,6 @@ class Registru extends Model {
     ];
 
     protected $appends = [
-        // 'columns',
         'human_type'
     ];
 
@@ -78,6 +77,10 @@ class Registru extends Model {
             'caption' => 'Audit',
             'color' => 'purple',
         ];
+    }
+
+    public function columns() {
+        return $this->hasMany(RegistruColoana::class, 'register_id');
     }
 
     
@@ -187,11 +190,7 @@ class Registru extends Model {
 
     //     return $record;
     // }
-
     
-
-    
-
     public static function PrepareActionInput($action, $input) {
 
         if($action == 'insert')
