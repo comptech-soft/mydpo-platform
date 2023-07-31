@@ -234,12 +234,12 @@ class Centralizator extends Model {
     }
 
     public static function GetRules($action, $input) {
-
-
+        
         if($action == 'delete')
         {
             return NULL;
         }
+
         $result = [
             'name' => [
                 'required',

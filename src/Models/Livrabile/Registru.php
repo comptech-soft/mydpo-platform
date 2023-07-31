@@ -121,16 +121,7 @@ class Registru extends Model {
     //     return (new GetItems($input, self::query()->with(['coloane']), __CLASS__))->Perform();
     // }
 
-    // public static function GetRules($action, $input) {
-    //     if($action == 'delete')
-    //     {
-    //         return NULL;
-    //     }
-    //     $result = [
-    //     ];
 
-    //     return $result;
-    // }
 
     // public static function doAction($action, $input) {
     //     return (new DoAction($action, $input, __CLASS__))->Perform();
@@ -193,6 +184,27 @@ class Registru extends Model {
         }
 
         return $input;
+    }
+
+    public static function GetRules($action, $input) {
+        if($action == 'delete')
+        {
+            return NULL;
+        }
+
+        $result = [
+            'name' => [
+                'required',
+            ],
+
+            'type' => [
+                'required',
+                'in:registre,audit'
+            ],
+           
+        ];
+
+        return $result;
     }
 
 }
