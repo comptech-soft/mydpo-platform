@@ -3,11 +3,12 @@
 namespace MyDpo\Models\Livrabile;
 
 use Illuminate\Database\Eloquent\Model;
-
-// use MyDpo\Helpers\Performers\Datatable\GetItems;
+use MyDpo\Traits\Itemable;
 // use MyDpo\Helpers\Performers\Datatable\DoAction;
 
 class Registru extends Model {
+
+    use Itemable;
 
     protected $table = 'registers';
 
