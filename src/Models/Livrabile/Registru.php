@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Validation\Rule;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
+use MyDpo\Scopes\NotdeletedScope;
 use MyDpo\Rules\Registru\UniqueName;
 
 class Registru extends Model {
@@ -53,6 +54,10 @@ class Registru extends Model {
         // 'columns',
         'human_type'
     ];
+
+    protected static function booted() {
+        static::addGlobalScope(new NotdeletedScope());
+    }
 
     public function getHumanTypeAttribute() {
         if($this->type == 'registre')
@@ -176,6 +181,19 @@ class Registru extends Model {
 
     //     return $record;
     // }
+
+    public static function doDelete($input, $record) {
+
+        // CentralizatorColoana::where('centralizator_id', $record->id)->delete();
+
+        $record->deleted = 1;
+        $record->deleted_by = \Auth::user()->id;
+        $record->name .= ($record->id . '#');
+        $record->save();
+
+        return $record;
+
+    }
 
     public static function PrepareActionInput($action, $input) {
 

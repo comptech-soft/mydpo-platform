@@ -44,7 +44,7 @@ class Centralizator extends Model {
     ];
 
     protected static function booted() {
-        static::addGlobalScope( new NotdeletedScope() );
+        static::addGlobalScope(new NotdeletedScope());
     }
 
     public function category() {
