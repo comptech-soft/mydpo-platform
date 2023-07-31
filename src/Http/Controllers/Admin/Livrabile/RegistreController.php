@@ -3,18 +3,18 @@
 namespace MyDpo\Http\Controllers\Admin\Livrabile;
 
 use App\Http\Controllers\Controller;
-// use Illuminate\Http\Request;
-// use MyDpo\Helpers\Response;
+use Illuminate\Http\Request;
+use MyDpo\Core\Http\Response\Index;
 // use MyDpo\Models\Registru;
 
 class RegistreController extends Controller {
     
-    // public function index(Request $r) {
-    //     return Response::View(
-    //         '~templates.index', 
-    //         asset('apps/registre/index.js')
-    //     );
-    // }
+    public function index(Request $r) {
+        return Index::View(
+            styles: ['css/app.css'],
+            scripts: ['apps/admin/registre/index.js']
+        );        
+    }
 
     // public function getItems(Request $r) {
     //     return Registru::getItems($r->all());
