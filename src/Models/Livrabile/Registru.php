@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Validation\Rule;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
+use MyDpo\Rules\Registru\UniqueName;
 
 class Registru extends Model {
 
@@ -197,6 +198,7 @@ class Registru extends Model {
         $result = [
             'name' => [
                 'required',
+                new UniqueName($action, $input),
             ],
 
             'type' => [
