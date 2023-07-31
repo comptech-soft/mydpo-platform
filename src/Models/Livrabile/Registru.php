@@ -18,6 +18,7 @@ class Registru extends Model {
 
     protected $casts = [
         'props' => 'json',
+        'body' => 'json',
         'order_no' => 'integer',
         'allow_upload_row_files' => 'integer',
         'has_departamente_column' => 'integer',
