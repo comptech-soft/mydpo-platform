@@ -188,40 +188,9 @@ class Registru extends Model {
     //     return $record;
     // }
 
-    public static function doUpdate($input, $record) {
+    
 
-        $record->update($input);
-        
-        if(array_key_exists('body', $input))
-        {
-            foreach($input['body'] as $key => $value)
-            {
-                if($value == 1)
-                {
-                    $record->{'AddColumn' . ucfirst($key)}();
-                }
-                else
-                {
-                    $record->{'DeleteColumn' . ucfirst($key)}();
-                }
-            }
-        }
-
-        return $record;
-    }
-
-    public static function doDelete($input, $record) {
-
-        // CentralizatorColoana::where('centralizator_id', $record->id)->delete();
-
-        $record->deleted = 1;
-        $record->deleted_by = \Auth::user()->id;
-        $record->name = $record->id . '#' . $record->name;
-        $record->save();
-
-        return $record;
-
-    }
+    
 
     public static function PrepareActionInput($action, $input) {
 
