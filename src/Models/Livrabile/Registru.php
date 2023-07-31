@@ -3,6 +3,7 @@
 namespace MyDpo\Models\Livrabile;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Validation\Rule;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 
@@ -199,7 +200,7 @@ class Registru extends Model {
 
             'type' => [
                 'required',
-                'in:registre,audit'
+                Rule::in(['registre', 'audit']),
             ],
            
         ];
