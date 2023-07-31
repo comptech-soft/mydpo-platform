@@ -33,6 +33,7 @@ class Registru extends Model {
         'name',
         'slug',
         'order_no',
+        'type',
         'allow_upload_row_files',
         'allow_versions',
         'upload_folder_id',
