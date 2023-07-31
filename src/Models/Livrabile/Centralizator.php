@@ -243,7 +243,6 @@ class Centralizator extends Model {
         $result = [
             'name' => [
                 'required',
-                // new UniquePermission($input),
             ],
             'category_id' => [
                 'required',
