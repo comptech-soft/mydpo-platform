@@ -52,7 +52,18 @@ class Registru extends Model {
     ];
 
     public function getHumanTypeAttribute() {
-        return $this->type;
+        if($this->type == 'registre')
+        {
+            return [
+                'caption' => 'Registru',
+                'color' => 'cyan',
+            ];
+        }
+
+        return [
+            'caption' => 'Audit',
+            'color' => 'purple',
+        ];
     }
 
     
