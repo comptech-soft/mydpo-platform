@@ -8,9 +8,9 @@ use MyDpo\Models\Livrabile\CentralizatorColoana;
 
 class CentralizatoareColumnsController extends Controller {
     
-    public function getItems(Request $r) {
-        return CentralizatorColoana::getItems($r->all());
-    }
+    // public function getItems(Request $r) {
+    //     return CentralizatorColoana::getItems($r->all());
+    // }
 
     public function getRecords(Request $r) {
         return CentralizatorColoana::getRecords($r->all());
