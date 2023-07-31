@@ -45,6 +45,7 @@ class Registru extends Model {
         'has_stare_column',
         'description',
         'props',
+        'body',
         'deleted',
         'created_by',
         'updated_by',
@@ -190,6 +191,18 @@ class Registru extends Model {
 
     //     return $record;
     // }
+
+    public static function GetQuery() {
+        return 
+            self::query()
+            ->select([
+                'registers.id', 
+                'registers.name', 
+                'registers.type', 
+                'registers.body', 
+            ])
+            ->withCount('columns');
+    }
     
     public static function PrepareActionInput($action, $input) {
 
