@@ -6,12 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Validation\Rule;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
+use MyDpo\Traits\Columnable;
 use MyDpo\Scopes\NotdeletedScope;
 use MyDpo\Rules\Registru\UniqueName;
 
 class Registru extends Model {
 
-    use Itemable, Actionable;
+    use Itemable, Actionable, Columnable;
 
     protected $table = 'registers';
 
@@ -184,7 +185,7 @@ class Registru extends Model {
 
     public static function doUpdate($input, $record) {
 
-        dd($input, $record);
+        dd($input);
 
         $record->update($input);
         
