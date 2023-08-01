@@ -3,6 +3,8 @@
 namespace MyDpo\Models\Customer;
 
 use Illuminate\Database\Eloquent\Model;
+use MyDpo\Traits\Itemable;
+use MyDpo\Traits\Actionable;
 // use MyDpo\Helpers\Performers\Datatable\GetItems;
 // use MyDpo\Helpers\Performers\Datatable\DoAction;
 // use MyDpo\Traits\NextNumber;
@@ -13,6 +15,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class CustomerRegister extends Model {
 
+    use Itemable, Actionable;
     // use NextNumber;
 
     protected $table = 'customers-registers';
