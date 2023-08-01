@@ -5,6 +5,7 @@ namespace MyDpo\Models\Livrabile;
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
+use MyDpo\Traits\Columnablecolumns;
 use MyDpo\Traits\Reorderable;
 
 class RegistruColoana extends Model {
@@ -119,5 +120,7 @@ class RegistruColoana extends Model {
     //     }
     //     return number_format(1 + $records[0]->max_order_no, 0, '', '');
     // }
+
+    
 
 }
