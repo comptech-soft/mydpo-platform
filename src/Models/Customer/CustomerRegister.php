@@ -135,7 +135,7 @@ class CustomerRegister extends Model {
     // }
 
     public function department() {
-        return $this->belongsTo(CustomerDepartment::class, 'departament_id');
+        return $this->belongsTo(CustomerDepartment::class, 'department_id');
     }
 
     // function rows() {
