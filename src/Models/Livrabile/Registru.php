@@ -9,6 +9,7 @@ use MyDpo\Traits\Actionable;
 use MyDpo\Traits\Columnable;
 use MyDpo\Scopes\NotdeletedScope;
 use MyDpo\Rules\Registru\UniqueName;
+use MyDpo\Performers\Registru\SaveCustomerAsociere;
 
 class Registru extends Model {
 
@@ -136,6 +137,9 @@ class Registru extends Model {
     //     return $this->hasMany(RegistruColoana::class, 'register_id');
     // }
 
+    public static function saveCustomerAsociere($input) {
+        return (new SaveCustomerAsociere($input))->Perform();
+    }
 
     public static function getCustomerAsociere($input) {
 
@@ -188,12 +192,7 @@ class Registru extends Model {
 
         return $records->toArray();
     }
-
-
     
-
-
-
     public static function GetQuery() {
         return 
             self::query()
