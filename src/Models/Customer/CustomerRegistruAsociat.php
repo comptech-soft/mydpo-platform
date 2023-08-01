@@ -31,6 +31,24 @@ class CustomerRegistruAsociat extends Model {
         'deleted_by'
     ];
 
+    public static function UpdateOrCreateAsociere($input) {
+
+        dd($input);
+        
+        $record = self::where('customer_id', $input['customer_id'])
+            ->where('centralizator_id', $input['centralizator_id'])
+            ->first();
+        
+        if( ! $record )
+        {
+            $record = self::create($input);
+        }
+        else
+        {
+            $record->update($input);
+        }
+    }
+
     // public static function saveAsociere($input) {
     //     return (new SaveAsociere($input))->Perform();
     // }
