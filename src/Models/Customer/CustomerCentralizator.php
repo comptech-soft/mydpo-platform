@@ -4,7 +4,7 @@ namespace MyDpo\Models\Customer;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
-// use MyDpo\Traits\Actionable;
+use MyDpo\Traits\Actionable;
 // use MyDpo\Performers\CustomerCentralizator\GetNextNumber;
 // use MyDpo\Performers\CustomerCentralizator\Export;
 // use MyDpo\Performers\CustomerCentralizator\Import;
