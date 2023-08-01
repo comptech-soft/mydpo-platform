@@ -202,18 +202,18 @@ class Registru extends Model {
                 'registers.type', 
                 'registers.body', 
             ])
-            ->withCount('columns');
+            ->withCount(['columns' => function($q) {
+                $q->whereNull('group_id');
+            }]);
     }
     
     public static function PrepareActionInput($action, $input) {
-
         if($action == 'insert')
         {
             $input['slug'] = \Str::slug($input['name']); 
             $input['description'] = '-'; 
             
         }
-
         return $input;
     }
 

@@ -72,7 +72,9 @@ class Centralizator extends Model {
                 'centralizatoare.body', 
                 'centralizatoare.status'
             ])
-            ->withCount('columns');
+            ->withCount(['columns' => function($q) {
+                $q->whereNull('group_id');
+            }]);
     }
 
     public static function saveCustomerAsociere($input) {
