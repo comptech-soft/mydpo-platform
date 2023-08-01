@@ -5,9 +5,7 @@ namespace MyDpo\Models\Customer;
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
-// use MyDpo\Helpers\Performers\Datatable\GetItems;
-// use MyDpo\Helpers\Performers\Datatable\DoAction;
-// use MyDpo\Traits\NextNumber;
+use MyDpo\Traits\NextNumber;
 // use MyDpo\Performers\CustomerRegister\ExportRegister;
 // use MyDpo\Performers\CustomerRegister\ImportRegister;
 // use MyDpo\Performers\CustomerRegister\RegisterSaveAccess;
@@ -15,9 +13,7 @@ use MyDpo\Traits\Actionable;
 
 class CustomerRegister extends Model {
 
-    use Itemable, Actionable;
-    
-    // use NextNumber;
+    use Itemable, Actionable, NextNumber;
 
     protected $table = 'customers-registers';
 
@@ -57,7 +53,7 @@ class CustomerRegister extends Model {
     //     // 'records',
     // ];
 
-    // public $nextNumberColumn = 'number';
+    public $nextNumberColumn = 'number';
 
     // public function getChildrenColumnsAttribute() {
     //     return collect($this->columns)->filter( function($item) {
@@ -123,9 +119,9 @@ class CustomerRegister extends Model {
     //     return $records;
     // }
 
-    // public function department() {
-    //     return $this->belongsTo(CustomerDepartment::class, 'departament_id');
-    // }
+    public function department() {
+        return $this->belongsTo(CustomerDepartment::class, 'departament_id');
+    }
 
     // function rows() {
     //     return $this->hasMany(CustomerRegistruRow::class, 'customer_register_id');
@@ -160,24 +156,25 @@ class CustomerRegister extends Model {
     //     return (new DoAction($action, $input, __CLASS__))->Perform();
     // }
 
-    // public static function GetRules($action, $input) {
+    public static function GetRules($action, $input) {
 
-    //     if($action == 'delete')
-    //     {
-    //         return NULL;
-    //     }
+        if($action == 'delete')
+        {
+            return NULL;
+        }
 
-    //     $result = [
-    //         'customer_id' => 'required|exists:customers,id',
-    //         'register_id' => 'required|exists:registers,id',
-    //         'number' => 'required',
-    //         'date' => [
-    //             'required',
-    //             'date',
-    //         ],
-    //     ];
-    //     return $result;
-    // }
+        $result = [
+            'customer_id' => 'required|exists:customers,id',
+            'register_id' => 'required|exists:registers,id',
+            'number' => 'required',
+            'date' => [
+                'required',
+                'date',
+            ],
+        ];
+
+        return $result;
+    }
 
     // public static function registerDownload($input) {
     //     return (new ExportRegister($input))->Perform();
@@ -195,8 +192,8 @@ class CustomerRegister extends Model {
     //     return (new RegisterCopy($input))->Perform();
     // }
 
-    // public static function nextNumberWhere($input) {
-    //     return "(customer_id = " . $input['customer_id'] . ") AND (register_id = " . $input['register_id'] . ")";
-    // }
+    public static function nextNumberWhere($input) {
+        return "(customer_id = " . $input['customer_id'] . ") AND (register_id = " . $input['register_id'] . ")";
+    }
 
 }
