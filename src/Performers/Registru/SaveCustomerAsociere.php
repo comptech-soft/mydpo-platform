@@ -3,24 +3,23 @@
 namespace MyDpo\Performers\Registru;
 
 use MyDpo\Helpers\Perform;
-use MyDpo\Models\Customer\CustomerCentralizatorAsociat;
+use MyDpo\Models\Customer\CustomerRegistruAsociat;
 
 class SaveCustomerAsociere extends Perform {
 
     public function Action() {
 
-        dd($this->input);
-        // $customer_id = $this->customer_id; 
+        $customer_id = $this->customer_id; 
 
-        // foreach($this->centralizatoare as $i => $centralizator)
-        // {
-        //     $input = [
-        //         ...$centralizator,
-        //         'customer_id' => $customer_id,
-        //     ];
+        foreach($this->registre as $i => $registru)
+        {
+            $input = [
+                ...$registru,
+                'customer_id' => $customer_id,
+            ];
 
-        //     CustomerCentralizatorAsociat::UpdateOrCreateAsociere($input);
-        // }
+            CustomerRegistruAsociat::UpdateOrCreateAsociere($input);
+        }
     }
 
 }
