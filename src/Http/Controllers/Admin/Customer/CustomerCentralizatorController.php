@@ -24,4 +24,8 @@ class CustomerCentralizatorController extends Controller {
         );        
     }
 
+    public function getRecords(Request $r) {
+        return CustomerCentralizator::getRecords($r->all());
+    }
+
 }

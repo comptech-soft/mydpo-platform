@@ -22,23 +22,7 @@ class CustomerCentralizatoareController extends Controller {
         );        
     }
 
-    // public function index($customer_id, Request $r) {
-
-    //     return Response::View(
-    //         '~templates.index', 
-    //         asset('apps/customer-centralizatoare/index.js'),
-    //         [], 
-    //         [
-    //             'customer_id' => $customer_id,
-    //             
-    //             
-    //         ]
-    //     );
-    // }
-
-    // public function getRecords(Request $r) {
-    //     return CustomerCentralizator::getRecords($r->all());
-    // }
+    
 
     // public function getNextNumber(Request $r) {
     //     return CustomerCentralizator::getNextNumber($r->all());
