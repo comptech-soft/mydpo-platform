@@ -50,5 +50,15 @@ trait Columnablecolumns {
 
         return $record;
     }
+
+    public static function doDelete($input, $record) {
+
+        self::where('group_id', $record->id)->delete();
+        
+        $record->delete();
+        
+        return $record;
+        
+    }
     
 }
