@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
 use MyDpo\Models\Customer;
 use MyDpo\Models\Livrabile\Registru;
-// use MyDpo\Models\Customer\CustomerCentralizator;
+use MyDpo\Models\Customer\CustomerRegister;
 
 class CustomerRegistruController extends Controller {
     
@@ -25,9 +25,9 @@ class CustomerRegistruController extends Controller {
         );        
     }
 
-    // public function getRecords(Request $r) {
-    //     return CustomerCentralizator::getRecords($r->all());
-    // }
+    public function getRecords(Request $r) {
+        return CustomerRegister::getRecords($r->all());
+    }
 
     // public function doAction($action, Request $r) {
     //     return CustomerCentralizator::doAction($action, $r->all());
