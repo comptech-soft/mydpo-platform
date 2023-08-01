@@ -49,11 +49,24 @@ class CustomerRegister extends Model {
         'deleted_by'
     ];
 
-    // protected $appends = [
-    //     'children_columns',
-    //     'real_columns',
-    //     // 'records',
-    // ];
+    protected $appends = [
+        // 'columns',
+        'visible',
+        // 'visible_column_id',
+        // 'status_column_id',
+        // 'department_column_id'
+    ];
+
+    protected $with = [
+        'department',
+    ];
+
+    public function getVisibleAttribute() {
+        return [
+            'color' => !! $this->visibility ? 'green' : 'red',
+            'icon' => !! $this->visibility ? 'mdi-check' : 'mdi-cancel',
+        ];
+    }
 
     public $nextNumberColumn = 'number';
 
