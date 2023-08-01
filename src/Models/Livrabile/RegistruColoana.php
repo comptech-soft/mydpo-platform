@@ -10,7 +10,7 @@ use MyDpo\Traits\Reorderable;
 
 class RegistruColoana extends Model {
 
-    use Itemable, Actionable, Reorderable;
+    use Itemable, Actionable, Reorderable, Columnablecolumns;
 
     protected $table = 'registers-columns';
 
