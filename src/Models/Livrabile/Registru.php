@@ -136,62 +136,61 @@ class Registru extends Model {
     //     return $this->hasMany(RegistruColoana::class, 'register_id');
     // }
 
-    // public static function getItems($input) {
-    //     return (new GetItems($input, self::query()->with(['coloane']), __CLASS__))->Perform();
-    // }
 
+    public static function getCustomerAsociere($input) {
 
-
-    // public static function doAction($action, $input) {
-    //     return (new DoAction($action, $input, __CLASS__))->Perform();
-    // }
-
-    // public static function doUpdate($input, $record) {
-    //     $record->update($input);
+        dd($input);
         
-    //     $columns = ['DEPARTAMENT', 'STATUS', 'STARE'];
-    //     $fields = ['has_departamente_column', 'has_status_column', 'has_stare_column'];
-    //     $captions = ['Departament', 'Vizibilitate', 'Status'];
+        $customer_id = $input['customer_id'];
 
-    //     foreach($columns as $i => $column)
-    //     {
-    //         $data = [
-    //             'register_id' => $record->id,
-    //             'slug' => $column . $record->id . md5($i . time()),
-    //             'caption' => $captions[$i],
-    //             'is_group' => 0,
-    //             'group_id' => NULL,
-    //             'type' => $column,
-    //             'order_no' => - $i - 1,
-    //             'width' => 160,
-    //         ];
+        $q = self::query()->leftJoin(
 
-    //         $exists = RegistruColoana::where('register_id', $record->id)->where('type', $column)->first(); 
+            'customers-centralizatoare-asociere',
+            
+            function($j) use ($customer_id){
+                $j
+                    ->on('customers-centralizatoare-asociere.centralizator_id', '=', 'centralizatoare.id')
+                    ->where('customers-centralizatoare-asociere.customer_id', $customer_id);
+            }
 
-    //         if($record->{$fields[$i]} == 1)
-    //         {
-    //             if($exists) 
-    //             {
-    //                 $exists->update($data);    
-    //             }
-    //             else
-    //             {
-    //                 RegistruColoana::create($data);
-    //             }
-    //         }
-    //         else
-    //         {
-    //             if($exists) 
-    //             {
-    //                 $exists->delete();
-    //             }
-    //         }
-    //     }
+        )->select([
+            'centralizatoare.id',
+            'centralizatoare.name',
+            'centralizatoare.category_id',
+            'centralizatoare.description',
+            'centralizatoare.status',
+            'centralizatoare.body',
+            'is_associated'
+        ]);
+
+        $records = $q->get()->filter(function($item) use ($input){
+
+            if(! $item->status )
+            {
+                return false;
+            }
+
+            $visible = $input['gap'] * $item->status['gap'] + $input['centralizatoare'] * $item->status['centralizatoare'];
+
+            return !! $item->status && $visible;
+
+        });
+
+        if(config('app.platform') == 'b2b')
+        {
+            $records = $records->filter( function($item) {
+
+                return !! $item->is_associated;
+            });
+        }
+
+        return $records->toArray();
+    }
 
 
+    
 
-    //     return $record;
-    // }
+
 
     public static function GetQuery() {
         return 
