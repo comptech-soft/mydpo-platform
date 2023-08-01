@@ -7,8 +7,7 @@ use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
 use MyDpo\Models\Livrabile\Centralizator;
 
-class CentralizatoareController extends Controller 
-{
+class CentralizatoareController extends Controller {
     
     public function index(Request $r) {
         return Index::View(
@@ -29,11 +28,8 @@ class CentralizatoareController extends Controller
         return Centralizator::getCustomerAsociere($r->all());
     }
 
-
-    // public function saveCustomerAsociere(Request $r) {
-    //     return Centralizator::saveCustomerAsociere($r->all());
-    // }
+    public function saveCustomerAsociere(Request $r) {
+        return Centralizator::saveCustomerAsociere($r->all());
+    }
     
-
-
 }
