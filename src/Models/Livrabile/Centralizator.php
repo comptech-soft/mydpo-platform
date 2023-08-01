@@ -44,6 +44,11 @@ class Centralizator extends Model {
         'category'
     ];
 
+    protected $columnsDefinition = [
+        'model' => \MyDpo\Models\Livrabile\CentralizatorColoana::class,
+        'foreign_key' => 'centralizator_id',
+    ];
+
     protected static function booted() {
         static::addGlobalScope(new NotdeletedScope());
     }
