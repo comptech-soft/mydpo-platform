@@ -49,11 +49,11 @@ class CustomerCentralizator extends Model {
     ];
 
     protected $appends = [
-        'columns',
-        'visible',
-        'visible_column_id',
-        'status_column_id',
-        'department_column_id'
+        // 'columns',
+        // 'visible',
+        // 'visible_column_id',
+        // 'status_column_id',
+        // 'department_column_id'
     ];
 
     protected $with = [
