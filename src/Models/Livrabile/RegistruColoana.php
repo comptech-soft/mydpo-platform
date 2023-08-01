@@ -4,12 +4,12 @@ namespace MyDpo\Models\Livrabile;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
-// use MyDpo\Performers\RegistruColoana\ReorderColumns;
-// use MyDpo\Helpers\Performers\Datatable\DoAction;
+use MyDpo\Traits\Actionable;
+use MyDpo\Traits\Reorderable;
 
 class RegistruColoana extends Model {
 
-    use Itemable;
+    use Itemable, Actionable, Reorderable;
 
     protected $table = 'registers-columns';
 
