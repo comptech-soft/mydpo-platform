@@ -16,6 +16,8 @@ class CustomerRegistreController extends Controller {
             payload: [
                 'customer_id' => $customer_id,
                 'customer' => Customer::find($customer_id),
+                'registre' => 1,
+                'audit' => 0,
             ],
         );        
     }
