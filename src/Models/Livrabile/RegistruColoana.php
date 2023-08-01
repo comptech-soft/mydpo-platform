@@ -40,6 +40,15 @@ class RegistruColoana extends Model {
         'updated_by'
     ];
 
+    protected $with = [
+        'children'
+    ];
+
+    public function children() {
+        return $this->hasMany(CentralizatorColoana::class, 'group_id');
+    }
+
+
     // public static function reorderColumns($input) {
     //     return (new ReorderColumns($input))
     //         ->Perform();
