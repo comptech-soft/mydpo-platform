@@ -60,6 +60,10 @@ class CustomerCentralizator extends Model {
         'department',
     ];
 
+    public function department() {
+        return $this->belongsTo(CustomerDepartment::class, 'department_id')->select(['id', 'departament']);
+    }
+
     // public function getColumnsAttribute() {
 
     //     if(! $this->current_columns )
@@ -191,9 +195,7 @@ class CustomerCentralizator extends Model {
     //     ];
     // }
 
-    // public function department() {
-    //     return $this->belongsTo(CustomerDepartment::class, 'department_id')->select(['id', 'departament']);
-    // }
+
 
     // public static function doInsert($input, $record) {
     //     $coloane = CentralizatorColoana::where('centralizator_id', $input['centralizator_id'])->get()->toArray();
