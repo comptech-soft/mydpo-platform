@@ -3,7 +3,7 @@
 namespace MyDpo\Performers\Centralizator;
 
 use MyDpo\Helpers\Perform;
-use MyDpo\Models\CustomerCentralizatorAsociat;
+use MyDpo\Models\Customer\CustomerCentralizatorAsociat;
 
 class SaveCustomerAsociere extends Perform {
 

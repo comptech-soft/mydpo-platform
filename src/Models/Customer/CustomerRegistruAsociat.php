@@ -3,8 +3,6 @@
 namespace MyDpo\Models\Customer;
 
 use Illuminate\Database\Eloquent\Model;
-// use MyDpo\Helpers\Performers\Datatable\GetItems;
-// use MyDpo\Performers\CustomerRegistruAsociat\SaveAsociere;
 
 class CustomerRegistruAsociat extends Model {
 
@@ -32,11 +30,8 @@ class CustomerRegistruAsociat extends Model {
     ];
 
     public static function UpdateOrCreateAsociere($input) {
-
-        dd($input);
-        
         $record = self::where('customer_id', $input['customer_id'])
-            ->where('centralizator_id', $input['centralizator_id'])
+            ->where('register_id', $input['register_id'])
             ->first();
         
         if( ! $record )
@@ -48,13 +43,5 @@ class CustomerRegistruAsociat extends Model {
             $record->update($input);
         }
     }
-
-    // public static function saveAsociere($input) {
-    //     return (new SaveAsociere($input))->Perform();
-    // }
-
-    // public static function getItems($input) {
-    //     return (new GetItems($input, self::query(), __CLASS__))->Perform();
-    // }
 
 }
