@@ -38,5 +38,17 @@ trait Columnablecolumns {
 
         return $record;
     }
+
+    public static function doUpdate($input, $record) {
+
+        if( ! array_key_exists('props', $input) )
+        {
+            $input['props'] = NULL;
+        }
+
+        $record->update($input);
+
+        return $record;
+    }
     
 }
