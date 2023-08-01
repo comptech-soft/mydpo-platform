@@ -17,6 +17,8 @@ class CustomerCentralizatoareController extends Controller {
             payload: [
                 'customer_id' => $customer_id,
                 'customer' => Customer::find($customer_id),
+                'gap' => 0,
+                'centralizatoare' => 1,
             ],
         );        
     }
@@ -29,8 +31,8 @@ class CustomerCentralizatoareController extends Controller {
     //         [], 
     //         [
     //             'customer_id' => $customer_id,
-    //             'gap' => 0,
-    //             'centralizatoare' => 1,
+    //             
+    //             
     //         ]
     //     );
     // }
