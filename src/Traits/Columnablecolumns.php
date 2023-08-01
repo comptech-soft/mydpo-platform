@@ -3,9 +3,7 @@
 namespace MyDpo\Traits;
 
 trait Columnablecolumns { 
-
-
-
+    
     public static function doInsert($input, $record) {
 
         $input = [
