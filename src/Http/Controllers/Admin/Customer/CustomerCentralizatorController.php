@@ -20,7 +20,7 @@ class CustomerCentralizatorController extends Controller {
                 'customer_id' => $customer_id,
                 'centralizator_id' => $centralizator_id,
                 'customer' => Customer::find($customer_id),
-                'centralizator' => Centralizator::find($customer_id),
+                'centralizator' => Centralizator::find($centralizator_id),
             ],
         );        
     }
