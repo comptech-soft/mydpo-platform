@@ -24,4 +24,13 @@ class RegistreController extends Controller {
         return Registru::doAction($action, $r->all());
     }
 
+    public function getCustomerAsociere(Request $r) {
+        return Registru::getCustomerAsociere($r->all());
+    }
+
+    public function saveCustomerAsociere(Request $r) {
+        return Registru::saveCustomerAsociere($r->all());
+    }
+    
+
 }
