@@ -139,47 +139,49 @@ class Registru extends Model {
 
     public static function getCustomerAsociere($input) {
 
-        dd($input);
-        
         $customer_id = $input['customer_id'];
 
         $q = self::query()->leftJoin(
 
-            'customers-centralizatoare-asociere',
+            'customers-registers-asociate',
             
             function($j) use ($customer_id){
                 $j
-                    ->on('customers-centralizatoare-asociere.centralizator_id', '=', 'centralizatoare.id')
-                    ->where('customers-centralizatoare-asociere.customer_id', $customer_id);
+                    ->on('customers-registers-asociate.register_id', '=', 'registers.id')
+                    ->where('customers-registers-asociate.customer_id', $customer_id);
             }
 
         )->select([
-            'centralizatoare.id',
-            'centralizatoare.name',
-            'centralizatoare.category_id',
-            'centralizatoare.description',
-            'centralizatoare.status',
-            'centralizatoare.body',
+            'registers.id',
+            'registers.name',
+            'registers.type',
+            'registers.body',
             'is_associated'
         ]);
 
-        $records = $q->get()->filter(function($item) use ($input){
+        $types = ['registre', 'audit'];
 
-            if(! $item->status )
+        $records = $q->get()->filter(function($item) use ($input, $types){
+
+            $visible = false;
+            foreach( $types as $i => $type)
             {
-                return false;
+                if( $input[$type] == 1)
+                {
+                    if($item->type == $type)
+                    {
+                        $visible = true;
+                    }
+                }
             }
 
-            $visible = $input['gap'] * $item->status['gap'] + $input['centralizatoare'] * $item->status['centralizatoare'];
-
-            return !! $item->status && $visible;
+            return $visible;
 
         });
 
         if(config('app.platform') == 'b2b')
         {
             $records = $records->filter( function($item) {
-
                 return !! $item->is_associated;
             });
         }
