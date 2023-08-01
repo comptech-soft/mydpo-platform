@@ -29,6 +29,10 @@ class CustomerCentralizatorController extends Controller {
         return CustomerCentralizator::getRecords($r->all());
     }
 
+    public function doAction($action, Request $r) {
+        return CustomerCentralizator::doAction($action, $r->all());
+    }
+
     public function getNextNumber(Request $r) {
         return CustomerCentralizator::getNextNumber($r->all());
     }
