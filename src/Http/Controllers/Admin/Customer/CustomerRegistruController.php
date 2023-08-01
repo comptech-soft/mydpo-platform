@@ -29,12 +29,12 @@ class CustomerRegistruController extends Controller {
         return CustomerRegister::getRecords($r->all());
     }
 
-    // public function doAction($action, Request $r) {
-    //     return CustomerCentralizator::doAction($action, $r->all());
-    // }
+    public function doAction($action, Request $r) {
+        return CustomerRegister::doAction($action, $r->all());
+    }
 
-    // public function getNextNumber(Request $r) {
-    //     return CustomerCentralizator::getNextNumber($r->all());
-    // }
+    public function getNextNumber(Request $r) {
+        return CustomerRegister::getNextNumber($r->all());
+    }
 
 }

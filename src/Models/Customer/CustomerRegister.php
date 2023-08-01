@@ -16,6 +16,7 @@ use MyDpo\Traits\Actionable;
 class CustomerRegister extends Model {
 
     use Itemable, Actionable;
+    
     // use NextNumber;
 
     protected $table = 'customers-registers';
