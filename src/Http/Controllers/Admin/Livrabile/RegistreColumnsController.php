@@ -12,9 +12,9 @@ class RegistreColumnsController extends Controller {
         return RegistruColoana::getRecords($r->all());
     }
 
-    // public function doAction($action, Request $r) {
-    //     return RegistruColoana::doAction($action, $r->all());
-    // }
+    public function doAction($action, Request $r) {
+        return RegistruColoana::doAction($action, $r->all());
+    }
 
     // public function reorderColumns(Request $r) {
     //     return RegistruColoana::reorderColumns($r->all());
