@@ -109,7 +109,7 @@ trait Columnable {
             }
         }
 
-        return $record;
+        return self::withCount('columns')->find($record->id);
     }
 
     public static function doDelete($input, $record) {
