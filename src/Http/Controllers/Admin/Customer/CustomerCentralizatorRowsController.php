@@ -5,8 +5,9 @@ namespace MyDpo\Http\Controllers\Admin\Customer;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
-
-// use MyDpo\Models\CustomerCentralizatorRow;
+use MyDpo\Models\Customer;
+use MyDpo\Models\Livrabile\Centralizator;
+use MyDpo\Models\Customer\CustomerCentralizator;
 
 class CustomerCentralizatorRowsController extends Controller {
     
