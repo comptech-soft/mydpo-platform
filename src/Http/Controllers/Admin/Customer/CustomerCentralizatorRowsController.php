@@ -24,6 +24,8 @@ class CustomerCentralizatorRowsController extends Controller {
         {
             $customer_centralizator->SetCurrentColumns();
         }
+
+        dd($customer_centralizator->columns_tree);
         
         return Index::View(
             styles: ['css/app.css'],
@@ -38,7 +40,7 @@ class CustomerCentralizatorRowsController extends Controller {
                 'customer_centralizator' => $customer_centralizator,
             ],
         );
-              
+
     }
 
 

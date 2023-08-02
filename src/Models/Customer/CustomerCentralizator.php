@@ -71,7 +71,19 @@ class CustomerCentralizator extends Model {
     }
 
     public function getColumnsTreeAttribute() {
-        return __METHOD__;
+
+        if(! $this->current_columns )
+        {
+            return [];
+        }
+
+        $columns = collect($this->current_columns)
+            ->filter(function($column){
+                return ! $column['group_id'];
+            })
+            ->sortBy('order_no');
+
+        return $columns->values()->toArray();
     }
 
     public function getColumnsListAttribute() {
