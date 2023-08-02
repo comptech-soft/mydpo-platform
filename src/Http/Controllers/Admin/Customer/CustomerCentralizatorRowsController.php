@@ -15,7 +15,15 @@ class CustomerCentralizatorRowsController extends Controller {
 
         $customer_centralizator = CustomerCentralizator::find($customer_centralizator_id);
 
-        dd($customer_centralizator);
+        if(! $customer_centralizator)
+        {
+            return redirect()->back();
+        }
+
+        if(! $customer_centralizator->current_columns)
+        {
+            $customer_centralizator->SetCurrentColumns();
+        }
         
         return Index::View(
             styles: ['css/app.css'],
@@ -29,7 +37,8 @@ class CustomerCentralizatorRowsController extends Controller {
                 'centralizator' => Centralizator::find($centralizator_id),
                 'customer_centralizator' => $customer_centralizator,
             ],
-        );        
+        );
+              
     }
 
 

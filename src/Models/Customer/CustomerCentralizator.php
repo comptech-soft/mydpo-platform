@@ -205,7 +205,12 @@ class CustomerCentralizator extends Model {
         ]);
 
         return $record;
-        
+
+    }
+
+    public function SetCurrentColumns() {
+        $this->current_columns = CentralizatorColoana::where('centralizator_id', $this->centralizator_id)->get()->toArray();
+        $this->save();
     }
 
     // public static function doDuplicate($input, $record) {
