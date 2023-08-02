@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 use MyDpo\Performers\CustomerCentralizator\GetNextNumber;
+use MyDpo\Models\Livrabile\CentralizatorColoana;
+
 // use MyDpo\Performers\CustomerCentralizator\Export;
 // use MyDpo\Performers\CustomerCentralizator\Import;
 // use MyDpo\Performers\CustomerCentralizator\SaveSettings;
@@ -197,18 +199,13 @@ class CustomerCentralizator extends Model {
 
     public static function doInsert($input, $record) {
 
-        dd($input);
-        
-        $coloane = CentralizatorColoana::where('centralizator_id', $input['centralizator_id'])->get()->toArray();
-
-        $input = [
+        $record = self::create([
             ...$input,
-            'current_columns' => $coloane,
-        ];
-
-        $record = self::create($input);
+            'current_columns' => CentralizatorColoana::where('centralizator_id', $input['centralizator_id'])->get()->toArray(),
+        ]);
 
         return $record;
+        
     }
 
     // public static function doDuplicate($input, $record) {
