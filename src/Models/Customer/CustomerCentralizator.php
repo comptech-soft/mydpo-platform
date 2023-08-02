@@ -125,7 +125,7 @@ class CustomerCentralizator extends Model {
                 return ! $column['group_id'];
             })
             ->map(function($item) {
-                $item = collect($item)->only(['id', 'order_no', 'is_group', 'group_id', 'caption', 'type', 'width'])->toArray();
+                $item = collect($item)->only(['id', 'order_no', 'is_group', 'group_id', 'caption', 'type', 'width', 'props'])->toArray();
                 return [
                     ...$item,
                     'children' => [],
@@ -368,7 +368,7 @@ class CustomerCentralizator extends Model {
 
         return collect($children)
             ->map(function($item) {
-                $item = collect($item)->only(['id', 'order_no', 'is_group', 'group_id', 'caption', 'type', 'width'])->toArray();
+                $item = collect($item)->only(['id', 'order_no', 'is_group', 'group_id', 'caption', 'type', 'width', 'props'])->toArray();
                 return $item;
             })
             ->sortBy('order_no')
