@@ -51,7 +51,8 @@ class CustomerCentralizator extends Model {
     ];
 
     protected $appends = [
-        // 'columns',
+        'columns_tree',
+        'columns_list',
         'visible',
         // 'visible_column_id',
         // 'status_column_id',
@@ -67,6 +68,14 @@ class CustomerCentralizator extends Model {
             'color' => !! $this->visibility ? 'green' : 'red',
             'icon' => !! $this->visibility ? 'mdi-check' : 'mdi-cancel',
         ];
+    }
+
+    public function getColumnsTreeAttribute() {
+        return __METHOD__;
+    }
+
+    public function getColumnsListAttribute() {
+        return __METHOD__;
     }
 
     public function department() {
