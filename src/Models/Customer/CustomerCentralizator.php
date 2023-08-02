@@ -63,6 +63,52 @@ class CustomerCentralizator extends Model {
         'department',
     ];
 
+    protected $default_columns = [
+        [
+            'id' => 'empty',
+            'order_no' => 999999, 
+            'is_group' => 0, 
+            'group_id' => NULL, 
+            'caption' => 'a', 
+            'type' => 'EMPTY', 
+            'width' => NULL, 
+            'props' => NULL,
+        ],
+
+        [
+            'id' => 'nr_crt',
+            'order_no' => -200, 
+            'is_group' => 0, 
+            'group_id' => NULL, 
+            'caption' => ['Nr.', 'crt'], 
+            'type' => 'NRCRT', 
+            'width' => 50, 
+            'props' => NULL,
+        ],
+
+        [
+            'id' => 'check',
+            'order_no' => -150, 
+            'is_group' => 0, 
+            'group_id' => NULL, 
+            'caption' => '', 
+            'type' => 'CHECK', 
+            'width' => 50, 
+            'props' => NULL,
+        ],
+
+        [
+            'id' => 'files',
+            'order_no' => -120, 
+            'is_group' => 0, 
+            'group_id' => NULL, 
+            'caption' => 'Fișiere', 
+            'type' => 'FILES', 
+            'width' => 60, 
+            'props' => NULL,
+        ]
+    ];
+
     public function getVisibleAttribute() {
         return [
             'color' => !! $this->visibility ? 'green' : 'red',
@@ -72,18 +118,29 @@ class CustomerCentralizator extends Model {
 
     public function getColumnsTreeAttribute() {
 
-        if(! $this->current_columns )
-        {
-            return [];
-        }
+        $this->CorrectCurrentColumns();
 
         $columns = collect($this->current_columns)
             ->filter(function($column){
                 return ! $column['group_id'];
             })
-            ->sortBy('order_no');
+            ->map(function($item) {
+                $item = collect($item)->only(['id', 'order_no', 'is_group', 'group_id', 'caption', 'type', 'width'])->toArray();
+                return [
+                    ...$item,
+                    'children' => [],
+                ];
+            })
+            ->sortBy('order_no')
+            ->values()
+            ->toArray();
 
-        return $columns->values()->toArray();
+        foreach($columns as $i => $column)
+        {
+            $columns[$i]['children'] = self::CreateColumnChildren($column, $this->current_columns);
+        }
+
+        return $columns;
     }
 
     public function getColumnsListAttribute() {
@@ -102,13 +159,7 @@ class CustomerCentralizator extends Model {
     //     }
 
     //     $children = collect($this->current_columns)
-    //         ->map(function($item) {
-
-    //             $item = collect($item)->only(['id', 'order_no', 'is_group', 'group_id', 'caption', 'type', 'width', 'props'])->toArray();
-
-    //             return $item;
-
-    //         })
+            
 
     //         ->filter( function($item) {
     //             return !! $item['group_id'];
@@ -117,49 +168,9 @@ class CustomerCentralizator extends Model {
 
     //     $sorted = collect($this->current_columns)            
             
-    //         ->push([
-    //             'id' => -1,
-    //             'order_no' => 999999, 
-    //             'is_group' => 0, 
-    //             'group_id' => NULL, 
-    //             'caption' => 'a', 
-    //             'type' => NULL, 
-    //             'width' => NULL, 
-    //             'props' => NULL,
-    //         ])
 
-    //         ->push([
-    //             'id' => -2,
-    //             'order_no' => -200, 
-    //             'is_group' => 0, 
-    //             'group_id' => NULL, 
-    //             'caption' => ['Nr.', 'crt'], 
-    //             'type' => 'NRCRT', 
-    //             'width' => !!$this->props ? $this->props[-2] : 50, 
-    //             'props' => NULL,
-    //         ])
 
-    //         ->push([
-    //             'id' => -3,
-    //             'order_no' => -150, 
-    //             'is_group' => 0, 
-    //             'group_id' => NULL, 
-    //             'caption' => '', 
-    //             'type' => 'CHECK', 
-    //             'width' => !!$this->props ? $this->props[-3] : 50, 
-    //             'props' => NULL,
-    //         ])
 
-    //         ->push([
-    //             'id' => -4,
-    //             'order_no' => -120, 
-    //             'is_group' => 0, 
-    //             'group_id' => NULL, 
-    //             'caption' => 'Fișiere', 
-    //             'type' => 'FILES', 
-    //             'width' => !!$this->props ? $this->props[-4] : 60, 
-    //             'props' => NULL,
-    //         ])
             
     //         ->map(function($item) use ($children) {
 
@@ -338,6 +349,62 @@ class CustomerCentralizator extends Model {
 
     public static function getNextNumber($input) {
         return (new GetNextNumber($input))->Perform();
+    }
+
+    public function CorrectCurrentColumns() {
+
+        if(! $this->current_columns)
+        {
+            $this->SetCurrentColumns();
+        }
+
+        if(! $this->current_columns)
+        {
+            $this->current_columns = [];
+        }
+
+        $new_columns = [...$this->current_columns];
+
+        foreach($this->default_columns as $i => $column)
+        {
+            $exists = false;
+            foreach($new_columns as $j => $item)
+            {
+                if($item['id'] == $column['id'])
+                {
+                    $exists = true;
+                }
+            }
+            if(! $exists )
+            {
+                $new_columns[] = $column;
+            }
+        }
+
+        $this->current_columns = $new_columns;
+        $this->save();
+    }
+
+    public static function CreateColumnChildren($column, $current_columns) {
+
+        $children = [];
+
+        foreach($current_columns as $i => $item)
+        {
+            if(!! $item['group_id'] && ($item['group_id'] == $column['id']))
+            {
+                $children[] = $item;
+            }
+        }
+
+        return collect($children)
+            ->map(function($item) {
+                $item = collect($item)->only(['id', 'order_no', 'is_group', 'group_id', 'caption', 'type', 'width'])->toArray();
+                return $item;
+            })
+            ->sortBy('order_no')
+            ->values()
+            ->toArray();
     }
 
 }
