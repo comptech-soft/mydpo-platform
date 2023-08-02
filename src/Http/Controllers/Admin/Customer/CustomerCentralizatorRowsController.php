@@ -13,6 +13,10 @@ class CustomerCentralizatorRowsController extends Controller {
     
     public function index($customer_centralizator_id, $customer_id, $centralizator_id, Request $r) {
 
+        $customer_centralizator = CustomerCentralizator::find($customer_centralizator_id);
+
+        dd($customer_centralizator);
+        
         return Index::View(
             styles: ['css/app.css'],
             scripts: ['apps/customer/centralizator-rows/index.js'],
@@ -23,7 +27,7 @@ class CustomerCentralizatorRowsController extends Controller {
 
                 'customer' => Customer::find($customer_id),
                 'centralizator' => Centralizator::find($centralizator_id),
-                'customer_centralizator' => CustomerCentralizator::find($customer_centralizator_id),
+                'customer_centralizator' => $customer_centralizator,
             ],
         );        
     }
