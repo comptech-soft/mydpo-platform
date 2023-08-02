@@ -19,8 +19,11 @@ class CustomerCentralizatorRowsController extends Controller {
             payload: [
                 'customer_id' => $customer_id,
                 'centralizator_id' => $centralizator_id,
+                'customer_centralizator_id' => $customer_centralizator_id,
+
                 'customer' => Customer::find($customer_id),
                 'centralizator' => Centralizator::find($centralizator_id),
+                'customer_centralizator' => CustomerCentralizator::find($customer_centralizator_id),
             ],
         );        
     }
