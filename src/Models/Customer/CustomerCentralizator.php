@@ -195,22 +195,21 @@ class CustomerCentralizator extends Model {
 
     // } 
 
+    public static function doInsert($input, $record) {
 
+        dd($input);
+        
+        $coloane = CentralizatorColoana::where('centralizator_id', $input['centralizator_id'])->get()->toArray();
 
+        $input = [
+            ...$input,
+            'current_columns' => $coloane,
+        ];
 
+        $record = self::create($input);
 
-    // public static function doInsert($input, $record) {
-    //     $coloane = CentralizatorColoana::where('centralizator_id', $input['centralizator_id'])->get()->toArray();
-
-    //     $input = [
-    //         ...$input,
-    //         'current_columns' => $coloane,
-    //     ];
-
-    //     $record = self::create($input);
-
-    //     return $record;
-    // }
+        return $record;
+    }
 
     // public static function doDuplicate($input, $record) {
 
