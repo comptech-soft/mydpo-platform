@@ -3,11 +3,28 @@
 namespace MyDpo\Http\Controllers\Admin\Customer;
 
 use App\Http\Controllers\Controller;
-// use Illuminate\Http\Request;
+use Illuminate\Http\Request;
+use MyDpo\Core\Http\Response\Index;
+
 // use MyDpo\Models\CustomerCentralizatorRow;
 
 class CustomerCentralizatorRowsController extends Controller {
     
+    public function index($customer_centralizator_id, $customer_id, $centralizator_id, Request $r) {
+
+        return Index::View(
+            styles: ['css/app.css'],
+            scripts: ['apps/customer/centralizator-rows/index.js'],
+            payload: [
+                'customer_id' => $customer_id,
+                'centralizator_id' => $centralizator_id,
+                'customer' => Customer::find($customer_id),
+                'centralizator' => Centralizator::find($centralizator_id),
+            ],
+        );        
+    }
+
+
     // public function getRecords(Request $r) {
     //     return CustomerCentralizatorRow::getRecords($r->all());
     // }
