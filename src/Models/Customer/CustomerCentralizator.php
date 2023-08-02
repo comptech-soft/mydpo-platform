@@ -144,7 +144,22 @@ class CustomerCentralizator extends Model {
     }
 
     public function getColumnsListAttribute() {
-        return __METHOD__;
+        $list = [];
+
+        foreach($this->columns_tree as $i => $node)
+        {
+            if( count($node['children']) == 0)
+            {
+                $list[] = $node;
+            }
+
+            foreach($node['children'] as $j => $child)
+            {
+                $list[] = $child;
+            }
+        }
+
+        return $list;
     }
 
     public function department() {
