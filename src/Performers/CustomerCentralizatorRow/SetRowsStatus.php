@@ -4,8 +4,8 @@ namespace MyDpo\Performers\CustomerCentralizatorRow;
 
 use MyDpo\Helpers\Perform;
 use MyDpo\Models\Customer\CustomerCentralizator;
-use MyDpo\Models\Customer\CentralizatorRow;
-use MyDpo\Models\Customer\CentralizatorRowValue;
+use MyDpo\Models\Customer\CustomerCentralizatorRow;
+use MyDpo\Models\Customer\CustomerCentralizatorRowValue;
 use Carbon\Carbon;
 
 class SetRowsStatus extends Perform {
