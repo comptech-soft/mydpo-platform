@@ -54,9 +54,9 @@ class CustomerCentralizatorRowsController extends Controller {
         return CustomerCentralizatorRow::updateRow($r->all());
     }
 
-    // public function deleteRow(Request $r) {
-    //     return CustomerCentralizatorRow::deleteRow($r->all());
-    // }
+    public function deleteRow(Request $r) {
+        return CustomerCentralizatorRow::deleteRow($r->all());
+    }
     
     // public function setRowsStatus(Request $r) {
     //     return CustomerCentralizatorRow::setRowsStatus($r->all());
