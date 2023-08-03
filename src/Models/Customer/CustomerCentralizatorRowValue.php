@@ -12,7 +12,7 @@ class CustomerCentralizatorRowValue extends Model {
         'row_id' => 'integer',
         'column_id' => 'integer',
         'props' => 'json',
-        'columns' => 'json',
+        // 'column' => 'json',
     ];
 
     protected $fillable = [
@@ -20,7 +20,7 @@ class CustomerCentralizatorRowValue extends Model {
         'row_id',
         'column_id',
         'value',
-        'columns',
+        'column',
         'props',
     ];
 
