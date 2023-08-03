@@ -38,6 +38,7 @@ class CustomerCentralizatorRow extends Model {
         'department_id',
         'order_no',
         'deleted',
+        'column',
         'props',
         'created_by',
         'updated_by',
