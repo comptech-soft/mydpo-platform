@@ -1,12 +1,12 @@
 <?php
 
-namespace MyDpo\Http\Controllers\Auth;
+namespace MyDpo\Http\Controllers\Admin\Customer;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Models\CustomerCentralizatorRowFile;
 
-class CustomersCentralizatoareRowsFilesController extends Controller {
+class CustomerCentralizatorRowsFilesController extends Controller {
     
     public function getRecords(Request $r) {
         return CustomerCentralizatorRowFile::getRecords($r->all());
