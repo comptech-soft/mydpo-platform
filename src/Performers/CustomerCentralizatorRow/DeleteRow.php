@@ -3,8 +3,8 @@
 namespace MyDpo\Performers\CustomerCentralizatorRow;
 
 use MyDpo\Helpers\Perform;
-use MyDpo\Models\CustomerCentralizatorRow;
-use MyDpo\Models\CustomerCentralizatorRowValue;
+use MyDpo\Models\Customer\CustomerCentralizatorRow;
+use MyDpo\Models\Customer\CustomerCentralizatorRowValue;
 
 class DeleteRow extends Perform {
 
@@ -12,7 +12,6 @@ class DeleteRow extends Perform {
 
         $values = CustomerCentralizatorRowValue::where('row_id', $this->id)->delete();
         $record = CustomerCentralizatorRow::where('id', $this->id)->delete();
-
 
         $this->payload = [
             'record' => $record,
