@@ -44,13 +44,13 @@ class CustomerCentralizatorRow extends Model {
         'deleted_by'
     ];
 
-    // protected $with = [
-    //     'rowvalues',
-    // ];
+    protected $with = [
+        'rowvalues',
+    ];
 
-    // protected $withCount = [
-    //     'files',
-    // ];
+    protected $withCount = [
+        'files',
+    ];
 
     // public function getDepartmentIdAttribute() {
     //     $column_id = $this->customercentralizator->department_column_id;
@@ -63,13 +63,13 @@ class CustomerCentralizatorRow extends Model {
     //     return $this->belongsTo(CustomerCentralizator::class, 'customer_centralizator_id');
     // }
      
-    // public function rowvalues() {
-    //     return $this->hasMany(CustomerCentralizatorRowValue::class, 'row_id')->select(['id', 'row_id', 'column_id', 'value']);
-    // }
+    public function rowvalues() {
+        return $this->hasMany(CustomerCentralizatorRowValue::class, 'row_id')->select(['id', 'row_id', 'column_id', 'value']);
+    }
 
-    // public function files() {
-    //     return $this->hasMany(CustomerCentralizatorRowFile::class, 'row_id');
-    // }
+    public function files() {
+        return $this->hasMany(CustomerCentralizatorRowFile::class, 'row_id');
+    }
 
     // public function DuplicateValues($id, $new_customer_id){
 
