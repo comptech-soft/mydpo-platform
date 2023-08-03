@@ -41,7 +41,7 @@ class CustomerCentralizatorRowsController extends Controller {
         );
 
     }
-    
+
     public function getRecords(Request $r) {
         return CustomerCentralizatorRow::getRecords($r->all());
     }
@@ -50,9 +50,9 @@ class CustomerCentralizatorRowsController extends Controller {
         return CustomerCentralizatorRow::insertRow($r->all());
     }
 
-    // public function updateRow(Request $r) {
-    //     return CustomerCentralizatorRow::updateRow($r->all());
-    // }
+    public function updateRow(Request $r) {
+        return CustomerCentralizatorRow::updateRow($r->all());
+    }
 
     // public function deleteRow(Request $r) {
     //     return CustomerCentralizatorRow::deleteRow($r->all());

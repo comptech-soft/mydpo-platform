@@ -108,9 +108,9 @@ class CustomerCentralizatorRow extends Model {
         return (new InsertRow($input))->Perform();
     }
 
-    // public static function updateRow($input) {
-    //     return (new UpdateRow($input))->Perform();
-    // }
+    public static function updateRow($input) {
+        return (new UpdateRow($input))->Perform();
+    }
 
     // public static function deleteRow($input) {
     //     return (new DeleteRow($input))->Perform();
