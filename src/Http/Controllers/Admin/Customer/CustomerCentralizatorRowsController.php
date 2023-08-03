@@ -66,10 +66,8 @@ class CustomerCentralizatorRowsController extends Controller {
         return CustomerCentralizatorRow::setRowsStatus($r->all());
     }
     
-    // public function setRowsVisibility(Request $r) {
-    //     return CustomerCentralizatorRow::setRowsVisibility($r->all());
-    // }
+    public function setRowsVisibility(Request $r) {
+        return CustomerCentralizatorRow::setRowsVisibility($r->all());
+    }
 
-    
-    
 }
