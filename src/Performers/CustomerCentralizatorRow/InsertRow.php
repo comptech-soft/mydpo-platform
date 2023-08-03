@@ -3,8 +3,8 @@
 namespace MyDpo\Performers\CustomerCentralizatorRow;
 
 use MyDpo\Helpers\Perform;
-use MyDpo\Models\CustomerCentralizatorRow;
-use MyDpo\Models\CustomerCentralizatorRowValue;
+use MyDpo\Models\Customer\CustomerCentralizatorRow;
+use MyDpo\Models\Customer\CustomerCentralizatorRowValue;
 use Carbon\Carbon;
 
 class InsertRow extends Perform {
