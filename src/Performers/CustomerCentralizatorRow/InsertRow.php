@@ -42,7 +42,8 @@ class InsertRow extends Perform {
         {
             $input['row_id'] = $record->id;
 
-            dd($input);
+            $input['column'] = $input['type'];
+            
             CustomerCentralizatorRowValue::create($input);
         }
 
