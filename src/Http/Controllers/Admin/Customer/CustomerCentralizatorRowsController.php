@@ -57,6 +57,10 @@ class CustomerCentralizatorRowsController extends Controller {
     public function deleteRow(Request $r) {
         return CustomerCentralizatorRow::deleteRow($r->all());
     }
+
+    public function deleteRows(Request $r) {
+        return CustomerCentralizatorRow::deleteRows($r->all());
+    }
     
     // public function setRowsStatus(Request $r) {
     //     return CustomerCentralizatorRow::setRowsStatus($r->all());
@@ -66,8 +70,6 @@ class CustomerCentralizatorRowsController extends Controller {
     //     return CustomerCentralizatorRow::setRowsVisibility($r->all());
     // }
 
-    // public function deleteRows(Request $r) {
-    //     return CustomerCentralizatorRow::deleteRows($r->all());
-    // }
+    
     
 }

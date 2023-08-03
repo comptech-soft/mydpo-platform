@@ -7,10 +7,11 @@ use MyDpo\Traits\Itemable;
 use MyDpo\Performers\CustomerCentralizatorRow\InsertRow;
 use MyDpo\Performers\CustomerCentralizatorRow\UpdateRow;
 use MyDpo\Performers\CustomerCentralizatorRow\DeleteRow;
+use MyDpo\Performers\CustomerCentralizatorRow\DeleteRows;
 
 // use MyDpo\Performers\CustomerCentralizatorRow\SetRowsStatus;
 // use MyDpo\Performers\CustomerCentralizatorRow\SetRowsVisibility;
-// use MyDpo\Performers\CustomerCentralizatorRow\DeleteRows;
+// 
 
 class CustomerCentralizatorRow extends Model {
 
@@ -117,6 +118,10 @@ class CustomerCentralizatorRow extends Model {
         return (new DeleteRow($input))->Perform();
     }
 
+    public static function deleteRows($input) {
+        return (new DeleteRows($input))->Perform();
+    }
+
     // public static function setRowsStatus($input) {
     //     return (new SetRowsStatus($input))->Perform();
     // }
@@ -125,9 +130,7 @@ class CustomerCentralizatorRow extends Model {
     //     return (new SetRowsVisibility($input))->Perform();
     // }
 
-    // public static function deleteRows($input) {
-    //     return (new DeleteRows($input))->Perform();
-    // }
+    
     
 
 }
