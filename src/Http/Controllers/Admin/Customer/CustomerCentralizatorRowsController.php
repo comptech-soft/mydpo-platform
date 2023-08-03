@@ -26,6 +26,8 @@ class CustomerCentralizatorRowsController extends Controller {
             $customer_centralizator->SetCurrentColumns();
         }
         
+        dd('Bam bam....');
+
         return Index::View(
             styles: ['css/app.css'],
             scripts: ['apps/customer/centralizator-rows/index.js'],
