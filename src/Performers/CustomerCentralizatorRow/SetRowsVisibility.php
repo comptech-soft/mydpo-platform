@@ -3,9 +3,9 @@
 namespace MyDpo\Performers\CustomerCentralizatorRow;
 
 use MyDpo\Helpers\Perform;
-use MyDpo\Models\CustomerCentralizator;
-use MyDpo\Models\CustomerCentralizatorRow;
-use MyDpo\Models\CustomerCentralizatorRowValue;
+use MyDpo\Models\Customer\CustomerCentralizator;
+use MyDpo\Models\Customer\CustomerCentralizatorRow;
+use MyDpo\Models\Customer\CustomerCentralizatorRowValue;
 use Carbon\Carbon;
 
 class SetRowsVisibility extends Perform {

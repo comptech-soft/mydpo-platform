@@ -8,10 +8,8 @@ use MyDpo\Performers\CustomerCentralizatorRow\InsertRow;
 use MyDpo\Performers\CustomerCentralizatorRow\UpdateRow;
 use MyDpo\Performers\CustomerCentralizatorRow\DeleteRow;
 use MyDpo\Performers\CustomerCentralizatorRow\DeleteRows;
-
-// use MyDpo\Performers\CustomerCentralizatorRow\SetRowsStatus;
-// use MyDpo\Performers\CustomerCentralizatorRow\SetRowsVisibility;
-// 
+use MyDpo\Performers\CustomerCentralizatorRow\SetRowsStatus;
+use MyDpo\Performers\CustomerCentralizatorRow\SetRowsVisibility;
 
 class CustomerCentralizatorRow extends Model {
 
@@ -122,15 +120,12 @@ class CustomerCentralizatorRow extends Model {
         return (new DeleteRows($input))->Perform();
     }
 
-    // public static function setRowsStatus($input) {
-    //     return (new SetRowsStatus($input))->Perform();
-    // }
+    public static function setRowsStatus($input) {
+        return (new SetRowsStatus($input))->Perform();
+    }
 
-    // public static function setRowsVisibility($input) {
-    //     return (new SetRowsVisibility($input))->Perform();
-    // }
-
+    public static function setRowsVisibility($input) {
+        return (new SetRowsVisibility($input))->Perform();
+    }
     
-    
-
 }
