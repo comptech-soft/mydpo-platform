@@ -8,6 +8,7 @@ use MyDpo\Core\Http\Response\Index;
 use MyDpo\Models\Customer;
 use MyDpo\Models\Livrabile\Centralizator;
 use MyDpo\Models\Customer\CustomerCentralizator;
+use MyDpo\Models\Customer\CustomerCentralizatorRow;
 
 class CustomerCentralizatorRowsController extends Controller {
     

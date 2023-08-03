@@ -4,7 +4,7 @@ namespace MyDpo\Models\Customer;
 
 use Illuminate\Database\Eloquent\Model;
 // use MyDpo\Traits\Itemable;
-// use MyDpo\Performers\CustomerCentralizatorRow\InsertRow;
+use MyDpo\Performers\CustomerCentralizatorRow\InsertRow;
 // use MyDpo\Performers\CustomerCentralizatorRow\DeleteRow;
 // use MyDpo\Performers\CustomerCentralizatorRow\UpdateRow;
 // use MyDpo\Performers\CustomerCentralizatorRow\SetRowsStatus;
@@ -104,9 +104,9 @@ class CustomerCentralizatorRow extends Model {
     //     CustomerCentralizatorRowValue::where('row_id', $this->id)->delete();
     // }
 
-    // public static function insertRow($input) {
-    //     return (new InsertRow($input))->Perform();
-    // }
+    public static function insertRow($input) {
+        return (new InsertRow($input))->Perform();
+    }
 
     // public static function updateRow($input) {
     //     return (new UpdateRow($input))->Perform();
