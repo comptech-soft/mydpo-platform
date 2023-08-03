@@ -41,11 +41,10 @@ class CustomerCentralizatorRowsController extends Controller {
         );
 
     }
-
-
-    // public function getRecords(Request $r) {
-    //     return CustomerCentralizatorRow::getRecords($r->all());
-    // }
+    
+    public function getRecords(Request $r) {
+        return CustomerCentralizatorRow::getRecords($r->all());
+    }
 
     public function insertRow(Request $r) {
         return CustomerCentralizatorRow::insertRow($r->all());
