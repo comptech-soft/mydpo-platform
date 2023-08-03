@@ -3,9 +3,9 @@
 namespace MyDpo\Performers\CustomerCentralizatorRow;
 
 use MyDpo\Helpers\Perform;
-use MyDpo\Models\CustomerCentralizatorRow;
-use MyDpo\Models\CustomerCentralizatorRowValue;
-use MyDpo\Models\CustomerCentralizator;
+use MyDpo\Models\Customer\CustomerCentralizatorRow;
+use MyDpo\Models\Customer\CustomerCentralizatorRowValue;
+use MyDpo\Models\Customer\CustomerCentralizator;
 use Carbon\Carbon;
 
 class UpdateRow extends Perform {
