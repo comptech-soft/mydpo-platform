@@ -3,7 +3,7 @@
 namespace MyDpo\Models\Customer;
 
 use Illuminate\Database\Eloquent\Model;
-// use MyDpo\Traits\Itemable;
+use MyDpo\Traits\Itemable;
 use MyDpo\Performers\CustomerCentralizatorRow\InsertRow;
 // use MyDpo\Performers\CustomerCentralizatorRow\DeleteRow;
 // use MyDpo\Performers\CustomerCentralizatorRow\UpdateRow;
