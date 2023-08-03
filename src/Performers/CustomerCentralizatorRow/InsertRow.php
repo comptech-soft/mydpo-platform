@@ -5,6 +5,7 @@ namespace MyDpo\Performers\CustomerCentralizatorRow;
 use MyDpo\Helpers\Perform;
 use MyDpo\Models\Customer\CustomerCentralizatorRow;
 use MyDpo\Models\Customer\CustomerCentralizatorRowValue;
+use MyDpo\Models\Customer_base;
 use Carbon\Carbon;
 
 class InsertRow extends Perform {
@@ -32,7 +33,7 @@ class InsertRow extends Perform {
                     ],
                     'customer' => [
                         'id' => $this->customer_id,
-                        'name' => $this->customer,
+                        'name' => Customer_base::find($this->customer_id)->name,
                     ],
                 ],
             ],
