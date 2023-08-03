@@ -54,9 +54,9 @@ class CustomerCentralizator extends Model {
         'columns_tree',
         'columns_list',
         'visible',
-        // 'visible_column_id',
-        // 'status_column_id',
-        // 'department_column_id'
+        'visibility_column_id',
+        'status_column_id',
+        'department_column_id'
     ];
 
     protected $with = [
@@ -166,37 +166,37 @@ class CustomerCentralizator extends Model {
         return $this->belongsTo(CustomerDepartment::class, 'department_id')->select(['id', 'departament']);
     }
 
-    // public function getVisibleColumnIdAttribute() {
-    //     return $this->GetColumnIdByType('VISIBILITY');
-    // }
+    public function getVisibilityColumnIdAttribute() {
+        return $this->GetColumnIdByType('VISIBILITY');
+    }
 
-    // public function getStatusColumnIdAttribute() {
-    //     return $this->GetColumnIdByType('STATUS');
-    // }
+    public function getStatusColumnIdAttribute() {
+        return $this->GetColumnIdByType('STATUS');
+    }
 
-    // public function getDepartmentColumnIdAttribute() {
-    //     return $this->GetColumnIdByType('DEPARTMENT');
-    // }
+    public function getDepartmentColumnIdAttribute() {
+        return $this->GetColumnIdByType('DEPARTMENT');
+    }
 
-    // private function GetColumnIdByType($type) {
+    private function GetColumnIdByType($type) {
 
-    //     if( ! $this->columns )
-    //     {
-    //         return NULL;
-    //     }
+        if( ! $this->current_columns )
+        {
+            return NULL;
+        }
 
-    //     $first = collect($this->columns)->first( function($column) use ($type) {
-    //         return $column['type'] == $type;
-    //     });
+        $first = collect($this->current_columns)->first( function($column) use ($type) {
+            return $column['type'] == $type;
+        });
 
-    //     if(!! $first)
-    //     {
-    //         return 1 * $first['id'];
-    //     }
+        if(!! $first)
+        {
+            return 1 * $first['id'];
+        }
 
-    //     return NULL;
+        return NULL;
 
-    // } 
+    } 
 
     public static function doInsert($input, $record) {
 
