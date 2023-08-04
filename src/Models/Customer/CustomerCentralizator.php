@@ -255,7 +255,14 @@ class CustomerCentralizator extends Model {
     // }
 
     public static function doExport($input) {
-        return (new Export($input))->Perform();
+        $result = (new Export($input))->Perform();
+
+        if($result['success'])
+        {
+            return $result['payload']['record'];
+        }
+
+        return $result['payload'];
     }
 
     // public static function saveSettings($input) {

@@ -49,16 +49,18 @@ class Exporter implements FromView, WithStrictNullComparison, ShouldAutoSize {
     
     public function view(): View {
         
-        $columns = $this->columns();
+        // dd();
 
-        $children_columns = $this->children_columns();
 
-        $columns = $this->columns_colspan_rowspan($columns, $children_columns->count() > 0);
+
+        // $children_columns = $this->children_columns();
+
+        // $columns = $this->columns_colspan_rowspan($columns, $children_columns->count() > 0);
 
         return view('exports.customer-centralizator.export', [
-            'columns' => $columns->toArray(),
-            'children_columns' => $children_columns->toArray(),
-            'records' => $this->records($columns),
+            'columns_tree' => $this->centralizator->columns_tree,
+            // 'children_columns' => $children_columns->toArray(),
+            // 'records' => $this->records($columns),
         ]);
     }
 
@@ -196,29 +198,29 @@ class Exporter implements FromView, WithStrictNullComparison, ShouldAutoSize {
 
     }
 
-    protected function columns() {
-        return collect($this->centralizator->columns)->filter(function($item){
+    // protected function columns() {
+    //     return collect($this->centralizator->columns)->filter(function($item){
 
-            if( in_array($item['type'], ['NRCRT', 'CHECK', 'FILES']) )
-            {
-                return false;
-            }
+    //         if( in_array($item['type'], ['NRCRT', 'CHECK', 'FILES']) )
+    //         {
+    //             return false;
+    //         }
 
-            if( ! $item['type']  )
-            {
-                return count($item['children']) > 0;
-            }
+    //         if( ! $item['type']  )
+    //         {
+    //             return count($item['children']) > 0;
+    //         }
 
-            return true;
-        });
-    }
+    //         return true;
+    //     });
+    // }
 
-    protected function children_columns() {
-        return collect($this->centralizator->columns)->filter(function($item){
+    // protected function children_columns() {
+    //     return collect($this->centralizator->columns)->filter(function($item){
 
-            return count($item['children']) > 0;
+    //         return count($item['children']) > 0;
 
-        });
-    }
+    //     });
+    // }
 
 }
