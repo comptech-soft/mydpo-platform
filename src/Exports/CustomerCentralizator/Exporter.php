@@ -53,7 +53,7 @@ class Exporter implements FromView, WithStrictNullComparison, ShouldAutoSize {
     public function view(): View {
 
         return view('exports.customer-centralizator.export', [
-            'columns' => $this->columns,
+            'columns' => $this->Columns(),
             // 'children_columns' => $children_columns->toArray(),
             'records' => [], //$this->records($columns),
         ]);
@@ -193,7 +193,7 @@ class Exporter implements FromView, WithStrictNullComparison, ShouldAutoSize {
 
     }
 
-    protected function columns() {
+    protected function Columns() {
         return collect($this->centralizator->columns_tree)->filter( function($item) {
 
             return ! in_array($item['type'], ['CHECK', 'FILES', 'EMPTY']);
