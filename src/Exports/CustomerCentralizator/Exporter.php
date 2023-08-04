@@ -14,6 +14,8 @@ use Illuminate\Contracts\View\View;
 
 class Exporter implements FromView, WithStrictNullComparison, ShouldAutoSize {
 
+    public $input = NULL;
+
     /**
      * Departamentele ce se exporta
      */
@@ -33,10 +35,10 @@ class Exporter implements FromView, WithStrictNullComparison, ShouldAutoSize {
 
     public function __construct($input) {
 
-        dd($input);
+        $this->input = $input;   
         
-        $this->department_ids = $department_ids;
-        $this->id = $id;
+        $this->department_ids = $input['department_ids'];
+        $this->id = $input['id'];
 
         if(!! $this->department_ids)
         {
@@ -47,22 +49,13 @@ class Exporter implements FromView, WithStrictNullComparison, ShouldAutoSize {
 
         $this->centralizator = CustomerCentralizator::where('id', $this->id)->first();
     }
-
     
     public function view(): View {
-        
-        // dd();
-
-
-
-        // $children_columns = $this->children_columns();
-
-        // $columns = $this->columns_colspan_rowspan($columns, $children_columns->count() > 0);
 
         return view('exports.customer-centralizator.export', [
-            'columns_tree' => $this->centralizator->columns_tree,
+            'columns' => $this->columns,
             // 'children_columns' => $children_columns->toArray(),
-            // 'records' => $this->records($columns),
+            'records' => [], //$this->records($columns),
         ]);
     }
 
@@ -200,22 +193,37 @@ class Exporter implements FromView, WithStrictNullComparison, ShouldAutoSize {
 
     }
 
-    // protected function columns() {
-    //     return collect($this->centralizator->columns)->filter(function($item){
+    protected function columns() {
+        return collect($this->centralizator->columns_tree)->filter( function($item) {
 
-    //         if( in_array($item['type'], ['NRCRT', 'CHECK', 'FILES']) )
-    //         {
-    //             return false;
-    //         }
+            return ! in_array($item['type'], ['CHECK', 'FILES', 'EMPTY']);
 
-    //         if( ! $item['type']  )
-    //         {
-    //             return count($item['children']) > 0;
-    //         }
+        })->map(function($item){
 
-    //         return true;
-    //     });
-    // }
+            $caption = $item['caption'];
+
+            if(is_string($caption))
+            {
+                $caption = explode('#', $caption);
+                
+                
+            }
+
+            $type = $item['type'];
+
+            if( ! $type )
+            {
+                $type = 'group';
+            }
+
+            return [
+                ...$item,
+                'caption' => $caption,
+                'type' => $type,
+            ];
+
+        })->toArray();
+    }
 
     // protected function children_columns() {
     //     return collect($this->centralizator->columns)->filter(function($item){
