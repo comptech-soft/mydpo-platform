@@ -72,4 +72,8 @@ class CustomerCentralizatorRowFile extends Model {
         return NULL;
     }
 
+    public static function doDownload($input, $record) {
+    dd($input, $record);
+    }
+
 }
