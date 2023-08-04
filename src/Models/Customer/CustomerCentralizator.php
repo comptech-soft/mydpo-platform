@@ -259,17 +259,6 @@ class CustomerCentralizator extends Model {
     //     return $record;
     // }
 
-    public static function doExport($input) {
-        $result = (new Export($input))->Perform();
-
-        if($result['success'])
-        {
-            return $result['payload']['record'];
-        }
-
-        return $result;
-    }
-
     // public static function saveSettings($input) {
     //     return (new SaveSettings($input))->Perform();
     // }
