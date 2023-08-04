@@ -3,7 +3,7 @@
 namespace MyDpo\Performers\CustomerCentralizatorRowFile;
 
 use MyDpo\Helpers\Perform;
-use MyDpo\Models\CustomerCentralizatorRowFile;
+use MyDpo\Models\Customer\CustomerCentralizatorRowFile;
 
 class UploadFiles extends Perform {
 
