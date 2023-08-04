@@ -37,7 +37,6 @@ class CustomerCentralizatorRowsController extends Controller {
                 'customer_centralizator_id' => $customer_centralizator_id,
                 'customers' => Customer::orderBy('name')->pluck('name', 'id')->toArray(),
                 'customer' => Customer::find($customer_id),
-                'customers' => Customer::find($customer_id),
                 'centralizator' => Centralizator::find($centralizator_id),
                 'customer_centralizator' => $customer_centralizator,
             ],
