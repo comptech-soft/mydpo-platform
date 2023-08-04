@@ -54,7 +54,7 @@ class Exporter implements FromView, WithStrictNullComparison, ShouldAutoSize {
 
         return view('exports.customer-centralizator.export', [
             'columns' => $this->Columns(),
-            // 'children_columns' => $children_columns->toArray(),
+            'children' => $this->Children(),
             'records' => [], //$this->records($columns),
         ]);
     }
@@ -195,18 +195,21 @@ class Exporter implements FromView, WithStrictNullComparison, ShouldAutoSize {
 
     protected function Columns() {
         return collect($this->centralizator->columns_tree)->filter( function($item) {
-
             return ! in_array($item['type'], ['CHECK', 'FILES', 'EMPTY']);
-
         })->map(function($item){
 
             $caption = $item['caption'];
 
             if(is_string($caption))
             {
-                $caption = explode('#', $caption);
-                
-                
+                $caption = \Str::replace('#', ' ', $caption);
+            }
+            else
+            {
+                if(is_array($caption))
+                {
+                    $caption = implode(' ', $caption);
+                }
             }
 
             $type = $item['type'];
@@ -225,12 +228,12 @@ class Exporter implements FromView, WithStrictNullComparison, ShouldAutoSize {
         })->toArray();
     }
 
-    // protected function children_columns() {
-    //     return collect($this->centralizator->columns)->filter(function($item){
+    protected function Children() {
+        return collect($this->Columns())->filter(function($item){
 
-    //         return count($item['children']) > 0;
+            return count($item['children']) > 0;
 
-    //     });
-    // }
+        });
+    }
 
 }
