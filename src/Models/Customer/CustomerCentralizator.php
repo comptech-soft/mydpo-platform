@@ -5,9 +5,10 @@ namespace MyDpo\Models\Customer;
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
+use MyDpo\Traits\Exportable;
 use MyDpo\Performers\CustomerCentralizator\GetNextNumber;
 use MyDpo\Models\Livrabile\CentralizatorColoana;
-use MyDpo\Performers\CustomerCentralizator\Export;
+// use MyDpo\Performers\CustomerCentralizator\Export;
 
 // use MyDpo\Performers\CustomerCentralizator\Import;
 // use MyDpo\Performers\CustomerCentralizator\SaveSettings;
@@ -15,7 +16,7 @@ use MyDpo\Performers\CustomerCentralizator\Export;
 
 class CustomerCentralizator extends Model {
 
-    use Itemable, Actionable;
+    use Itemable, Actionable, Exportable;
 
     protected $table = 'customers-centralizatoare';
 
@@ -262,7 +263,7 @@ class CustomerCentralizator extends Model {
             return $result['payload']['record'];
         }
 
-        return $result['payload'];
+        return $result;
     }
 
     // public static function saveSettings($input) {
