@@ -6,9 +6,9 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithStrictNullComparison;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\FromView;
-use MyDpo\Models\CustomerCentralizator;
-use MyDpo\Models\CustomerDepartment;
-use MyDpo\Models\CustomerCentralizatorRow;
+use MyDpo\Models\Customer\CustomerCentralizator;
+use MyDpo\Models\Customer\CustomerDepartment;
+use MyDpo\Models\Customer\CustomerCentralizatorRow;
 
 use Illuminate\Contracts\View\View;
 
