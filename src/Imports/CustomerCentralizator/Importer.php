@@ -33,6 +33,8 @@ class Importer implements ToCollection {
 
     public function __construct($input) {
 
+        dd($input);
+        
         $this->input = $input;
 
         $this->centralizator = CustomerCentralizator::where('id', $this->input['id'])->first();

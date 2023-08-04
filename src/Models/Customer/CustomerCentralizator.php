@@ -6,9 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 use MyDpo\Traits\Exportable;
+use MyDpo\Traits\Importable;
 use MyDpo\Performers\CustomerCentralizator\GetNextNumber;
 use MyDpo\Models\Livrabile\CentralizatorColoana;
 use MyDpo\Exports\CustomerCentralizator\Exporter;
+use MyDpo\Imports\CustomerCentralizator\Importer;
 
 // use MyDpo\Performers\CustomerCentralizator\Import;
 // use MyDpo\Performers\CustomerCentralizator\SaveSettings;
@@ -16,7 +18,7 @@ use MyDpo\Exports\CustomerCentralizator\Exporter;
 
 class CustomerCentralizator extends Model {
 
-    use Itemable, Actionable, Exportable;
+    use Itemable, Actionable, Exportable, Importable;
 
     protected $table = 'customers-centralizatoare';
 
@@ -112,6 +114,10 @@ class CustomerCentralizator extends Model {
 
     protected static function GetExporter($input) {
         return new Exporter($input); 
+    }
+
+    protected static function GetImporter($input) {
+        return new Importer($input); 
     }
 
     public function getVisibleAttribute() {
