@@ -37,8 +37,8 @@ class CustomerCentralizatorController extends Controller {
         return CustomerCentralizator::getNextNumber($r->all());
     }
 
-    public function doExport(Request $r) {
-        return CustomerCentralizator::doExport($r->all());
-    }
+    // public function doExport(Request $r) {
+    //     return CustomerCentralizator::doExport($r->all());
+    // }
 
 }
