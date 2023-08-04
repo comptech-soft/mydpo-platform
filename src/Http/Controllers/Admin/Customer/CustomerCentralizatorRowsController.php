@@ -26,6 +26,8 @@ class CustomerCentralizatorRowsController extends Controller {
             $customer_centralizator->SetCurrentColumns();
         }
 
+
+
         return Index::View(
             styles: ['css/app.css'],
             scripts: ['apps/customer/centralizator-rows/index.js'],
@@ -33,8 +35,9 @@ class CustomerCentralizatorRowsController extends Controller {
                 'customer_id' => $customer_id,
                 'centralizator_id' => $centralizator_id,
                 'customer_centralizator_id' => $customer_centralizator_id,
-
+                'customers' => Customer::orderBy('name')->pluck('name', 'id')->toArray(),
                 'customer' => Customer::find($customer_id),
+                'customers' => Customer::find($customer_id),
                 'centralizator' => Centralizator::find($centralizator_id),
                 'customer_centralizator' => $customer_centralizator,
             ],
