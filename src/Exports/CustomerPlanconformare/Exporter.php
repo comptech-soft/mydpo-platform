@@ -47,9 +47,6 @@ class Exporter implements FromView, WithStrictNullComparison, ShouldAutoSize {
                 'word-wrap' => 'break-word',
             ],
         ];
-
-    
-        
     }
 
     public function view(): View {

@@ -37,7 +37,7 @@ class Exporter implements FromView, WithStrictNullComparison, ShouldAutoSize {
 
         $this->input = $input;   
         
-        $this->department_ids = $input['department_ids'];
+        $this->department_ids = array_key_exists('department_ids', $input) ? $input['department_ids'] : [];
         $this->id = $input['id'];
 
         if(!! $this->department_ids)
