@@ -157,23 +157,12 @@ trait Centralizatorable {
             }
         }
 
-        // dd(11);
-
-        // if(array_key_exists('body', $input))
-        // {
-        //     foreach($input['body'] as $key => $value)
-        //     {
-        //         if($value == 1)
-        //         {
-        //             $record->{'AddColumn' . ucfirst($key)}();
-        //         }
-        //     }
-        // }
-
         return self::withCount('columns')->find($record->id);
     }
 
     public static function doUpdate($input, $record) {
+
+        dd($input);
 
         $record->update($input);
         
