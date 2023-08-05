@@ -5,13 +5,13 @@ namespace MyDpo\Models\Livrabile;
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
-use MyDpo\Traits\Columnable;
+use MyDpo\Traits\Centralizatorable;
 use MyDpo\Scopes\NotdeletedScope;
 use MyDpo\Performers\Centralizator\SaveCustomerAsociere;
 
 class TipCentralizator extends Model {
 
-    use Itemable, Actionable, Columnable;
+    use Itemable, Actionable, Centralizatorable;
 
     protected $table = 'centralizatoare';
     
@@ -165,7 +165,7 @@ class TipCentralizator extends Model {
 
     public static function GetRules($action, $input) {
         
-        if($action == 'delete')
+        if( ! in_array($action, ['insert', 'update']) )
         {
             return NULL;
         }
@@ -174,7 +174,12 @@ class TipCentralizator extends Model {
             'name' => [
                 'required',
             ],
+
             'category_id' => [
+                'required',
+            ],
+
+            'description' => [
                 'required',
             ],
            
