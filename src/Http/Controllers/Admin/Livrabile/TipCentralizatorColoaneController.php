@@ -5,17 +5,19 @@ namespace MyDpo\Http\Controllers\Admin\Livrabile;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
-// use MyDpo\Models\Livrabile\TipCentralizator;
+use MyDpo\Models\Livrabile\TipCentralizator;
 
 class TipCentralizatorColoaneController extends Controller {
     
     public function index($centralizator_id, Request $r) {
 
-        dd($centralizator_id);
-        
         return Index::View(
             styles: ['css/app.css'],
-            scripts: ['apps/admin/tip-centralizator-coloane/index.js']
+            scripts: ['apps/admin/tip-centralizator-coloane/index.js'],
+            payload: [
+                'centralizator_id' => $centralizator_id,
+                'centralizator' => TipCentralizator::find($centralizator_id),
+            ],
         );        
     }
 
