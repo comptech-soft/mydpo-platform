@@ -7,12 +7,12 @@ use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
 use MyDpo\Models\Livrabile\Centralizator;
 
-class CentralizatoareController extends Controller {
+class TipuriCentralizatoareController extends Controller {
     
     public function index(Request $r) {
         return Index::View(
             styles: ['css/app.css'],
-            scripts: ['apps/admin/centralizatoare/index.js']
+            scripts: ['apps/admin/tipuri-centralizatoare/index.js']
         );        
     }
 
