@@ -2,7 +2,7 @@
 
 namespace MyDpo\Traits;
 
-trait Columnable { 
+trait Centralizatorable { 
 
     public function DeleteColumnStatus() {
         $this->DeleteColumn('STATUS');
@@ -73,6 +73,8 @@ trait Columnable {
     }
 
     public static function doInsert($input, $record) {
+
+        dd($input);
 
         $record = self::create($input);
 
