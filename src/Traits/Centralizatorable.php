@@ -4,7 +4,10 @@ namespace MyDpo\Traits;
 
 trait Centralizatorable { 
 
-    protected static $default_columns = [
+    /**
+     * Definirea coloanelor implicite
+     */
+    protected static $default_columns_definition = [
         'has_nr_crt_column' => [
             'type' =>  'NRCRT',
             'caption' => 'Număr#curent',
@@ -55,9 +58,20 @@ trait Centralizatorable {
             'caption' => '',
             'is_group' => 0,
             'group_id' => NULL,
-            'order_no' => 999999,
+            'order_no' => 32767,
             'width' => 10,
         ],
+    ];
+
+    /**
+     * Coloanela care au flag in tabela de tipuri de centralizatoare
+     */
+    protected static $in_table_columns = [
+        'has_nr_crt_column',
+        'has_visibility_column',
+        'has_status_column',
+        'has_files_column',
+        'has_department_column'
     ];
 
     // public function DeleteColumnStatus() {
@@ -102,19 +116,11 @@ trait Centralizatorable {
         
         $model = new ($this->columnsDefinition['model']);
 
-        dd($model);
-
-        $record = $model->where($this->columnsDefinition['foreign_key'], $this->id)->whereType($type)->first();
+        $record = $model->where($this->columnsDefinition['foreign_key'], $this->id)->whereType($input['type'])->first();
 
         $input = [
             $this->columnsDefinition['foreign_key'] => $this->id,
-            'caption' => $caption,
-            'slug' => md5($caption . time()),
-            'is_group' => 0,
-            'group_id' => NULL,
-            'type' =>  $type,
-            'order_no' => $order_no,
-            'width' => $width,
+           ...$input,
         ];
 
         if(!! $record)
@@ -136,29 +142,33 @@ trait Centralizatorable {
 
         $record = self::create($input);
 
-        foreach(self::$default_columns as $field => $column)
+        foreach(self::$default_columns_definition as $field => $column)
         {
 
             if( array_key_exists($field, $input) && $input[$field] == 1)
             {
                 $col = $record->AddColumn($column);
-
-                dd($col);
-            }
-        }
-
-        dd(11);
-
-        if(array_key_exists('body', $input))
-        {
-            foreach($input['body'] as $key => $value)
-            {
-                if($value == 1)
+                	
+                if( in_array($field, self::$in_table_columns))
                 {
-                    $record->{'AddColumn' . ucfirst($key)}();
+                    $record->{$field} = $col->id;
+                    $record->save();
                 }
             }
         }
+
+        // dd(11);
+
+        // if(array_key_exists('body', $input))
+        // {
+        //     foreach($input['body'] as $key => $value)
+        //     {
+        //         if($value == 1)
+        //         {
+        //             $record->{'AddColumn' . ucfirst($key)}();
+        //         }
+        //     }
+        // }
 
         return self::withCount('columns')->find($record->id);
     }

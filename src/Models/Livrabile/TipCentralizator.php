@@ -77,7 +77,7 @@ class TipCentralizator extends Model {
     }
 
     public function columns() {
-        return $this->hasMany(CentralizatorColoana::class, 'centralizator_id');
+        return $this->hasMany(TipCentralizatorColoana::class, 'centralizator_id');
     }
 
     public static function GetQuery() {
