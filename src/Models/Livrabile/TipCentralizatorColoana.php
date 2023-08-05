@@ -44,7 +44,7 @@ class TipCentralizatorColoana extends Model {
     ];
 
     public function children() {
-        return $this->hasMany(CentralizatorColoana::class, 'group_id');
+        return $this->hasMany(TipCentralizatorColoana::class, 'group_id');
     }
 
 }
