@@ -74,18 +74,9 @@ trait Centralizatorable {
         'has_department_column'
     ];
 
-    // public function DeleteColumnStatus() {
-    //     $this->DeleteColumn('STATUS');
-    // }
-
-    // public function DeleteColumnDepartament() {
-    //     $this->DeleteColumn('DEPARTMENT');
-    // }
-
-    // public function DeleteColumnVizibilitate() {
-    //     $this->DeleteColumn('VISIBILITY');
-    // }
-
+    /**
+     * Stergere coloana
+     */
     public function DeleteColumn($input) {
 
         $model = new ($this->columnsDefinition['model']);
@@ -100,6 +91,9 @@ trait Centralizatorable {
         return $record;
     }
 
+    /**
+     * Adaugare coloana
+     */
     public function AddColumn($input) {
         
         $model = new ($this->columnsDefinition['model']);
@@ -124,6 +118,9 @@ trait Centralizatorable {
 
     }
 
+    /**
+     * Adaugare tip centralizator + coloanele implicite
+     */
     public static function doInsert($input, $record) {
 
         $record = self::create($input);
@@ -146,6 +143,10 @@ trait Centralizatorable {
         return self::withCount('columns')->find($record->id);
     }
 
+    /**
+     * Editate tip de centralizator
+     * Se actualizeaza coloanele implicite
+     */
     public static function doUpdate($input, $record) {
         
         $record->update($input);
@@ -176,28 +177,15 @@ trait Centralizatorable {
             }
         }
 
-        
-        if(array_key_exists('body', $input))
-        {
-            foreach($input['body'] as $key => $value)
-            {
-                if($value == 1)
-                {
-                    $record->{'AddColumn' . ucfirst($key)}();
-                }
-                else
-                {
-                    $record->{'DeleteColumn' . ucfirst($key)}();
-                }
-            }
-        }
-
         return self::withCount('columns')->find($record->id);
     }
 
+    /**
+     * Stergerea unui tip de centralizator
+     * Stergerea este logica
+     * Coloanele raman
+     */
     public static function doDelete($input, $record) {
-
-        // CentralizatorColoana::where('centralizator_id', $record->id)->delete();
 
         $record->deleted = 1;
         $record->deleted_by = \Auth::user()->id;
@@ -205,7 +193,6 @@ trait Centralizatorable {
         $record->save();
 
         return $record;
-
     }
     
 }
