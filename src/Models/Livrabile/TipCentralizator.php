@@ -19,8 +19,17 @@ class TipCentralizator extends Model {
         'id' => 'integer',
         'category_id' => 'integer',
         'deleted' => 'integer',
+        'props' => 'json',
+
         'on_gap_page' => 'integer',
         'on_centralizatoare_page' => 'integer',
+
+        'has_nr_crt_column' => 'integer',
+        'has_visibility_column' => 'integer',
+        'has_status_column' => 'integer',
+        'has_files_column' => 'integer',
+        'has_department_column' => 'integer',
+
         'created_by' => 'integer',
         'updated_by' => 'integer',
         'deleted_by' => 'integer',
@@ -36,6 +45,14 @@ class TipCentralizator extends Model {
         // 'body',
         'on_gap_page',
         'on_centralizatoare_page',
+
+        'has_nr_crt_column',
+        'has_visibility_column',
+        'has_status_column',
+        'has_files_column',
+        'has_department_column',
+
+        'props',
         'deleted',
         'created_by',
         'updated_by',
@@ -77,9 +94,16 @@ class TipCentralizator extends Model {
                 'centralizatoare.name', 
                 'centralizatoare.category_id', 
                 'centralizatoare.description', 
+
                 'centralizatoare.on_gap_page', 
                 'centralizatoare.on_centralizatoare_page',
+
+                'centralizatoare.has_nr_crt_column',
                 'centralizatoare.has_visibility_column',
+                'centralizatoare.has_status_column',
+                'centralizatoare.has_files_column',
+                'centralizatoare.has_department_column',
+
                 'centralizatoare.props'
             ])
             ->withCount(['columns' => function($q) {
