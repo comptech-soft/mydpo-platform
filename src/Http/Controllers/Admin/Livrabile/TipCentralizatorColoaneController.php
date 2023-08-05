@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
 use MyDpo\Models\Livrabile\TipCentralizator;
+use MyDpo\Models\Livrabile\TipCentralizatorColoana;
 
 class TipCentralizatorColoaneController extends Controller {
     
@@ -21,20 +22,14 @@ class TipCentralizatorColoaneController extends Controller {
         );        
     }
 
-    // public function getRecords(Request $r) {
-    //     return TipCentralizator::getRecords($r->all());
-    // }
+    public function getRecords(Request $r) {
+        return TipCentralizatorColoana::getRecords($r->all());
+    }
 
-    // public function doAction($action, Request $r) {
-    //     return TipCentralizator::doAction($action, $r->all());
-    // }
+    public function doAction($action, Request $r) {
+        return TipCentralizatorColoana::doAction($action, $r->all());
+    }
 
-    // public function getCustomerAsociere(Request $r) {
-    //     return TipCentralizator::getCustomerAsociere($r->all());
-    // }
-
-    // public function saveCustomerAsociere(Request $r) {
-    //     return TipCentralizator::saveCustomerAsociere($r->all());
-    // }
+    
     
 }
