@@ -86,31 +86,19 @@ trait Centralizatorable {
     //     $this->DeleteColumn('VISIBILITY');
     // }
 
-    // public function DeleteColumn($type) {
+    public function DeleteColumn($input) {
 
-    //     $model = new ($this->columnsDefinition['model']);
+        $model = new ($this->columnsDefinition['model']);
         
-    //     $record = $model->where($this->columnsDefinition['foreign_key'], $this->id)->whereType($type)->first();
+        $record = $model->where($this->columnsDefinition['foreign_key'], $this->id)->whereType($input['type'])->first();
 
-    //     if(!! $record)
-    //     {
-    //         return $record->delete();
-    //     }
+        if(!! $record)
+        {
+            return $record->delete();
+        }
 
-    //     return $record;
-    // }
-
-    // public function AddColumnVizibilitate() {
-    //     $this->AddColumn('Vizibilitate', 'VISIBILITY', -100, 150);
-    // }
-
-    // public function AddColumnStatus() {
-    //     $this->AddColumn('Status', 'STATUS', -90, 150);
-    // }
-
-    // public function AddColumnDepartament() {
-    //     $this->AddColumn('Departament', 'DEPARTMENT', -80, 200);
-    // }
+        return $record;
+    }
 
     public function AddColumn($input) {
         
@@ -138,8 +126,6 @@ trait Centralizatorable {
 
     public static function doInsert($input, $record) {
 
-        // dd($input, self::$default_columns);
-
         $record = self::create($input);
 
         foreach(self::$default_columns_definition as $field => $column)
@@ -156,15 +142,40 @@ trait Centralizatorable {
                 }
             }
         }
-
+        
         return self::withCount('columns')->find($record->id);
     }
 
     public static function doUpdate($input, $record) {
-
-        dd($input);
-
+        
         $record->update($input);
+
+        foreach(self::$default_columns_definition as $field => $column)
+        {
+
+            if( array_key_exists($field, $input) && $input[$field] == 1)
+            {
+                $col = $record->AddColumn($column);
+                	
+                if( in_array($field, self::$in_table_columns))
+                {
+                    $record->{$field} = $col->id;
+                    $record->save();
+                }
+            }
+            else
+            {
+
+                $record->DeleteColumn($column);
+
+                if( in_array($field, self::$in_table_columns))
+                {
+                    $record->{$field} = NULL;
+                    $record->save();
+                }
+            }
+        }
+
         
         if(array_key_exists('body', $input))
         {
