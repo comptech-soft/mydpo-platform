@@ -4,47 +4,105 @@ namespace MyDpo\Traits;
 
 trait Centralizatorable { 
 
-    public function DeleteColumnStatus() {
-        $this->DeleteColumn('STATUS');
-    }
+    protected static $default_columns = [
+        'has_nr_crt_column' => [
+            'type' =>  'NRCRT',
+            'caption' => 'Număr#curent',
+            'is_group' => 0,
+            'group_id' => NULL,
+            'order_no' => -100,
+            'width' => 100,
+        ],
 
-    public function DeleteColumnDepartament() {
-        $this->DeleteColumn('DEPARTMENT');
-    }
+        'has_visibility_column' => [
+            'type' =>  'VISIBILITY',
+            'caption' => 'Vizibilitate',
+            'is_group' => 0,
+            'group_id' => NULL,
+            'order_no' => -90,
+            'width' => 100,
+        ],
 
-    public function DeleteColumnVizibilitate() {
-        $this->DeleteColumn('VISIBILITY');
-    }
+        'has_status_column' => [
+            'type' =>  'STATUS',
+            'caption' => 'Status',
+            'is_group' => 0,
+            'group_id' => NULL,
+            'order_no' => -80,
+            'width' => 100,
+        ],
 
-    public function DeleteColumn($type) {
+        'has_files_column' => [
+            'type' =>  'FILES',
+            'caption' => 'Fișiere',
+            'is_group' => 0,
+            'group_id' => NULL,
+            'order_no' => -70,
+            'width' => 100,
+        ],
 
-        $model = new ($this->columnsDefinition['model']);
+        'has_department_column' => [
+            'type' =>  'DEPARTMENT',
+            'caption' => 'Departament',
+            'is_group' => 0,
+            'group_id' => NULL,
+            'order_no' => -60,
+            'width' => 200,
+        ],
+
+        'has_empty_column' => [
+            'type' =>  'EMPTY',
+            'caption' => '',
+            'is_group' => 0,
+            'group_id' => NULL,
+            'order_no' => 999999,
+            'width' => 10,
+        ],
+    ];
+
+    // public function DeleteColumnStatus() {
+    //     $this->DeleteColumn('STATUS');
+    // }
+
+    // public function DeleteColumnDepartament() {
+    //     $this->DeleteColumn('DEPARTMENT');
+    // }
+
+    // public function DeleteColumnVizibilitate() {
+    //     $this->DeleteColumn('VISIBILITY');
+    // }
+
+    // public function DeleteColumn($type) {
+
+    //     $model = new ($this->columnsDefinition['model']);
         
-        $record = $model->where($this->columnsDefinition['foreign_key'], $this->id)->whereType($type)->first();
+    //     $record = $model->where($this->columnsDefinition['foreign_key'], $this->id)->whereType($type)->first();
 
-        if(!! $record)
-        {
-            return $record->delete();
-        }
+    //     if(!! $record)
+    //     {
+    //         return $record->delete();
+    //     }
 
-        return $record;
-    }
+    //     return $record;
+    // }
 
-    public function AddColumnVizibilitate() {
-        $this->AddColumn('Vizibilitate', 'VISIBILITY', -100, 150);
-    }
+    // public function AddColumnVizibilitate() {
+    //     $this->AddColumn('Vizibilitate', 'VISIBILITY', -100, 150);
+    // }
 
-    public function AddColumnStatus() {
-        $this->AddColumn('Status', 'STATUS', -90, 150);
-    }
+    // public function AddColumnStatus() {
+    //     $this->AddColumn('Status', 'STATUS', -90, 150);
+    // }
 
-    public function AddColumnDepartament() {
-        $this->AddColumn('Departament', 'DEPARTMENT', -80, 200);
-    }
+    // public function AddColumnDepartament() {
+    //     $this->AddColumn('Departament', 'DEPARTMENT', -80, 200);
+    // }
 
-    public function AddColumn($caption, $type, $order_no, $width) {
+    public function AddColumn($input) {
         
         $model = new ($this->columnsDefinition['model']);
+
+        dd($model);
 
         $record = $model->where($this->columnsDefinition['foreign_key'], $this->id)->whereType($type)->first();
 
@@ -74,9 +132,22 @@ trait Centralizatorable {
 
     public static function doInsert($input, $record) {
 
-        dd($input);
+        // dd($input, self::$default_columns);
 
         $record = self::create($input);
+
+        foreach(self::$default_columns as $field => $column)
+        {
+
+            if( array_key_exists($field, $input) && $input[$field] == 1)
+            {
+                $col = $record->AddColumn($column);
+
+                dd($col);
+            }
+        }
+
+        dd(11);
 
         if(array_key_exists('body', $input))
         {

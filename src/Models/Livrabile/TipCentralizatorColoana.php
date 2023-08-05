@@ -8,7 +8,7 @@ use MyDpo\Traits\Actionable;
 use MyDpo\Traits\Columnablecolumns;
 use MyDpo\Traits\Reorderable;
 
-class CentralizatorColoana extends Model {
+class TipCentralizatorColoana extends Model {
 
     use Itemable, Actionable, Columnablecolumns, Reorderable;
     
