@@ -19,8 +19,8 @@ class TipCentralizator extends Model {
         'id' => 'integer',
         'category_id' => 'integer',
         'deleted' => 'integer',
-        'body' => 'json',
-        'status' => 'json',
+        'on_gap_page' => 'integer',
+        'on_centralizatoare_page' => 'integer',
         'created_by' => 'integer',
         'updated_by' => 'integer',
         'deleted_by' => 'integer',
@@ -28,12 +28,14 @@ class TipCentralizator extends Model {
 
     protected $fillable = [
         'id',
-        'status',
+        // 'status',
         'name',
         'category_id',
         'description',
-        'subject',
-        'body',
+        // 'subject',
+        // 'body',
+        'on_gap_page',
+        'on_centralizatoare_page',
         'deleted',
         'created_by',
         'updated_by',
@@ -77,6 +79,7 @@ class TipCentralizator extends Model {
                 'centralizatoare.description', 
                 'centralizatoare.on_gap_page', 
                 'centralizatoare.on_centralizatoare_page',
+                'centralizatoare.has_visibility_column',
                 'centralizatoare.props'
             ])
             ->withCount(['columns' => function($q) {
