@@ -9,7 +9,7 @@ use MyDpo\Traits\Columnable;
 use MyDpo\Scopes\NotdeletedScope;
 use MyDpo\Performers\Centralizator\SaveCustomerAsociere;
 
-class Centralizator extends Model {
+class TipCentralizator extends Model {
 
     use Itemable, Actionable, Columnable;
 
@@ -75,8 +75,9 @@ class Centralizator extends Model {
                 'centralizatoare.name', 
                 'centralizatoare.category_id', 
                 'centralizatoare.description', 
-                'centralizatoare.body', 
-                'centralizatoare.status'
+                'centralizatoare.on_gap_page', 
+                'centralizatoare.on_centralizatoare_page',
+                'centralizatoare.props'
             ])
             ->withCount(['columns' => function($q) {
                 $q->whereNull('group_id');
