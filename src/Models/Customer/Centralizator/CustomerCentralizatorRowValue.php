@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Models\Customer;
+namespace MyDpo\Models\Customer\Centralizator;
 
 use Illuminate\Database\Eloquent\Model;
 

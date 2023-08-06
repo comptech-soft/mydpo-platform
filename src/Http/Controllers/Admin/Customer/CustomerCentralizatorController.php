@@ -12,8 +12,7 @@ use MyDpo\Models\Customer\CustomerCentralizator;
 class CustomerCentralizatorController extends Controller {
     
     public function index($customer_id, $centralizator_id, Request $r) {
-
-
+        
         return Index::View(
             styles: ['css/app.css'],
             scripts: ['apps/customer/centralizator/index.js'],
