@@ -84,52 +84,6 @@ class CustomerCentralizator extends Model {
         ];
     }
 
-    // protected $default_columns = [
-    //     [
-    //         'id' => 'empty',
-    //         'order_no' => 999999, 
-    //         'is_group' => 0, 
-    //         'group_id' => NULL, 
-    //         'caption' => 'a', 
-    //         'type' => 'EMPTY', 
-    //         'width' => NULL, 
-    //         'props' => NULL,
-    //     ],
-
-    //     [
-    //         'id' => 'nr_crt',
-    //         'order_no' => -200, 
-    //         'is_group' => 0, 
-    //         'group_id' => NULL, 
-    //         'caption' => ['Nr.', 'crt'], 
-    //         'type' => 'NRCRT', 
-    //         'width' => 50, 
-    //         'props' => NULL,
-    //     ],
-
-    //     [
-    //         'id' => 'check',
-    //         'order_no' => -150, 
-    //         'is_group' => 0, 
-    //         'group_id' => NULL, 
-    //         'caption' => '', 
-    //         'type' => 'CHECK', 
-    //         'width' => 50, 
-    //         'props' => NULL,
-    //     ],
-
-    //     [
-    //         'id' => 'files',
-    //         'order_no' => -120, 
-    //         'is_group' => 0, 
-    //         'group_id' => NULL, 
-    //         'caption' => 'Fișiere', 
-    //         'type' => 'FILES', 
-    //         'width' => 60, 
-    //         'props' => NULL,
-    //     ]
-    // ];
-    
     protected static function GetExporter($input) {
         return new Exporter($input); 
     }
@@ -137,29 +91,6 @@ class CustomerCentralizator extends Model {
     protected static function GetImporter($input) {
         return new Importer($input); 
     }
-
-    
-
-
-
-    // public function getColumnsListAttribute() {
-    //     $list = [];
-
-    //     foreach($this->columns_tree as $i => $node)
-    //     {
-    //         if( count($node['children']) == 0)
-    //         {
-    //             $list[] = $node;
-    //         }
-
-    //         foreach($node['children'] as $j => $child)
-    //         {
-    //             $list[] = $child;
-    //         }
-    //     }
-
-    //     return $list;
-    // }
 
     public function department() {
         return $this->belongsTo(CustomerDepartment::class, 'department_id')->select(['id', 'departament']);

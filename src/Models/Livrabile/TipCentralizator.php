@@ -128,7 +128,27 @@ class TipCentralizator extends Model {
     }
     
     public function getColumnsItemsAttribute() {
-        return __METHOD__;
+        
+        $list = [];
+
+        foreach($this->columns_tree as $i => $node)
+        {
+            if( count($node['children']) == 0)
+            {
+                $list[] = $node;
+            }
+
+            foreach($node['children'] as $j => $child)
+            {
+                $list[] = [
+                    ...$child,
+                    'children' => [],
+                ];
+            }
+        }
+
+        return $list;
+
     }
 
     public function category() {
