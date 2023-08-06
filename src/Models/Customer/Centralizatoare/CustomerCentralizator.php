@@ -8,6 +8,7 @@ use MyDpo\Traits\Actionable;
 use MyDpo\Traits\Exportable;
 use MyDpo\Traits\Importable;
 use MyDpo\Performers\Customer\Centralizatoare\Centralizator\GetNextNumber;
+use MyDpo\Models\Customer\CustomerDepartment;
 use MyDpo\Models\Livrabile\TipCentralizatorColoana;
 use MyDpo\Exports\CustomerCentralizator\Exporter;
 use MyDpo\Imports\CustomerCentralizator\Importer;
@@ -111,9 +112,7 @@ class CustomerCentralizator extends Model {
             'props' => NULL,
         ]
     ];
-
-
-
+    
     protected static function GetExporter($input) {
         return new Exporter($input); 
     }
