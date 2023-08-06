@@ -43,5 +43,9 @@ class TipCentralizatorColoana extends Model {
         'children'
     ];
 
-   
+    protected $appends = [
+        'array_caption',
+        'not_is_clickable',
+        'not_is_in_list',
+    ];
 }

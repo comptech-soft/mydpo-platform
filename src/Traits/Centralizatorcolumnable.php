@@ -4,11 +4,7 @@ namespace MyDpo\Traits;
 
 trait Centralizatorcolumnable { 
     
-    protected $appends = [
-        'array_caption',
-        'not_is_clickable',
-        'not_is_in_list',
-    ];
+   
 
     public function children() {
         return $this->hasMany(TipCentralizatorColoana::class, 'group_id');
@@ -26,7 +22,6 @@ trait Centralizatorcolumnable {
         return in_array($this->type, ['EMPTY']);
     }
 
-    
     public static function doInsert($input, $record) {
 
         if( ! array_key_exists('props', $input) )
