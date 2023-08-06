@@ -26,7 +26,6 @@ class CustomerCentralizatorRow extends Model {
         'deleted' => 'integer',
         'visibility' => 'integer',
         'props' => 'json',
-        'status' => 'json',
         'created_by' => 'integer',
         'updated_by' => 'integer',
         'deleted_by' => 'integer',

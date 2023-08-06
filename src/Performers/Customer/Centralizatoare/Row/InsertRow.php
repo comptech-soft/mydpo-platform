@@ -14,15 +14,11 @@ class InsertRow extends Perform {
 		
         $role = $this->getUserRole();
 		
-        dd($role);
-        
-        $input = collect($this->input)->except(['rowvalues'])->toArray();
-        
-        $record = CustomerCentralizatorRow::create([
-            ...$input, 
+        $input = [
+            ...collect($this->input)->except(['rowvalues'])->toArray(),
             'props' => [
                 'action' => [
-                    'name' => 'insert',
+                    'name' => 'new',
                     'action_at' => Carbon::now()->format('Y-m-d'),
                     'tooltip' => 'Creat de :user_full_name la :action_at. (:customer_name)',
                     'user' => [
@@ -39,16 +35,39 @@ class InsertRow extends Perform {
                     ],
                 ],
             ],
-        ]);
+        ];
+        
+        $record = CustomerCentralizatorRow::create($input);
 
         foreach($this->rowvalues as $i => $input)
         {
             $input['row_id'] = $record->id;
 
             $input['column'] = $input['type'];
+
+            if($input['type'] == 'VISIBILITY')
+            {
+                $record->visibility = $input['value'];
+            }
+            else
+            {
+                if($input['type'] == 'STATUS')
+                {
+                    $record->status = $input['value'];
+                }
+                else
+                {
+                    if($input['type'] == 'DEPARTMENT')
+                    {
+                        $record->department_id = $input['value'];;
+                    }
+                }
+            }
             
             CustomerCentralizatorRowValue::create($input);
         }
+
+        $record->save();
 
         $this->payload = [
             'record' => CustomerCentralizatorRow::find($record->id),
