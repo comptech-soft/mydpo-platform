@@ -44,7 +44,8 @@ class TipCentralizatorColoana extends Model {
     ];
 
     protected $appends = [
-        'array_caption'
+        'array_caption',
+        'is_disabled'
     ];
 
     public function children() {
@@ -53,6 +54,10 @@ class TipCentralizatorColoana extends Model {
 
     public function getArrayCaptionAttribute() {
         return explode('#', $this->caption);
+    }
+
+    public function getIsDisabledAttribute() {
+        return in_array($this->type, ['VISIBILITY', 'STATUS', 'FILES', 'DEPARTMENT', 'NRCRT', 'EMPTY']);
     }
 
 }
