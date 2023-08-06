@@ -9,6 +9,7 @@ use MyDpo\Traits\Exportable;
 use MyDpo\Traits\Importable;
 use MyDpo\Performers\Customer\Centralizatoare\Centralizator\GetNextNumber;
 use MyDpo\Models\Customer\CustomerDepartment;
+use MyDpo\Models\Livrabile\TipCentralizator;
 use MyDpo\Models\Livrabile\TipCentralizatorColoana;
 use MyDpo\Exports\CustomerCentralizator\Exporter;
 use MyDpo\Imports\CustomerCentralizator\Importer;
@@ -55,12 +56,12 @@ class CustomerCentralizator extends Model {
     ];
 
     protected $appends = [
-        'columns_tree',
-        'columns_list',
-        'visible',
-        'visibility_column_id',
-        'status_column_id',
-        'department_column_id'
+        // 'columns_tree',
+        // 'columns_list',
+        // 'visible',
+        // 'visibility_column_id',
+        // 'status_column_id',
+        // 'department_column_id'
     ];
 
     protected $with = [
@@ -128,103 +129,112 @@ class CustomerCentralizator extends Model {
         ];
     }
 
-    public function getColumnsTreeAttribute() {
+    // public function getColumnsTreeAttribute() {
 
-        $this->CorrectCurrentColumns();
+    //     $this->CorrectCurrentColumns();
 
-        $columns = collect($this->current_columns)
-            ->filter(function($column){
-                return ! $column['group_id'];
-            })
-            ->map(function($item) {
-                $item = collect($item)->only(['id', 'order_no', 'is_group', 'group_id', 'caption', 'type', 'width', 'props'])->toArray();
-                return [
-                    ...$item,
-                    'children' => [],
-                ];
-            })
-            ->sortBy('order_no')
-            ->values()
-            ->toArray();
+    //     $columns = collect($this->current_columns)
+    //         ->filter(function($column){
+    //             return ! $column['group_id'];
+    //         })
+    //         ->map(function($item) {
+    //             $item = collect($item)->only(['id', 'order_no', 'is_group', 'group_id', 'caption', 'type', 'width', 'props'])->toArray();
+    //             return [
+    //                 ...$item,
+    //                 'children' => [],
+    //             ];
+    //         })
+    //         ->sortBy('order_no')
+    //         ->values()
+    //         ->toArray();
 
-        foreach($columns as $i => $column)
-        {
-            $columns[$i]['children'] = self::CreateColumnChildren($column, $this->current_columns);
-        }
+    //     foreach($columns as $i => $column)
+    //     {
+    //         $columns[$i]['children'] = self::CreateColumnChildren($column, $this->current_columns);
+    //     }
 
-        return $columns;
-    }
+    //     return $columns;
+    // }
 
-    public function getColumnsListAttribute() {
-        $list = [];
+    // public function getColumnsListAttribute() {
+    //     $list = [];
 
-        foreach($this->columns_tree as $i => $node)
-        {
-            if( count($node['children']) == 0)
-            {
-                $list[] = $node;
-            }
+    //     foreach($this->columns_tree as $i => $node)
+    //     {
+    //         if( count($node['children']) == 0)
+    //         {
+    //             $list[] = $node;
+    //         }
 
-            foreach($node['children'] as $j => $child)
-            {
-                $list[] = $child;
-            }
-        }
+    //         foreach($node['children'] as $j => $child)
+    //         {
+    //             $list[] = $child;
+    //         }
+    //     }
 
-        return $list;
-    }
+    //     return $list;
+    // }
 
     public function department() {
         return $this->belongsTo(CustomerDepartment::class, 'department_id')->select(['id', 'departament']);
     }
 
-    public function getVisibilityColumnIdAttribute() {
-        return $this->GetColumnIdByType('VISIBILITY');
-    }
+    // public function getVisibilityColumnIdAttribute() {
+    //     return $this->GetColumnIdByType('VISIBILITY');
+    // }
 
-    public function getStatusColumnIdAttribute() {
-        return $this->GetColumnIdByType('STATUS');
-    }
+    // public function getStatusColumnIdAttribute() {
+    //     return $this->GetColumnIdByType('STATUS');
+    // }
 
-    public function getDepartmentColumnIdAttribute() {
-        return $this->GetColumnIdByType('DEPARTMENT');
-    }
+    // public function getDepartmentColumnIdAttribute() {
+    //     return $this->GetColumnIdByType('DEPARTMENT');
+    // }
 
-    private function GetColumnIdByType($type) {
+    // private function GetColumnIdByType($type) {
 
-        if( ! $this->current_columns )
-        {
-            return NULL;
-        }
+    //     if( ! $this->current_columns )
+    //     {
+    //         return NULL;
+    //     }
 
-        $first = collect($this->current_columns)->first( function($column) use ($type) {
-            return $column['type'] == $type;
-        });
+    //     $first = collect($this->current_columns)->first( function($column) use ($type) {
+    //         return $column['type'] == $type;
+    //     });
 
-        if(!! $first)
-        {
-            return 1 * $first['id'];
-        }
+    //     if(!! $first)
+    //     {
+    //         return 1 * $first['id'];
+    //     }
 
-        return NULL;
+    //     return NULL;
 
-    } 
+    // } 
 
     public static function doInsert($input, $record) {
 
+        $tip_centralizator = TipCentralizator::find($input['centralizator_id']);
+
+
         $record = self::create([
             ...$input,
-            'current_columns' => TipCentralizatorColoana::where('centralizator_id', $input['centralizator_id'])->get()->toArray(),
+            
+            'props' => [
+                'columns_tree' => $tip_centralizator->columns_tree,
+                'columns_items' => $tip_centralizator->columns_items,
+            ],
+
+            'current_columns' => $tip_centralizator->columns->toArray(), 
         ]);
 
         return $record;
 
     }
 
-    public function SetCurrentColumns() {
-        $this->current_columns = CentralizatorColoana::where('centralizator_id', $this->centralizator_id)->get()->toArray();
-        $this->save();
-    }
+    // public function SetCurrentColumns() {
+    //     $this->current_columns = CentralizatorColoana::where('centralizator_id', $this->centralizator_id)->get()->toArray();
+    //     $this->save();
+    // }
 
     // public static function doDuplicate($input, $record) {
 
@@ -328,60 +338,60 @@ class CustomerCentralizator extends Model {
         return (new GetNextNumber($input))->Perform();
     }
 
-    public function CorrectCurrentColumns() {
+    // public function CorrectCurrentColumns() {
 
-        if(! $this->current_columns)
-        {
-            $this->SetCurrentColumns();
-        }
+    //     if(! $this->current_columns)
+    //     {
+    //         $this->SetCurrentColumns();
+    //     }
 
-        if(! $this->current_columns)
-        {
-            $this->current_columns = [];
-        }
+    //     if(! $this->current_columns)
+    //     {
+    //         $this->current_columns = [];
+    //     }
 
-        $new_columns = [...$this->current_columns];
+    //     $new_columns = [...$this->current_columns];
 
-        foreach($this->default_columns as $i => $column)
-        {
-            $exists = false;
-            foreach($new_columns as $j => $item)
-            {
-                if($item['id'] == $column['id'])
-                {
-                    $exists = true;
-                }
-            }
-            if(! $exists )
-            {
-                $new_columns[] = $column;
-            }
-        }
+    //     foreach($this->default_columns as $i => $column)
+    //     {
+    //         $exists = false;
+    //         foreach($new_columns as $j => $item)
+    //         {
+    //             if($item['id'] == $column['id'])
+    //             {
+    //                 $exists = true;
+    //             }
+    //         }
+    //         if(! $exists )
+    //         {
+    //             $new_columns[] = $column;
+    //         }
+    //     }
 
-        $this->current_columns = $new_columns;
-        $this->save();
-    }
+    //     $this->current_columns = $new_columns;
+    //     $this->save();
+    // }
 
-    public static function CreateColumnChildren($column, $current_columns) {
+    // public static function CreateColumnChildren($column, $current_columns) {
 
-        $children = [];
+    //     $children = [];
 
-        foreach($current_columns as $i => $item)
-        {
-            if(!! $item['group_id'] && ($item['group_id'] == $column['id']))
-            {
-                $children[] = $item;
-            }
-        }
+    //     foreach($current_columns as $i => $item)
+    //     {
+    //         if(!! $item['group_id'] && ($item['group_id'] == $column['id']))
+    //         {
+    //             $children[] = $item;
+    //         }
+    //     }
 
-        return collect($children)
-            ->map(function($item) {
-                $item = collect($item)->only(['id', 'order_no', 'is_group', 'group_id', 'caption', 'type', 'width', 'props'])->toArray();
-                return $item;
-            })
-            ->sortBy('order_no')
-            ->values()
-            ->toArray();
-    }
+    //     return collect($children)
+    //         ->map(function($item) {
+    //             $item = collect($item)->only(['id', 'order_no', 'is_group', 'group_id', 'caption', 'type', 'width', 'props'])->toArray();
+    //             return $item;
+    //         })
+    //         ->sortBy('order_no')
+    //         ->values()
+    //         ->toArray();
+    // }
 
 }
