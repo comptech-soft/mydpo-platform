@@ -12,12 +12,17 @@ class TipCentralizatorColoaneController extends Controller {
     
     public function index($centralizator_id, Request $r) {
 
+        if(! ($centralizator = TipCentralizator::find($centralizator_id)) )
+        {
+            return redirect('admin/tipuri-centralizatoare');
+        }
+
         return Index::View(
             styles: ['css/app.css'],
             scripts: ['apps/admin/tip-centralizator-coloane/index.js'],
             payload: [
                 'centralizator_id' => $centralizator_id,
-                'centralizator' => TipCentralizator::find($centralizator_id),
+                'centralizator' => $centralizator,
             ],
         );        
     }
