@@ -58,7 +58,7 @@ class CustomerCentralizator extends Model {
     protected $appends = [
         // 'columns_tree',
         // 'columns_list',
-        // 'visible',
+        'visible',
         // 'visibility_column_id',
         // 'status_column_id',
         // 'department_column_id'
@@ -68,51 +68,58 @@ class CustomerCentralizator extends Model {
         'department',
     ];
 
-    protected $default_columns = [
-        [
-            'id' => 'empty',
-            'order_no' => 999999, 
-            'is_group' => 0, 
-            'group_id' => NULL, 
-            'caption' => 'a', 
-            'type' => 'EMPTY', 
-            'width' => NULL, 
-            'props' => NULL,
-        ],
+    public function getVisibleAttribute() {
+        return [
+            'color' => !! $this->visibility ? 'green' : 'red',
+            'icon' => !! $this->visibility ? 'mdi-check' : 'mdi-cancel',
+        ];
+    }
 
-        [
-            'id' => 'nr_crt',
-            'order_no' => -200, 
-            'is_group' => 0, 
-            'group_id' => NULL, 
-            'caption' => ['Nr.', 'crt'], 
-            'type' => 'NRCRT', 
-            'width' => 50, 
-            'props' => NULL,
-        ],
+    // protected $default_columns = [
+    //     [
+    //         'id' => 'empty',
+    //         'order_no' => 999999, 
+    //         'is_group' => 0, 
+    //         'group_id' => NULL, 
+    //         'caption' => 'a', 
+    //         'type' => 'EMPTY', 
+    //         'width' => NULL, 
+    //         'props' => NULL,
+    //     ],
 
-        [
-            'id' => 'check',
-            'order_no' => -150, 
-            'is_group' => 0, 
-            'group_id' => NULL, 
-            'caption' => '', 
-            'type' => 'CHECK', 
-            'width' => 50, 
-            'props' => NULL,
-        ],
+    //     [
+    //         'id' => 'nr_crt',
+    //         'order_no' => -200, 
+    //         'is_group' => 0, 
+    //         'group_id' => NULL, 
+    //         'caption' => ['Nr.', 'crt'], 
+    //         'type' => 'NRCRT', 
+    //         'width' => 50, 
+    //         'props' => NULL,
+    //     ],
 
-        [
-            'id' => 'files',
-            'order_no' => -120, 
-            'is_group' => 0, 
-            'group_id' => NULL, 
-            'caption' => 'Fișiere', 
-            'type' => 'FILES', 
-            'width' => 60, 
-            'props' => NULL,
-        ]
-    ];
+    //     [
+    //         'id' => 'check',
+    //         'order_no' => -150, 
+    //         'is_group' => 0, 
+    //         'group_id' => NULL, 
+    //         'caption' => '', 
+    //         'type' => 'CHECK', 
+    //         'width' => 50, 
+    //         'props' => NULL,
+    //     ],
+
+    //     [
+    //         'id' => 'files',
+    //         'order_no' => -120, 
+    //         'is_group' => 0, 
+    //         'group_id' => NULL, 
+    //         'caption' => 'Fișiere', 
+    //         'type' => 'FILES', 
+    //         'width' => 60, 
+    //         'props' => NULL,
+    //     ]
+    // ];
     
     protected static function GetExporter($input) {
         return new Exporter($input); 
@@ -122,12 +129,7 @@ class CustomerCentralizator extends Model {
         return new Importer($input); 
     }
 
-    public function getVisibleAttribute() {
-        return [
-            'color' => !! $this->visibility ? 'green' : 'red',
-            'icon' => !! $this->visibility ? 'mdi-check' : 'mdi-cancel',
-        ];
-    }
+    
 
     // public function getColumnsTreeAttribute() {
 
