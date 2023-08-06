@@ -43,8 +43,16 @@ class TipCentralizatorColoana extends Model {
         'children'
     ];
 
+    protected $appends = [
+        'array_caption'
+    ];
+
     public function children() {
         return $this->hasMany(TipCentralizatorColoana::class, 'group_id');
+    }
+
+    public function getArrayCaptionAttribute() {
+        return explode('#', $this->capton);
     }
 
 }
