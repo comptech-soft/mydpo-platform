@@ -148,9 +148,7 @@ class TipCentralizator extends Model {
         $customer_id = $input['customer_id'];
 
         $q = self::query()->leftJoin(
-
             'customers-centralizatoare-asociere',
-            
             function($j) use ($customer_id){
                 $j
                     ->on('customers-centralizatoare-asociere.centralizator_id', '=', 'centralizatoare.id')
@@ -162,10 +160,8 @@ class TipCentralizator extends Model {
             'centralizatoare.name',
             'centralizatoare.category_id',
             'centralizatoare.description',
-
             'centralizatoare.on_centralizatoare_page',
             'centralizatoare.on_gap_page',
-
             'is_associated'
         ]);
 
@@ -216,6 +212,7 @@ class TipCentralizator extends Model {
             ],
            
         ];
+        
         return $result;
     }
 

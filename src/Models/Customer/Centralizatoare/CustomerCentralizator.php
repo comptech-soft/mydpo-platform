@@ -112,6 +112,8 @@ class CustomerCentralizator extends Model {
         ]
     ];
 
+
+
     protected static function GetExporter($input) {
         return new Exporter($input); 
     }
