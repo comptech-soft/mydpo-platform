@@ -14,19 +14,20 @@ class CustomerCentralizatorRowsController extends Controller {
     
     public function index($customer_centralizator_id, $customer_id, $centralizator_id, Request $r) {
 
-        $customer_centralizator = CustomerCentralizator::find($customer_centralizator_id);
-
-        if(! $customer_centralizator)
+        if(! ($customer = Customer::find($customer_id)) )
         {
-            return redirect()->back();
+            return redirect('admin/customers');
         }
 
-        if(! $customer_centralizator->current_columns)
+        if( ! ($tip_centralizator = TipCentralizator::find($centralizator_id)) )
         {
-            $customer_centralizator->SetCurrentColumns();
+            return redirect('customer-centralizatoare-dashboard/' . $customer_id);
         }
 
-
+        if(! ($customer_centralizator = CustomerCentralizator::find($customer_centralizator_id)) )
+        {
+            return redirect('customer-tip-centralizator/' . $customer_id . '/' . $centralizator_id);
+        }
 
         return Index::View(
             styles: ['css/app.css'],
@@ -36,8 +37,8 @@ class CustomerCentralizatorRowsController extends Controller {
                 'centralizator_id' => $centralizator_id,
                 'customer_centralizator_id' => $customer_centralizator_id,
                 'customers' => Customer::orderBy('name')->pluck('name', 'id')->toArray(),
-                'customer' => Customer::find($customer_id),
-                'centralizator' => Centralizator::find($centralizator_id),
+                'customer' => $customer,
+                'centralizator' => $tip_centralizator,
                 'customer_centralizator' => $customer_centralizator,
             ],
         );
