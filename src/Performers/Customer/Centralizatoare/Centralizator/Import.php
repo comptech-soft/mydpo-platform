@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Performers\CustomerCentralizator;
+namespace MyDpo\Performers\Customer\Centralizatoare\Centralizator;
 
 use MyDpo\Helpers\Perform;
 use MyDpo\Exports\CustomerCentralizator\Exporter;
