@@ -52,7 +52,7 @@ class TipCentralizatorColoana extends Model {
     }
 
     public function getArrayCaptionAttribute() {
-        return explode('#', $this->capton);
+        return explode('#', $this->caption);
     }
 
 }
