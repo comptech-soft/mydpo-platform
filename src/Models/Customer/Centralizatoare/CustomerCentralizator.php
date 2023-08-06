@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Models\Customer\Centralizator;
+namespace MyDpo\Models\Customer\Centralizatoare;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;

@@ -1,9 +1,9 @@
 <?php
 
-namespace MyDpo\Performers\Centralizator;
+namespace MyDpo\Performers\Customer\Centralizatoare\Dashboard;
 
 use MyDpo\Helpers\Perform;
-use MyDpo\Models\Customer\CustomerCentralizatorAsociat;
+use MyDpo\Models\Customer\Centralizatoare\CustomerCentralizatorAsociat;
 
 class SaveCustomerAsociere extends Perform {
 

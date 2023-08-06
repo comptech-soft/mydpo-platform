@@ -7,7 +7,7 @@ use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 use MyDpo\Traits\Centralizatorable;
 use MyDpo\Scopes\NotdeletedScope;
-use MyDpo\Performers\Centralizator\SaveCustomerAsociere;
+use MyDpo\Performers\Customer\Centralizatoare\Dashboard\SaveCustomerAsociere;
 
 class TipCentralizator extends Model {
 
