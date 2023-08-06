@@ -12,7 +12,7 @@ class CustomerCentralizatoareDashboardController extends Controller {
     public function index($customer_id, Request $r) {
         return Index::View(
             styles: ['css/app.css'],
-            scripts: ['apps/customer/centralizatoare/index.js'],
+            scripts: ['apps/customer/centralizatoare-dashboard/index.js'],
             payload: [
                 'customer_id' => $customer_id,
                 'customer' => Customer::find($customer_id),
