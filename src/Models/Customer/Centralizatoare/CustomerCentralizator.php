@@ -233,6 +233,12 @@ class CustomerCentralizator extends Model {
             'columns_tree' => $tip_centralizator->columns_tree,
             'columns_items' => $tip_centralizator->columns_items,
 
+            'nr_crt_column_id' => $tip_centralizator->has_nr_crt_column,
+            'visibility_column_id' => $tip_centralizator->has_visibility_column,
+            'status_column_id' => $tip_centralizator->has_status_column,
+            'department_column_id' => $tip_centralizator->has_department_column,
+            'files_column_id' => $tip_centralizator->has_files_column,
+
             'current_columns' => $tip_centralizator->columns->toArray(), 
         ]);
 
