@@ -6,9 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
 use MyDpo\Models\Customer;
-use MyDpo\Models\Livrabile\Centralizator;
-use MyDpo\Models\Customer\CustomerCentralizator;
-use MyDpo\Models\Customer\CustomerCentralizatorRow;
+use MyDpo\Models\Livrabile\TipCentralizator;
+use MyDpo\Models\Customer\Centralizatoare\CustomerCentralizator;
+use MyDpo\Models\Customer\Centralizatoare\CustomerCentralizatorRow;
 
 class CustomerCentralizatorRowsController extends Controller {
     
