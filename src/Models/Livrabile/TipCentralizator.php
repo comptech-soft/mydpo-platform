@@ -64,7 +64,11 @@ class TipCentralizator extends Model {
     ];
 
     protected $appends = [
-        'bool_col_nrcrt'
+        'bool_col_nrcrt',
+        'bool_col_visibility',
+        'bool_col_status',
+        'bool_col_files',
+        'bool_col_department'
     ];
 
     protected $columnsDefinition = [
@@ -78,6 +82,22 @@ class TipCentralizator extends Model {
 
     public function getBoolColNrcrtAttribute() {
         return !! $this->has_nr_crt_column ? 1 : 0;
+    }
+
+    public function getBoolColVisibilityAttribute() {
+        return !! $this->has_visibility_column ? 1 : 0;
+    }
+
+    public function getBoolColStatusAttribute() {
+        return !! $this->has_status_column ? 1 : 0;
+    }
+
+    public function getBoolColFilesAttribute() {
+        return !! $this->has_files_column ? 1 : 0;
+    }
+
+    public function getBoolColDepartmentAttribute() {
+        return !! $this->bool_col_department ? 1 : 0;
     }
 
     public function category() {
