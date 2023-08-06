@@ -162,22 +162,26 @@ class TipCentralizator extends Model {
             'centralizatoare.name',
             'centralizatoare.category_id',
             'centralizatoare.description',
-            'centralizatoare.status',
-            'centralizatoare.body',
+
+            'centralizatoare.on_centralizatoare_page',
+            'centralizatoare.on_gap_page',
+
             'is_associated'
         ]);
 
         $records = $q->get()->filter(function($item) use ($input){
 
-            if(! $item->status )
+            if($input['centralizatoare'] == 1 && $item->on_centralizatoare_page == 1)
             {
-                return false;
+                return TRUE;
             }
 
-            $visible = $input['gap'] * $item->status['gap'] + $input['centralizatoare'] * $item->status['centralizatoare'];
+            if($input['gap'] == 1 && $item->on_gap_page == 1)
+            {
+                return TRUE;
+            }
 
-            return !! $item->status && $visible;
-
+            return FALSE;
         });
 
         if(config('app.platform') == 'b2b')
