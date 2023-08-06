@@ -22,6 +22,8 @@ class CustomerTipCentralizatorController extends Controller {
         {
             return redirect('customer-centralizatoare-dashboard/' . $customer_id);
         }
+
+        dd($tip_centralizator->columns_with_values);
         
         return Index::View(
             styles: ['css/app.css'],
