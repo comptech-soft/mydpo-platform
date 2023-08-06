@@ -97,7 +97,7 @@ class TipCentralizator extends Model {
     }
 
     public function getBoolColDepartmentAttribute() {
-        return !! $this->bool_col_department ? 1 : 0;
+        return !! $this->has_department_column ? 1 : 0;
     }
 
     public function category() {
