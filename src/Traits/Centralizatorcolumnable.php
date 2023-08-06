@@ -17,6 +17,9 @@ trait Centralizatorcolumnable {
     }
 
     public function getHumanTypeAttribute() {
+        $types = [
+            'NRCRT' => 'Număr curent',
+        ];
         return $this->type;
     }
 
