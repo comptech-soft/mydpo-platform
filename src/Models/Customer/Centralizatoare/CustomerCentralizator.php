@@ -96,48 +96,16 @@ class CustomerCentralizator extends Model {
         return $this->belongsTo(CustomerDepartment::class, 'department_id')->select(['id', 'departament']);
     }
 
-    // public function getVisibilityColumnIdAttribute() {
-    //     return $this->GetColumnIdByType('VISIBILITY');
-    // }
-
-    // public function getStatusColumnIdAttribute() {
-    //     return $this->GetColumnIdByType('STATUS');
-    // }
-
-    // public function getDepartmentColumnIdAttribute() {
-    //     return $this->GetColumnIdByType('DEPARTMENT');
-    // }
-
-    // private function GetColumnIdByType($type) {
-
-    //     if( ! $this->current_columns )
-    //     {
-    //         return NULL;
-    //     }
-
-    //     $first = collect($this->current_columns)->first( function($column) use ($type) {
-    //         return $column['type'] == $type;
-    //     });
-
-    //     if(!! $first)
-    //     {
-    //         return 1 * $first['id'];
-    //     }
-
-    //     return NULL;
-
-    // } 
-
     public static function doInsert($input, $record) {
 
         $tip_centralizator = TipCentralizator::find($input['centralizator_id']);
-
-
+        
         $record = self::create([
             ...$input,
 
             'columns_tree' => $tip_centralizator->columns_tree,
             'columns_items' => $tip_centralizator->columns_items,
+            'columns_with_values' => $tip_centralizator->columns_with_values,
 
             'nr_crt_column_id' => $tip_centralizator->has_nr_crt_column,
             'visibility_column_id' => $tip_centralizator->has_visibility_column,
@@ -149,7 +117,6 @@ class CustomerCentralizator extends Model {
         ]);
 
         return $record;
-
     }
 
     // public function SetCurrentColumns() {

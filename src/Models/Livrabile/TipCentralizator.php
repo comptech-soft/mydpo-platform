@@ -102,7 +102,6 @@ class TipCentralizator extends Model {
     }
 
     public function getColumnsTreeAttribute() {
-
         $columns = collect($this->columns)
             ->filter(function($column){
                 return ! $column['group_id'];
@@ -122,15 +121,11 @@ class TipCentralizator extends Model {
         {
             $columns[$i]['children'] = self::CreateColumnChildren($column, $this->columns);
         }
-
         return $columns;
-    
     }
     
     public function getColumnsItemsAttribute() {
-        
         $list = [];
-
         foreach($this->columns_tree as $i => $node)
         {
             if( count($node['children']) == 0)
@@ -146,9 +141,14 @@ class TipCentralizator extends Model {
                 ];
             }
         }
-
         return $list;
+    }
 
+    public function getColumnsWithValuesAttribute() {   
+        $result = collect($this->columns_items)->filter( function($item) {
+            return count($item['children']) == 0;
+        });
+        return $result->toArray();
     }
 
     public function category() {
