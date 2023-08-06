@@ -101,6 +101,14 @@ class TipCentralizator extends Model {
         return !! $this->has_department_column ? 1 : 0;
     }
 
+    public function getColumnsTreeAttribute() {
+        return __METHOD__;
+    }
+    
+    public function getColumnsItemsAttribute() {
+        return __METHOD__;
+    }
+    
     public function category() {
         return $this->belongsTo(Category::class, 'category_id')->select(['id', 'name']);
     }

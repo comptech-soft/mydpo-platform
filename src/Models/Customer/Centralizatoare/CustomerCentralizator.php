@@ -27,6 +27,8 @@ class CustomerCentralizator extends Model {
     protected $casts = [
         'props' => 'json',
         'current_columns' => 'json',
+        'columns_tree'  => 'json',
+        'columns_items'  => 'json',
         'customer_id' => 'integer',
         'centralizator_id' => 'integer',
         'department_id' => 'integer',
@@ -35,6 +37,11 @@ class CustomerCentralizator extends Model {
         'updated_by' => 'integer',
         'deleted_by' => 'integer',
         'deleted' => 'integer',
+        'nr_crt_column_id' => 'integer',
+        'visibility_column_id' => 'integer',
+        'status_column_id' => 'integer',
+        'department_column_id' => 'integer',
+        'files_column_id' => 'integer',
     ];
 
     protected $fillable = [
@@ -49,19 +56,21 @@ class CustomerCentralizator extends Model {
         'responsabil_functie',
         'props',
         'current_columns',
+        'columns_tree',
+        'columns_items',
         'deleted',
         'created_by',
         'updated_by',
-        'deleted_by'
+        'deleted_by',
+        'nr_crt_column_id',
+        'visibility_column_id',
+        'status_column_id',
+        'department_column_id',
+        'files_column_id'
     ];
 
     protected $appends = [
-        // 'columns_tree',
-        // 'columns_list',
         'visible',
-        // 'visibility_column_id',
-        // 'status_column_id',
-        // 'department_column_id'
     ];
 
     protected $with = [
@@ -220,11 +229,9 @@ class CustomerCentralizator extends Model {
 
         $record = self::create([
             ...$input,
-            
-            'props' => [
-                'columns_tree' => $tip_centralizator->columns_tree,
-                'columns_items' => $tip_centralizator->columns_items,
-            ],
+
+            'columns_tree' => $tip_centralizator->columns_tree,
+            'columns_items' => $tip_centralizator->columns_items,
 
             'current_columns' => $tip_centralizator->columns->toArray(), 
         ]);
