@@ -7,7 +7,7 @@ use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 use MyDpo\Traits\Exportable;
 use MyDpo\Traits\Importable;
-use MyDpo\Performers\CustomerCentralizator\GetNextNumber;
+use MyDpo\Performers\Customer\Centralizatoare\Centralizator\GetNextNumber;
 use MyDpo\Models\Livrabile\CentralizatorColoana;
 use MyDpo\Exports\CustomerCentralizator\Exporter;
 use MyDpo\Imports\CustomerCentralizator\Importer;
