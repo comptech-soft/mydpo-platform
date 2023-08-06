@@ -8,6 +8,7 @@ use MyDpo\Traits\Actionable;
 use MyDpo\Traits\Centralizatorable;
 use MyDpo\Scopes\NotdeletedScope;
 use MyDpo\Performers\Customer\Centralizatoare\Dashboard\SaveCustomerAsociere;
+use MyDpo\Models\Customer\Centralizatoare\CustomerCentralizator;
 
 class TipCentralizator extends Model {
 
@@ -188,7 +189,14 @@ class TipCentralizator extends Model {
             });
         }
 
-        return $records->toArray();
+        $result = $records->toArray(); 
+
+        foreach($result as $i => $item)
+        {
+            $result[$i]['count'] = CustomerCentralizator::where('customer_id', $customer_id)->where('centralizator_id', $item['id'])->count();
+        }
+
+        return $result;
     }
 
     public static function GetRules($action, $input) {
