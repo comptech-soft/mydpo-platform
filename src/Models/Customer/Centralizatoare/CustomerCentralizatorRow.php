@@ -4,7 +4,7 @@ namespace MyDpo\Models\Customer\Centralizatoare;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
-use MyDpo\Performers\CustomerCentralizatorRow\InsertRow;
+use MyDpo\Performers\Customer\Centralizatoare\Row\InsertRow;
 use MyDpo\Performers\CustomerCentralizatorRow\UpdateRow;
 use MyDpo\Performers\CustomerCentralizatorRow\DeleteRow;
 use MyDpo\Performers\CustomerCentralizatorRow\DeleteRows;
