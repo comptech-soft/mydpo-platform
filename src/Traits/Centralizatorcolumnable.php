@@ -20,7 +20,7 @@ trait Centralizatorcolumnable {
         $types = [
             'NRCRT' => 'Număr curent',
         ];
-        return $this->type;
+        return $types[$this->type];
     }
 
     public static function doInsert($input, $record) {
