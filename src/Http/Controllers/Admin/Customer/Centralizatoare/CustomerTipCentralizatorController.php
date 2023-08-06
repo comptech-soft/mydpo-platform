@@ -9,7 +9,7 @@ use MyDpo\Models\Customer;
 use MyDpo\Models\Livrabile\TipCentralizator;
 use MyDpo\Models\Customer\Centralizatoare\CustomerCentralizator;
 
-class CustomerCentralizatorController extends Controller {
+class CustomerTipCentralizatorController extends Controller {
     
     public function index($customer_id, $centralizator_id, Request $r) {
         
