@@ -40,7 +40,7 @@ trait Centralizatorable {
             'caption' => 'Fișiere',
             'is_group' => 0,
             'group_id' => NULL,
-            'order_no' => -70,
+            'order_no' => -95,
             'width' => 100,
         ],
 

@@ -102,34 +102,29 @@ class TipCentralizator extends Model {
     }
 
     public function getColumnsTreeAttribute() {
-        return __METHOD__;
 
-            // public function getColumnsTreeAttribute() {
+        $columns = collect($this->columns)
+            ->filter(function($column){
+                return ! $column['group_id'];
+            })
+            ->map(function($item) {
+                $item = collect($item)->only(['id', 'order_no', 'is_group', 'group_id', 'caption', 'type', 'width', 'props'])->toArray();
+                return [
+                    ...$item,
+                    'children' => [],
+                ];
+            })
+            ->sortBy('order_no')
+            ->values()
+            ->toArray();
 
-    //     $this->CorrectCurrentColumns();
+        foreach($columns as $i => $column)
+        {
+            $columns[$i]['children'] = self::CreateColumnChildren($column, $this->columns);
+        }
 
-    //     $columns = collect($this->current_columns)
-    //         ->filter(function($column){
-    //             return ! $column['group_id'];
-    //         })
-    //         ->map(function($item) {
-    //             $item = collect($item)->only(['id', 'order_no', 'is_group', 'group_id', 'caption', 'type', 'width', 'props'])->toArray();
-    //             return [
-    //                 ...$item,
-    //                 'children' => [],
-    //             ];
-    //         })
-    //         ->sortBy('order_no')
-    //         ->values()
-    //         ->toArray();
-
-    //     foreach($columns as $i => $column)
-    //     {
-    //         $columns[$i]['children'] = self::CreateColumnChildren($column, $this->current_columns);
-    //     }
-
-    //     return $columns;
-    // }
+        return $columns;
+    
     }
     
     public function getColumnsItemsAttribute() {
@@ -257,6 +252,28 @@ class TipCentralizator extends Model {
         ];
         
         return $result;
+    }
+
+    private static function CreateColumnChildren($column, $current_columns) {
+
+        $children = [];
+
+        foreach($current_columns as $i => $item)
+        {
+            if(!! $item['group_id'] && ($item['group_id'] == $column['id']))
+            {
+                $children[] = $item;
+            }
+        }
+
+        return collect($children)
+            ->map(function($item) {
+                $item = collect($item)->only(['id', 'order_no', 'is_group', 'group_id', 'caption', 'type', 'width', 'props'])->toArray();
+                return $item;
+            })
+            ->sortBy('order_no')
+            ->values()
+            ->toArray();
     }
 
 }
