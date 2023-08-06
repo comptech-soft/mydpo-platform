@@ -63,6 +63,10 @@ class TipCentralizator extends Model {
         'category'
     ];
 
+    protected $appends = [
+        'bool_col_nrcrt'
+    ];
+
     protected $columnsDefinition = [
         'model' => \MyDpo\Models\Livrabile\TipCentralizatorColoana::class,
         'foreign_key' => 'centralizator_id',
@@ -70,6 +74,10 @@ class TipCentralizator extends Model {
 
     protected static function booted() {
         static::addGlobalScope(new NotdeletedScope());
+    }
+
+    public function getBoolColNrcrtAttribute() {
+        return !! $this->has_nr_crt_column ? 1 : 0;
     }
 
     public function category() {

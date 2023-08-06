@@ -2,7 +2,7 @@
 
 namespace MyDpo\Traits;
 
-trait Columnablecolumns { 
+trait Centralizatorcolumnable { 
     
     public static function doInsert($input, $record) {
 
