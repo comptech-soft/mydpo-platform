@@ -19,8 +19,17 @@ trait Centralizatorcolumnable {
     public function getHumanTypeAttribute() {
         $types = [
             'NRCRT' => 'Număr curent',
+            'VISIBILITY' => 'Vizibilitate',
+            'STATUS' => 'Status',
+            'FILES' => 'Fișiere',
+            'DEPARTMENT' => 'Departament',
+            'C' => 'Text',
+            'N' => 'Număr',
+            'O' => 'Opțiuni',
+            'D' => 'Dată calendaristică',
+            'T' => 'Dată calendaristică și oră',
         ];
-        return $types[$this->type];
+        return array_key_exists($this->type, $types) ? $types[$this->type] : $this->type;
     }
 
     public static function doInsert($input, $record) {
