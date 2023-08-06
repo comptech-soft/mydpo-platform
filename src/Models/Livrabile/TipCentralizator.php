@@ -103,12 +103,39 @@ class TipCentralizator extends Model {
 
     public function getColumnsTreeAttribute() {
         return __METHOD__;
+
+            // public function getColumnsTreeAttribute() {
+
+    //     $this->CorrectCurrentColumns();
+
+    //     $columns = collect($this->current_columns)
+    //         ->filter(function($column){
+    //             return ! $column['group_id'];
+    //         })
+    //         ->map(function($item) {
+    //             $item = collect($item)->only(['id', 'order_no', 'is_group', 'group_id', 'caption', 'type', 'width', 'props'])->toArray();
+    //             return [
+    //                 ...$item,
+    //                 'children' => [],
+    //             ];
+    //         })
+    //         ->sortBy('order_no')
+    //         ->values()
+    //         ->toArray();
+
+    //     foreach($columns as $i => $column)
+    //     {
+    //         $columns[$i]['children'] = self::CreateColumnChildren($column, $this->current_columns);
+    //     }
+
+    //     return $columns;
+    // }
     }
     
     public function getColumnsItemsAttribute() {
         return __METHOD__;
     }
-    
+
     public function category() {
         return $this->belongsTo(Category::class, 'category_id')->select(['id', 'name']);
     }
