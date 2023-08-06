@@ -24,12 +24,6 @@ class TipuriCentralizatoareController extends Controller {
         return TipCentralizator::doAction($action, $r->all());
     }
 
-    public function getCustomerAsociere(Request $r) {
-        return TipCentralizator::getCustomerAsociere($r->all());
-    }
-
-    public function saveCustomerAsociere(Request $r) {
-        return TipCentralizator::saveCustomerAsociere($r->all());
-    }
+    
     
 }
