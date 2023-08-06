@@ -6,9 +6,7 @@ trait Centralizatorcolumnable {
     
    
 
-    public function children() {
-        return $this->hasMany(TipCentralizatorColoana::class, 'group_id');
-    }
+    
 
     public function getArrayCaptionAttribute() {
         return explode('#', $this->caption);

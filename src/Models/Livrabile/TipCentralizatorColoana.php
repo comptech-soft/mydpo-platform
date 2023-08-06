@@ -48,4 +48,8 @@ class TipCentralizatorColoana extends Model {
         'not_is_clickable',
         'not_is_in_list',
     ];
+
+    public function children() {
+        return $this->hasMany(TipCentralizatorColoana::class, 'group_id');
+    }
 }
