@@ -16,24 +16,11 @@ class InsertRow extends Perform {
 		
         $input = [
             ...collect($this->input)->except(['rowvalues'])->toArray(),
-            'props' => [
-                'action' => [
-                    'name' => 'new',
-                    'action_at' => Carbon::now()->format('Y-m-d'),
-                    'tooltip' => 'Creat de :user_full_name la :action_at. (:customer_name)',
-                    'user' => [
-                        'id' => \Auth::user()->id,
-                        'full_name' => \Auth::user()->full_name,
-                        'role' => [
-							'id' => !! $role ? $role->id : NULL,
-                            'name' => !! $role ? $role->name : NULL,
-                        ]
-                    ],
-                    'customer' => [
-                        'id' => $this->customer_id,
-                        'name' => Customer_base::find($this->customer_id)->name,
-                    ],
-                ],
+            'action_at' => Carbon::now()->format('Y-m-d'),
+            'tooltip' => [
+                'text' => 'Creat de :user la :action_at. (:customer)',
+                'user'=> \Auth::user()->full_name,
+                'customer' => Customer_base::find($this->customer_id)->name,
             ],
         ];
         
