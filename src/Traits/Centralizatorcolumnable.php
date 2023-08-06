@@ -3,10 +3,6 @@
 namespace MyDpo\Traits;
 
 trait Centralizatorcolumnable { 
-    
-   
-
-    
 
     public function getArrayCaptionAttribute() {
         return explode('#', $this->caption);
@@ -18,6 +14,10 @@ trait Centralizatorcolumnable {
 
     public function getNotIsInListAttribute() {
         return in_array($this->type, ['EMPTY']);
+    }
+
+    public function getHumanTypeAttribute() {
+        return $this->type;
     }
 
     public static function doInsert($input, $record) {

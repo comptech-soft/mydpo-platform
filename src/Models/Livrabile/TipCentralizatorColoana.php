@@ -47,6 +47,7 @@ class TipCentralizatorColoana extends Model {
         'array_caption',
         'not_is_clickable',
         'not_is_in_list',
+        'human_type',
     ];
 
     public function children() {
