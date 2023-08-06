@@ -44,7 +44,9 @@ class CustomerCentralizatorRow extends Model {
         'updated_by',
         'deleted_by',
         'visibility',
-        'status'
+        'status',
+        'action_at',
+        'tooltip',
     ];
 
     protected $with = [
