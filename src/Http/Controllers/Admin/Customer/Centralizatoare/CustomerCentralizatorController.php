@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
 use MyDpo\Models\Customer;
 use MyDpo\Models\Livrabile\TipCentralizator;
-use MyDpo\Models\Customer\CustomerCentralizator;
+use MyDpo\Models\Customer\CVentralizatoare\CustomerCentralizator;
 
 class CustomerCentralizatorController extends Controller {
     
