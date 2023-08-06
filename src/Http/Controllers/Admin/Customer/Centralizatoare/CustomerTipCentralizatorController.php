@@ -25,7 +25,7 @@ class CustomerTipCentralizatorController extends Controller {
         }
 
         	
-        dd($tip_centralizator->columns_tree);
+        dd($tip_centralizator->columns_items);
 
         return Index::View(
             styles: ['css/app.css'],
