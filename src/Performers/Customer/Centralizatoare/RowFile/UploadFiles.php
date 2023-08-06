@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Performers\CustomerCentralizatorRowFile;
+namespace MyDpo\Performers\Customer\Centralizatoare\RowFile;
 
 use MyDpo\Helpers\Perform;
 use MyDpo\Models\Customer\CustomerCentralizatorRowFile;
