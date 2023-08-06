@@ -215,7 +215,7 @@ class CustomerCentralizator extends Model {
 
         $record = self::create([
             ...$input,
-            'current_columns' => CentralizatorColoana::where('centralizator_id', $input['centralizator_id'])->get()->toArray(),
+            'current_columns' => TipCentralizatorColoana::where('centralizator_id', $input['centralizator_id'])->get()->toArray(),
         ]);
 
         return $record;
