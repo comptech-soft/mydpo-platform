@@ -24,7 +24,9 @@ class CustomerCentralizatorRow extends Model {
         'department_id' => 'integer',
         'order_no' => 'integer',
         'deleted' => 'integer',
+        'visibility' => 'integer',
         'props' => 'json',
+        'status' => 'json',
         'created_by' => 'integer',
         'updated_by' => 'integer',
         'deleted_by' => 'integer',
@@ -41,7 +43,9 @@ class CustomerCentralizatorRow extends Model {
         'props',
         'created_by',
         'updated_by',
-        'deleted_by'
+        'deleted_by',
+        'visibility',
+        'status'
     ];
 
     protected $with = [
