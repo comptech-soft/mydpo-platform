@@ -4,9 +4,12 @@ namespace MyDpo\Models\Customer\Centralizatoare;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
+
 use MyDpo\Performers\Customer\Centralizatoare\Row\InsertRow;
-use MyDpo\Performers\CustomerCentralizatorRow\UpdateRow;
 use MyDpo\Performers\Customer\Centralizatoare\Row\DeleteRow;
+
+use MyDpo\Performers\CustomerCentralizatorRow\UpdateRow;
+
 use MyDpo\Performers\CustomerCentralizatorRow\DeleteRows;
 use MyDpo\Performers\CustomerCentralizatorRow\SetRowsStatus;
 use MyDpo\Performers\CustomerCentralizatorRow\SetRowsVisibility;

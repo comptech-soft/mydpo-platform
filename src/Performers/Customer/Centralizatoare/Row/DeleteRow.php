@@ -3,8 +3,8 @@
 namespace MyDpo\Performers\Customer\Centralizatoare\Row;
 
 use MyDpo\Helpers\Perform;
-use MyDpo\Models\Customer\CustomerCentralizatorRow;
-use MyDpo\Models\Customer\CustomerCentralizatorRowValue;
+use MyDpo\Models\Customer\Centralizatoare\CustomerCentralizatorRow;
+use MyDpo\Models\Customer\Centralizatoare\CustomerCentralizatorRowValue;
 
 class DeleteRow extends Perform {
 
