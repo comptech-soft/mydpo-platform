@@ -92,7 +92,7 @@ class Category extends Model {
                 'max:191',
                 new UniqueName($input),
             ],
-            'type' => 'in:centralizatoare,chestionare,cursuri',
+            'type' => 'in:centralizatoare,chestionare,cursuri,registre',
         ];
 
         return $result;
