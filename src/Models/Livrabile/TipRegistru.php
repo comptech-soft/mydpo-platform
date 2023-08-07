@@ -5,15 +5,15 @@ namespace MyDpo\Models\Livrabile;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Validation\Rule;
 use MyDpo\Traits\Itemable;
-use MyDpo\Traits\Actionable;
-use MyDpo\Traits\Columnable;
-use MyDpo\Scopes\NotdeletedScope;
-use MyDpo\Rules\Registru\UniqueName;
-use MyDpo\Performers\Registru\SaveCustomerAsociere;
+// use MyDpo\Traits\Actionable;
+// use MyDpo\Traits\Columnable;
+// use MyDpo\Scopes\NotdeletedScope;
+// use MyDpo\Rules\Registru\UniqueName;
+// use MyDpo\Performers\Registru\SaveCustomerAsociere;
 
-class Registru extends Model {
+class TipRegistru extends Model {
 
-    use Itemable, Actionable, Columnable;
+    use Itemable; //, Actionable, Columnable;
 
     protected $table = 'registers';
 
