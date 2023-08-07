@@ -6,7 +6,6 @@ use MyDpo\Helpers\Perform;
 use MyDpo\Models\Customer\Centralizatoare\CustomerCentralizator;
 use MyDpo\Models\Customer\Centralizatoare\CustomerCentralizatorRow;
 use MyDpo\Models\Customer\Centralizatoare\CustomerCentralizatorRowValue;
-use MyDpo\Models\Customer_base;
 use Carbon\Carbon;
 
 class SetRowsStatus extends Perform {
@@ -14,7 +13,7 @@ class SetRowsStatus extends Perform {
     public function Action() {
 
         $records = NULL;
-        
+
         if(!! count($this->selected_rows) )
         {
 
@@ -50,13 +49,13 @@ class SetRowsStatus extends Perform {
                 // ];
 
                 // $row->props = $props;
-                $row->status = $statuses[$this->status];
+                $row->status = $this->status;
                 $row->action_at = $action_at = Carbon::now()->format('Y-m-d');
                 $row->tooltip = [
                     'text' => 'Setat ' . $statuses[$this->status] . ' de :user la :action_at. (:customer)',
                     'user'=> \Auth::user()->full_name,
-                    'customer' => Customer_base::find($this->customer_id)->name,
-                    'action_at' => $action->at,
+                    'customer' => $this->customer,
+                    'action_at' => $action_at,
                 ];
 
                 $row->save();
