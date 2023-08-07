@@ -19,7 +19,7 @@ class UpdateRow extends Perform {
             ...collect($this->input)->except(['rowvalues'])->toArray(),
             'action_at' => Carbon::now()->format('Y-m-d'),
             'tooltip' => [
-                'text' => 'Creat de :user la :action_at. (:customer)',
+                'text' => 'Editat de :user la :action_at. (:customer)',
                 'user'=> \Auth::user()->full_name,
                 'customer' => Customer_base::find($this->customer_id)->name,
             ],
@@ -43,7 +43,7 @@ class UpdateRow extends Perform {
             {
                 if($input['type'] == 'STATUS')
                 {
-                    $record->status = $input['value'];
+                    $record->status = 'updated';
                 }
                 else
                 {
@@ -59,7 +59,7 @@ class UpdateRow extends Perform {
         }
 
         $record->save();
-        
+
         $this->payload = [
             'record' => CustomerCentralizatorRow::find($record->id),
         ];

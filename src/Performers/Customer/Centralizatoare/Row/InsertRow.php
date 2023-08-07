@@ -40,7 +40,7 @@ class InsertRow extends Perform {
             {
                 if($input['type'] == 'STATUS')
                 {
-                    $record->status = $input['value'];
+                    $record->status = 'new';
                 }
                 else
                 {
