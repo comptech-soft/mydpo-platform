@@ -3,9 +3,9 @@
 namespace MyDpo\Performers\Customer\Centralizatoare\Row;
 
 use MyDpo\Helpers\Perform;
-use MyDpo\Models\Customer\CustomerCentralizatorRow;
-use MyDpo\Models\Customer\CustomerCentralizatorRowValue;
-use MyDpo\Models\Customer\CustomerCentralizator;
+use MyDpo\Models\Customer\Centralizatoare\CustomerCentralizatorRow;
+use MyDpo\Models\Customer\Centralizatoare\CustomerCentralizatorRowValue;
+use MyDpo\Models\Customer\Centralizatoare\CustomerCentralizator;
 use MyDpo\Models\Customer_base;
 use Carbon\Carbon;
 
@@ -13,45 +13,25 @@ class UpdateRow extends Perform {
 
     public function Action() {
 
-        $input = collect($this->input)->except(['rowvalues'])->toArray();
+        $role = $this->getUserRole();
+
+        $input = [
+            ...collect($this->input)->except(['rowvalues'])->toArray(),
+            'action_at' => Carbon::now()->format('Y-m-d'),
+            'tooltip' => [
+                'text' => 'Creat de :user la :action_at. (:customer)',
+                'user'=> \Auth::user()->full_name,
+                'customer' => Customer_base::find($this->customer_id)->name,
+            ],
+        ];
 
         $record = CustomerCentralizatorRow::find($this->id);
 
-        if(config('app.platform') == 'admin')
-        {
-            $role = \Auth::user()->role;
-        }
-        else
-        {
-            $role = \Auth::user()->roles()->wherePivot('customer_id', $this->customer_id)->first();
-        }
          
-        $record->update([
-            ...$input, 
-            'department_id' => NULL,
-            'props' => [
-                'action' => [
-                    'name' => 'update',
-                    'action_at' => Carbon::now()->format('Y-m-d'),
-                    'tooltip' => 'Editat de :user_full_name la :action_at. (:customer_name)',
-                    'user' => [
-                        'id' => \Auth::user()->id,
-                        'full_name' => \Auth::user()->full_name,
-                        'role' => [
-                            'id' => $role ? $role->id : NULL,
-                            'name' => $role ? $role->name : NULL,
-                        ]
-                    ],
-                    'customer' => [
-                        'id' => $this->customer_id,
-                        'name' => Customer_base::find($this->customer_id)->name,
-                    ],
-                ],
-            ],
-        ]);
+        $record->update($input);
         
-        $customer_centralizator = CustomerCentralizator::find($this->customer_centralizator_id);
-        $status_column_id = $customer_centralizator->status_column_id;
+        // $customer_centralizator = CustomerCentralizator::find($this->customer_centralizator_id);
+        // $status_column_id = $customer_centralizator->status_column_id;
 
         foreach($this->rowvalues as $i => $input)
         {
@@ -69,4 +49,15 @@ class UpdateRow extends Perform {
         ];
     
     }
+
+    public function getUserRole() {
+		$user = \Auth::user();
+		
+		if(config('app.platform') == 'admin')
+		{
+			return $user->role;
+		}
+		
+		return $user->roles()->wherePivot('customer_id', $this->customer_id)->first();
+	}
 }
