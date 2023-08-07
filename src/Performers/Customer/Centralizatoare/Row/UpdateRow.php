@@ -35,15 +35,31 @@ class UpdateRow extends Perform {
 
         foreach($this->rowvalues as $i => $input)
         {
-            if($input['column_id'] == $status_column_id)
+            if($input['type'] == 'VISIBILITY')
             {
-                $input['value'] = 'updated';
+                $record->visibility = $input['value'];
+            }
+            else
+            {
+                if($input['type'] == 'STATUS')
+                {
+                    $record->status = $input['value'];
+                }
+                else
+                {
+                    if($input['type'] == 'DEPARTMENT')
+                    {
+                        $record->department_id = $input['value'];;
+                    }
+                }
             }
 
             $rowvalue = CustomerCentralizatorRowValue::find($input['id']);
             $rowvalue->update($input);
         }
 
+        $record->save();
+        
         $this->payload = [
             'record' => CustomerCentralizatorRow::find($record->id),
         ];
