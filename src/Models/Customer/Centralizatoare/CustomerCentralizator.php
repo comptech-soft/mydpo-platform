@@ -166,9 +166,12 @@ class CustomerCentralizator extends Model {
     //     return $record;
     // }
 
-    // public static function saveSettings($input) {
-    //     return (new SaveSettings($input))->Perform();
-    // }
+    public static function doSavesettings($input) {
+
+        dd($input);
+
+        return (new SaveSettings($input))->Perform();
+    }
 
     // public static function setAccess($input) {
     //     return (new SetAccess($input))->Perform();
