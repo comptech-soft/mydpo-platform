@@ -23,7 +23,5 @@ class TipuriCentralizatoareController extends Controller {
     public function doAction($action, Request $r) {
         return TipCentralizator::doAction($action, $r->all());
     }
-
-    
-    
+ 
 }
