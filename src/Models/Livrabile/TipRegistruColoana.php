@@ -46,7 +46,7 @@ class TipRegistruColoana extends Model {
     ];
 
     public function children() {
-        return $this->hasMany(RegistruColoana::class, 'group_id');
+        return $this->hasMany(TipRegistruColoana::class, 'group_id');
     }
 
 }
