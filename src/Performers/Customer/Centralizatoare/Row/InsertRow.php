@@ -12,7 +12,7 @@ class InsertRow extends Perform {
 
     public function Action() {
 		
-        $role = $this->getUserRole();
+        // $role = $this->getUserRole();
 		
         $input = [
             ...collect($this->input)->except(['rowvalues'])->toArray(),
@@ -63,14 +63,14 @@ class InsertRow extends Perform {
     
     }
 	
-	public function getUserRole() {
-		$user = \Auth::user();
+	// public function getUserRole() {
+	// 	$user = \Auth::user();
 		
-		if(config('app.platform') == 'admin')
-		{
-			return $user->role;
-		}
+	// 	if(config('app.platform') == 'admin')
+	// 	{
+	// 		return $user->role;
+	// 	}
 		
-		return $user->roles()->wherePivot('customer_id', $this->customer_id)->first();
-	}
+	// 	return $user->roles()->wherePivot('customer_id', $this->customer_id)->first();
+	// }
 }

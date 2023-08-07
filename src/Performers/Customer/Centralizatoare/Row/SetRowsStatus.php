@@ -17,7 +17,7 @@ class SetRowsStatus extends Perform {
         if(!! count($this->selected_rows) )
         {
 
-            $role = $this->getUserRole();
+            // $role = $this->getUserRole();
 
             $statuses = collect($this->statuses)->pluck('text', 'value')->toArray();
 
@@ -26,29 +26,6 @@ class SetRowsStatus extends Perform {
             foreach($rows as $i => $row)
             {
 
-                // $props = !! $row->props ? $row->props : []; 
-                // $props = [
-                //     ...$props,
-                //     'action' => [
-                //         'name' => 'status',
-                //         
-                //         'tooltip' => 'Setat ' . $statuses[$this->status] . ' de :user_full_name la :action_at. (:customer_name)',
-                //         'user' => [
-                //             'id' => \Auth::user()->id,
-                //             'full_name' => \Auth::user()->full_name,
-                //             'role' => [
-                //                 'id' => $role ? $role->id : NULL,
-                //                 'name' => $role ? $role->name : NULL,
-                //             ]
-                //         ],
-                //         'customer' => [
-                //             'id' => $this->customer_id,
-                //             'name' => $this->customer,
-                //         ],
-                //     ],
-                // ];
-
-                // $row->props = $props;
                 $row->status = $this->status;
                 $row->action_at = $action_at = Carbon::now()->format('Y-m-d');
                 $row->tooltip = [
@@ -78,14 +55,14 @@ class SetRowsStatus extends Perform {
     
     }
 
-    public function getUserRole() {
-		$user = \Auth::user();
+    // public function getUserRole() {
+	// 	$user = \Auth::user();
 		
-		if(config('app.platform') == 'admin')
-		{
-			return $user->role;
-		}
+	// 	if(config('app.platform') == 'admin')
+	// 	{
+	// 		return $user->role;
+	// 	}
 		
-		return $user->roles()->wherePivot('customer_id', $this->customer_id)->first();
-	}
+	// 	return $user->roles()->wherePivot('customer_id', $this->customer_id)->first();
+	// }
 }

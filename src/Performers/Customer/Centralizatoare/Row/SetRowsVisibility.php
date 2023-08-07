@@ -17,7 +17,7 @@ class SetRowsVisibility extends Perform {
         if(!! count($this->selected_rows) )
         {
 
-            $role = $this->getUserRole();
+            // $role = $this->getUserRole();
 
             $items = collect($this->items)->pluck('text', 'value')->toArray();
 
@@ -27,13 +27,13 @@ class SetRowsVisibility extends Perform {
             {
 
                 $row->visibility = $this->visibility;
-                $row->action_at = $action_at = Carbon::now()->format('Y-m-d');
-                $row->tooltip = [
-                    'text' => 'Setat ' . $items[$this->visibility] . ' de :user la :action_at. (:customer)',
-                    'user'=> \Auth::user()->full_name,
-                    'customer' => $this->customer,
-                    'action_at' => $action_at,
-                ];
+                // $row->action_at = $action_at = Carbon::now()->format('Y-m-d');
+                // $row->tooltip = [
+                //     'text' => 'Setat ' . $items[$this->visibility] . ' de :user la :action_at. (:customer)',
+                //     'user'=> \Auth::user()->full_name,
+                //     'customer' => $this->customer,
+                //     'action_at' => $action_at,
+                // ];
 
                 $row->save();
             }
@@ -55,14 +55,14 @@ class SetRowsVisibility extends Perform {
     
     }
 
-    public function getUserRole() {
-		$user = \Auth::user();
+    // public function getUserRole() {
+	// 	$user = \Auth::user();
 		
-		if(config('app.platform') == 'admin')
-		{
-			return $user->role;
-		}
+	// 	if(config('app.platform') == 'admin')
+	// 	{
+	// 		return $user->role;
+	// 	}
 		
-		return $user->roles()->wherePivot('customer_id', $this->customer_id)->first();
-	}
+	// 	return $user->roles()->wherePivot('customer_id', $this->customer_id)->first();
+	// }
 }
