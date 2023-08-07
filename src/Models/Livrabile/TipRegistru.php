@@ -6,14 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Validation\Rule;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
-use MyDpo\Traits\Columnable;
+use MyDpo\Traits\Centralizatorable;
 use MyDpo\Scopes\NotdeletedScope;
 // use MyDpo\Rules\Registru\UniqueName;
 // use MyDpo\Performers\Registru\SaveCustomerAsociere;
 
 class TipRegistru extends Model {
 
-    use Itemable, Actionable, Columnable;
+    use Itemable, Actionable, Centralizatorable;
 
     protected $table = 'registers';
 
