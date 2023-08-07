@@ -8,11 +8,9 @@ use MyDpo\Traits\Itemable;
 use MyDpo\Performers\Customer\Centralizatoare\Row\InsertRow;
 use MyDpo\Performers\Customer\Centralizatoare\Row\UpdateRow;
 use MyDpo\Performers\Customer\Centralizatoare\Row\DeleteRow;
-
-
-use MyDpo\Performers\CustomerCentralizatorRow\DeleteRows;
-use MyDpo\Performers\CustomerCentralizatorRow\SetRowsStatus;
-use MyDpo\Performers\CustomerCentralizatorRow\SetRowsVisibility;
+use MyDpo\Performers\Customer\Centralizatoare\Row\DeleteRows;
+use MyDpo\Performers\Customer\Centralizatoare\Row\SetRowsStatus;
+use MyDpo\Performers\Customer\Centralizatoare\Row\SetRowsVisibility;
 
 class CustomerCentralizatorRow extends Model {
 
