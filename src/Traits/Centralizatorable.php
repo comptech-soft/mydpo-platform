@@ -17,6 +17,15 @@ trait Centralizatorable {
             'width' => 100,
         ],
 
+        'has_visibility_check' => [
+            'type' =>  'CHECK',
+            'caption' => 'Selectare',
+            'is_group' => 0,
+            'group_id' => NULL,
+            'order_no' => -99,
+            'width' => 100,
+        ],
+
         'has_visibility_column' => [
             'type' =>  'VISIBILITY',
             'caption' => 'Vizibilitate',
