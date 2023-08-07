@@ -10,7 +10,7 @@ use MyDpo\Traits\Reorderable;
 
 class TipRegistruColoana extends Model {
 
-    use Itemable, Actionable, Reorderable, Columnablecolumns;
+    use Itemable, Actionable, Reorderable, Centralizatorcolumnable;
 
     protected $table = 'registers-columns';
 
