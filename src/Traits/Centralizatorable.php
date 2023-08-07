@@ -17,7 +17,7 @@ trait Centralizatorable {
             'width' => 100,
         ],
 
-        'has_visibility_check' => [
+        'has_check_column' => [
             'type' =>  'CHECK',
             'caption' => 'Selectare',
             'is_group' => 0,
