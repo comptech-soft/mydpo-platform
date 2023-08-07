@@ -20,9 +20,9 @@ class TipuriRegistreController extends Controller {
         return TipRegistru::getRecords($r->all());
     }
 
-    // public function doAction($action, Request $r) {
-    //     return Registru::doAction($action, $r->all());
-    // }
+    public function doAction($action, Request $r) {
+        return TipRegistru::doAction($action, $r->all());
+    }
 
     // public function getCustomerAsociere(Request $r) {
     //     return Registru::getCustomerAsociere($r->all());

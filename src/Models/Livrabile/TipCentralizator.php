@@ -135,9 +135,7 @@ class TipCentralizator extends Model {
         });
         return $result->toArray();
     }
-
     
-
     public static function GetQuery() {
         return 
             self::query()
