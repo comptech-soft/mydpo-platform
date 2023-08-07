@@ -8,7 +8,7 @@ use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 use MyDpo\Traits\Centralizatorable;
 use MyDpo\Scopes\NotdeletedScope;
-// use MyDpo\Rules\Registru\UniqueName;
+use MyDpo\Rules\Registru\UniqueName;
 // use MyDpo\Performers\Registru\SaveCustomerAsociere;
 
 class TipRegistru extends Model {
