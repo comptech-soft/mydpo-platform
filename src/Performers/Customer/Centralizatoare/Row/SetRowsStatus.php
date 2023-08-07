@@ -26,29 +26,38 @@ class SetRowsStatus extends Perform {
             foreach($rows as $i => $row)
             {
 
-                $props = !! $row->props ? $row->props : []; 
-                $props = [
-                    ...$props,
-                    'action' => [
-                        'name' => 'status',
-                        'action_at' => Carbon::now()->format('Y-m-d'),
-                        'tooltip' => 'Setat ' . $statuses[$this->status] . ' de :user_full_name la :action_at. (:customer_name)',
-                        'user' => [
-                            'id' => \Auth::user()->id,
-                            'full_name' => \Auth::user()->full_name,
-                            'role' => [
-                                'id' => $role ? $role->id : NULL,
-                                'name' => $role ? $role->name : NULL,
-                            ]
-                        ],
-                        'customer' => [
-                            'id' => $this->customer_id,
-                            'name' => $this->customer,
-                        ],
-                    ],
+                // $props = !! $row->props ? $row->props : []; 
+                // $props = [
+                //     ...$props,
+                //     'action' => [
+                //         'name' => 'status',
+                //         
+                //         'tooltip' => 'Setat ' . $statuses[$this->status] . ' de :user_full_name la :action_at. (:customer_name)',
+                //         'user' => [
+                //             'id' => \Auth::user()->id,
+                //             'full_name' => \Auth::user()->full_name,
+                //             'role' => [
+                //                 'id' => $role ? $role->id : NULL,
+                //                 'name' => $role ? $role->name : NULL,
+                //             ]
+                //         ],
+                //         'customer' => [
+                //             'id' => $this->customer_id,
+                //             'name' => $this->customer,
+                //         ],
+                //     ],
+                // ];
+
+                // $row->props = $props;
+                $row->status = $statuses[$this->status];
+                $row->action_at = $action_at = Carbon::now()->format('Y-m-d');
+                $row->tooltip = [
+                    'text' => 'Setat ' . $statuses[$this->status] . ' de :user la :action_at. (:customer)',
+                    'user'=> \Auth::user()->full_name,
+                    'customer' => Customer_base::find($this->customer_id)->name,
+                    'action_at' => $action->at,
                 ];
 
-                $row->props = $props;
                 $row->save();
             }
 
