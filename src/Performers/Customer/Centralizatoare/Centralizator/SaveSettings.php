@@ -3,12 +3,14 @@
 namespace MyDpo\Performers\Customer\Centralizatoare\Centralizator;
 
 use MyDpo\Helpers\Perform;
-use MyDpo\Models\CustomerCentralizator;
+use MyDpo\Models\Cenralizatoare\CustomerCentralizator;
 
 class SaveSettings extends Perform {
 
     public function Action() {
 
+        dd(__METHOD__, $this->input);
+        
         $record = CustomerCentralizator::find($this->id);
 
         $widths = collect($this->columns)->pluck('width', 'id')->toArray();

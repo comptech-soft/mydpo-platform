@@ -8,6 +8,7 @@ use MyDpo\Traits\Actionable;
 use MyDpo\Traits\Exportable;
 use MyDpo\Traits\Importable;
 use MyDpo\Performers\Customer\Centralizatoare\Centralizator\GetNextNumber;
+use MyDpo\Performers\Customer\Centralizatoare\Centralizator\SaveSettings;
 use MyDpo\Models\Customer\CustomerDepartment;
 use MyDpo\Models\Livrabile\TipCentralizator;
 use MyDpo\Models\Livrabile\TipCentralizatorColoana;
@@ -15,7 +16,7 @@ use MyDpo\Exports\CustomerCentralizator\Exporter;
 use MyDpo\Imports\CustomerCentralizator\Importer;
 
 // use MyDpo\Performers\CustomerCentralizator\Import;
-// use MyDpo\Performers\CustomerCentralizator\SaveSettings;
+;
 // use MyDpo\Performers\CustomerCentralizator\SetAccess;
 
 class CustomerCentralizator extends Model {
@@ -167,9 +168,6 @@ class CustomerCentralizator extends Model {
     // }
 
     public static function doSavesettings($input) {
-
-        dd($input);
-
         return (new SaveSettings($input))->Perform();
     }
 
