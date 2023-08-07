@@ -78,7 +78,13 @@ class TipCentralizator extends Model {
         static::addGlobalScope(new NotdeletedScope());
     }
 
-    
+    public function category() {
+        return $this->belongsTo(Category::class, 'category_id')->select(['id', 'name']);
+    }
+
+    public function columns() {
+        return $this->hasMany(TipCentralizatorColoana::class, 'centralizator_id');
+    }
 
     public function getColumnsTreeAttribute() {
         $columns = collect($this->columns)
@@ -130,13 +136,7 @@ class TipCentralizator extends Model {
         return $result->toArray();
     }
 
-    public function category() {
-        return $this->belongsTo(Category::class, 'category_id')->select(['id', 'name']);
-    }
-
-    public function columns() {
-        return $this->hasMany(TipCentralizatorColoana::class, 'centralizator_id');
-    }
+    
 
     public static function GetQuery() {
         return 

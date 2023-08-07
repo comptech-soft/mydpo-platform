@@ -89,11 +89,19 @@ class TipRegistru extends Model {
 
     protected $columnsDefinition = [
         'model' => \MyDpo\Models\Livrabile\TipRegistruColoana::class,
-        'foreign_key' => 'centralizator_id',
+        'foreign_key' => 'register_id',
     ];
 
     protected static function booted() {
         static::addGlobalScope(new NotdeletedScope());
+    }
+
+    public function category() {
+        return $this->belongsTo(Category::class, 'category_id')->select(['id', 'name']);
+    }
+
+    public function columns() {
+        return $this->hasMany(TipRegistruColoana::class, 'register_id');
     }
 
     // public function getHumanTypeAttribute() {
@@ -110,12 +118,7 @@ class TipRegistru extends Model {
     //         'color' => 'purple',
     //     ];
     // }
-
-    // public function columns() {
-    //     return $this->hasMany(RegistruColoana::class, 'register_id');
-    // }
-
-    
+   
     // public function getColumnsAttribute() {
     //     $t = $this->coloane->filter( function($item) {
     //         if($item->is_group == 1)
