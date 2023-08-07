@@ -49,6 +49,7 @@ class SetRowsVisibility extends Perform {
                 ];
 
                 $row->props = $props;
+                
                 $row->save();
             }
 

@@ -51,6 +51,10 @@ class CustomerCentralizatorRow extends Model {
         'tooltip',
     ];
 
+    protected $appends = [
+        'human_status',
+    ];
+
     protected $with = [
         'rowvalues',
     ];
@@ -58,6 +62,10 @@ class CustomerCentralizatorRow extends Model {
     protected $withCount = [
         'files',
     ];
+
+    public function getHumanStatusAttribute() {
+        return __FILE__;
+    }
 
     // public function getDepartmentIdAttribute() {
     //     $column_id = $this->customercentralizator->department_column_id;
