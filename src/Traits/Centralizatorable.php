@@ -68,7 +68,7 @@ trait Centralizatorable {
             'is_group' => 0,
             'group_id' => NULL,
             'order_no' => 32767,
-            'width' => 10,
+            'width' => NULL,
         ],
     ];
 

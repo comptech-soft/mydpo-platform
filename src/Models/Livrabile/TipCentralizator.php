@@ -38,12 +38,9 @@ class TipCentralizator extends Model {
 
     protected $fillable = [
         'id',
-        // 'status',
         'name',
         'category_id',
         'description',
-        // 'subject',
-        // 'body',
         'on_gap_page',
         'on_centralizatoare_page',
 
