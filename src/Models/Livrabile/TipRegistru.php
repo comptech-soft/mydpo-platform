@@ -3,7 +3,7 @@
 namespace MyDpo\Models\Livrabile;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Validation\Rule;
+// use Illuminate\Validation\Rule;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 use MyDpo\Traits\Centralizatorable;
@@ -278,10 +278,10 @@ class TipRegistru extends Model {
                 new UniqueName($action, $input),
             ],
 
-            'type' => [
-                'required',
-                Rule::in(['registre', 'audit']),
-            ],
+            // 'type' => [
+            //     'required',
+            //     Rule::in(['registre', 'audit']),
+            // ],
            
         ];
 
