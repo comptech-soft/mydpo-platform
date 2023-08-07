@@ -17,11 +17,12 @@ class UpdateRow extends Perform {
 
         $input = [
             ...collect($this->input)->except(['rowvalues'])->toArray(),
-            'action_at' => Carbon::now()->format('Y-m-d'),
+            'action_at' => $action_at = Carbon::now()->format('Y-m-d'),
             'tooltip' => [
                 'text' => 'Editat de :user la :action_at. (:customer)',
                 'user'=> \Auth::user()->full_name,
                 'customer' => Customer_base::find($this->customer_id)->name,
+                'action_at' => $action_at,
             ],
         ];
 
