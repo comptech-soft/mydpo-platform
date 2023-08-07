@@ -228,26 +228,43 @@ class TipRegistru extends Model {
     public static function GetQuery() {
         return 
             self::query()
+            ->leftJoin(
+                'categories',
+                function($j) {
+                    $j->on('categories.id', '=', 'centralizatoare.category_id');
+                }
+            )
             ->select([
-                'registers.id', 
-                'registers.name', 
-                'registers.type', 
-                'registers.body', 
+                'centralizatoare.id', 
+                'centralizatoare.name', 
+                'centralizatoare.category_id', 
+                'centralizatoare.description', 
+
+                'centralizatoare.on_registre_page', 
+                'centralizatoare.on_audit_page',
+
+                'centralizatoare.has_nr_crt_column',
+                'centralizatoare.has_visibility_column',
+                'centralizatoare.has_status_column',
+                'centralizatoare.has_files_column',
+                'centralizatoare.has_department_column',
+
+                'centralizatoare.props'
             ])
             ->withCount(['columns' => function($q) {
                 $q->whereNull('group_id');
             }]);
     }
     
-    public static function PrepareActionInput($action, $input) {
-        if($action == 'insert')
-        {
-            $input['slug'] = \Str::slug($input['name']); 
-            $input['description'] = '-'; 
+    // public static function PrepareActionInput($action, $input) {
+    //     if($action == 'insert')
+    //     {
+    //         $input['slug'] = \Str::slug($input['name']); 
+    //         $input['description'] = '-'; 
             
-        }
-        return $input;
-    }
+    //     }
+    //     return $input;
+    // }
 
     public static function GetRules($action, $input) {
         if($action == 'delete')
