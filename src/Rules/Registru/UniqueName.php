@@ -3,7 +3,7 @@
 namespace MyDpo\Rules\Registru;
 
 use Illuminate\Contracts\Validation\Rule;
-use MyDpo\Models\Livrabile\Registru;
+use MyDpo\Models\Livrabile\TipRegistru;
 
 class UniqueName implements Rule {
 
@@ -18,7 +18,7 @@ class UniqueName implements Rule {
 
     public function passes($attribute, $value) {   
 
-        $q = Registru::where('name', $this->input['name'])->where('type', $this->input['type']);
+        $q = TipRegistru::where('name', $this->input['name']);
 
         if($this->action == 'update')
         {
