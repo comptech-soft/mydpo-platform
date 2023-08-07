@@ -3,49 +3,31 @@
 namespace MyDpo\Performers\Customer\Centralizatoare\Centralizator;
 
 use MyDpo\Helpers\Perform;
-use MyDpo\Models\Cenralizatoare\CustomerCentralizator;
+use MyDpo\Models\Customer\Centralizatoare\CustomerCentralizator;
 
 class SaveSettings extends Perform {
 
     public function Action() {
-
-        dd(__METHOD__, $this->input);
         
-        $record = CustomerCentralizator::find($this->id);
+        $customer_centralizator = CustomerCentralizator::find($this->id);
 
         $widths = collect($this->columns)->pluck('width', 'id')->toArray();
 
-        $current_columns = $record->current_columns;
-        $props = !! $record->props ? $record->props : [];
+        $columns_items = collect([...$customer_centralizator->columns_items])->map(function($column) use ($widths){
 
-        foreach($widths as $column_id => $width)
-        {
+            return [
+                ...$column,
+                'width' => array_key_exists($column['id'], $widths) ? $widths[$column['id']] : $column['width']
+            ];
 
-            $ok = false;
+        })->toArray();
 
-            foreach($current_columns as $i => $column)
-            {
-                if($column_id == $column['id'])
-                {
-                    $ok = true;
-                    $current_columns[$i]['width'] = $width;
-                }
-            }
+        $columns_tree = [...$customer_centralizator->columns_tree];
 
-            if( ! $ok )
-            {
-                $props[$column_id] = $width;
-            }
-        }
 
-        $record->current_columns = $current_columns;
-        $record->props = $props;
+        $customer_centralizator->columns_items = $columns_items;
+        $customer_centralizator->columns_tree = $columns_tree;
 
-        $record->save();
-
-        $this->payload = [
-            'record' => $record,
-        ];
-    
+        $customer_centralizator->save();    
     }
 }
