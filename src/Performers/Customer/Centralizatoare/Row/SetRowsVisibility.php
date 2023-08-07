@@ -26,33 +26,18 @@ class SetRowsVisibility extends Perform {
             foreach($rows as $i => $row)
             {
 
-                $props = !! $row->props ? $row->props : []; 
-                $props = [
-                    ...$props,
-                    'action' => [
-                        'name' => 'visibility',
-                        'action_at' => Carbon::now()->format('Y-m-d'),
-                        'tooltip' => 'Setat ' . $items[$this->visibility] . ' de :user_full_name la :action_at. (:customer_name)',
-                        'user' => [
-                            'id' => \Auth::user()->id,
-                            'full_name' => \Auth::user()->full_name,
-                            'role' => [
-                                'id' => $role ? $role->id : NULL,
-                                'name' => $role ? $role->name : NULL,
-                            ]
-                        ],
-                        'customer' => [
-                            'id' => $this->customer_id,
-                            'name' => $this->customer,
-                        ],
-                    ],
+                $row->visibility = $this->visibility;
+                $row->action_at = $action_at = Carbon::now()->format('Y-m-d');
+                $row->tooltip = [
+                    'text' => 'Setat ' . $items[$this->visibility] . ' de :user la :action_at. (:customer)',
+                    'user'=> \Auth::user()->full_name,
+                    'customer' => $this->customer,
+                    'action_at' => $action_at,
                 ];
 
-                $row->props = $props;
-                
                 $row->save();
             }
-
+            
             $customer_centralizator = CustomerCentralizator::find($this->customer_centralizator_id);
 
             $records = CustomerCentralizatorRowValue::where('column_id', $customer_centralizator->visibility_column_id)
