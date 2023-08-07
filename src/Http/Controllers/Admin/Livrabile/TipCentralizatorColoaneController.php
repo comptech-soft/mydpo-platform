@@ -35,6 +35,4 @@ class TipCentralizatorColoaneController extends Controller {
         return TipCentralizatorColoana::doAction($action, $r->all());
     }
 
-    
-    
 }
