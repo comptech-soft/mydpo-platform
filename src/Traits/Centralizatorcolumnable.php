@@ -23,6 +23,7 @@ trait Centralizatorcolumnable {
             'STATUS' => 'Status',
             'FILES' => 'Fișiere',
             'DEPARTMENT' => 'Departament',
+            'CHECK' => 'Selectare',
             'C' => 'Text',
             'N' => 'Număr',
             'O' => 'Opțiuni',
