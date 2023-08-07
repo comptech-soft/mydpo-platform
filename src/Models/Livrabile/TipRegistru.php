@@ -231,25 +231,25 @@ class TipRegistru extends Model {
             ->leftJoin(
                 'categories',
                 function($j) {
-                    $j->on('categories.id', '=', 'centralizatoare.category_id');
+                    $j->on('categories.id', '=', 'registers.category_id');
                 }
             )
             ->select([
-                'centralizatoare.id', 
-                'centralizatoare.name', 
-                'centralizatoare.category_id', 
-                'centralizatoare.description', 
+                'registers.id', 
+                'registers.name', 
+                'registers.category_id', 
+                'registers.description', 
 
-                'centralizatoare.on_registre_page', 
-                'centralizatoare.on_audit_page',
+                'registers.on_registre_page', 
+                'registers.on_audit_page',
 
-                'centralizatoare.has_nr_crt_column',
-                'centralizatoare.has_visibility_column',
-                'centralizatoare.has_status_column',
-                'centralizatoare.has_files_column',
-                'centralizatoare.has_department_column',
+                'registers.has_nr_crt_column',
+                'registers.has_visibility_column',
+                'registers.has_status_column',
+                'registers.has_files_column',
+                'registers.has_department_column',
 
-                'centralizatoare.props'
+                'registers.props'
             ])
             ->withCount(['columns' => function($q) {
                 $q->whereNull('group_id');
