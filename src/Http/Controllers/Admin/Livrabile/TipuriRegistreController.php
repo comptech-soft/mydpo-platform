@@ -5,7 +5,7 @@ namespace MyDpo\Http\Controllers\Admin\Livrabile;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
-// use MyDpo\Models\Livrabile\Registru;
+use MyDpo\Models\Livrabile\TipRegistru;
 
 class TipuriRegistreController extends Controller {
     
@@ -16,9 +16,9 @@ class TipuriRegistreController extends Controller {
         );        
     }
 
-    // public function getRecords(Request $r) {
-    //     return Registru::getRecords($r->all());
-    // }
+    public function getRecords(Request $r) {
+        return TipRegistru::getRecords($r->all());
+    }
 
     // public function doAction($action, Request $r) {
     //     return Registru::doAction($action, $r->all());
