@@ -3,9 +3,9 @@
 namespace MyDpo\Performers\Customer\Centralizatoare\Row;
 
 use MyDpo\Helpers\Perform;
-use MyDpo\Models\Customer\CustomerCentralizator;
-use MyDpo\Models\Customer\CustomerCentralizatorRow;
-use MyDpo\Models\Customer\CustomerCentralizatorRowValue;
+use MyDpo\Models\Customer\Centralizatoare\CustomerCentralizator;
+use MyDpo\Models\Customer\Centralizatoare\CustomerCentralizatorRow;
+use MyDpo\Models\Customer\Centralizatoare\CustomerCentralizatorRowValue;
 use Carbon\Carbon;
 
 class SetRowsVisibility extends Perform {
@@ -17,14 +17,7 @@ class SetRowsVisibility extends Perform {
         if(!! count($this->selected_rows) )
         {
 
-            if(config('app.platform') == 'admin')
-            {
-                $role = \Auth::user()->role;
-            }
-            else
-            {
-                $role = \Auth::user()->roles()->wherePivot('customer_id', $this->customer_id)->first();
-            }
+            $role = $this->getUserRole();
 
             $items = collect($this->items)->pluck('text', 'value')->toArray();
 
@@ -75,4 +68,15 @@ class SetRowsVisibility extends Perform {
         ];
     
     }
+
+    public function getUserRole() {
+		$user = \Auth::user();
+		
+		if(config('app.platform') == 'admin')
+		{
+			return $user->role;
+		}
+		
+		return $user->roles()->wherePivot('customer_id', $this->customer_id)->first();
+	}
 }
