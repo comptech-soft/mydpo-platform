@@ -161,11 +161,7 @@ class CustomerCentralizator extends Model {
 
     // }
 
-    // public static function doDelete($input, $record) {
-    //     $record->DeleteRows();
-    //     $record->delete();
-    //     return $record;
-    // }
+
 
     public static function doSavesettings($input) {
         return (new SaveSettings($input))->Perform();
@@ -201,18 +197,21 @@ class CustomerCentralizator extends Model {
 
     // }
 
-    // public function DeleteRows() {
-    //     $rows = CustomerCentralizatorRow::where('customer_centralizator_id', $this->id)->get();
-    //     foreach($rows as $i => $row)
-    //     {
-    //         $row->DeleteValues();
+    public static function doDelete($input, $record) {
+        $record->DeleteRows();
+        $record->delete();
+        return $record;
+    }
 
-    //         $row->delete();
-    //     }
-    // }
-
-
-
+    public function DeleteRows() {
+        $rows = CustomerCentralizatorRow::where('customer_centralizator_id', $this->id)->get();
+        foreach($rows as $i => $row)
+        {
+            $row->DeleteValues();
+            $row->delete();
+        }
+    }
+    
     public static function GetQuery() {
 
         $q = self::query();

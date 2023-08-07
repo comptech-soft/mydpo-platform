@@ -14,7 +14,7 @@ trait Centralizatorable {
             'is_group' => 0,
             'group_id' => NULL,
             'order_no' => -100,
-            'width' => 100,
+            'width' => 55,
         ],
 
         'has_check_column' => [
@@ -23,7 +23,7 @@ trait Centralizatorable {
             'is_group' => 0,
             'group_id' => NULL,
             'order_no' => -99,
-            'width' => 100,
+            'width' => 50,
         ],
 
         'has_visibility_column' => [
@@ -32,7 +32,7 @@ trait Centralizatorable {
             'is_group' => 0,
             'group_id' => NULL,
             'order_no' => -90,
-            'width' => 100,
+            'width' => 50,
         ],
 
         'has_status_column' => [
@@ -41,7 +41,7 @@ trait Centralizatorable {
             'is_group' => 0,
             'group_id' => NULL,
             'order_no' => -80,
-            'width' => 100,
+            'width' => 140,
         ],
 
         'has_files_column' => [
