@@ -6,6 +6,7 @@ use MyDpo\Helpers\Perform;
 use MyDpo\Models\Customer\Centralizatoare\CustomerCentralizator;
 use MyDpo\Models\Customer\Centralizatoare\CustomerCentralizatorRow;
 use MyDpo\Models\Customer\Centralizatoare\CustomerCentralizatorRowValue;
+use MyDpo\Models\Customer_base;
 use Carbon\Carbon;
 
 class SetRowsStatus extends Perform {
