@@ -78,25 +78,7 @@ class TipCentralizator extends Model {
         static::addGlobalScope(new NotdeletedScope());
     }
 
-    public function getBoolColNrcrtAttribute() {
-        return !! $this->has_nr_crt_column ? 1 : 0;
-    }
-
-    public function getBoolColVisibilityAttribute() {
-        return !! $this->has_visibility_column ? 1 : 0;
-    }
-
-    public function getBoolColStatusAttribute() {
-        return !! $this->has_status_column ? 1 : 0;
-    }
-
-    public function getBoolColFilesAttribute() {
-        return !! $this->has_files_column ? 1 : 0;
-    }
-
-    public function getBoolColDepartmentAttribute() {
-        return !! $this->has_department_column ? 1 : 0;
-    }
+    
 
     public function getColumnsTreeAttribute() {
         $columns = collect($this->columns)

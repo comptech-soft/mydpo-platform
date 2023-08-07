@@ -5,10 +5,10 @@ namespace MyDpo\Models\Livrabile;
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
-use MyDpo\Traits\Columnablecolumns;
+use MyDpo\Traits\Centralizatorcolumnable;
 use MyDpo\Traits\Reorderable;
 
-class RegistruColoana extends Model {
+class TipRegistruColoana extends Model {
 
     use Itemable, Actionable, Reorderable, Columnablecolumns;
 

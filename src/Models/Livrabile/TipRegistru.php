@@ -18,19 +18,28 @@ class TipRegistru extends Model {
     protected $table = 'registers';
 
     protected $casts = [
+        'category_id' => 'integer',
         'props' => 'json',
         'body' => 'json',
         'order_no' => 'integer',
         'allow_upload_row_files' => 'integer',
         'has_departamente_column' => 'integer',
         'allow_versions' => 'integer',
-        'has_status_column' => 'integer',
         'has_stare_column' => 'integer',
         'upload_folder_id' => 'integer',
         'deleted' => 'integer',
         'created_by' => 'integer',
         'updated_by' => 'integer',
         'deleted_by' => 'integer',
+
+        'on_registre_page' => 'integer',
+        'on_audit_page' => 'integer',
+
+        'has_nr_crt_column' => 'integer',
+        'has_visibility_column' => 'integer',
+        'has_status_column' => 'integer',
+        'has_files_column' => 'integer',
+        'has_department_column' => 'integer',
     ];
 
     protected $fillable = [
@@ -43,48 +52,68 @@ class TipRegistru extends Model {
         'allow_versions',
         'upload_folder_id',
         'has_departamente_column',
-        'has_status_column',
         'has_stare_column',
+        'category_id',
         'description',
         'props',
         'body',
         'deleted',
         'created_by',
         'updated_by',
-        'deleted_by'
+        'deleted_by',
+        'on_registre_page',
+        'on_audit_page',
+        'has_nr_crt_column',
+        'has_visibility_column',
+        'has_status_column',
+        'has_files_column',
+        'has_department_column',
+    ];
+
+    // protected $appends = [
+    //     'human_type'
+    // ];
+
+
+    protected $with = [
+        'category'
     ];
 
     protected $appends = [
-        'human_type'
+        'bool_col_nrcrt',
+        'bool_col_visibility',
+        'bool_col_status',
+        'bool_col_files',
+        'bool_col_department'
     ];
 
     protected $columnsDefinition = [
-        'model' => \MyDpo\Models\Livrabile\RegistruColoana::class,
-        'foreign_key' => 'register_id',
+        'model' => \MyDpo\Models\Livrabile\TipRegistruColoana::class,
+        'foreign_key' => 'centralizator_id',
     ];
 
     protected static function booted() {
         static::addGlobalScope(new NotdeletedScope());
     }
 
-    public function getHumanTypeAttribute() {
-        if($this->type == 'registre')
-        {
-            return [
-                'caption' => 'Registru',
-                'color' => 'cyan',
-            ];
-        }
+    // public function getHumanTypeAttribute() {
+    //     if($this->type == 'registre')
+    //     {
+    //         return [
+    //             'caption' => 'Registru',
+    //             'color' => 'cyan',
+    //         ];
+    //     }
 
-        return [
-            'caption' => 'Audit',
-            'color' => 'purple',
-        ];
-    }
+    //     return [
+    //         'caption' => 'Audit',
+    //         'color' => 'purple',
+    //     ];
+    // }
 
-    public function columns() {
-        return $this->hasMany(RegistruColoana::class, 'register_id');
-    }
+    // public function columns() {
+    //     return $this->hasMany(RegistruColoana::class, 'register_id');
+    // }
 
     
     // public function getColumnsAttribute() {
