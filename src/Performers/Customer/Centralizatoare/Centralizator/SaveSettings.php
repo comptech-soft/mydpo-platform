@@ -3,6 +3,8 @@
 namespace MyDpo\Performers\Customer\Centralizatoare\Centralizator;
 
 use MyDpo\Helpers\Perform;
+use MyDpo\Models\Livrabile\TipCentralizatorColoana;
+use MyDpo\Models\Livrabile\TipCentralizator;
 use MyDpo\Models\Customer\Centralizatoare\CustomerCentralizator;
 
 class SaveSettings extends Perform {
@@ -11,23 +13,23 @@ class SaveSettings extends Perform {
         
         $customer_centralizator = CustomerCentralizator::find($this->id);
 
-        $widths = collect($this->columns)->pluck('width', 'id')->toArray();
+        foreach($widths = collect($this->columns)->pluck('width', 'id')->toArray() as $column_id => $width)
+        {
+            $column = TipCentralizatorColoana::where('centralizator_id', $customer_centralizator->centralizator_id)
+                ->where('id', $column_id)
+                ->first();
 
-        $columns_items = collect([...$customer_centralizator->columns_items])->map(function($column) use ($widths){
+            $column->width = $width;
 
-            return [
-                ...$column,
-                'width' => array_key_exists($column['id'], $widths) ? $widths[$column['id']] : $column['width']
-            ];
+            $column->save();
+        }
 
-        })->toArray();
+        $centralizator = TipCentralizator::find($customer_centralizator->centralizator_id);
 
-        $columns_tree = [...$customer_centralizator->columns_tree];
-
-
-        $customer_centralizator->columns_items = $columns_items;
-        $customer_centralizator->columns_tree = $columns_tree;
-
-        $customer_centralizator->save();    
+        $customer_centralizator->columns_items = $centralizator->columns_items;
+        $customer_centralizator->columns_tree = $centralizator->columns_tree;
+        $customer_centralizator->columns_with_values = $centralizator->columns_with_values;    
+        $customer_centralizator->save(); 
+           
     }
 }
