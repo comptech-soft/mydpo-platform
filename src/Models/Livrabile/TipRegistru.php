@@ -7,7 +7,7 @@ use Illuminate\Validation\Rule;
 use MyDpo\Traits\Itemable;
 // use MyDpo\Traits\Actionable;
 // use MyDpo\Traits\Columnable;
-// use MyDpo\Scopes\NotdeletedScope;
+use MyDpo\Scopes\NotdeletedScope;
 // use MyDpo\Rules\Registru\UniqueName;
 // use MyDpo\Performers\Registru\SaveCustomerAsociere;
 
