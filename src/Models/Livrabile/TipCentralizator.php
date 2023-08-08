@@ -58,18 +58,7 @@ class TipCentralizator extends Model {
         'deleted_by',
     ];
 
-    protected $with = [
-        'category'
-    ];
-
-    protected $appends = [
-        'bool_col_nrcrt',
-        'bool_col_visibility',
-        'bool_col_status',
-        'bool_col_files',
-        'bool_col_department'
-    ];
-
+    
     protected $columnsDefinition = [
         'model' => \MyDpo\Models\Livrabile\TipCentralizatorColoana::class,
         'foreign_key' => 'centralizator_id',
