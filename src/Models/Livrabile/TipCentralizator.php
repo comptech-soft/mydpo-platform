@@ -299,7 +299,7 @@ class TipCentralizator extends Model {
                 )
                 v_count_centralizatoare
             ON `centralizatoare`.`id` = v_count_centralizatoare.centralizator_id
-            WHERE `registers`." . ($page == 'centralizatoare' ? 'on_centralizatoare_page ' : 'on_gap_page ') . "> 0
+            WHERE `centralizatoare`." . ($page == 'centralizatoare' ? 'on_centralizatoare_page ' : 'on_gap_page ') . "> 0
         ";
 
         return \DB::select($sql);
