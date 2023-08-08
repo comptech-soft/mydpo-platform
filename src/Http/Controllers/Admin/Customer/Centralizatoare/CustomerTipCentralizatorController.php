@@ -13,6 +13,8 @@ class CustomerTipCentralizatorController extends Controller {
     
     public function index($customer_id, $centralizator_id, Request $r) {
         
+        dd(__METHOD__);
+        
         if( ! ($customer = Customer::find($customer_id)) )
         {
             return redirect('admin/customers');
