@@ -86,7 +86,7 @@ class Centralizator extends Model {
 
     public $numberable = [
         'field' => 'number',
-        'where' => "(customer_id = %%customer_id%%) AND (centralizator_id = %%tip_id)",
+        'where' => "(customer_id = %%customer_id%%) AND (centralizator_id = %%tip_id%%)",
         'replacement' => [
             '%%customer_id%%' => 'customer_id',
             '%%tip_id%%' => 'tip_id',

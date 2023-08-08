@@ -12,6 +12,24 @@ trait Numberable {
 
         $table = $instance->getTable();
 
+        $sql = "
+            SELECT 
+                MAX(CAST(`" . $instance->numberable['field'] . "` AS UNSIGNED)) as max_number 
+            FROM `" . $table . "`";
+        
+        $where = $instance->numberable['where'];
+        if(!! $where)
+        {
+            foreach($instance->numberable['replacement'] as $key => $field)
+            {
+                $where = \Str::replace($key, $input[$field], $where);
+            }
+
+            dd($where);
+        }
+
+        dd($sql);
+        
         dd($table, $input, $instance->numberable);
 
         return 7;
@@ -27,11 +45,7 @@ trait Numberable {
 
         
 
-        $sql = "
-            SELECT 
-                MAX(CAST(`" . $instance->nextNumberColumn . "` AS UNSIGNED)) as max_number 
-            FROM `" . $table . "`" 
-        ;
+        
 
         if(method_exists($this->model, 'NextNumberWhere'))
         {
