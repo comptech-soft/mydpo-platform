@@ -8,7 +8,7 @@ use MyDpo\Traits\Actionable;
 class CentralizatorAsociat extends Model {
 
     use Actionable;
-    
+
     protected $table = 'customers-centralizatoare-asociere';
 
     protected $casts = [
@@ -29,6 +29,13 @@ class CentralizatorAsociat extends Model {
         'created_by',
         'updated_by',
     ];
+
+    public static function doSaveasociere($input, $record) {
+        return self::UpdateOrCreateAsociere([
+            ...$input,
+            'centralizator_id' => $input['centralizator_id'],
+        ]);
+    }
 
     public static function UpdateOrCreateAsociere($input) {
 
