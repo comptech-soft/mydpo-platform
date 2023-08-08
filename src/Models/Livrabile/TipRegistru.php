@@ -3,21 +3,22 @@
 namespace MyDpo\Models\Livrabile;
 
 use Illuminate\Database\Eloquent\Model;
-// use Illuminate\Validation\Rule;
+
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 use MyDpo\Traits\Admin\Livrabile\Tipuri\Centralizatorable;
+
 use MyDpo\Scopes\NotdeletedScope;
-use MyDpo\Rules\Registru\UniqueName;
-// use MyDpo\Performers\Registru\SaveCustomerAsociere;
 
 class TipRegistru extends Model {
 
     use Itemable, Actionable, Centralizatorable;
 
     protected $table = 'registers';
-
+    
     protected $casts = [
+        'id' => 'integer',
+
         'category_id' => 'integer',
         'props' => 'json',
         'body' => 'json',
@@ -41,7 +42,7 @@ class TipRegistru extends Model {
         'has_files_column' => 'integer',
         'has_department_column' => 'integer',
     ];
-
+    
     protected $fillable = [
         'id',
         'name',
@@ -69,11 +70,6 @@ class TipRegistru extends Model {
         'has_files_column',
         'has_department_column',
     ];
-
-    // protected $appends = [
-    //     'human_type'
-    // ];
-
 
     protected $with = [
         'category'
@@ -103,72 +99,6 @@ class TipRegistru extends Model {
     public function columns() {
         return $this->hasMany(TipRegistruColoana::class, 'register_id');
     }
-
-    // public function getHumanTypeAttribute() {
-    //     if($this->type == 'registre')
-    //     {
-    //         return [
-    //             'caption' => 'Registru',
-    //             'color' => 'cyan',
-    //         ];
-    //     }
-
-    //     return [
-    //         'caption' => 'Audit',
-    //         'color' => 'purple',
-    //     ];
-    // }
-   
-    // public function getColumnsAttribute() {
-    //     $t = $this->coloane->filter( function($item) {
-    //         if($item->is_group == 1)
-    //         {
-    //             return TRUE;
-    //         }
-
-    //         if($item->is_group == 0 && $item->group_id == 0)
-    //         {
-    //             return TRUE;
-    //         }
-    //         return FALSE;
-    //     })->map(function($item) {
-    //         $item->column_type = $item->is_group == 1 ? 'group' : 'single';
-    //         return $item;
-    //     })->sortBy('order_no')->toArray();
-
-    //     $r = [];
-    //     foreach($t as $i => $item)
-    //     {
-    //         $r[]  = $item;
-    //     }
-       
-    //     foreach($r as $i => $record)
-    //     {
-    //         $r[$i]['children'] = [];
-    //         if($record['is_group'] == 1)
-    //         {
-    //             $children = $this->coloane->filter( function($item) use ($record) {
-    //                 if($item->group_id == $record['id'])
-    //                 {
-    //                     return TRUE;
-    //                 }
-    //                 return FALSE;
-    //             })->sortBy('order_no')->toArray();
-
-    //             foreach($children as $j => $child)
-    //             {
-    //                 $r[$i]['children'][] = $child;
-    //             }
-    //         }
-    //     }
-
-    //     return $r;
-    // }
-
-    // function coloane() {
-    //     return $this->hasMany(RegistruColoana::class, 'register_id');
-    // }
-
     
     public static function GetQuery() {
         return 
@@ -200,19 +130,10 @@ class TipRegistru extends Model {
                 $q->whereNull('group_id');
             }]);
     }
-    
-    // public static function PrepareActionInput($action, $input) {
-    //     if($action == 'insert')
-    //     {
-    //         $input['slug'] = \Str::slug($input['name']); 
-    //         $input['description'] = '-'; 
-            
-    //     }
-    //     return $input;
-    // }
 
     public static function GetRules($action, $input) {
-        if($action == 'delete')
+
+        if( ! in_array($action, ['insert', 'update']) )
         {
             return NULL;
         }
@@ -223,16 +144,19 @@ class TipRegistru extends Model {
                 new UniqueName($action, $input),
             ],
 
-            // 'type' => [
-            //     'required',
-            //     Rule::in(['registre', 'audit']),
-            // ],
+            'category_id' => [
+                'required',
+            ],
+
+            'description' => [
+                'required',
+            ],
            
         ];
 
         return $result;
     }
-
+    
     public static function GetDashboardItems($page, $customer_id) {
         $sql = "
             SELECT 
