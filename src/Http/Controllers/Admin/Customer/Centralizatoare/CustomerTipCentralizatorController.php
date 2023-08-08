@@ -42,9 +42,9 @@ class CustomerTipCentralizatorController extends Controller {
         return Centralizator::getRecords($r->all());
     }
 
-    // public function doAction($action, Request $r) {
-    //     return CustomerCentralizator::doAction($action, $r->all());
-    // }
+    public function doAction($action, Request $r) {
+        return Centralizator::doAction($action, $r->all());
+    }
 
     // public function getNextNumber(Request $r) {
     //     return CustomerCentralizator::getNextNumber($r->all());

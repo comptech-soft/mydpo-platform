@@ -4,9 +4,10 @@ namespace MyDpo\Models\Customer\Centralizatoare;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
+use MyDpo\Traits\Actionable;
 use MyDpo\Models\Customer\CustomerDepartment;
 
-// use MyDpo\Traits\Actionable;
+// 
 // use MyDpo\Traits\Exportable;
 // use MyDpo\Traits\Importable;
 // use MyDpo\Performers\Customer\Centralizatoare\Centralizator\GetNextNumber;
@@ -23,7 +24,7 @@ use MyDpo\Models\Customer\CustomerDepartment;
 
 class Centralizator extends Model {
 
-    use Itemable; //, Actionable, Exportable, Importable;
+    use Itemable, Actionable; //, Exportable, Importable;
 
     protected $table = 'customers-centralizatoare';
 
