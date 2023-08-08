@@ -31,7 +31,7 @@ class CustomerRegistreDashboardController extends Controller {
                 'customer_id' => $customer_id,
                 'customer' => $customer,
                 'page' => $page,
-                'items' => $items,
+                'tipuri' => $items,
             ],
         );     
 
