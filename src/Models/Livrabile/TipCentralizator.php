@@ -226,6 +226,30 @@ class TipCentralizator extends Model {
         return $result;
     }
 
+
+
+    private static function CreateColumnChildren($column, $current_columns) {
+
+        $children = [];
+
+        foreach($current_columns as $i => $item)
+        {
+            if(!! $item['group_id'] && ($item['group_id'] == $column['id']))
+            {
+                $children[] = $item;
+            }
+        }
+
+        return collect($children)
+            ->map(function($item) {
+                $item = collect($item)->only(['id', 'order_no', 'is_group', 'group_id', 'caption', 'type', 'width', 'props'])->toArray();
+                return $item;
+            })
+            ->sortBy('order_no')
+            ->values()
+            ->toArray();
+    }
+
     public static function GetRules($action, $input) {
         
         if( ! in_array($action, ['insert', 'update']) )
@@ -251,26 +275,34 @@ class TipCentralizator extends Model {
         return $result;
     }
 
-    private static function CreateColumnChildren($column, $current_columns) {
+    public static function GetDashboardItems($page, $customer_id) {
+        $sql = "
+            SELECT 
+                `centralizatoare`.`id`,
+                `centralizatoare`.`name`,
+                `categories`.`name` AS category,
+                COALESCE(is_associated, 0) AS is_associated,
+                COALESCE(v_count_centralizatoare.count_items, 0) AS count_items
+            FROM `centralizatoare`
+            LEFT JOIN `customers-centralizatoare-asociere`
+            ON (`centralizatoare`.id = `customers-centralizatoare-asociere`.centralizator_id) AND (" . $customer_id . " = `customers-centralizatoare-asociere`.customer_id)
+            LEFT JOIN `categories`
+            ON `categories`.id = `registers`.category_id
+            LEFT JOIN 
+                (
+                    SELECT
+                        centralizator_id,
+                        COUNT(*) AS count_items
+                    FROM `customers-centralizatoare`
+                    WHERE customer_id = " . $customer_id . "
+                    GROUP BY 1
+                )
+                v_count_centralizatoare
+            ON `centralizatoare`.`id` = v_count_centralizatoare.centralizator_id
+            WHERE `registers`." . ($page == 'centralizatoare' ? 'on_centralizatoare_page ' : 'on_gap_page ') . "> 0
+        ";
 
-        $children = [];
-
-        foreach($current_columns as $i => $item)
-        {
-            if(!! $item['group_id'] && ($item['group_id'] == $column['id']))
-            {
-                $children[] = $item;
-            }
-        }
-
-        return collect($children)
-            ->map(function($item) {
-                $item = collect($item)->only(['id', 'order_no', 'is_group', 'group_id', 'caption', 'type', 'width', 'props'])->toArray();
-                return $item;
-            })
-            ->sortBy('order_no')
-            ->values()
-            ->toArray();
+        return \DB::select($sql);
     }
 
 }
