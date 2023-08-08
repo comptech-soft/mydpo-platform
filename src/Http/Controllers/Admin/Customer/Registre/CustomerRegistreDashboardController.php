@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
 use MyDpo\Models\Customer;
+use MyDpo\Models\Livrabile\TipRegistru;
 
 class CustomerRegistreDashboardController extends Controller {
     
@@ -16,7 +17,9 @@ class CustomerRegistreDashboardController extends Controller {
             return redirect('admin/clienti');
         }
 
-        dd($page);
+        $items = TipRegistru::GetDashboardItems($page, $customer_id);
+
+        dd($items);
 
         return Index::View(
             styles: ['css/app.css'],
