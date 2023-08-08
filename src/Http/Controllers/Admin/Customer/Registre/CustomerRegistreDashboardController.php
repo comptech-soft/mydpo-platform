@@ -9,7 +9,7 @@ use MyDpo\Models\Customer;
 
 class CustomerRegistreDashboardController extends Controller {
     
-    public function index($customer_id, Request $r) {
+    public function index($page, $customer_id, Request $r) {
         
         if(! ($customer =  Customer::find($customer_id)) )
         {
