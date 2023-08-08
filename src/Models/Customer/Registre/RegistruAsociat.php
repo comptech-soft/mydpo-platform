@@ -35,7 +35,10 @@ class RegistruAsociat extends Model {
     ];
 
     public static function doSaveasociere($input, $record) {
-        return self::UpdateOrCreateAsociere($input);
+        return self::UpdateOrCreateAsociere([
+            ...$input,
+            'register_id' => $input['id'],
+        ]);
     }
 
     private static function UpdateOrCreateAsociere($input) {
