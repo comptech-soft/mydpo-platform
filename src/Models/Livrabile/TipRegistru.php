@@ -295,7 +295,7 @@ class TipRegistru extends Model {
                 `registers`.`name`,
                 `categories`.`name` AS category,
                 COALESCE(is_associated, 0) AS is_associated,
-                v_count_registre.count_items
+                COALESCE(v_count_registre.count_items, 0) AS count_items
             FROM `registers`
             LEFT JOIN `customers-registers-asociate`
             ON (`registers`.id = `customers-registers-asociate`.register_id) AND (" . $customer_id . " = `customers-registers-asociate`.customer_id)
