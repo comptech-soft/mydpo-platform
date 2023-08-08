@@ -28,6 +28,15 @@ class Registru extends Model {
         'created_by' => 'integer',
         'updated_by' => 'integer',
         'deleted_by' => 'integer',
+        'current_columns' => 'json',
+        'columns_tree' => 'json',
+        'columns_items' => 'json',
+        'columns_with_values' => 'json',
+        'nr_crt_column_id' => 'integer',
+        'visibility_column_id' => 'integer',
+        'status_column_id' => 'integer',
+        'department_column_id' => 'integer',
+        'files_column_id' => 'integer',
     ];
 
     protected $fillable = [
@@ -38,6 +47,10 @@ class Registru extends Model {
         'department_id',
         'register_id',
         'columns',
+        'current_columns',
+        'columns_tree',
+        'columns_items',
+        'columns_with_values',
         'number',
         'date',
         'status',
@@ -46,7 +59,12 @@ class Registru extends Model {
         'deleted',
         'created_by',
         'updated_by',
-        'deleted_by'
+        'deleted_by',
+        'nr_crt_column_id',
+        'visibility_column_id',
+        'status_column_id',
+        'department_column_id',
+        'files_column_id'
     ];
 
     protected $appends = [
