@@ -5,6 +5,7 @@ namespace MyDpo\Models\Customer\Centralizatoare;
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
+use MyDpo\Traits\Numberable;
 use MyDpo\Models\Customer\CustomerDepartment;
 
 // 
@@ -24,7 +25,7 @@ use MyDpo\Models\Customer\CustomerDepartment;
 
 class Centralizator extends Model {
 
-    use Itemable, Actionable; //, Exportable, Importable;
+    use Itemable, Actionable, Numberable; //, Exportable, Importable;
 
     protected $table = 'customers-centralizatoare';
 
@@ -81,6 +82,11 @@ class Centralizator extends Model {
 
     protected $with = [
         'department',
+    ];
+
+    public $numberable = [
+        'field' => 'number',
+        'where' => "(customer_id = %%customer_id%%) AND (register_id = %%register_id)",
     ];
 
     public function getVisibleAttribute() {
