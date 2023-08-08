@@ -4,24 +4,24 @@ namespace MyDpo\Models\Customer\Centralizatoare;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
-use MyDpo\Traits\Actionable;
-use MyDpo\Traits\Exportable;
-use MyDpo\Traits\Importable;
-use MyDpo\Performers\Customer\Centralizatoare\Centralizator\GetNextNumber;
-use MyDpo\Performers\Customer\Centralizatoare\Centralizator\SaveSettings;
-use MyDpo\Models\Customer\CustomerDepartment;
-use MyDpo\Models\Livrabile\TipCentralizator;
-use MyDpo\Models\Livrabile\TipCentralizatorColoana;
-use MyDpo\Exports\CustomerCentralizator\Exporter;
-use MyDpo\Imports\CustomerCentralizator\Importer;
+// use MyDpo\Traits\Actionable;
+// use MyDpo\Traits\Exportable;
+// use MyDpo\Traits\Importable;
+// use MyDpo\Performers\Customer\Centralizatoare\Centralizator\GetNextNumber;
+// use MyDpo\Performers\Customer\Centralizatoare\Centralizator\SaveSettings;
+// use MyDpo\Models\Customer\CustomerDepartment;
+// use MyDpo\Models\Livrabile\TipCentralizator;
+// use MyDpo\Models\Livrabile\TipCentralizatorColoana;
+// use MyDpo\Exports\CustomerCentralizator\Exporter;
+// use MyDpo\Imports\CustomerCentralizator\Importer;
 
 // use MyDpo\Performers\CustomerCentralizator\Import;
 ;
 // use MyDpo\Performers\CustomerCentralizator\SetAccess;
 
-class CustomerCentralizator extends Model {
+class Centralizator extends Model {
 
-    use Itemable, Actionable, Exportable, Importable;
+    use Itemable; //, Actionable, Exportable, Importable;
 
     protected $table = 'customers-centralizatoare';
 
@@ -72,55 +72,55 @@ class CustomerCentralizator extends Model {
         'files_column_id'
     ];
 
-    protected $appends = [
-        'visible',
-    ];
+    // protected $appends = [
+    //     'visible',
+    // ];
 
-    protected $with = [
-        'department',
-    ];
+    // protected $with = [
+    //     'department',
+    // ];
 
-    public function getVisibleAttribute() {
-        return [
-            'color' => !! $this->visibility ? 'green' : 'red',
-            'icon' => !! $this->visibility ? 'mdi-check' : 'mdi-cancel',
-        ];
-    }
+    // public function getVisibleAttribute() {
+    //     return [
+    //         'color' => !! $this->visibility ? 'green' : 'red',
+    //         'icon' => !! $this->visibility ? 'mdi-check' : 'mdi-cancel',
+    //     ];
+    // }
 
-    protected static function GetExporter($input) {
-        return new Exporter($input); 
-    }
+    // protected static function GetExporter($input) {
+    //     return new Exporter($input); 
+    // }
 
-    protected static function GetImporter($input) {
-        return new Importer($input); 
-    }
+    // protected static function GetImporter($input) {
+    //     return new Importer($input); 
+    // }
 
-    public function department() {
-        return $this->belongsTo(CustomerDepartment::class, 'department_id')->select(['id', 'departament']);
-    }
+    // public function department() {
+    //     return $this->belongsTo(CustomerDepartment::class, 'department_id')->select(['id', 'departament']);
+    // }
 
-    public static function doInsert($input, $record) {
+    // public static function doInsert($input, $record) {
 
-        $tip_centralizator = TipCentralizator::find($input['centralizator_id']);
+    //     $tip_centralizator = TipCentralizator::find($input['centralizator_id']);
         
-        $record = self::create([
-            ...$input,
+    //     $record = self::create([
+    //         ...$input,
 
-            'columns_tree' => $tip_centralizator->columns_tree,
-            'columns_items' => $tip_centralizator->columns_items,
-            'columns_with_values' => $tip_centralizator->columns_with_values,
+    //         'columns_tree' => $tip_centralizator->columns_tree,
+    //         'columns_items' => $tip_centralizator->columns_items,
+    //         'columns_with_values' => $tip_centralizator->columns_with_values,
 
-            'nr_crt_column_id' => $tip_centralizator->has_nr_crt_column,
-            'visibility_column_id' => $tip_centralizator->has_visibility_column,
-            'status_column_id' => $tip_centralizator->has_status_column,
-            'department_column_id' => $tip_centralizator->has_department_column,
-            'files_column_id' => $tip_centralizator->has_files_column,
+    //         'nr_crt_column_id' => $tip_centralizator->has_nr_crt_column,
+    //         'visibility_column_id' => $tip_centralizator->has_visibility_column,
+    //         'status_column_id' => $tip_centralizator->has_status_column,
+    //         'department_column_id' => $tip_centralizator->has_department_column,
+    //         'files_column_id' => $tip_centralizator->has_files_column,
 
-            'current_columns' => $tip_centralizator->columns->toArray(), 
-        ]);
+    //         'current_columns' => $tip_centralizator->columns->toArray(), 
+    //     ]);
 
-        return $record;
-    }
+    //     return $record;
+    // }
 
     // public function SetCurrentColumns() {
     //     $this->current_columns = CentralizatorColoana::where('centralizator_id', $this->centralizator_id)->get()->toArray();
@@ -163,9 +163,9 @@ class CustomerCentralizator extends Model {
 
 
 
-    public static function doSavesettings($input) {
-        return (new SaveSettings($input))->Perform();
-    }
+    // public static function doSavesettings($input) {
+    //     return (new SaveSettings($input))->Perform();
+    // }
 
     // public static function setAccess($input) {
     //     return (new SetAccess($input))->Perform();
@@ -197,20 +197,20 @@ class CustomerCentralizator extends Model {
 
     // }
 
-    public static function doDelete($input, $record) {
-        $record->DeleteRows();
-        $record->delete();
-        return $record;
-    }
+    // public static function doDelete($input, $record) {
+    //     $record->DeleteRows();
+    //     $record->delete();
+    //     return $record;
+    // }
 
-    public function DeleteRows() {
-        $rows = CustomerCentralizatorRow::where('customer_centralizator_id', $this->id)->get();
-        foreach($rows as $i => $row)
-        {
-            $row->DeleteValues();
-            $row->delete();
-        }
-    }
+    // public function DeleteRows() {
+    //     $rows = CustomerCentralizatorRow::where('customer_centralizator_id', $this->id)->get();
+    //     foreach($rows as $i => $row)
+    //     {
+    //         $row->DeleteValues();
+    //         $row->delete();
+    //     }
+    // }
     
     public static function GetQuery() {
 
@@ -224,9 +224,9 @@ class CustomerCentralizator extends Model {
         return $q;
     }
 
-    public static function getNextNumber($input) {
-        return (new GetNextNumber($input))->Perform();
-    }
+    // public static function getNextNumber($input) {
+    //     return (new GetNextNumber($input))->Perform();
+    // }
 
     // public function CorrectCurrentColumns() {
 

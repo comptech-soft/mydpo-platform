@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
 use MyDpo\Models\Customer;
 use MyDpo\Models\Livrabile\TipCentralizator;
-use MyDpo\Models\Customer\Centralizatoare\CustomerCentralizator;
+use MyDpo\Models\Customer\Centralizatoare\Centralizator;
 
 class CustomerTipCentralizatorController extends Controller {
     
@@ -38,9 +38,9 @@ class CustomerTipCentralizatorController extends Controller {
       
     }
 
-    // public function getRecords(Request $r) {
-    //     return CustomerCentralizator::getRecords($r->all());
-    // }
+    public function getRecords(Request $r) {
+        return Centralizator::getRecords($r->all());
+    }
 
     // public function doAction($action, Request $r) {
     //     return CustomerCentralizator::doAction($action, $r->all());
