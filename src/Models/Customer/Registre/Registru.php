@@ -80,23 +80,23 @@ class Registru extends Model {
     public static function doInsert($input, $record) {
 
         
-        $tip_registru = TipRegistru::find($input['register_id']);
+        $tip = TipRegistru::find($input['register_id']);
 
        
         $record = self::create([
             ...$input,
 
-            'columns_tree' => $tip_centralizator->columns_tree,
-            'columns_items' => $tip_centralizator->columns_items,
-            'columns_with_values' => $tip_centralizator->columns_with_values,
+            'columns_tree' => $tip->columns_tree,
+            'columns_items' => $tip->columns_items,
+            'columns_with_values' => $tip->columns_with_values,
 
-            'nr_crt_column_id' => $tip_centralizator->has_nr_crt_column,
-            'visibility_column_id' => $tip_centralizator->has_visibility_column,
-            'status_column_id' => $tip_centralizator->has_status_column,
-            'department_column_id' => $tip_centralizator->has_department_column,
-            'files_column_id' => $tip_centralizator->has_files_column,
+            'nr_crt_column_id' => $tip->has_nr_crt_column,
+            'visibility_column_id' => $tip->has_visibility_column,
+            'status_column_id' => $tip->has_status_column,
+            'department_column_id' => $tip->has_department_column,
+            'files_column_id' => $tip->has_files_column,
 
-            'current_columns' => $tip_centralizator->columns->toArray(), 
+            'current_columns' => $tip->columns->toArray(), 
         ]);
 
         return $record;
