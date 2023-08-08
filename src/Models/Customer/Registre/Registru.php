@@ -9,7 +9,6 @@ use MyDpo\Traits\Actionable;
 use MyDpo\Traits\Numberable;
 use MyDpo\Traits\Customer\Centralizatoare\Centralizatorable;
 
-use MyDpo\Models\Customer\CustomerDepartment;
 use MyDpo\Models\Livrabile\TipRegistru;
 
 class Registru extends Model {
