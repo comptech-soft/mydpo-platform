@@ -13,8 +13,29 @@ class CustomerTipCentralizatorController extends Controller {
     
     public function index($customer_id, $centralizator_id, Request $r) {
         
+        if( ! ($customer = Customer::find($customer_id)) )
+        {
+            return redirect('/');
+        }
+
+        if( ! ($tip = TipCentralizator::find($centralizator_id)) )
+        {
+            return redirect('/');
+        }
+
+        return Index::View(
+            styles: ['css/app.css'],
+            scripts: ['apps/customer/customers-centralizatoare-list/index.js'],
+            payload: [
+                'customer_id' => $customer_id,
+                'tip_id' => $centralizator_id,
+                'customer' => $customer,
+                'tip' => $tip,
+            ],
+        );    
+
         dd(__METHOD__);
-        
+
         if( ! ($customer = Customer::find($customer_id)) )
         {
             return redirect('admin/customers');

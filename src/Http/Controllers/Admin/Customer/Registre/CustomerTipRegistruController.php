@@ -5,24 +5,32 @@ namespace MyDpo\Http\Controllers\Admin\Customer\Registre;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
-// use MyDpo\Models\Customer;
-// use MyDpo\Models\Livrabile\Registru;
+use MyDpo\Models\Customer;
+use MyDpo\Models\Livrabile\TipRegistru;
 // use MyDpo\Models\Customer\CustomerRegister;
 
 class CustomerTipRegistruController extends Controller {
     
     public function index($customer_id, $register_id, Request $r) {
 
-        dd(__METHOD__);
-        
+        if( ! ($customer = Customer::find($customer_id)) )
+        {
+            return redirect('/');
+        }
+
+        if( ! ($tip = TipRegistru::find($register_id)) )
+        {
+            return redirect('/');
+        }
+
         return Index::View(
             styles: ['css/app.css'],
-            scripts: ['apps/customer/registru/index.js'],
+            scripts: ['apps/customer/customers-registre-list/index.js'],
             payload: [
                 'customer_id' => $customer_id,
-                'register_id' => $register_id,
-                'customer' => Customer::find($customer_id),
-                'registru' => Registru::find($register_id),
+                'tip_id' => $register_id,
+                'customer' => $customer,
+                'tip' => $tip,
             ],
         );        
     }
