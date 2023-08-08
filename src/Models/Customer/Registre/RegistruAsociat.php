@@ -8,7 +8,7 @@ use MyDpo\Traits\Actionable;
 class RegistruAsociat extends Model {
 
     use Actionable;
-    
+
     protected $table = 'customers-registers-asociate';
 
     protected $casts = [
@@ -33,6 +33,11 @@ class RegistruAsociat extends Model {
         'updated_by',
         'deleted_by'
     ];
+
+    public static function doSaveasociere($input, $record) {
+
+        dd($input, $record);
+    }
 
     public static function UpdateOrCreateAsociere($input) {
         $record = self::where('customer_id', $input['customer_id'])
