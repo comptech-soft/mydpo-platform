@@ -4,7 +4,7 @@ namespace MyDpo\Models\Customer\Centralizatoare;
 
 use Illuminate\Database\Eloquent\Model;
 
-class CustomerCentralizatorAsociat extends Model {
+class CentralizatorAsociat extends Model {
 
     protected $table = 'customers-centralizatoare-asociere';
 

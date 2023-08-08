@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
 use MyDpo\Models\Customer;
 use MyDpo\Models\Livrabile\TipCentralizator;
+use MyDpo\Models\Customer\Centralizatoare\CentralizatorAsociat;
 
 class CustomerCentralizatoareDashboardController extends Controller {
     
@@ -37,13 +38,17 @@ class CustomerCentralizatoareDashboardController extends Controller {
         );        
     }
 
-    public function getCustomerAsociere(Request $r) {
-        return TipCentralizator::getCustomerAsociere($r->all());
+    public function doAction($action, Request $r) {
+        return CentralizatorAsociat::doAction($action, $r->all());
     }
 
-    public function saveCustomerAsociere(Request $r) {
-        return TipCentralizator::saveCustomerAsociere($r->all());
-    }
+    // public function getCustomerAsociere(Request $r) {
+    //     return TipCentralizator::getCustomerAsociere($r->all());
+    // }
+
+    // public function saveCustomerAsociere(Request $r) {
+    //     return TipCentralizator::saveCustomerAsociere($r->all());
+    // }
 
 
 
