@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
 use MyDpo\Models\Customer;
 use MyDpo\Models\Livrabile\TipRegistru;
-// use MyDpo\Models\Customer\CustomerRegister;
+use MyDpo\Models\Customer\Registre\Registru;
 
 class CustomerTipRegistruController extends Controller {
     
@@ -36,9 +36,9 @@ class CustomerTipRegistruController extends Controller {
         );        
     }
 
-    // public function getRecords(Request $r) {
-    //     return CustomerRegister::getRecords($r->all());
-    // }
+    public function getRecords(Request $r) {
+        return Registru::getRecords($r->all());
+    }
 
     // public function doAction($action, Request $r) {
     //     return CustomerRegister::doAction($action, $r->all());

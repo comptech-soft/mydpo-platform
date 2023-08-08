@@ -11,7 +11,7 @@ use MyDpo\Traits\NextNumber;
 // use MyDpo\Performers\CustomerRegister\RegisterSaveAccess;
 // use MyDpo\Performers\CustomerRegister\RegisterCopy;
 
-class CustomerRegister extends Model {
+class Registru extends Model {
 
     use Itemable, Actionable, NextNumber;
 
