@@ -13,6 +13,8 @@ class CustomerTipRegistruController extends Controller {
     
     public function index($customer_id, $register_id, Request $r) {
 
+        dd(__METHOD__);
+        
         return Index::View(
             styles: ['css/app.css'],
             scripts: ['apps/customer/registru/index.js'],
