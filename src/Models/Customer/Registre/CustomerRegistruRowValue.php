@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Models;
+namespace MyDpo\Models\Customer\Registre;
 
 use Illuminate\Database\Eloquent\Model;
 
