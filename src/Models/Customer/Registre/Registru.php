@@ -78,10 +78,10 @@ class Registru extends Model {
 
     public static function doInsert($input, $record) {
 
-        dd($input, $record);
         
-        $tip_centralizator = TipCentralizator::find($input['centralizator_id']);
-        
+        $tip_registru = TipRegistru::find($input['register_id']);
+
+       
         $record = self::create([
             ...$input,
 
