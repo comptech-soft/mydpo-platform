@@ -9,7 +9,7 @@ trait Centralizatorcolumnable {
     }
 
     public function getNotIsClickableAttribute() {
-        return in_array($this->type, ['VISIBILITY', 'STATUS', 'FILES', 'DEPARTMENT', 'NRCRT', 'EMPTY']);
+        return in_array($this->type, ['VISIBILITY', 'STATUS', 'FILES', 'DEPARTMENT', 'NRCRT', 'EMPTY', 'CHECK']);
     }
 
     public function getNotIsInListAttribute() {
