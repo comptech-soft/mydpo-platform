@@ -10,6 +10,8 @@ use MyDpo\Traits\Admin\Livrabile\Tipuri\Centralizatorable;
 
 use MyDpo\Scopes\NotdeletedScope;
 
+use MyDpo\Rules\Registru\UniqueName;
+
 class TipRegistru extends Model {
 
     use Itemable, Actionable, Centralizatorable;
