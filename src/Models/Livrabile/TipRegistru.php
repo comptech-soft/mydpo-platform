@@ -305,7 +305,7 @@ class TipRegistru extends Model {
                 (
                     SELECT
                         register_id,
-                        COUNT(*) AS count_registre
+                        COUNT(*) AS count_items
                     FROM `customers-registers`
                     WHERE customer_id = " . $customer_id . "
                     GROUP BY 1
