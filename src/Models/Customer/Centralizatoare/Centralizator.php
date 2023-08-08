@@ -95,7 +95,9 @@ class Centralizator extends Model {
     }
 
     public static function doGetnextnumber($input, $record) {
-        dd($input, $record);
+        
+        
+        return 7;
     }
 
     public static function GetQuery() {
