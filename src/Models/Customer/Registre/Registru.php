@@ -4,12 +4,12 @@ namespace MyDpo\Models\Customer\Registre;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Models\Customer\CustomerDepartment;
-use MyDpo\Traits\Itemable;
-
+use MyDpo\Traits\Actionable;
+use MyDpo\Traits\Numberable;
 
 class Registru extends Model {
 
-    use Itemable;
+    use Itemable, Actionable, Numberable;
 
     protected $table = 'customers-registers';
 
@@ -53,6 +53,15 @@ class Registru extends Model {
         'department',
     ];
 
+    public $numberable = [
+        'field' => 'number',
+        'where' => "(customer_id = %%customer_id%%) AND (register_id = %%tip_id%%)",
+        'replacement' => [
+            '%%customer_id%%' => 'customer_id',
+            '%%tip_id%%' => 'tip_id',
+        ],
+    ];
+    
     public function getVisibleAttribute() {
         return [
             'color' => !! $this->visibility ? 'green' : 'red',
@@ -64,7 +73,7 @@ class Registru extends Model {
         return $this->belongsTo(CustomerDepartment::class, 'department_id')->select(['id', 'departament']);
     }
 
-   
+    
 
     public static function GetQuery() {
 
