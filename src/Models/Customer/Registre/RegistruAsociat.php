@@ -35,11 +35,10 @@ class RegistruAsociat extends Model {
     ];
 
     public static function doSaveasociere($input, $record) {
-
-        dd($input, $record);
+        return self::UpdateOrCreateAsociere($input);
     }
 
-    public static function UpdateOrCreateAsociere($input) {
+    private static function UpdateOrCreateAsociere($input) {
         $record = self::where('customer_id', $input['customer_id'])
             ->where('register_id', $input['register_id'])
             ->first();
@@ -52,6 +51,8 @@ class RegistruAsociat extends Model {
         {
             $record->update($input);
         }
+
+        return $record;
     }
 
 }
