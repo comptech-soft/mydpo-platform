@@ -5,11 +5,8 @@ namespace MyDpo\Traits\Customer\Centralizatoare;
 trait Centralizatorable {
 
     public static function doInsert($input, $record) {
-
-        dd('bam bam....');
         
-        $tip = TipRegistru::find($input['register_id']);
-
+        $tip = self::GetTip($input);
        
         $record = self::create([
             ...$input,
@@ -28,6 +25,29 @@ trait Centralizatorable {
         ]);
 
         return $record;
+    }
+
+    public function getVisibleAttribute() {
+        return [
+            'color' => !! $this->visibility ? 'green' : 'red',
+            'icon' => !! $this->visibility ? 'mdi-check' : 'mdi-cancel',
+        ];
+    }
+
+    public function department() {
+        return $this->belongsTo(CustomerDepartment::class, 'department_id')->select(['id', 'departament']);
+    }
+
+    public static function GetQuery() {
+
+        $q = self::query();
+
+        if(config('app.platform') == 'b2b')
+        {
+            $q = $q->where('visibility', 1);
+        }
+        
+        return $q;
     }
 
 }

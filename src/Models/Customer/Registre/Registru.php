@@ -85,31 +85,8 @@ class Registru extends Model {
         ],
     ];
     
-    public function getVisibleAttribute() {
-        return [
-            'color' => !! $this->visibility ? 'green' : 'red',
-            'icon' => !! $this->visibility ? 'mdi-check' : 'mdi-cancel',
-        ];
+    public static function GetTip($input) {
+        return TipRegistru::find($input['register_id']);
     }
-
-    public function department() {
-        return $this->belongsTo(CustomerDepartment::class, 'department_id')->select(['id', 'departament']);
-    }
-
     
-
-    public static function GetQuery() {
-
-        $q = self::query();
-
-        if(config('app.platform') == 'b2b')
-        {
-            $q = $q->where('visibility', 1);
-        }
-        
-        return $q;
-    }
-
-    
-
 }
