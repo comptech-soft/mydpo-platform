@@ -169,61 +169,6 @@ class TipRegistru extends Model {
     //     return $this->hasMany(RegistruColoana::class, 'register_id');
     // }
 
-    // public static function saveCustomerAsociere($input) {
-    //     return (new SaveCustomerAsociere($input))->Perform();
-    // }
-
-    // public static function getCustomerAsociere($input) {
-
-    //     $customer_id = $input['customer_id'];
-
-    //     $q = self::query()->leftJoin(
-
-    //         'customers-registers-asociate',
-            
-    //         function($j) use ($customer_id){
-    //             $j
-    //                 ->on('customers-registers-asociate.register_id', '=', 'registers.id')
-    //                 ->where('customers-registers-asociate.customer_id', $customer_id);
-    //         }
-
-    //     )->select([
-    //         'registers.id',
-    //         'registers.name',
-    //         'registers.type',
-    //         'registers.body',
-    //         'is_associated'
-    //     ]);
-
-    //     $types = ['registre', 'audit'];
-
-    //     $records = $q->get()->filter(function($item) use ($input, $types){
-
-    //         $visible = false;
-    //         foreach( $types as $i => $type)
-    //         {
-    //             if( $input[$type] == 1)
-    //             {
-    //                 if($item->type == $type)
-    //                 {
-    //                     $visible = true;
-    //                 }
-    //             }
-    //         }
-
-    //         return $visible;
-
-    //     });
-
-    //     if(config('app.platform') == 'b2b')
-    //     {
-    //         $records = $records->filter( function($item) {
-    //             return !! $item->is_associated;
-    //         });
-    //     }
-
-    //     return $records->toArray();
-    // }
     
     public static function GetQuery() {
         return 

@@ -171,60 +171,60 @@ class TipCentralizator extends Model {
         return (new SaveCustomerAsociere($input))->Perform();
     }
 
-    public static function getCustomerAsociere($input) {
+    // public static function getCustomerAsociere($input) {
 
-        $customer_id = $input['customer_id'];
+    //     $customer_id = $input['customer_id'];
 
-        $q = self::query()->leftJoin(
-            'customers-centralizatoare-asociere',
-            function($j) use ($customer_id){
-                $j
-                    ->on('customers-centralizatoare-asociere.centralizator_id', '=', 'centralizatoare.id')
-                    ->where('customers-centralizatoare-asociere.customer_id', $customer_id);
-            }
+    //     $q = self::query()->leftJoin(
+    //         'customers-centralizatoare-asociere',
+    //         function($j) use ($customer_id){
+    //             $j
+    //                 ->on('customers-centralizatoare-asociere.centralizator_id', '=', 'centralizatoare.id')
+    //                 ->where('customers-centralizatoare-asociere.customer_id', $customer_id);
+    //         }
 
-        )->select([
-            'centralizatoare.id',
-            'centralizatoare.name',
-            'centralizatoare.category_id',
-            'centralizatoare.description',
-            'centralizatoare.on_centralizatoare_page',
-            'centralizatoare.on_gap_page',
-            'is_associated'
-        ]);
+    //     )->select([
+    //         'centralizatoare.id',
+    //         'centralizatoare.name',
+    //         'centralizatoare.category_id',
+    //         'centralizatoare.description',
+    //         'centralizatoare.on_centralizatoare_page',
+    //         'centralizatoare.on_gap_page',
+    //         'is_associated'
+    //     ]);
 
-        $records = $q->get()->filter(function($item) use ($input){
+    //     $records = $q->get()->filter(function($item) use ($input){
 
-            if($input['centralizatoare'] == 1 && $item->on_centralizatoare_page == 1)
-            {
-                return TRUE;
-            }
+    //         if($input['centralizatoare'] == 1 && $item->on_centralizatoare_page == 1)
+    //         {
+    //             return TRUE;
+    //         }
 
-            if($input['gap'] == 1 && $item->on_gap_page == 1)
-            {
-                return TRUE;
-            }
+    //         if($input['gap'] == 1 && $item->on_gap_page == 1)
+    //         {
+    //             return TRUE;
+    //         }
 
-            return FALSE;
-        });
+    //         return FALSE;
+    //     });
 
-        if(config('app.platform') == 'b2b')
-        {
-            $records = $records->filter( function($item) {
+    //     if(config('app.platform') == 'b2b')
+    //     {
+    //         $records = $records->filter( function($item) {
 
-                return !! $item->is_associated;
-            });
-        }
+    //             return !! $item->is_associated;
+    //         });
+    //     }
 
-        $result = $records->toArray(); 
+    //     $result = $records->toArray(); 
 
-        foreach($result as $i => $item)
-        {
-            $result[$i]['count'] = CustomerCentralizator::where('customer_id', $customer_id)->where('centralizator_id', $item['id'])->count();
-        }
+    //     foreach($result as $i => $item)
+    //     {
+    //         $result[$i]['count'] = CustomerCentralizator::where('customer_id', $customer_id)->where('centralizator_id', $item['id'])->count();
+    //     }
 
-        return $result;
-    }
+    //     return $result;
+    // }
 
 
 
