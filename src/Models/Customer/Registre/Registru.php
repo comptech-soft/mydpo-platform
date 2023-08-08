@@ -7,13 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 use MyDpo\Traits\Numberable;
+use MyDpo\Traits\Customer\Centralizatoare\Centralizatorable;
 
 use MyDpo\Models\Customer\CustomerDepartment;
 use MyDpo\Models\Livrabile\TipRegistru;
 
 class Registru extends Model {
 
-    use Itemable, Actionable, Numberable;
+    use Itemable, Actionable, Numberable, Centralizatorable;
 
     protected $table = 'customers-registers';
 
@@ -95,30 +96,7 @@ class Registru extends Model {
         return $this->belongsTo(CustomerDepartment::class, 'department_id')->select(['id', 'departament']);
     }
 
-    public static function doInsert($input, $record) {
-
-        
-        $tip = TipRegistru::find($input['register_id']);
-
-       
-        $record = self::create([
-            ...$input,
-
-            'columns_tree' => $tip->columns_tree,
-            'columns_items' => $tip->columns_items,
-            'columns_with_values' => $tip->columns_with_values,
-
-            'nr_crt_column_id' => $tip->has_nr_crt_column,
-            'visibility_column_id' => $tip->has_visibility_column,
-            'status_column_id' => $tip->has_status_column,
-            'department_column_id' => $tip->has_department_column,
-            'files_column_id' => $tip->has_files_column,
-
-            'current_columns' => $tip->columns->toArray(), 
-        ]);
-
-        return $record;
-    }
+    
 
     public static function GetQuery() {
 
