@@ -5,7 +5,7 @@ namespace MyDpo\Models\Customer;
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
-use MyDpo\Models\Livrabile\PlanConformare;
+use MyDpo\Models\Livrabile\Planconformare;
 use MyDpo\Traits\Exportable;
 use MyDpo\Exports\CustomerPlanconformare\Exporter;
 
