@@ -287,7 +287,7 @@ class TipCentralizator extends Model {
             LEFT JOIN `customers-centralizatoare-asociere`
             ON (`centralizatoare`.id = `customers-centralizatoare-asociere`.centralizator_id) AND (" . $customer_id . " = `customers-centralizatoare-asociere`.customer_id)
             LEFT JOIN `categories`
-            ON `categories`.id = `registers`.category_id
+            ON `categories`.id = `centralizatoare`.category_id
             LEFT JOIN 
                 (
                     SELECT
