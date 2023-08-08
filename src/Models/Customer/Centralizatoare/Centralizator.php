@@ -3,18 +3,20 @@
 namespace MyDpo\Models\Customer\Centralizatoare;
 
 use Illuminate\Database\Eloquent\Model;
+
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 use MyDpo\Traits\Numberable;
-use MyDpo\Models\Customer\CustomerDepartment;
 
+use MyDpo\Models\Customer\CustomerDepartment;
+use MyDpo\Models\Livrabile\TipCentralizator;
 // 
 // use MyDpo\Traits\Exportable;
 // use MyDpo\Traits\Importable;
 
 // use MyDpo\Performers\Customer\Centralizatoare\Centralizator\SaveSettings;
 // 
-// use MyDpo\Models\Livrabile\TipCentralizator;
+
 // use MyDpo\Models\Livrabile\TipCentralizatorColoana;
 // use MyDpo\Exports\CustomerCentralizator\Exporter;
 // use MyDpo\Imports\CustomerCentralizator\Importer;
