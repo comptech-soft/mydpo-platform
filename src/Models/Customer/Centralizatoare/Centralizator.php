@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 use MyDpo\Traits\Numberable;
+use MyDpo\Traits\Customer\Centralizatoare\Centralizatorable;
 
 use MyDpo\Models\Livrabile\TipCentralizator;
 // 
@@ -26,7 +27,7 @@ use MyDpo\Models\Livrabile\TipCentralizator;
 
 class Centralizator extends Model {
 
-    use Itemable, Actionable, Numberable; //, Exportable, Importable;
+    use Itemable, Actionable, Numberable, Centralizatorable; //, Exportable, Importable;
 
     protected $table = 'customers-centralizatoare';
 
