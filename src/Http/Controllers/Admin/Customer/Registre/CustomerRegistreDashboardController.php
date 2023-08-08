@@ -10,17 +10,23 @@ use MyDpo\Models\Customer;
 class CustomerRegistreDashboardController extends Controller {
     
     public function index($customer_id, Request $r) {
-
         
+        if(! ($customer =  Customer::find($customer_id)) )
+        {
+            return redirect('admin/clienti');
+        }
+
         return Index::View(
             styles: ['css/app.css'],
             scripts: ['apps/customer/registre-dashboard/index.js'],
             payload: [
                 'customer_id' => $customer_id,
-                'customer' => Customer::find($customer_id),
+                'customer' => $customer,
+                'page'=> $page,
                 
             ],
-        );        
+        );     
+
     }
 
     // public function index($customer_id, Request $r) {
