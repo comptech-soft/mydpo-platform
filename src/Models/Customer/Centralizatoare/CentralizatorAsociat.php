@@ -33,7 +33,7 @@ class CentralizatorAsociat extends Model {
     public static function doSaveasociere($input, $record) {
         return self::UpdateOrCreateAsociere([
             ...$input,
-            'centralizator_id' => $input['centralizator_id'],
+            'centralizator_id' => $input['id'],
         ]);
     }
 
