@@ -40,12 +40,8 @@ class CustomerTipRegistruController extends Controller {
         return Registru::getRecords($r->all());
     }
 
-    // public function doAction($action, Request $r) {
-    //     return CustomerRegister::doAction($action, $r->all());
-    // }
-
-    // public function getNextNumber(Request $r) {
-    //     return CustomerRegister::getNextNumber($r->all());
-    // }
+    public function doAction($action, Request $r) {
+        return Registru::doAction($action, $r->all());
+    }
 
 }
