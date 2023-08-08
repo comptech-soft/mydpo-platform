@@ -3,9 +3,12 @@
 namespace MyDpo\Models\Customer\Registre;
 
 use Illuminate\Database\Eloquent\Model;
+use MyDpo\Traits\Actionable;
 
-class CustomerRegistruAsociat extends Model {
+class RegistruAsociat extends Model {
 
+    use Actionable;
+    
     protected $table = 'customers-registers-asociate';
 
     protected $casts = [
