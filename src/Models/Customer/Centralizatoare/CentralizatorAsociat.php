@@ -3,9 +3,12 @@
 namespace MyDpo\Models\Customer\Centralizatoare;
 
 use Illuminate\Database\Eloquent\Model;
+use MyDpo\Traits\Actionable;
 
 class CentralizatorAsociat extends Model {
 
+    use Actionable;
+    
     protected $table = 'customers-centralizatoare-asociere';
 
     protected $casts = [
