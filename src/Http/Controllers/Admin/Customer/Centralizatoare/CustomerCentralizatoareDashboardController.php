@@ -10,15 +10,29 @@ use MyDpo\Models\Livrabile\TipCentralizator;
 
 class CustomerCentralizatoareDashboardController extends Controller {
     
-    public function index($customer_id, Request $r) {
+    public function index($page, $customer_id, Request $r) {
+
+
+        if(! ($customer =  Customer::find($customer_id)) )
+        {
+            return redirect('admin/clienti');
+        }
+
+        if(! in_array($page, ['centralizatoare', 'gap']))
+        {
+            return redirect('/');
+        }
+
+        $items = TipCentralizator::GetDashboardItems($page, $customer_id);
+
         return Index::View(
             styles: ['css/app.css'],
             scripts: ['apps/customer/centralizatoare-dashboard/index.js'],
             payload: [
                 'customer_id' => $customer_id,
-                'customer' => Customer::find($customer_id),
-                'gap' => 0,
-                'centralizatoare' => 1,
+                'customer' => $customer,
+                'page' => $page,
+                'tipuri' => $items,
             ],
         );        
     }
