@@ -229,27 +229,27 @@ class TipCentralizator extends Model {
 
 
 
-    // private static function CreateColumnChildren($column, $current_columns) {
+    private static function CreateColumnChildren($column, $current_columns) {
 
-    //     $children = [];
+        $children = [];
 
-    //     foreach($current_columns as $i => $item)
-    //     {
-    //         if(!! $item['group_id'] && ($item['group_id'] == $column['id']))
-    //         {
-    //             $children[] = $item;
-    //         }
-    //     }
+        foreach($current_columns as $i => $item)
+        {
+            if(!! $item['group_id'] && ($item['group_id'] == $column['id']))
+            {
+                $children[] = $item;
+            }
+        }
 
-    //     return collect($children)
-    //         ->map(function($item) {
-    //             $item = collect($item)->only(['id', 'order_no', 'is_group', 'group_id', 'caption', 'type', 'width', 'props'])->toArray();
-    //             return $item;
-    //         })
-    //         ->sortBy('order_no')
-    //         ->values()
-    //         ->toArray();
-    // }
+        return collect($children)
+            ->map(function($item) {
+                $item = collect($item)->only(['id', 'order_no', 'is_group', 'group_id', 'caption', 'type', 'width', 'props'])->toArray();
+                return $item;
+            })
+            ->sortBy('order_no')
+            ->values()
+            ->toArray();
+    }
 
     public static function GetRules($action, $input) {
         
