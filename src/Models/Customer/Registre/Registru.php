@@ -76,7 +76,30 @@ class Registru extends Model {
         return $this->belongsTo(CustomerDepartment::class, 'department_id')->select(['id', 'departament']);
     }
 
-    
+    public static function doInsert($input, $record) {
+
+        dd($input, $record);
+        
+        $tip_centralizator = TipCentralizator::find($input['centralizator_id']);
+        
+        $record = self::create([
+            ...$input,
+
+            'columns_tree' => $tip_centralizator->columns_tree,
+            'columns_items' => $tip_centralizator->columns_items,
+            'columns_with_values' => $tip_centralizator->columns_with_values,
+
+            'nr_crt_column_id' => $tip_centralizator->has_nr_crt_column,
+            'visibility_column_id' => $tip_centralizator->has_visibility_column,
+            'status_column_id' => $tip_centralizator->has_status_column,
+            'department_column_id' => $tip_centralizator->has_department_column,
+            'files_column_id' => $tip_centralizator->has_files_column,
+
+            'current_columns' => $tip_centralizator->columns->toArray(), 
+        ]);
+
+        return $record;
+    }
 
     public static function GetQuery() {
 
