@@ -10,7 +10,9 @@ trait Numberable {
         
         $instance = new (__CLASS__)();
 
-        dd($instance);
+        $table = $instance->getTable();
+
+        dd($table, $input, $instance->numberable);
 
         return 7;
     }
@@ -23,7 +25,7 @@ trait Numberable {
 
         
 
-        $table = $instance->getTable();
+        
 
         $sql = "
             SELECT 
