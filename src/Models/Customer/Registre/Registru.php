@@ -3,9 +3,12 @@
 namespace MyDpo\Models\Customer\Registre;
 
 use Illuminate\Database\Eloquent\Model;
-use MyDpo\Models\Customer\CustomerDepartment;
+
+use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 use MyDpo\Traits\Numberable;
+
+use MyDpo\Models\Customer\CustomerDepartment;
 
 class Registru extends Model {
 
