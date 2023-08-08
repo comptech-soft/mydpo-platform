@@ -94,6 +94,10 @@ class Centralizator extends Model {
         return $this->belongsTo(CustomerDepartment::class, 'department_id')->select(['id', 'departament']);
     }
 
+    public static function doGetnextnumber($input, $record) {
+        dd($input, $record);
+    }
+
     public static function GetQuery() {
 
         $q = self::query();
