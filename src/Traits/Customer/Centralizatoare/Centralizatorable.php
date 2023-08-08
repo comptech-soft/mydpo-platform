@@ -2,6 +2,8 @@
 
 namespace MyDpo\Traits\Customer\Centralizatoare;
 
+use MyDpo\Models\Customer\CustomerDepartment;
+
 trait Centralizatorable {
 
     public static function doInsert($input, $record) {
