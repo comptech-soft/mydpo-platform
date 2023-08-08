@@ -37,13 +37,17 @@ class CustomerRegistreDashboardController extends Controller {
 
     }
 
+    public function doAction($action, Request $r) {
+
+        dd($action, $r->all());
+        return CustomerRegister::doAction($action, $r->all());
+    }
+
+
     // public function getItems(Request $r) {
     //     return CustomerRegister::getItems($r->all());
     // }
 
-    // public function doAction($action, Request $r) {
-    //     return CustomerRegister::doAction($action, $r->all());
-    // }
 
     // public function getNextNumber(Request $r) {
     //     return CustomerRegister::getNextNumber($r->all());
