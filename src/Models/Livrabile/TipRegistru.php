@@ -289,7 +289,33 @@ class TipRegistru extends Model {
     }
 
     public static function GetDashboardItems($page, $customer_id) {
-        dd($page, $customer_id);
+        $sql = "
+            SELECT 
+                `registers`.`id`,
+                `registers`.`name`,
+                `categories`.`name` AS category,
+                COALESCE(is_associated, 0) AS is_associated,
+                v_count_registre.count_registre
+            FROM `registers`
+            LEFT JOIN `customers-registers-asociate`
+            ON (`registers`.id = `customers-registers-asociate`.register_id) AND (" . $customer_id . " = `customers-registers-asociate`.customer_id)
+            LEFT JOIN `categories`
+            ON `categories`.id = `registers`.category_id
+            LEFT JOIN 
+                (
+                    SELECT
+                        register_id,
+                        COUNT(*) AS count_registre
+                    FROM `customers-registers`
+                    WHERE customer_id = " . $customer_id . "
+                    GROUP BY 1
+                )
+                v_count_registre
+            ON `registers`.`id` = v_count_registre.register_id
+            WHERE `registers`." . ($page == 'registre' ? 'on_registre_page ' : 'on_audit_page ') . "> 0
+        ";
+
+        return \DB::select($sql);
     }
 
 }

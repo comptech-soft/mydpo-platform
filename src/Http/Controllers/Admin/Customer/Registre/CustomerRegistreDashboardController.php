@@ -17,9 +17,12 @@ class CustomerRegistreDashboardController extends Controller {
             return redirect('admin/clienti');
         }
 
-        $items = TipRegistru::GetDashboardItems($page, $customer_id);
+        if(! in_array($page, ['registre', 'gap']))
+        {
+            return redirect('/');
+        }
 
-        dd($items);
+        $items = TipRegistru::GetDashboardItems($page, $customer_id);
 
         return Index::View(
             styles: ['css/app.css'],
@@ -27,8 +30,8 @@ class CustomerRegistreDashboardController extends Controller {
             payload: [
                 'customer_id' => $customer_id,
                 'customer' => $customer,
-                'page'=> $page,
-                
+                'page' => $page,
+                'items' => $items,
             ],
         );     
 
