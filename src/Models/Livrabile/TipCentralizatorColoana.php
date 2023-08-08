@@ -5,7 +5,7 @@ namespace MyDpo\Models\Livrabile;
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
-use MyDpo\Traits\Centralizatorcolumnable;
+use MyDpo\Traits\Admin\Livrabile\Tipuri\Centralizatorcolumnable;
 use MyDpo\Traits\Reorderable;
 
 class TipCentralizatorColoana extends Model {

@@ -1,9 +1,22 @@
 <?php
 
-namespace MyDpo\Traits;
+namespace MyDpo\Traits\Admin\Livrabile\Tipuri;
 
 trait Centralizatorable { 
 
+    protected $with = [
+        'category'
+    ];
+
+    protected $appends = [
+        'bool_col_nrcrt',
+        'bool_col_visibility',
+        'bool_col_status',
+        'bool_col_files',
+        'bool_col_department'
+    ];
+
+    
     /**
      * Definirea coloanelor implicite
      */

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 // use Illuminate\Validation\Rule;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
-use MyDpo\Traits\Centralizatorable;
+use MyDpo\Traits\Admin\Livrabile\Tipuri\Centralizatorable;
 use MyDpo\Scopes\NotdeletedScope;
 use MyDpo\Rules\Registru\UniqueName;
 // use MyDpo\Performers\Registru\SaveCustomerAsociere;

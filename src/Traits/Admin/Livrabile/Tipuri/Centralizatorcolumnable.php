@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Traits;
+namespace MyDpo\Traits\Admin\Livrabile\Tipuri;
 
 trait Centralizatorcolumnable { 
 
