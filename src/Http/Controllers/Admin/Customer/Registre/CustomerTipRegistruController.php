@@ -31,7 +31,7 @@ class CustomerTipRegistruController extends Controller {
                 'tip_id' => $register_id,
                 'customer' => $customer,
                 'tip' => $tip,
-                'model' => 'Registre',
+                'model' => 'Customerregistre',
             ],
         );        
     }

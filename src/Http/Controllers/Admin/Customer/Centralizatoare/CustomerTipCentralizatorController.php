@@ -31,7 +31,7 @@ class CustomerTipCentralizatorController extends Controller {
                 'tip_id' => $centralizator_id,
                 'customer' => $customer,
                 'tip' => $tip,
-                'model' => 'Centralizatoare',
+                'model' => 'Customercentralizatoare',
             ],
         );    
 
