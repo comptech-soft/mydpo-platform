@@ -3,13 +3,12 @@
 namespace MyDpo\Models\Livrabile;
 
 use Illuminate\Database\Eloquent\Model;
+
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 use MyDpo\Traits\Admin\Livrabile\Tipuri\Centralizatorable;
-use MyDpo\Scopes\NotdeletedScope;
 
-// use MyDpo\Performers\Customer\Centralizatoare\Dashboard\SaveCustomerAsociere;
-// use MyDpo\Models\Customer\Centralizatoare\CustomerCentralizator;
+use MyDpo\Scopes\NotdeletedScope;
 
 class TipCentralizator extends Model {
 
@@ -58,7 +57,18 @@ class TipCentralizator extends Model {
         'deleted_by',
     ];
 
-    
+    protected $with = [
+        'category'
+    ];
+
+    protected $appends = [
+        'bool_col_nrcrt',
+        'bool_col_visibility',
+        'bool_col_status',
+        'bool_col_files',
+        'bool_col_department'
+    ];
+
     protected $columnsDefinition = [
         'model' => \MyDpo\Models\Livrabile\TipCentralizatorColoana::class,
         'foreign_key' => 'centralizator_id',
@@ -74,56 +84,6 @@ class TipCentralizator extends Model {
 
     public function columns() {
         return $this->hasMany(TipCentralizatorColoana::class, 'centralizator_id');
-    }
-
-    public function getColumnsTreeAttribute() {
-        $columns = collect($this->columns)
-            ->filter(function($column){
-                return ! $column['group_id'];
-            })
-            ->map(function($item) {
-                $item = collect($item)->only(['id', 'order_no', 'is_group', 'group_id', 'caption', 'type', 'width', 'props'])->toArray();
-                return [
-                    ...$item,
-                    'children' => [],
-                ];
-            })
-            ->sortBy('order_no')
-            ->values()
-            ->toArray();
-
-        foreach($columns as $i => $column)
-        {
-            $columns[$i]['children'] = self::CreateColumnChildren($column, $this->columns);
-        }
-        return $columns;
-    }
-    
-    public function getColumnsItemsAttribute() {
-        $list = [];
-        foreach($this->columns_tree as $i => $node)
-        {
-            if( count($node['children']) == 0)
-            {
-                $list[] = $node;
-            }
-
-            foreach($node['children'] as $j => $child)
-            {
-                $list[] = [
-                    ...$child,
-                    'children' => [],
-                ];
-            }
-        }
-        return $list;
-    }
-
-    public function getColumnsWithValuesAttribute() {   
-        $result = collect($this->columns_items)->filter( function($item) {
-            return count($item['children']) == 0;
-        });
-        return $result->toArray();
     }
     
     public static function GetQuery() {
@@ -156,90 +116,7 @@ class TipCentralizator extends Model {
                 $q->whereNull('group_id');
             }]);
     }
-
-    // public static function saveCustomerAsociere($input) {
-    //     return (new SaveCustomerAsociere($input))->Perform();
-    // }
-
-    // public static function getCustomerAsociere($input) {
-
-    //     $customer_id = $input['customer_id'];
-
-    //     $q = self::query()->leftJoin(
-    //         'customers-centralizatoare-asociere',
-    //         function($j) use ($customer_id){
-    //             $j
-    //                 ->on('customers-centralizatoare-asociere.centralizator_id', '=', 'centralizatoare.id')
-    //                 ->where('customers-centralizatoare-asociere.customer_id', $customer_id);
-    //         }
-
-    //     )->select([
-    //         'centralizatoare.id',
-    //         'centralizatoare.name',
-    //         'centralizatoare.category_id',
-    //         'centralizatoare.description',
-    //         'centralizatoare.on_centralizatoare_page',
-    //         'centralizatoare.on_gap_page',
-    //         'is_associated'
-    //     ]);
-
-    //     $records = $q->get()->filter(function($item) use ($input){
-
-    //         if($input['centralizatoare'] == 1 && $item->on_centralizatoare_page == 1)
-    //         {
-    //             return TRUE;
-    //         }
-
-    //         if($input['gap'] == 1 && $item->on_gap_page == 1)
-    //         {
-    //             return TRUE;
-    //         }
-
-    //         return FALSE;
-    //     });
-
-    //     if(config('app.platform') == 'b2b')
-    //     {
-    //         $records = $records->filter( function($item) {
-
-    //             return !! $item->is_associated;
-    //         });
-    //     }
-
-    //     $result = $records->toArray(); 
-
-    //     foreach($result as $i => $item)
-    //     {
-    //         $result[$i]['count'] = CustomerCentralizator::where('customer_id', $customer_id)->where('centralizator_id', $item['id'])->count();
-    //     }
-
-    //     return $result;
-    // }
-
-
-
-    private static function CreateColumnChildren($column, $current_columns) {
-
-        $children = [];
-
-        foreach($current_columns as $i => $item)
-        {
-            if(!! $item['group_id'] && ($item['group_id'] == $column['id']))
-            {
-                $children[] = $item;
-            }
-        }
-
-        return collect($children)
-            ->map(function($item) {
-                $item = collect($item)->only(['id', 'order_no', 'is_group', 'group_id', 'caption', 'type', 'width', 'props'])->toArray();
-                return $item;
-            })
-            ->sortBy('order_no')
-            ->values()
-            ->toArray();
-    }
-
+    
     public static function GetRules($action, $input) {
         
         if( ! in_array($action, ['insert', 'update']) )

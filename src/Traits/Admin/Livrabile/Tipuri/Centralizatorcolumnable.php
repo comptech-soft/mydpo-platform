@@ -33,6 +33,8 @@ trait Centralizatorcolumnable {
         return array_key_exists($this->type, $types) ? $types[$this->type] : $this->type;
     }
 
+
+
     public static function doInsert($input, $record) {
 
         if( ! array_key_exists('props', $input) )

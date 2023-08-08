@@ -2,20 +2,7 @@
 
 namespace MyDpo\Traits\Admin\Livrabile\Tipuri;
 
-trait Centralizatorable { 
-
-    protected $with = [
-        'category'
-    ];
-
-    protected $appends = [
-        'bool_col_nrcrt',
-        'bool_col_visibility',
-        'bool_col_status',
-        'bool_col_files',
-        'bool_col_department'
-    ];
-
+trait Centralizatorable {
     
     /**
      * Definirea coloanelor implicite
@@ -114,6 +101,78 @@ trait Centralizatorable {
 
     public function getBoolColDepartmentAttribute() {
         return !! $this->has_department_column ? 1 : 0;
+    }
+
+    public function getColumnsTreeAttribute() {
+        $columns = collect($this->columns)
+            ->filter(function($column){
+                return ! $column['group_id'];
+            })
+            ->map(function($item) {
+                $item = collect($item)->only(['id', 'order_no', 'is_group', 'group_id', 'caption', 'type', 'width', 'props'])->toArray();
+                return [
+                    ...$item,
+                    'children' => [],
+                ];
+            })
+            ->sortBy('order_no')
+            ->values()
+            ->toArray();
+
+        foreach($columns as $i => $column)
+        {
+            $columns[$i]['children'] = self::CreateColumnChildren($column, $this->columns);
+        }
+        return $columns;
+    }
+
+    public function getColumnsItemsAttribute() {
+        $list = [];
+        foreach($this->columns_tree as $i => $node)
+        {
+            if( count($node['children']) == 0)
+            {
+                $list[] = $node;
+            }
+
+            foreach($node['children'] as $j => $child)
+            {
+                $list[] = [
+                    ...$child,
+                    'children' => [],
+                ];
+            }
+        }
+        return $list;
+    }
+
+    public function getColumnsWithValuesAttribute() {   
+        $result = collect($this->columns_items)->filter( function($item) {
+            return count($item['children']) == 0;
+        });
+        return $result->toArray();
+    }
+
+    private static function CreateColumnChildren($column, $current_columns) {
+
+        $children = [];
+
+        foreach($current_columns as $i => $item)
+        {
+            if(!! $item['group_id'] && ($item['group_id'] == $column['id']))
+            {
+                $children[] = $item;
+            }
+        }
+
+        return collect($children)
+            ->map(function($item) {
+                $item = collect($item)->only(['id', 'order_no', 'is_group', 'group_id', 'caption', 'type', 'width', 'props'])->toArray();
+                return $item;
+            })
+            ->sortBy('order_no')
+            ->values()
+            ->toArray();
     }
 
     /**
