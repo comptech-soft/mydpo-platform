@@ -4,7 +4,7 @@ namespace MyDpo\Http\Controllers\Admin\Customer\Centralizatorable;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-// use MyDpo\Core\Http\Response\Index;
+use MyDpo\Core\Http\Response\Index;
 use MyDpo\Models\Customer;
 // use MyDpo\Models\Livrabile\TipCentralizator;
 // use MyDpo\Models\Customer\Centralizatoare\CentralizatorAsociat;
@@ -33,7 +33,7 @@ class CentralizatorableRowsController extends Controller {
 
         return Index::View(
             styles: ['css/app.css'],
-            scripts: ['apps/customer/customers-centralizatoare-list/index.js'],
+            scripts: ['apps/customer/centralizatorable-rows/index.js'],
             payload: [
                 'model' => $model,
                 'customer_id' => $customer_id,
