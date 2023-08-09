@@ -9,13 +9,13 @@ use Illuminate\Http\Request;
 // use MyDpo\Models\Livrabile\TipCentralizator;
 // use MyDpo\Models\Customer\Centralizatoare\CentralizatorAsociat;
 
-class CustomerCentralizatoareDashboardController extends Controller {
+class CentralizatorableRowsController extends Controller {
 
 
     public function index($model, $customer_id, $tip_id, $document_id, Request $r) {
         
         dd($model, $customer_id, $tip_id, $document_id);
-        
+
         // if( ! ($customer = Customer::find($customer_id)) )
         // {
         //     return redirect('/');
