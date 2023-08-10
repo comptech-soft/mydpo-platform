@@ -8,8 +8,8 @@ use MyDpo\Core\Http\Response\Index;
 use MyDpo\Models\Customer;
 use MyDpo\Models\Livrabile\TipCentralizator;
 use MyDpo\Models\Livrabile\TipRegistru;
-
-// use MyDpo\Models\Customer\Centralizatoare\CentralizatorAsociat;
+use MyDpo\Models\Customer\Centralizatoare\Centralizator;
+use MyDpo\Models\Customer\Registre\Registru;
 
 class CentralizatorableRowsController extends Controller {
 
@@ -32,7 +32,11 @@ class CentralizatorableRowsController extends Controller {
             return redirect('/');
         }
 
-        // dd($model, $customer_id, $tip_id, $document_id);
+        $document = ($model == 'centralizatoare' ? Centralizator::find($document_id) : Registru::find($document_id) );
+        if( ! $tip )
+        {
+            return redirect('/');
+        }
 
         return Index::View(
             styles: ['css/app.css'],
@@ -43,6 +47,8 @@ class CentralizatorableRowsController extends Controller {
                 'customer' => $customer,
                 'tip_id' => $tip_id,
                 'tip' => $tip,
+                'document_id' => $document_id,
+                'document' => $document
             ],
         );    
 
