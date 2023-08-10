@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
 use MyDpo\Models\Customer;
-// use MyDpo\Models\Livrabile\TipCentralizator;
+use MyDpo\Models\Livrabile\TipCentralizator;
+use MyDpo\Models\Livrabile\TipRegistru;
+
 // use MyDpo\Models\Customer\Centralizatoare\CentralizatorAsociat;
 
 class CentralizatorableRowsController extends Controller {
@@ -24,10 +26,11 @@ class CentralizatorableRowsController extends Controller {
             return redirect('/');
         }
 
-        // if( ! ($tip = TipCentralizator::find($centralizator_id)) )
-        // {
-        //     return redirect('/');
-        // }
+        $tip = ($model == 'centralizatoare' ? TipCentralizator::find($tip_id) : TipRegistru::find($tip_id) );
+        if( ! $tip )
+        {
+            return redirect('/');
+        }
 
         // dd($model, $customer_id, $tip_id, $document_id);
 
@@ -38,10 +41,8 @@ class CentralizatorableRowsController extends Controller {
                 'model' => $model,
                 'customer_id' => $customer_id,
                 'customer' => $customer,
-                // 'tip_id' => $centralizator_id,
-                
-                // 'tip' => $tip,
-                
+                'tip_id' => $tip_id,
+                'tip' => $tip,
             ],
         );    
 
