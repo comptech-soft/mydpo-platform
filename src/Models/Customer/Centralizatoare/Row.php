@@ -177,5 +177,13 @@ class Row extends Model {
     // public static function setRowsVisibility($input) {
     //     return (new SetRowsVisibility($input))->Perform();
     // }
+
+    public static function PrepareActionInput($action, $input) {
+
+        if( in_array($action, ['insert']) )
+        {
+            dd(__METHOD__, $input);
+        }
+    }
     
 }
