@@ -60,4 +60,9 @@ trait Rowable {
 
         return self::find($row->id);
     }
+
+    public static function doUpdate($input, $record) {
+
+        dd($input, $record);
+    }
 }
