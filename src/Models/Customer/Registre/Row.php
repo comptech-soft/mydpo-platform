@@ -3,6 +3,10 @@
 namespace MyDpo\Models\Customer\Registre;
 
 use Illuminate\Database\Eloquent\Model;
+
+use MyDpo\Traits\Actionable;
+
+use MyDpo\Traits\Customer\Centralizatoare\Rowable;
 // use MyDpo\Helpers\Performers\Datatable\DoAction;
 // use MyDpo\Performers\CustomerRegistruRow\ChangeStatus;
 // use MyDpo\Performers\CustomerRegistruRow\ChangeStare;
@@ -212,5 +216,19 @@ class Row extends Model {
     // public static function deleteFile($input) {
     //     return (new DeleteFile($input))->Perform();
     // }
+
+    public static function PrepareActionInput($action, $input) {
+
+        if( in_array($action, ['insert']) )
+        {
+            $input = [
+                ...$input,
+                'register_id' => $input['tip_id'],
+                'customer_register_id' => $input['document_id'],
+            ];
+        }
+
+        return $input;
+    }
 
 }
