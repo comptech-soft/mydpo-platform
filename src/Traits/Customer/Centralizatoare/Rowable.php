@@ -102,7 +102,27 @@ trait Rowable {
 
         if($input['model'] == 'centralizatoare')
         {
-            $rows = CentralizatorRow::whereIn('id', $input['selected_rows'])->update(['status' => $input['status']]);
+            $rows = CentralizatorRow::whereIn('id', $input['selected_rows'])->update([
+                'status' => $input['status'],
+                'tooltip' => 'Setat ' . $input['status'] . ' de ' . \Auth::user()->full_name . ' la ' . \Carbon\Carbon::now()->format('d-m-Y'),
+            ]);
+        }
+
+        return $rows;
+    }
+
+    public static function doSetvisibility($input, $record) {
+
+        dd($input, $record);
+
+        $statuses = collect($input['statuses'])->pluck('text', 'value')->toArray();
+
+        if($input['model'] == 'centralizatoare')
+        {
+            $rows = CentralizatorRow::whereIn('id', $input['selected_rows'])->update([
+                'status' => $input['status'],
+                'tooltip' => 'Setat ' . $input['status'] . ' de ' . \Auth::user()->full_name . ' la ' . \Carbon\Carbon::now()->format('d-m-Y'),
+            ]);
         }
 
         return $rows;
