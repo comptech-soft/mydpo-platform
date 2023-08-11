@@ -40,8 +40,6 @@ class CentralizatorableRowsController extends Controller {
             return redirect('/');
         }
 
-        dd($document);
-
         return Index::View(
             styles: ['css/app.css'],
             scripts: ['apps/customer/centralizatorable-rows/index.js'],

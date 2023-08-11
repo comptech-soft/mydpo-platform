@@ -36,6 +36,10 @@ trait Centralizatorable {
         ];
     }
 
+    public function getTableHeadersAttribute() {
+        return $this->columns_tree;
+    }
+    
     public function department() {
         return $this->belongsTo(CustomerDepartment::class, 'department_id')->select(['id', 'departament']);
     }
