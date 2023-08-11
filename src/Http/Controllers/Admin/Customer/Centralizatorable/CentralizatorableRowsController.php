@@ -55,6 +55,14 @@ class CentralizatorableRowsController extends Controller {
         );
     }
 
+    public function getCentralizatorRows(Request $r) {
+        return CentralizatorRow::getRecords($r->all());
+    }
+
+    public function getRegistruRows(Request $r) {
+        return RegistruRow::getRecords($r->all());
+    }
+
     public function doAction($action, Request $r) {
 
         if($r->model == 'centralizatoare')
