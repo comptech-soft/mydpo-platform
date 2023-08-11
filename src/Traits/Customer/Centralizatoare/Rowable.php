@@ -85,6 +85,6 @@ trait Rowable {
             }
         }
 
-        return self::find($row->id);
+        return self::find($record->id);
     }
 }
