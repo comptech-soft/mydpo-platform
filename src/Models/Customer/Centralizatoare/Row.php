@@ -53,9 +53,9 @@ class Row extends Model {
         'tooltip',
     ];
 
-    // protected $appends = [
-    //     'human_status',
-    // ];
+    protected $appends = [
+        'human_status',
+    ];
 
     // protected $with = [
     //     'rowvalues',
