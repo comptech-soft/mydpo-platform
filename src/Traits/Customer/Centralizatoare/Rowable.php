@@ -87,4 +87,8 @@ trait Rowable {
 
         return self::find($record->id);
     }
+
+    public static function doDelete($input, $record) {
+        dd($input, $record);
+    }
 }
