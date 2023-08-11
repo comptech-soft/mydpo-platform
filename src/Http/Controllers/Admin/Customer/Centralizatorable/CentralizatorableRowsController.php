@@ -11,6 +11,7 @@ use MyDpo\Models\Livrabile\TipRegistru;
 use MyDpo\Models\Customer\Centralizatoare\Centralizator;
 use MyDpo\Models\Customer\Registre\Registru;
 use MyDpo\Models\Customer\Centralizatoare\Row as CentralizatorRow;
+use MyDpo\Models\Customer\Registre\Row as RegistruRow;
 
 class CentralizatorableRowsController extends Controller {
 
@@ -65,7 +66,7 @@ class CentralizatorableRowsController extends Controller {
         {
             return RegistruRow::doAction($action, $r->all());
         }
-        
+
     }
 
 }
