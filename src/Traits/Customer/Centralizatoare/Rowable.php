@@ -4,7 +4,7 @@ namespace MyDpo\Traits\Customer\Centralizatoare;
 
 use MyDpo\Models\Customer\CustomerDepartment;
 use MyDpo\Models\Customer\Centralizatoare\RowValue as CentralizatorRowValue;
-
+use MyDpo\Models\Customer\Centralizatoare\Row as CentralizatorRow;
 trait Rowable {
 
     protected $statuses = [
@@ -98,6 +98,13 @@ trait Rowable {
 
     public static function doSetstatus($input, $record) {
 
-        dd($input, $record);
+        $statuses = collect($input['statuses'])->pluck('text', 'value')->toArray();
+
+        if($input['model'] == 'centralizatoare')
+        {
+            $rows = CentralizatorRow::whereIn('id', $input['selected_rows'])->update(['status' => $input['status']]);
+        }
+
+        return $rows;
     }
 }
