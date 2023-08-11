@@ -96,7 +96,7 @@ trait Rowable {
         }
     }
 
-    public function doSetstatus($input, $record) {
+    public static function doSetstatus($input, $record) {
 
         dd($input, $record);
     }
