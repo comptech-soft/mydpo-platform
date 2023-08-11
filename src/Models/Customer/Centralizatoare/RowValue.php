@@ -4,7 +4,7 @@ namespace MyDpo\Models\Customer\Centralizatoare;
 
 use Illuminate\Database\Eloquent\Model;
 
-class CustomerCentralizatorRowValue extends Model {
+class RowValue extends Model {
 
     protected $table = 'customers-centralizatoare-rows-values';
 
@@ -12,7 +12,6 @@ class CustomerCentralizatorRowValue extends Model {
         'row_id' => 'integer',
         'column_id' => 'integer',
         'props' => 'json',
-        // 'column' => 'json',
     ];
 
     protected $fillable = [

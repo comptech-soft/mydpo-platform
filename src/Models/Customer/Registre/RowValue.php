@@ -4,7 +4,7 @@ namespace MyDpo\Models\Customer\Registre;
 
 use Illuminate\Database\Eloquent\Model;
 
-class CustomerRegistruRowValue extends Model {
+class RowValue extends Model {
    
     protected $table = 'customers-registers-rows-values';
 
@@ -25,12 +25,12 @@ class CustomerRegistruRowValue extends Model {
         'updated_by'
     ];
 
-    public function row() {
-        return $this->belongsTo(CustomerRegistruRow::class, 'row_id');
-    }
+    // public function row() {
+    //     return $this->belongsTo(CustomerRegistruRow::class, 'row_id');
+    // }
 
-    public function column() {
-        return $this->belongsTo(RegistruColoana::class, 'column_id');
-    }
+    // public function column() {
+    //     return $this->belongsTo(RegistruColoana::class, 'column_id');
+    // }
     
 }
