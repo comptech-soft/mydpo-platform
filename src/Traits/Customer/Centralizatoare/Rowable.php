@@ -48,9 +48,9 @@ trait Rowable {
 
         foreach($input['rowvalues'] as $i => $rowvalueinput)
         {
-            $input['rowvalues'][$i]['row_id'] = $row->id;
+            $input['rowvalues'][$i]['row_id'] = $rowvalueinput['row_id'] = $row->id;
 
-            $input['rowvalues'][$i]['column'] = $rowvalueinput['type'];
+            $input['rowvalues'][$i]['column'] = $rowvalueinput['column'] = $rowvalueinput['type'];
 
             if($input['model'] == 'centralizatoare')
             {
