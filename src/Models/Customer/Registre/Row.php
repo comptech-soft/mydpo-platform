@@ -40,6 +40,7 @@ class Row extends Model {
         'register_id',
         'customer_id',
         'departament_id',
+        'department_id',
         'order_no',
         'status',
         'props',
