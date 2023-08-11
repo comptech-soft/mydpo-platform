@@ -150,7 +150,7 @@ class Row extends Model {
 
     public static function PrepareActionInput($action, $input) {
 
-        if( in_array($action, ['insert']) )
+        if( in_array($action, ['insert', 'update']) )
         {
             $input = [
                 ...$input,
