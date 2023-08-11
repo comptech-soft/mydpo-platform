@@ -46,7 +46,6 @@ trait Centralizatorcolumnable {
         {
             $input = [
                 ...$input,
-                // 'order_no' => $input['order_no'],
                 'width' => NULL,
                 'type' => NULL,
             ];
@@ -56,7 +55,6 @@ trait Centralizatorcolumnable {
         {
             $input = [
                 ...$input,
-                // 'order_no' => $input['order_no'],
             ];
         }
 

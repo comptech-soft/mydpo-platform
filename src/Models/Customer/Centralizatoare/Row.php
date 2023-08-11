@@ -65,40 +65,7 @@ class Row extends Model {
     //     'files',
     // ];
 
-    // public function getHumanStatusAttribute() {
-    //     if($this->status == 'new')
-    //     {
-    //         return [
-    //             'color' => 'blue',
-    //             'icon' => 'mdi-file-outline',
-    //         ];
-    //     }
-
-    //     if($this->status == 'updated')
-    //     {
-    //         return [
-    //             'color' => 'orange',
-    //             'icon' => 'mdi-note-edit-outline',
-    //         ];
-    //     }
-        
-    //     if($this->status == 'approved')
-    //     {
-    //         return [
-    //             'color' => 'green',
-    //             'icon' => 'mdi-check-all',
-    //         ];
-    //     }
-        
-    //     if($this->status == 'na')
-    //     {
-    //         return [
-    //             'color' => 'red',
-    //             'icon' => 'mdi-minus-circle-outline',
-    //         ];
-    //     }
-    //     return NULL;
-    // }
+    // 
 
     // public function getDepartmentIdAttribute() {
     //     $column_id = $this->customercentralizator->department_column_id;
