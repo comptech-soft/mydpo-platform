@@ -18,7 +18,7 @@ use MyDpo\Traits\Customer\Centralizatoare\Rowable;
 class Row extends Model {
 
     use Actionable, Rowable;
-    
+
     protected $table = 'customers-registers-rows';
 
     protected $casts = [
@@ -48,7 +48,9 @@ class Row extends Model {
         'createdby',
         'created_by',
         'updated_by',
-        'deleted_by'
+        'deleted_by',
+        'action_at',
+        'tooltip',
     ];
 
     // protected $appends = [
