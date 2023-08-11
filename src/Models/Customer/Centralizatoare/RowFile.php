@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class RowFile extends Model {
 
-    use Itemable, Actionable;
+    // use Itemable, Actionable;
 
     protected $table = 'customers-centralizatoare-rows-files';
 
