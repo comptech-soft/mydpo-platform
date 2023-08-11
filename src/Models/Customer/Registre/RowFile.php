@@ -4,7 +4,7 @@ namespace MyDpo\Models\Customer\Registre;
 
 use Illuminate\Database\Eloquent\Model;
 
-class CustomerRegistruRowFile extends Model {
+class RowFile extends Model {
    
     protected $table = 'customers-registers-rows-files';
 

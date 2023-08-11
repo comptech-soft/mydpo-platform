@@ -55,11 +55,17 @@ class Row extends Model {
         'tooltip',
     ];
 
-    // protected $appends = [
-    //     'myvalues',
-    // ];
+    protected $appends = [
+        'human_status',
+    ];
 
-    // protected $withCount = ['files'];
+    protected $withCount = [
+        'files'
+    ];
+
+    public function files() {
+        return $this->hasMany(RowFile::class, 'row_id');
+    }
 
     // public function registru() {
     //     return $this->belongsTo(CustomerRegister::class, 'customer_register_id');
@@ -69,9 +75,7 @@ class Row extends Model {
     //     return $this->hasMany(CustomerRegistruRowValue::class, 'row_id');
     // }
 
-    // public function files() {
-    //     return $this->hasMany(CustomerRegistruRowFile::class, 'row_id');
-    // }
+    
 
     // public function getMyvaluesAttribute() {
     //     $r = [...$this->registru->real_columns];

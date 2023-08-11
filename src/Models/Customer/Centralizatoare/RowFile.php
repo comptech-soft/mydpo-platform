@@ -3,11 +3,11 @@
 namespace MyDpo\Models\Customer\Centralizatoare;
 
 use Illuminate\Database\Eloquent\Model;
-use MyDpo\Traits\Itemable;
-use MyDpo\Traits\Actionable;
-use MyDpo\Performers\CustomerCentralizatorRowFile\UploadFiles;
+// use MyDpo\Traits\Itemable;
+// use MyDpo\Traits\Actionable;
+// use MyDpo\Performers\CustomerCentralizatorRowFile\UploadFiles;
 
-class CustomerCentralizatorRowFile extends Model {
+class RowFile extends Model {
 
     use Itemable, Actionable;
 
@@ -53,23 +53,23 @@ class CustomerCentralizatorRowFile extends Model {
         return config('app.url') . '/imgs/extensions/'. strtolower($this->file['file_original_extension']) . '.png';
     }
 
-    public static function uploadFiles($input) {
-        return (new UploadFiles($input))->Perform();
-    }
+    // public static function uploadFiles($input) {
+    //     return (new UploadFiles($input))->Perform();
+    // }
 
-    public static function downloadFile($id) {
+    // public static function downloadFile($id) {
 
-        $record = self::where('id', $id)->first();
+    //     $record = self::where('id', $id)->first();
 
-        if(!! $record )
-        {
-            $path = $record->file['url']; 
-            $path = \Str::replace(config('filesystems.disks.s3.url'), '', $path);
+    //     if(!! $record )
+    //     {
+    //         $path = $record->file['url']; 
+    //         $path = \Str::replace(config('filesystems.disks.s3.url'), '', $path);
 
-            return \Storage::disk('s3')->download($path, $record->file['file_original_name']);
-        }
+    //         return \Storage::disk('s3')->download($path, $record->file['file_original_name']);
+    //     }
 
-        return NULL;
-    }
+    //     return NULL;
+    // }
 
 }

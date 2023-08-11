@@ -61,9 +61,13 @@ class Row extends Model {
     //     'rowvalues',
     // ];
 
-    // protected $withCount = [
-    //     'files',
-    // ];
+    protected $withCount = [
+        'files',
+    ];
+
+    public function files() {
+        return $this->hasMany(RowFile::class, 'row_id');
+    }
 
     // 
 
@@ -82,9 +86,7 @@ class Row extends Model {
     //     return $this->hasMany(CustomerCentralizatorRowValue::class, 'row_id')->select(['id', 'row_id', 'column_id', 'value']);
     // }
 
-    // public function files() {
-    //     return $this->hasMany(CustomerCentralizatorRowFile::class, 'row_id');
-    // }
+    
 
     // public function DuplicateValues($id, $new_customer_id){
 
