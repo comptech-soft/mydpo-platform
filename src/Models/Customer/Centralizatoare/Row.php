@@ -3,7 +3,11 @@
 namespace MyDpo\Models\Customer\Centralizatoare;
 
 use Illuminate\Database\Eloquent\Model;
+
 // use MyDpo\Traits\Itemable;
+use MyDpo\Traits\Actionable;
+
+use MyDpo\Traits\Customer\Centralizatoare\Rowable;
 
 // use MyDpo\Performers\Customer\Centralizatoare\Row\InsertRow;
 // use MyDpo\Performers\Customer\Centralizatoare\Row\UpdateRow;
@@ -14,7 +18,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Row extends Model {
 
-    // use Itemable;
+    use Actionable, Rowable;
 
     protected $table = 'customers-centralizatoare-rows';
 
