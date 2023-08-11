@@ -2,6 +2,8 @@
 
 namespace MyDpo\Traits\Customer\Centralizatoare;
 
+use MyDpo\Models\Customer\Centralizatoare\RowValue as CentralizatorRowValue;
+
 trait Rowable {
 
     public static function doInsert($input, $record) {
@@ -13,18 +15,18 @@ trait Rowable {
             ] 
         ]);
 
-
-        dd($input);
-        
         foreach($input['rowvalues'] as $i => $rowvalue)
         {
             $rowvalue['row_id'] = $row->id;
 
             $rowvalue['column'] = $rowvalue['type'];
 
-            CustomerCentralizatorRowValue::create($input);
+            if($input['model'] == 'centralizatoare')
+            {
+                CentralizatorRowValue::create($rowvalue);
+            }
         }
 
-        dd(11);
+        return self::find($row->id);
     }
 }
