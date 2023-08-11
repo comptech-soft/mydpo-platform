@@ -8,6 +8,7 @@ use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 use MyDpo\Traits\Customer\Centralizatoare\Rowable;
 
+
 // use MyDpo\Performers\Customer\Centralizatoare\Row\InsertRow;
 // use MyDpo\Performers\Customer\Centralizatoare\Row\UpdateRow;
 // use MyDpo\Performers\Customer\Centralizatoare\Row\DeleteRow;
@@ -57,13 +58,15 @@ class Row extends Model {
         'human_status',
     ];
 
-    // protected $with = [
-    //     'rowvalues',
-    // ];
+    protected $with = [
+        'department',
+    ];
 
     protected $withCount = [
         'files',
     ];
+
+    
 
     public function files() {
         return $this->hasMany(RowFile::class, 'row_id');

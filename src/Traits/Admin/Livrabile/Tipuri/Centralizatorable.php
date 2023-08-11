@@ -32,7 +32,7 @@ trait Centralizatorable {
             'is_group' => 0,
             'group_id' => NULL,
             'order_no' => -90,
-            'width' => 50,
+            'width' => 100,
         ],
 
         'has_status_column' => [
@@ -41,7 +41,7 @@ trait Centralizatorable {
             'is_group' => 0,
             'group_id' => NULL,
             'order_no' => -80,
-            'width' => 140,
+            'width' => 120,
         ],
 
         'has_files_column' => [

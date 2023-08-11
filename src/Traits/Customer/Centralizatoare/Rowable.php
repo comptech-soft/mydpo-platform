@@ -2,6 +2,7 @@
 
 namespace MyDpo\Traits\Customer\Centralizatoare;
 
+use MyDpo\Models\Customer\CustomerDepartment;
 use MyDpo\Models\Customer\Centralizatoare\RowValue as CentralizatorRowValue;
 
 trait Rowable {
@@ -28,9 +29,12 @@ trait Rowable {
         ]
     ];
 
-
     public function getHumanStatusAttribute() {
         return $this->statuses[$this->status];
+    }
+
+    public function department() {
+        return $this->belongsTo(CustomerDepartment::class, 'department_id');
     }
 
     public static function doInsert($input, $record) {
