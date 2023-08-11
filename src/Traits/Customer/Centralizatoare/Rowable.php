@@ -95,4 +95,9 @@ trait Rowable {
             $record->delete();
         }
     }
+
+    public function doSetstatus($input, $record) {
+
+        dd($input, $record);
+    }
 }
