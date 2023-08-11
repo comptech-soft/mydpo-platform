@@ -89,6 +89,10 @@ trait Rowable {
     }
 
     public static function doDelete($input, $record) {
-        dd($input, $record);
+        if($input['model'] == 'centralizatoare')
+        {
+            CentralizatorRowValue::where('row_id', $input['id'])->delete();
+            $record->delete();
+        }
     }
 }
