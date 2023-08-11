@@ -46,23 +46,45 @@ trait Rowable {
             ] 
         ]);
 
-        foreach($input['rowvalues'] as $i => $rowvalue)
+        foreach($input['rowvalues'] as $i => $rowvalueinput)
         {
-            $rowvalue['row_id'] = $row->id;
+            $rowvalueinput['row_id'] = $row->id;
 
-            $rowvalue['column'] = $rowvalue['type'];
+            $rowvalueinput['column'] = $rowvalueinput['type'];
 
             if($input['model'] == 'centralizatoare')
             {
-                CentralizatorRowValue::create($rowvalue);
+                $rowvalue = CentralizatorRowValue::create($rowvalueinput);
+                $input['rowvalues'][$i]['id'] = $rowvalue->id;
             }
         }
+
+        $row->props = [
+            'rowvalues' => $input['rowvalues'],
+        ];
+        $row->save();
 
         return self::find($row->id);
     }
 
     public static function doUpdate($input, $record) {
 
-        dd($input, $record);
+        $record->update([
+            ...$input,
+            'props' => [
+                'rowvalues' => $input['rowvalues'],
+            ] 
+        ]);
+
+        foreach($input['rowvalues'] as $i => $rowvalueinput)
+        {
+            if($input['model'] == 'centralizatoare')
+            {
+                $rowvalue = CentralizatorRowValue::find($rowvalueinput['id']);
+                $rowvalue->update($rowvalueinput);
+            }
+        }
+
+        return self::find($row->id);
     }
 }
