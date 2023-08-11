@@ -31,7 +31,6 @@ class Row extends Model {
         'deleted' => 'integer',
         'visibility' => 'integer',
         'props' => 'json',
-        'tooltip' => 'json',
         'created_by' => 'integer',
         'updated_by' => 'integer',
         'deleted_by' => 'integer',
@@ -182,8 +181,14 @@ class Row extends Model {
 
         if( in_array($action, ['insert']) )
         {
-            dd(__METHOD__, $input);
+            $input = [
+                ...$input,
+                'centralizator_id' => $input['tip_id'],
+                'customer_centralizator_id' => $input['document_id'],
+            ];
         }
+
+        return $input;
     }
     
 }
