@@ -124,4 +124,9 @@ trait Rowable {
 
         return $rows;
     }
+
+    public static function doDeleterows($input, $record) {
+
+        dd($input);
+    }
 }
