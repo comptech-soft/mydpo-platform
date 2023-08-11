@@ -10,6 +10,7 @@ use MyDpo\Models\Livrabile\TipCentralizator;
 use MyDpo\Models\Livrabile\TipRegistru;
 use MyDpo\Models\Customer\Centralizatoare\Centralizator;
 use MyDpo\Models\Customer\Registre\Registru;
+use MyDpo\Models\Customer\Centralizatoare\Row as CentralizatorRow;
 
 class CentralizatorableRowsController extends Controller {
 
@@ -55,9 +56,16 @@ class CentralizatorableRowsController extends Controller {
 
     public function doAction($action, Request $r) {
 
-        dd($r->model, $action, $r->all() );
+        if($r->model == 'centralizatoare')
+        {
+            return CentralizatorRow::doAction($action, $r->all());
+        }
 
-        // return Centralizator::doAction($action, $r->all());
+        if($r->model == 'registre')
+        {
+            return RegistruRow::doAction($action, $r->all());
+        }
+        
     }
 
 }
