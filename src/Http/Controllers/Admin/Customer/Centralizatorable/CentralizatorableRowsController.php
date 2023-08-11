@@ -55,8 +55,8 @@ class CentralizatorableRowsController extends Controller {
 
     public function doAction($action, Request $r) {
 
-        dd($action, $r->all() );
-        
+        dd($r->model, $action, $r->all() );
+
         // return Centralizator::doAction($action, $r->all());
     }
 
