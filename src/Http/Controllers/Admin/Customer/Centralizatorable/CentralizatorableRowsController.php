@@ -33,7 +33,7 @@ class CentralizatorableRowsController extends Controller {
             {
                 return redirect('customer-dashboard/' . $customer_id);
             }
-            return redirec('centralizatoare-list/' + $page + '/' + $customer_id + '/' + $tip_id);
+            return redirect('centralizatoare-list/' + $page + '/' + $customer_id + '/' + $tip_id);
         }
 
         if($model == 'registre')
