@@ -11,16 +11,21 @@ use MyDpo\Models\Customer\Centralizatoare\Centralizator;
 
 class CustomerTipCentralizatorController extends Controller {
     
-    public function index($customer_id, $centralizator_id, Request $r) {
+    public function index($customer_id, $tip_id, Request $r) {
         
         if( ! ($customer = Customer::find($customer_id)) )
         {
-            return redirect('/');
+            return redirect('admin/clienti');
         }
 
-        if( ! ($tip = TipCentralizator::find($centralizator_id)) )
+        if(! in_array($page, ['centralizatoare', 'gap']))
         {
-            return redirect('/');
+            return redirect('customer-dashboard/' . $customer_id);
+        }
+
+        if( ! ($tip = TipCentralizator::find($tip_id)) )
+        {
+            return redirect('centralizatoare-dashboard/' . $page . '/' . $customer_id);
         }
 
         return Index::View(

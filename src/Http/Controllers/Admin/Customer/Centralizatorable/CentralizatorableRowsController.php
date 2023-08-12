@@ -28,21 +28,38 @@ class CentralizatorableRowsController extends Controller {
         {
             return redirect('customer-dashboard/' + $customer_id);
         }
+
+        if($model == 'centralizatoare')
+        {
+            if(! in_array($page, ['centralizatoare', 'gap']))
+            {
+                return redirect('customer-dashboard/' . $customer_id);
+            }
+        }
+
+        if($model == 'registre')
+        {
+            if(! in_array($page, ['registre', 'gap']))
+            {
+                return redirect('customer-dashboard/' . $customer_id);
+            }
+        }
         
         if( ! ($tip = ($model == 'centralizatoare' ? TipCentralizator::find($tip_id) : TipRegistru::find($tip_id) ) ) )
         {
-            return redirect('customer-dashboard/' + $customer_id);
+            return redirect($model . '-dashboard/' . $page . '/' . $customer_id);
         }
 
         if( ! ($document = ($model == 'centralizatoare' ? Centralizator::find($document_id) : Registru::find($document_id) )) )
         {
-            return redirect('customer-dashboard/' + $customer_id);
+            return redirect($model . '-list/' . $page . '/' . $customer_id + '/' + $tip_id);
         }
 
         return Index::View(
             styles: ['css/app.css'],
             scripts: ['apps/customer/centralizatorable-rows/index.js'],
             payload: [
+                'page' => $page,
                 'model' => $model,
                 'customer_id' => $customer_id,
                 'customer' => $customer,

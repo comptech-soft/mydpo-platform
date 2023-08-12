@@ -15,7 +15,7 @@ class CustomerTipRegistruController extends Controller {
 
         if( ! ($customer = Customer::find($customer_id)) )
         {
-            return redirect('/');
+            return redirect('admin/clienti');
         }
 
         if(! in_array($page, ['registre', 'gap']))
