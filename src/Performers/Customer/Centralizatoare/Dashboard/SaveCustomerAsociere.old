@@ -3,7 +3,7 @@
 namespace MyDpo\Performers\Customer\Centralizatoare\Dashboard;
 
 use MyDpo\Helpers\Perform;
-use MyDpo\Models\Customer\Centralizatoare\CustomerCentralizatorAsociat;
+use MyDpo\Models\Customer\Centralizatoare\Asociere;
 
 class SaveCustomerAsociere extends Perform {
 
@@ -18,7 +18,7 @@ class SaveCustomerAsociere extends Perform {
                 'customer_id' => $customer_id,
             ];
 
-            CustomerCentralizatorAsociat::UpdateOrCreateAsociere($input);
+            Asociere::UpdateOrCreateAsociere($input);
         }
     }
 
