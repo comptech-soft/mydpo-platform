@@ -32,6 +32,7 @@ class CustomerTipCentralizatorController extends Controller {
             styles: ['css/app.css'],
             scripts: ['apps/customer/customers-centralizatoare-list/index.js'],
             payload: [
+                'page' => $page,
                 'customer_id' => $customer_id,
                 'tip_id' => $tip_id,
                 'customer' => $customer,
