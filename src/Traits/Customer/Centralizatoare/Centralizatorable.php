@@ -30,11 +30,10 @@ trait Centralizatorable {
     }
 
     public static function doDelete($input, $record) {
-
-        dd($input, $record);
-        
         $record->DeleteRows();
+        
         $record->delete();
+        
         return $record;
     }
 
