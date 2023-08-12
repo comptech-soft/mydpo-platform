@@ -27,22 +27,14 @@ class CentralizatorableRowsController extends Controller {
             return redirect('customer-dashboard/' . $customer_id);
         }
 
-        if($model == 'centralizatoare')
+        if( ($model == 'centralizatoare') && ! in_array($page, ['centralizatoare', 'gap']))
         {
-            if(! in_array($page, ['centralizatoare', 'gap']))
-            {
-                return redirect('customer-dashboard/' . $customer_id);
-            }
-            return redirect('centralizatoare-list/' . $page . '/' . $customer_id . '/' . $tip_id);
+            return redirect('customer-dashboard/' . $customer_id);
         }
 
-        if($model == 'registre')
+        if( ($model == 'registre') && ! in_array($page, ['registre', 'gap']))
         {
-            if(! in_array($page, ['registre', 'gap']))
-            {
-                return redirect('customer-dashboard/' . $customer_id);
-            }
-            return redirect('registre-list/' . $page . '/' . $customer_id . '/' . $tip_id);
+            return redirect('customer-dashboard/' . $customer_id);
         }
         
         if( ! ($tip = ($model == 'centralizatoare' ? TipCentralizator::find($tip_id) : TipRegistru::find($tip_id) ) ) )
