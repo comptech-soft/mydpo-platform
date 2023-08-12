@@ -32,7 +32,7 @@ class CustomerTipRegistruController extends Controller {
             styles: ['css/app.css'],
             scripts: ['apps/customer/customers-registre-list/index.js'],
             payload: [
-                'page' => 'page',
+                'page' => $page,
                 'customer_id' => $customer_id,
                 'tip_id' => $tip_id,
                 'customer' => $customer,
