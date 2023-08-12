@@ -35,7 +35,7 @@ class CentralizatorableRowsController extends Controller {
         }
 
         $document = ($model == 'centralizatoare' ? Centralizator::find($document_id) : Registru::find($document_id) );
-        if( ! $tip )
+        if( ! $document )
         {
             return redirect('/');
         }
