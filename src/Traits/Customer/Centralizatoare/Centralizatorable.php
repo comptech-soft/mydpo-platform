@@ -29,6 +29,15 @@ trait Centralizatorable {
         return $record;
     }
 
+    public static function doDelete($input, $record) {
+
+        dd($input, $record);
+        
+        $record->DeleteRows();
+        $record->delete();
+        return $record;
+    }
+
     public function getVisibleAttribute() {
         return [
             'color' => !! $this->visibility ? 'green' : 'red',
