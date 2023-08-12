@@ -42,7 +42,7 @@ class CentralizatorableRowsController extends Controller {
             {
                 return redirect('customer-dashboard/' . $customer_id);
             }
-            return redirec('registre-list/' + $page + '/' + $customer_id + '/' + $tip_id);
+            return redirect('registre-list/' + $page + '/' + $customer_id + '/' + $tip_id);
         }
         
         if( ! ($tip = ($model == 'centralizatoare' ? TipCentralizator::find($tip_id) : TipRegistru::find($tip_id) ) ) )
