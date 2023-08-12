@@ -17,8 +17,6 @@ class CentralizatorableRowsController extends Controller {
     
     public function index($model, $page, $customer_id, $tip_id, $document_id, Request $r) {
         
-        dd($model, $page, $customer_id, $tip_id, $document_id);
-
         if( ! ($customer = Customer::find($customer_id)) )
         {
             return redirect('admin/clienti');
@@ -35,6 +33,7 @@ class CentralizatorableRowsController extends Controller {
             {
                 return redirect('customer-dashboard/' . $customer_id);
             }
+            return redirec('centralizatoare-list/' + $page + '/' + $customer_id + '/' + $tip_id);
         }
 
         if($model == 'registre')
@@ -43,6 +42,7 @@ class CentralizatorableRowsController extends Controller {
             {
                 return redirect('customer-dashboard/' . $customer_id);
             }
+            return redirec('registre-list/' + $page + '/' + $customer_id + '/' + $tip_id);
         }
         
         if( ! ($tip = ($model == 'centralizatoare' ? TipCentralizator::find($tip_id) : TipRegistru::find($tip_id) ) ) )
