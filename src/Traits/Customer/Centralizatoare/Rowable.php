@@ -127,6 +127,18 @@ trait Rowable {
 
     public static function doDeleterows($input, $record) {
 
-        dd($input);
+        if($input['model'] == 'centralizatoare')
+        {
+            CentralizatorRowValue::whereIn('row_id', $input['selected_rows'])->delete();
+            CentralizatorRow::whereIn('id', $input['selected_rows'])->delete();
+        }
     }
+
+    public static function doSavewidthssetting($input, $record) {
+
+        if($input['model'] == 'centralizatoare')
+        {
+            dd($input, $record);
+        }
+    } 
 }
