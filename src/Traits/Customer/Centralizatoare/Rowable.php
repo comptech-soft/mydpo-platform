@@ -9,7 +9,7 @@ use MyDpo\Models\Livrabile\TipCentralizatorColoana;
 use MyDpo\Models\Customer\Centralizatoare\Centralizator as CustomerCentralizator;
 use MyDpo\Models\Customer\Centralizatoare\RowValue as CentralizatorRowValue;
 use MyDpo\Models\Customer\Centralizatoare\Row as CentralizatorRow;
-use MyDpo\Models\Customer\Centralizatoare\Acsess as CentralizatorAccess;
+use MyDpo\Models\Customer\Centralizatoare\Access as CentralizatorAccess;
 
 trait Rowable {
 
@@ -168,22 +168,14 @@ trait Rowable {
 
         if(array_key_exists('departments', $input) && !! count($input['departments']) )
         {
-            if($input['mode'] == 'centralizatoare')
+            if($input['model'] == 'centralizatoare')
             {
-                dd($input);
+                CentralizatorAccess::where('customer_centralizator_id', $input['document_id'])->delete();
             }
-        }
-    }
-}
 
-/**
- * 
- * CustomerCentralizatorAccess::where('customer_centralizator_id', $this->customer_centralizator_id)->delete();
-
-        if($this->departments)
-        {
             $users = [];
-            foreach($this->departments as $i => $item)
+
+            foreach($input['departments'] as $i => $item)
             {
                 $parts = explode('#', $item);
 
@@ -200,18 +192,17 @@ trait Rowable {
 
             foreach($users as $user_id => $departamente)
             {
-                CustomerCentralizatorAccess::create([
-                    'customer_centralizator_id' => $this->customer_centralizator_id,
-                    'customer_id' => $this->customer_id,
-                    'centralizator_id' => $this->centralizator_id,
-                    'user_id' => $user_id,
-                    'departamente' => $departamente,                    
-                ]);
+                if($input['model'] == 'centralizatoare')
+                {
+                    CentralizatorAccess::create([
+                        'customer_centralizator_id' => $input['document_id'],
+                        'customer_id' => $input['customer_id'],
+                        'centralizator_id' => $input['tip_id'],
+                        'user_id' => $user_id,
+                        'departamente' => $departamente,                    
+                    ]);
+                }
             }
         }
-
-        $this->payload = [
-            'record' => NULL,
-        ];
-    
- */
+    }
+}
