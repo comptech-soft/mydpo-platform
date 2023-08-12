@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
 use MyDpo\Models\Customer;
 use MyDpo\Models\Livrabile\TipRegistru;
-use MyDpo\Models\Customer\Registre\RegistruAsociat;
+use MyDpo\Models\Customer\Registre\Asociere;
 
 class CustomerRegistreDashboardController extends Controller {
     
@@ -39,7 +39,7 @@ class CustomerRegistreDashboardController extends Controller {
     }
 
     public function doAction($action, Request $r) {
-        return RegistruAsociat::doAction($action, $r->all());
+        return Asociere::doAction($action, $r->all());
     }
 
 
