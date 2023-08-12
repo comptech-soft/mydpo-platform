@@ -24,7 +24,7 @@ class CentralizatorableRowsController extends Controller {
 
         if(! in_array($model, ['centralizatoare', 'registre']))
         {
-            return redirect('customer-dashboard/' + $customer_id);
+            return redirect('customer-dashboard/' . $customer_id);
         }
 
         if($model == 'centralizatoare')
@@ -33,7 +33,7 @@ class CentralizatorableRowsController extends Controller {
             {
                 return redirect('customer-dashboard/' . $customer_id);
             }
-            return redirect('centralizatoare-list/' + $page + '/' + $customer_id + '/' + $tip_id);
+            return redirect('centralizatoare-list/' . $page . '/' . $customer_id . '/' . $tip_id);
         }
 
         if($model == 'registre')
@@ -42,7 +42,7 @@ class CentralizatorableRowsController extends Controller {
             {
                 return redirect('customer-dashboard/' . $customer_id);
             }
-            return redirect('registre-list/' + $page + '/' + $customer_id + '/' + $tip_id);
+            return redirect('registre-list/' . $page . '/' . $customer_id . '/' . $tip_id);
         }
         
         if( ! ($tip = ($model == 'centralizatoare' ? TipCentralizator::find($tip_id) : TipRegistru::find($tip_id) ) ) )
@@ -52,7 +52,7 @@ class CentralizatorableRowsController extends Controller {
 
         if( ! ($document = ($model == 'centralizatoare' ? Centralizator::find($document_id) : Registru::find($document_id) )) )
         {
-            return redirect($model . '-list/' . $page . '/' . $customer_id + '/' + $tip_id);
+            return redirect($model . '-list/' . $page . '/' . $customer_id . '/' . $tip_id);
         }
 
         return Index::View(
