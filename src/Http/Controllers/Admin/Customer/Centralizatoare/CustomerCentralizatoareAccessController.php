@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Models\Customer\Centralizatoare\Access;
 
-class CustomersCentralizatoareAccessController extends Controller {
+class CustomerCentralizatoareAccessController extends Controller {
     
     public function getRecords(Request $r) {
         return Access::getRecords($r->all());
