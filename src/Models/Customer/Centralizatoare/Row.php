@@ -65,13 +65,29 @@ class Row extends Model {
     protected $withCount = [
         'files',
     ];
-
     
-
     public function files() {
         return $this->hasMany(RowFile::class, 'row_id');
     }
 
+    public function DeleteValues() {
+        RowValue::where('row_id', $this->id)->delete();
+    }
+
+    public static function PrepareActionInput($action, $input) {
+
+        if( in_array($action, ['insert', 'update']) )
+        {
+            $input = [
+                ...$input,
+                'centralizator_id' => $input['tip_id'],
+                'customer_centralizator_id' => $input['document_id'],
+            ];
+        }
+
+        return $input;
+    }
+    
     // 
 
     // public function getDepartmentIdAttribute() {
@@ -120,9 +136,7 @@ class Row extends Model {
     //     }
     // }
 
-    // public function DeleteValues() {
-    //     CustomerCentralizatorRowValue::where('row_id', $this->id)->delete();
-    // }
+    
 
     // public static function insertRow($input) {
     //     return (new InsertRow($input))->Perform();
@@ -148,18 +162,6 @@ class Row extends Model {
     //     return (new SetRowsVisibility($input))->Perform();
     // }
 
-    public static function PrepareActionInput($action, $input) {
-
-        if( in_array($action, ['insert', 'update']) )
-        {
-            $input = [
-                ...$input,
-                'centralizator_id' => $input['tip_id'],
-                'customer_centralizator_id' => $input['document_id'],
-            ];
-        }
-
-        return $input;
-    }
+    
     
 }

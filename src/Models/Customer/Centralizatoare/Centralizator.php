@@ -100,4 +100,14 @@ class Centralizator extends Model {
         return TipCentralizator::find($input['centralizator_id']);
     }
 
+    
+    public function DeleteRows() {
+        $rows = Row::where('customer_centralizator_id', $this->id)->get();
+        foreach($rows as $i => $row)
+        {
+            $row->DeleteValues();
+            $row->delete();
+        }
+    }
+
 }
