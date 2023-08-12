@@ -11,10 +11,10 @@ use MyDpo\Models\Customer\Registre\Registru;
 
 class CustomerTipRegistruController extends Controller {
     
-    public function index($page, $customer_id, $register_id, Request $r) {
+    public function index($page, $customer_id, $tip_id, Request $r) {
 
-        dd($page);
-        
+        dd($page, $customer_id, $tip_id);
+
         if( ! ($customer = Customer::find($customer_id)) )
         {
             return redirect('/');
