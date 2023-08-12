@@ -14,30 +14,27 @@ use MyDpo\Models\Customer\Centralizatoare\Row as CentralizatorRow;
 use MyDpo\Models\Customer\Registre\Row as RegistruRow;
 
 class CentralizatorableRowsController extends Controller {
-
-
+    
     public function index($model, $customer_id, $tip_id, $document_id, Request $r) {
         
-        if(! in_array($model, ['centralizatoare', 'registre']))
-        {
-            return redirect('admin/clienti');
-        }
-
         if( ! ($customer = Customer::find($customer_id)) )
         {
             return redirect('admin/clienti');
         }
 
-        $tip = ($model == 'centralizatoare' ? TipCentralizator::find($tip_id) : TipRegistru::find($tip_id) );
-        if( ! $tip )
+        if(! in_array($model, ['centralizatoare', 'registre']))
         {
-            return redirect('/');
+            return redirect('customer-dashboard/' + $customer_id);
+        }
+        
+        if( ! ($tip = ($model == 'centralizatoare' ? TipCentralizator::find($tip_id) : TipRegistru::find($tip_id) ) ) )
+        {
+            return redirect('customer-dashboard/' + $customer_id);
         }
 
-        $document = ($model == 'centralizatoare' ? Centralizator::find($document_id) : Registru::find($document_id) );
-        if( ! $document )
+        if( ! ($document = ($model == 'centralizatoare' ? Centralizator::find($document_id) : Registru::find($document_id) )) )
         {
-            return redirect('/');
+            return redirect('customer-dashboard/' + $customer_id);
         }
 
         return Index::View(
