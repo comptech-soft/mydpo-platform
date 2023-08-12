@@ -15,8 +15,10 @@ use MyDpo\Models\Customer\Registre\Row as RegistruRow;
 
 class CentralizatorableRowsController extends Controller {
     
-    public function index($model, $customer_id, $tip_id, $document_id, Request $r) {
+    public function index($model, $page, $customer_id, $tip_id, $document_id, Request $r) {
         
+        dd($model, $page, $customer_id, $tip_id, $document_id);
+
         if( ! ($customer = Customer::find($customer_id)) )
         {
             return redirect('admin/clienti');
