@@ -3,8 +3,13 @@
 namespace MyDpo\Traits\Customer\Centralizatoare;
 
 use MyDpo\Models\Customer\CustomerDepartment;
+use MyDpo\Models\Livrabile\TipCentralizator;
+use MyDpo\Models\Livrabile\TipCentralizatorColoana;
+
+use MyDpo\Models\Customer\Centralizatoare\Centralizator as CustomerCentralizator;
 use MyDpo\Models\Customer\Centralizatoare\RowValue as CentralizatorRowValue;
 use MyDpo\Models\Customer\Centralizatoare\Row as CentralizatorRow;
+
 trait Rowable {
 
     protected $statuses = [
@@ -138,7 +143,23 @@ trait Rowable {
 
         if($input['model'] == 'centralizatoare')
         {
-            dd($input, $record);
+            $document = CustomerCentralizator::find($input['document_id']);
+
+            foreach($widths = collect($input['columns'])->pluck('width', 'id')->toArray() as $column_id => $width)
+            {
+                $column = TipCentralizatorColoana::where('centralizator_id', $document->centralizator_id)->where('id', $column_id)->first();
+                $column->width = $width;
+                $column->save();
+
+            }
+
+            $tip = TipCentralizator::find($document->centralizator_id);
+
+            $document->current_columns = $tip->columns;
+            $document->columns_items = $tip->columns_items;
+            $document->columns_tree = $tip->columns_tree;
+            $document->columns_with_values = $tip->columns_with_values;    
+            $document->save(); 
         }
     } 
 }
