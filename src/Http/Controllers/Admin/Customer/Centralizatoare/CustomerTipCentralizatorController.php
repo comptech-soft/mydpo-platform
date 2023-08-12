@@ -11,7 +11,7 @@ use MyDpo\Models\Customer\Centralizatoare\Centralizator;
 
 class CustomerTipCentralizatorController extends Controller {
     
-    public function index($customer_id, $tip_id, Request $r) {
+    public function index($page, $customer_id, $tip_id, Request $r) {
         
         if( ! ($customer = Customer::find($customer_id)) )
         {
