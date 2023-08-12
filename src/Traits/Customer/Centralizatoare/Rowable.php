@@ -162,4 +162,8 @@ trait Rowable {
             $document->save(); 
         }
     } 
+
+    public static function doAccountaccess($input, $record) {
+        dd($input, $record);
+    }
 }
