@@ -1,0 +1,14 @@
+<?php
+
+namespace MyDpo\Performers\Customer\Centralizatoare\Centralizator;
+
+use MyDpo\Helpers\Perform;
+use MyDpo\Models\CustomerCentralizatorAccess;
+
+class SetAccess extends Perform {
+
+    public function Action() {
+
+        
+    }
+}

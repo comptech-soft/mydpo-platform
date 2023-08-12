@@ -9,6 +9,7 @@ use MyDpo\Models\Livrabile\TipCentralizatorColoana;
 use MyDpo\Models\Customer\Centralizatoare\Centralizator as CustomerCentralizator;
 use MyDpo\Models\Customer\Centralizatoare\RowValue as CentralizatorRowValue;
 use MyDpo\Models\Customer\Centralizatoare\Row as CentralizatorRow;
+use MyDpo\Models\Customer\Centralizatoare\Acsess as CentralizatorAccess;
 
 trait Rowable {
 
@@ -164,6 +165,53 @@ trait Rowable {
     } 
 
     public static function doAccountaccess($input, $record) {
-        dd($input, $record);
+
+        if(array_key_exists('departments', $input) && !! count($input['departments']) )
+        {
+            if($input['mode'] == 'centralizatoare')
+            {
+                dd($input);
+            }
+        }
     }
 }
+
+/**
+ * 
+ * CustomerCentralizatorAccess::where('customer_centralizator_id', $this->customer_centralizator_id)->delete();
+
+        if($this->departments)
+        {
+            $users = [];
+            foreach($this->departments as $i => $item)
+            {
+                $parts = explode('#', $item);
+
+                $user_id = $parts[0];
+                $department_id = $parts[1];
+
+                if( ! array_key_exists($user_id, $users) )
+                {
+                    $users[$user_id] = [];
+                }
+
+                $users[$user_id][] = $department_id;
+            }
+
+            foreach($users as $user_id => $departamente)
+            {
+                CustomerCentralizatorAccess::create([
+                    'customer_centralizator_id' => $this->customer_centralizator_id,
+                    'customer_id' => $this->customer_id,
+                    'centralizator_id' => $this->centralizator_id,
+                    'user_id' => $user_id,
+                    'departamente' => $departamente,                    
+                ]);
+            }
+        }
+
+        $this->payload = [
+            'record' => NULL,
+        ];
+    
+ */
