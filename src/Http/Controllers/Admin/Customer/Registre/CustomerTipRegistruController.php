@@ -13,16 +13,19 @@ class CustomerTipRegistruController extends Controller {
     
     public function index($page, $customer_id, $tip_id, Request $r) {
 
-        dd($page, $customer_id, $tip_id);
-
         if( ! ($customer = Customer::find($customer_id)) )
         {
             return redirect('/');
         }
 
-        if( ! ($tip = TipRegistru::find($register_id)) )
+        if(! in_array($page, ['registre', 'gap']))
         {
-            return redirect('/');
+            return redirect('customer-dashboard/' . $customer_id);
+        }
+
+        if( ! ($tip = TipRegistru::find($tip_id)) )
+        {
+            return redirect('registre-dashboard/' . $page . '/' . $customer_id);
         }
 
         return Index::View(
