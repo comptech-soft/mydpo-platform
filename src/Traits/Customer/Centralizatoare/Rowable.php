@@ -45,6 +45,11 @@ trait Rowable {
 
     public static function doInsert($input, $record) {
 
+        if(! array_key_exists('rowvalues', $input) )
+        {
+            $input['rowvalues'] = [];
+        }
+
         $row = self::create([
             ...$input,
             'props' => [
