@@ -149,28 +149,33 @@ trait Rowable {
      */
     public static function doSavewidthssetting($input, $record) {
 
-        if($input['model'] == 'centralizatoare')
+        $document = self::$myclasses['document']::find($input['document_id']);
+
+        $fields = [
+            'centralizatoare' => 'centralizator_id',
+            'registre' => 'register_id',
+        ];
+
+        foreach($widths = collect($input['columns'])->pluck('width', 'id')->toArray() as $column_id => $width)
         {
-            $document = CustomerCentralizator::find($input['document_id']);
-
-            foreach($widths = collect($input['columns'])->pluck('width', 'id')->toArray() as $column_id => $width)
-            {
-                $column = TipCentralizatorColoana::where('centralizator_id', $document->centralizator_id)->where('id', $column_id)->first();
-                $column->width = $width;
-                $column->save();
-
-            }
-
-            $tip = TipCentralizator::find($document->centralizator_id);
-
-            $document->current_columns = $tip->columns;
-            $document->columns_items = $tip->columns_items;
-            $document->columns_tree = $tip->columns_tree;
-            $document->columns_with_values = $tip->columns_with_values;    
-            $document->save(); 
+            $column = self::$myclasses['tipcoloana']::where($fields[$input['model']], $document->{$fields[$input['model']]})->where('id', $column_id)->first();
+            $column->width = $width;
+            $column->save();
         }
+
+        $tip = self::$myclasses['tip']::find($document->{$fields[$input['model']]});
+
+        $document->current_columns = $tip->columns;
+        $document->columns_items = $tip->columns_items;
+        $document->columns_tree = $tip->columns_tree;
+        $document->columns_with_values = $tip->columns_with_values;    
+        $document->save(); 
     } 
 
+    /**
+     * Setare acces la randurile documentului
+     * Accesul se face pe useri + departamente
+     */
     public static function doAccountaccess($input, $record) {
 
         if(array_key_exists('departments', $input) && !! count($input['departments']) )

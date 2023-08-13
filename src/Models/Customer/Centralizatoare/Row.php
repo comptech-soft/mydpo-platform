@@ -8,6 +8,9 @@ use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 use MyDpo\Traits\Customer\Centralizatoare\Rowable;
 
+use MyDpo\Models\Livrabile\TipCentralizator;
+use MyDpo\Models\Livrabile\TipCentralizatorColoana;
+
 class Row extends Model {
 
     use Itemable, Actionable, Rowable;
@@ -59,6 +62,8 @@ class Row extends Model {
     ];
 
     protected static $myclasses = [
+        'tip' => TipCentralizator::class,
+        'tipcoloana' => TipCentralizatorColoana::class,
         'document' => Centralizator::class,
         'row' => Row::class,
         'rowvalue' => RowValue::class,
