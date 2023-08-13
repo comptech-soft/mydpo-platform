@@ -29,6 +29,10 @@ trait Centralizatorable {
         return $record;
     }
 
+    public static function doDuplicate($input, $record) {
+        dd($input);
+    }
+
     public static function doDelete($input, $record) {
         $record->DeleteRows();
         
