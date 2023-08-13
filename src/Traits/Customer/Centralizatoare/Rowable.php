@@ -39,7 +39,7 @@ trait Rowable {
     }
 
     /**
-     * Inserarea unui rand nou in centralizator|registru
+     * Inserarea unui rand nou in centralizator | registru
      */
     public static function doInsert($input, $record) {
 
@@ -75,7 +75,7 @@ trait Rowable {
     }
 
     /**
-     * Editarea unui rand din centralizator|registru
+     * Editarea unui rand din centralizator | registru
      */
     public static function doUpdate($input, $record) {
         $record->update([
@@ -96,26 +96,18 @@ trait Rowable {
     }
 
     /**
-     * Stergerea unui rand din centralizator|registru
+     * Stergerea unui rand din centralizator | registru
      */
     public static function doDelete($input, $record) {
-        switch( $input['model'] )
-        {
-            case 'centralizatoare': 
-                CentralizatorRowValue::where('row_id', $input['id'])->delete();
-                $record->delete();
-                break;
+        
+        self::$myclasses['rowvalue']::where('row_id', $input['id'])->delete();
+        $record->delete();
 
-            case 'registre':
-                RegistruRowValue::where('row_id', $input['id'])->delete();
-                $record->delete();
-                break;
-
-            default: 
-                throw new \Exception('Invalid model [' . $input['model'] .  ']');
-        }
     }
 
+    /**
+     * Setarea statusului unui rand din centralizator | registru
+     */
     public static function doSetstatus($input, $record) {
 
         $statuses = collect($input['statuses'])->pluck('text', 'value')->toArray();
