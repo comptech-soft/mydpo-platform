@@ -177,13 +177,20 @@ trait Rowable {
      * Accesul se face pe useri + departamente
      */
     public static function doAccountaccess($input, $record) {
-
+        
         if(array_key_exists('departments', $input) && !! count($input['departments']) )
         {
-            if($input['model'] == 'centralizatoare')
-            {
-                CentralizatorAccess::where('customer_centralizator_id', $input['document_id'])->delete();
-            }
+            $fields = [
+                'centralizatoare' => [
+                    'customer_centralizator_id', 
+                    'centralizator_id'
+                ],
+                'registre' => [
+                    'customer_registru_id', 'register_id'
+                ],
+            ];
+
+            self::$myclasses['access']::where($fields[$input['model']][0], $input['document_id'])->delete();
 
             $users = [];
 
@@ -204,16 +211,13 @@ trait Rowable {
 
             foreach($users as $user_id => $departamente)
             {
-                if($input['model'] == 'centralizatoare')
-                {
-                    CentralizatorAccess::create([
-                        'customer_centralizator_id' => $input['document_id'],
-                        'customer_id' => $input['customer_id'],
-                        'centralizator_id' => $input['tip_id'],
-                        'user_id' => $user_id,
-                        'departamente' => $departamente,                    
-                    ]);
-                }
+                self::$myclasses['access']::create([
+                    $fields[$input['model']][0] => $input['document_id'],
+                    'customer_id' => $input['customer_id'],
+                    $fields[$input['model']][1] => $input['tip_id'],
+                    'user_id' => $user_id,
+                    'departamente' => $departamente,                    
+                ]);
             }
         }
     }
