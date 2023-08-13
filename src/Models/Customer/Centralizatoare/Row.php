@@ -8,14 +8,6 @@ use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 use MyDpo\Traits\Customer\Centralizatoare\Rowable;
 
-
-// use MyDpo\Performers\Customer\Centralizatoare\Row\InsertRow;
-// use MyDpo\Performers\Customer\Centralizatoare\Row\UpdateRow;
-// use MyDpo\Performers\Customer\Centralizatoare\Row\DeleteRow;
-// use MyDpo\Performers\Customer\Centralizatoare\Row\DeleteRows;
-// use MyDpo\Performers\Customer\Centralizatoare\Row\SetRowsStatus;
-// use MyDpo\Performers\Customer\Centralizatoare\Row\SetRowsVisibility;
-
 class Row extends Model {
 
     use Itemable, Actionable, Rowable;
@@ -73,7 +65,7 @@ class Row extends Model {
     public function DeleteValues() {
         RowValue::where('row_id', $this->id)->delete();
     }
-
+    
     public static function PrepareActionInput($action, $input) {
 
         if( in_array($action, ['insert', 'update']) )
@@ -87,65 +79,24 @@ class Row extends Model {
 
         return $input;
     }
-    
-    // 
 
-    // public function getDepartmentIdAttribute() {
-    //     $column_id = $this->customercentralizator->department_column_id;
-    //     $rowvalue = $this->rowvalues()->where('column_id', $column_id)->first();
- 
-    //     return !! $rowvalue ? $rowvalue->value : null;
-    // }
- 
-    // public function customercentralizator() {
-    //     return $this->belongsTo(CustomerCentralizator::class, 'customer_centralizator_id');
-    // }
-     
-    // public function rowvalues() {
-    //     return $this->hasMany(CustomerCentralizatorRowValue::class, 'row_id')->select(['id', 'row_id', 'column_id', 'value']);
-    // }
-
-    
-
-    public function DuplicateValues($id, $new_customer_id){
-        $rowvalues = RowValue::where('row_id', $this->id)->get();
-
-        foreach($rowvalues as $i => $rowvalue)
+    /**
+     * Duplicarea valorilor unui rand
+     *      $id         = row_id pentru vechiurile randuri
+     *      
+     */
+    public function DuplicateValues($id){
+        /**
+         * Pentru toate randurile
+         */
+        foreach(RowValue::where('row_id', $this->id)->get() as $i => $rowvalue)
         {
-            $input = $rowvalue->toArray();
-            $input['id'] = NULL;
-            $input['row_id'] = $id;
-
-            RowValue::create($input);
+            RowValue::create([
+                ...$rowvalue->toArray(),
+                'id' => NULL,
+                'row_id' => $id,
+            ]);
         }
     }
-
-    
-
-    // public static function insertRow($input) {
-    //     return (new InsertRow($input))->Perform();
-    // }
-
-    // public static function updateRow($input) {
-    //     return (new UpdateRow($input))->Perform();
-    // }
-
-    // public static function deleteRow($input) {
-    //     return (new DeleteRow($input))->Perform();
-    // }
-
-    // public static function deleteRows($input) {
-    //     return (new DeleteRows($input))->Perform();
-    // }
-
-    // public static function setRowsStatus($input) {
-    //     return (new SetRowsStatus($input))->Perform();
-    // }
-
-    // public static function setRowsVisibility($input) {
-    //     return (new SetRowsVisibility($input))->Perform();
-    // }
-
-    
     
 }

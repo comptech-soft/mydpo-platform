@@ -102,31 +102,32 @@ class Centralizator extends Model {
         return TipCentralizator::find($input['centralizator_id']);
     }
 
+    /**
+     * Duplicarea unui centralizator
+     */
     public static function Duplicate($input) {
-        
+        /**
+         * Documentul duplicat
+         */
         $source = self::find($input['document_id']);
 
-        $dest = $source->replicate();
+        /**
+         * Destinatia. Se salveaza informatiile completate in interfata
+         */
+        $dest = self::create([
+            ...$source->toArray(),
+            'customer_id' => $input['customer_id'],
+            'department_id' => $input['department_id'],
+            'visibility' => $input['visibility'],
+            'numbr' => $input['number'],
+            'date' => $input['date'],
+            'responsabil_nume' => $input['responsabil_nume'],
+            'responsabil_functie' => $input['responsabil_functie']
+        ]);
 
-        if(!! $input['department_id'])
-        {
-            $department = CustomerDepartment::CreateIfNecessary($source->customer_id, $input['customer_id'], $input['department_id']);
-        }
-        else
-        {
-            $department = NULL;
-        }
-
-        $dest->customer_id = $input['customer_id'];
-        $dest->department_id = !! $department ? $department->id : NULL;
-        $dest->visibility = $input['visibility'];
-        $dest->number = $input['number'];
-        $dest->date = $input['date'];
-        $dest->responsabil_nume = $input['responsabil_nume'];
-        $dest->responsabil_functie = $input['responsabil_functie'];
-
-        $dest->save();
-
+        /**
+         * Se duplica randurile documentului de duplicat
+         */
         $source->DuplicateRows(
             $dest->id, 
             array_key_exists('department_ids', $input) ? $input['department_ids'] : [], 
@@ -136,39 +137,54 @@ class Centralizator extends Model {
 
         return $dest;
     }
-
     
-
+    /**
+     * Duplicarea randurilor
+     *      $id                 = id-ul documentului duplicat
+     *      $department_ids     = departamentele ce trebuie duplicate
+     *      $new_customer_id    = noul client
+     *      $old_customer_id    = vechiul client
+     */
     protected function DuplicateRows($id, $department_ids, $new_customer_id, $old_customer_id) {
 
-        foreach($department_ids as $i => $department_id)
+        /**
+         * Randurile vechiului document, pentru fiecare rand
+         */
+        foreach(Row::where('customer_centralizator_id', $this->id)->get() as $i => $row)
         {
-            CustomerDepartment::CreateIfNecessary($old_customer_id, $new_customer_id, $department_id);
-        }
+            /**
+             * Alu id-ul departamentului din randul vechi
+             */
+            $old_department_id = $row->department_id;
 
-        $rows = Row::where('customer_centralizator_id', $this->id)->get();
-
-        foreach($rows as $i => $row)
-        {
-            
-            $department_id = !! $row->department_id ? $row->department_id : NULL;
-
-            if( !! $department_id && in_array($department_id, $department_ids) )
+            if( !! $old_department_id && in_array($old_department_id, $department_ids) )
             {
-                $newrowinut = $row->toArray();
-                $newrowinut['id'] = NULL;
-                $newrowinut['customer_centralizator_id'] = $id;
-                $newrowinut['action_at'] = $action_at = \Carbon\Carbon::now();
-                $newrowinut['status'] = 'new';
-                $newrowinut['tooltip'] = __('Creat de :full_name la :action_at. (:customer)', [
-                    'action_at' => $action_at->format('d.m.Y'),
-                    'full_name' => \Auth::user()->full_name,
-                    'customer' => 'Bam bam...',
-                ]);
-                
-                $newrow = Row::create($newrowinut);
+                /**
+                 * Creez departamentul
+                 */
+                $department_record = CustomerDepartment::CreateIfNecessary($old_customer_id, $new_customer_id, $old_department_id);
 
-                $row->DuplicateValues($newrow->id, $new_customer_id);
+                /**
+                 * Creez noul rand
+                 */
+                $newrow = Row::create([
+                    ...$row->toArray(),
+                    'id' => NULL,
+                    'customer_centralizator_id' => $id,
+                    'department_id' => $department_record->id,
+                    'action_at' => ($action_at = \Carbon\Carbon::now()),
+                    'status' => 'new',
+                    'tooltip' => __('Creat de :full_name la :action_at. (:customer)', [
+                        'action_at' => $action_at->format('d.m.Y'),
+                        'full_name' => \Auth::user()->full_name,
+                        'customer' => 'Bam bam...',
+                    ]),
+                ]);
+
+                /**
+                 * Se duplica valorile randului
+                 */
+                $row->DuplicateValues($newrow->id);
             }
         }
 
