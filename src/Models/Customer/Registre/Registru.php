@@ -69,6 +69,7 @@ class Registru extends Model {
 
     protected $appends = [
         'visible',
+        'table_headers',
     ];
 
     protected $with = [
