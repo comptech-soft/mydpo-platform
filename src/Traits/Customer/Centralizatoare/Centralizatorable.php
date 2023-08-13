@@ -38,7 +38,7 @@ trait Centralizatorable {
             Centralizator::Duplicate($input);
         }
 
-        dd($input['model'], $record);
+
     }
 
     public static function doDelete($input, $record) {
