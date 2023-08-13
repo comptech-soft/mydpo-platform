@@ -47,6 +47,7 @@ trait Rowable {
 
         $row = self::create([
             ...$input,
+            'tooltip' => 'Creat de :full_name la :action_at. (:customer)',
             'props' => [
                 'rowvalues' => $input['rowvalues'],
             ] 
@@ -57,9 +58,9 @@ trait Rowable {
             $input['rowvalues'][$i]['row_id'] = $rowvalueinput['row_id'] = $row->id;
             $input['rowvalues'][$i]['column'] = $rowvalueinput['column'] = $rowvalueinput['type'];
             
-            $className = self::$myclasses['rowvalue'];
+            // $className = self::$myclasses['rowvalue'];
 
-            $rowvalue = $className::create($rowvalueinput);
+            $rowvalue = self::$myclasses['rowvalue']::create($rowvalueinput);
             $input['rowvalues'][$i]['id'] = $rowvalue->id;            
         }
 
