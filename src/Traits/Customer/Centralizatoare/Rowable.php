@@ -110,7 +110,7 @@ trait Rowable {
 
         if($input['model'] == 'registre')
         {
-            RegistrurRowValue::where('row_id', $input['id'])->delete();
+            RegistruRowValue::where('row_id', $input['id'])->delete();
             $record->delete();
         }
 
