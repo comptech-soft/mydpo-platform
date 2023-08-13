@@ -3,9 +3,9 @@
 namespace MyDpo\Models\Customer\Registre;
 
 use Illuminate\Database\Eloquent\Model;
-use MyDpo\Helpers\Performers\Datatable\GetItems;
 
-class CustomerRegistruUser extends Model {
+
+class Access extends Model {
 
     protected $table = 'customers-registers-users';
 
@@ -36,8 +36,5 @@ class CustomerRegistruUser extends Model {
         'deleted_by'
     ];
 
-    public static function getItems($input) {
-        return (new GetItems($input, self::query(), __CLASS__))->Perform();
-    }
 
 }
