@@ -53,9 +53,9 @@ class RowFile extends Model {
         return config('app.url') . '/imgs/extensions/'. strtolower($this->file['file_original_extension']) . '.png';
     }
 
-    // public static function uploadFiles($input) {
-    //     return (new UploadFiles($input))->Perform();
-    // }
+    public static function uploadFiles($input) {
+        return (new UploadFiles($input))->Perform();
+    }
 
     // public static function downloadFile($id) {
 
