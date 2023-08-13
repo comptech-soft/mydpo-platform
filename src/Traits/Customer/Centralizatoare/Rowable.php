@@ -102,19 +102,21 @@ trait Rowable {
     }
 
     public static function doDelete($input, $record) {
-        if($input['model'] == 'centralizatoare')
+        switch( $input['model'] )
         {
-            CentralizatorRowValue::where('row_id', $input['id'])->delete();
-            $record->delete();
-        }
+            case 'centralizatoare': 
+                CentralizatorRowValue::where('row_id', $input['id'])->delete();
+                $record->delete();
+                break;
 
-        if($input['model'] == 'registre')
-        {
-            RegistruRowValue::where('row_id', $input['id'])->delete();
-            $record->delete();
-        }
+            case 'registre':
+                RegistruRowValue::where('row_id', $input['id'])->delete();
+                $record->delete();
+                break;
 
-        throw new \Exception('Invalid model [' . $input['model'] .  ']');
+            default: 
+                throw new \Exception('Invalid model [' . $input['model'] .  ']');
+        }
     }
 
     public static function doSetstatus($input, $record) {
@@ -148,19 +150,21 @@ trait Rowable {
 
     public static function doDeleterows($input, $record) {
 
-        if($input['model'] == 'centralizatoare')
+        switch( $input['model'] )
         {
-            CentralizatorRowValue::whereIn('row_id', $input['selected_rows'])->delete();
-            CentralizatorRow::whereIn('id', $input['selected_rows'])->delete();
-        }
+            case 'centralizatoare': 
+                CentralizatorRowValue::whereIn('row_id', $input['selected_rows'])->delete();
+                CentralizatorRow::whereIn('id', $input['selected_rows'])->delete();
+                break;
 
-        if($input['model'] == 'registre')
-        {
-            RegistruRowValue::whereIn('row_id', $input['selected_rows'])->delete();
-            RegistruRow::whereIn('id', $input['selected_rows'])->delete();
-        }
+            case 'registre':
+                RegistruRowValue::whereIn('row_id', $input['selected_rows'])->delete();
+                RegistruRow::whereIn('id', $input['selected_rows'])->delete();
+                break;
 
-        throw new \Exception('Invalid model [' . $input['model'] .  ']');
+            default: 
+                throw new \Exception('Invalid model [' . $input['model'] .  ']');
+        }
     }
 
     public static function doSavewidthssetting($input, $record) {
