@@ -116,6 +116,7 @@ class Centralizator extends Model {
          */
         $dest = self::create([
             ...$source->toArray(),
+            'id' => NULL,
             'customer_id' => $input['customer_id'],
             'department_id' => $input['department_id'],
             'visibility' => $input['visibility'],
