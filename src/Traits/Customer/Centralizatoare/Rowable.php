@@ -11,6 +11,8 @@ use MyDpo\Models\Customer\Centralizatoare\RowValue as CentralizatorRowValue;
 use MyDpo\Models\Customer\Centralizatoare\Row as CentralizatorRow;
 use MyDpo\Models\Customer\Centralizatoare\Access as CentralizatorAccess;
 
+use MyDpo\Models\Customer\Registre\RowValue as RegistruRowValue;
+
 trait Rowable {
 
     protected $statuses = [
@@ -105,6 +107,14 @@ trait Rowable {
             CentralizatorRowValue::where('row_id', $input['id'])->delete();
             $record->delete();
         }
+
+        if($input['model'] == 'registre')
+        {
+            RegistrurRowValue::where('row_id', $input['id'])->delete();
+            $record->delete();
+        }
+
+        throw new \Exception('Invalid model [' . $input['model'] .  ']');
     }
 
     public static function doSetstatus($input, $record) {
