@@ -3,13 +3,13 @@
 namespace MyDpo\Models\Customer\Centralizatoare;
 
 use Illuminate\Database\Eloquent\Model;
-// use MyDpo\Traits\Itemable;
-// use MyDpo\Traits\Actionable;
+use MyDpo\Traits\Itemable;
+use MyDpo\Traits\Actionable;
 // use MyDpo\Performers\CustomerCentralizatorRowFile\UploadFiles;
 
 class RowFile extends Model {
 
-    // use Itemable, Actionable;
+    use Itemable, Actionable;
 
     protected $table = 'customers-centralizatoare-rows-files';
 
