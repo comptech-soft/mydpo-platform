@@ -107,34 +107,34 @@ class Row extends Model {
 
     
 
-    // public function DuplicateValues($id, $new_customer_id){
+    public function DuplicateValues($id, $new_customer_id){
 
-    //     $rowvalues = CustomerCentralizatorRowValue::where('row_id', $this->id)->get();
-    //     $column_id = $this->customercentralizator->department_column_id;
+        $rowvalues = RowValue::where('row_id', $this->id)->get();
+        // $column_id = $this->customercentralizator->department_column_id;
 
-    //     foreach($rowvalues as $i => $rowvalue)
-    //     {
-    //         $newrowvalue = $rowvalue->replicate();
+        foreach($rowvalues as $i => $rowvalue)
+        {
+            $input = $rowvalue->toArray();
+            $input['id'] = NULL;
+            $input['row_id'] = $id;
 
-    //         $newrowvalue->row_id = $id;
+            // if($newrowvalue->column_id == $column_id)
+            // {
+            //     if(!! $rowvalue->value)
+            //     {
+            //         $department = CustomerDepartment::CreateIfNecessary(
+            //             $this->customercentralizator->customer_id, 
+            //             $new_customer_id, 
+            //             $rowvalue->value
+            //         );
 
-    //         if($newrowvalue->column_id == $column_id)
-    //         {
-    //             if(!! $rowvalue->value)
-    //             {
-    //                 $department = CustomerDepartment::CreateIfNecessary(
-    //                     $this->customercentralizator->customer_id, 
-    //                     $new_customer_id, 
-    //                     $rowvalue->value
-    //                 );
+            //         $newrowvalue->value = $department->id;
+            //     }
+            // }
 
-    //                 $newrowvalue->value = $department->id;
-    //             }
-    //         }
-
-    //         $newrowvalue->save();
-    //     }
-    // }
+            RowValue::create($input);
+        }
+    }
 
     
 

@@ -10,6 +10,8 @@ use MyDpo\Traits\Numberable;
 use MyDpo\Traits\Customer\Centralizatoare\Centralizatorable;
 
 use MyDpo\Models\Livrabile\TipCentralizator;
+use MyDpo\Models\Customer\CustomerDepartment;
+
 // 
 // use MyDpo\Traits\Exportable;
 // use MyDpo\Traits\Importable;
@@ -101,7 +103,37 @@ class Centralizator extends Model {
     }
 
     public static function Duplicate($input) {
-        dd(__METHOD__, $input);
+        
+        $source = self::find($input['document_id']);
+
+        $dest = $source->replicate();
+
+        if(!! $input['department_id'])
+        {
+            $department = CustomerDepartment::CreateIfNecessary($source->customer_id, $input['customer_id'], $input['department_id']);
+        }
+        else
+        {
+            $department = NULL;
+        }
+
+        $dest->customer_id = $input['customer_id'];
+        $dest->department_id = !! $department ? $department->id : NULL;
+        $dest->visibility = $input['visibility'];
+        $dest->number = $input['number'];
+        $dest->date = $input['date'];
+        $dest->responsabil_nume = $input['responsabil_nume'];
+        $dest->responsabil_functie = $input['responsabil_functie'];
+
+        $dest->save();
+
+        $source->DuplicateRows(
+            $dest->id, 
+            array_key_exists('department_ids', $input) ? $input['department_ids'] : [], 
+            $input['customer_id']
+        );
+
+        return $dest;
     }
 
     public function DeleteRows() {
@@ -111,6 +143,29 @@ class Centralizator extends Model {
             $row->DeleteValues();
             $row->delete();
         }
+    }
+
+    protected function DuplicateRows($id, $department_ids, $new_customer_id) {
+
+        $rows = Row::where('customer_centralizator_id', $this->id)->get();
+
+        foreach($rows as $i => $row)
+        {
+            
+            $department_id = !! $row->department_id ? $row->department_id : NULL;
+
+            if( !! $department_id && in_array($department_id, $department_ids) )
+            {
+                $newrowinut = $row->toArray();
+                $newrowinut['id'] = NULL;
+                $newrowinut['customer_centralizator_id'] = $id;
+                
+                $newrow = Row::create($newrowinut);
+
+                $row->DuplicateValues($newrow->id, $new_customer_id);
+            }
+        }
+
     }
 
 }
