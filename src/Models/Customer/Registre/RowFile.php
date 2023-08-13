@@ -4,12 +4,19 @@ namespace MyDpo\Models\Customer\Registre;
 
 use Illuminate\Database\Eloquent\Model;
 
+use MyDpo\Traits\Itemable;
+use MyDpo\Traits\Actionable;
+use MyDpo\Traits\Customer\Centralizatoare\RowFileable;
+
+use MyDpo\Performers\Customer\Registre\RowFile\UploadFiles;
+
 class RowFile extends Model {
-   
+    
+    use Itemable, Actionable, RowFileable;
+    
     protected $table = 'customers-registers-rows-files';
 
     protected $casts = [
-        'deleted' => 'integer',
         'row_id' => 'integer',
         'file' => 'json',
     ];
@@ -24,33 +31,13 @@ class RowFile extends Model {
 
     protected $appends = [
         'is_image', 
-        'is_office'
+        'is_office',
+        'is_pdf',
+        'icon'
     ];
 
-    public function getIsImageAttribute() {
-        $ext = strtolower($this->file['file_original_extension']);
-        return in_array($ext, ['jpg', 'jpeg', 'png']);
-    }   
-
-    public function getIsOfficeAttribute() {
-        $ext = strtolower($this->file['file_original_extension']);
-        return in_array($ext, ['doc', 'docx', 'xls', 'xlsx']);
-    }  
-
-    public static function downloadFile($id) {
-
-        $record = self::where('id', $id)->first();
-
-        if(!! $record )
-        {
-            $path = $record->file['url'];
-            
-            $path = \Str::replace(config('filesystems.disks.s3.url'), '', $path);
-
-            return \Storage::disk('s3')->download($path, $record->file['file_original_name']);
-        }
-
-        return NULL;
+    public static function uploadFiles($input) {
+        return (new UploadFiles($input))->Perform();
     }
 
 }
