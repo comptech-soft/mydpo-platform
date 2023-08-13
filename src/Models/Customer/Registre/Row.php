@@ -54,6 +54,10 @@ class Row extends Model {
         'human_status',
     ];
 
+    protected $with = [
+        'department',
+    ];
+    
     protected $withCount = [
         'files'
     ];
