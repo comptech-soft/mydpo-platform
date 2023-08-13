@@ -38,6 +38,9 @@ trait Rowable {
         return $this->belongsTo(CustomerDepartment::class, 'department_id');
     }
 
+    /**
+     * Inserarea unui rand nou in centralizator|registru
+     */
     public static function doInsert($input, $record) {
 
         if(! array_key_exists('rowvalues', $input) )
@@ -71,10 +74,13 @@ trait Rowable {
         return self::find($row->id);
     }
 
+    /**
+     * Editarea unui rand din centralizator|registru
+     */
     public static function doUpdate($input, $record) {
-
         $record->update([
             ...$input,
+            'tooltip' => 'Editat de full_name la :action_at. (:customer)',
             'props' => [
                 'rowvalues' => $input['rowvalues'],
             ] 
@@ -82,23 +88,16 @@ trait Rowable {
 
         foreach($input['rowvalues'] as $i => $rowvalueinput)
         {
-            switch($input['model'])
-            {
-                case 'centralizatoare':
-                    $rowvalue = CentralizatorRowValue::find($rowvalueinput['id']);
-                    $rowvalue->update($rowvalueinput);
-                    break;
-
-                case 'registre':
-                    $$rowvalue = RegistruRowValue::find($rowvalueinput['id']);
-                    $rowvalue->update($rowvalueinput);
-                    break;
-            }
+            $rowvalue = self::$myclasses['rowvalue']::find($rowvalueinput['id']);
+            $rowvalue->update($rowvalueinput);
         }
 
         return self::find($record->id);
     }
 
+    /**
+     * Stergerea unui rand din centralizator|registru
+     */
     public static function doDelete($input, $record) {
         switch( $input['model'] )
         {
