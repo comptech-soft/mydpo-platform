@@ -57,6 +57,13 @@ class Row extends Model {
     protected $withCount = [
         'files',
     ];
+
+    protected static $myclasses = [
+        'document' => Centralizator::class,
+        'row' => Row::class,
+        'rowvalue' => RowValue::class,
+        'access' => Access::class,
+    ];
     
     public function files() {
         return $this->hasMany(RowFile::class, 'row_id');

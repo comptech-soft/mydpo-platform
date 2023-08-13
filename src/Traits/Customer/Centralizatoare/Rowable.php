@@ -6,16 +6,6 @@ use MyDpo\Models\Customer\CustomerDepartment;
 use MyDpo\Models\Livrabile\TipCentralizator;
 use MyDpo\Models\Livrabile\TipCentralizatorColoana;
 
-use MyDpo\Models\Customer\Centralizatoare\Centralizator as CustomerCentralizator;
-use MyDpo\Models\Customer\Centralizatoare\Row as CentralizatorRow;
-use MyDpo\Models\Customer\Centralizatoare\RowValue as CentralizatorRowValue;
-use MyDpo\Models\Customer\Centralizatoare\Access as CentralizatorAccess;
-
-use MyDpo\Models\Customer\Registre\Centralizator as RegistruCentralizator;
-use MyDpo\Models\Customer\Registre\Row as RegistruRow;
-use MyDpo\Models\Customer\Registre\RowValue as RegistruRowValue;
-use MyDpo\Models\Customer\Registre\Access as RegistruAccess;
-
 trait Rowable {
 
     protected $statuses = [
@@ -38,22 +28,6 @@ trait Rowable {
             'color' => 'red',
             'icon' => 'mdi-minus-circle-outline',
         ]
-    ];
-
-    protected static $myclasses = [
-        'centralizatoare' => [
-            'document' => CustomerCentralizator::class,
-            'row' => CentralizatorRow::class,
-            'rowvalue' => CentralizatorRowValue::class,
-            'access' => CentralizatorAccess::class,
-        ],
-
-        'registre' => [
-            'document' => RegistruCentralizator::class,
-            'row' => RegistruRow::class,
-            'rowvalue' => RegistruRowValue::class,
-            'access' => RegistruAccess::class,
-        ],
     ];
 
     public function getHumanStatusAttribute() {
@@ -81,29 +55,18 @@ trait Rowable {
         foreach($input['rowvalues'] as $i => $rowvalueinput)
         {
             $input['rowvalues'][$i]['row_id'] = $rowvalueinput['row_id'] = $row->id;
-
             $input['rowvalues'][$i]['column'] = $rowvalueinput['column'] = $rowvalueinput['type'];
-
-
-            dd($input['model']);
-            switch($input['model'])
-            {
-                case 'centralizatoare':
-                    $rowvalue = CentralizatorRowValue::create($rowvalueinput);
-                    $input['rowvalues'][$i]['id'] = $rowvalue->id;
-                    break;
-
-                case 'registre':
-                    $rowvalue = CentralizatorRowValue::create($rowvalueinput);
-                    $input['rowvalues'][$i]['id'] = $rowvalue->id;
-                    break;
-            }
             
+            $className = self::$myclasses['rowvalue'];
+
+            $rowvalue = $className::create($rowvalueinput);
+            $input['rowvalues'][$i]['id'] = $rowvalue->id;            
         }
 
         $row->props = [
             'rowvalues' => $input['rowvalues'],
         ];
+        
         $row->save();
 
         return self::find($row->id);
