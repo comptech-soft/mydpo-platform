@@ -58,8 +58,6 @@ trait Rowable {
             $input['rowvalues'][$i]['row_id'] = $rowvalueinput['row_id'] = $row->id;
             $input['rowvalues'][$i]['column'] = $rowvalueinput['column'] = $rowvalueinput['type'];
             
-            // $className = self::$myclasses['rowvalue'];
-
             $rowvalue = self::$myclasses['rowvalue']::create($rowvalueinput);
             $input['rowvalues'][$i]['id'] = $rowvalue->id;            
         }
