@@ -149,6 +149,8 @@ trait Rowable {
             RegistruRowValue::whereIn('row_id', $input['selected_rows'])->delete();
             RegistruRow::whereIn('id', $input['selected_rows'])->delete();
         }
+
+        throw new \Exception('Invalid model [' . $input['model'] .  ']');
     }
 
     public static function doSavewidthssetting($input, $record) {
