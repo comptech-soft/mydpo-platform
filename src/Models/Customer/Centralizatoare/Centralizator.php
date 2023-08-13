@@ -120,7 +120,7 @@ class Centralizator extends Model {
             'customer_id' => $input['customer_id'],
             'department_id' => $input['department_id'],
             'visibility' => $input['visibility'],
-            'numbr' => $input['number'],
+            'number' => $input['number'],
             'date' => $input['date'],
             'responsabil_nume' => $input['responsabil_nume'],
             'responsabil_functie' => $input['responsabil_functie']
