@@ -7,6 +7,33 @@ use MyDpo\Models\Customer\Centralizatoare\Centralizator;
 
 trait Centralizatorable {
 
+    /**
+     * Atributul visible pentru interfata
+     */
+    public function getVisibleAttribute() {
+        return [
+            'color' => !! $this->visibility ? 'green' : 'red',
+            'icon' => !! $this->visibility ? 'mdi-check' : 'mdi-cancel',
+        ];
+    }
+
+    /**
+     * Atributul Headerul pentru tabel
+     */
+    public function getTableHeadersAttribute() {
+        return $this->columns_tree;
+    }
+    
+    /**
+     * Relatie catre departament
+     */
+    public function department() {
+        return $this->belongsTo(CustomerDepartment::class, 'department_id')->select(['id', 'departament']);
+    }
+
+    /**
+     * Crearea unui document
+     */
     public static function doInsert($input, $record) {
         
         $tip = self::GetTip($input);
@@ -30,40 +57,29 @@ trait Centralizatorable {
         return $record;
     }
 
+    /**
+     * Duplicarea unui element
+     */
     public static function doDuplicate($input, $record) {
 
-
-        if($input['model'] == 'centralizatoare')
-        {
-            Centralizator::Duplicate($input);
-        }
-
+        return self::Duplicate($input);
 
     }
 
+    /**
+     * Stergerea unui document
+     */
     public static function doDelete($input, $record) {
+
         $record->DeleteRows();
-        
         $record->delete();
         
         return $record;
     }
-
-    public function getVisibleAttribute() {
-        return [
-            'color' => !! $this->visibility ? 'green' : 'red',
-            'icon' => !! $this->visibility ? 'mdi-check' : 'mdi-cancel',
-        ];
-    }
-
-    public function getTableHeadersAttribute() {
-        return $this->columns_tree;
-    }
     
-    public function department() {
-        return $this->belongsTo(CustomerDepartment::class, 'department_id')->select(['id', 'departament']);
-    }
-
+    /**
+     * Generarea inregistrarilor
+     */
     public static function GetQuery() {
 
         $q = self::query();

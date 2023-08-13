@@ -16,7 +16,6 @@ use MyDpo\Models\Customer;
 // use MyDpo\Traits\Exportable;
 // use MyDpo\Traits\Importable;
 
-// use MyDpo\Performers\Customer\Centralizatoare\Centralizator\SaveSettings;
 // 
 
 // use MyDpo\Models\Livrabile\TipCentralizatorColoana;
@@ -24,8 +23,6 @@ use MyDpo\Models\Customer;
 // use MyDpo\Imports\CustomerCentralizator\Importer;
 
 // use MyDpo\Performers\CustomerCentralizator\Import;
-;
-// use MyDpo\Performers\CustomerCentralizator\SetAccess;
 
 class Centralizator extends Model {
 
