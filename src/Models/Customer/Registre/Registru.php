@@ -88,5 +88,14 @@ class Registru extends Model {
     public static function GetTip($input) {
         return TipRegistru::find($input['register_id']);
     }
+
+    public function DeleteRows() {
+        $rows = Row::where('customer_register_id', $this->id)->get();
+        foreach($rows as $i => $row)
+        {
+            $row->DeleteValues();
+            $row->delete();
+        }
+    }
     
 }

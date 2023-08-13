@@ -227,6 +227,10 @@ class Row extends Model {
     //     return (new DeleteFile($input))->Perform();
     // }
 
+    public function DeleteValues() {
+        RowValue::where('row_id', $this->id)->delete();
+    }
+    
     public static function PrepareActionInput($action, $input) {
 
         if( in_array($action, ['insert', 'update']) )
