@@ -130,7 +130,8 @@ class Centralizator extends Model {
         $source->DuplicateRows(
             $dest->id, 
             array_key_exists('department_ids', $input) ? $input['department_ids'] : [], 
-            $input['customer_id']
+            $input['customer_id'],
+            $source->customer_id
         );
 
         return $dest;
@@ -145,7 +146,12 @@ class Centralizator extends Model {
         }
     }
 
-    protected function DuplicateRows($id, $department_ids, $new_customer_id) {
+    protected function DuplicateRows($id, $department_ids, $new_customer_id, $old_customer_id) {
+
+        foreach($department_ids as $i => $department_id)
+        {
+            CustomerDepartment::CreateIfNecessary($old_customer_id, $new_customer_id, $department_id);
+        }
 
         $rows = Row::where('customer_centralizator_id', $this->id)->get();
 
