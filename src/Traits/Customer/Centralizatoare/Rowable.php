@@ -7,11 +7,14 @@ use MyDpo\Models\Livrabile\TipCentralizator;
 use MyDpo\Models\Livrabile\TipCentralizatorColoana;
 
 use MyDpo\Models\Customer\Centralizatoare\Centralizator as CustomerCentralizator;
-use MyDpo\Models\Customer\Centralizatoare\RowValue as CentralizatorRowValue;
 use MyDpo\Models\Customer\Centralizatoare\Row as CentralizatorRow;
+use MyDpo\Models\Customer\Centralizatoare\RowValue as CentralizatorRowValue;
 use MyDpo\Models\Customer\Centralizatoare\Access as CentralizatorAccess;
 
+use MyDpo\Models\Customer\Registre\Centralizator as RegistruCentralizator;
+use MyDpo\Models\Customer\Registre\Row as RegistruRow;
 use MyDpo\Models\Customer\Registre\RowValue as RegistruRowValue;
+use MyDpo\Models\Customer\Registre\Access as RegistruAccess;
 
 trait Rowable {
 
@@ -35,6 +38,22 @@ trait Rowable {
             'color' => 'red',
             'icon' => 'mdi-minus-circle-outline',
         ]
+    ];
+
+    protected static $myclasses = [
+        'centralizatoare' => [
+            'document' => CustomerCentralizator::class,
+            'row' => CentralizatorRow::class,
+            'rowvalue' => CentralizatorRowValue::class,
+            'access' => CentralizatorAccess::class,
+        ],
+
+        'registre' => [
+            'document' => RegistruCentralizator::class,
+            'row' => RegistruRow::class,
+            'rowvalue' => RegistruRowValue::class,
+            'access' => RegistruAccess::class,
+        ],
     ];
 
     public function getHumanStatusAttribute() {
@@ -65,11 +84,21 @@ trait Rowable {
 
             $input['rowvalues'][$i]['column'] = $rowvalueinput['column'] = $rowvalueinput['type'];
 
-            if($input['model'] == 'centralizatoare')
+
+            dd($input['model']);
+            switch($input['model'])
             {
-                $rowvalue = CentralizatorRowValue::create($rowvalueinput);
-                $input['rowvalues'][$i]['id'] = $rowvalue->id;
+                case 'centralizatoare':
+                    $rowvalue = CentralizatorRowValue::create($rowvalueinput);
+                    $input['rowvalues'][$i]['id'] = $rowvalue->id;
+                    break;
+
+                case 'registre':
+                    $rowvalue = CentralizatorRowValue::create($rowvalueinput);
+                    $input['rowvalues'][$i]['id'] = $rowvalue->id;
+                    break;
             }
+            
         }
 
         $row->props = [
@@ -91,10 +120,17 @@ trait Rowable {
 
         foreach($input['rowvalues'] as $i => $rowvalueinput)
         {
-            if($input['model'] == 'centralizatoare')
+            switch($input['model'])
             {
-                $rowvalue = CentralizatorRowValue::find($rowvalueinput['id']);
-                $rowvalue->update($rowvalueinput);
+                case 'centralizatoare':
+                    $rowvalue = CentralizatorRowValue::find($rowvalueinput['id']);
+                    $rowvalue->update($rowvalueinput);
+                    break;
+
+                case 'registre':
+                    $$rowvalue = RegistruRowValue::find($rowvalueinput['id']);
+                    $rowvalue->update($rowvalueinput);
+                    break;
             }
         }
 
@@ -123,14 +159,26 @@ trait Rowable {
 
         $statuses = collect($input['statuses'])->pluck('text', 'value')->toArray();
 
-        if($input['model'] == 'centralizatoare')
+        switch( $input['model'] )
         {
-            $rows = CentralizatorRow::whereIn('id', $input['selected_rows'])->update([
-                'status' => $input['status'],
-                'tooltip' => 'Setat ' . $input['status'] . ' de ' . \Auth::user()->full_name . ' la ' . \Carbon\Carbon::now()->format('d-m-Y'),
-            ]);
-        }
+            case 'centralizatoare': 
+                $rows = CentralizatorRow::whereIn('id', $input['selected_rows'])->update([
+                    'status' => $input['status'],
+                    'tooltip' => 'Setat ' . $input['status'] . ' de ' . \Auth::user()->full_name . ' la ' . \Carbon\Carbon::now()->format('d-m-Y'),
+                ]);
+                break;
 
+            case 'registre':
+                $rows = RegistruRow::whereIn('id', $input['selected_rows'])->update([
+                    'status' => $input['status'],
+                    'tooltip' => 'Setat ' . $input['status'] . ' de ' . \Auth::user()->full_name . ' la ' . \Carbon\Carbon::now()->format('d-m-Y'),
+                ]);
+                break;
+
+            default: 
+                throw new \Exception('Invalid model [' . $input['model'] .  ']');
+        }
+        
         return $rows;
     }
 
@@ -138,11 +186,22 @@ trait Rowable {
 
         $statuses = collect($input['statuses'])->pluck('text', 'value')->toArray();
 
-        if($input['model'] == 'centralizatoare')
+        switch( $input['model'] )
         {
-            $rows = CentralizatorRow::whereIn('id', $input['selected_rows'])->update([
-                'visibility' => $input['visibility'],
-            ]);
+            case 'centralizatoare': 
+                $rows = CentralizatorRow::whereIn('id', $input['selected_rows'])->update([
+                    'visibility' => $input['visibility'],
+                ]);
+                break;
+
+            case 'registre':
+                $rows = RegistruRow::whereIn('id', $input['selected_rows'])->update([
+                    'visibility' => $input['visibility'],
+                ]);
+                break;
+
+            default: 
+                throw new \Exception('Invalid model [' . $input['model'] .  ']');
         }
 
         return $rows;
