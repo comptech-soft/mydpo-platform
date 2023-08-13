@@ -3,10 +3,12 @@
 namespace MyDpo\Models\Customer\Registre;
 
 use Illuminate\Database\Eloquent\Model;
-
+use MyDpo\Traits\Itemable;
 
 class Access extends Model {
 
+    use Itemable;
+    
     protected $table = 'customers-registers-users';
 
     protected $casts = [
