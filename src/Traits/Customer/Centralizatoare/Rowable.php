@@ -143,6 +143,12 @@ trait Rowable {
             CentralizatorRowValue::whereIn('row_id', $input['selected_rows'])->delete();
             CentralizatorRow::whereIn('id', $input['selected_rows'])->delete();
         }
+
+        if($input['model'] == 'registre')
+        {
+            RegistruRowValue::whereIn('row_id', $input['selected_rows'])->delete();
+            RegistruRow::whereIn('id', $input['selected_rows'])->delete();
+        }
     }
 
     public static function doSavewidthssetting($input, $record) {
