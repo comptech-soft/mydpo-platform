@@ -57,19 +57,19 @@ class RowFile extends Model {
         return (new UploadFiles($input))->Perform();
     }
 
-    // public static function downloadFile($id) {
+    public static function downloadFile($id) {
 
-    //     $record = self::where('id', $id)->first();
+        $record = self::where('id', $id)->first();
 
-    //     if(!! $record )
-    //     {
-    //         $path = $record->file['url']; 
-    //         $path = \Str::replace(config('filesystems.disks.s3.url'), '', $path);
+        if(!! $record )
+        {
+            $path = $record->file['url']; 
+            $path = \Str::replace(config('filesystems.disks.s3.url'), '', $path);
 
-    //         return \Storage::disk('s3')->download($path, $record->file['file_original_name']);
-    //     }
+            return \Storage::disk('s3')->download($path, $record->file['file_original_name']);
+        }
 
-    //     return NULL;
-    // }
+        return NULL;
+    }
 
 }
