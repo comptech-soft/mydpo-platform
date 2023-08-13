@@ -137,14 +137,7 @@ class Centralizator extends Model {
         return $dest;
     }
 
-    public function DeleteRows() {
-        $rows = Row::where('customer_centralizator_id', $this->id)->get();
-        foreach($rows as $i => $row)
-        {
-            $row->DeleteValues();
-            $row->delete();
-        }
-    }
+    
 
     protected function DuplicateRows($id, $department_ids, $new_customer_id, $old_customer_id) {
 
@@ -165,6 +158,13 @@ class Centralizator extends Model {
                 $newrowinut = $row->toArray();
                 $newrowinut['id'] = NULL;
                 $newrowinut['customer_centralizator_id'] = $id;
+                $newrowinut['action_at'] = $action_at = \Carbon\Carbon::now();
+                $newrowinut['status'] = 'new';
+                $newrowinut['tooltip'] = __('Creat de :full_name la :action_at. (:customer)', [
+                    'action_at' => $action_at->format('d.m.Y'),
+                    'full_name' => \Auth::user()->full_name,
+                    'customer' => 'Bam bam...',
+                ]);
                 
                 $newrow = Row::create($newrowinut);
 
@@ -172,6 +172,15 @@ class Centralizator extends Model {
             }
         }
 
+    }
+
+    public function DeleteRows() {
+        $rows = Row::where('customer_centralizator_id', $this->id)->get();
+        foreach($rows as $i => $row)
+        {
+            $row->DeleteValues();
+            $row->delete();
+        }
     }
 
 }
