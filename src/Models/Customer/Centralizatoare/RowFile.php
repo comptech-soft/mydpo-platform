@@ -5,7 +5,7 @@ namespace MyDpo\Models\Customer\Centralizatoare;
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
-// use MyDpo\Performers\CustomerCentralizatorRowFile\UploadFiles;
+use MyDpo\Performers\Customer\Centralizator\RowFile\UploadFiles;
 
 class RowFile extends Model {
 
