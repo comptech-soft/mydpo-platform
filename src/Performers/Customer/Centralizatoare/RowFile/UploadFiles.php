@@ -3,7 +3,7 @@
 namespace MyDpo\Performers\Customer\Centralizatoare\RowFile;
 
 use MyDpo\Helpers\Perform;
-use MyDpo\Models\Customer\CustomerCentralizatorRowFile;
+use MyDpo\Models\Customer\Centralizatoare\RowFile;
 
 class UploadFiles extends Perform {
 
@@ -59,7 +59,7 @@ class UploadFiles extends Perform {
             ];
         }
 
-        CustomerCentralizatorRowFile::create([
+        RowFile::create([
             'row_id' => $this->row_id,
             'file' => $input,
             'created_by' => \Auth::user()->id,
