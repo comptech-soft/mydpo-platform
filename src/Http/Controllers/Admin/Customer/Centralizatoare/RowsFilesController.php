@@ -4,7 +4,7 @@ namespace MyDpo\Http\Controllers\Admin\Customer\Centralizatoare;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use MyDpo\Models\Customer\RowFile;
+use MyDpo\Models\Customer\Centralizatoare\RowFile;
 
 class RowsFilesController extends Controller {
     
