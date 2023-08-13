@@ -109,53 +109,49 @@ trait Rowable {
      * Setarea statusului unui rand din centralizator | registru
      */
     public static function doSetstatus($input, $record) {
-
+       
         $statuses = collect($input['statuses'])->pluck('text', 'value')->toArray();
 
-        switch( $input['model'] )
-        {
-            case 'centralizatoare': 
-                $rows = CentralizatorRow::whereIn('id', $input['selected_rows'])->update([
+        $rows = self::$myclasses['row']::whereIn('id', $input['selected_rows'])
+            ->update(
+                [
                     'status' => $input['status'],
-                    'tooltip' => 'Setat ' . $input['status'] . ' de ' . \Auth::user()->full_name . ' la ' . \Carbon\Carbon::now()->format('d-m-Y'),
-                ]);
-                break;
-
-            case 'registre':
-                $rows = RegistruRow::whereIn('id', $input['selected_rows'])->update([
-                    'status' => $input['status'],
-                    'tooltip' => 'Setat ' . $input['status'] . ' de ' . \Auth::user()->full_name . ' la ' . \Carbon\Carbon::now()->format('d-m-Y'),
-                ]);
-                break;
-
-            default: 
-                throw new \Exception('Invalid model [' . $input['model'] .  ']');
-        }
+                    'tooltip' => 'Setat ' . $statuses[$input['status']] . ' de full_name la :action_at. (:customer)',
+                ]
+            );
         
         return $rows;
     }
 
+    /**
+     * Setarea vizibilitatii unui rand din centralizator | registru
+     */
     public static function doSetvisibility($input, $record) {
 
-        $statuses = collect($input['statuses'])->pluck('text', 'value')->toArray();
-
-        switch( $input['model'] )
-        {
-            case 'centralizatoare': 
-                $rows = CentralizatorRow::whereIn('id', $input['selected_rows'])->update([
+        $rows = self::$myclasses['row']::whereIn('id', $input['selected_rows'])
+            ->update(
+                [
                     'visibility' => $input['visibility'],
-                ]);
-                break;
+                ]
+            );
 
-            case 'registre':
-                $rows = RegistruRow::whereIn('id', $input['selected_rows'])->update([
-                    'visibility' => $input['visibility'],
-                ]);
-                break;
+        // switch( $input['model'] )
+        // {
+        //     case 'centralizatoare': 
+        //         $rows = CentralizatorRow::whereIn('id', $input['selected_rows'])->update([
+        //             
+        //         ]);
+        //         break;
 
-            default: 
-                throw new \Exception('Invalid model [' . $input['model'] .  ']');
-        }
+        //     case 'registre':
+        //         $rows = RegistruRow::whereIn('id', $input['selected_rows'])->update([
+        //             'visibility' => $input['visibility'],
+        //         ]);
+        //         break;
+
+        //     default: 
+        //         throw new \Exception('Invalid model [' . $input['model'] .  ']');
+        // }
 
         return $rows;
     }
