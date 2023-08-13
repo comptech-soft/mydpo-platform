@@ -100,7 +100,10 @@ class Centralizator extends Model {
         return TipCentralizator::find($input['centralizator_id']);
     }
 
-    
+    public static function Duplicate($input) {
+        dd(__METHOD__, $input);
+    }
+
     public function DeleteRows() {
         $rows = Row::where('customer_centralizator_id', $this->id)->get();
         foreach($rows as $i => $row)

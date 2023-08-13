@@ -3,6 +3,7 @@
 namespace MyDpo\Traits\Customer\Centralizatoare;
 
 use MyDpo\Models\Customer\CustomerDepartment;
+use MyDpo\Models\Customer\Centralizatoare\Centralizator;
 
 trait Centralizatorable {
 
@@ -30,7 +31,14 @@ trait Centralizatorable {
     }
 
     public static function doDuplicate($input, $record) {
-        dd($input);
+
+
+        if($input['model'] == 'centralizatoare')
+        {
+            Centralizator::Duplicate($input);
+        }
+
+        dd($input['model'], $record);
     }
 
     public static function doDelete($input, $record) {
