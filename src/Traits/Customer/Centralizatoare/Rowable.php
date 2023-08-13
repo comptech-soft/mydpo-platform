@@ -119,8 +119,6 @@ trait Rowable {
                     'tooltip' => 'Setat ' . $statuses[$input['status']] . ' de full_name la :action_at. (:customer)',
                 ]
             );
-        
-        return $rows;
     }
 
     /**
@@ -134,47 +132,21 @@ trait Rowable {
                     'visibility' => $input['visibility'],
                 ]
             );
-
-        // switch( $input['model'] )
-        // {
-        //     case 'centralizatoare': 
-        //         $rows = CentralizatorRow::whereIn('id', $input['selected_rows'])->update([
-        //             
-        //         ]);
-        //         break;
-
-        //     case 'registre':
-        //         $rows = RegistruRow::whereIn('id', $input['selected_rows'])->update([
-        //             'visibility' => $input['visibility'],
-        //         ]);
-        //         break;
-
-        //     default: 
-        //         throw new \Exception('Invalid model [' . $input['model'] .  ']');
-        // }
-
-        return $rows;
     }
 
+    /**
+     *  Stergerea randurilor din centralizator | registru
+     */
     public static function doDeleterows($input, $record) {
 
-        switch( $input['model'] )
-        {
-            case 'centralizatoare': 
-                CentralizatorRowValue::whereIn('row_id', $input['selected_rows'])->delete();
-                CentralizatorRow::whereIn('id', $input['selected_rows'])->delete();
-                break;
-
-            case 'registre':
-                RegistruRowValue::whereIn('row_id', $input['selected_rows'])->delete();
-                RegistruRow::whereIn('id', $input['selected_rows'])->delete();
-                break;
-
-            default: 
-                throw new \Exception('Invalid model [' . $input['model'] .  ']');
-        }
+        self::$myclasses['rowvalue']::whereIn('row_id', $input['selected_rows'])->delete();
+        self::$myclasses['row']::whereIn('id', $input['selected_rows'])->delete();
+    
     }
 
+    /**
+     * Setare latimi coloane
+     */
     public static function doSavewidthssetting($input, $record) {
 
         if($input['model'] == 'centralizatoare')
