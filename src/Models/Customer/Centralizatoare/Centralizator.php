@@ -172,11 +172,7 @@ class Centralizator extends Model {
                     'department_id' => $department_record->id,
                     'action_at' => ($action_at = \Carbon\Carbon::now()),
                     'status' => 'new',
-                    'tooltip' => __('Creat de :full_name la :action_at. (:customer)', [
-                        'action_at' => $action_at->format('d.m.Y'),
-                        'full_name' => \Auth::user()->full_name,
-                        'customer' => Customer::find($new_customer_id)->name,
-                    ]),
+                    'tooltip' => 'Duplicat de :full_name la :action_at. (:customer)',
                 ]);
 
                 /**

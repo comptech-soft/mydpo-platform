@@ -89,4 +89,23 @@ class Row extends Model {
         return $input;
     }
 
+    /**
+     * Duplicarea valorilor unui rand
+     *      $id         = row_id pentru vechiurile randuri
+     *      
+     */
+    public function DuplicateValues($id){
+        /**
+         * Pentru toate randurile
+         */
+        foreach(RowValue::where('row_id', $this->id)->get() as $i => $rowvalue)
+        {
+            RowValue::create([
+                ...$rowvalue->toArray(),
+                'id' => NULL,
+                'row_id' => $id,
+            ]);
+        }
+    }
+
 }
