@@ -11,7 +11,7 @@ use MyDpo\Traits\Customer\Centralizatoare\Centralizatorable;
 
 use MyDpo\Models\Livrabile\TipCentralizator;
 use MyDpo\Models\Customer\CustomerDepartment;
-
+use MyDpo\Models\Customer;
 // 
 // use MyDpo\Traits\Exportable;
 // use MyDpo\Traits\Importable;
@@ -178,7 +178,7 @@ class Centralizator extends Model {
                     'tooltip' => __('Creat de :full_name la :action_at. (:customer)', [
                         'action_at' => $action_at->format('d.m.Y'),
                         'full_name' => \Auth::user()->full_name,
-                        'customer' => 'Bam bam...',
+                        'customer' => Customer::find($new_customer_id)->name,
                     ]),
                 ]);
 
