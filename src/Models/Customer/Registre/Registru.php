@@ -91,9 +91,9 @@ class Registru extends Model {
     ];
     
     function rows() {
-        return $this->hasMany(Row::class, 'customer_centralizator_id');
+        return $this->hasMany(Row::class, 'customer_register_id');
     }
-    
+
     public static function GetTip($input) {
         return TipRegistru::find($input['register_id']);
     }
