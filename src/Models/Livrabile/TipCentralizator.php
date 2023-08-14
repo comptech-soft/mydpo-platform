@@ -31,6 +31,8 @@ class TipCentralizator extends Model {
         'has_files_column' => 'integer',
         'has_department_column' => 'integer',
 
+        'columns_count' => 'integer',
+
         'created_by' => 'integer',
         'updated_by' => 'integer',
         'deleted_by' => 'integer',
