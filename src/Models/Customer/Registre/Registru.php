@@ -77,6 +77,10 @@ class Registru extends Model {
         'department',
     ];
 
+    protected $withCount = [
+        'rows'
+    ];
+
     public $numberable = [
         'field' => 'number',
         'where' => "(customer_id = %%customer_id%%) AND (register_id = %%tip_id%%)",
@@ -85,6 +89,10 @@ class Registru extends Model {
             '%%tip_id%%' => 'tip_id',
         ],
     ];
+    
+    function rows() {
+        return $this->hasMany(Row::class, 'customer_centralizator_id');
+    }
     
     public static function GetTip($input) {
         return TipRegistru::find($input['register_id']);
