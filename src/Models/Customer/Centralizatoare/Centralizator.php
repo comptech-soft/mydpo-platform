@@ -86,6 +86,10 @@ class Centralizator extends Model {
         'department',
     ];
 
+    protected $withCount = [
+        'rows'
+    ];
+
     public $numberable = [
         'field' => 'number',
         'where' => "(customer_id = %%customer_id%%) AND (centralizator_id = %%tip_id%%)",
@@ -94,6 +98,10 @@ class Centralizator extends Model {
             '%%tip_id%%' => 'tip_id',
         ],
     ];
+
+    function rows() {
+        return $this->hasMany(Row::class, 'customer_centralizator_id');
+    }
 
     public static function GetTip($input) {
         return TipCentralizator::find($input['centralizator_id']);
