@@ -7,9 +7,9 @@ use Maatwebsite\Excel\Concerns\WithStrictNullComparison;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\FromView;
 
-use MyDpo\Models\Customer\Centralizatoare\Centralizator;
 use MyDpo\Models\Customer\CustomerDepartment;
-use MyDpo\Models\Customer\CustomerCentralizatorRow;
+use MyDpo\Models\Customer\Centralizatoare\Centralizator;
+use MyDpo\Models\Customer\Centralizatoare\Row;
 
 use Illuminate\Contracts\View\View;
 
@@ -34,6 +34,13 @@ class Exporter implements FromView, WithStrictNullComparison, ShouldAutoSize {
     public $id = NULL;
     public $document = NULL;
 
+    protected $myclasses = [
+        'centralizatoare' => [
+            'document' => Centralizator::class,
+            'row' => Row::class,
+        ],
+    ];
+
     public function __construct($input) {
 
         $this->input = $input;   
@@ -47,193 +54,102 @@ class Exporter implements FromView, WithStrictNullComparison, ShouldAutoSize {
             $this->departamente = CustomerDepartment::whereIn('id', $this->department_ids)->pluck('departament', 'id')->toArray();
         }
         
-        $this->document = Centralizator::where('id', $this->id)->first();
+        $this->document = $this->GetDocument();
     }
     
     public function view(): View {
-
         return view('exports.customer.centralizatorable.export', [
-            // 'columns' => $this->Columns(),
-            // 'children' => $this->Children(),
-            // 'records' => [], //$this->records($columns),
+            'header' => $this->GetHeader(),
+            'rows' => $this->GetRows(),
+            'columns' => $this->GetColumns(),
         ]);
     }
 
-    // protected function records($columns) {
+    protected function GetRows(){
+        $rows = $this->myclasses['centralizatoare']['row']::where('customer_centralizator_id', $this->input['document_id'])
+            ->orderBy('order_no')
+            ->get()
+            ->map(function($row) {
+                return [
+                    'visibility' => $row->visibility,
+                    'status' => $row->status,
+                    'department' => $row->department->departament,
+                    'values' => $this->GetValues($row),
+                ];
+            })
+            ->toArray();
 
-    //     $rows = CustomerCentralizatorRow::where('customer_centralizator_id', $this->id)->get();
+        return $rows;
+    }
 
-    //     $value_columns = $this->value_columns($columns);
+    protected function GetValue($record) {
 
-    //     $records = [];
+        $value = $record['value'];
 
-    //     foreach($rows as $i => $row)
-    //     {
-            
-    //         if($this->row_department_is_selected($row))
-    //         {
-    //             $records[] = $this->item($value_columns, $row);
-    //         }
-    //     }
+        if($record['type'] == 'O')
+        {
+            $options = collect(collect($this->document->columns_with_values)->first(function($column) use ($record){
+                return $column['id'] == $record['column_id'];
+            })['props'])->pluck('text', 'value')->toArray();
 
-    //     return $records;
-    // }
+            return $options[$value];
 
-    // protected function row_department_is_selected($row) {
-		
-	// 	if(! $this->centralizator->department_column_id)
-	// 	{
-	// 		return true;
-	// 	}
-		
-    //     if(! $this->department_ids)
-    //     {
-    //         return false;
-    //     }
+        }
 
-    //     $rowvalue = $row->rowvalues->where('column_id', $this->centralizator->department_column_id)->first();
+        if($record['type'] == 'D')
+        {
+            if(!! $value )
+            {
+                return \Carbon\Carbon::createFromFormat('Y-m-d', $value)->format('d.m.Y');
+            }
+        }
 
-    //     if(! $rowvalue)
-    //     {
-    //         return false;
-    //     }
+        if($record['type'] == 'T')
+        {
+            if(!! $value )
+            {
+                return \Carbon\Carbon::createFromFormat('Y-m-d, H:i', $value)->format('d.m.Y, H:i');
+            }
+        }
+
+        return $value;
+    }
+
+    protected function GetValues($row) {
+
+        $records = $row->props['rowvalues'];
+
+        foreach($records as $i => $record)
+        {
+            $records[$i]['value'] = $this->GetValue($record);
+        }
         
-    //     return in_array($rowvalue->value, $this->department_ids);
-    // }
+        return $records;
+    }
 
-    // protected function item($value_columns, $row) {
-    //     $item = [];
+    protected function GetColumns() {
 
-    //     foreach($value_columns as $j => $column)
-    //     {
-    //         $rowvalue = $row->rowvalues->where('column_id', $column['id'])->first();
+        return collect($this->document->columns_with_values)
+            ->filter( function($column) {
+                return ! in_array($column['type'], ['NRCRT', 'VISIBILITY', 'STATUS', 'DEPARTMENT', 'CHECK', 'FILES', 'EMPTY']);
+            })
+            ->toArray();
+    }
 
-    //         $item[] = $this->value($rowvalue, $column);   
-    //     }
+    protected function GetHeader() {
+        /**
+         * Nu vom transmite coloanele CHECK, FILES
+         */
 
-    //     return $item;
-    // }
+        return collect($this->document->table_headers)
+            ->filter( function($column) {
+                return ! in_array($column['type'], ['CHECK', 'FILES', 'EMPTY']);
+            })
+            ->toArray();
+    }
 
-    // protected function valueVisibility($rowvalue, $column) {
-    //     return $rowvalue->value;
-    // }
-
-    // protected function valueStatus($rowvalue, $column) {
-    //     return $rowvalue->value;
-    // }
-
-    // protected function valueDepartment($rowvalue, $column) {
-    //     return array_key_exists($rowvalue->value, $this->departamente) ? $this->departamente[$rowvalue->value] : NULL;
-    // }
-
-    // protected function valueC($rowvalue, $column) {
-    //     return $rowvalue->value;
-    // }
-
-    // protected function valueN($rowvalue, $column) {
-    //     return $rowvalue->value;
-    // }
-
-    // protected function valueD($rowvalue, $column) {
-    //     return $rowvalue->value;
-    // }
-
-    // protected function valueT($rowvalue, $column) {
-    //     return $rowvalue->value;
-    // }
-
-    // protected function valueO($rowvalue, $column) {
-    //     $options = collect($column['props'])->pluck('text', 'value')->toArray();
-
-    //     return array_key_exists($rowvalue->value, $options) ? $options[$rowvalue->value] : NULL;
-    // }
-
-    // protected function value($rowvalue, $column) {
-    //     if(! $rowvalue )
-    //     {
-    //         return NULL;
-    //     }
-
-    //     $method = 'value' . ucfirst(strtolower($column['type']));
-
-    //     return $this->{$method}($rowvalue, $column);
-    // }
-
-    // protected function value_columns($columns) {
-
-    //     $value_columns = [];
-        
-    //     foreach($columns as $i => $column)
-    //     {
-    //         if( count($column['children']) == 0)
-    //         {
-    //             $value_columns[] = $column;
-    //         }
-    //         else
-    //         {
-    //             foreach( $column['children'] as $j => $child)
-    //             {
-    //                 $value_columns[] = $child;
-    //             }
-    //         }
-    //     }
-
-    //     return $value_columns;
-    // }
-
-    // protected function columns_colspan_rowspan($columns, $has_children) {
-
-    //     return $columns->map(function($item) use ($has_children){
-    //         return [
-    //             ...$item,
-    //             'colspan' => count($item['children']) == 0 ? NULL : count($item['children']) ,
-    //             'rowspan' => count($item['children']) > 0 ? NULL : ($has_children ? 2 : NULL),
-    //         ];
-    //     });
-
-    // }
-
-    // protected function Columns() {
-    //     return collect($this->centralizator->columns_tree)->filter( function($item) {
-    //         return ! in_array($item['type'], ['CHECK', 'FILES', 'EMPTY']);
-    //     })->map(function($item){
-
-    //         $caption = $item['caption'];
-
-    //         if(is_string($caption))
-    //         {
-    //             $caption = \Str::replace('#', ' ', $caption);
-    //         }
-    //         else
-    //         {
-    //             if(is_array($caption))
-    //             {
-    //                 $caption = implode(' ', $caption);
-    //             }
-    //         }
-
-    //         $type = $item['type'];
-
-    //         if( ! $type )
-    //         {
-    //             $type = 'group';
-    //         }
-
-    //         return [
-    //             ...$item,
-    //             'caption' => $caption,
-    //             'type' => $type,
-    //         ];
-
-    //     })->toArray();
-    // }
-
-    // protected function Children() {
-    //     return collect($this->Columns())->filter(function($item){
-
-    //         return count($item['children']) > 0;
-
-    //     });
-    // }
-
+    protected function GetDocument() {
+        return $this->myclasses['centralizatoare']['document']::find($this->input['document_id']);
+    }
+    
 }
