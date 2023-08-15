@@ -7,13 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 use MyDpo\Traits\Customer\Centralizatoare\Rowable;
+use MyDpo\Traits\Exportable;
 
 use MyDpo\Models\Livrabile\TipCentralizator;
 use MyDpo\Models\Livrabile\TipCentralizatorColoana;
 
 class Row extends Model {
 
-    use Itemable, Actionable, Rowable;
+    use Itemable, Actionable, Rowable, Exportable;
 
     protected $table = 'customers-centralizatoare-rows';
 
