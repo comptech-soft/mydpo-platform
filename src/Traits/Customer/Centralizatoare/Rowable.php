@@ -5,6 +5,7 @@ namespace MyDpo\Traits\Customer\Centralizatoare;
 use MyDpo\Models\Customer\CustomerDepartment;
 use MyDpo\Models\Livrabile\TipCentralizator;
 use MyDpo\Models\Livrabile\TipCentralizatorColoana;
+use MyDpo\Traits\Exportable;
 
 trait Rowable {
 
@@ -220,10 +221,6 @@ trait Rowable {
                 ]);
             }
         }
-    }
-
-    public static function doExport($input, $record) {
-        dd($input, $record);
     }
 
 }
