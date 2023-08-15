@@ -52,7 +52,7 @@ class Exporter implements FromView, WithStrictNullComparison, ShouldAutoSize {
     
     public function view(): View {
 
-        return view('exports.customer.centralizator.export', [
+        return view('exports.customer.centralizatorable.export', [
             // 'columns' => $this->Columns(),
             // 'children' => $this->Children(),
             // 'records' => [], //$this->records($columns),
