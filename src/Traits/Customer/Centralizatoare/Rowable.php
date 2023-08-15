@@ -221,4 +221,9 @@ trait Rowable {
             }
         }
     }
+
+    public static function doExport($input, $record) {
+        dd($input, $record);
+    }
+
 }
