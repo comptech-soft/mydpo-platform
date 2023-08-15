@@ -60,8 +60,8 @@ class Exporter implements FromView, WithStrictNullComparison, ShouldAutoSize {
     public function view(): View {
         return view('exports.customer.centralizatorable.export', [
             'header' => $this->GetHeader(),
-            'rows' => $this->GetRows(),
-            'columns' => $this->GetColumns(),
+            'rows' => $this->just_structure == 1 ? [] : $this->GetRows(),
+            'columns' => $this->just_structure == 1 ? [] : $this->GetColumns(),
         ]);
     }
 
@@ -151,5 +151,5 @@ class Exporter implements FromView, WithStrictNullComparison, ShouldAutoSize {
     protected function GetDocument() {
         return $this->myclasses['centralizatoare']['document']::find($this->input['document_id']);
     }
-    
+
 }
