@@ -12,6 +12,9 @@ use MyDpo\Traits\Exportable;
 use MyDpo\Models\Livrabile\TipCentralizator;
 use MyDpo\Models\Livrabile\TipCentralizatorColoana;
 
+use MyDpo\Exports\Customer\Centralizator\Exporter;
+// use MyDpo\Imports\CustomerCentralizator\Importer;
+
 class Row extends Model {
 
     use Itemable, Actionable, Rowable, Exportable;
@@ -70,6 +73,10 @@ class Row extends Model {
         'rowvalue' => RowValue::class,
         'access' => Access::class,
     ];
+    
+    protected static function GetExporter($input) {
+        return new Exporter($input); 
+    }
     
     public function files() {
         return $this->hasMany(RowFile::class, 'row_id');

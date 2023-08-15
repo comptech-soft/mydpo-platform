@@ -12,8 +12,7 @@ use MyDpo\Traits\Itemable;
 // use MyDpo\Models\Customer\CustomerDepartment;
 // 
 // use MyDpo\Models\Livrabile\TipCentralizatorColoana;
-// use MyDpo\Exports\CustomerCentralizator\Exporter;
-// use MyDpo\Imports\CustomerCentralizator\Importer;
+
 
 // use MyDpo\Performers\CustomerCentralizator\Import;
 ;
@@ -87,9 +86,7 @@ class Centralizator extends Model {
     //     ];
     // }
 
-    // protected static function GetExporter($input) {
-    //     return new Exporter($input); 
-    // }
+
 
     // protected static function GetImporter($input) {
     //     return new Importer($input); 

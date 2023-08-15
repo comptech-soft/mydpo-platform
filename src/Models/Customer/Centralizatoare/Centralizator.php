@@ -107,6 +107,10 @@ class Centralizator extends Model {
         return TipCentralizator::find($input['centralizator_id']);
     }
 
+    protected static function GetExporter($input) {
+        return new Exporter($input); 
+    }
+
     /**
      * Duplicarea unui centralizator
      */

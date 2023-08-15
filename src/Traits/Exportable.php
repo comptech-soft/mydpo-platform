@@ -6,8 +6,6 @@ trait Exportable {
 
     public static function doExport($input, $record) {
        
-        dd($input, $record);
-        
         if(! \Storage::exists('public/exports/' . \Auth::user()->id) )
         {
             \Storage::disk('public')->makeDirectory('exports/' . \Auth::user()->id, 0777);

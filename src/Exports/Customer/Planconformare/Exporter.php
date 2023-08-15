@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Exports\CustomerPlanconformare;
+namespace MyDpo\Exports\Customer\Planconformare;
 
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithStrictNullComparison;
