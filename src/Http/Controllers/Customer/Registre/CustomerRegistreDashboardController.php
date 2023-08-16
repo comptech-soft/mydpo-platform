@@ -5,9 +5,9 @@ namespace MyDpo\Http\Controllers\Customer\Registre;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
-use MyDpo\Models\Customer;
+use MyDpo\Models\Customer\Customer;
 use MyDpo\Models\Livrabile\TipRegistru;
-use MyDpo\Models\Customer\Registre\Asociere;
+use MyDpo\Models\Customer\Customer\Registre\Asociere;
 
 class CustomerRegistreDashboardController extends Controller {
     

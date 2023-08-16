@@ -4,7 +4,7 @@ namespace MyDpo\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use MyDpo\Models\CustomerStatus;
+use MyDpo\Models\Customer\CustomerStatus;
 
 class CustomersStatusesController extends Controller
 {

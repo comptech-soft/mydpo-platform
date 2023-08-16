@@ -4,7 +4,7 @@ namespace MyDpo\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use MyDpo\Models\CustomerDashboardItem;
+use MyDpo\Models\Customer\CustomerDashboardItem;
 
 class CustomersDashboardItemsController extends Controller
 {

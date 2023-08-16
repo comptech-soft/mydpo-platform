@@ -4,7 +4,7 @@ namespace MyDpo\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use MyDpo\Models\CustomerFolder;
+use MyDpo\Models\Customer\CustomerFolder;
 use MyDpo\Models\Folder;
 
 class CustomersFoldersController extends Controller

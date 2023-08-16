@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Models\User;
 use MyDpo\Models\Curs;
-use MyDpo\Models\Customer;
-use MyDpo\Models\CustomerCursUser;
+use MyDpo\Models\Customer\Customer;
+use MyDpo\Models\Customer\CustomerCursUser;
 use MyDpo\Events\Knolyx\CursFinished;
 
 class KnolyxController extends Controller {

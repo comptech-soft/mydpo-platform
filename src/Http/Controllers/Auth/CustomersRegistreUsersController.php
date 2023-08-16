@@ -4,7 +4,7 @@ namespace MyDpo\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use MyDpo\Models\CustomerRegistruUser;
+use MyDpo\Models\Customer\CustomerRegistruUser;
 
 class CustomersRegistreUsersController extends Controller {
 

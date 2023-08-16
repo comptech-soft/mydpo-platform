@@ -4,7 +4,7 @@ namespace MyDpo\Http\Middleware;
 
 use Closure;
 use MyDpo\Models\Activation;
-use MyDpo\Models\CustomerAccount;
+use MyDpo\Models\Customer\Customer\CustomerAccount;
 use MyDpo\Models\RoleUser;
 
 class IsActivated {

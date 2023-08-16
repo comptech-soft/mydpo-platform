@@ -4,7 +4,7 @@ namespace MyDpo\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use MyDpo\Helpers\Response;
-use MyDpo\Models\CustomerAccount;
+use MyDpo\Models\Customer\CustomerAccount;
 
 class PersonsController extends Controller {
     

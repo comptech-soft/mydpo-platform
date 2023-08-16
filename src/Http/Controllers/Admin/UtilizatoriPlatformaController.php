@@ -5,7 +5,7 @@ namespace MyDpo\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Helpers\Response;
-use MyDpo\Models\CustomerAccount;
+use MyDpo\Models\Customer\CustomerAccount;
 
 class UtilizatoriPlatformaController extends Controller {
     

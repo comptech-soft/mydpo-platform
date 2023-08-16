@@ -5,8 +5,8 @@ namespace MyDpo\Http\Controllers\Customer;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
-use MyDpo\Models\Customer;
-use MyDpo\Models\Customer\CustomerEmail;
+use MyDpo\Models\Customer\Customer;
+use MyDpo\Models\Customer\Customer\CustomerEmail;
 
 class CustomerEmailsController extends Controller {
 

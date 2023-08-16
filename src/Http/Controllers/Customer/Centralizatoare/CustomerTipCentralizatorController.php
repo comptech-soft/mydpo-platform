@@ -5,9 +5,9 @@ namespace MyDpo\Http\Controllers\Customer\Centralizatoare;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
-use MyDpo\Models\Customer;
+use MyDpo\Models\Customer\Customer;
 use MyDpo\Models\Livrabile\TipCentralizator;
-use MyDpo\Models\Customer\Centralizatoare\Centralizator;
+use MyDpo\Models\Customer\Customer\Centralizatoare\Centralizator;
 
 class CustomerTipCentralizatorController extends Controller {
     

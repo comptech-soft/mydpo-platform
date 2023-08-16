@@ -3,8 +3,8 @@
 namespace MyDpo\Http\Middleware;
 
 use Closure;
-use MyDpo\Models\Customer;
-use MyDpo\Models\CustomerAccount;
+use MyDpo\Models\Customer\Customer;
+use MyDpo\Models\Customer\Customer\CustomerAccount;
 
 class ValidCustomer {
 

@@ -5,9 +5,9 @@ namespace MyDpo\Http\Controllers\Customer\Dashboard;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
-use MyDpo\Models\Customer;
-use MyDpo\Models\Customer\Dashboard\Item;
-use MyDpo\Models\Customer\Dashboard\Entity;
+use MyDpo\Models\Customer\Customer;
+use MyDpo\Models\Customer\Customer\Dashboard\Item;
+use MyDpo\Models\Customer\Customer\Dashboard\Entity;
 
 class DashboardController extends Controller {
     

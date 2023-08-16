@@ -6,15 +6,15 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
 
-use MyDpo\Models\Customer;
+use MyDpo\Models\Customer\Customer;
 
 use MyDpo\Models\Livrabile\TipCentralizator;
-use MyDpo\Models\Customer\Centralizatoare\Centralizator;
-use MyDpo\Models\Customer\Centralizatoare\Row as CentralizatorRow;
+use MyDpo\Models\Customer\Customer\Centralizatoare\Centralizator;
+use MyDpo\Models\Customer\Customer\Centralizatoare\Row as CentralizatorRow;
 
 use MyDpo\Models\Livrabile\TipRegistru;
-use MyDpo\Models\Customer\Registre\Registru;
-use MyDpo\Models\Customer\Registre\Row as RegistruRow;
+use MyDpo\Models\Customer\Customer\Registre\Registru;
+use MyDpo\Models\Customer\Customer\Registre\Row as RegistruRow;
 
 class CentralizatorableRowsController extends Controller {
     
