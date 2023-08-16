@@ -5,7 +5,7 @@ namespace MyDpo\Models\Customer;
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Helpers\Performers\Datatable\DoAction;
-use MyDpo\Models\Satuses\CustomerStatus;
+use MyDpo\Models\Customer\Satuses\Status;
 use MyDpo\Models\System\City;
 use MyDpo\Models\Customer\Contracts\CustomerContract;
 use MyDpo\Models\Customer\Accounts\Account;
@@ -114,7 +114,7 @@ class Customer_base extends Model {
     }
 
     public function mystatus() {
-        return $this->belongsTo(CustomerStatus::class, 'status', 'slug');
+        return $this->belongsTo(Status::class, 'status', 'slug');
     }
 
     public function city() {
