@@ -3,10 +3,15 @@
 namespace MyDpo\Models\Customer\Departments;
 
 use Illuminate\Database\Eloquent\Model;
+
+
 use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Rules\CustomerDepartment\UniqueName;
+
 use MyDpo\Traits\Itemable;
+
+use MyDpo\Models\Customer\Accounts\Account;
 
 class Department extends Model {
 
@@ -43,7 +48,7 @@ class Department extends Model {
     ];
 
     function accounts() {
-        return $this->hasMany(CustomerAccount::class, 'department_id');
+        return $this->hasMany(Account::class, 'department_id');
     }
 
     public static function CreateIfNecessary($customer_id, $new_customer_id, $department_id) {

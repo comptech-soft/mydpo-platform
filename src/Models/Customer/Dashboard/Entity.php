@@ -24,7 +24,7 @@ class Entity extends Model {
     ];
 
     protected static $myclasses = [
-        'department' => \MyDpo\Models\Customer\Departments\Department::class,
+        'departments' => \MyDpo\Models\Customer\Departments\Department::class,
     ];
    
     /**
@@ -38,11 +38,22 @@ class Entity extends Model {
         foreach(self::orderBy('order_no')->get() as $i => $record)
         {
             if( in_array(config('app.platform'), $record->platform) )
-            {
-                $r[] = $record;
+            {                
+                $count = array_key_exists($record->slug, self::$myclasses) 
+                    ? self::$myclasses[$record->slug]::where('customer_id', request()->customer_id)
+                    : NULL;
+                
+                if($count)
+                dd($count);
+
+                $r[] = [
+                    ...$record->toArray(),
+                    'count' => 17,
+                ];
             }
         }
 
+        // dd($r);
         return $r;
     }
 
