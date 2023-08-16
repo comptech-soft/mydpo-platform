@@ -34,7 +34,7 @@ class Item extends Model {
         'plan-conformare' => \MyDpo\Models\Customer\Planuriconformare\Planconformare::class,
         // 'registre' => \MyDpo\Models\Customer\Registre\Registru::class,
         // 'centralizatoare' => \MyDpo\Models\Customer\Centralizatoare\Centralizator::class,
-        'cursuri' => \MyDpo\Models\CustomerCurs::class,
+        'cursuri' => \MyDpo\Models\Customer\ELearning\CustomerCurs::class,
         // 'accounts' => \MyDpo\Models\Customer\Accounts\Account::class,
         // 'team' => \MyDpo\Models\Customer\Teams\Team::class,
         // 'monthly-reports' => \MyDpo\Models\Customer\Rapoartelunare\RaportLunar::class,
