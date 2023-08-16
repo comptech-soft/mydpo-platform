@@ -4,7 +4,7 @@ namespace MyDpo\Performers\System;
 
 use MyDpo\Helpers\Perform;
 use MyDpo\Models\System\SysConfig;
-use MyDpo\Models\Platform;
+use MyDpo\Models\System\Platform;
 use MyDpo\Models\MaterialStatus;
 use MyDpo\Models\Language;
 use MyDpo\Models\System\Translation;

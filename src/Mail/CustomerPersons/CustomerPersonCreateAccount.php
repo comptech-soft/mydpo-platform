@@ -4,7 +4,7 @@ namespace MyDpo\Mail\CustomerPersons;
 
 use MyDpo\Mail\BaseEmail;
 use MyDpo\Models\Activation;
-use MyDpo\Models\Platform;
+use MyDpo\Models\System\Platform;
 
 class CustomerPersonCreateAccount extends BaseEmail {
     
