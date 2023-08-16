@@ -1,10 +1,10 @@
 <?php
 
-namespace MyDpo\Models\Customer;
+namespace MyDpo\Models\Customer\Dasboard;
 
 use Illuminate\Database\Eloquent\Model;
 
-class CustomerEntityItem extends Model {
+class Entity extends Model {
 
     protected $table = 'customers-entities-items';
 

@@ -1,14 +1,12 @@
 <?php
 
-namespace MyDpo\Models\Customer;
+namespace MyDpo\Models\Customer\Dashboard;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Traits\Actionable;
-// use MyDpo\Performers\CustomerDashboardItem\SaveReorderedItems;
-// use MyDpo\Performers\CustomerDashboardItem\SaveProfileReorderedItems;
 
-class CustomerDashboardItem extends Model {
+class Item extends Model {
 
     use Actionable;
 
@@ -87,25 +85,5 @@ class CustomerDashboardItem extends Model {
         return self::getByColumns();
 
     }
-
-    // public static function saveReorderedItems($input) {
-    //     return 
-    //         (new SaveReorderedItems($input))
-    //         ->SetSuccessMessage(NULL)
-    //         ->SetExceptionMessage([
-    //             \Exception::class => NULL,
-    //         ])
-    //         ->Perform();
-    // }
-
-    // public static function saveProfileReorderedItems($input) {
-    //     return 
-    //         (new SaveProfileReorderedItems($input))
-    //         ->SetSuccessMessage(NULL)
-    //         ->SetExceptionMessage([
-    //             \Exception::class => NULL,
-    //         ])
-    //         ->Perform();
-    // }
 
 }
