@@ -6,8 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Traits\Itemable;
-use MyDpo\Models\Country;
-use MyDpo\Models\City;
 
 class Region extends Model {
   
