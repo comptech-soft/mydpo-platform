@@ -25,6 +25,15 @@ class Entity extends Model {
 
     protected static $myclasses = [
         'departments' => \MyDpo\Models\Customer\Departments\Department::class,
+        'contracts' => \MyDpo\Models\Customer\Contracts\Contract::class,
+        'orders' => \MyDpo\Models\Customer\Contracts\Order::class,
+        'services' => \MyDpo\Models\Customer\Contracts\Account::class,
+        'accounts' => \MyDpo\Models\Customer\Accounts\OrderService::class,
+        'team' => \MyDpo\Models\Customer\Teams\Team::class,
+        'monthly-reports' => \MyDpo\Models\Customer\Rapoartelunare\RaportLunar::class,
+        'tasks' => \MyDpo\Models\Customer\Taskuri\Task::class,
+        'emails' => \MyDpo\Models\Customer\Emails\Email::class,
+        'notifications' => \MyDpo\Models\Customer\Notifications\Notification::class,
     ];
    
     /**
@@ -40,20 +49,17 @@ class Entity extends Model {
             if( in_array(config('app.platform'), $record->platform) )
             {                
                 $count = array_key_exists($record->slug, self::$myclasses) 
-                    ? self::$myclasses[$record->slug]::where('customer_id', request()->customer_id)
-                    : NULL;
+                    ? self::$myclasses[$record->slug]::where('customer_id', request()->customer_id)->count()
+                    : -1;
                 
-                if($count)
-                dd($count);
 
                 $r[] = [
                     ...$record->toArray(),
-                    'count' => 17,
+                    'count' => $count,
                 ];
             }
         }
-
-        // dd($r);
+        
         return $r;
     }
 
