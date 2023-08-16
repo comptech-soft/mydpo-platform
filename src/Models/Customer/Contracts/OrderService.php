@@ -7,7 +7,7 @@ use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Models\Service;
 use MyDpo\Models\CustomerOrder;
-use MyDpo\Models\Customer_base as Customer;
+use MyDpo\Models\Customer\Customer_base as Customer;
 use MyDpo\Rules\CustomerService\UniqueOrderService;
 
 class OrderService extends Model {
