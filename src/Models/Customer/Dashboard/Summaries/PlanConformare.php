@@ -11,7 +11,7 @@ class PlanConformare {
                 COUNT(*) AS count_records
             FROM `customers-planuri-conformare`
             WHERE 
-                (`customers-files`.`customer_id` = " . $customer_id . ")
+                (`customers-planuri-conformare`.`customer_id` = " . $customer_id . ")
             ";
 
         $records = \DB::select($sql);
