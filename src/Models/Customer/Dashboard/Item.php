@@ -41,9 +41,9 @@ class Item extends Model {
         'cursuri' => \MyDpo\Models\Customer\Dashboard\Summaries\Cursuri::class,
         'studii-caz' => \MyDpo\Models\Customer\Dashboard\Summaries\Studiicaz::class,
         'infografice' => \MyDpo\Models\Customer\Dashboard\Summaries\Infografice::class,
-        'sfaturile-dpo' => \MyDpo\Models\Customer\Dashboard\Summaries\Sfaturidpo::class,
+        'sfaturi' => \MyDpo\Models\Customer\Dashboard\Summaries\Sfaturidpo::class,
         'dpia' => \MyDpo\Models\Customer\Dashboard\Summaries\Dpia::class,
-        'instrumente-de-lucru' => \MyDpo\Models\Customer\Dashboard\Summaries\Instrumentelucru::class,
+        'tools' => \MyDpo\Models\Customer\Dashboard\Summaries\Instrumentelucru::class,
     ];
 
     public static function getByColumns() {
