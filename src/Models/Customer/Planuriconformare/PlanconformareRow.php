@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Models\Customer;
+namespace MyDpo\Models\Customer\Planuriconformare;
 
 use Illuminate\Database\Eloquent\Model;
 // use Kalnoy\Nestedset\NodeTrait;
@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 // use MyDpo\Performers\CustomerCentralizator\SaveSettings;
 // use MyDpo\Performers\CustomerCentralizator\SetAccess;
 
-class CustomerPlanconformareRow extends Model {
+class PlanconformareRow extends Model {
 
     // use NodeTrait;
 

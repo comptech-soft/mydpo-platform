@@ -1,15 +1,15 @@
 <?php
 
-namespace MyDpo\Models\Customer;
+namespace MyDpo\Models\Customer\Planuriconformare;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
-use MyDpo\Models\Livrabile\Planconformare;
+use MyDpo\Models\Livrabile\Planconformare as Structura;
 use MyDpo\Traits\Exportable;
 use MyDpo\Exports\CustomerPlanconformare\Exporter;
 
-class CustomerPlanconformare extends Model {
+class Planconformare extends Model {
 
     use Itemable, Actionable, Exportable;
 
@@ -91,13 +91,13 @@ class CustomerPlanconformare extends Model {
 
     public static function doInsert($input, $record) { 
 
-        $current_lines = PlanConformare::whereNull('parent_id')->get()->toArray();
+        $current_lines = Structura::whereNull('parent_id')->get()->toArray();
 
         $input = [
             ...$input,
             'current_lines' => $current_lines,
-            'columns' => PlanConformare::GetColumns(),
-            'pondere_total' => PlanConformare::TotalPondere(),
+            'columns' => Structura::GetColumns(),
+            'pondere_total' => Structura::TotalPondere(),
             'value_inceput_an' => 0,
             'value_final_s1' => 0,
             'value_final_s2' => 0,
@@ -206,7 +206,7 @@ class CustomerPlanconformare extends Model {
 
     public function CreateRows() {
 
-        foreach(Planconformare::all() as $i => $row) 
+        foreach(Structura::all() as $i => $row) 
         {
             $input = [
                 'customer_plan_id' => $this->id,
