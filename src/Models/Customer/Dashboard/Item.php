@@ -39,9 +39,9 @@ class Item extends Model {
         'centralizatoare' => \MyDpo\Models\Customer\Dashboard\Summaries\Centralizatoare::class,
         'chestionare' => \MyDpo\Models\Customer\Dashboard\Summaries\Chestionare::class,
         'cursuri' => \MyDpo\Models\Customer\Dashboard\Summaries\Cursuri::class,
-        
-        'studii-de-caz' => \MyDpo\Models\Customer\Dashboard\Summaries\Centralizatoare::class,
-        'infografice' => \MyDpo\Models\Customer\Dashboard\Summaries\Centralizatoare::class,
+        'studii-caz' => \MyDpo\Models\Customer\Dashboard\Summaries\Studiicaz::class,
+        'infografice' => \MyDpo\Models\Customer\Dashboard\Summaries\Infografice::class,
+
         'sfaturile-dpo' => \MyDpo\Models\Customer\Dashboard\Summaries\Centralizatoare::class,
         'dpia' => \MyDpo\Models\Customer\Dashboard\Summaries\Centralizatoare::class,
         'instrumente-de-lucru' => \MyDpo\Models\Customer\Dashboard\Summaries\Centralizatoare::class,
