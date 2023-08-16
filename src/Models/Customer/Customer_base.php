@@ -5,7 +5,7 @@ namespace MyDpo\Models\Customer;
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Helpers\Performers\Datatable\DoAction;
-use MyDpo\Models\Customer\Satuses\Status;
+use MyDpo\Models\Customer\Statuses\Status;
 use MyDpo\Models\System\City;
 use MyDpo\Models\Customer\Contracts\CustomerContract;
 use MyDpo\Models\Customer\Accounts\Account;
