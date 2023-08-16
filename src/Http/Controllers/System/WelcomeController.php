@@ -7,16 +7,13 @@ use Illuminate\Http\Request;
 
 class WelcomeController extends Controller {
     
-    public function index(Request $r) {
-
-        return redirect(! \Auth::check() ? 'connect' : 'dashboard' );
-
-
-        // if(  )
-        // {
-        //     return redirect(config('app.url'). '/connect');
-        // }
-        // return Redirect('dashboard');
-    }
+    /**
+     * Se ajunge pe pagina '/'
+     * Se redirecteaza catre dashboard sau connect un functie de existenta/inexistenta utilizatorului conectat
+     */
     
+    public function index(Request $r) {
+        return redirect(! \Auth::check() ? 'connect' : 'dashboard' );
+    }
+
 }

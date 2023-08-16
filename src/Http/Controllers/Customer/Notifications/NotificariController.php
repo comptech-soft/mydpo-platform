@@ -28,10 +28,5 @@ class NotificariController extends Controller {
     public function doAction($action, Request $r) {
         return Notification::doAction($action, $r->all());
     }
-
-    // public function getItems(Request $r) {
-    //     return CustomerNotification::getItems($r->all());
-    // }
-
-  
+      
 }
