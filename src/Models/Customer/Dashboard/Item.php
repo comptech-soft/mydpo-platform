@@ -42,9 +42,8 @@ class Item extends Model {
         'studii-caz' => \MyDpo\Models\Customer\Dashboard\Summaries\Studiicaz::class,
         'infografice' => \MyDpo\Models\Customer\Dashboard\Summaries\Infografice::class,
         'sfaturile-dpo' => \MyDpo\Models\Customer\Dashboard\Summaries\Sfaturidpo::class,
-
-        'dpia' => \MyDpo\Models\Customer\Dashboard\Summaries\Centralizatoare::class,
-        'instrumente-de-lucru' => \MyDpo\Models\Customer\Dashboard\Summaries\Centralizatoare::class,
+        'dpia' => \MyDpo\Models\Customer\Dashboard\Summaries\Dpia::class,
+        'instrumente-de-lucru' => \MyDpo\Models\Customer\Dashboard\Summaries\Instrumentelucru::class,
     ];
 
     public static function getByColumns() {
