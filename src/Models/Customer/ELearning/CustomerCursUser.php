@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Models;
+namespace MyDpo\Models\Customer\ELearning;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Models\User;
