@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Helpers\Response;
 use MyDpo\Core\Http\Response\Index;
-use MyDpo\Models\Knolyx;
+use MyDpo\Models\Livrabile\ELearning\Knolyx;
 
 class DashboardController extends Controller {
     

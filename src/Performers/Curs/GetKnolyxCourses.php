@@ -4,7 +4,7 @@ namespace MyDpo\Performers\Curs;
 
 use MyDpo\Helpers\Perform;
 use MyDpo\Models\System\SysConfig;
-use MyDpo\Models\Knolyx;
+use MyDpo\Models\Livrabile\ELearning\Knolyx;
 use MyDpo\Models\Curs;
 
 class GetKnolyxCourses extends Perform {

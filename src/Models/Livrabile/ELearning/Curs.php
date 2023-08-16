@@ -11,7 +11,7 @@ use MyDpo\Models\Cursadresare;
 use MyDpo\Traits\DaysDifference;
 use MyDpo\Performers\Curs\OpenKnolyxCourse;
 use MyDpo\Performers\Curs\GetKnolyxCourses;
-use MyDpo\Models\Knolyx;
+use MyDpo\Models\Livrabile\ELearning\Knolyx;
 use MyDpo\Rules\Curs\IsUrlPresent;
 use MyDpo\Rules\Curs\IsFilePresent;
 use MyDpo\Scopes\NotdeletedScope;
