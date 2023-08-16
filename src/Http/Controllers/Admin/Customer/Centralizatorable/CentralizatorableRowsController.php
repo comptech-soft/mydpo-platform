@@ -87,17 +87,7 @@ class CentralizatorableRowsController extends Controller {
     }
 
     public function doAction($action, Request $r) {
-
-        if($r->model == 'centralizatoare')
-        {
-            return CentralizatorRow::doAction($action, $r->all());
-        }
-
-        if($r->model == 'registre')
-        {
-            return RegistruRow::doAction($action, $r->all());
-        }
-
+        $this->myclasses[$model]['row']::doAction($action, $r->all());
     }
 
 }
