@@ -1,61 +1,53 @@
 <?php
 
-namespace MyDpo\Http\Controllers\Admin\Customer\Centralizatoare;
+namespace MyDpo\Http\Controllers\Customer\Registre;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
 use MyDpo\Models\Customer;
-use MyDpo\Models\Livrabile\TipCentralizator;
-use MyDpo\Models\Customer\Centralizatoare\Centralizator;
+use MyDpo\Models\Livrabile\TipRegistru;
+use MyDpo\Models\Customer\Registre\Registru;
 
-class CustomerTipCentralizatorController extends Controller {
+class CustomerTipRegistruController extends Controller {
     
     public function index($page, $customer_id, $tip_id, Request $r) {
-        
+
         if( ! ($customer = Customer::find($customer_id)) )
         {
             return redirect('admin/clienti');
         }
 
-        if(! in_array($page, ['centralizatoare', 'gap']))
+        if(! in_array($page, ['registre', 'gap']))
         {
             return redirect('customer-dashboard/' . $customer_id);
         }
 
-        if( ! ($tip = TipCentralizator::find($tip_id)) )
+        if( ! ($tip = TipRegistru::find($tip_id)) )
         {
-            return redirect('centralizatoare-dashboard/' . $page . '/' . $customer_id);
+            return redirect('registre-dashboard/' . $page . '/' . $customer_id);
         }
 
         return Index::View(
             styles: ['css/app.css'],
-            scripts: ['apps/customer/customers-centralizatoare-list/index.js'],
+            scripts: ['apps/customer/customers-registre-list/index.js'],
             payload: [
                 'page' => $page,
                 'customer_id' => $customer_id,
                 'tip_id' => $tip_id,
                 'customer' => $customer,
                 'tip' => $tip,
-                'model' => 'Customercentralizatoare',
+                'model' => 'Customerregistre',
             ],
-        );    
-
-      
+        );        
     }
 
     public function getRecords(Request $r) {
-        return Centralizator::getRecords($r->all());
+        return Registru::getRecords($r->all());
     }
 
     public function doAction($action, Request $r) {
-        return Centralizator::doAction($action, $r->all());
+        return Registru::doAction($action, $r->all());
     }
-
-
-
-    // public function doExport(Request $r) {
-    //     return CustomerCentralizator::doExport($r->all());
-    // }
 
 }

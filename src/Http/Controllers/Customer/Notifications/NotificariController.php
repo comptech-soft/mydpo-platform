@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Http\Controllers\Admin\Customer\Notifications;
+namespace MyDpo\Http\Controllers\Customer\Notifications;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;

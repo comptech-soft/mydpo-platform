@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Http\Controllers\Admin\Customer\Centralizatorable;
+namespace MyDpo\Http\Controllers\Customer\Centralizatorable;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
