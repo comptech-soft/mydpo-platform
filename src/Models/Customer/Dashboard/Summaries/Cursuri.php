@@ -9,7 +9,7 @@ class Cursuri {
         $sql = "
             SELECT
                 COUNT(*) AS count_records
-            FROM `customers-crsuri`
+            FROM `customers-cursuri`
             WHERE 
                 (`customers-cursuri`.`customer_id` = " . $customer_id . ")
             ";
