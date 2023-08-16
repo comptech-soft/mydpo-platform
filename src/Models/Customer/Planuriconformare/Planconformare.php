@@ -272,9 +272,4 @@ class Planconformare extends Model {
         $this->UpdateSummary();
     }
 
-    public static function CountLivrabile($customer_id) {
-
-        return $customer_id;
-    } 
-
 }
