@@ -24,7 +24,7 @@ class Entity extends Model {
     ];
    
    
-    public static function getByPlatform() {
+    public static function GetByPlatform() {
 
         $r = [];
 

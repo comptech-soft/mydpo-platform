@@ -11,6 +11,12 @@ use MyDpo\Models\Customer\Dashboard\Entity;
 
 class DashboardController extends Controller {
     
+    /**
+     * Dashboard-ul unui client
+     * Se stie id-l clientului
+     * Se afiseaza linkuri catre livrabile si catre entitati
+     */
+
     public function index($customer_id, Request $r) {
         return Index::View(
             styles: ['css/app.css'],
@@ -19,7 +25,7 @@ class DashboardController extends Controller {
                 'customer_id' => $customer_id,
                 'customer' => Customer::find($customer_id),
                 'dashboard_items' => Item::getByColumns(),
-                'entities_items' => Entity::getByPlatform(),
+                'entities_items' => Entity::GetByPlatform(),
             ],
         );        
     }
