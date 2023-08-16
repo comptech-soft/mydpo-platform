@@ -88,9 +88,7 @@ class Centralizator extends Model {
 
 
 
-    // protected static function GetImporter($input) {
-    //     return new Importer($input); 
-    // }
+
 
     // public function department() {
     //     return $this->belongsTo(CustomerDepartment::class, 'department_id')->select(['id', 'departament']);

@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Imports\CustomerCentralizator;
+namespace MyDpo\Imports\Customer\Centralizator;
 
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;

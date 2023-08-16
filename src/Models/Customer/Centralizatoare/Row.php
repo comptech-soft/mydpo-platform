@@ -8,16 +8,17 @@ use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 use MyDpo\Traits\Customer\Centralizatoare\Rowable;
 use MyDpo\Traits\Exportable;
+use MyDpo\Traits\Importable;
 
 use MyDpo\Models\Livrabile\TipCentralizator;
 use MyDpo\Models\Livrabile\TipCentralizatorColoana;
 
 use MyDpo\Exports\Customer\Centralizator\Exporter;
-// use MyDpo\Imports\CustomerCentralizator\Importer;
+use MyDpo\Imports\Customer\Centralizator\Importer;
 
 class Row extends Model {
 
-    use Itemable, Actionable, Rowable, Exportable;
+    use Itemable, Actionable, Rowable, Exportable, Importable;
 
     protected $table = 'customers-centralizatoare-rows';
 
@@ -76,6 +77,10 @@ class Row extends Model {
     
     protected static function GetExporter($input) {
         return new Exporter($input); 
+    }
+
+    protected static function GetImporter($input) {
+        return new Importer($input); 
     }
     
     public function files() {
