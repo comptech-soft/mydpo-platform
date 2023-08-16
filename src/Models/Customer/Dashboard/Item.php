@@ -31,10 +31,11 @@ class Item extends Model {
     ];
     
     protected static $myclasses = [
-        'plan-conformare' => \MyDpo\Models\Customer\Planuriconformare\Planconformare::class,
+        'analiza-gap' => \MyDpo\Models\Customer\Dashboard\Summaries\AnalizaGap::class,
+        // 'plan-conformare' => \MyDpo\Models\Customer\Summaries\Planconformare::class,
         // 'registre' => \MyDpo\Models\Customer\Registre\Registru::class,
         // 'centralizatoare' => \MyDpo\Models\Customer\Centralizatoare\Centralizator::class,
-        'cursuri' => \MyDpo\Models\Customer\ELearning\CustomerCurs::class,
+        // 'cursuri' => \MyDpo\Models\Customer\Summaries\ELearning::class,
         // 'accounts' => \MyDpo\Models\Customer\Accounts\Account::class,
         // 'team' => \MyDpo\Models\Customer\Teams\Team::class,
         // 'monthly-reports' => \MyDpo\Models\Customer\Rapoartelunare\RaportLunar::class,
