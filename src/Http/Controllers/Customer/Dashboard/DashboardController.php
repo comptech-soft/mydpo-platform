@@ -9,7 +9,7 @@ use MyDpo\Models\Customer;
 use MyDpo\Models\Customer\Dashboard\Item;
 use MyDpo\Models\Customer\Dashboard\Entity;
 
-class CustomerDashboardController extends Controller {
+class DashboardController extends Controller {
     
     public function index($customer_id, Request $r) {
         return Index::View(
