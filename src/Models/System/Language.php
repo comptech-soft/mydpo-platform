@@ -1,11 +1,10 @@
 <?php
 
-namespace MyDpo\Models;
+namespace MyDpo\Models\System;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Language extends Model 
-{
+class Language extends Model {
 
     protected $table = 'languages';
 

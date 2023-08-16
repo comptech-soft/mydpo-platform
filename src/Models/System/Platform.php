@@ -1,11 +1,10 @@
 <?php
 
-namespace MyDpo\Models;
+namespace MyDpo\Models\System;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Platform extends Model 
-{
+class Platform extends Model {
 
     protected $table = 'platforms';
 
@@ -15,6 +14,5 @@ class Platform extends Model
         'name',              
         'url',
     ];
-
 
 }
