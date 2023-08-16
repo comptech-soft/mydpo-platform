@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Models\Customer\Dasboard;
+namespace MyDpo\Models\Customer\Dashboard;
 
 use Illuminate\Database\Eloquent\Model;
 
