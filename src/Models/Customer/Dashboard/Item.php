@@ -30,6 +30,19 @@ class Item extends Model {
         'props',
     ];
     
+    protected static $myclasses = [
+        'plan-conformare' => \MyDpo\Models\Customer\Planuriconformare\Planconformare::class,
+        // 'registre' => \MyDpo\Models\Customer\Registre\Registru::class,
+        // 'centralizatoare' => \MyDpo\Models\Customer\Centralizatoare\Centralizator::class,
+        'cursuri' => \MyDpo\Models\CustomerCurs::class,
+        // 'accounts' => \MyDpo\Models\Customer\Accounts\Account::class,
+        // 'team' => \MyDpo\Models\Customer\Teams\Team::class,
+        // 'monthly-reports' => \MyDpo\Models\Customer\Rapoartelunare\RaportLunar::class,
+        // 'tasks' => \MyDpo\Models\Customer\Taskuri\Task::class,
+        // 'emails' => \MyDpo\Models\Customer\Emails\Email::class,
+        // 'notifications' => \MyDpo\Models\Customer\Notifications\Notification::class,
+    ];
+
     public static function getByColumns() {
 
         $r = [];
@@ -40,12 +53,21 @@ class Item extends Model {
             {
                 $r[$record->column_no] = [];
             }
-            $r[$record->column_no][] = $record;
+
+            $count = array_key_exists($record->slug, self::$myclasses) 
+                ? self::$myclasses[$record->slug]::CountLivrabile(request()->customer_id) 
+                : -1;
+
+
+            $r[$record->column_no][] = [
+                ...$record->toArray(),
+                'count' => $count,
+            ];
         }
 
         foreach($r as $key => $items)
         {
-            $r[$key] = collect($items)->sortBy('order_no');
+            $r[$key] = collect($items)->sortBy('order_no')->toArray();
         }
 
         return $r;
