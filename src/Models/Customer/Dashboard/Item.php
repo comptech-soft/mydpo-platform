@@ -32,16 +32,7 @@ class Item extends Model {
     
     protected static $myclasses = [
         'analiza-gap' => \MyDpo\Models\Customer\Dashboard\Summaries\AnalizaGap::class,
-        // 'plan-conformare' => \MyDpo\Models\Customer\Summaries\Planconformare::class,
-        // 'registre' => \MyDpo\Models\Customer\Registre\Registru::class,
-        // 'centralizatoare' => \MyDpo\Models\Customer\Centralizatoare\Centralizator::class,
-        // 'cursuri' => \MyDpo\Models\Customer\Summaries\ELearning::class,
-        // 'accounts' => \MyDpo\Models\Customer\Accounts\Account::class,
-        // 'team' => \MyDpo\Models\Customer\Teams\Team::class,
-        // 'monthly-reports' => \MyDpo\Models\Customer\Rapoartelunare\RaportLunar::class,
-        // 'tasks' => \MyDpo\Models\Customer\Taskuri\Task::class,
-        // 'emails' => \MyDpo\Models\Customer\Emails\Email::class,
-        // 'notifications' => \MyDpo\Models\Customer\Notifications\Notification::class,
+        'plan-conformare' => \MyDpo\Models\Customer\Dashboard\Summaries\PlanConformare::class,
     ];
 
     public static function getByColumns() {
