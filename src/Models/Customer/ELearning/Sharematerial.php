@@ -9,8 +9,6 @@ use MyDpo\Scopes\NotdeletedScope;
 use MyDpo\Traits\NextNumber;
 use MyDpo\Rules\Sharematerial\AtLeastOneCustomer;
 use MyDpo\Rules\Sharematerial\AtLeastOneMaterial;
-use MyDpo\Models\SharematerialDetail;
-use MyDpo\Models\CustomerCurs;
 use MyDpo\Models\CustomerCursUser;
 use MyDpo\Models\User;
 use MyDpo\Events\CustomerCurs\CursShare as CursShareEvent;
