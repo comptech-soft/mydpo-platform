@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Models\Customer;
+namespace MyDpo\Models\Customer\Departments;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
@@ -8,7 +8,7 @@ use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Rules\CustomerDepartment\UniqueName;
 use MyDpo\Traits\Itemable;
 
-class CustomerDepartment extends Model {
+class Department extends Model {
 
     use Itemable;
     

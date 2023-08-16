@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Models\Customer;
+namespace MyDpo\Models\Customer\Accounts;
 
 use Illuminate\Database\Eloquent\Model;
 // use MyDpo\Helpers\Performers\Datatable\GetItems;
@@ -24,7 +24,7 @@ use MyDpo\Performers\CustomerAccount\AssignUser;
 
 use MyDpo\Scopes\NotdeletedScope;
 
-class CustomerAccount extends Model {
+class Account extends Model {
 
     use Itemable;
     
