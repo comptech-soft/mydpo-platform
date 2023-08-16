@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Models\Customer\Customer;
+namespace MyDpo\Models\Customer\Statuses;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
