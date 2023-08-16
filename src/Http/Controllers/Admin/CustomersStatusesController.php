@@ -4,17 +4,17 @@ namespace MyDpo\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use MyDpo\Models\Customer\CustomerStatus;
+use MyDpo\Models\Customer\Statuses\Status;
 
 class CustomersStatusesController extends Controller
 {
     
     public function getItems(Request $r) {
-        return CustomerStatus::getItems($r->all());
+        return Status::getItems($r->all());
     }
 
     public function getRecords(Request $r) {
-        return CustomerStatus::getRecords($r->all());
+        return Status::getRecords($r->all());
     }
 
 }
