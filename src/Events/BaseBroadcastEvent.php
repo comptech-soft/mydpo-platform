@@ -11,7 +11,7 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use MyDpo\Models\Customer\Customer;
 use MyDpo\Models\CustomerNotification;
-use MyDpo\Models\TemplateNotification;
+use MyDpo\Models\Livrabile\Notifications\TemplateNotification;
 
 class BaseBroadcastEvent implements ShouldBroadcast {
 

@@ -4,7 +4,7 @@ namespace MyDpo\Models\Customer\Notifications;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\DoAction;
-use MyDpo\Models\TemplateNotification;
+use MyDpo\Models\Livrabile\Notifications\TemplateNotification;
 use MyDpo\Models\Customer\Customer_base as Customer;
 use MyDpo\Models\Authentication\User;
 use MyDpo\Traits\Itemable;
