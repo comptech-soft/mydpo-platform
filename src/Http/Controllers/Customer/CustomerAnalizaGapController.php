@@ -19,17 +19,5 @@ class CustomerAnalizaGapController extends Controller {
             ],
         );        
     }
-
-    // public function index($customer_id, Request $r) {
-
-    //     return Response::View(
-    //         '~templates.index', 
-    //         asset('apps/customer-analiza-gap/index.js'),
-    //         [], 
-    //         [
-    //             'customer_id' => $customer_id,
-    //         ]
-    //     );
-    // }
-
+    
 }
