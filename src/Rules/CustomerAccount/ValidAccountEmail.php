@@ -4,7 +4,7 @@ namespace MyDpo\Rules\CustomerAccount;
 
 use Illuminate\Contracts\Validation\Rule;
 use MyDpo\Models\CustomerAccount;
-use MyDpo\Models\User;
+use MyDpo\Models\Authentication\User;
 
 class ValidAccountEmail implements Rule {
 

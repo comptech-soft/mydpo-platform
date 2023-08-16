@@ -3,7 +3,7 @@
 namespace MyDpo\Rules\User;
 
 use Illuminate\Contracts\Validation\Rule;
-use MyDpo\Models\User;
+use MyDpo\Models\Authentication\User;
 
 class Oldpassword implements Rule {
 

@@ -4,7 +4,7 @@ namespace MyDpo\Http\Controllers\System;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use MyDpo\Models\User;
+use MyDpo\Models\Authentication\User;
 use MyDpo\Models\Curs;
 use MyDpo\Models\Customer\Customer;
 use MyDpo\Models\Customer\CustomerCursUser;

@@ -4,7 +4,7 @@ namespace MyDpo\Performers\UserCustomer;
 
 use MyDpo\Helpers\Perform;
 use MyDpo\Models\UserCustomer;
-use MyDpo\Models\User;
+use MyDpo\Models\Authentication\User;
 
 class UpdateUserCustomers extends Perform {
 

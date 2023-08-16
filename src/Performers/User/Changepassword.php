@@ -3,7 +3,7 @@
 namespace MyDpo\Performers\User;
 
 use MyDpo\Helpers\Perform;
-use MyDpo\Models\User;
+use MyDpo\Models\Authentication\User;
 
 class Changepassword extends Perform {
 

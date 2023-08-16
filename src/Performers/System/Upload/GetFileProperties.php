@@ -4,7 +4,7 @@ namespace MyDpo\Performers\System\Upload;
 
 use MyDpo\Helpers\Perform;
 use MyDpo\Models\System\Upload;
-use MyDpo\Models\User;
+use MyDpo\Models\Authentication\User;
 
 class GetFileProperties extends Perform {
 

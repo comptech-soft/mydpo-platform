@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Models\TemplateNotification;
 use MyDpo\Models\Customer_base as Customer;
-use MyDpo\Models\User;
+use MyDpo\Models\Authentication\User;
 use MyDpo\Traits\Itemable;
 
 class Notification extends Model {

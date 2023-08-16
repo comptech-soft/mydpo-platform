@@ -3,7 +3,7 @@
 namespace MyDpo\Models\Customer\ELearning;
 
 use Illuminate\Database\Eloquent\Model;
-use MyDpo\Models\User;
+use MyDpo\Models\Authentication\User;
 use MyDpo\Models\Curs;
 use MyDpo\Models\Sharematerial;
 use MyDpo\Models\SharematerialDetail;
