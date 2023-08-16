@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Models\Customer;
+namespace MyDpo\Models\Customer\Notifications;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\DoAction;
@@ -9,7 +9,7 @@ use MyDpo\Models\Customer_base as Customer;
 use MyDpo\Models\User;
 use MyDpo\Traits\Itemable;
 
-class CustomerNotification extends Model {
+class Notification extends Model {
 
     use Itemable;
 

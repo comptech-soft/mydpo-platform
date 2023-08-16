@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Models\Customer;
+namespace MyDpo\Models\Customer\Emails;
 
 use Illuminate\Database\Eloquent\Model;
 // use MyDpo\Helpers\Performers\Datatable\GetItems;
@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use MyDpo\Traits\Itemable;
 
-class CustomerEmail extends Model {
+class Email extends Model {
 
     use Itemable;
     
