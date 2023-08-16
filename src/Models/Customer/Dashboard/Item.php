@@ -41,8 +41,8 @@ class Item extends Model {
         'cursuri' => \MyDpo\Models\Customer\Dashboard\Summaries\Cursuri::class,
         'studii-caz' => \MyDpo\Models\Customer\Dashboard\Summaries\Studiicaz::class,
         'infografice' => \MyDpo\Models\Customer\Dashboard\Summaries\Infografice::class,
-
         'sfaturile-dpo' => \MyDpo\Models\Customer\Dashboard\Summaries\Sfaturidpo::class,
+
         'dpia' => \MyDpo\Models\Customer\Dashboard\Summaries\Centralizatoare::class,
         'instrumente-de-lucru' => \MyDpo\Models\Customer\Dashboard\Summaries\Centralizatoare::class,
     ];
