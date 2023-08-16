@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Models;
+namespace MyDpo\Models\Authentication;
 
 use Illuminate\Database\Eloquent\Model;
 use Kalnoy\Nestedset\NodeTrait;

@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Models;
+namespace MyDpo\Models\Authentication;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
