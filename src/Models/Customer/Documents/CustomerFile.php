@@ -7,7 +7,7 @@ use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Models\Folder;
 use MyDpo\Models\Customer\Customer;
-use MyDpo\Models\MaterialStatus;
+use MyDpo\Models\Customer\ELearning\MaterialStatus;
 use MyDpo\Models\User;
 use MyDpo\Models\RoleUser;
 use MyDpo\Performers\CustomerFile\ChangeFilesStatus;
