@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Models\Customer;
+namespace MyDpo\Models\Customer\Contracts;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
@@ -10,7 +10,7 @@ use MyDpo\Models\CustomerOrder;
 use MyDpo\Models\Customer_base as Customer;
 use MyDpo\Rules\CustomerService\UniqueOrderService;
 
-class CustomerService extends Model {
+class OrderService extends Model {
 
     protected $table = 'customers-orders-services';
 

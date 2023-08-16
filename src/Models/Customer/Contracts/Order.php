@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Models\Customer;
+namespace MyDpo\Models\Customer\Contracts;
 
 use Illuminate\Database\Eloquent\Model;
 // use MyDpo\Helpers\Performers\Datatable\GetItems;
@@ -12,7 +12,7 @@ use MyDpo\Rules\CustomerOrder\OrderNumber;
 use MyDpo\Traits\DaysDifference;
 use MyDpo\Traits\Itemable;
 
-class CustomerOrder extends Model {
+class Order extends Model {
     
     use Itemable, DaysDifference;
 
