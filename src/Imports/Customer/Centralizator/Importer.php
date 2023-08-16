@@ -5,20 +5,22 @@ namespace MyDpo\Imports\Customer\Centralizator;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Carbon\Carbon;
-use MyDpo\Models\Customer\CustomerCentralizator;
-use MyDpo\Models\Customer\CustomerDepartment;
+
 use MyDpo\Models\Customer;
-use MyDpo\Models\Customer\CustomerCentralizatorRow;
-use MyDpo\Models\Customer\CustomerCentralizatorRowValue;
+use MyDpo\Models\Customer\CustomerDepartment;
+
+use MyDpo\Models\Customer\Centralizatoare\Centralizator;
+use MyDpo\Models\Customer\Centralizatoare\Row;
+use MyDpo\Models\Customer\Centralizatoare\Rowvalue;
 
 class Importer implements ToCollection {
 
-    public $input = NULL;
-
+    protected $input = NULL;
+    protected $lines = NULL;
     /**
-     * centralizatorul in care se importa randuri
+     * centralizatorul/registrul in care se importa randuri
      */
-    public $centralizator = NULL;
+    public $document = NULL;
     
     /**
      * departamentele clientului
@@ -30,54 +32,69 @@ class Importer implements ToCollection {
      */
     public $customer = NULL;
 
-    public $columns_ids = [];
+    public $columns = [];
 
+    public $myclasses = [
+        'centralizatoare' => [
+            'document' => Centralizator::class,
+            'row' => Row::class,
+            'rowvalue' => Rowvalue::class,
+            'fk_col' => 'customer_centralizator_id',
+            'tip_col' => 'centralizator_id',
+        ],
+    ];
 
     public function __construct($input) {
         $this->input = $input;
 
-        $this->centralizator = CustomerCentralizator::where('id', $this->input['id'])->first();
-        $this->departamente = CustomerDepartment::where('customer_id', $this->centralizator->customer_id)->pluck('id', 'departament')->toArray();
-        $this->customer = Customer::find($this->centralizator->customer_id);
+        $this->customer = Customer::find($this->input['customer_id']);
 
-        $this->columns_ids = $this->List();
+        $this->departamente = CustomerDepartment::where('customer_id', $this->input['customer_id'])->pluck('id', 'departament')->toArray();
+
+        $this->document = $this->myclasses[$this->input['model']]['document']::where('id', $this->input['document_id'])->first();
+
+        $this->columns = $this->GetColumns();
     }
 
     public function collection(Collection $rows) {
-
         $this->CreateLines($rows);
-
         $this->Process();
-
-
-        // $value_columns = $this->value_columns($this->columns());
-        // $start_row = $this->has_children_header() ? 2 : 1;
-        // $rows_count = CustomerCentralizatorRow::where('customer_centralizator_id', $this->input['id'])->count();
-
-        // foreach($rows as $i => $row)
-        // {
-        //     if($i >= $start_row)
-        //     {
-        //         $this->processRow($value_columns, $row, $rows_count - $start_row + $i + 1);
-        //     }
-        // }
     }
 
     private function RowToRecord($row) {
 
-        $record = [];
+        $record = [
+            'nrcrt' => $row[0],
+            'rowvalues' => [],
+        ];
 
-        foreach($row as $i => $field)
+        $i = 1;
+
+        if($this->document->visibility_column_id)
         {
-            if($i > 0)
-            {
-                $record[] = [
-                    'column_id' => $this->columns_ids[$i]['column_id'],
-                    'column' => $this->columns_ids[$i]['type'],
-                    'value' => $field,
-                ];
+            $record['visibility'] = $row[$i++];
+        }
+        
+        if($this->document->status_column_id)
+        {
+            $record['status'] = $row[$i++];
+        }
+        
+        if($this->document->department_column_id)
+        {
+            $record['department_id'] = $row[$i++];
+        }
 
-            }
+        foreach($this->columns as $j => $column)
+        {
+            $record['rowvalues']['col-' . $column['id']] = [
+                'id' => NULL,
+                'row_id' => NULL,
+                'column_id' => $column['id'],
+                'value' => $row[$i++],
+                'type' => $column['type'],
+                'column' => $column['type'],
+            ]; 
         }
 
         return $record;
@@ -125,70 +142,70 @@ class Importer implements ToCollection {
 
     private function ProcessLine($line) {
 
-        if(config('app.platform') == 'admin')
-		{
-			$role = \Auth::user()->role;
-		}
-		else
-		{
-			$role = \Auth::user()->roles()->where('customer_id', $this->centralizator->customer_id)->first();
-		}
-
-        $rowrecord = CustomerCentralizatorRow::create([
-            'customer_centralizator_id' => $this->input['id'],
-            'customer_id' => $this->centralizator->customer_id,
-            'centralizator_id' => $this->centralizator->centralizator_id,
-            'order_no' => NULL,
-            'props' => [
-                'action' => [
-                    'name' => 'import',
-                    'action_at' => Carbon::now()->format('Y-m-d'),
-                    'tooltip' => 'Importat de :user_full_name la :action_at. (:customer_name)',
-                    'user' => [
-                        'id' => \Auth::user()->id,
-                        'full_name' => \Auth::user()->full_name,
-                        'role' => [
-                            'id' => $role ? $role->id : NULL,
-							'name' => $role ? $role->name : NULL,
-                        ]
-                    ],
-                    'customer' => [
-                        'id' => $this->centralizator->customer_id,
-                        'name' => $this->customer->name,
-                    ],
-                ],
-            ],
+        $row = $this->myclasses[$this->input['model']]['row']::create([
+            $this->myclasses[$this->input['model']]['fk_col'] => $this->document->id,
+            $this->myclasses[$this->input['model']]['tip_col'] => $this->input['tip_id'],
+            'customer_id' => $this->input['customer_id'],
+            'order_no' => 1 + $this->myclasses[$this->input['model']]['row']::where($this->myclasses[$this->input['model']]['fk_col'], $this->document->id)->count(),
+            'action_at' => Carbon::now()->format('Y-m-d'),
+            'tooltip' => '???',
+            'visibility' => array_key_exists('visibility', $line) ? $line['visibility'] : 0,
+            'status' => array_key_exists('status', $line) ? $line['status'] : NULL,
+            'department_id' => array_key_exists('department_id', $line) ? $this->departamente[$line['department_id']] : NULL,
         ]);
 
-        foreach($line as $i => $rowvalue)
+        foreach($line['rowvalues'] as $i => $rowvalue)
         {
-            if($rowvalue['column'] == 'DEPARTMENT')
-            {
-                if( array_key_exists($rowvalue['value'], $this->departamente) )
-                {
-                    $rowvalue['value'] = $this->departamente[$rowvalue['value']];
-                }
-                else
-                {
-                    $departament = CustomerDepartment::create([
-                        'customer_id' => $this->centralizator->customer_id,
-                        'departament' => $rowvalue['value'],
-                    ]);
-
-                    $this->departamente = CustomerDepartment::where('customer_id', $this->centralizator->customer_id)->pluck('id', 'departament')->toArray();
-
-                    $rowvalue['value'] = $departament->id;
-                }
-            }
-
-            CustomerCentralizatorRowValue::create([...$rowvalue, 'row_id' => $rowrecord->id]);
+            $line['rowvalues'][$i]['row_id'] = $row->id;
+            $value = $this->myclasses[$this->input['model']]['rowvalue']::create($line['rowvalues'][$i]);
+            $line['rowvalues'][$i]['id'] = $value->id;
         }
+
+        $row->props = [
+            'rowvalues' => $line['rowvalues']
+        ];
+        $row->save();
+
+
+
+        // foreach($line as $i => $rowvalue)
+        // {
+        //     if($rowvalue['column'] == 'DEPARTMENT')
+        //     {
+        //         if( array_key_exists($rowvalue['value'], $this->departamente) )
+        //         {
+        //             $rowvalue['value'] = $this->departamente[$rowvalue['value']];
+        //         }
+        //         else
+        //         {
+        //             $departament = CustomerDepartment::create([
+        //                 'customer_id' => $this->centralizator->customer_id,
+        //                 'departament' => $rowvalue['value'],
+        //             ]);
+
+        //             $this->departamente = CustomerDepartment::where('customer_id', $this->centralizator->customer_id)->pluck('id', 'departament')->toArray();
+
+        //             $rowvalue['value'] = $departament->id;
+        //         }
+        //     }
+
+        //     CustomerCentralizatorRowValue::create([...$rowvalue, 'row_id' => $rowrecord->id]);
+        // }
 
 
 
 
     }
 
+    protected function GetColumns() {
+
+        return collect($this->document->columns_with_values)
+            ->filter( function($column) {
+                return ! in_array($column['type'], ['NRCRT', 'VISIBILITY', 'STATUS', 'DEPARTMENT', 'CHECK', 'FILES', 'EMPTY']);
+            })
+            ->toArray();
+    }
+    
     // private function processRow($value_columns, $row, $order_no) {
         
 
@@ -320,72 +337,72 @@ class Importer implements ToCollection {
     //     return $r;
     // }
 
-    protected function Columns() {
-        return collect($this->centralizator->columns_tree)->filter( function($item) {
-            return ! in_array($item['type'], ['CHECK', 'FILES', 'EMPTY']);
-        })->map(function($item){
+    // protected function Columns() {
+    //     return collect($this->centralizator->columns_tree)->filter( function($item) {
+    //         return ! in_array($item['type'], ['CHECK', 'FILES', 'EMPTY']);
+    //     })->map(function($item){
 
-            $caption = $item['caption'];
+    //         $caption = $item['caption'];
 
-            if(is_string($caption))
-            {
-                $caption = \Str::replace('#', ' ', $caption);
-            }
-            else
-            {
-                if(is_array($caption))
-                {
-                    $caption = implode(' ', $caption);
-                }
-            }
+    //         if(is_string($caption))
+    //         {
+    //             $caption = \Str::replace('#', ' ', $caption);
+    //         }
+    //         else
+    //         {
+    //             if(is_array($caption))
+    //             {
+    //                 $caption = implode(' ', $caption);
+    //             }
+    //         }
 
-            $type = $item['type'];
+    //         $type = $item['type'];
 
-            if( ! $type )
-            {
-                $type = 'group';
-            }
+    //         if( ! $type )
+    //         {
+    //             $type = 'group';
+    //         }
 
-            return [
-                ...$item,
-                'caption' => $caption,
-                'type' => $type,
-            ];
+    //         return [
+    //             ...$item,
+    //             'caption' => $caption,
+    //             'type' => $type,
+    //         ];
 
-        })->toArray();
-    }
+    //     })->toArray();
+    // }
 
-    protected function Children() {
-        return collect($this->Columns())->filter(function($item){
-            return count($item['children']) > 0;
-        });
-    }
+    // protected function Children() {
+    //     return collect($this->Columns())->filter(function($item){
+    //         return count($item['children']) > 0;
+    //     });
+    // }
 
-    protected function List() {
-        $list = [];
+    // protected function List() {
+    //     $list = [];
 
-        foreach($this->Columns() as $i => $column)
-        {
-            if( count($column['children']) == 0)
-            {
-                $list[] = [
-                    'column_id' => $column['id'],
-                    'type' => $column['type'],
-                ];
-            }
-            else
-            {
-                foreach($column['children'] as $j => $child)
-                {
-                    $list[] = [
-                        'column_id' => $child['id'],
-                        'type' => $child['type'],
-                    ];
-                }
-            }
-        }
+    //     foreach($this->Columns() as $i => $column)
+    //     {
+    //         if( count($column['children']) == 0)
+    //         {
+    //             $list[] = [
+    //                 'column_id' => $column['id'],
+    //                 'type' => $column['type'],
+    //             ];
+    //         }
+    //         else
+    //         {
+    //             foreach($column['children'] as $j => $child)
+    //             {
+    //                 $list[] = [
+    //                     'column_id' => $child['id'],
+    //                     'type' => $child['type'],
+    //                 ];
+    //             }
+    //         }
+    //     }
 
-        return $list;
-    }
+    //     return $list;
+    // }
 
 }
