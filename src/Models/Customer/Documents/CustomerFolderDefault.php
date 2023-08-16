@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Models;
+namespace MyDpo\Models\Customer\Documents;
 
 use Illuminate\Database\Eloquent\Model;
 use Kalnoy\Nestedset\NodeTrait;

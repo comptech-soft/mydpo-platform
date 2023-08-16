@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Models;
+namespace MyDpo\Models\Customer\Documents;
 
 use MyDpo\Models\Folder;
 use Kalnoy\Nestedset\NodeTrait;
