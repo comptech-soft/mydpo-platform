@@ -42,7 +42,6 @@ class Exporter implements FromView, WithStrictNullComparison, ShouldAutoSize {
     ];
 
     public function __construct($input) {
-
         $this->input = $input;   
         
         $this->department_ids = array_key_exists('department_ids', $input) ? $input['department_ids'] : [];
@@ -59,6 +58,7 @@ class Exporter implements FromView, WithStrictNullComparison, ShouldAutoSize {
     
     public function view(): View {
         return view('exports.customer.centralizatorable.export', [
+            'document' => $this->document->toArray(),
             'header' => $this->GetHeader(),
             'rows' => $this->just_structure == 1 ? [] : $this->GetRows(),
             'columns' => $this->just_structure == 1 ? [] : $this->GetColumns(),
