@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Imports\CustomerRegister;
+namespace MyDpo\Imports\Customer\Registru;
 
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
