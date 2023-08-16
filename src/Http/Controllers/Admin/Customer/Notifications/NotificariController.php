@@ -1,14 +1,14 @@
 <?php
 
-namespace MyDpo\Http\Controllers\Admin\Customer;
+namespace MyDpo\Http\Controllers\Admin\Customer\Notifications;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
 use MyDpo\Models\Customer;
-use MyDpo\Models\Customer\CustomerNotification;
+use MyDpo\Models\Customer\Notifications\Notification;
 
-class CustomerNotificariController extends Controller {
+class NotificariController extends Controller {
     
     public function index($customer_id, Request $r) {
         return Index::View(
@@ -22,11 +22,11 @@ class CustomerNotificariController extends Controller {
     }
 
     public function getRecords(Request $r) {
-        return CustomerNotification::getRecords($r->all());
+        return Notification::getRecords($r->all());
     }
 
     public function doAction($action, Request $r) {
-        return CustomerNotification::doAction($action, $r->all());
+        return Notification::doAction($action, $r->all());
     }
 
     // public function getItems(Request $r) {
