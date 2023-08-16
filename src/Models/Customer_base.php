@@ -7,7 +7,7 @@ use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Models\CustomerStatus;
 use MyDpo\Models\City;
-use MyDpo\Models\Customer\CustomerContract;
+use MyDpo\Models\Customer\Contracts\CustomerContract;
 use MyDpo\Models\Customer\CustomerAccount;
 use MyDpo\Models\CustomerFolder;
 use MyDpo\Models\UserCustomer;

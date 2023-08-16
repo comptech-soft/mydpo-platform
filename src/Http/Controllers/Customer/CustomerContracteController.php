@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
 use MyDpo\Models\Customer;
-use MyDpo\Models\Customer\CustomerContract;
+use MyDpo\Models\Customer\Contracts\CustomerContract;
 
 class CustomerContracteController extends Controller {
     
