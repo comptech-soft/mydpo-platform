@@ -22,8 +22,15 @@ class Entity extends Model {
         'order_no',
         'props',
     ];
+
+    protected static $myclasses = [
+        'department' => \MyDpo\Models\Customer\Departments\Department::class,
+    ];
    
-   
+    /**
+     * Returneza entitatile care se afiseaza pe dashboard-ul clientului
+     * in functie de ce este in campul `customers-entities-items`.`platform`
+     */
     public static function GetByPlatform() {
 
         $r = [];
