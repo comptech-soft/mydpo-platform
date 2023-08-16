@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Models;
+namespace MyDpo\Models\Customer;
 
 use MyDpo\Models\Customer_base;
 
