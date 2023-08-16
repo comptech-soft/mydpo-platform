@@ -37,6 +37,7 @@ class Item extends Model {
         'documents' => \MyDpo\Models\Customer\Dashboard\Summaries\Documents::class,
         'registre' => \MyDpo\Models\Customer\Dashboard\Summaries\Registre::class,
         'centralizatoare' => \MyDpo\Models\Customer\Dashboard\Summaries\Centralizatoare::class,
+        
         'chestionar' => \MyDpo\Models\Customer\Dashboard\Summaries\Centralizatoare::class,
         'curs' => \MyDpo\Models\Customer\Dashboard\Summaries\Centralizatoare::class,
         'studii-de-caz' => \MyDpo\Models\Customer\Dashboard\Summaries\Centralizatoare::class,
