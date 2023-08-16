@@ -171,5 +171,11 @@ class CustomerCurs extends Model {
         
     }
 
+
+    public static function CountLivrabile($customer_id) {
+
+        return $customer_id;
+    } 
+
     
 }
