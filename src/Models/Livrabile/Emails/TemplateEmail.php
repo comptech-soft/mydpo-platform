@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Models\Emails;
+namespace MyDpo\Models\Livrabile\Emails;
 
 use Illuminate\Database\Eloquent\Model;
 

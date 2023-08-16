@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Models\Chestionare;
+namespace MyDpo\Models\Livrabile\Chestionare;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
