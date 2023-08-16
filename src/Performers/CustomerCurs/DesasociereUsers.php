@@ -4,7 +4,7 @@ namespace MyDpo\Performers\CustomerCurs;
 
 use MyDpo\Helpers\Perform;
 use MyDpo\Models\CustomerCursUser;
-use MyDpo\Models\CustomerCurs;
+use MyDpo\Models\Customer\ELearning\CustomerCurs;
 use MyDpo\Models\SharematerialDetail;
 
 class DesasociereUsers extends Perform {

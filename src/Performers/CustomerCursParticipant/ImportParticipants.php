@@ -4,7 +4,7 @@ namespace MyDpo\Performers\CustomerCursParticipant;
 
 use MyDpo\Helpers\Perform;
 use MyDpo\Models\CustomerCursFile;
-use MyDpo\Models\CustomerCurs;
+use MyDpo\Models\Customer\ELearning\CustomerCurs;
 use MyDpo\Imports\CustomerCursParticipant\Importer;
 
 class ImportParticipants extends Perform {

@@ -4,7 +4,7 @@ namespace MyDpo\Performers\CustomerCursFile;
 
 use MyDpo\Helpers\Perform;
 use MyDpo\Models\CustomerCursFile;
-use MyDpo\Models\CustomerCurs;
+use MyDpo\Models\Customer\ELearning\CustomerCurs;
 
 class AttachFiles extends Perform {
 

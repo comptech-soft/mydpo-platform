@@ -3,7 +3,7 @@
 namespace MyDpo\Performers\CustomerCurs;
 
 use MyDpo\Helpers\Perform;
-use MyDpo\Models\CustomerCurs;
+use MyDpo\Models\Customer\ELearning\CustomerCurs;
 
 class GetSummary extends Perform {
 
