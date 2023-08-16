@@ -33,6 +33,17 @@ class Item extends Model {
     protected static $myclasses = [
         'analiza-gap' => \MyDpo\Models\Customer\Dashboard\Summaries\AnalizaGap::class,
         'plan-conformare' => \MyDpo\Models\Customer\Dashboard\Summaries\PlanConformare::class,
+        'reevaluare' => \MyDpo\Models\Customer\Dashboard\Summaries\Reevaluare::class,
+        'documents' => \MyDpo\Models\Customer\Dashboard\Summaries\Documents::class,
+        'registre' => \MyDpo\Models\Customer\Dashboard\Summaries\Registre::class,
+        'centralizatoare' => \MyDpo\Models\Customer\Dashboard\Summaries\Centralizatoare::class,
+        'chestionar' => \MyDpo\Models\Customer\Dashboard\Summaries\Centralizatoare::class,
+        'curs' => \MyDpo\Models\Customer\Dashboard\Summaries\Centralizatoare::class,
+        'studii-de-caz' => \MyDpo\Models\Customer\Dashboard\Summaries\Centralizatoare::class,
+        'infografice' => \MyDpo\Models\Customer\Dashboard\Summaries\Centralizatoare::class,
+        'sfaturile-dpo' => \MyDpo\Models\Customer\Dashboard\Summaries\Centralizatoare::class,
+        'dpia' => \MyDpo\Models\Customer\Dashboard\Summaries\Centralizatoare::class,
+        'instrumente-de-lucru' => \MyDpo\Models\Customer\Dashboard\Summaries\Centralizatoare::class,
     ];
 
     public static function getByColumns() {
