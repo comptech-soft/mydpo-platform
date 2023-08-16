@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Models\Livrabile;
+namespace MyDpo\Models\Livrabile\Registre;
 
 use Illuminate\Database\Eloquent\Model;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Models\Livrabile;
+namespace MyDpo\Models\Livrabile\Planuriconformare;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;

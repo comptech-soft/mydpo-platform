@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Models\Livrabile;
+namespace MyDpo\Models\Livrabile\Categories;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;

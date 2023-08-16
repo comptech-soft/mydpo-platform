@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Models;
+namespace MyDpo\Models\Notifications;
 
 use Illuminate\Database\Eloquent\Model;
 

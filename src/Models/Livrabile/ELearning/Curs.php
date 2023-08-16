@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Models;
+namespace MyDpo\Models\ELearning;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;

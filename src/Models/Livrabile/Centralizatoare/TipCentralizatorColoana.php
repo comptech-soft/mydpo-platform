@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Models\Livrabile;
+namespace MyDpo\Models\Livrabile\Centralizatoare;
 
 use Illuminate\Database\Eloquent\Model;
 
