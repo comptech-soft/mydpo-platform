@@ -6,7 +6,7 @@ use MyDpo\Helpers\Perform;
 use MyDpo\Models\System\SysConfig;
 use MyDpo\Models\System\Platform;
 use MyDpo\Models\Customer\ELearning\MaterialStatus;
-use MyDpo\Models\Language;
+use MyDpo\Models\System\Language;
 use MyDpo\Models\System\Translation;
 use MyDpo\Models\Authentication\Role;
 
