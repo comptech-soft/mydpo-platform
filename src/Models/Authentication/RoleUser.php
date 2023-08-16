@@ -4,7 +4,7 @@ namespace MyDpo\Models\Authentication;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Models\Authentication\Role;
-use MyDpo\Models\Customer;
+use MyDpo\Models\Customer\Customer;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
 
 class RoleUser extends Model {

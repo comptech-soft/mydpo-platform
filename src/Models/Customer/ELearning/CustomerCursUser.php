@@ -7,7 +7,7 @@ use MyDpo\Models\User;
 use MyDpo\Models\Curs;
 use MyDpo\Models\Sharematerial;
 use MyDpo\Models\SharematerialDetail;
-use MyDpo\Models\Customer;
+use MyDpo\Models\Customer\Customer;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Performers\CustomerCursUser\GetCounter;
 use MyDpo\Performers\CustomerCursUser\ChangeStatus;

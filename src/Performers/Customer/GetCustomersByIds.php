@@ -3,7 +3,7 @@
 namespace MyDpo\Performers\Customer;
 
 use MyDpo\Helpers\Perform;
-use MyDpo\Models\Customer;
+use MyDpo\Models\Customer\Customer;
 
 class GetCustomersByIds extends Perform {
 

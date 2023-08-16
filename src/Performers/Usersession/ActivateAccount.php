@@ -6,7 +6,7 @@ use MyDpo\Helpers\Perform;
 use Illuminate\Support\Facades\Password;
 use MyDpo\Models\Activation;
 use MyDpo\Models\User;
-use MyDpo\Models\Customer;
+use MyDpo\Models\Customer\Customer;
 use MyDpo\Models\UserSetting;
 use Illuminate\Auth\Events\Login;
 

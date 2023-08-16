@@ -8,7 +8,7 @@ use MyDpo\Models\CustomerRegister;
 use MyDpo\Models\CustomerRegistruRow;
 use MyDpo\Models\CustomerRegistruRowValue;
 use MyDpo\Models\CustomerDepartment;
-use MyDpo\Models\Customer;
+use MyDpo\Models\Customer\Customer;
 
 class Importer implements ToCollection {
 

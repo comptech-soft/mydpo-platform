@@ -4,7 +4,7 @@ namespace MyDpo\Models\Customer\Accounts;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
-use MyDpo\Models\Customer;
+use MyDpo\Models\Customer\Customer;
 use MyDpo\Models\User;
 
 class Activation extends Model {

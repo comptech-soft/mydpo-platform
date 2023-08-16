@@ -11,7 +11,7 @@ use MyDpo\Traits\Customer\Centralizatoare\Centralizatorable;
 
 use MyDpo\Models\Livrabile\TipCentralizator;
 use MyDpo\Models\Customer\CustomerDepartment;
-use MyDpo\Models\Customer;
+use MyDpo\Models\Customer\Customer;
 // 
 // use MyDpo\Traits\Exportable;
 // use MyDpo\Traits\Importable;

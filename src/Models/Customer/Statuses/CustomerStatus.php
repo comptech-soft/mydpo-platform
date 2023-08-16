@@ -5,7 +5,7 @@ namespace MyDpo\Models\Customer\Statuses;
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Traits\Itemable;
-use MyDpo\Models\Customer;
+use MyDpo\Models\Customer\Customer;
 
 class CustomerStatus extends Model {
 
