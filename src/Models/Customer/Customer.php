@@ -2,8 +2,6 @@
 
 namespace MyDpo\Models\Customer;
 
-use MyDpo\Models\Customer_base;
-
 class Customer extends Customer_base {
 
     protected $with = [
