@@ -19,7 +19,7 @@ class CustomerDashboardController extends Controller {
                 'customer_id' => $customer_id,
                 'customer' => Customer::find($customer_id),
                 'dashboard_items' => Item::getByColumns(),
-                'entities_items' => Enity::getByPlatform(),
+                'entities_items' => Entity::getByPlatform(),
             ],
         );        
     }
