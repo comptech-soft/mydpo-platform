@@ -3,7 +3,7 @@
 namespace MyDpo\Performers\CustomerDashboardItem;
 
 use MyDpo\Helpers\Perform;
-use MyDpo\Models\UserSetting;
+use MyDpo\Models\Authentication\UserSetting;
 
 class SaveProfileReorderedItems extends Perform {
 

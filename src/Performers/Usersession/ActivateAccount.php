@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Password;
 use MyDpo\Models\Activation;
 use MyDpo\Models\User;
 use MyDpo\Models\Customer\Customer;
-use MyDpo\Models\UserSetting;
+use MyDpo\Models\Authentication\UserSetting;
 use Illuminate\Auth\Events\Login;
 
 class ActivateAccount extends Perform {

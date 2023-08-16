@@ -14,7 +14,6 @@ use Laravel\Passport\HasApiTokens;
 use MyDpo\Models\Authentication\Role;
 use MyDpo\Models\RoleUser;
 use MyDpo\Models\Customer\Customer;
-use MyDpo\Models\UserSetting;
 use MyDpo\Models\UserCustomer;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Helpers\Performers\Datatable\DoAction;
