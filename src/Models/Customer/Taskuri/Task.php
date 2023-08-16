@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Models\Customer;
+namespace MyDpo\Models\Customer\Taskuri;
 
 use Illuminate\Database\Eloquent\Model;
 // use MyDpo\Helpers\Performers\Datatable\GetItems;
@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use MyDpo\Traits\Itemable;
 
-class CustomerTask extends Model {
+class Task extends Model {
 
     use Itemable;
     

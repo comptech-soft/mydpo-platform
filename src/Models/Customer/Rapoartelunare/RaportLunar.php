@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Models\Customer;
+namespace MyDpo\Models\Customer\Rapoartelunare;
 
 use Illuminate\Database\Eloquent\Model;
 // use MyDpo\Helpers\Performers\Datatable\GetItems;
@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use MyDpo\Traits\Itemable;
 
-class CustomerRaportLunar extends Model {
+class RaportLunar extends Model {
 
     use Itemable;
     

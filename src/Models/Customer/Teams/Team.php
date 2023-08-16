@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Models\Customer;
+namespace MyDpo\Models\Customer\Teams;
 
 use Illuminate\Database\Eloquent\Model;
 // use MyDpo\Helpers\Performers\Datatable\GetItems;
@@ -9,7 +9,7 @@ use MyDpo\Models\User;
 // use MyDpo\Performers\UserCustomer\UpdateUserCustomers;
 use MyDpo\Traits\Itemable;
 
-class CustomerTeam extends Model {
+class Team extends Model {
 
     use Itemable;
 
