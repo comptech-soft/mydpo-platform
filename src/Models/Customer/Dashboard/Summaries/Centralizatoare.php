@@ -2,7 +2,7 @@
 
 namespace MyDpo\Models\Customer\Dashboard\Summaries;
 
-class Cenralizatoare {
+class Centralizatoare {
 
     public static function CountLivrabile($customer_id) {
 
