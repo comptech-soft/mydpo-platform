@@ -5,16 +5,34 @@ namespace MyDpo\Http\Controllers\Admin\Customer\Centralizatorable;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
+
 use MyDpo\Models\Customer;
+
 use MyDpo\Models\Livrabile\TipCentralizator;
-use MyDpo\Models\Livrabile\TipRegistru;
 use MyDpo\Models\Customer\Centralizatoare\Centralizator;
-use MyDpo\Models\Customer\Registre\Registru;
 use MyDpo\Models\Customer\Centralizatoare\Row as CentralizatorRow;
+
+use MyDpo\Models\Livrabile\TipRegistru;
+use MyDpo\Models\Customer\Registre\Registru;
 use MyDpo\Models\Customer\Registre\Row as RegistruRow;
 
 class CentralizatorableRowsController extends Controller {
     
+    protected $myclasses = [
+        'centralizatoare' => [
+            'tip' => TipCentralizator::class,
+            'document' => Centralizator::class,
+            'row' => CentralizatorRow::class,
+        ],
+
+        'registre' => [
+            'tip' => TipCentralizator::class,
+            'document' => Registru::class,
+            'row' => RegistruRow::class,
+        ],
+
+    ];
+
     public function index($model, $page, $customer_id, $tip_id, $document_id, Request $r) {
         
         if( ! ($customer = Customer::find($customer_id)) )
@@ -37,6 +55,8 @@ class CentralizatorableRowsController extends Controller {
             return redirect('customer-dashboard/' . $customer_id);
         }
         
+        dd(__FILE__);
+
         if( ! ($tip = ($model == 'centralizatoare' ? TipCentralizator::find($tip_id) : TipRegistru::find($tip_id) ) ) )
         {
             return redirect($model . '-dashboard/' . $page . '/' . $customer_id);
