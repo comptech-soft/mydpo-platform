@@ -75,6 +75,8 @@ class Service extends Model {
                 'max:191',
                 new UniqueName($action, $input),
             ],
+
+            'type' => 'exists:services-types,slug',
         ];
 
         return $result;

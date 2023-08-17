@@ -94,6 +94,7 @@ class Category extends Model {
                 'max:191',
                 new UniqueName($action, $input),
             ],
+            
             'type' => 'in:centralizatoare,chestionare,cursuri,registre',
         ];
 
