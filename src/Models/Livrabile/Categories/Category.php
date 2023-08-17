@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 // use MyDpo\Rules\Category\UniqueName;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
-use MyDpo\Rules\Livrabile\Categpry\UniqueName;
+use MyDpo\Rules\Livrabile\Category\UniqueName;
 
 class Category extends Model {
     
