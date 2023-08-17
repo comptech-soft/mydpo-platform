@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Models\Livrabile\Tasks;
+namespace MyDpo\Models\Livrabile\Services;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
