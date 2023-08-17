@@ -1,9 +1,9 @@
 <?php
 
-namespace MyDpo\Rules\Nomenclatoare\Region;
+namespace MyDpo\Rules\Nomenclatoare\City;
 
 use Illuminate\Contracts\Validation\Rule;
-use MyDpo\Models\System\Region;
+use MyDpo\Models\System\City;
 
 class UniqueName implements Rule {
 
@@ -18,7 +18,7 @@ class UniqueName implements Rule {
 
     public function passes($attribute, $value) {   
 
-        $q = Region::where('country_id', $this->input['country_id'])->where('name', $this->input['name']);
+        $q = City::where('region_id', $this->input['region_id'])->where('name', $this->input['name']);
 
         if($this->action == 'update')
         {
@@ -32,6 +32,6 @@ class UniqueName implements Rule {
 
     public function message()
     {
-        return 'Regiunea (' . $this->input['name'] . ') este deja definită.';
+        return 'Orașul (' . $this->input['name'] . ') este deja definit';
     }
 }

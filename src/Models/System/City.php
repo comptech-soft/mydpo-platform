@@ -3,10 +3,9 @@
 namespace MyDpo\Models\System;
 
 use Illuminate\Database\Eloquent\Model;
-// use MyDpo\Helpers\Performers\Datatable\GetItems;
-// use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
+use MyDpo\Rules\Nomenclatoare\City\UniqueName;
 
 class City extends Model {
 
@@ -33,6 +32,25 @@ class City extends Model {
 
     public static function GetQuery() {
         return self::query()->select(['id', 'name', 'postal_code', 'region_id']);
+    }
+
+    public static function GetRules($action, $input) {
+
+        if(! in_array($action, ['insert', 'update']) )
+        {
+            return NULL;
+        }
+
+        $result = [
+            'name' => [
+                'required',
+                'max:191',
+                new UniqueName($action, $input),
+            ],
+
+        ];
+
+        return $result;
     }
     
 }
