@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 // use MyDpo\Actions\Items\Dataprovider;
 // use MyDpo\Helpers\Performers\Datatable\DoAction;
 // use MyDpo\Rules\Category\UniqueName;
-// use MyDpo\Traits\Itemable;
+use MyDpo\Traits\Itemable;
 
 class Category extends Model {
     
