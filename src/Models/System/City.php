@@ -3,13 +3,14 @@
 namespace MyDpo\Models\System;
 
 use Illuminate\Database\Eloquent\Model;
-use MyDpo\Helpers\Performers\Datatable\GetItems;
-use MyDpo\Helpers\Performers\Datatable\DoAction;
+// use MyDpo\Helpers\Performers\Datatable\GetItems;
+// use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Traits\Itemable;
+use MyDpo\Traits\Actionable;
 
 class City extends Model {
 
-    use Itemable;
+    use Itemable, Actionable;
     
     protected $table = 'cities';
 
@@ -30,12 +31,8 @@ class City extends Model {
         return $this->belongsTo(Region::class, 'region_id');
     }
 
-    public static function getItems($input) {
-        return (new GetItems($input, self::query(), __CLASS__))->Perform();
-    }
-
-    public static function doAction($action, $input) {
-        return (new DoAction($action, $input, __CLASS__))->Perform();
+    public static function GetQuery() {
+        return self::query()->select(['id', 'name', 'postal_code', 'region_id']);
     }
     
 }
