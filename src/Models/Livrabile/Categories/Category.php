@@ -83,7 +83,7 @@ class Category extends Model {
 
     public static function GetRules($action, $input) {
 
-        if($action == 'delete')
+        if(! in_array($action, ['insert', 'update']) )
         {
             return NULL;
         }
