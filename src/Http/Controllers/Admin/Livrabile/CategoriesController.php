@@ -5,10 +5,9 @@ namespace MyDpo\Http\Controllers\Admin\Livrabile;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
-use MyDpo\Models\Livrabile\Category;
+use MyDpo\Models\Livrabile\CategoiesâCategory;
 
-class CategoriesController extends Controller 
-{
+class CategoriesController extends Controller {
 
     public function index(Request $r) {
         return Index::View(
