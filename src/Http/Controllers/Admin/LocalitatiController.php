@@ -5,7 +5,7 @@ namespace MyDpo\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
-use MyDpo\Models\City;
+use MyDpo\Models\System\City;
 
 class LocalitatiController extends Controller {
     
@@ -17,10 +17,12 @@ class LocalitatiController extends Controller {
     }
 
     public function getItems(Request $r) {
+        dd(__METHOD__);
         return City::getItems($r->all());
     }
 
     public function getRecords(Request $r) {
+        dd(__METHOD__);
         return City::getRecords($r->all());
     }
 
