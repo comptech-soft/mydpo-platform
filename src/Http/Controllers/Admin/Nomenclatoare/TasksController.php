@@ -4,6 +4,7 @@ namespace MyDpo\Http\Controllers\Admin\Nomenclatoare;
 
 use App\Http\Controllers\Controller;
 use MyDpo\Core\Http\Response\Index;
+use Illuminate\Http\Request;
 
 class TasksController extends Controller {
     
