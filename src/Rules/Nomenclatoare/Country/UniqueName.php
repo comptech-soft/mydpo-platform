@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Rules\Livrabile\Category;
+namespace MyDpo\Rules\Nomenclatoare\Country;
 
 use Illuminate\Contracts\Validation\Rule;
 use MyDpo\Models\Livrabile\Categories\Category;
