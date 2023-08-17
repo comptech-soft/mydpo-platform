@@ -5,7 +5,7 @@ namespace MyDpo\Http\Controllers\Admin\Livrabile;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
-use MyDpo\Models\Livrabile\CategoiesâCategory;
+use MyDpo\Models\Livrabile\Categories\Category;
 
 class CategoriesController extends Controller {
 
