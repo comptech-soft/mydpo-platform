@@ -100,4 +100,10 @@ class Category extends Model {
         return $result;
     }
 
+    public static function GetMessages($action, $input) {
+        return [
+            'type.in' => 'Tipul trebuie selectat.',
+        ];
+    }
+
 }
