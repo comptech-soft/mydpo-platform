@@ -8,10 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 // use MyDpo\Helpers\Performers\Datatable\DoAction;
 // use MyDpo\Rules\Category\UniqueName;
 use MyDpo\Traits\Itemable;
+use MyDpo\Traits\Actionable;
 
 class Task extends Model {
     
-    use Itemable;
+    use Itemable, Actionable;
 
     protected $table = 'tasks';
 
@@ -33,25 +34,22 @@ class Task extends Model {
     ];
 
     
-    // public static function GetRules($action, $input) {
+    public static function GetRules($action, $input) {
 
-    //     if($action == 'delete')
-    //     {
-    //         return NULL;
-    //     }
+        if(! in_array($action, ['insert', 'update']) )
+        {
+            return NULL;
+        }
 
-    //     $result = [
-    //         'name' => [
-    //             'required',
-    //             'max:191',
-    //             new UniqueName($input),
-    //         ],
-    //         'type' => 'in:centralizatoare,chestionare,cursuri,registre',
-    //     ];
+        $result = [
+            'name' => [
+                'required',
+                'max:191',
+                new UniqueName($input),
+            ],
+        ];
 
-    //     return $result;
-    // }
-
-
+        return $result;
+    }
 
 }
