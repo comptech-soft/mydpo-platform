@@ -13,6 +13,18 @@ class Service extends Model {
 
     protected $table = 'services';
 
+    protected $types = [
+        'service' => [
+            'name' => 'Service',
+            'color' => 'cyan',
+        ],
+
+        'subscription' => [
+            'name' => 'Abonament',
+            'color' => 'purple',
+        ],
+    ];
+
     protected $casts = [
         'id' => 'integer',
         'created_by' => 'integer',
@@ -41,6 +53,14 @@ class Service extends Model {
         'updated_by',
         'deleted_by'
     ];
+
+    protected $appends = [
+        'service_type',
+    ];
+
+    public function getServiceTypeAttribute() {
+        return $this->types[$this->type];
+    }
 
     public static function GetRules($action, $input) {
 
