@@ -16,13 +16,7 @@ class LocalitatiController extends Controller {
         );        
     }
 
-    public function getItems(Request $r) {
-        dd(__METHOD__);
-        return City::getItems($r->all());
-    }
-
     public function getRecords(Request $r) {
-        dd(__METHOD__);
         return City::getRecords($r->all());
     }
 
