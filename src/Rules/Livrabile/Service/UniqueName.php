@@ -18,7 +18,7 @@ class UniqueName implements Rule {
 
     public function passes($attribute, $value) {   
 
-        $q = Service::where('name', $this->input['name'])->where('type', $this->input['type']);
+        $q = Service::where('name', $this->input['name']);
 
         if($this->action == 'update')
         {
