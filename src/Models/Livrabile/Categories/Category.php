@@ -8,10 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 // use MyDpo\Helpers\Performers\Datatable\DoAction;
 // use MyDpo\Rules\Category\UniqueName;
 use MyDpo\Traits\Itemable;
+use MyDpo\Traits\Actionable;
+use MyDpo\Rules\Livrabile\Categpry\UniqueName;
 
 class Category extends Model {
     
-    use Itemable;
+    use Itemable, Actionable;
 
     protected $table = 'categories';
 
@@ -79,23 +81,23 @@ class Category extends Model {
     //     return $validator->fails() ? 0 : 1;
     // }
 
-    // public static function GetRules($action, $input) {
+    public static function GetRules($action, $input) {
 
-    //     if($action == 'delete')
-    //     {
-    //         return NULL;
-    //     }
+        if($action == 'delete')
+        {
+            return NULL;
+        }
 
-    //     $result = [
-    //         'name' => [
-    //             'required',
-    //             'max:191',
-    //             new UniqueName($input),
-    //         ],
-    //         'type' => 'in:centralizatoare,chestionare,cursuri,registre',
-    //     ];
+        $result = [
+            'name' => [
+                'required',
+                'max:191',
+                new UniqueName($action, $input),
+            ],
+            'type' => 'in:centralizatoare,chestionare,cursuri,registre',
+        ];
 
-    //     return $result;
-    // }
+        return $result;
+    }
 
 }

@@ -3,9 +3,9 @@
 namespace MyDpo\Models\Livrabile\Tasks;
 
 use Illuminate\Database\Eloquent\Model;
-use MyDpo\Rules\Livrabile\Task\UniqueName;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
+use MyDpo\Rules\Livrabile\Task\UniqueName;
 
 class Task extends Model {
     

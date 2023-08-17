@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Rules\Category;
+namespace MyDpo\Rules\Livrabile\Category;
 
 use Illuminate\Contracts\Validation\Rule;
 use MyDpo\Models\Livrabile\Category;
@@ -8,29 +8,26 @@ use MyDpo\Models\Livrabile\Category;
 class UniqueName implements Rule {
 
     public $input = NULL;
+    public $action = NULL;
     public $record = NULL;
 
-    public function __construct($input) {
+    public function __construct($action, $input) {
         $this->input = $input;
+        $this->action = $action;
     }
 
     public function passes($attribute, $value) {   
 
         $q = Category::where('name', $this->input['name'])->where('type', $this->input['type']);
 
-        if(array_key_exists('id', $this->input) && $this->input['id'])
+        if($this->action == 'update')
         {
             $q->where('id', '<>', $this->input['id']);
         }
 
         $this->record = $q->first();
-
-        if($this->record)
-        {
-            return FALSE;
-        }
         
-        return TRUE;
+        return ! $this->record;
     }
 
     public function message()
