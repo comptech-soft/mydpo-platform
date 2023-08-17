@@ -3,8 +3,8 @@
 namespace MyDpo\Models\System;
 
 use Illuminate\Database\Eloquent\Model;
-use MyDpo\Helpers\Performers\Datatable\GetItems;
-use MyDpo\Helpers\Performers\Datatable\DoAction;
+// use MyDpo\Helpers\Performers\Datatable\GetItems;
+// use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Traits\Itemable;
 
 class Country extends Model {
@@ -28,13 +28,13 @@ class Country extends Model {
         return $this->hasMany(Region::class, 'country_id');
     }
 
-    public static function getItems($input) {
-        return (new GetItems($input, self::query()->withCount('regions'), __CLASS__))->Perform();
-    }
+    // public static function getItems($input) {
+    //     return (new GetItems($input, self::query()->withCount('regions'), __CLASS__))->Perform();
+    // }
 
-    public static function doAction($action, $input) {
-        return (new DoAction($action, $input, __CLASS__))->Perform();
-    }
+    // public static function doAction($action, $input) {
+    //     return (new DoAction($action, $input, __CLASS__))->Perform();
+    // }
 
     public static function GetQuery() {
         return self::query()->withCount('regions');
