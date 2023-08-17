@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Rules\Livrabile\Task\Task;
+namespace MyDpo\Rules\Livrabile\Task;
 
 use Illuminate\Contracts\Validation\Rule;
 use MyDpo\Models\Livrabile\Tasks\Task;
