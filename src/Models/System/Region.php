@@ -5,6 +5,7 @@ namespace MyDpo\Models\System;
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
+use MyDpo\Rules\Nomenclatoare\Region\UniqueName;
 
 class Region extends Model {
   
@@ -33,6 +34,25 @@ class Region extends Model {
 
     public static function GetQuery() {
         return self::query()->select(['id', 'name', 'code', 'country_id'])->withCount('cities');
+    }
+
+    public static function GetRules($action, $input) {
+
+        if(! in_array($action, ['insert', 'update']) )
+        {
+            return NULL;
+        }
+
+        $result = [
+            'name' => [
+                'required',
+                'max:191',
+                new UniqueName($action, $input),
+            ],
+
+        ];
+
+        return $result;
     }
 
 }
