@@ -5,7 +5,7 @@ namespace MyDpo\Http\Controllers\Admin\Nomenclatoare;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
-// use MyDpo\Models\Service;
+use MyDpo\Models\Livrabile\Services\Service;
 
 class ServiciiController extends Controller {
     
@@ -16,11 +16,11 @@ class ServiciiController extends Controller {
         );        
     }
 
-    // public function getItems(Request $r) {
-    //     return Service::getItems($r->all());
-    // }
+    public function getRecords(Request $r) {
+        return Service::getRecords($r->all());
+    }
 
-    // public function doAction($action, Request $r) {
-    //     return Service::doAction($action, $r->all());
-    // }
+    public function doAction($action, Request $r) {
+        return Service::doAction($action, $r->all());
+    }
 }
