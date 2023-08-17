@@ -28,7 +28,7 @@ class Country extends Model {
     }
 
     public static function GetQuery() {
-        return self::query()->withCount('regions')->select(['id', 'name', 'code', 'vat_prefix', 'phone_prefix']);
+        return self::query()->select(['id', 'name', 'code', 'vat_prefix', 'phone_prefix'])->withCount('regions');
     }
 
 }
