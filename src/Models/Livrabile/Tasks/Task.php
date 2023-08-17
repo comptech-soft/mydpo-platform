@@ -41,7 +41,7 @@ class Task extends Model {
             'name' => [
                 'required',
                 'max:191',
-                new UniqueName($input),
+                new UniqueName($action, $input),
             ],
         ];
 
