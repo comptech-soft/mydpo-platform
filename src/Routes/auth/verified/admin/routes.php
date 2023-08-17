@@ -8,7 +8,7 @@ Route::middleware(['isadmin'])->prefix('admin')->group(function () {
     require __DIR__ . '/clienti/routes.php';
     // require __DIR__ . '/contracte/routes.php';
     // require __DIR__ . '/comenzi/routes.php';
-    require __DIR__ . '/servicii-comandate/routes.php';
+    // require __DIR__ . '/servicii-comandate/routes.php';
 
     require __DIR__ . '/persons/routes.php';
     require __DIR__ . '/users/routes.php';
@@ -27,7 +27,7 @@ Route::middleware(['isadmin'])->prefix('admin')->group(function () {
 
     require __DIR__ . '/rapoarte/routes.php';
 
-    require __DIR__ . '/servicii/routes.php';
+    // require __DIR__ . '/servicii/routes.php';
     // require __DIR__ . '/taskuri/routes.php';
     require __DIR__ . '/registre/routes.php';
 
