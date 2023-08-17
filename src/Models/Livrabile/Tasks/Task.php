@@ -3,10 +3,7 @@
 namespace MyDpo\Models\Livrabile\Tasks;
 
 use Illuminate\Database\Eloquent\Model;
-// use MyDpo\Helpers\Performers\Datatable\GetItems;
-// use MyDpo\Actions\Items\Dataprovider;
-// use MyDpo\Helpers\Performers\Datatable\DoAction;
-// use MyDpo\Rules\Category\UniqueName;
+use MyDpo\Rules\Livrabile\Task\UniqueName;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 
@@ -33,7 +30,6 @@ class Task extends Model {
         'deleted_by'
     ];
 
-    
     public static function GetRules($action, $input) {
 
         if(! in_array($action, ['insert', 'update']) )
