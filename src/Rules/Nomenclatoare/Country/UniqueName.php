@@ -3,7 +3,7 @@
 namespace MyDpo\Rules\Nomenclatoare\Country;
 
 use Illuminate\Contracts\Validation\Rule;
-use MyDpo\Models\Livrabile\Categories\Category;
+use MyDpo\Models\System\Country;
 
 class UniqueName implements Rule {
 
@@ -18,9 +18,7 @@ class UniqueName implements Rule {
 
     public function passes($attribute, $value) {   
 
-        dd($this->action, $this->input);
-
-        $q = Category::where('name', $this->input['name'])->where('type', $this->input['type']);
+        $q = Country::where('name', $this->input['name']);
 
         if($this->action == 'update')
         {
@@ -34,6 +32,6 @@ class UniqueName implements Rule {
 
     public function message()
     {
-        return 'Categoria (' . $this->input['name'] . ') este deja definită.';
+        return 'Țara (' . $this->input['name'] . ') este deja definită.';
     }
 }
