@@ -29,10 +29,10 @@ Route::middleware(['isadmin'])->prefix('admin')->group(function () {
 
     // require __DIR__ . '/servicii/routes.php';
     // require __DIR__ . '/taskuri/routes.php';
-    require __DIR__ . '/registre/routes.php';
+    // require __DIR__ . '/registre/routes.php';
 
-    require __DIR__ . '/sabloane-email/routes.php';
-    require __DIR__ . '/sabloane-notificari/routes.php';
+    // require __DIR__ . '/sabloane-email/routes.php';
+    // require __DIR__ . '/sabloane-notificari/routes.php';
 
 
     require __DIR__ . '/config/routes.php';
