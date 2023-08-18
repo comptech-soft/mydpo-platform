@@ -33,6 +33,26 @@ class Email extends Model {
         'updated_by',
     ];
 
+    public static function RegisterToSend($template, $customer_id, $users) {
+
+        $record = self::create([
+            'customer_id' => $customer_id,
+            'template_id' => $template->id,
+            'descripton' => NULL,
+            'props' => [
+                'template' => collect($template->toArray())->only(['id', 'subject', 'body'])->toArray(),
+            ],
+            'created_by' => \Auth::user()->id,
+        ]);
+
+        $record->RegisterUsersToSend($users);
+
+    }
+
+    public function RegisterUsersToSend($users) {
+        EmailUser::RegisterUsersToSend($this, $users);
+    }
+
     // public static function getItems($input) {
     //     return (new GetItems($input, self::query()->with(['orders.services.service.type', 'customer']), __CLASS__))->Perform();
     // }

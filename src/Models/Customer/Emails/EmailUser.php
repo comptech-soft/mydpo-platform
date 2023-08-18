@@ -25,4 +25,29 @@ class EmailUser extends Model {
         'props',
     ];
 
+    public static function RegisterUsersToSend($email, $users) {
+
+        foreach($users as $i => $user_id)
+        {
+            self::RegisterUserToSend($email, $user_id);
+        }
+
+    }
+
+    public static function RegisterUserToSend($email, $user_id) {
+
+        self::create([
+            'customer_email_id' => $email->id,
+            'user_id' => $user_id,
+            'template_id' => $email->template_id,
+            'sended_by' => \Auth::user()->id,
+            'sended_at' => NULL,
+            'props' => [
+                'template' => $email->props['template'],
+                'created_by' => \Auth::user()->id,
+            ]
+        ]);
+
+    }
+
 }
