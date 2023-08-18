@@ -38,6 +38,16 @@ class TemplateEmail extends Model {
         'deleted_by'
     ];
 
+
+    /**
+     * Trimierea unui calup de emailuri
+     * 
+     */
+    public static function doSend($input, $record) {
+
+        dd($inpu, $record);
+    }
+
     // public static function findByEntityActionPlatform($entity, $action, $platform) {
 
     //     return self::where('entity', $entity)
