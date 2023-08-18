@@ -40,7 +40,7 @@ class Email extends Model {
             'template_id' => $template->id,
             'descripton' => NULL,
             'props' => [
-                'template' => collect($template->toArray())->only(['id', 'subject', 'body'])->toArray(),
+                'template' => collect($template->toArray())->only(['id', 'subject', 'body', 'name'])->toArray(),
             ],
             'created_by' => \Auth::user()->id,
         ]);
