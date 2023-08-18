@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Http\Controllers\Customer;
+namespace MyDpo\Http\Controllers\Customer\Accounts;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
