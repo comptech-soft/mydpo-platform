@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use Carbon\Carbon;
 
 use MyDpo\Models\Customer\Emails\EmailUser;
+use MyDpo\Mail\System\SystemEmail;
 
 class Send extends Command {
 
@@ -34,11 +35,15 @@ class Send extends Command {
                 break;
             }
 
-            // // Trimiteți emailul folosind clasa de email corespunzătoare
-            // \Mail::to($email->email_address)->send(new YourMailClass($email));
+            /**
+             * Trimiteți emailul folosind clasa de email corespunzătoare
+             **/ 
+            \Mail::to($email->user->email)->send(new SystemEmail($email));
             
-            // // Actualizați câmpul 'sended_at' pentru email
-            // $email->update(['sended_at' => now()]);
+            /**
+             * Actualizați câmpul 'sended_at' pentru email
+             */
+            $email->update(['sended_at' => now()]);
             sleep(1);
         }
         
