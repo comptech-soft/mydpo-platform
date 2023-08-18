@@ -23,6 +23,7 @@ class TemplateEmail extends Model {
 
     protected $fillable = [
         'id',
+        'name',
         'entity',
         'action',
         'subject',
