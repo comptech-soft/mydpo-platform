@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 use Carbon\Carbon;
 
 use MyDpo\Models\Customer\Emails\EmailUser;
-use MyDpo\Mail\System\SystemEmail;
+use MyDpo\Mail\System\SystemMail;
 
 class Send extends Command {
 
@@ -30,7 +30,7 @@ class Send extends Command {
 
             $minute_diff = $send_at->diffInMinutes($start_at);
 
-            if($minute_dif >= 5)
+            if($minute_diff >= 5)
             {
                 break;
             }
@@ -38,12 +38,15 @@ class Send extends Command {
             /**
              * Trimiteți emailul folosind clasa de email corespunzătoare
              **/ 
-            \Mail::to($email->user->email)->send(new SystemEmail($email));
+            \Mail::to($email->user->email)->send(new SystemMail($email->user));
             
             /**
              * Actualizați câmpul 'sended_at' pentru email
              */
-            $email->update(['sended_at' => now()]);
+            $email->update([
+                'sended_at' => Carbon::now()
+            ]);
+
             sleep(1);
         }
         
