@@ -8,7 +8,7 @@ use MyDpo\Core\Http\Response\Index;
 use MyDpo\Models\Customer\Customer;
 use MyDpo\Models\Customer\Customer\CustomerAccount;
 
-class CustomerConturiController extends Controller {
+class AccountsController extends Controller {
     
     public function index($customer_id, Request $r) {
         return Index::View(
