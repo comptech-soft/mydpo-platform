@@ -3,6 +3,9 @@
 namespace MyDpo\Models\Livrabile\Emails;
 
 use Illuminate\Database\Eloquent\Model;
+
+use MyDpo\Models\Customer\Emails\Email;
+
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 
@@ -49,7 +52,10 @@ class TemplateEmail extends Model {
 
         if(array_key_exists('customers', $input))
         {
-            dd($input);
+            /**
+             * Se inregistreaza emailurile pentru a fi trimise
+             */
+            $record->RegisterCustomersEmailsToSend(self::PrepareCustomersToSend($input['customers']));
         }
     }
 
@@ -63,4 +69,34 @@ class TemplateEmail extends Model {
     // }
 
 
+    /**
+     * Se inregistreaza emailurile pentru customer in vederea trimiterii
+     */
+    public function RegisterCustomersEmailsToSend($customers) {
+        foreach($customers as $customer_id => $users)
+        {
+            Email::RegisterToSend($this, $customer_id, $users);
+        }
+    }
+
+    /**
+     * Din [customer_id#user_id, ....] se obtine [ {customer_id: [user_id, ...]}, ...]
+     */
+    private static function PrepareCustomersToSend($input) {
+        $customers = [];
+
+        foreach($input as $i => $item)
+        {
+            [$customer_id, $user_id] = explode('#', $item);
+
+            if(! array_key_exists($customer_id, $customers) )
+            {
+                $customers[$customer_id] = [];
+            }
+
+            $customers[$customer_id][] = $user_id;
+        }
+
+        return $customers;
+    }
 }
