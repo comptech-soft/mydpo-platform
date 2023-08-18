@@ -38,7 +38,12 @@ class Send extends Command {
             /**
              * Trimiteți emailul folosind clasa de email corespunzătoare
              **/ 
-            \Mail::to($email->user->email)->send(new SystemMail($email->user));
+            \Mail::to($email->user->email)->send(
+                new SystemMail(
+                    user: $email->user,
+                    sender: $email->sender,
+                    template: $email->props['template'],
+                ));
             
             /**
              * Actualizați câmpul 'sended_at' pentru email

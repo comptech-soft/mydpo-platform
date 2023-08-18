@@ -7,17 +7,21 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
+use Illuminate\Mail\Mailables\Address;
 use Illuminate\Queue\SerializesModels;
 
 class SystemMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $user;
+    public $user = NULL;
+    public $sender = NULL;
+    public $template = NULL;
 
-    public function __construct($user) {
-        
-        $this->email = $user;
+    public function __construct($user, $sender, $template) {
+        $this->user = $user;
+        $this->sender = $sender;
+        $this->template = $template;
     }
 
     /**
@@ -25,7 +29,8 @@ class SystemMail extends Mailable
      */
     public function envelope() {
         return new Envelope(
-            subject: 'Sample Mail',
+            from: new Address($this->sender->email,  $this->sender->full_name),
+            subject: $this->template['subject'],
         );
     }
 
@@ -34,7 +39,11 @@ class SystemMail extends Mailable
      */
     public function content() {
         return new Content(
-            markdown: 'aaa.bb.cc',
+            markdown: 'emails.system',
+            with: [
+                'user' => $this->user,
+                'body' => $this->template['body'],
+            ],
         );
     }
 

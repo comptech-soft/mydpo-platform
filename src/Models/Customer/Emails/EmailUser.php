@@ -24,11 +24,16 @@ class EmailUser extends Model {
         'user_id',
         'template_id',
         'sended_at',
+        'sended_by',
         'props',
     ];
 
     public function user() {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function sender() {
+        return $this->belongsTo(User::class, 'sended_by');
     }
 
     public static function RegisterUsersToSend($email, $users) {

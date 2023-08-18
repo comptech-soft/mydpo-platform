@@ -105,9 +105,6 @@ class Account extends Model {
         return $this->belongsTo(Customer::class, 'customer_id')->select(['id', 'name', 'status'])->with(['mystatus']);
     }
 
-
-
-
     // public static function doAction($action, $input) {
     //     return (new DoAction($action, $input, __CLASS__))->Perform();
     // }
