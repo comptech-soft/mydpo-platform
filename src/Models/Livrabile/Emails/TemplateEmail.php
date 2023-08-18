@@ -45,7 +45,7 @@ class TemplateEmail extends Model {
      */
     public static function doSend($input, $record) {
 
-        dd($inpu, $record);
+        dd($input, $record);
     }
 
     // public static function findByEntityActionPlatform($entity, $action, $platform) {
