@@ -8,10 +8,8 @@ use MyDpo\Traits\Itemable;
 // use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Models\Authentication\User;
 use MyDpo\Models\Customer\Departments\Department;
+use MyDpo\Models\Customer\Customer_base as Customer;
 
-
-
-// use MyDpo\Models\Customer\Customer;
 // use MyDpo\Models\RoleUser;
 // use MyDpo\Models\Activation;
 // use MyDpo\Rules\CustomerAccount\ValidAccountEmail;
@@ -75,7 +73,8 @@ class Account extends Model {
 
     protected $with = [
         'user', 
-        'department'
+        'department',
+        'customer'
     ];
 
     protected $appends = [
@@ -102,9 +101,9 @@ class Account extends Model {
         return $this->belongsTo(Department::class, 'department_id');
     }
 
-    // public function customer() {
-    //     return $this->belongsTo(Customer::class, 'customer_id');
-    // }
+    public function customer() {
+        return $this->belongsTo(Customer::class, 'customer_id')->select(['id', 'name']);
+    }
 
 
 
