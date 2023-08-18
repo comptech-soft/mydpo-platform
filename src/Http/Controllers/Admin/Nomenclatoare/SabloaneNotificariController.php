@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
 use MyDpo\Models\Livrabile\Notifications\TemplateNotification;
 
-class SabloaneEmailController extends Controller {
+class SabloaneNotificariController extends Controller {
     
     public function index(Request $r) {
         return Index::View(
