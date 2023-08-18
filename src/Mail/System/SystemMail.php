@@ -10,8 +10,8 @@ use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Mail\Mailables\Address;
 use Illuminate\Queue\SerializesModels;
 
-class SystemMail extends Mailable
-{
+class SystemMail extends Mailable {
+
     use Queueable, SerializesModels;
 
     public $user = NULL;
@@ -38,8 +38,11 @@ class SystemMail extends Mailable
      * Get the message content definition.
      */
     public function content() {
+        
+        $markdown = \View::exists($markdown = ('emails.' . $this->template['name'])) ? $markdown : 'emails.system';
+        
         return new Content(
-            markdown: 'emails.system',
+            markdown: $markdown,
             with: [
                 'user' => $this->user,
                 'body' => $this->template['body'],
@@ -50,8 +53,7 @@ class SystemMail extends Mailable
     /**
      * Get the attachments for the message.
      */
-    public function attachments()
-    {
+    public function attachments() {
         return [];
     }
 }

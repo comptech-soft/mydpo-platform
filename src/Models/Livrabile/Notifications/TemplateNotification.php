@@ -33,14 +33,14 @@ class TemplateNotification extends Model {
         'deleted_by'
     ];
 
-    public static function findByEntityActionPlatform($entity, $action, $platform) {
+    // public static function findByEntityActionPlatform($entity, $action, $platform) {
 
-        return self::where('entity', $entity)
-            ->where('action', $action)
-            ->where('platform', $platform)
-            ->first();
+    //     return self::where('entity', $entity)
+    //         ->where('action', $action)
+    //         ->where('platform', $platform)
+    //         ->first();
             
-    }
+    // }
 
 
 }
