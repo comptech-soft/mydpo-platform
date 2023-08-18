@@ -41,11 +41,16 @@ class TemplateEmail extends Model {
 
     /**
      * Trimierea unui calup de emailuri
-     * 
+     * Se primeste:
+     *      id = id-ul template-ului de email
+     *      customers = un array [6#123, 6#434, ....], unde structura este customer_id#user_id
      */
     public static function doSend($input, $record) {
 
-        dd($input, $record);
+        if(array_key_exists('customers', $input))
+        {
+            dd($input);
+        }
     }
 
     // public static function findByEntityActionPlatform($entity, $action, $platform) {
