@@ -3,7 +3,7 @@
 namespace MyDpo\Commands\Emailing;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\RateLimiter; 
+use Carbon\Carbon;
 
 use MyDpo\Models\Customer\Emails\EmailUser;
 
@@ -16,19 +16,30 @@ class Send extends Command {
     public function handle() {
 
         $pending_emails = EmailUser::whereNull('sended_at')
-            ->take(10)
+            ->take(5)
             ->get();
+
+        $start_at = Carbon::now();
+        $count = 0;
 
         foreach($pending_emails as $email) 
         {
-            // Introduceți o pauză de 6 secunde (60 secunde / 10 emailuri)
-            RateLimiter::throttle('email-sending')->allow(1)->every(6);
-    
+
+            $send_at = Carbon::now();
+
+            $minute_diff = $send_at->diffInMinutes($start_at);
+
+            if($minute_dif >= 5)
+            {
+                break;
+            }
+
             // // Trimiteți emailul folosind clasa de email corespunzătoare
             // \Mail::to($email->email_address)->send(new YourMailClass($email));
             
             // // Actualizați câmpul 'sended_at' pentru email
             // $email->update(['sended_at' => now()]);
+            sleep(1);
         }
         
         $this->info('Sent ' . count($pending_emails) . ' emails.');
