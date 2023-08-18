@@ -4,6 +4,8 @@ namespace MyDpo\Models\Customer\Emails;
 
 use Illuminate\Database\Eloquent\Model;
 
+use MyDpo\Models\Authentication\User;
+
 class EmailUser extends Model {
 
     protected $table = 'customers-emails-users';
@@ -24,6 +26,10 @@ class EmailUser extends Model {
         'sended_at',
         'props',
     ];
+
+    public function user() {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 
     public static function RegisterUsersToSend($email, $users) {
 
