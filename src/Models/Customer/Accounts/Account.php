@@ -6,9 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 // use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Traits\Itemable;
 // use MyDpo\Helpers\Performers\Datatable\DoAction;
-// use MyDpo\Models\Authentication\User;
+use MyDpo\Models\Authentication\User;
+use MyDpo\Models\Customer\Departments\Departent;
+
+
+
 // use MyDpo\Models\Customer\Customer;
-// use MyDpo\Models\Customer\CustomerDepartment;
 // use MyDpo\Models\RoleUser;
 // use MyDpo\Models\Activation;
 // use MyDpo\Rules\CustomerAccount\ValidAccountEmail;
@@ -70,57 +73,41 @@ class Account extends Model {
         static::addGlobalScope( new NotdeletedScope() );
     }
 
-    // protected $with = [
-    //     'user', 
-    //     'department'
-    // ];
+    protected $with = [
+        'user', 
+        'department'
+    ];
 
-    // protected $appends = [
-    //     'role'
-    // ];
+    protected $appends = [
+        'role'
+    ];
 
-    // public function getRoleAttribute() {
-    //     $r = NULL;
-    //     foreach($this->user->roles as $i => $role)
-    //     {
-    //         if( ($role->type == 'b2b') && ($role->pivot->customer_id == $this->customer_id) )
-    //         {
-    //             $r = $role;
-    //         }
-    //     }
-    //     return $r;
-    // }
+    public function getRoleAttribute() {
+        $r = NULL;
+        foreach($this->user->roles as $i => $role)
+        {
+            if( ($role->type == 'b2b') && ($role->pivot->customer_id == $this->customer_id) )
+            {
+                $r = $role;
+            }
+        }
+        return $r;
+    }
 
-    // public function user() {
-    //     return $this->belongsTo(User::class, 'user_id');
-    // }
+    public function user() {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function department() {
+        return $this->belongsTo(Department::class, 'department_id');
+    }
 
     // public function customer() {
     //     return $this->belongsTo(Customer::class, 'customer_id');
     // }
 
-    // public function department() {
-    //     return $this->belongsTo(CustomerDepartment::class, 'department_id');
-    // }
 
-    // // public static function getItems($input) {
 
-    // //     $q = self::query()->leftJoin(
-    // //         'users',
-    // //         function($j) {
-    // //             $j->on('users.id', '=', 'customers-persons.user_id');
-    // //         }
-    // //     )
-    // //     ->leftJoin(
-    // //         'customers',
-    // //         function($j) {
-    // //             $j->on('customers.id', '=', 'customers-persons.customer_id');
-    // //         }
-    // //     )
-    // //     ->select('customers-persons.*');
-
-    // //     return (new GetItems($input, $q->with(['customer', 'department', 'user']), __CLASS__))->Perform();
-    // // }
 
     // public static function doAction($action, $input) {
     //     return (new DoAction($action, $input, __CLASS__))->Perform();
