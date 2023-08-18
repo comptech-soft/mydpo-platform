@@ -3,9 +3,13 @@
 namespace MyDpo\Models\Livrabile\Emails;
 
 use Illuminate\Database\Eloquent\Model;
+use MyDpo\Traits\Itemable;
+use MyDpo\Traits\Actionable;
 
 class TemplateEmail extends Model {
    
+    use Itemable, Actionable;
+
     protected $table = 'email-templates';
 
     protected $casts = [
@@ -33,14 +37,14 @@ class TemplateEmail extends Model {
         'deleted_by'
     ];
 
-    public static function findByEntityActionPlatform($entity, $action, $platform) {
+    // public static function findByEntityActionPlatform($entity, $action, $platform) {
 
-        return self::where('entity', $entity)
-            ->where('action', $action)
-            ->where('platform', $platform)
-            ->first();
+    //     return self::where('entity', $entity)
+    //         ->where('action', $action)
+    //         ->where('platform', $platform)
+    //         ->first();
             
-    }
+    // }
 
 
 }
