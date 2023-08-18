@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
 // use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Models\Authentication\User;
-use MyDpo\Models\Customer\Departments\Departent;
+use MyDpo\Models\Customer\Departments\Department;
 
 
 
