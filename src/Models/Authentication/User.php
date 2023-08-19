@@ -151,9 +151,9 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail 
         return strtoupper($r);
     }
 
-    // public function getMySettingsAttribute() {
-    //     return $this->settings()->get()->pluck('value', 'code');
-    // }
+    public function getMySettingsAttribute() {
+        return $this->settings()->get()->pluck('value', 'code');
+    }
 
     /** *************************
      * RELATIONS                *
