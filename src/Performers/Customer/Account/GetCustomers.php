@@ -4,7 +4,7 @@ namespace MyDpo\Performers\Customer\Account;
 
 use MyDpo\Helpers\Perform;
 use MyDpo\Models\Customer\Accounts\Account;
-use MyDpo\Models\Customers\Customer;
+use MyDpo\Models\Customer\Customer;
 
 class GetCustomers extends Perform {
 
