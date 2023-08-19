@@ -17,12 +17,20 @@ class CustomerContract extends Contract {
         // 'last_order',
     ];
 
+    protected $with = [
+        'customer'
+    ];
+
     // public function getLastOrderAttribute() {
     //     return $this->orders->first();
     // }
 
     function orders() {
         return $this->hasMany(CustomerOrder::class, 'contract_id')->orderBy('date_to', 'desc');
+    }
+
+    public function customer() {
+        return $this->belongsTo(Customer::class, 'customer_id')->select(['id', 'name', 'status'])->with(['mystatus']);
     }
     
     // public static function getItems($input) {
