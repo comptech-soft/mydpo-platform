@@ -65,10 +65,24 @@ class RoleUser extends Model {
 
     }
 
-    public static function byUserAndCustomer($user_id, $customer_id) {
-        return self::where('user_id', $user_id)
-            ->where('customer_id', $customer_id)
-            ->first();
+    public static function byUserAndCustomer($user_id, $customer_id, $role_id) {
+        $record = self::where('user_id', $user_id)->where('customer_id', $customer_id)->first();
+
+        if( ! $record)
+        {
+            $record = self::create([
+                'user_id' => $user_id,
+                'customer_id' => $customer_id,
+                'role_id' => $role_id,
+            ]);
+        }
+        else
+        {
+            $record->role_id = $role_id;
+            $record->save();
+        }
+
+        return $record;
     }
 
 }

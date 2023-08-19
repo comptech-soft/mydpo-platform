@@ -247,24 +247,33 @@ class Account extends Model {
 
         foreach($accounts as $i => $account)
         {
+            $activation = Activation::byUserAndCustomer($account->user_id, $account->customer_id);
+            $role_user = RoleUser::byUserAndCustomer($account->user_id, $account->customer_id);
+            
+            if(!! $activation )
+            {
+                $account->activated = $activation->activated;
+                $account->activated_at = $activation->activated_at;
+                $account->role_id = $activation->role_id;
+                
+                $account->save();
 
-            dd($account);
-            // $activation = Activation::byUserAndCustomer($account->user_id, $account->customer_id);
+            }
+            // 
             
             // if(!! $activation)
             // {
-            //     $account->activated = $activation->activated;
-            //     $account->activated_at = $activation->activated_at;
+            //    
             // }
 
-            // $roleUser = RoleUser::byUserAndCustomer($account->user_id, $account->customer_id);
+            // 
 
             // if(!! $roleUser)
             // {
             //     $account->role_id = $roleUser->role_id;
             // }
 
-            // $account->save();
+            // 
         }
     }
 }
