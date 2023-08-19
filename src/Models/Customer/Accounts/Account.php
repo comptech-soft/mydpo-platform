@@ -220,7 +220,9 @@ class Account extends Model {
     // }
 
     /**
-     * Din tabele customers-persons aflautilizatorii
+     * Din tabele customers-persons afla utilizatorii
+     * Utilizatotrii se iau o singura data
+     * Ne intereseaza si la cati clienti este 
      */
     public static function GetUsers($input) {
         return (new GetUsers($input))->Perform();
