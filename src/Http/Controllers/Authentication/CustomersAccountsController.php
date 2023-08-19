@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
 // use MyDpo\Models\Customer\Accounts\Account;
 
-// use MyDpo\Models\Authentication\User;
 
 class CustomersAccountsController extends Controller {
     

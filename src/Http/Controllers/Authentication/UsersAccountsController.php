@@ -7,8 +7,6 @@ use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
 use MyDpo\Models\Customer\Accounts\Account;
 
-// use MyDpo\Models\Authentication\User;
-
 class UsersAccountsController extends Controller {
     
     public function index(Request $r) {
@@ -27,22 +25,3 @@ class UsersAccountsController extends Controller {
     }
 
 }
-
-// use App\Http\Controllers\Controller;
-// use MyDpo\Helpers\Response;
-// use MyDpo\Models\Customer\CustomerAccount;
-
-
-
-// class PersonsController extends Controller {
-    
-//     public function index() {
-//         
-
-//         return Response::View(
-//             '~templates.index', 
-//             asset('apps/persons/index.js')
-//         );
-//     }
-
-// }
