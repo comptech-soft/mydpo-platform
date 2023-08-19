@@ -11,6 +11,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
+use MyDpo\Traits\Itemable;
+use MyDpo\Traits\Actionable;
 use MyDpo\Models\Authentication\Role;
 // use MyDpo\Models\RoleUser;
 // use MyDpo\Models\Customer\Customer;
@@ -27,7 +29,7 @@ use Illuminate\Support\Facades\Hash;
 use MyDpo\Scopes\NotdeletedScope;
 
 class User extends Authenticatable implements CanResetPassword, MustVerifyEmail {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, Itemable, Actionable;
 
     /**
      * The attributes that are mass assignable.
