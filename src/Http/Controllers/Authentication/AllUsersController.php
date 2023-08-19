@@ -20,9 +20,9 @@ class AllUsersController extends Controller {
         return User::getRecords($r->all());
     }
 
-    // public function doAction($action, Request $r) {
-    //     return Role::doAction($action, $r->all());
-    // }
+    public function doAction($action, Request $r) {
+        return User::doAction($action, $r->all());
+    }
 
     // // public function saveRolePermissions(Request $r) {
     // //     return Role::saveRolePermissions($r->all());
