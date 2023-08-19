@@ -46,6 +46,7 @@ class NotificationEvent implements ShouldBroadcast {
             'id' => $this->notification->id,
             'receiver_id' => $this->notification->receiver_id,
             'message' => $this->notification->message,
+            'title' => $this->notification->title, 
         ];
     }
 
