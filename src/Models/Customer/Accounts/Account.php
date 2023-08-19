@@ -219,7 +219,10 @@ class Account extends Model {
     //     return $result;
     // }
 
-    public static function GetUsers() {
+    /**
+     * Din tabele customers-persons aflautilizatorii
+     */
+    public static function GetUsers($input) {
         return (new GetUsers($input))->Perform();
     }
 

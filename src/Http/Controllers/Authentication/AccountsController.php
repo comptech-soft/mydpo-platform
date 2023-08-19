@@ -21,9 +21,9 @@ class AccountsController extends Controller {
         );        
     }
 
-    public function getUsers() {
+    public function getUsers(Request $r) {
 
-        return Account::GetUsers();
+        return Account::GetUsers($r->all());
     }
 
 }
