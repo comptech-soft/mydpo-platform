@@ -199,9 +199,9 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail 
     //     ->withTimestamps();
     // }
 
-    // function settings() {
-    //     return $this->hasMany(UserSetting::class, 'user_id')->where('platform', config('app.platform'));
-    // }
+    function settings() {
+        return $this->hasMany(UserSetting::class, 'user_id')->where('platform', config('app.platform'));
+    }
 
     // function usercustomers() {
     //     return $this->hasMany(UserCustomer::class, 'user_id');
