@@ -9,8 +9,8 @@ use MyDpo\Traits\Itemable;
 use MyDpo\Models\Authentication\User;
 use MyDpo\Models\Customer\Departments\Department;
 use MyDpo\Models\Customer\Customer_base as Customer;
+use MyDpo\Models\Authentication\RoleUser;
 
-// use MyDpo\Models\RoleUser;
 // use MyDpo\Models\Activation;
 // use MyDpo\Rules\CustomerAccount\ValidAccountEmail;
 // use MyDpo\Events\CustomerPersons\CustomerPersonCreateAccount;
@@ -217,38 +217,7 @@ class Account extends Model {
     //     return $result;
     // }
 
-    // public static function SyncRecords($customer_id = NULL) {
 
-    //     if($customer_id)
-    //     {
-    //         $accounts = self::where('customer_id', $customer_id)->get();
-    //     }
-    //     else
-    //     {
-    //         $accounts = self::all();
-    //     }
-
-
-    //     foreach($accounts as $i => $account)
-    //     {
-    //         $activation = Activation::byUserAndCustomer($account->user_id, $account->customer_id);
-            
-    //         if(!! $activation)
-    //         {
-    //             $account->activated = $activation->activated;
-    //             $account->activated_at = $activation->activated_at;
-    //         }
-
-    //         $roleUser = RoleUser::byUserAndCustomer($account->user_id, $account->customer_id);
-
-    //         if(!! $roleUser)
-    //         {
-    //             $account->role_id = $roleUser->role_id;
-    //         }
-
-    //         $account->save();
-    //     }
-    // }
 
     public static function GetQuery() {
         return 
@@ -266,5 +235,36 @@ class Account extends Model {
                 }
             )
             ->select('customers-persons.*');
+    }
+
+    /**
+     * Actualizeaza tabela customers-persons cu ce este in 
+     * tabelele accounts-activations si roles-users
+     */
+    public static function SyncRecords($customer_id = NULL) {
+
+        $accounts = (!! $customer_id ? self::where('customer_id', $customer_id)->get() : self::all());
+
+        foreach($accounts as $i => $account)
+        {
+
+            dd($account);
+            // $activation = Activation::byUserAndCustomer($account->user_id, $account->customer_id);
+            
+            // if(!! $activation)
+            // {
+            //     $account->activated = $activation->activated;
+            //     $account->activated_at = $activation->activated_at;
+            // }
+
+            // $roleUser = RoleUser::byUserAndCustomer($account->user_id, $account->customer_id);
+
+            // if(!! $roleUser)
+            // {
+            //     $account->role_id = $roleUser->role_id;
+            // }
+
+            // $account->save();
+        }
     }
 }
