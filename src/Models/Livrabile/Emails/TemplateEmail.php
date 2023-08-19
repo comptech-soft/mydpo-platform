@@ -41,7 +41,6 @@ class TemplateEmail extends Model {
         'deleted_by'
     ];
 
-
     /**
      * Trimierea unui calup de emailuri
      * Se primeste:
@@ -58,16 +57,6 @@ class TemplateEmail extends Model {
             $record->RegisterCustomersEmailsToSend(self::PrepareCustomersToSend($input['customers']));
         }
     }
-
-    // public static function findByEntityActionPlatform($entity, $action, $platform) {
-
-    //     return self::where('entity', $entity)
-    //         ->where('action', $action)
-    //         ->where('platform', $platform)
-    //         ->first();
-            
-    // }
-
 
     /**
      * Se inregistreaza emailurile pentru customer in vederea trimiterii
@@ -99,4 +88,13 @@ class TemplateEmail extends Model {
 
         return $customers;
     }
+
+        // public static function findByEntityActionPlatform($entity, $action, $platform) {
+
+    //     return self::where('entity', $entity)
+    //         ->where('action', $action)
+    //         ->where('platform', $platform)
+    //         ->first();
+            
+    // }
 }
