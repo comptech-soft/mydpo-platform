@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Performers\Customer\Accounts;
+namespace MyDpo\Performers\Customer\Account;
 
 use MyDpo\Helpers\Perform;
 // use MyDpo\Models\Customer\Registre\RowFile;
