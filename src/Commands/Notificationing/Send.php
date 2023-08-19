@@ -5,6 +5,7 @@ namespace MyDpo\Commands\Notificationing;
 use Illuminate\Console\Command;
 use Carbon\Carbon;
 use MyDpo\Models\Customer\Notifications\Notification;
+use MyDpo\Events\Notifications\NotificationEvent;
 
 class Send extends Command {
 
@@ -14,9 +15,7 @@ class Send extends Command {
 
     public function handle() {
 
-        $pending_notifications = Notification::whereStatus('created')
-            ->take(5)
-            ->get();
+        $pending_notifications = Notification::whereStatus('created')->orderBy('created_at')->take(5)->get();
 
         $start_at = Carbon::now();
         $count = 0;
@@ -33,15 +32,12 @@ class Send extends Command {
                 break;
             }
 
+            $this->info('Sendig notification #' . $notification->id);
+
             /**
              * Trimiteți emailul folosind clasa de email corespunzătoare
              **/ 
-            // \Mail::to($email->user->email)->send(
-            //     new SystemMail(
-            //         user: $email->user,
-            //         sender: $email->sender,
-            //         template: $email->props['template'],
-            //     ));
+            event(new NotificationEvent($notification));
             
             /**
              * Actualizați câmpul 'sended_at' pentru email

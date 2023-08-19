@@ -16,16 +16,13 @@ class Send extends Command {
 
     public function handle() {
 
-        $pending_emails = EmailUser::whereNull('sended_at')
-            ->take(5)
-            ->get();
+        $pending_emails = EmailUser::whereNull('sended_at')->orderBy('created_at')->take(5)->get();
 
         $start_at = Carbon::now();
         $count = 0;
 
         foreach($pending_emails as $email) 
         {
-
             $send_at = Carbon::now();
 
             $minute_diff = $send_at->diffInMinutes($start_at);
@@ -46,7 +43,7 @@ class Send extends Command {
                 ));
             
             /**
-             * Actualizați câmpul 'sended_at' pentru email
+             * Se actualizeaza câmpul 'sended_at' pentru email
              */
             $email->update([
                 'sended_at' => Carbon::now()
