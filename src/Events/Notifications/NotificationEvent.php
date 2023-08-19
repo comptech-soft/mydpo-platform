@@ -42,7 +42,9 @@ class NotificationEvent implements ShouldBroadcast {
     }
 
     public function broadcastWith() {
-        return $this->notification->toArray();
+        return [
+            'id' => $this->notification->id,
+        ];
     }
 
     // public function InsertNotification() {
