@@ -112,17 +112,27 @@ class Notification extends Model {
 
     public static function RegisterUserToSend($template, $customer_id, $user_id) {
 
-        self::create(dd([
+        self::create([
             'type_id' => $template->id,
-            // 'user_id' => $user_id,
-            // 'template_id' => $email->template_id,
-            // 'sended_by' => \Auth::user()->id,
-            // 'sended_at' => NULL,
-            // 'props' => [
-            //     'template' => $email->props['template'],
-            //     'created_by' => \Auth::user()->id,
-            // ]
-        ]));
+            'subject_type' => $template->name,
+            'subject_id' => NULL,
+            'sender_id' => \Auth::user()->id,
+            'sended_at' => NULL,
+            'date_from' => NULL,
+            'date_to' => NULL,
+            'readed_at' => NULL,
+            'customer_id' => $customer_id,
+            'receiver_id' => $user_id,
+            'event' => $template->name,
+            'message' => $template->message,
+            'status' => 'created',
+            'payload' => NULL,
+            'created_by' => \Auth::user()->id,
+            'props' => [
+                'template' => $template->toArray(),
+                
+            ]
+        ]);
 
     }
 
