@@ -9,7 +9,7 @@ use MyDpo\Models\Customer\Accounts\Account;
 
 // use MyDpo\Models\Authentication\User;
 
-class TeamController extends Controller {
+class AccountsController extends Controller {
     
     public function index(Request $r) {
 
