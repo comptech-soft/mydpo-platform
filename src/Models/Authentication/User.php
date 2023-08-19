@@ -211,18 +211,7 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail 
      * ROLURI.PERMISIUNI        *
      ****************************/
 
-    // public function inRoles($slugs) {
-    //     if( (config('app.platform') == 'b2b') )
-    //     {
-    //         return true;
-    //     }
-
-    //     if(! $this->role)
-    //     {
-    //         return false;
-    //     }
-    //     return in_array($this->role->slug, $slugs);
-    // }
+    
 
     /** *************************
      * ITEMS                    *
@@ -559,4 +548,22 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail 
     //         }
     //     }
     // }
+
+    /**
+     * 19.08.2023 - daca rolul meu este in array-ul $slugs
+     * Nu se aplica pe b2b (client)
+     */
+    public function inRoles($slugs) {
+        if( (config('app.platform') == 'b2b') )
+        {
+            return true;
+        }
+
+        if(! $this->role)
+        {
+            return false;
+        }
+
+        return in_array($this->role->slug, $slugs);
+    }
 }
