@@ -233,7 +233,7 @@ class Account extends Model {
      * Clientii se iau o singura data
      * Ne intereseaza cate conturi are clientul???
      */
-    public static function GetUsGetCustomersers($input) {
+    public static function GetCustomers($input) {
         return (new GetCustomers($input))->Perform();
     }
 
