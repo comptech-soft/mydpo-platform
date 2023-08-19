@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 
-use MyDpo\Models\Customer\NotificationsâNotification;
+use MyDpo\Models\Customer\Notifications\Notification;
 
 class TemplateNotification extends Model {
    
