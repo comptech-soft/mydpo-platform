@@ -103,18 +103,26 @@ class Notification extends Model {
 
     public static function RegisterToSend($template, $customer_id, $users) {
 
-        dd($template, $customer_id, $users);
-        // $record = self::create([
-        //     'customer_id' => $customer_id,
-        //     'template_id' => $template->id,
-        //     'descripton' => NULL,
-        //     'props' => [
-        //         'template' => collect($template->toArray())->only(['id', 'subject', 'body', 'name'])->toArray(),
-        //     ],
-        //     'created_by' => \Auth::user()->id,
-        // ]);
+        foreach($users as $i => $user_id)
+        {
+            self::RegisterUserToSend($template, $customer_id, $user_id);
+        }
 
-        // $record->RegisterUsersToSend($users);
+    }
+
+    public static function RegisterUserToSend($template, $customer_id, $user_id) {
+
+        self::create(dd([
+            'type_id' => $template->id,
+            // 'user_id' => $user_id,
+            // 'template_id' => $email->template_id,
+            // 'sended_by' => \Auth::user()->id,
+            // 'sended_at' => NULL,
+            // 'props' => [
+            //     'template' => $email->props['template'],
+            //     'created_by' => \Auth::user()->id,
+            // ]
+        ]));
 
     }
 
