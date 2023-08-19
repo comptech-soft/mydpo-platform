@@ -238,11 +238,18 @@ class Account extends Model {
                 }
             )
             ->leftJoin(
+                'customers',
+                function($q) {
+                    $q->on('customers.id', '=', 'customers-persons.customer_id');
+                }
+            )
+            ->leftJoin(
                 'customers-departamente',
                 function($q) {
                     $q->on('customers-departamente.id', '=', 'customers-persons.department_id');
                 }
             )
+            ->whereRaw("((`customers`.`deleted` IS NULL) OR (`customers`.`deleted` = 0))")
             ->select('customers-persons.*');
     }
 
