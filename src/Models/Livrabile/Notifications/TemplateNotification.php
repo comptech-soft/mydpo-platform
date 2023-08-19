@@ -4,8 +4,13 @@ namespace MyDpo\Models\Livrabile\Notifications;
 
 use Illuminate\Database\Eloquent\Model;
 
+use MyDpo\Traits\Itemable;
+use MyDpo\Traits\Actionable;
+
 class TemplateNotification extends Model {
    
+    use Itemable, Actionable;
+
     protected $table = 'notification-types';
 
     protected $casts = [
@@ -19,6 +24,7 @@ class TemplateNotification extends Model {
 
     protected $fillable = [
         'id',
+        'name',
         'entity',
         'action',
         'title',
