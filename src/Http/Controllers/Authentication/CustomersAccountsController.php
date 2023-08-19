@@ -20,9 +20,8 @@ class CustomersAccountsController extends Controller {
         );        
     }
 
-    // public function getUsers(Request $r) {
-
-    //     return Account::GetUsers($r->all());
-    // }
+    public function getCustomers(Request $r) {
+        return Account::GetCustomers($r->all());
+    }
 
 }

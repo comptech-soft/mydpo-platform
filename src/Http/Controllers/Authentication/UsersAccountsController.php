@@ -20,7 +20,6 @@ class UsersAccountsController extends Controller {
     }
 
     public function getUsers(Request $r) {
-
         return Account::GetUsers($r->all());
     }
 

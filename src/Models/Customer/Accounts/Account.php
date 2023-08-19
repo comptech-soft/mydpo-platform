@@ -12,7 +12,7 @@ use MyDpo\Models\Customer\Customer_base as Customer;
 use MyDpo\Models\Authentication\RoleUser;
 
 use MyDpo\Performers\Customer\Account\GetUsers;
-
+use MyDpo\Performers\Customer\Account\GetCustomers;
 
 // use MyDpo\Rules\CustomerAccount\ValidAccountEmail;
 // use MyDpo\Events\CustomerPersons\CustomerPersonCreateAccount;
@@ -220,12 +220,21 @@ class Account extends Model {
     // }
 
     /**
-     * Din tabele customers-persons afla utilizatorii
-     * Utilizatotrii se iau o singura data
+     * Din tabele customers-persons aflam utilizatorii
+     * Utilizatorii se iau o singura data
      * Ne intereseaza si la cati clienti este 
      */
     public static function GetUsers($input) {
         return (new GetUsers($input))->Perform();
+    }
+
+    /**
+     * Din tabele customers-persons aflam clientii
+     * Clientii se iau o singura data
+     * Ne intereseaza cate conturi are clientul???
+     */
+    public static function GetUsGetCustomersers($input) {
+        return (new GetCustomers($input))->Perform();
     }
 
     public static function GetQuery() {
