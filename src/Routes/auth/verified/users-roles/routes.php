@@ -1,10 +1,10 @@
 <?php
 
-use MyDpo\Http\Controllers\Auth\UsersRolesController;
+// use MyDpo\Http\Controllers\Auth\UsersRolesController;
 
-Route::prefix('role-users')->group( function() {
+// Route::prefix('role-users')->group( function() {
         
-    Route::post('items', [UsersRolesController::class, 'getItems']);
+//     Route::post('items', [UsersRolesController::class, 'getItems']);
     
     
-});
+// });

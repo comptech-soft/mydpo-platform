@@ -1,10 +1,10 @@
 <?php
 
-use MyDpo\Http\Controllers\Auth\UsersStatusesController;
+// use MyDpo\Http\Controllers\Auth\UsersStatusesController;
 
-Route::prefix('users-statuses')->group( function() {
+// Route::prefix('users-statuses')->group( function() {
         
-    Route::post('items', [UsersStatusesController::class, 'getItems']);
+//     Route::post('items', [UsersStatusesController::class, 'getItems']);
     
     
-});
+// });

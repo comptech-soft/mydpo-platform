@@ -8,7 +8,7 @@ use MyDpo\Http\Controllers\Usersession\MyProfileController;
  */
 Route::middleware('verified')->group(function () {
 
-    Route::get('my-profile', [MyProfileController::class, 'index']);
+    // Route::get('my-profile', [MyProfileController::class, 'index']);
 
    
     // require __DIR__ . '/customers-dashboard/routes.php';
@@ -31,24 +31,24 @@ Route::middleware('verified')->group(function () {
 
     // require __DIR__ . '/customers-cursuri/routes.php';
     // require __DIR__ . '/customers-contracte/routes.php';
-    require __DIR__ . '/customers-orders/routes.php';
-    require __DIR__ . '/customers-services/routes.php';
+    // require __DIR__ . '/customers-orders/routes.php';
+    // require __DIR__ . '/customers-services/routes.php';
     // require __DIR__ . '/customers-accounts/routes.php';
-    require __DIR__ . '/customers-materiale/routes.php';
+    // require __DIR__ . '/customers-materiale/routes.php';
     // require __DIR__ . '/customers-team/routes.php';
     // require __DIR__ . '/customers-rapoarte-lunare/routes.php';
     // require __DIR__ . '/customers-taskuri/routes.php';
     // require __DIR__ . '/customers-emails/routes.php';
     // require __DIR__ . '/customers-notificari/routes.php';
 
-    require __DIR__ . '/clienti/routes.php';
-    require __DIR__ . '/users/routes.php';
+    // require __DIR__ . '/clienti/routes.php';
+    // require __DIR__ . '/users/routes.php';
     // require __DIR__ . '/permissions/routes.php';
-    require __DIR__ . '/users-statuses/routes.php';
-    require __DIR__ . '/users-customers/routes.php';
-    require __DIR__ . '/users-roles/routes.php';
-    require __DIR__ . '/users-activations/routes.php';
+    // require __DIR__ . '/users-statuses/routes.php';
+    // require __DIR__ . '/users-customers/routes.php';
+    // require __DIR__ . '/users-roles/routes.php';
+    // require __DIR__ . '/users-activations/routes.php';
 
-    require __DIR__ . '/admin/routes.php';
-    require __DIR__ . '/mydpo/routes.php';
+    // require __DIR__ . '/admin/routes.php';
+    // require __DIR__ . '/mydpo/routes.php';
 });
