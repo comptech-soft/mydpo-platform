@@ -1,14 +1,13 @@
 <?php
 
-namespace MyDpo\Http\Controllers\Admin;
+namespace MyDpo\Http\Controllers\Customer\Customers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
 use MyDpo\Models\Customer\Customer;
 
-class CustomersController extends Controller
-{
+class CustomersController extends Controller {
     
     public function index(Request $r) {
 
