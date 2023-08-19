@@ -10,9 +10,8 @@ class GetUsers extends Perform {
 
     public function Action() {
 
-        $users = User::whereIn('id', Account::distinct()->pluck('user_id'))->get();
-
-
+        $users = User::whereIn('id', Account::distinct()->pluck('user_id'))->orderBy('last_name')->orderBy('first_name')->get();
+        
         $this->payload = [
             'users' => $users,
         ];
