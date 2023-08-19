@@ -2,8 +2,7 @@
 
 namespace MyDpo\Models\Customer\Contracts;
 
-// use MyDpo\Helpers\Performers\Datatable\GetItems;
-// use MyDpo\Helpers\Performers\Datatable\DoAction;
+use MyDpo\Models\Customer\Customer_base as Customer;
 
 use MyDpo\Rules\CustomerContract\ContractNumber;
 use MyDpo\Traits\Itemable;
