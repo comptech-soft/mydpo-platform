@@ -53,6 +53,7 @@ class Activation extends Model {
             $record = self::create([
                 'user_id' => $user_id,
                 'customer_id' => $customer_id,
+                'token' => \Str::random(64),
                 'role_id' => $role_id,
             ]);
         }
