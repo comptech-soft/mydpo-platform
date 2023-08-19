@@ -23,7 +23,7 @@ class AccountsController extends Controller {
 
     public function getUsers() {
 
-        return __METHOD__;
+        return Account::GetUsers();
     }
 
 }

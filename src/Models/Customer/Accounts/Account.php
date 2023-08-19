@@ -11,7 +11,9 @@ use MyDpo\Models\Customer\Departments\Department;
 use MyDpo\Models\Customer\Customer_base as Customer;
 use MyDpo\Models\Authentication\RoleUser;
 
-// use MyDpo\Models\Activation;
+use MyDpo\Performers\Customer\Account\GetUsers;
+
+
 // use MyDpo\Rules\CustomerAccount\ValidAccountEmail;
 // use MyDpo\Events\CustomerPersons\CustomerPersonCreateAccount;
 // use MyDpo\Performers\CustomerFolder\SaveFoldersAccess;
@@ -217,7 +219,9 @@ class Account extends Model {
     //     return $result;
     // }
 
-
+    public static function GetUsers() {
+        return (new GetUsers($input))->Perform();
+    }
 
     public static function GetQuery() {
         return 
