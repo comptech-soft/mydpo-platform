@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 
+use MyDpo\Models\Customer\NotificationsâNotification;
+
 class TemplateNotification extends Model {
    
     use Itemable, Actionable;
@@ -62,8 +64,7 @@ class TemplateNotification extends Model {
     public function RegisterCustomersNotificationsToSend($customers) {
         foreach($customers as $customer_id => $users)
         {
-            dd($customer_id, $users);
-            // Email::RegisterToSend($this, $customer_id, $users);
+            Notification::RegisterToSend($this, $customer_id, $users);
         }
     }
 

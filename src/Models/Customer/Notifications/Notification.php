@@ -3,15 +3,15 @@
 namespace MyDpo\Models\Customer\Notifications;
 
 use Illuminate\Database\Eloquent\Model;
-use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Models\Livrabile\Notifications\TemplateNotification;
 use MyDpo\Models\Customer\Customer_base as Customer;
 use MyDpo\Models\Authentication\User;
 use MyDpo\Traits\Itemable;
+use MyDpo\Traits\Actionable;
 
 class Notification extends Model {
 
-    use Itemable;
+    use Itemable, Actionable;
 
     protected $table = 'customers-notifications';
 
@@ -101,8 +101,25 @@ class Notification extends Model {
         return $this->belongsTo(User::class, 'receiver_id');
     }
 
-    public static function doAction($action, $input) {
-        return (new DoAction($action, $input, __CLASS__))->Perform();
+    public static function RegisterToSend($template, $customer_id, $users) {
+
+        dd($template, $customer_id, $users);
+        // $record = self::create([
+        //     'customer_id' => $customer_id,
+        //     'template_id' => $template->id,
+        //     'descripton' => NULL,
+        //     'props' => [
+        //         'template' => collect($template->toArray())->only(['id', 'subject', 'body', 'name'])->toArray(),
+        //     ],
+        //     'created_by' => \Auth::user()->id,
+        // ]);
+
+        // $record->RegisterUsersToSend($users);
+
     }
+
+    // public static function doAction($action, $input) {
+    //     return (new DoAction($action, $input, __CLASS__))->Perform();
+    // }
 
 }
