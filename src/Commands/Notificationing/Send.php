@@ -35,16 +35,16 @@ class Send extends Command {
             $this->info('Sendig notification #' . $notification->id);
 
             /**
-             * Trimiteți emailul folosind clasa de email corespunzătoare
+             * Se trimite notificarea folosind evenimentul NotificationEvent
              **/ 
             event(new NotificationEvent($notification));
             
             /**
-             * Actualizați câmpul 'sended_at' pentru email
+             * Se actualizeaza câmpul 'status' pentru email
              */
-            // $email->update([
-            //     'sended_at' => Carbon::now()
-            // ]);
+            $notification->update([
+                'status' => 'sended',
+            ]);
 
             sleep(1);
         }
