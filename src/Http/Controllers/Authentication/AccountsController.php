@@ -21,6 +21,11 @@ class AccountsController extends Controller {
         );        
     }
 
+    public function getUsers() {
+
+        return __METHOD__;
+    }
+
 }
 
 // use App\Http\Controllers\Controller;
