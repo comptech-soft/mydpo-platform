@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Http\Controllers\Nomenclatoare\Livrabile\Cursuri;
+namespace MyDpo\Http\Controllers\Nomenclatoare\Livrabile\Chestionare;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
