@@ -21,7 +21,6 @@ class CursuriController extends Controller {
         return Index::View(
             styles: ['css/app.css'],
             scripts: ['apps/nomenclatoare/livrabile/cursuri/index.js'],
-            
         );
     }
 
