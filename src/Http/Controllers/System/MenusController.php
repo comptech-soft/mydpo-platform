@@ -14,8 +14,7 @@ class MenusController extends Controller {
      * Definirea meniurilor
      * Tabela: system-menus
      */
-    public function index(Request $r) 
-    {
+    public function index(Request $r) {
         return Index::View(
             styles: ['css/app.css'],
             scripts: ['apps/system/menus/index.js']

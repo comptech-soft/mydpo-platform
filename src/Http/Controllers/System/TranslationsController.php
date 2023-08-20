@@ -7,8 +7,7 @@ use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
 use MyDpo\Models\System\Translation;
 
-class TranslationsController extends Controller
-{
+class TranslationsController extends Controller {
 
     public function index(Request $r) {
         return Index::View(
