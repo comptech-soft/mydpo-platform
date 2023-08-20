@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Http\Controllers\Customer\Centralizatoare;
+namespace MyDpo\Http\Controllers\Customer\Dashboard\Dashboard;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -9,7 +9,7 @@ use MyDpo\Models\Customer\Customer;
 use MyDpo\Models\Livrabile\TipCentralizator;
 use MyDpo\Models\Customer\Customer\Centralizatoare\Asociere;
 
-class CustomerCentralizatoareDashboardController extends Controller {
+class CentralizatoareDashboardController extends Controller {
     
     public function index($page, $customer_id, Request $r) {
 
