@@ -5,7 +5,7 @@ namespace MyDpo\Http\Controllers\Nomenclatoare\Livrabile\Registre;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
-use MyDpo\Models\Livrabile\TipRegistru;
+use MyDpo\Models\Livrabile\Registre\TipRegistru;
 
 class TipuriRegistreController extends Controller {
     
