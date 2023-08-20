@@ -12,7 +12,7 @@ class PermissionsController extends Controller {
     public function index(Request $r) {
         return Index::View(
             styles: ['css/app.css'],
-            scripts: ['apps/authentication/permissions/index.js'],
+            scripts: ['apps/nomenclatoare/auth/permissions/index.js'],
         );        
     }
 
