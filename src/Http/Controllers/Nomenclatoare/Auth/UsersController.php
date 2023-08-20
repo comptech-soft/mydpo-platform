@@ -1,13 +1,13 @@
 <?php
 
-namespace MyDpo\Http\Controllers\Authentication;
+namespace MyDpo\Http\Controllers\Nomenclatoare\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
 use MyDpo\Models\Authentication\User;
 
-class AllUsersController extends Controller {
+class UsersController extends Controller {
     
     public function index(Request $r) {
         return Index::View(
