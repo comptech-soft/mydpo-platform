@@ -1,32 +1,32 @@
 <?php
 
-namespace MyDpo\Http\Controllers\Customer\Dashboard\Entities\Notifications;
+namespace MyDpo\Http\Controllers\Customer\Dashboard\Entities;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
 use MyDpo\Models\Customer\Customer;
-use MyDpo\Models\Customer\Notifications\Notification;
+use MyDpo\Models\Customer\Customer\CustomerDepartment;
 
-class NotificariController extends Controller {
+class CustomerDepartmentsController extends Controller {
     
     public function index($customer_id, Request $r) {
         return Index::View(
             styles: ['css/app.css'],
-            scripts: ['apps/customer/notificari/index.js'],
+            scripts: ['apps/customer/departamente/index.js'],
             payload: [
                 'customer_id' => $customer_id,
                 'customer' => Customer::find($customer_id),
             ],
         );        
-    }
+    }    
 
     public function getRecords(Request $r) {
-        return Notification::getRecords($r->all());
+        return CustomerDepartment::getRecords($r->all());
+    }
+    
+    public function doAction($action, Request $r) {
+        return CustomerDepartment::doAction($action, $r->all());
     }
 
-    public function doAction($action, Request $r) {
-        return Notification::doAction($action, $r->all());
-    }
-      
 }
