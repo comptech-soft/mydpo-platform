@@ -2,16 +2,14 @@
 
 namespace MyDpo\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use MyDpo\Http\Requests\Auth\LoginRequest;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Auth;
-
+use App\Http\Controllers\Controller;
+use App\Providers\RouteServiceProvider;
+use MyDpo\Http\Requests\Auth\LoginRequest;
 use MyDpo\Helpers\Response;
 
-class AuthenticatedSessionController extends Controller
-{
+class AuthenticatedSessionController extends Controller {
     /**
      * Display the login view.
      */
