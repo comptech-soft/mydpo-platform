@@ -1,19 +1,17 @@
 <?php
 
-namespace MyDpo\Http\Controllers\System;
+namespace MyDpo\Http\Controllers\Staticpages;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
 
-class NotaController extends Controller
-{
+class TermeniController extends Controller {
 
-    public function index(Request $r) 
-    {
+    public function index(Request $r) {
         return Index::View(
             styles: ['css/app.css'],
-            scripts: ['apps/footer/nota/index.js']
+            scripts: ['apps/footer/termeni/index.js']
         );
     }
 

@@ -8,8 +8,7 @@ use MyDpo\Core\Http\Response\Index;
 
 class ContactController extends Controller {
 
-    public function index(Request $r) 
-    {
+    public function index(Request $r) {
         return Index::View(
             styles: ['css/app.css'],
             scripts: ['apps/footer/contact/index.js']
