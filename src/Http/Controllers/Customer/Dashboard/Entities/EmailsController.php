@@ -1,14 +1,14 @@
 <?php
 
-namespace MyDpo\Http\Controllers\Customer;
+namespace MyDpo\Http\Controllers\Customer\Dashboard\Entities;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
 use MyDpo\Models\Customer\Customer;
-use MyDpo\Models\Customer\Customer\CustomerEmail;
+use MyDpo\Models\Customer\Emails\Email;
 
-class CustomerEmailsController extends Controller {
+class EmailsController extends Controller {
 
     public function index($customer_id, Request $r) {
         return Index::View(
@@ -22,7 +22,7 @@ class CustomerEmailsController extends Controller {
     }
 
     public function getRecords(Request $r) {
-        return CustomerEmail::getRecords($r->all());
+        return Email::getRecords($r->all());
     }
   
 }
