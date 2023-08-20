@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 use MyDpo\Models\Livrabile\Planconformare as Structura;
+use MyDpo\Models\Customer\Departments\Department;
 use MyDpo\Traits\Exportable;
 use MyDpo\Exports\CustomerPlanconformare\Exporter;
 
@@ -78,11 +79,11 @@ class Planconformare extends Model {
     }
 
     public function department() {
-        return $this->belongsTo(CustomerDepartment::class, 'department_id')->select(['id', 'departament']);
+        return $this->belongsTo(Department::class, 'department_id')->select(['id', 'departament']);
     }
 
     function rows() {
-        return $this->hasMany(CustomerPlanconformareRow::class, 'customer_plan_id')->whereIn('type', ['capitol', 'actiune', 'subactiune'])->orderBy('order_no');
+        return $this->hasMany(PlanconformareRow::class, 'customer_plan_id')->whereIn('type', ['capitol', 'actiune', 'subactiune'])->orderBy('order_no');
     }
 
     protected static function GetExporter($input) {
