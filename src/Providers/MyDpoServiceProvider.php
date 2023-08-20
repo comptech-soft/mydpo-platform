@@ -35,12 +35,9 @@ class MyDpoServiceProvider extends ServiceProvider {
                     $route_registrar->middleware($route->middleware);
                 }
 
-                if(!! $route->props)
+                if(!! $route->name)
                 {
-                    if( array_key_exists('name', $route->props))
-                    {
-                        $route_registrar->name($route->props['name']);
-                    }
+                    $route_registrar->name($route->name);
                 }
 
                 if(! $route->controller->disabled)
