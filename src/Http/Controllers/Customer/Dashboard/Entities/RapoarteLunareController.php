@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
 use MyDpo\Models\Customer\Customer;
-use MyDpo\Models\Customer\Customer\CustomerRaportLunar;
+use MyDpo\Models\Customer\Rapoartelunare\RaportLunar;
 
 class RapoarteLunareController extends Controller {
     
@@ -22,7 +22,7 @@ class RapoarteLunareController extends Controller {
     }
 
     public function getRecords(Request $r) {
-        return CustomerRaportLunar::getRecords($r->all());
+        return RaportLunar::getRecords($r->all());
     }
   
 }
