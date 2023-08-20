@@ -3,12 +3,6 @@
 namespace MyDpo\Models\Customer\Contracts;
 
 use Illuminate\Database\Eloquent\Model;
-// use MyDpo\Helpers\Performers\Datatable\GetItems;
-// use MyDpo\Helpers\Performers\Datatable\DoAction;
-// use MyDpo\Models\Service;
-// use MyDpo\Models\CustomerOrder;
-// use MyDpo\Models\Customer\Customer_base as Customer;
-// use MyDpo\Rules\CustomerService\UniqueOrderService;
 
 class OrderService extends Model {
 
