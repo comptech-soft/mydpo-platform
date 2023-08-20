@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Http\Controllers\Nomenclatoare\Livrabile;
+namespace MyDpo\Http\Controllers\Nomenclatoare\Livrabile\Centralizatoare;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
