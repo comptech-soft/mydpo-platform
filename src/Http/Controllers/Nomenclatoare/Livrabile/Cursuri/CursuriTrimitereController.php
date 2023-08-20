@@ -20,7 +20,7 @@ class CursuriTrimitereController extends Controller {
 
         return Index::View(
             styles: ['css/app.css'],
-            scripts: ['apps/nomenclatoare/livrabile/cursuri/trimitere/index.js'],
+            scripts: ['apps/nomenclatoare/livrabile/cursuri/trimiteri/index.js'],
             
         );
     }
