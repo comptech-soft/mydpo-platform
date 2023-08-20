@@ -1,14 +1,13 @@
 <?php
 
-namespace MyDpo\Http\Controllers\Authentication;
+namespace MyDpo\Http\Controllers\Nomenclatoare\Customers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
 use MyDpo\Models\Customer\Accounts\Account;
 
-
-class CustomersAccountsController extends Controller {
+class AccountsController extends Controller {
     
     public function index(Request $r) {
 
