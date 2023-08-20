@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Http\Controllers\Customer;
+namespace MyDpo\Http\Controllers\Customer\Dashboard\Entities;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -8,7 +8,7 @@ use MyDpo\Core\Http\Response\Index;
 use MyDpo\Models\Customer\Customer;
 use MyDpo\Models\Customer\Customer\CustomerRaportLunar;
 
-class CustomerRapoarteLunareController extends Controller {
+class RapoarteLunareController extends Controller {
     
     public function index($customer_id, Request $r) {
         return Index::View(
