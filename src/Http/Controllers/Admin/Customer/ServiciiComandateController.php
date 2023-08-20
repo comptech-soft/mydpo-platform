@@ -12,7 +12,7 @@ class ServiciiComandateController extends Controller {
 
     public function index(Request $r) {
 
-        CustomerService::syncWithOrders();
+        OrderService::syncWithOrders();
 
         return Index::View(
             styles: ['css/app.css'],
