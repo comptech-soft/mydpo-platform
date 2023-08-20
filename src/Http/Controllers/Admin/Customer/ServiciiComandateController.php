@@ -1,0 +1,23 @@
+<?php
+
+namespace MyDpo\Http\Controllers\Admin\Customer;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use MyDpo\Core\Http\Response\Index;
+use MyDpo\Models\Customer\Contracts\OrderService;
+
+class ServiciiComandateController extends Controller {
+
+
+    public function index(Request $r) {
+
+        CustomerService::syncWithOrders();
+
+        return Index::View(
+            styles: ['css/app.css'],
+            scripts: ['apps/admin/servicii-comandate/index.js'],
+        );        
+    }
+
+}
