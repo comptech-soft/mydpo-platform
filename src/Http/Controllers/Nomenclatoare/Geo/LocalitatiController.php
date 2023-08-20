@@ -12,7 +12,7 @@ class LocalitatiController extends Controller {
     public function index(Request $r) {
         return Index::View(
             styles: ['css/app.css'],
-            scripts: ['apps/admin/localitati/index.js']
+            scripts: ['apps/nomenclatoare/geo/localitati/index.js'],
         );        
     }
 
