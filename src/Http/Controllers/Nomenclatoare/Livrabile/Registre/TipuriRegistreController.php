@@ -12,7 +12,7 @@ class TipuriRegistreController extends Controller {
     public function index(Request $r) {
         return Index::View(
             styles: ['css/app.css'],
-            scripts: ['apps/admin/tipuri-registre/index.js']
+            scripts: ['apps/nomenclatoare/livrabile/tipuri-registre/index.js'],
         );        
     }
 
