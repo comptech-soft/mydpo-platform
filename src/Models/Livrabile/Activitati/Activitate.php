@@ -1,13 +1,13 @@
 <?php
 
-namespace MyDpo\Models\Livrabile\Tasks;
+namespace MyDpo\Models\Livrabile\Activitati;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 use MyDpo\Rules\Livrabile\Task\UniqueName;
 
-class Task extends Model {
+class Activitate extends Model {
     
     use Itemable, Actionable;
 

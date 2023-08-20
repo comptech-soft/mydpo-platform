@@ -1,13 +1,13 @@
 <?php
 
-namespace MyDpo\Http\Controllers\Admin\Nomenclatoare;
+namespace MyDpo\Http\Controllers\Nomenclatoare\Base;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
-use MyDpo\Models\Livrabile\Tasks\Task;
+use MyDpo\Models\Livrabile\Activitati\Activitate;
 
-class TasksController extends Controller {
+class ActivitatiController extends Controller {
     
     public function index(Request $r) {
         return Index::View(
@@ -17,10 +17,10 @@ class TasksController extends Controller {
     }
 
     public function getRecords(Request $r) {
-        return Task::getRecords($r->all());
+        return Activitate::getRecords($r->all());
     }
 
     public function doAction($action, Request $r) {
-        return Task::doAction($action, $r->all());
+        return Activitate::doAction($action, $r->all());
     }
 }
