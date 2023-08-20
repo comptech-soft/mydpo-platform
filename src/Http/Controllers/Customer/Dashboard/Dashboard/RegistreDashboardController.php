@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
 use MyDpo\Models\Customer\Customer;
-use MyDpo\Models\Livrabile\TipRegistru;
+use MyDpo\Models\Livrabile\Registre\TipRegistru;
 use MyDpo\Models\Customer\Customer\Registre\Asociere;
 
 class RegistreDashboardController extends Controller {
