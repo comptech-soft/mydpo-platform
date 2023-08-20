@@ -8,7 +8,7 @@ use MyDpo\Core\Http\Response\Index;
 use MyDpo\Models\Customer\Customer;
 use MyDpo\Models\Customer\Customer\CustomerDepartment;
 
-class CustomerDepartmentsController extends Controller {
+class DepartmentsController extends Controller {
     
     public function index($customer_id, Request $r) {
         return Index::View(
