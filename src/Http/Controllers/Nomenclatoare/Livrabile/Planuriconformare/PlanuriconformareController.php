@@ -5,7 +5,7 @@ namespace MyDpo\Http\Controllers\Nomenclatoare\Livrabile\Planuriconformare;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
-use MyDpo\Models\Livrabile\Planconformare;
+use MyDpo\Models\Livrabile\Planuriconformare\Planconformare;
 
 class PlanuriconformareController extends Controller {
     
