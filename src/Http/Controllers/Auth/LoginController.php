@@ -1,14 +1,13 @@
 <?php
 
-namespace MyDpo\Http\Controllers\Usersession;
+namespace MyDpo\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Helpers\Response;
 use MyDpo\Helpers\UserSession;
 
-class LoginController extends Controller
-{
+class LoginController extends Controller {
     
     public function index(Request $r) {
         return Response::View(
