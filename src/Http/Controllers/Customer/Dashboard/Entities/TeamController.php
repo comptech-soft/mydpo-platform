@@ -22,7 +22,7 @@ class TeamController extends Controller {
     }
 
     public function getRecords(Request $r) {
-        return CustomerTeam::getRecords($r->all());
+        return Team::getRecords($r->all());
     }
     
     // public function doAction($action, Request $r) {
