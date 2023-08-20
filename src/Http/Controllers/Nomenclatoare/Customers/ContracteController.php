@@ -11,7 +11,7 @@ class ContracteController extends Controller {
     public function index(Request $r) {
         return Index::View(
             styles: ['css/app.css'],
-            scripts: ['apps/admin/contracte/index.js'],
+            scripts: ['apps/nomenclatoare/customers/contracte/index.js'],
         );        
     }
 

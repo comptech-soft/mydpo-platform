@@ -16,7 +16,7 @@ class ServiciiComandateController extends Controller {
 
         return Index::View(
             styles: ['css/app.css'],
-            scripts: ['apps/admin/servicii-comandate/index.js'],
+            scripts: ['apps/nomenclatoare/customers/servicii-comandate/index.js'],
         );        
     }
 

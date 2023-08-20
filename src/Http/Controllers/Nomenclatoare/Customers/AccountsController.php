@@ -15,7 +15,7 @@ class AccountsController extends Controller {
 
         return Index::View(
             styles: ['css/app.css'],
-            scripts: ['apps/authentication/customer-accounts/index.js'],
+            scripts: ['apps/nomenclatoare/customers/customer-accounts/index.js'],
         );        
     }
 

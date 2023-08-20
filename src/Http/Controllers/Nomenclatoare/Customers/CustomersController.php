@@ -15,7 +15,7 @@ class CustomersController extends Controller {
 
         return Index::View(
             styles: ['css/app.css'],
-            scripts: ['apps/admin/customers/index.js']
+            scripts: ['apps/nomenclatoare/customers/customers/index.js'],
         );
         
     }
