@@ -12,7 +12,7 @@ class PlanuriconformareController extends Controller {
     public function index(Request $r) {
         return Index::View(
             styles: ['css/app.css'],
-            scripts: ['apps/admin/planuri-conformare/index.js']
+            scripts: ['apps/nomenclatoare/livrabile/planuri-conformare/index.js'],
         );        
     }
 
