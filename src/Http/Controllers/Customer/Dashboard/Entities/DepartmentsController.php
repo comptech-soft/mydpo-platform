@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
 use MyDpo\Models\Customer\Customer;
-use MyDpo\Models\Customer\Customer\CustomerDepartment;
+use MyDpo\Models\Customer\Departments\Department;
 
 class DepartmentsController extends Controller {
     
@@ -22,11 +22,11 @@ class DepartmentsController extends Controller {
     }    
 
     public function getRecords(Request $r) {
-        return CustomerDepartment::getRecords($r->all());
+        return Department::getRecords($r->all());
     }
     
     public function doAction($action, Request $r) {
-        return CustomerDepartment::doAction($action, $r->all());
+        return Department::doAction($action, $r->all());
     }
 
 }
