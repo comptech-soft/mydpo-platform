@@ -1,19 +1,20 @@
 <?php
 
-namespace MyDpo\Http\Controllers\Admin;
+namespace MyDpo\Http\Controllers\Nomenclatoare\Livrabile\Cursuri;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use MyDpo\Helpers\Response;
+use MyDpo\Core\Http\Response\Index;
+// use MyDpo\Models\Curs;
 use MyDpo\Models\Chestionar;
 
-class ChestionareController extends Controller
-{
+class ChestionareController extends Controller {
     
     public function index(Request $r) {
-        return Response::View(
-            '~templates.index', 
-            asset('apps/chestionare/index.js')
+        return Index::View(
+            styles: ['css/app.css'],
+            scripts: ['apps/admin/chestionare/index.js'],
+            
         );
     }
 
