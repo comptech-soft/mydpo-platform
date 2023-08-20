@@ -6,9 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
 use MyDpo\Models\Customer\Customer;
-use MyDpo\Models\Customer\Customer\CustomerTask;
+use MyDpo\Models\Customer\Taskuri\Task;
 
-class CustomerTaskuriController extends Controller {
+class TasksController extends Controller {
     
     public function index($customer_id, Request $r) {
         return Index::View(
@@ -22,7 +22,7 @@ class CustomerTaskuriController extends Controller {
     }
 
     public function getRecords(Request $r) {
-        return CustomerTask::getRecords($r->all());
+        return Task::getRecords($r->all());
     }
 
   
