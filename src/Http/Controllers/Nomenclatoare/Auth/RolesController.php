@@ -12,7 +12,7 @@ class RolesController extends Controller {
     public function index(Request $r) {
         return Index::View(
             styles: ['css/app.css'],
-            scripts: ['apps/authentication/roles/index.js'],
+            scripts: ['apps/nomenclatoare/auth/roles/index.js'],
         );        
     }
 
