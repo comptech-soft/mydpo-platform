@@ -11,7 +11,7 @@ class TeamController extends Controller {
     public function index(Request $r) {
         return Index::View(
             styles: ['css/app.css'],
-            scripts: ['apps/authentication/team/index.js'],
+            scripts: ['apps/nomenclatoare/auth/team/index.js'],
         );        
     }
 
