@@ -12,7 +12,7 @@ class UsersController extends Controller {
     public function index(Request $r) {
         return Index::View(
             styles: ['css/app.css'],
-            scripts: ['apps/authentication/all-users/index.js'],
+            scripts: ['apps/nomenclatoare/auth/all-users/index.js'],
         );        
     }
 
