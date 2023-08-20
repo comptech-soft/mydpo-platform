@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Http\Controllers\System;
+namespace MyDpo\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
