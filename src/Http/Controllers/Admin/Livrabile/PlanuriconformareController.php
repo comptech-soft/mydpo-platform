@@ -7,8 +7,7 @@ use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
 use MyDpo\Models\Livrabile\Planconformare;
 
-class PlanuriconformareController extends Controller 
-{
+class PlanuriconformareController extends Controller {
     
     public function index(Request $r) {
         return Index::View(
