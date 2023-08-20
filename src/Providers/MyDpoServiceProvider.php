@@ -22,7 +22,7 @@ class MyDpoServiceProvider extends ServiceProvider {
 
     private function RegisterSysRoutes() {
 
-        $routes = SysRoute::whereIsRoot()->whereType('Route')->orderBy('order_no')->get();
+        $routes = SysRoute::whereType('Route')->whereDisabled(0)->orderBy('order_no')->get();
 
         foreach($routes as $i => $route)
         {
@@ -43,13 +43,16 @@ class MyDpoServiceProvider extends ServiceProvider {
                     }
                 }
 
-                $route_registrar->{$route->verb}(
-                    $route->path,
-                    [
-                        'MyDpo\\Http\Controllers\\' . $route->controller->namespace . '\\' . $route->controller->controller,
-                        $route->method,
-                    ]
-                );
+                if(! $route->controller->disabled)
+                {
+                    $route_registrar->{$route->verb}(
+                        $route->path,
+                        [
+                            'MyDpo\\Http\Controllers\\' . $route->controller->namespace . '\\' . $route->controller->name . 'Controller',
+                            $route->method,
+                        ]
+                    );
+                }
             }
         }
     }
