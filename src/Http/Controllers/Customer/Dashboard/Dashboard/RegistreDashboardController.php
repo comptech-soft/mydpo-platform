@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Http\Controllers\Customer\Registre;
+namespace MyDpo\Http\Controllers\Customer\Dashboard\Dashboard;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -9,7 +9,7 @@ use MyDpo\Models\Customer\Customer;
 use MyDpo\Models\Livrabile\TipRegistru;
 use MyDpo\Models\Customer\Customer\Registre\Asociere;
 
-class CustomerRegistreDashboardController extends Controller {
+class RegistreDashboardController extends Controller {
     
     public function index($page, $customer_id, Request $r) {
         
