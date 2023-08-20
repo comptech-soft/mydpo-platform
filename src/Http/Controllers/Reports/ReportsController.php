@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
 
-class RapoarteController extends Controller {
+class ReportsController extends Controller {
     
     public function index(Request $r) {
         return Index::View(
