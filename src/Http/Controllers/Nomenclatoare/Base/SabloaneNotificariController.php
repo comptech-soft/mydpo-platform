@@ -12,7 +12,7 @@ class SabloaneNotificariController extends Controller {
     public function index(Request $r) {
         return Index::View(
             styles: ['css/app.css'],
-            scripts: ['apps/admin/sabloane-notificari/index.js']
+            scripts: ['apps/nomenclatoare/base/sabloane-notificari/index.js'],
         );        
     }
 
