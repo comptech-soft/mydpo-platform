@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Http\Controllers\Customer\Customers;
+namespace MyDpo\Http\Controllers\Nomenclatoare;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
