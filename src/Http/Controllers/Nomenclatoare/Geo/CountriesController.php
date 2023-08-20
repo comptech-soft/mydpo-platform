@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Http\Controllers\Nomenclatoare;
+namespace MyDpo\Http\Controllers\Nomenclatoare\Geo;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
