@@ -22,11 +22,11 @@ class PlanConformareController extends Controller {
     }
 
     public function getRecords(Request $r) {
-        return CustomerPlanconformare::getRecords($r->all());
+        return Planconformare::getRecords($r->all());
     }
 
     public function doAction($action, Request $r) {
-        return CustomerPlanconformare::doAction($action, $r->all());
+        return Planconformare::doAction($action, $r->all());
     }
 
     // public function getNextNumber(Request $r) {
