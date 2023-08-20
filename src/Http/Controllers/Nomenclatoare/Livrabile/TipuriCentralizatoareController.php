@@ -5,7 +5,7 @@ namespace MyDpo\Http\Controllers\Nomenclatoare\Livrabile;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
-use MyDpo\Models\Livrabile\TipCentralizator;
+use MyDpo\Models\Livrabile\Centralizatoare\TipCentralizator;
 
 class TipuriCentralizatoareController extends Controller {
     
