@@ -12,7 +12,7 @@ class TipuriCentralizatoareController extends Controller {
     public function index(Request $r) {
         return Index::View(
             styles: ['css/app.css'],
-            scripts: ['apps/admin/tipuri-centralizatoare/index.js']
+            scripts: ['apps/nomenclatoare/livrabile/tipuri-centralizatoare/index.js'],
         );        
     }
 
