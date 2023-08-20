@@ -1,13 +1,12 @@
 <?php
 
-namespace MyDpo\Http\Controllers\Admin;
+namespace MyDpo\Http\Controllers\Nomenclatoare;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Models\Customer\Statuses\Status;
 
-class CustomersStatusesController extends Controller
-{
+class CustomerStatusesController extends Controller {
     
     public function getItems(Request $r) {
         return Status::getItems($r->all());
