@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
 use MyDpo\Models\Customer\Customer;
-use MyDpo\Models\Livrabile\TipCentralizator;
+use MyDpo\Models\Livrabile\Centralizatoar\TipCentralizator;
 use MyDpo\Models\Customer\Customer\Centralizatoare\Asociere;
 
 class CentralizatoareDashboardController extends Controller {
