@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Http\Controllers\Admin\Livrabile;
+namespace MyDpo\Http\Controllers\Nomenclatoare\Base;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
