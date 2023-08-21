@@ -71,7 +71,7 @@ class Curs extends Model {
         'deleted_by'
     ];
 
-    protected $statuses = [
+    protected static $statuses = [
 
         0 => [
             'text' => 'Inactiv',
@@ -85,7 +85,7 @@ class Curs extends Model {
             'text' => 'Activ (Nelimitat)',
         ],
     ];
-    
+
     // protected $appends = [
     //     'days_difference',
     //     'my_url',
