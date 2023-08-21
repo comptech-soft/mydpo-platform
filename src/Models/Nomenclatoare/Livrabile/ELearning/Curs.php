@@ -231,27 +231,7 @@ class Curs extends Model {
 
 
 
-    // public static function doDelete($input, $curs) {
-    //     $curs->deleted = true;
-    //     $curs->deleted_by = \Auth::user()->id;
-
-    //     if(! $curs->props )
-    //     {
-    //         $curs->props = [];
-    //     }
-
-    //     $curs->props = [
-    //         ...$curs->props,
-    //         'k_id' => $curs->k_id,
-    //         'name' => $curs->name,
-    //     ];
-
-    //     $curs->k_id = NULL;
-    //     $curs->name = '#' . $curs->id . '-' . $curs->name;
-
-    //     $curs->save();
-    //     return $curs;
-    // }
+    
 
 
 
@@ -371,7 +351,29 @@ class Curs extends Model {
 
         $curs->update($input);
         $curs->SyncInfos();
-        
+
+        return $curs;
+    }
+
+    public static function doDelete($input, $curs) {
+        $curs->deleted = 1;
+        $curs->deleted_by = \Auth::user()->id;
+
+        if(! $curs->props )
+        {
+            $curs->props = [];
+        }
+
+        $curs->props = [
+            ...$curs->props,
+            'k_id' => $curs->k_id,
+            'name' => $curs->name,
+        ];
+
+        $curs->k_id = NULL;
+        $curs->name = '#' . $curs->id . '-' . $curs->name;
+
+        $curs->save();
         return $curs;
     }
 
