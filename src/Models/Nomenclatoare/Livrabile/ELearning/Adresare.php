@@ -3,13 +3,12 @@
 namespace MyDpo\Models\Nomenclatoare\Livrabile\ELearning;
 
 use Illuminate\Database\Eloquent\Model;
-// use MyDpo\Helpers\Performers\Datatable\GetItems;
-// use MyDpo\Helpers\Performers\Datatable\DoAction;
-// use MyDpo\Models\Curs;
-// use MyDpo\Rules\Cursadresare\UniqueName;
+use MyDpo\Traits\Itemable;
 
 class Adresare extends Model {
-   
+    
+    use Itemable;
+    
     protected $table = 'cursuri-adresare';
 
     protected $casts = [

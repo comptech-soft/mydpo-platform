@@ -9,12 +9,8 @@ use Illuminate\Http\Request;
 
 class CursuriAdresareController extends Controller {
 
-    // public function getItems(Request $r) {
-    //     return Cursadresare::getItems($r->all());
-    // }
-
-    // public function doAction($action, Request $r) {
-    //     return Cursadresare::doAction($action, $r->all());
-    // }
+    public function getRecords(Request $r) {
+        return Type::getRecords($r->all());
+    }
 
 }
