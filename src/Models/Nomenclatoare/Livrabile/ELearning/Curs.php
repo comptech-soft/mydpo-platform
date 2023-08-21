@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use MyDpo\Scopes\NotdeletedScope;
 
-// use Illuminate\Http\UploadedFile;
+use Illuminate\Http\UploadedFile;
 // use MyDpo\Helpers\Performers\Datatable\GetItems;
 // use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Models\Livrabile\Categories\Category;
@@ -269,68 +269,15 @@ class Curs extends Model {
     //     return $curs;
     // }
 
-    // public static function doInsert($input, $curs) {
-
-    //     if($input['file'] && ($input['file'] instanceof UploadedFile))
-    //     {
-    //         $input['file'] = self::saveFile($input['file']);
-    //     }
-
-    //     $curs = self::create($input);
-
-    //     return $curs;
-    // }
-
-    // public static function saveFile($file) {
-    //     $ext = strtolower($file->extension());
-
-    //     if(in_array($ext, ['pdf']))
-    //     {
-    //         $filename = md5(time()) . '-' . \Str::slug(str_replace($file->extension(), '', $file->getClientOriginalName())) . '.' .  strtolower($file->extension());
-            
-    //         $result = $file->storeAs('cursuri/' .  \Auth::user()->id, $filename, 's3');
-
-    //         $inputdata = [
-    //             'file_original_name' => $file->getClientOriginalName(),
-    //             'file_original_extension' => $file->extension(),
-    //             'file_full_name' => $filename,
-    //             'file_mime_type' => $file->getMimeType(),
-    //             'file_upload_ip' => request()->ip(),
-    //             'file_size' => $file->getSize(),
-    //             'url' => config('filesystems.disks.s3.url') . $result,
-    //             'created_by' => \Auth::user()->id,
-    //         ];
-            
-    //         return $inputdata;
-    //     }
-    //     else
-    //     {
-    //         throw new \Exception('Fișier incorect.');
-    //     }
-    // }
 
 
 
 
 
-    // public static function getQuery() {
-    //     return 
-    //         self::query()
-    //         ->leftJoin(
-    //             'categories',
-    //             function($j) {
-    //                 $j->on('categories.id', '=', 'cursuri.category_id');
-    //             }
-    //         )
-    //         ->leftJoin(
-    //             'cursuri-adresare',
-    //             function($j) {
-    //                 $j->on('cursuri-adresare.id', '=', 'cursuri.adresare_id');
-    //             }
-    //         )
-    //         ->select('cursuri.*')
-    //     ;
-    // }
+
+
+
+    
 
 
     // public static function getKnolyxCoursesImages() {
@@ -416,6 +363,49 @@ class Curs extends Model {
     //     return $customer_id;
     // } 
 
+
+    public static function doInsert($input, $curs) {
+
+        if($input['file'] && ($input['file'] instanceof UploadedFile))
+        {
+            $input['file'] = self::saveFile($input['file']);
+        }
+
+        $curs = self::create($input);
+
+        $curs->SyncInfos();
+        
+        return $curs;
+    }
+
+    public static function saveFile($file) {
+        $ext = strtolower($file->extension());
+
+        if(in_array($ext, ['pdf']))
+        {
+            $filename = md5(time()) . '-' . \Str::slug(str_replace($file->extension(), '', $file->getClientOriginalName())) . '.' .  strtolower($file->extension());
+            
+            $result = $file->storeAs('cursuri/' .  \Auth::user()->id, $filename, 's3');
+
+            $inputdata = [
+                'file_original_name' => $file->getClientOriginalName(),
+                'file_original_extension' => $file->extension(),
+                'file_full_name' => $filename,
+                'file_mime_type' => $file->getMimeType(),
+                'file_upload_ip' => request()->ip(),
+                'file_size' => $file->getSize(),
+                'url' => config('filesystems.disks.s3.url') . $result,
+                'created_by' => \Auth::user()->id,
+            ];
+            
+            return $inputdata;
+        }
+        else
+        {
+            throw new \Exception('Fișier incorect.');
+        }
+    }
+
     public static function GetRules($action, $input) {
 
         if(! in_array($action, ['insert', 'update']) )
@@ -468,6 +458,25 @@ class Curs extends Model {
             'type.required' => 'Tipul cursului trebuie selectat.',
             'url.url' => 'Linkul nu pare sa fie valid.',
         ];
+    }
+
+    public static function getQuery() {
+        return 
+            self::query()
+            ->leftJoin(
+                'categories',
+                function($j) {
+                    $j->on('categories.id', '=', 'cursuri.category_id');
+                }
+            )
+            ->leftJoin(
+                'cursuri-adresare',
+                function($j) {
+                    $j->on('cursuri-adresare.id', '=', 'cursuri.adresare_id');
+                }
+            )
+            ->select('cursuri.*')
+        ;
     }
 
     /**
