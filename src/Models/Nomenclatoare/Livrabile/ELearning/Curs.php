@@ -9,7 +9,7 @@ use MyDpo\Scopes\NotdeletedScope;
 // use Illuminate\Http\UploadedFile;
 // use MyDpo\Helpers\Performers\Datatable\GetItems;
 // use MyDpo\Helpers\Performers\Datatable\DoAction;
-// use MyDpo\Models\Livrabile\Category;
+use MyDpo\Models\Livrabile\Categories\Category;
 // use MyDpo\Models\Cursadresare;
 // 
 // use MyDpo\Performers\Curs\OpenKnolyxCourse;
@@ -100,7 +100,10 @@ class Curs extends Model {
         'status'
     ];
 
-    // protected $with = ['category', 'adresare'];
+    protected $with = [
+        'category', 
+        'adresare'
+    ];
 
     protected static function booted() {
         static::addGlobalScope( new NotdeletedScope() );
@@ -176,14 +179,12 @@ class Curs extends Model {
         ];
     }
     
-    // /**
-    //  * 
-    //  * RELATIONS
-    //  * 
-    //  */
-    // public function category() {
-    //     return $this->belongsTo(Category::class, 'category_id');
-    // }
+    /**
+     * RELATIONS
+     */
+    public function category() {
+        return $this->belongsTo(Category::class, 'category_id')->select(['id', 'name']);
+    }
 
     // public function adresare() {
     //     return $this->belongsTo(Cursadresare::class, 'adresare_id');
