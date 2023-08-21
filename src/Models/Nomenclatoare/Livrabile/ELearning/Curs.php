@@ -192,7 +192,7 @@ class Curs extends Model {
     }
 
     public function sursa() {
-        return $this->belongsTo(Type::class, 'slug', 'type')->select(['id', 'name']);
+        return $this->belongsTo(Type::class, 'type', 'slug')->select(['id', 'slug', 'name']);
     }
 
     // // public function customercursuri() {
