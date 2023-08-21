@@ -102,11 +102,11 @@ class Curs extends Model {
         static::addGlobalScope( new NotdeletedScope() );
     }
 
-    // /**
-    //  * 
-    //  * ATTRIBUTES
-    //  * 
-    //  */
+    /**
+     * 
+     * ATTRIBUTES
+     * 
+     */
     public function getStatusAttribute() {
         if(! $this->date_from && ! $this->date_to )
         {
@@ -115,52 +115,52 @@ class Curs extends Model {
         return $this->days_difference['hours'] > 0 ? 0 : 1;
     }
 
-    // public function getMyUrlAttribute() {
-    //     if( ($this->type == 'knolyx') && $this->k_id)
-    //     {
-    //         return config('knolyx.url') . $this->k_id;
-    //     }
+    public function getMyUrlAttribute() {
+        if( ($this->type == 'knolyx') && $this->k_id)
+        {
+            return config('knolyx.url') . $this->k_id;
+        }
 
-    //     if( ($this->type == 'fisier') && $this->file)
-    //     {   
-    //         return $this->file['url'];
-    //     }
+        if( ($this->type == 'fisier') && $this->file)
+        {   
+            return $this->file['url'];
+        }
 
-    //     return $this->url;
-    // }
+        return $this->url;
+    }
 
-    // public function getMyImageAttribute() {
+    public function getMyImageAttribute() {
 
-    //     if( $this->preview_image )
-    //     {
-    //         return $this->preview_image['url'];
-    //     }
+        if( $this->preview_image )
+        {
+            return $this->preview_image['url'];
+        }
 
-    //     if( $this->type == 'youtube')
-    //     {
-    //         $code= \Str::of($this->url)->explode('=')->last();
-    //         return 'https://img.youtube.com/vi/' . $code . '/0.jpg';
-    //     }
+        if( $this->type == 'youtube')
+        {
+            $code= \Str::of($this->url)->explode('=')->last();
+            return 'https://img.youtube.com/vi/' . $code . '/0.jpg';
+        }
 
-    //     $image = config('app.url') . '/imgs/layout/card-course-header.jpg';
+        $image = config('app.url') . '/imgs/layout/card-course-header.jpg';
 
-    //     if(! $this->props )
-    //     {
-    //         return $image;
-    //     }
+        if(! $this->props )
+        {
+            return $image;
+        }
 
-    //     if( ! array_key_exists('image', $this->props))
-    //     {
-    //         return $image;
-    //     }
+        if( ! array_key_exists('image', $this->props))
+        {
+            return $image;
+        }
 
-    //     if( ($this->type == 'knolyx') && $this->k_id)
-    //     {
-    //         return "data:" . $this->props['image']['mime'] . ";base64," . $this->props['image']['base64'];
-    //     }
+        if( ($this->type == 'knolyx') && $this->k_id)
+        {
+            return "data:" . $this->props['image']['mime'] . ";base64," . $this->props['image']['base64'];
+        }
 
-    //     return $image;
-    // }
+        return $image;
+    }
     // /**
     //  * 
     //  * RELATIONS
