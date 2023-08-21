@@ -3,10 +3,11 @@
 namespace MyDpo\Models\Nomenclatoare\Livrabile\ELearning;
 
 use Illuminate\Database\Eloquent\Model;
-// use MyDpo\Helpers\Performers\Datatable\GetItems;
-// use MyDpo\Models\Curs;
+use MyDpo\Traits\Itemable;
 
 class Type extends Model {
+
+    use Itemable;
    
     protected $table = 'cursuri-types';
 
@@ -25,8 +26,5 @@ class Type extends Model {
     //     return $this->hasMany(Curs::class, 'type', 'slug');
     // }
 
-    // public static function getItems($input, $type = NULL) {
-    //     return (new GetItems($input, self::query()->withCount('cursuri'), __CLASS__))->Perform();
-    // }
 
 }
