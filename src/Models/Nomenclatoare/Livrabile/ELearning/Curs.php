@@ -374,7 +374,7 @@ class Curs extends Model {
         $curs = self::create($input);
 
         $curs->SyncInfos();
-        
+
         return $curs;
     }
 
@@ -418,6 +418,7 @@ class Curs extends Model {
             'category_id' => 'required|exists:categories,id',
             'type' => 'required|exists:cursuri-types,slug',
             'adresare_id' => 'required',
+            'tip' => 'in:online,onsite'
         ];
 
         if($input['type'] == 'fisier')
