@@ -426,17 +426,17 @@ class Curs extends Model {
 
     public static function GetRules($action, $input) {
 
-
         if(! in_array($action, ['delete', 'update']) )
         {
             return NULL;
         }
-    //     $result = [
-    //         'name' => 'required|unique:cursuri,name',
-    //         'category_id' => 'required|exists:categories,id',
-    //         'type' => 'required',
-    //         'adresare_id' => 'required',
-    //     ];
+
+        $result = [
+            // 'name' => 'required|unique:cursuri,name',
+            'category_id' => 'required|exists:categories,id',
+            'type' => 'required|exists:cursuri-types,slug',
+            // 'adresare_id' => 'required',
+        ];
 
 
     //     if($input['type'] == 'fisier')
