@@ -466,7 +466,7 @@ class Curs extends Model {
     //         $result['name'] .= (',' . $input['id']);
     //     }
 
-    //     return $result;
+        return $result;
     }
 
     /**
