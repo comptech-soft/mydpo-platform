@@ -102,7 +102,8 @@ class Curs extends Model {
 
     protected $with = [
         'category', 
-        'adresare'
+        'adresare',
+        'sursa'
     ];
 
     protected static function booted() {
@@ -188,6 +189,10 @@ class Curs extends Model {
 
     public function adresare() {
         return $this->belongsTo(Adresare::class, 'adresare_id')->select(['id', 'name']);
+    }
+
+    public function sursa() {
+        return $this->belongsTo(Type::class, 'type', 'slug')->select(['id', 'name']);
     }
 
     // // public function customercursuri() {
