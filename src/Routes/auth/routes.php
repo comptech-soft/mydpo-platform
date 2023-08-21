@@ -24,7 +24,7 @@ Route::middleware('auth')->group(function () {
     /**
      * apare cand se acceseaza o ruta protejata de middelware [verified]
      */
-    Route::get('verify-email', [EmailVerificationPromptController::class, 'index'])->name('verification.notice');
+    // Route::get('verify-email', [EmailVerificationPromptController::class, 'index'])->name('verification.notice');
 
     /**
      * Trimite emailul de confirmare, verificare email = activarea contului 
