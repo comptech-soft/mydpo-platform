@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Models\Livrabile\ELearning;
+namespace MyDpo\Models\Nomenclatoare\Livrabile\ELearning;
 
 use MyDpo\Models\System\SysConfig;
 

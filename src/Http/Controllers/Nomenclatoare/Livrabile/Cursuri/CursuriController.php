@@ -5,13 +5,13 @@ namespace MyDpo\Http\Controllers\Nomenclatoare\Livrabile\Cursuri;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
-// use MyDpo\Models\Curs;
+use MyDpo\Models\Nomenclatoare\Livrabile\ELearning\Curs;
 
 class CursuriController extends Controller {
     
     public function index(Request $r) {
 
-        // Curs::calculateInfos();
+        Curs::CalculateInfos();
 
         // return Response::View(
         //     '~templates.index', 
@@ -24,22 +24,24 @@ class CursuriController extends Controller {
         );
     }
 
-    
-
-    public function getKnolyxCourses(Request $r) {
-        return Curs::getKnolyxCourses($r->all());
+    public function getRecords(Request $r) {
+        return Curs::getRecords($r->all());
     }
 
-    public function openKnolyxCourse(Request $r) {
-        return Curs::openKnolyxCourse($r->all());
-    }
+    // public function getKnolyxCourses(Request $r) {
+    //     return Curs::getKnolyxCourses($r->all());
+    // }
 
-    public function getItems(Request $r) {
-        return Curs::getItems($r->all());
-    }
+    // public function openKnolyxCourse(Request $r) {
+    //     return Curs::openKnolyxCourse($r->all());
+    // }
 
-    public function doAction($action, Request $r) {
-        return Curs::doAction($action, $r->all());
-    }
+    // public function getItems(Request $r) {
+    //     return Curs::getItems($r->all());
+    // }
+
+    // public function doAction($action, Request $r) {
+    //     return Curs::doAction($action, $r->all());
+    // }
 
 }

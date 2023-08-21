@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Models\Livrabile\ELearning;
+namespace MyDpo\Models\Nomenclatoare\Livrabile\ELearning;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
