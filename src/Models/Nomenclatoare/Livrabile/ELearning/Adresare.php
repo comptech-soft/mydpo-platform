@@ -3,11 +3,15 @@
 namespace MyDpo\Models\Nomenclatoare\Livrabile\ELearning;
 
 use Illuminate\Database\Eloquent\Model;
+
 use MyDpo\Traits\Itemable;
+use MyDpo\Traits\Actionable;
+
+use MyDpo\Rules\Nomenclatoare\Livrabile\Cursadresare\UniqueName;
 
 class Adresare extends Model {
     
-    use Itemable;
+    use Itemable, Actionable;
     
     protected $table = 'cursuri-adresare';
 
@@ -32,31 +36,24 @@ class Adresare extends Model {
     //     return $this->hasMany(Curs::class, 'adresare_id');
     // }
 
-    // public static function getItems($input) {
-    //     return (new GetItems($input, self::query()->withCount('cursuri'), __CLASS__))->Perform();
-    // }
 
-    // public static function doAction($action, $input) {
-    //     return (new DoAction($action, $input, __CLASS__))->Perform();
-    // }
+    public static function GetRules($action, $input) {
 
-    // public static function GetRules($action, $input) {
+        if(! in_array($action, 'insert', 'update') )
+        {
+            return NULL;
+        }
 
-    //     if($action == 'delete')
-    //     {
-    //         return NULL;
-    //     }
+        $result = [
+            'name' => [
+                'required',
+                'max:191',
+                new UniqueName($action, $input),
+            ],
+        ];
 
-    //     $result = [
-    //         'name' => [
-    //             'required',
-    //             'max:191',
-    //             new UniqueName($input),
-    //         ],
-    //     ];
-
-    //     return $result;
-    // }
+        return $result;
+    }
 
 
 
