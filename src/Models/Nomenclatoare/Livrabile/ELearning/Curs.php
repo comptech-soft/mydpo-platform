@@ -432,7 +432,7 @@ class Curs extends Model {
         }
 
         $result = [
-            // 'name' => 'required|unique:cursuri,name',
+            'name' => 'required|unique:cursuri,name',
             // 'category_id' => 'required|exists:categories,id',
             'type' => 'required|exists:cursuri-types,slug',
             // 'adresare_id' => 'required',
@@ -461,10 +461,10 @@ class Curs extends Model {
     //         ];
     //     }
 
-    //     if($action == 'update')
-    //     {
-    //         $result['name'] .= (',' . $input['id']);
-    //     }
+        if($action == 'update')
+        {
+            $result['name'] .= (',' . $input['id']);
+        }
 
         return $result;
     }
