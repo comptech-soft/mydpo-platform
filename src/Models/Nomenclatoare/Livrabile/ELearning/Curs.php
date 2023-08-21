@@ -25,12 +25,11 @@ class Curs extends Model {
     use DaysDifference;
 
     protected $table = 'cursuri';
-
     
-
     protected $casts = [
         'id' => 'integer',
         'props' => 'json',
+        'curs_status' => 'json',
         'category_id' => 'integer',
         'created_by' => 'integer',
         'updated_by' => 'integer',
@@ -58,6 +57,7 @@ class Curs extends Model {
         'date_to',
         'props',
         'public_private',
+        'curs_status',
         'file',
         'k_id',
         'k_level',
@@ -86,31 +86,31 @@ class Curs extends Model {
         ],
     ];
 
-    // protected $appends = [
-    //     'days_difference',
-    //     'my_url',
-    //     'my_image',
-    //     'status'
-    // ];
+    protected $appends = [
+        'days_difference',
+        'my_url',
+        'my_image',
+        'status'
+    ];
 
     // protected $with = ['category', 'adresare'];
 
-    // protected static function booted() {
-    //     static::addGlobalScope( new NotdeletedScope() );
-    // }
+    protected static function booted() {
+        static::addGlobalScope( new NotdeletedScope() );
+    }
 
     // /**
     //  * 
     //  * ATTRIBUTES
     //  * 
     //  */
-    // public function getStatusAttribute() {
-    //     if(! $this->date_from && ! $this->date_to )
-    //     {
-    //         return 2;
-    //     }
-    //     return $this->days_difference['hours'] > 0 ? 0 : 1;
-    // }
+    public function getStatusAttribute() {
+        if(! $this->date_from && ! $this->date_to )
+        {
+            return 2;
+        }
+        return $this->days_difference['hours'] > 0 ? 0 : 1;
+    }
 
     // public function getMyUrlAttribute() {
     //     if( ($this->type == 'knolyx') && $this->k_id)
@@ -451,23 +451,15 @@ class Curs extends Model {
     /**
      * Actualizeaza/sincronizeaza unele campuri
      * tematica_count = numarul de tematici
+     * curs_status = varianta human pentru status
      */
-
-    
     public static function CalculateInfos() {
         foreach(self::all() as $i => $curs)
         {
             $curs->tematica_count = (!! $curs->tematica ? count($curs->tematica) : 0);
 
-            if(! ($curs->status >= 1) )
-            {
-                $curs->status = 0;
-            }
-
-            $curs->curs_status = self::$statuses[$curs->status]['text'];
-
+            $curs->curs_status = self::$statuses[$curs->status];
             
-
             $curs->save();
         }
     }
