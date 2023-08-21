@@ -228,26 +228,8 @@ class Curs extends Model {
     //     return $input;
     // }
 
-    // public static function doAction($action, $input) {
-    //     return (new DoAction($action, $input, __CLASS__))->Perform();
-    // }
 
-    // public static function doUpdate($input, $curs) {
-        
-    //     if($input['file'] && ($input['file'] instanceof UploadedFile))
-    //     {
-    //         $input['file'] = self::saveFile($input['file']);
-    //     }
-    //     else
-    //     {
 
-    //         // $input['file'] = NULL;
-    //     }
-
-    //     $curs->update($input);
-
-    //     return $curs;
-    // }
 
     // public static function doDelete($input, $curs) {
     //     $curs->deleted = true;
@@ -377,6 +359,19 @@ class Curs extends Model {
 
         $curs->SyncInfos();
 
+        return $curs;
+    }
+
+    public static function doUpdate($input, $curs) {
+        
+        if($input['file'] && ($input['file'] instanceof UploadedFile))
+        {
+            $input['file'] = self::saveFile($input['file']);
+        }
+
+        $curs->update($input);
+        $curs->SyncInfos();
+        
         return $curs;
     }
 
