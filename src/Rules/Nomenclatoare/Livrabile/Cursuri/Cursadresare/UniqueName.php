@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Rules\Nomenclatoare\Livrabile\Cursadresare;
+namespace MyDpo\Rules\Nomenclatoare\Livrabile\Cursuri\Cursadresare;
 
 use Illuminate\Contracts\Validation\Rule;
 use MyDpo\Models\Nomenclatoare\Livrabile\ELearning\Adresare;
