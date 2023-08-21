@@ -28,6 +28,10 @@ class CursuriController extends Controller {
         return Curs::getRecords($r->all());
     }
 
+    public function doAction($action, Request $r) {
+        return Curs::doAction($action, $r->all());
+    }
+
     // public function getKnolyxCourses(Request $r) {
     //     return Curs::getKnolyxCourses($r->all());
     // }
@@ -40,8 +44,6 @@ class CursuriController extends Controller {
     //     return Curs::getItems($r->all());
     // }
 
-    // public function doAction($action, Request $r) {
-    //     return Curs::doAction($action, $r->all());
-    // }
+    
 
 }
