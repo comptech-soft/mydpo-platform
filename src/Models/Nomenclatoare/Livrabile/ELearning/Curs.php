@@ -309,15 +309,7 @@ class Curs extends Model {
     //     }
     // }
 
-    // public static function GetMessages($action, $input) {
 
-    //     return [
-    //         'name.required' => 'Denumirea cursului trebuie completată.',
-    //         'category_id.required' => 'Categoria trebuie selectată.',
-    //         'type.required' => 'Tipul cursului trebuie selectat.',
-    //         'url.url' => 'Linkul nu pare sa fie valid.',
-    //     ];
-    // }
 
 
 
@@ -433,9 +425,9 @@ class Curs extends Model {
 
         $result = [
             'name' => 'required|unique:cursuri,name',
-            // 'category_id' => 'required|exists:categories,id',
+            'category_id' => 'required|exists:categories,id',
             'type' => 'required|exists:cursuri-types,slug',
-            // 'adresare_id' => 'required',
+            'adresare_id' => 'required',
         ];
 
 
@@ -467,6 +459,16 @@ class Curs extends Model {
         }
 
         return $result;
+    }
+
+    public static function GetMessages($action, $input) {
+
+        return [
+            'name.required' => 'Denumirea cursului trebuie completată.',
+            'category_id.required' => 'Categoria trebuie selectată.',
+            'type.required' => 'Tipul cursului trebuie selectat.',
+            'url.url' => 'Linkul nu pare sa fie valid.',
+        ];
     }
 
     /**
