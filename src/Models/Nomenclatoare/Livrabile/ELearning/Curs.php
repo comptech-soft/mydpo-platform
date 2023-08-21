@@ -19,13 +19,13 @@ use MyDpo\Scopes\NotdeletedScope;
 // use MyDpo\Rules\Curs\IsFilePresent;
 // 
 
-
+use MyDpo\Traits\Itemable;
 use MyDpo\Traits\DaysDifference;
 
 
 class Curs extends Model {
 
-    use DaysDifference;
+    use Itemable, DaysDifference;
 
     protected $table = 'cursuri';
     
