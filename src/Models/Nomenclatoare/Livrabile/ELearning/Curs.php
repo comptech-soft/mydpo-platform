@@ -90,6 +90,7 @@ class Curs extends Model {
     ];
 
     protected $appends = [
+        'visible',
         'days_difference',
         'my_url',
         'my_image',
@@ -161,6 +162,17 @@ class Curs extends Model {
 
         return $image;
     }
+
+    /**
+     * Atributul visible pentru interfata
+     */
+    public function getVisibleAttribute() {
+        return [
+            'color' => !! $this->visibility ? 'green' : 'red',
+            'icon' => !! $this->visibility ? 'mdi-check' : 'mdi-cancel',
+        ];
+    }
+    
     // /**
     //  * 
     //  * RELATIONS
