@@ -14,7 +14,7 @@ class EmailVerificationPromptController extends Controller
     {
         if($request->user()->hasVerifiedEmail())
         {
-            return redirect()->intended(RouteServiceProvider::HOME);
+            return redirect()->intended('dashboard');
         }
 
         return Response::View(
