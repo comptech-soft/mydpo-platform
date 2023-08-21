@@ -319,48 +319,7 @@ class Curs extends Model {
     //     ];
     // }
 
-    // public static function GetRules($action, $input) {
-    //     if($action == 'delete')
-    //     {
-    //         return NULL;
-    //     }
-    //     $result = [
-    //         'name' => 'required|unique:cursuri,name',
-    //         'category_id' => 'required|exists:categories,id',
-    //         'type' => 'required',
-    //         'adresare_id' => 'required',
-    //     ];
 
-
-    //     if($input['type'] == 'fisier')
-    //     {
-    //         if( ($action == 'insert') || (($action == 'update')  && (! $input['file'] )) )
-    //         {
-    //             $result['file'] = [
-    //                 new IsFilePresent($input),
-    //                 'file',
-    //                 'max:5242880',
-    //                 'mimes:pdf',
-    //                 'mimetypes:application/pdf',
-    //             ];
-    //         }
-    //     }
-
-    //     if( ($input['type'] == 'link') || ($input['type'] == 'youtube'))
-    //     {
-    //         $result['url'] = [
-    //             new IsUrlPresent($input),
-    //             'active_url'
-    //         ];
-    //     }
-
-    //     if($action == 'update')
-    //     {
-    //         $result['name'] .= (',' . $input['id']);
-    //     }
-
-    //     return $result;
-    // }
 
     // public static function getQuery() {
     //     return 
@@ -381,14 +340,6 @@ class Curs extends Model {
     //     ;
     // }
 
-    // public static function getItems($input) {
-    //     return (new GetItems(
-    //         $input, 
-    //         self::getQuery(), 
-    //         __CLASS__
-    //     ))
-    //     ->Perform();
-    // }
 
     // public static function getKnolyxCoursesImages() {
 
@@ -472,6 +423,51 @@ class Curs extends Model {
 
     //     return $customer_id;
     // } 
+
+    public static function GetRules($action, $input) {
+
+
+        if(! in_array($action, ['delete', 'update']) )
+        {
+            return NULL;
+        }
+    //     $result = [
+    //         'name' => 'required|unique:cursuri,name',
+    //         'category_id' => 'required|exists:categories,id',
+    //         'type' => 'required',
+    //         'adresare_id' => 'required',
+    //     ];
+
+
+    //     if($input['type'] == 'fisier')
+    //     {
+    //         if( ($action == 'insert') || (($action == 'update')  && (! $input['file'] )) )
+    //         {
+    //             $result['file'] = [
+    //                 new IsFilePresent($input),
+    //                 'file',
+    //                 'max:5242880',
+    //                 'mimes:pdf',
+    //                 'mimetypes:application/pdf',
+    //             ];
+    //         }
+    //     }
+
+    //     if( ($input['type'] == 'link') || ($input['type'] == 'youtube'))
+    //     {
+    //         $result['url'] = [
+    //             new IsUrlPresent($input),
+    //             'active_url'
+    //         ];
+    //     }
+
+    //     if($action == 'update')
+    //     {
+    //         $result['name'] .= (',' . $input['id']);
+    //     }
+
+    //     return $result;
+    }
 
     /**
      * Actualizeaza/sincronizeaza unele campuri
