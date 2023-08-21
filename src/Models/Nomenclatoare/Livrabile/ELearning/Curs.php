@@ -78,14 +78,17 @@ class Curs extends Model {
 
         0 => [
             'text' => 'Inactiv',
+            'color' => 'red',
         ],
 
         1 => [
             'text' => 'Activ',
+            'color' => 'blue',
         ],
 
         2 => [
             'text' => 'Activ (Nelimitat)',
+            'color' => 'green',
         ],
     ];
 
