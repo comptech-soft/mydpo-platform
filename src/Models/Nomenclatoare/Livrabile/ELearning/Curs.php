@@ -71,6 +71,21 @@ class Curs extends Model {
         'deleted_by'
     ];
 
+    protected $statuses = [
+
+        0 => [
+            'text' => 'Inactiv',
+        ],
+
+        1 => [
+            'text' => 'Activ',
+        ],
+
+        2 => [
+            'text' => 'Activ (Nelimitat)',
+        ],
+    ];
+    
     // protected $appends = [
     //     'days_difference',
     //     'my_url',
@@ -426,34 +441,35 @@ class Curs extends Model {
     //     }
     // }
 
-    // public static function calculateInfos() {
-    //     foreach(self::all() as $i => $curs)
-    //     {
-    //         $curs->tematica_count = ($curs->tematica ? count($curs->tematica) : 0);
-            
-    //         if($curs->status == 2)
-    //         {
-    //             $curs->curs_status = 'Activ (Nelimitat)';
-    //         }
-    //         else
-    //         {
-    //             if($curs->status == 1)
-    //             {
-    //                 $curs->curs_status = 'Activ';
-    //             }
-    //             else
-    //             {
-    //                 $curs->curs_status = 'Inactiv';
-    //             }
-    //         }
 
-    //         $curs->save();
-    //     }
-    // }
 
     // public static function CountLivrabile($customer_id) {
 
     //     return $customer_id;
     // } 
+
+    /**
+     * Actualizeaza/sincronizeaza unele campuri
+     * tematica_count = numarul de tematici
+     */
+
+    
+    public static function CalculateInfos() {
+        foreach(self::all() as $i => $curs)
+        {
+            $curs->tematica_count = (!! $curs->tematica ? count($curs->tematica) : 0);
+
+            if(! ($curs->status >= 1) )
+            {
+                $curs->status = 0;
+            }
+
+            $curs->curs_status = self::$statuses[$curs->status]['text'];
+
+            
+
+            $curs->save();
+        }
+    }
 
 }
