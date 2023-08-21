@@ -20,12 +20,13 @@ use MyDpo\Models\Livrabile\Categories\Category;
 // 
 
 use MyDpo\Traits\Itemable;
+use MyDpo\Traits\Actionable;
 use MyDpo\Traits\DaysDifference;
 
 
 class Curs extends Model {
 
-    use Itemable, DaysDifference;
+    use Itemable, Actionable, DaysDifference;
 
     protected $table = 'cursuri';
     
