@@ -371,7 +371,7 @@ class Curs extends Model {
         ];
 
         $curs->k_id = NULL;
-        $curs->name = '#' . $curs->id . '-' . $curs->name;
+        $curs->name = '#' . $curs->id . '#' . $curs->name;
 
         $curs->save();
         return $curs;
