@@ -186,9 +186,9 @@ class Curs extends Model {
         return $this->belongsTo(Category::class, 'category_id')->select(['id', 'name']);
     }
 
-    // public function adresare() {
-    //     return $this->belongsTo(Cursadresare::class, 'adresare_id');
-    // }
+    public function adresare() {
+        return $this->belongsTo(Adresare::class, 'adresare_id')->select(['id', 'name']);
+    }
 
     // // public function customercursuri() {
     // //     return $this->hasMany(CustomerCurs::class, 'curs_id');
