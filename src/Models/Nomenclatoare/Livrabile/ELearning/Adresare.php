@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 
-use MyDpo\Rules\Nomenclatoare\Livrabile\Cursadresare\UniqueName;
+use MyDpo\Rules\Nomenclatoare\Livrabile\Cursuri\Cursadresare\UniqueName;
 
 class Adresare extends Model {
     
