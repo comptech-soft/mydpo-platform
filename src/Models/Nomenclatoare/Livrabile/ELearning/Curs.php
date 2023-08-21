@@ -15,8 +15,8 @@ use MyDpo\Models\Livrabile\Categories\Category;
 // use MyDpo\Performers\Curs\OpenKnolyxCourse;
 // use MyDpo\Performers\Curs\GetKnolyxCourses;
 // use MyDpo\Models\Livrabile\ELearning\Knolyx;
-// use MyDpo\Rules\Curs\IsUrlPresent;
-// use MyDpo\Rules\Curs\IsFilePresent;
+use MyDpo\Rules\Nomenclatoare\Livrabile\Cursuri\Curs\IsUrlPresent;
+use MyDpo\Rules\Nomenclatoare\Livrabile\Cursuri\Curs\IsFilePresent;
 // 
 
 use MyDpo\Traits\Itemable;
@@ -430,28 +430,27 @@ class Curs extends Model {
             'adresare_id' => 'required',
         ];
 
+        if($input['type'] == 'fisier')
+        {
+            if( ($action == 'insert') || (($action == 'update')  && (! $input['file'] )) )
+            {
+                $result['file'] = [
+                    new IsFilePresent($action, $input),
+                    'file',
+                    'max:5242880',
+                    'mimes:pdf',
+                    'mimetypes:application/pdf',
+                ];
+            }
+        }
 
-    //     if($input['type'] == 'fisier')
-    //     {
-    //         if( ($action == 'insert') || (($action == 'update')  && (! $input['file'] )) )
-    //         {
-    //             $result['file'] = [
-    //                 new IsFilePresent($input),
-    //                 'file',
-    //                 'max:5242880',
-    //                 'mimes:pdf',
-    //                 'mimetypes:application/pdf',
-    //             ];
-    //         }
-    //     }
-
-    //     if( ($input['type'] == 'link') || ($input['type'] == 'youtube'))
-    //     {
-    //         $result['url'] = [
-    //             new IsUrlPresent($input),
-    //             'active_url'
-    //         ];
-    //     }
+        if( ($input['type'] == 'link') || ($input['type'] == 'youtube'))
+        {
+            $result['url'] = [
+                new IsUrlPresent($action, $input),
+                'active_url'
+            ];
+        }
 
         if($action == 'update')
         {
@@ -479,12 +478,14 @@ class Curs extends Model {
     public static function CalculateInfos() {
         foreach(self::all() as $i => $curs)
         {
-            $curs->tematica_count = (!! $curs->tematica ? count($curs->tematica) : 0);
-
-            $curs->curs_status = self::$statuses[$curs->status];
-            
-            $curs->save();
+            $curs->SyncInfos();
         }
+    }
+
+    public function SyncInfos() {
+        $this->tematica_count = (!! $this->tematica ? count($this->tematica) : 0);
+        $this->curs_status = self::$statuses[$this->status];
+        $this->save();
     }
 
 }

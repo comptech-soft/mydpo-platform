@@ -32,6 +32,6 @@ class UniqueName implements Rule {
 
     public function message()
     {
-        return 'Înregistrarea ' . $this->input['name'] . 'este deja definită.';
+        return 'Înregistrarea ' . $this->input['name'] . ' este deja definită.';
     }
 }
