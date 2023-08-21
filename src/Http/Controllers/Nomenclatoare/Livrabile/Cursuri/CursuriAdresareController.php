@@ -12,4 +12,8 @@ class CursuriAdresareController extends Controller {
         return Adresare::getRecords($r->all());
     }
 
+    public function doAction($action, Request $r) {
+        return Adresare::doAction($action, $r->all());
+    }
+
 }
