@@ -26,4 +26,8 @@ class CursuriTrimitereController extends Controller {
         return Sharematerial::getRecords($r->all());
     }
 
+    public function doAction($action, Request $r) {
+        return Sharematerial::doAction($action, $r->all());
+    }
+
 }
