@@ -20,6 +20,7 @@ class CursDetailsController extends Controller {
             styles: ['css/app.css'],
             scripts: ['apps/nomenclatoare/livrabile/cursuri/curs-details/index.js'],
             payload: [
+                'type' => 'curs',
                 'curs_id' => $curs_id,
                 'curs' => $curs,
             ],
