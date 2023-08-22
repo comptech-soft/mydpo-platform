@@ -13,10 +13,14 @@ use MyDpo\Scopes\NotdeletedScope;
 use MyDpo\Models\Authentication\User;
 // use MyDpo\Events\CustomerCurs\CursShare as CursShareEvent;
 
+use MyDpo\Traits\Itemable;
+use MyDpo\Traits\Actionable;
+
 class Sharematerial extends Model {
 
     // use NextNumber;
-
+    use Itemable, Actionable;
+    
     protected $table = 'share-materiale';
 
     protected $casts = [
