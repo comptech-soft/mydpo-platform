@@ -78,6 +78,7 @@ class Sharematerial extends Model {
         'count_materiale',
         'trimitere_type',
         'days_difference',
+        'valabilitate',
     ];
 
     protected $types = [
@@ -158,6 +159,26 @@ class Sharematerial extends Model {
         }
 
         return implode(', ', $r);
+    }
+
+    public function getValabilitateAttribute() {
+
+        if(! $this->date_from && ! $this->date_to )
+        {
+            return 'Nelimitat';
+        }
+
+        if(!! $this->date_from && !! $this->date_to)
+        {
+            return \Carbon\Carbon::createFromFormat('Y-m-d', $this->date_from)->format('d.m.Y') . ' - ' . \Carbon\Carbon::createFromFormat('Y-m-d', $this->date_to)->format('d.m.Y');;
+        }
+
+        if(!! $this->date_from)
+        {
+            return \Carbon\Carbon::createFromFormat('Y-m-d', $this->date_from)->format('d.m.Y');        
+        }
+
+        return \Carbon\Carbon::createFromFormat('Y-m-d', $this->date_to)->format('d.m.Y');        
     }
 
     /**
