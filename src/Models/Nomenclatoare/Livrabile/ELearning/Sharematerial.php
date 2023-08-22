@@ -31,6 +31,9 @@ class Sharematerial extends Model {
         'created_by' => 'integer',
         'updated_by' => 'integer',
         'deleted_by' => 'integer',
+        'users_count' => 'integer',
+        'cursuri_count' => 'integer',
+        'customers_count' => 'integer',
         'deleted' => 'integer',
         'effective_time' => 'float',
         'ore_lucrate' => 'float',
@@ -61,6 +64,11 @@ class Sharematerial extends Model {
         'created_by',
         'updated_by',
         'deleted_by',
+
+        'sender_full_name',
+        'users_count',
+        'cursuri_count',
+        'customers_count'
     ];
 
     protected $appends = [
