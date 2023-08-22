@@ -22,4 +22,8 @@ class CursuriTrimitereController extends Controller {
         );
     }
 
+    public function getRecords(Request $r) {
+        return Sharematerial::getRecords($r->all());
+    }
+
 }
