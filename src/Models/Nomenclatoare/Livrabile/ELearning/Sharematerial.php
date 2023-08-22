@@ -20,7 +20,7 @@ class Sharematerial extends Model {
 
     // use NextNumber;
     use Itemable, Actionable;
-    
+
     protected $table = 'share-materiale';
 
     protected $casts = [
@@ -67,8 +67,18 @@ class Sharematerial extends Model {
         'count_customers',
         'count_users',
         'count_materiale',
+        'trimitere_type',
     ];
 
+    protected $types = [
+        'onsite' => [
+            'text' => 'Onsite',
+        ],
+
+        'online' => [
+            'text' => 'Online',
+        ],
+    ];
     // public $nextNumberColumn = 'number';
 
     // public static function nextNumberWhere($input) {
@@ -105,6 +115,21 @@ class Sharematerial extends Model {
 
     public function getCountMaterialeAttribute() {
         return is_null($this->materiale_trimise) ? 0 : count($this->materiale_trimise);
+    }
+
+    public function getTrimitereTypeAttribute() {
+        $r = [];
+        if(!! $this->tip_curs )
+        {
+            $r[] = $this->types[$this->tip_curs]['text'];
+        }
+
+        foreach([] as $i => $field)
+        {
+
+        }
+
+        return implode(', ', $r);
     }
 
     /**
