@@ -15,11 +15,12 @@ use MyDpo\Models\Authentication\User;
 
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
+use MyDpo\Traits\DaysDifference;
 
 class Sharematerial extends Model {
 
     // use NextNumber;
-    use Itemable, Actionable;
+    use Itemable, Actionable, DaysDifference;
 
     protected $table = 'share-materiale';
 
@@ -68,6 +69,7 @@ class Sharematerial extends Model {
         'count_users',
         'count_materiale',
         'trimitere_type',
+        'days_difference',
     ];
 
     protected $types = [
