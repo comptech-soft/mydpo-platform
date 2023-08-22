@@ -4,7 +4,7 @@ namespace MyDpo\Models\Nomenclatoare\Livrabile\ELearning;
 
 use Illuminate\Database\Eloquent\Model;
 
-use MyDpo\Scopes\NotdeletedScope;
+// use MyDpo\Scopes\NotdeletedScope;
 
 use Illuminate\Http\UploadedFile;
 // use MyDpo\Helpers\Performers\Datatable\GetItems;
@@ -109,9 +109,9 @@ class Curs extends Model {
         'sursa'
     ];
 
-    protected static function booted() {
-        static::addGlobalScope( new NotdeletedScope() );
-    }
+    // protected static function booted() {
+    //     static::addGlobalScope( new NotdeletedScope() );
+    // }
 
     /**
      * 
