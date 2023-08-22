@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 // use MyDpo\Helpers\Performers\Datatable\GetItems;
 // use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Scopes\NotdeletedScope;
-// use MyDpo\Traits\NextNumber;
+use MyDpo\Traits\Numberable;
 // use MyDpo\Rules\Sharematerial\AtLeastOneCustomer;
 // use MyDpo\Rules\Sharematerial\AtLeastOneMaterial;
 // use MyDpo\Models\CustomerCursUser;
@@ -20,7 +20,7 @@ use MyDpo\Traits\DaysDifference;
 class Sharematerial extends Model {
 
     // use NextNumber;
-    use Itemable, Actionable, DaysDifference;
+    use Itemable, Actionable, Numberable, DaysDifference;
 
     protected $table = 'share-materiale';
 
@@ -81,11 +81,14 @@ class Sharematerial extends Model {
             'text' => 'Online',
         ],
     ];
-    // public $nextNumberColumn = 'number';
 
-    // public static function nextNumberWhere($input) {
-    //     return "type = '" . $input['type'] . "'";
-    // }
+    public $numberable = [
+        'field' => 'number',
+        'where' => "(type = '%%type%%')",
+        'replacement' => [
+            '%%type%%' => 'type',
+        ],
+    ];
 
     protected static function booted() {
         static::addGlobalScope( new NotdeletedScope() );
