@@ -12,7 +12,7 @@ use MyDpo\Models\Customer\Accounts\Account;
 use MyDpo\Models\Customer\Documents\CustomerFolder;
 use MyDpo\Models\UserCustomer;
 use MyDpo\Performers\Customer\GetCustomersByIds;
-use MyDpo\Scopes\NotdeletedScope;
+// use MyDpo\Scopes\NotdeletedScope;
 use MyDpo\Traits\Itemable;
 
 class Customer_base extends Model {
@@ -62,9 +62,9 @@ class Customer_base extends Model {
         'has_order',
     ];
 
-    protected static function booted() {
-        static::addGlobalScope( new NotdeletedScope() );
-    }
+    // protected static function booted() {
+    //     static::addGlobalScope( new NotdeletedScope() );
+    // }
 
     public function getMylogoAttribute() {
         
