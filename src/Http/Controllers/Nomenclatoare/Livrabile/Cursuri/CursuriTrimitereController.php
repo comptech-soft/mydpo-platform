@@ -5,27 +5,21 @@ namespace MyDpo\Http\Controllers\Nomenclatoare\Livrabile\Cursuri;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
-// use MyDpo\Models\Curs;
+use MyDpo\Models\Nomenclatoare\Livrabile\ELearning\Sharematerial;
 
 class CursuriTrimitereController extends Controller {
     
     public function index(Request $r) {
 
-        // Curs::calculateInfos();
-
-        // return Response::View(
-        //     '~templates.index', 
-        //     asset('apps/elearning/index.js')
-        // );
+        Sharematerial::SyncRecords();
 
         return Index::View(
             styles: ['css/app.css'],
             scripts: ['apps/nomenclatoare/livrabile/cursuri/trimiteri/index.js'],
-            
+            payload: [
+                'type' => 'curs',
+            ],
         );
     }
-
-    
-
 
 }
