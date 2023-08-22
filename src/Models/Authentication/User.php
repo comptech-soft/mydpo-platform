@@ -26,7 +26,7 @@ use Illuminate\Support\Facades\Hash;
 // use MyDpo\Performers\User\UpdatePermissions;
 // use MyDpo\Performers\User\UpdateStatus;
 // use MyDpo\Rules\User\Oldpassword;
-use MyDpo\Scopes\NotdeletedScope;
+// use MyDpo\Scopes\NotdeletedScope;
 
 class User extends Authenticatable implements CanResetPassword, MustVerifyEmail {
     use HasApiTokens, HasFactory, Notifiable, Itemable, Actionable;
@@ -92,9 +92,9 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail 
         'my_settings'
     ];
 
-    protected static function booted() {
-        static::addGlobalScope( new NotdeletedScope() );
-    }
+    // protected static function booted() {
+    //     static::addGlobalScope( new NotdeletedScope() );
+    // }
 
     /** *************************
      * ATTRIBUTES               *
