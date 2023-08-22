@@ -6,13 +6,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Helpers\Response;
 use MyDpo\Core\Http\Response\Index;
-use MyDpo\Models\Livrabile\ELearning\Knolyx;
+use MyDpo\Models\Nomenclatoare\Livrabile\ELearning\Knolyx;
 
 class DashboardController extends Controller {
     
     public function index(Request $r) {
 
-        dd(__METHOD__);
         Knolyx::createWebhook();
         
         /**
