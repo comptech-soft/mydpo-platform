@@ -131,7 +131,7 @@ class Sharematerial extends Model {
 
         if(!! $this->data_curs )
         {
-            $r[] = \Carbon\Carbon::createFromFormat('Y-m-d', $this->trimitere->data_curs)->format('d.m.Y');
+            $r[] = \Carbon\Carbon::createFromFormat('Y-m-d', $this->data_curs)->format('d.m.Y');
         }
 
         if(!! $this->ora_curs )
