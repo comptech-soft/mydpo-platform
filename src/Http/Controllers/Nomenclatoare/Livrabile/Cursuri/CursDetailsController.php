@@ -11,10 +11,18 @@ class CursDetailsController extends Controller {
     
     public function index($curs_id, Request $r) {
 
-        dd($curs_id);
+        if(! ($curs =  Curs::find($curs_id)) )
+        {
+            return redirect('cursuri');
+        }
+
         return Index::View(
             styles: ['css/app.css'],
             scripts: ['apps/nomenclatoare/livrabile/cursuri/curs-details/index.js'],
+            payload: [
+                'curs_id' => $curs_id,
+                'curs' => $curs,
+            ],
         );
 
         // return Response::View(
