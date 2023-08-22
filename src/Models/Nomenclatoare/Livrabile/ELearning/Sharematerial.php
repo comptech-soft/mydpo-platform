@@ -124,9 +124,24 @@ class Sharematerial extends Model {
             $r[] = $this->types[$this->tip_curs]['text'];
         }
 
-        foreach([] as $i => $field)
+        if(!! $this->location)
         {
+            $r[] = $this->location;
+        }
 
+        if(!! $this->data_curs )
+        {
+            $r[] = \Carbon\Carbon::createFromFormat('Y-m-d', $this->trimitere->data_curs)->format('d.m.Y');
+        }
+
+        if(!! $this->ora_curs )
+        {
+            $r[] = $this->ora_curs;
+        }
+
+        if(!! $this->durata_curs )
+        {
+            $r[] = $this->durata_curs;
         }
 
         return implode(', ', $r);
