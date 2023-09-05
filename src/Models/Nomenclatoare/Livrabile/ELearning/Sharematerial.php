@@ -227,14 +227,7 @@ class Sharematerial extends Model {
 
     
 
-    // public function CreateCustomersMaterials() {
-    //     $numberOfitems = $this->count_users * $this->count_materiale;
-    //     $calculated_time = ($numberOfitems > 0) ? $this->effective_time/$numberOfitems : 0; 
 
-    //     foreach($this->customers as $customer_id => $users) {
-    //         static::CreateCustomerMaterialsRecords($this->type, $this->id, $calculated_time, $customer_id, $users, $this->materiale_trimise);
-    //     }
-    // }
 
     // public static function CreateCustomerMaterialsRecords($type, $trimitere_id, $calculated_time, $customer_id, $users, $materiale_trimise) {
     //     foreach($materiale_trimise as $material_id)
@@ -407,10 +400,31 @@ class Sharematerial extends Model {
         {
             foreach($users as $i => $user_id)
             {
-                dd($customer_id, $user_id, $calculated_time);
+                foreach($this->materiale_trimise as $i => $sended_document_id)
+                {
+                    $input = [
+                        'trimitere_id' => $this->id,
+                        'customer_id' => $customer_id,
+                        'assigned_to' => $user_id,
+                        'sended_document_id' => $sended_document_id,
+                        'platform' => config('app.platform'),
+                        'effective_time' => $calculated_time,
+                    ];
+
+                    SharematerialDetail::create($input);
+                }
             }
-            // static::CreateCustomerDetailsRecords($this->id, $calculated_time, $customer_id, $users, $this->materiale_trimise);
         }
+    }
+
+    public function CreateCustomersMaterials() {
+        dd(__METHOD__);
+        // $numberOfitems = $this->count_users * $this->count_materiale;
+        // $calculated_time = ($numberOfitems > 0) ? $this->effective_time/$numberOfitems : 0; 
+
+        // foreach($this->customers as $customer_id => $users) {
+        //     static::CreateCustomerMaterialsRecords($this->type, $this->id, $calculated_time, $customer_id, $users, $this->materiale_trimise);
+        // }
     }
     
     public static function SyncRecords() {
