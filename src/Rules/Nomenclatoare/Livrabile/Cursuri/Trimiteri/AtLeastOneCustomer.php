@@ -35,6 +35,6 @@ class AtLeastOneCustomer implements Rule {
     }
 
     public function message() {
-        return 'Pentru trimitere, trebuie selectat cel puțin un cont destinatar.';
+        return 'Pentru trimitere, trebuie selectat cel puțin un cont client.';
     }
 }

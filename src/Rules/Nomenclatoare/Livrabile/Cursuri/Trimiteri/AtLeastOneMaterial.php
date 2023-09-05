@@ -28,6 +28,6 @@ class AtLeastOneMaterial implements Rule {
     }
 
     public function message() {
-        return 'Pentru trimitere, trebuie selectat cel puțin un ' + $this->input['type'] + '.';
+        return 'Pentru trimitere, trebuie selectat cel puțin un ' . $this->input['type'] . '.';
     }
 }
