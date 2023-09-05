@@ -317,16 +317,7 @@ class Sharematerial extends Model {
     //     }
     // }   
 
-    // public function CreateDetailsRecords() {
-
-    //     $numberOfitems = $this->count_users * $this->count_materiale;
-    //     $calculated_time = ($numberOfitems > 0) ? $this->effective_time/$numberOfitems : 0; 
-
-    //     foreach($this->customers as $customer_id => $users)
-    //     {
-    //         static::CreateCustomerDetailsRecords($this->id, $calculated_time, $customer_id, $users, $this->materiale_trimise);
-    //     }
-    // }
+    
 
     // public static function CreateCustomerDetailsRecords($trimitere_id, $calculated_time, $customer_id, $users, $materiale_trimise) {
     //     foreach($users as $i => $user_id) {
@@ -360,11 +351,13 @@ class Sharematerial extends Model {
             'platform' => config('app.platform'),
         ]);
 
+        $record->Sync();
+
         $record->CreateDetailsRecords();
 
         $record->CreateCustomersMaterials();
 
-        $record->Sync();
+        
 
         return $record;
     } 
@@ -403,6 +396,18 @@ class Sharematerial extends Model {
         ];
 
         return $result;
+    }
+
+    public function CreateDetailsRecords() {
+
+        dd($this);
+        // $numberOfitems = $this->count_users * $this->count_materiale;
+        // $calculated_time = ($numberOfitems > 0) ? $this->effective_time/$numberOfitems : 0; 
+
+        // foreach($this->customers as $customer_id => $users)
+        // {
+        //     static::CreateCustomerDetailsRecords($this->id, $calculated_time, $customer_id, $users, $this->materiale_trimise);
+        // }
     }
     
     public static function SyncRecords() {
