@@ -17,8 +17,8 @@ use MyDpo\Traits\Actionable;
 use MyDpo\Traits\DaysDifference;
 use MyDpo\Traits\Numberable;
 
-use MyDpo\Rules\Nomenclatoare\Livrabile\Trimiteri\AtLeastOneCustomer;
-use MyDpo\Rules\Nomenclatoare\Livrabile\Trimiteri\AtLeastOneMaterial;
+use MyDpo\Rules\Nomenclatoare\Livrabile\Cursuri\Trimiteri\AtLeastOneCustomer;
+use MyDpo\Rules\Nomenclatoare\Livrabile\Cursuri\Trimiteri\AtLeastOneMaterial;
 
 class Sharematerial extends Model {
 
