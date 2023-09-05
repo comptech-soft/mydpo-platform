@@ -405,7 +405,10 @@ class Sharematerial extends Model {
 
         foreach($this->customers as $customer_id => $users)
         {
-            dd($customer_id, $users, $calculated_time);
+            foreach($users as $i => $user_id)
+            {
+                dd($customer_id, $user_id, $calculated_time);
+            }
             // static::CreateCustomerDetailsRecords($this->id, $calculated_time, $customer_id, $users, $this->materiale_trimise);
         }
     }
