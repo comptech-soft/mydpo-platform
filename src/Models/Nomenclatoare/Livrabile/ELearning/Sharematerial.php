@@ -369,37 +369,35 @@ class Sharematerial extends Model {
     //     ]);
     // }
 
-    // public static function GetRules($action, $input) {
-    //     if($action == 'delete')
-    //     {
-    //         return NULL;
-    //     }
-    //     $result = [
-    //         'number' => [
-    //             'required'
-    //         ],
-    //         'date' => [
-    //             'required',
-    //             'date',
-    //         ],
-    //         'type' => 'in:centralizator,chestionar,curs',
-    //         'effective_time' => [
-    //             'numeric',
-    //             'min:0',
-    //         ],
-    //         'customers' => [
-    //             new AtLeastOneCustomer($input),
-    //         ],
-    //         'materiale_trimise' => [
-    //             new AtLeastOneMaterial($input),
-    //         ],
-    //     ];
+    public static function GetRules($action, $input) {
+        if(! in_array($action, ['insert', 'update']) )
+        {
+            return NULL;
+        }
+        $result = [
+            'number' => [
+                'required'
+            ],
+            'date' => [
+                'required',
+                'date',
+            ],
+            'type' => 'in:centralizator,chestionar,curs',
+            'effective_time' => [
+                'numeric',
+                'min:0',
+            ],
+            'customers' => [
+                new AtLeastOneCustomer($input),
+            ],
+            'materiale_trimise' => [
+                new AtLeastOneMaterial($input),
+            ],
+        ];
 
-    //     return $result;
-    // }
-
-
-
+        return $result;
+    }
+    
     public static function SyncRecords() {
         $records = self::all();
 
