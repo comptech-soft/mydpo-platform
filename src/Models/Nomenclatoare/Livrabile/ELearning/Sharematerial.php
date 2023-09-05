@@ -6,9 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 // use MyDpo\Helpers\Performers\Datatable\GetItems;
 // use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Scopes\NotdeletedScope;
-use MyDpo\Traits\Numberable;
-// use MyDpo\Rules\Sharematerial\AtLeastOneCustomer;
-// use MyDpo\Rules\Sharematerial\AtLeastOneMaterial;
+
+
 // use MyDpo\Models\CustomerCursUser;
 use MyDpo\Models\Authentication\User;
 // use MyDpo\Events\CustomerCurs\CursShare as CursShareEvent;
@@ -16,10 +15,13 @@ use MyDpo\Models\Authentication\User;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 use MyDpo\Traits\DaysDifference;
+use MyDpo\Traits\Numberable;
+
+use MyDpo\Rules\Nomenclatoare\Livrabile\Trimiteri\AtLeastOneCustomer;
+use MyDpo\Rules\Nomenclatoare\Livrabile\Trimiteri\AtLeastOneMaterial;
 
 class Sharematerial extends Model {
 
-    // use NextNumber;
     use Itemable, Actionable, Numberable, DaysDifference;
 
     protected $table = 'share-materiale';

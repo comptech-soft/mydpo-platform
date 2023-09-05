@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Rules\Sharematerial;
+namespace MyDpo\Rules\Nomenclatoare\Livrabile\Cursuri\Trimiteri;
 
 use Illuminate\Contracts\Validation\Rule;
 
