@@ -380,21 +380,25 @@ class Sharematerial extends Model {
             'number' => [
                 'required'
             ],
+
             'date' => [
                 'required',
                 'date',
             ],
+            
             'type' => 'in:centralizator,chestionar,curs',
+            
             'effective_time' => [
                 'numeric',
                 'min:0',
             ],
+            
             'customers' => [
                 // 'required',
                 new AtLeastOneCustomer($input),
             ],
+            
             'materiale_trimise' => [
-                // 'required',
                 new AtLeastOneMaterial($input),
             ],
         ];
