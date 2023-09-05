@@ -7,13 +7,16 @@ use Illuminate\Contracts\Validation\Rule;
 class AtLeastOneMaterial implements Rule {
 
     public $input = NULL;
+    public $action = NULL;
 
-    public function __construct($input) {
+    public function __construct($action, $input) {
+        $this->action = $action;
         $this->input = $input;
     }
 
     public function passes($attribute, $value) {   
 
+        dd(__METHOD__);
         if(! array_key_exists('materiale_trimise', $this->input) )
         {
             return FALSE;
