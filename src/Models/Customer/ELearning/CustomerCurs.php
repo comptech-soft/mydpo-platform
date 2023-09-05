@@ -173,20 +173,63 @@ class CustomerCurs extends Model {
 
 
     public static function CreateRecordsByTrimitere($trimitere) {
-        $numberOfitems = $this->trimitere->count_users * $this->trimitere->count_materiale;
-        $calculated_time = ($numberOfitems > 0) ? $this->trimitere->effective_time/$numberOfitems : 0; 
+        $numberOfitems = $trimitere->count_users * $trimitere->count_materiale;
+        $calculated_time = ($numberOfitems > 0) ? $trimitere->effective_time/$numberOfitems : 0; 
 
-        foreach($this->trimitere->customers as $customer_id => $users)
+        foreach($trimitere->customers as $customer_id => $users)
         {
-            foreach($users as $i => $user_id)
+            foreach($trimitere->materiale_trimise as $i => $curs_id)
             {
-                foreach($this->trimitere->materiale_trimise as $j => $curs_id)
-                {
-                    $input = [];
+                $input = [
+                    'customer_id' => $customer_id,
+                    'curs_id' => $curs_id,
+                    'trimitere_id' => $trimitere->id,
+                    'platform'=> config('app.platform'),
+                    'effective_time' => $calculated_time,
+                    'assigned_users' => $users,
+                    'trimitere_number' => $trimitere->number,
+                    'trimitere_date' => $trimitere->date,
+                    'trimitere_sended_by' => $trimitere->sender_full_name,
+                ];
 
-                    dd($input);
-                }
+                self::CreateOrUpdateRecord($input);
             }
+            
+            // foreach($users as $i => $user_id)
+            // {
+                
+            // }
+        }
+    }
+
+    public static function CreateOrUpdateRecord($input) {
+
+        $record = self::where('customer_id', $input['customer_id'])->where('curs_id', $input['curs_id'])->first();
+
+        dd($record);
+        
+        if($customer_curs)
+        {
+            $customer_curs->update([
+                'trimitere_id' => $trimitere_id,
+                'effective_time' => $calculated_time * count($users),
+                'assigned_users' => $users,
+                'platform' => config('app.platform'),
+                'created_by' => \Auth::user()->id,
+                'deleted' => 0,
+            ]);
+        }
+        else
+        {
+            $customer_curs = CustomerCurs::create([
+                'customer_id' => $customer_id,
+                'curs_id' => $material_id,
+                'trimitere_id' => $trimitere_id,
+                'effective_time' => $calculated_time * count($users),
+                'assigned_users' => $users,
+                'platform' => config('app.platform'),
+                'created_by' => \Auth::user()->id,
+            ]);
         }
     }
 
