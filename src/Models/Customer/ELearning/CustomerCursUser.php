@@ -208,6 +208,24 @@ class CustomerCursUser extends Model {
 
     public static function AttachUser($input) {
 
-        dd($input, __METHOD__);
+        $input = [
+            ...$input,
+            'created_by' => \Auth::user()->id,
+        ];
+
+        $record = CustomerCursUser::where('customer_id', $input['customer_id'])
+            ->where('curs_id', $input['curs_id'])
+            ->where('user_id', $input['user_id'])
+            ->first();
+
+        if($record)
+        {
+            $recod->update($input);
+        }
+        else
+        {
+            $customercurs = self::create($input);
+        }
+
     }
 }
