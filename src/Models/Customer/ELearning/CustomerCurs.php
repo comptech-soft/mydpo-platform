@@ -205,32 +205,30 @@ class CustomerCurs extends Model {
     public static function CreateOrUpdateRecord($input) {
 
         $record = self::where('customer_id', $input['customer_id'])->where('curs_id', $input['curs_id'])->first();
-
-        dd($record);
         
-        if($customer_curs)
+        if($record)
         {
-            $customer_curs->update([
-                'trimitere_id' => $trimitere_id,
-                'effective_time' => $calculated_time * count($users),
-                'assigned_users' => $users,
-                'platform' => config('app.platform'),
-                'created_by' => \Auth::user()->id,
-                'deleted' => 0,
-            ]);
+            /**
+             * Cursul este deja asociat la client
+             */
+            $record->update($input);
         }
         else
         {
-            $customer_curs = CustomerCurs::create([
-                'customer_id' => $customer_id,
-                'curs_id' => $material_id,
-                'trimitere_id' => $trimitere_id,
-                'effective_time' => $calculated_time * count($users),
-                'assigned_users' => $users,
-                'platform' => config('app.platform'),
-                'created_by' => \Auth::user()->id,
-            ]);
+            /**
+             * Cursul nu este asociat la client ==> se asociaza
+             */
+            $record = CustomerCurs::create($input);
         }
+
+        /**
+         * Se asociaza si utilizatorii la inregistrarea creata
+         */
+        $record->AttachUsersToCurs();
+    }
+
+    public function AttachUsersToCurs() {
+        dd(__METHOD__);
     }
 
     
