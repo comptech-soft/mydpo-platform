@@ -400,14 +400,14 @@ class Sharematerial extends Model {
 
     public function CreateDetailsRecords() {
 
-        dd($this);
-        // $numberOfitems = $this->count_users * $this->count_materiale;
-        // $calculated_time = ($numberOfitems > 0) ? $this->effective_time/$numberOfitems : 0; 
+        $numberOfitems = $this->count_users * $this->count_materiale;
+        $calculated_time = ($numberOfitems > 0) ? $this->effective_time/$numberOfitems : 0; 
 
-        // foreach($this->customers as $customer_id => $users)
-        // {
-        //     static::CreateCustomerDetailsRecords($this->id, $calculated_time, $customer_id, $users, $this->materiale_trimise);
-        // }
+        foreach($this->customers as $customer_id => $users)
+        {
+            dd($customer_id, $users, $calculated_time);
+            // static::CreateCustomerDetailsRecords($this->id, $calculated_time, $customer_id, $users, $this->materiale_trimise);
+        }
     }
     
     public static function SyncRecords() {
