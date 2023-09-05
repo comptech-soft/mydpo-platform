@@ -3,16 +3,16 @@
 namespace MyDpo\Models\Customer\ELearning;
 
 use Illuminate\Database\Eloquent\Model;
-use MyDpo\Models\Authentication\User;
-use MyDpo\Models\Curs;
-use MyDpo\Models\Sharematerial;
-use MyDpo\Models\SharematerialDetail;
-use MyDpo\Models\Customer\Customer;
-use MyDpo\Helpers\Performers\Datatable\GetItems;
-use MyDpo\Performers\CustomerCursUser\GetCounter;
-use MyDpo\Performers\CustomerCursUser\ChangeStatus;
-use MyDpo\Performers\CustomerCursUser\AssignCursuri;
-use Carbon\Carbon;
+// use MyDpo\Models\Authentication\User;
+// use MyDpo\Models\Curs;
+// use MyDpo\Models\Sharematerial;
+// use MyDpo\Models\SharematerialDetail;
+// use MyDpo\Models\Customer\Customer;
+// use MyDpo\Helpers\Performers\Datatable\GetItems;
+// use MyDpo\Performers\CustomerCursUser\GetCounter;
+// use MyDpo\Performers\CustomerCursUser\ChangeStatus;
+// use MyDpo\Performers\CustomerCursUser\AssignCursuri;
+// use Carbon\Carbon;
 
 
 class CustomerCursUser extends Model {
@@ -49,160 +49,165 @@ class CustomerCursUser extends Model {
         'deleted_by'
     ];
 
-    protected $appends = [
-        'my_status',
-        'status_termen',
-    ];
+    // protected $appends = [
+    //     'my_status',
+    //     'status_termen',
+    // ];
 
-    protected $with = [
-        'user',
-        'curs',
-        'trimitere',
-        'createdby',
-    ];
+    // protected $with = [
+    //     'user',
+    //     'curs',
+    //     'trimitere',
+    //     'createdby',
+    // ];
 
-    public function getMyStatusAttribute() {
-        $status = $color = '';
-        if($this->status == 'sended')
-        {
-            $status = 'Neînceput';
-            $color = 'red';
-        }
-        else
-        {
-            if($this->status == 'done')
-            {
-                $status = 'Finalizat';
-                $color = 'green';
-            }
-            else
-            {
-                if($this->status == 'started')
-                {
-                    $status = 'Început';
-                    $color = 'orange';
-                }
-            }
-        }
-        return [
-            'status' => $status,
-            'color' => $color,
-        ];
-    }
+    // public function getMyStatusAttribute() {
+    //     $status = $color = '';
+    //     if($this->status == 'sended')
+    //     {
+    //         $status = 'Neînceput';
+    //         $color = 'red';
+    //     }
+    //     else
+    //     {
+    //         if($this->status == 'done')
+    //         {
+    //             $status = 'Finalizat';
+    //             $color = 'green';
+    //         }
+    //         else
+    //         {
+    //             if($this->status == 'started')
+    //             {
+    //                 $status = 'Început';
+    //                 $color = 'orange';
+    //             }
+    //         }
+    //     }
+    //     return [
+    //         'status' => $status,
+    //         'color' => $color,
+    //     ];
+    // }
 
-    public function getStatusTermenAttribute() {
+    // public function getStatusTermenAttribute() {
 
-        $daysDiff = $hoursDiff = NULL;
+    //     $daysDiff = $hoursDiff = NULL;
 
-        $color = NULL;
-        $text = NULL;
+    //     $color = NULL;
+    //     $text = NULL;
 
-        if($this->status == 'done')
-        {
+    //     if($this->status == 'done')
+    //     {
 
-        }
-        else
-        {
-            $color = 'green';
-            if( $this->trimitere->date_to )
-            {
-                $now = Carbon::now();
-                $expire = Carbon::createFromFormat('Y-m-d', $this->trimitere->date_to);
+    //     }
+    //     else
+    //     {
+    //         $color = 'green';
+    //         if( $this->trimitere->date_to )
+    //         {
+    //             $now = Carbon::now();
+    //             $expire = Carbon::createFromFormat('Y-m-d', $this->trimitere->date_to);
         
-                $daysDiff = $expire->diffInDays($now, false);
-                $hoursDiff = $expire->diffInHours($now, false);
+    //             $daysDiff = $expire->diffInDays($now, false);
+    //             $hoursDiff = $expire->diffInHours($now, false);
 
                 
-                if( ($daysDiff > 0) || ( ($daysDiff == 0) && ($hoursDiff > 0)))
-                {
-                    $color = 'red';
-                    $text = 'Depășit';
-                }
+    //             if( ($daysDiff > 0) || ( ($daysDiff == 0) && ($hoursDiff > 0)))
+    //             {
+    //                 $color = 'red';
+    //                 $text = 'Depășit';
+    //             }
 
-                else
-                {
-                    if(-5 <= $daysDiff && $daysDiff <= 0 )
-                    {
-                        $color = 'orange';
-                        $text = 'În curând';
-                    }
-                    else
-                    {
-                        $color = 'blue';
-                        $text = 'Asignate';
-                    }
-                }
+    //             else
+    //             {
+    //                 if(-5 <= $daysDiff && $daysDiff <= 0 )
+    //                 {
+    //                     $color = 'orange';
+    //                     $text = 'În curând';
+    //                 }
+    //                 else
+    //                 {
+    //                     $color = 'blue';
+    //                     $text = 'Asignate';
+    //                 }
+    //             }
                 
-            }
-        }
+    //         }
+    //     }
 
-        return [
-            'date_from' => $this->trimitere->date_from,
-            'date_to' => $this->trimitere->date_to,
-            'days' => $daysDiff,
-            'hours' => $hoursDiff,
-            'color' => $color,
-            'caption' => $text,
-        ];
-    }
+    //     return [
+    //         'date_from' => $this->trimitere->date_from,
+    //         'date_to' => $this->trimitere->date_to,
+    //         'days' => $daysDiff,
+    //         'hours' => $hoursDiff,
+    //         'color' => $color,
+    //         'caption' => $text,
+    //     ];
+    // }
 
-    public function user() {
-        return $this->belongsTo(User::class, 'user_id');
-    }
+    // public function user() {
+    //     return $this->belongsTo(User::class, 'user_id');
+    // }
 
-    public function createdby() {
-        return $this->belongsTo(User::class, 'created_by');
-    }
+    // public function createdby() {
+    //     return $this->belongsTo(User::class, 'created_by');
+    // }
 
-    public function curs() {
-        return $this->belongsTo(Curs::class, 'curs_id');
-    }
+    // public function curs() {
+    //     return $this->belongsTo(Curs::class, 'curs_id');
+    // }
 
-    public function trimitere() {
-        return $this->belongsTo(Sharematerial::class, 'trimitere_id');
-    }
+    // public function trimitere() {
+    //     return $this->belongsTo(Sharematerial::class, 'trimitere_id');
+    // }
 
-    public function customer() {
-        return $this->belongsTo(Customer::class, 'customer_id');
-    }
+    // public function customer() {
+    //     return $this->belongsTo(Customer::class, 'customer_id');
+    // }
 
-    public function removeRecord() {
-        $record = SharematerialDetail::where('trimitere_id', $this->trimitere_id)
-            ->where('customer_id', $this->customer_id)
-            ->where('assigned_to', $this->user_id)
-            ->where('sended_document_id', $this->curs_id)
-            ->first();
+    // public function removeRecord() {
+    //     $record = SharematerialDetail::where('trimitere_id', $this->trimitere_id)
+    //         ->where('customer_id', $this->customer_id)
+    //         ->where('assigned_to', $this->user_id)
+    //         ->where('sended_document_id', $this->curs_id)
+    //         ->first();
 
-        $record->delete();
+    //     $record->delete();
 
-        $this->delete();
-    }
+    //     $this->delete();
+    // }
 
-    public static function getItems($input) {
-        $q = self::query()
-        ->leftJoin(
-            'cursuri',
-            function($j) {
-                $j->on('cursuri.id', '=', 'customers-cursuri-users.curs_id');
+    // public static function getItems($input) {
+    //     $q = self::query()
+    //     ->leftJoin(
+    //         'cursuri',
+    //         function($j) {
+    //             $j->on('cursuri.id', '=', 'customers-cursuri-users.curs_id');
                 
-            }
-        )
-        ->select('customers-cursuri-users.*');
+    //         }
+    //     )
+    //     ->select('customers-cursuri-users.*');
   
-        $input['permanent_filters']['not-deletede'] = "( (cursuri.deleted = 0) OR (cursuri.deleted IS NULL))";
+    //     $input['permanent_filters']['not-deletede'] = "( (cursuri.deleted = 0) OR (cursuri.deleted IS NULL))";
 
-        return (new GetItems($input, $q, __CLASS__))->Perform();
-    }
+    //     return (new GetItems($input, $q, __CLASS__))->Perform();
+    // }
 
-    public static function getCounter($input) {
-        return (new GetCounter($input))->Perform();
-    }
+    // public static function getCounter($input) {
+    //     return (new GetCounter($input))->Perform();
+    // }
 
-    public static function changeStatus($input) {
-        return (new ChangeStatus($input))->Perform();
-    }
+    // public static function changeStatus($input) {
+    //     return (new ChangeStatus($input))->Perform();
+    // }
 
-    public static function assignCursuri($input) {
-        return (new AssignCursuri($input))->Perform();
+    // public static function assignCursuri($input) {
+    //     return (new AssignCursuri($input))->Perform();
+    // }
+
+    public static function AttachUser($input) {
+
+        dd($input, __METHOD__);
     }
 }

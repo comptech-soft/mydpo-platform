@@ -228,7 +228,22 @@ class CustomerCurs extends Model {
     }
 
     public function AttachUsersToCurs() {
-        dd(__METHOD__);
+
+        foreach($this->assigned_users as $i => $user_id)
+        {
+            $input = [
+                'customer_curs_id' => $this->id,
+                'customer_id' => $this->customer_id,
+                'curs_id' => $this->curs_id,
+                'trimitere_id' => $this->trimitere_id,
+                'user_id' => $user_id,
+                'status' => 'sended',
+                'platform'=> config('app.platform'),
+            ];
+
+            CustomerCursUser::AttachUser($input);
+        }
+
     }
 
     
