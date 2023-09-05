@@ -225,24 +225,7 @@ class Sharematerial extends Model {
         
     // }
 
-    // public static function doAction($action, $input) {
-    //     return (new DoAction($action, $input, __CLASS__))->Perform();
-    // }
-
-    // public static function doInsert($input, $share) {
-    //     $share = self::create([
-    //         ...$input,
-    //         'platform' => config('app.platform'),
-    //     ]);
-
-    //     $share->CreateDetailsRecords();
-
-    //     $share->CreateCustomersMaterials();
-
-    //     $share->syncValues();
-
-    //     return $share;
-    // } 
+    
 
     // public function CreateCustomersMaterials() {
     //     $numberOfitems = $this->count_users * $this->count_materiale;
@@ -370,6 +353,24 @@ class Sharematerial extends Model {
 
     //     ]);
     // }
+
+    public static function doInsert($input, $record) {
+
+        dd($input, $record);
+        
+        $share = self::create([
+            ...$input,
+            'platform' => config('app.platform'),
+        ]);
+
+        $share->CreateDetailsRecords();
+
+        $share->CreateCustomersMaterials();
+
+        $share->syncValues();
+
+        return $share;
+    } 
 
     public static function GetRules($action, $input) {
         if(! in_array($action, ['insert', 'update']) )
