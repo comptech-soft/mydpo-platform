@@ -25,6 +25,7 @@ class AtLeastOneCustomer implements Rule {
         }
 
         $count_users = 0;
+
         foreach($this->input['customers'] as $customer_id => $users)
         {
             $count_users += count($users);
@@ -34,6 +35,6 @@ class AtLeastOneCustomer implements Rule {
     }
 
     public function message() {
-        return 'Pentru trimitere, Trebuie selectat cel puțin un cont destinatar.';
+        return 'Pentru trimitere, trebuie selectat cel puțin un cont destinatar.';
     }
 }

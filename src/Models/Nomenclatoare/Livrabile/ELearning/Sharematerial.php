@@ -355,28 +355,27 @@ class Sharematerial extends Model {
     // }
 
     public static function doInsert($input, $record) {
-
-        dd($input, $record);
-        
-        $share = self::create([
+        $record = self::create([
             ...$input,
             'platform' => config('app.platform'),
         ]);
 
-        $share->CreateDetailsRecords();
+        $record->CreateDetailsRecords();
 
-        $share->CreateCustomersMaterials();
+        $record->CreateCustomersMaterials();
 
-        $share->syncValues();
+        $record->Sync();
 
-        return $share;
+        return $record;
     } 
 
     public static function GetRules($action, $input) {
+
         if(! in_array($action, ['insert', 'update']) )
         {
             return NULL;
         }
+
         $result = [
             'number' => [
                 'required'
@@ -391,9 +390,11 @@ class Sharematerial extends Model {
                 'min:0',
             ],
             'customers' => [
+                'required',
                 new AtLeastOneCustomer($input),
             ],
             'materiale_trimise' => [
+                'required',
                 new AtLeastOneMaterial($input),
             ],
         ];
