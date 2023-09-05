@@ -10,6 +10,12 @@ use MyDpo\Models\Customer\Customer;
 class CursuriController extends Controller {
 
     public function index($customer_id, Request $r) {
+
+        if(! ($customer = Customer::find($customer_id)) )
+        {
+            return redirect('clienti');
+        }
+
         return Index::View(
             styles: ['css/app.css'],
             scripts: ['apps/customer/elearning/index.js'],

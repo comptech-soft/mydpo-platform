@@ -13,9 +13,9 @@ class RegistreDashboardController extends Controller {
     
     public function index($page, $customer_id, Request $r) {
         
-        if(! ($customer =  Customer::find($customer_id)) )
+        if(! ($customer = Customer::find($customer_id)) )
         {
-            return redirect('admin/clienti');
+            return redirect('clienti');
         }
 
         if(! in_array($page, ['registre', 'gap']))
