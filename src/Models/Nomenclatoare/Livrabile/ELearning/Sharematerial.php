@@ -402,7 +402,7 @@ class Sharematerial extends Model {
         {
             foreach($users as $i => $user_id)
             {
-                foreach($this->materiale_trimise as $i => $sended_document_id)
+                foreach($this->materiale_trimise as $j => $sended_document_id)
                 {
                     $input = [
                         'trimitere_id' => $this->id,
