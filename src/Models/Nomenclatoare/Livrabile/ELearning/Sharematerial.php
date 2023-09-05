@@ -10,6 +10,8 @@ use MyDpo\Scopes\NotdeletedScope;
 
 // use MyDpo\Models\CustomerCursUser;
 use MyDpo\Models\Authentication\User;
+use MyDpo\Models\Customer\ELearning\CustomerCurs;
+
 // use MyDpo\Events\CustomerCurs\CursShare as CursShareEvent;
 
 use MyDpo\Traits\Itemable;
@@ -418,13 +420,14 @@ class Sharematerial extends Model {
     }
 
     public function CreateCustomersMaterials() {
-        dd(__METHOD__);
-        // $numberOfitems = $this->count_users * $this->count_materiale;
-        // $calculated_time = ($numberOfitems > 0) ? $this->effective_time/$numberOfitems : 0; 
+        
+        $numberOfitems = $this->count_users * $this->count_materiale;
+        $calculated_time = ($numberOfitems > 0) ? $this->effective_time/$numberOfitems : 0; 
 
-        // foreach($this->customers as $customer_id => $users) {
-        //     static::CreateCustomerMaterialsRecords($this->type, $this->id, $calculated_time, $customer_id, $users, $this->materiale_trimise);
-        // }
+        if($this->type == 'curs')
+        {
+            CustomerCurs::CreateRecordsByTrimitere($this);
+        }
     }
     
     public static function SyncRecords() {
