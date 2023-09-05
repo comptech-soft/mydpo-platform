@@ -16,7 +16,6 @@ class AtLeastOneMaterial implements Rule {
 
     public function passes($attribute, $value) {   
 
-        dd(__METHOD__);
         if(! array_key_exists('materiale_trimise', $this->input) )
         {
             return FALSE;

@@ -7,8 +7,10 @@ use Illuminate\Contracts\Validation\Rule;
 class AtLeastOneCustomer implements Rule {
 
     public $input = NULL;
+    public $action = NULL;
 
-    public function __construct($input) {
+    public function __construct($action, $input) {
+        $this->action = $action;
         $this->input = $input;
     }
 
