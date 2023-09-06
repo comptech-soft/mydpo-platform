@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
 use MyDpo\Models\Customer\Customer;
+use MyDpo\Models\Customer\ELearning\CustomerCurs;
 
 class CursuriController extends Controller {
 
@@ -24,6 +25,10 @@ class CursuriController extends Controller {
                 'customer' => Customer::find($customer_id),
             ],
         );        
+    }
+
+    public function getRecords(Request $r) {
+        return CustomerCurs::getRecords($r->all());
     }
 
     
