@@ -139,8 +139,8 @@ class CustomerCurs extends Model {
             //         $q->on('customers-departamente.id', '=', 'customers-persons.department_id');
             //     }
             // )
-            ->whereRaw("((`customers`.`deleted` IS NULL) OR (`customers`.`deleted` = 0))")
-            ->select('customers-persons.*');
+            ->whereRaw("((`customers-cursuri`.`deleted` IS NULL) OR (`customers-cursuri`.`deleted` = 0))")
+            ->select('customers-cursuri.*');
     }
 
     public static function CreateRecordsByTrimitere($trimitere) {
