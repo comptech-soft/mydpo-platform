@@ -287,19 +287,14 @@ class Sharematerial extends Model {
     // }
 
     public static function doInsert($input, $record) {
-        $record = self::create([
-            ...$input,
-            'platform' => config('app.platform'),
-        ]);
+        $record = self::create($input);
 
         $record->Sync();
 
         $record->CreateDetailsRecords();
 
         $record->CreateCustomersMaterials();
-
         
-
         return $record;
     } 
 
