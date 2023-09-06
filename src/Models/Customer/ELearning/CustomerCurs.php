@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use MyDpo\Traits\Itemable;
 
-// use MyDpo\Models\Curs;
+use MyDpo\Models\Nomenclatoare\Livrabile\ELearning\Curs;
 // use MyDpo\Models\CustomerCursUser;
 // use MyDpo\Models\CustomerCursFile;
 // use MyDpo\Models\CustomerCursParticipant;
