@@ -220,11 +220,11 @@ class CustomerCursUser extends Model {
 
         if($record)
         {
-            $recod->update($input);
+            $record->update($input);
         }
         else
         {
-            $customercurs = self::create($input);
+            $record = self::create($input);
         }
 
     }
