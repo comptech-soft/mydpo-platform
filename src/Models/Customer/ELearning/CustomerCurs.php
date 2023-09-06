@@ -124,7 +124,7 @@ class CustomerCurs extends Model {
             ->leftJoin(
                 'cursuri',
                 function($q) {
-                    $q->on('curs.id', '=', 'customers-cursuri.curs_id');
+                    $q->on('cursuri.id', '=', 'customers-cursuri.curs_id');
                 }
             )
             // ->leftJoin(
