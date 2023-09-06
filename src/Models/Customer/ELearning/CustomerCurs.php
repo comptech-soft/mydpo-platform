@@ -118,7 +118,30 @@ class CustomerCurs extends Model {
     // }
 
 
-
+    public static function GetQuery() {
+        return 
+            self::query()
+            ->leftJoin(
+                'cursuri',
+                function($q) {
+                    $q->on('curs.id', '=', 'customers-cursuri.curs_id');
+                }
+            )
+            // ->leftJoin(
+            //     'customers',
+            //     function($q) {
+            //         $q->on('customers.id', '=', 'customers-persons.customer_id');
+            //     }
+            // )
+            // ->leftJoin(
+            //     'customers-departamente',
+            //     function($q) {
+            //         $q->on('customers-departamente.id', '=', 'customers-persons.department_id');
+            //     }
+            // )
+            ->whereRaw("((`customers`.`deleted` IS NULL) OR (`customers`.`deleted` = 0))")
+            ->select('customers-persons.*');
+    }
 
     public static function CreateRecordsByTrimitere($trimitere) {
         $numberOfitems = $trimitere->count_users * $trimitere->count_materiale;
