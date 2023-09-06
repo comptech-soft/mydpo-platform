@@ -118,17 +118,7 @@ class CustomerCurs extends Model {
     // }
 
     public static function doAsociere($input, $record) {
-
-        dd($input);
-        // $record = self::create($input);
-
-        // $record->Sync();
-
-        // $record->CreateDetailsRecords();
-
-        // $record->CreateCustomersMaterials();
-        
-        // return $record;
+        return Sharematerial::doInsert($input, $record);
     }
 
     public static function GetQuery() {
