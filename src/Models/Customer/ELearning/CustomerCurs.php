@@ -63,30 +63,30 @@ class CustomerCurs extends Model {
         'deleted_by'
     ];
 
-    // protected $with = [
-    //     'curs',
-    //     'cursusers',
-    // ];
+    protected $with = [
+        'curs',
+        'cursusers',
+    ];
 
-    // public function curs() {
-    //     return $this->belongsTo(Curs::class, 'curs_id');
-    // }
+    public function curs() {
+        return $this->belongsTo(Curs::class, 'curs_id');
+    }
 
-    // public function trimitere() {
-    //     return $this->belongsTo(Sharematerial::class, 'trimitere_id');
-    // }
+    public function trimitere() {
+        return $this->belongsTo(Sharematerial::class, 'trimitere_id');
+    }
 
-    // public function cursusers() {
-    //     return $this->hasMany(CustomerCursUser::class, 'customer_curs_id');
-    // }
+    public function cursusers() {
+        return $this->hasMany(CustomerCursUser::class, 'customer_curs_id');
+    }
 
-    // public function cursfiles() {
-    //     return $this->hasMany(CustomerCursFile::class, 'customer_curs_id');
-    // }
+    public function cursfiles() {
+        return $this->hasMany(CustomerCursFile::class, 'customer_curs_id');
+    }
 
-    // public function cursparticipants() {
-    //     return $this->hasMany(CustomerCursParticipant::class, 'customer_curs_id');
-    // }
+    public function cursparticipants() {
+        return $this->hasMany(CustomerCursParticipant::class, 'customer_curs_id');
+    }
 
     // public static function desasociereUtilizatori($input) {
     //     $r = (new DesasociereUtilizatori($input))->Perform();
@@ -116,58 +116,7 @@ class CustomerCurs extends Model {
     //     return (new GetSummary($input))->Perform();
     // }
 
-    // /**
-    //  * actualizeaza numarul de utilizatori care au cursurile: sended, startde, done
-    //  */
-    // public static function syncUsersCounts($customer_id) {
 
-    //     $records = self::where('customer_id', $customer_id)->get();
-
-    //     foreach($records as $i => $record)
-    //     {
-    //         $record->files_count =  $record->cursfiles()->count();
-    //         $record->participants_count =  $record->cursparticipants()->count();
-    //         $record->trimitere_number =  $record->trimitere->number;
-    //         $record->trimitere_date =  $record->trimitere->date;
-    //         $record->trimitere_sended_by =  $record->trimitere->createdby->full_name;
-
-    //         $record->users_count = 0;
-    //         $record->users_count_sended = 0;
-    //         $record->users_count_started = 0;
-    //         $record->users_count_done = 0;
-
-    //         $record->save();
-    //     }
-
-
-    //     $sql = "
-    //         SELECT
-    //             `customers-cursuri-users`.customer_curs_id,
-    //             COUNT(*) AS users_count,
-    //             SUM(IF(`customers-cursuri-users`.`status` = 'sended', 1, 0)) AS users_count_sended,
-    //             SUM(IF(`customers-cursuri-users`.`status` = 'started', 1, 0)) AS users_count_started,
-    //             SUM(IF(`customers-cursuri-users`.`status` = 'done', 1, 0)) AS users_count_done
-    //         FROM `customers-cursuri-users`
-    //         WHERE `customers-cursuri-users`.customer_id = " . $customer_id . "
-    //         GROUP BY 1
-    //     ";
-
-    //     $results = \DB::select($sql);
-
-    //     foreach($results as $i => $result)
-    //     {
-    //         $record = self::find($result->customer_curs_id);
-
-    //         $record->users_count = $result->users_count;
-    //         $record->users_count_sended = $result->users_count_sended;
-    //         $record->users_count_started = $result->users_count_started;
-    //         $record->users_count_done = $result->users_count_done;
-
-    //         $record->save();
-    //     }
-
-        
-    // }
 
 
     public static function CreateRecordsByTrimitere($trimitere) {
@@ -239,5 +188,56 @@ class CustomerCurs extends Model {
 
     }
 
-    
+    /**
+     * actualizeaza numarul de utilizatori care au cursurile: sended, startde, done
+     */
+    public static function Sync($customer_id) {
+
+        $records = self::where('customer_id', $customer_id)->get();
+
+        foreach($records as $i => $record)
+        {
+            $record->files_count =  $record->cursfiles()->count();
+            $record->participants_count =  $record->cursparticipants()->count();
+            $record->trimitere_number =  $record->trimitere->number;
+            $record->trimitere_date =  $record->trimitere->date;
+            $record->trimitere_sended_by =  $record->trimitere->createdby->full_name;
+
+            $record->users_count = 0;
+            $record->users_count_sended = 0;
+            $record->users_count_started = 0;
+            $record->users_count_done = 0;
+
+            $record->save();
+        }
+
+
+        $sql = "
+            SELECT
+                `customers-cursuri-users`.customer_curs_id,
+                COUNT(*) AS users_count,
+                SUM(IF(`customers-cursuri-users`.`status` = 'sended', 1, 0)) AS users_count_sended,
+                SUM(IF(`customers-cursuri-users`.`status` = 'started', 1, 0)) AS users_count_started,
+                SUM(IF(`customers-cursuri-users`.`status` = 'done', 1, 0)) AS users_count_done
+            FROM `customers-cursuri-users`
+            WHERE `customers-cursuri-users`.customer_id = " . $customer_id . "
+            GROUP BY 1
+        ";
+
+        $results = \DB::select($sql);
+
+        foreach($results as $i => $result)
+        {
+            $record = self::find($result->customer_curs_id);
+
+            $record->users_count = $result->users_count;
+            $record->users_count_sended = $result->users_count_sended;
+            $record->users_count_started = $result->users_count_started;
+            $record->users_count_done = $result->users_count_done;
+
+            $record->save();
+        }
+
+        
+    }
 }

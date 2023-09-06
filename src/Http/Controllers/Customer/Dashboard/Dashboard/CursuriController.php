@@ -17,6 +17,8 @@ class CursuriController extends Controller {
             return redirect('clienti');
         }
 
+        CustomerCurs::Sync($customer_id);
+
         return Index::View(
             styles: ['css/app.css'],
             scripts: ['apps/customer/elearning/index.js'],
@@ -56,7 +58,7 @@ class CursuriController extends Controller {
     //         }
     //     }
 
-    //     CustomerCurs::syncUsersCounts($customer_id);
+    //     
 
     //     return Response::View(
     //         '~templates.index', 
