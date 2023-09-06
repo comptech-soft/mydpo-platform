@@ -67,6 +67,7 @@ class CustomerCurs extends Model {
     protected $with = [
         'curs',
         'cursusers',
+        'trimitere',
     ];
 
     public function curs() {
