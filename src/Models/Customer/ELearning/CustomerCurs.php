@@ -3,7 +3,9 @@
 namespace MyDpo\Models\Customer\ELearning;
 
 use Illuminate\Database\Eloquent\Model;
-// use MyDpo\Helpers\Performers\Datatable\GetItems;
+
+use MyDpo\Traits\Itemable;
+
 // use MyDpo\Models\Curs;
 // use MyDpo\Models\CustomerCursUser;
 // use MyDpo\Models\CustomerCursFile;
@@ -15,7 +17,11 @@ use Illuminate\Database\Eloquent\Model;
 // use MyDpo\Performers\CustomerCurs\StergereParticipant;
 // use MyDpo\Performers\CustomerCurs\StergereFisier;
 
+
+
 class CustomerCurs extends Model {
+
+    use Itemable;
 
     protected $table = 'customers-cursuri';
 
@@ -80,14 +86,6 @@ class CustomerCurs extends Model {
 
     // public function cursparticipants() {
     //     return $this->hasMany(CustomerCursParticipant::class, 'customer_curs_id');
-    // }
-
-    // public static function getItems($input) {
-    //     return (new GetItems(
-    //         $input, 
-    //         self::query()->has('curs'), 
-    //         __CLASS__
-    //     ))->Perform();
     // }
 
     // public static function desasociereUtilizatori($input) {
@@ -194,11 +192,6 @@ class CustomerCurs extends Model {
 
                 self::CreateOrUpdateRecord($input);
             }
-            
-            // foreach($users as $i => $user_id)
-            // {
-                
-            // }
         }
     }
 
