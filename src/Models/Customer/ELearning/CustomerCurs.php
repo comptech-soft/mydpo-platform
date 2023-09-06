@@ -118,7 +118,7 @@ class CustomerCurs extends Model {
     // }
 
     public static function doAsociere($input, $record) {
-        return Sharematerial::doInsert($input, $record);
+        return Sharematerial::doInsert($input, $record);;
     }
 
     public static function GetQuery() {
@@ -168,6 +168,8 @@ class CustomerCurs extends Model {
 
                 self::CreateOrUpdateRecord($input);
             }
+
+            self::Sync($customer_id);
         }
     }
 
