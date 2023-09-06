@@ -130,12 +130,12 @@ class CustomerCurs extends Model {
                     $q->on('cursuri.id', '=', 'customers-cursuri.curs_id');
                 }
             )
-            // ->leftJoin(
-            //     'customers',
-            //     function($q) {
-            //         $q->on('customers.id', '=', 'customers-persons.customer_id');
-            //     }
-            // )
+            ->leftJoin(
+                'share-materiale',
+                function($q) {
+                    $q->on('share-materiale.id', '=', 'customers-cursuri.trimitere_id');
+                }
+            )
             // ->leftJoin(
             //     'customers-departamente',
             //     function($q) {
