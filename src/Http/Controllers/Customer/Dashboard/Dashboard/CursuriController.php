@@ -33,7 +33,10 @@ class CursuriController extends Controller {
         return CustomerCurs::getRecords($r->all());
     }
 
-    
+    public function doAction($action, Request $r) {
+        return CustomerCurs::doAction($action, $r->all());
+    }
+
     // public function index($customer_id, Request $r) {
 
     //     if( config('app.platform') == 'b2b')
