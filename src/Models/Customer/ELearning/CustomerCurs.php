@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
 
 use MyDpo\Models\Nomenclatoare\Livrabile\ELearning\Curs;
+use MyDpo\Models\Nomenclatoare\Livrabile\ELearning\Sharematerial;
+
 // use MyDpo\Models\CustomerCursUser;
 // use MyDpo\Models\CustomerCursFile;
 // use MyDpo\Models\CustomerCursParticipant;
-// use MyDpo\Models\Sharematerial;
 // use MyDpo\Performers\CustomerCurs\GetSummary;
 // use MyDpo\Performers\CustomerCurs\DesasociereUtilizatori;
 // use MyDpo\Performers\CustomerCurs\DesasociereUsers;
