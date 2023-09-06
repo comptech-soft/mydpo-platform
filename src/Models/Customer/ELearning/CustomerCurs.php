@@ -4,10 +4,11 @@ namespace MyDpo\Models\Customer\ELearning;
 
 use Illuminate\Database\Eloquent\Model;
 
-use MyDpo\Traits\Itemable;
-
 use MyDpo\Models\Nomenclatoare\Livrabile\ELearning\Curs;
 use MyDpo\Models\Nomenclatoare\Livrabile\ELearning\Sharematerial;
+
+use MyDpo\Traits\Itemable;
+use MyDpo\Traits\Actionable;
 
 // use MyDpo\Models\CustomerCursUser;
 // use MyDpo\Models\CustomerCursFile;
@@ -18,11 +19,9 @@ use MyDpo\Models\Nomenclatoare\Livrabile\ELearning\Sharematerial;
 // use MyDpo\Performers\CustomerCurs\StergereParticipant;
 // use MyDpo\Performers\CustomerCurs\StergereFisier;
 
-
-
 class CustomerCurs extends Model {
 
-    use Itemable;
+    use Itemable, Actionable;
 
     protected $table = 'customers-cursuri';
 
