@@ -99,7 +99,19 @@ class CustomerCursFile extends Model {
                 'url' => config('filesystems.disks.s3.url') . $result,
                 'platform' => config('app.platform'),
                 'created_by' => \Auth::user()->id,
+                'deleted' => 0,
             ];
+
+            if(in_array($ext, ['jpg', 'jpeg', 'png']))
+            {
+                $image = \Image::make($file);
+                $input = [
+                    ...$input,
+                    'file_size' => $image->filesize(),
+                    'file_width' => $image->width(),
+                    'file_height' => $image->height(),
+                ];
+            }
             
             $record = CustomerCursFile::where('customer_curs_id', $customer_curs_id)->where('url', $input['url'])->first();
 
@@ -109,8 +121,7 @@ class CustomerCursFile extends Model {
             }
             else
             {
-                $record->deleted = 0;
-                $record->save();
+                $record->update($input);
             }
         }
     }
