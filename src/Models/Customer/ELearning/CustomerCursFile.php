@@ -142,26 +142,10 @@ class CustomerCursFile extends Model {
         return NULL;
     }
 
-    // public static function downloadFile($customer_id, $file_id) {
+    public static function AfterAction($action, $input, $payload) {
 
-    //     $record = self::where('customer_id', $customer_id)->where('id', $file_id)->first();
-
-    //     if(!! $record )
-    //     {
-    //         $path = $record->url;          
-    //         $path = \Str::replace(config('filesystems.disks.s3.url'), '', $path);
-    //         return \Storage::disk('s3')->download($path, $record->file_original_name);
-    //     }
-
-    //     return NULL;
-    // }
-
-    // public static function getItems($input) {
-    //     return (new GetItems($input, self::query(), __CLASS__))->Perform();
-    // }
-
-    // public static function attachFiles($input) {
-    //     return (new AttachFiles($input))->Perform();
-    // }
+        dd($input);
+        CustomerCurs::Sync($input['customer_id']);
+    }
 
 }
