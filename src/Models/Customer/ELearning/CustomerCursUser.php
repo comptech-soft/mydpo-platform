@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 // use MyDpo\Models\Sharematerial;
 // use MyDpo\Models\SharematerialDetail;
 // use MyDpo\Models\Customer\Customer;
-// use MyDpo\Helpers\Performers\Datatable\GetItems;
+
+use MyDpo\Traits\Itemable;
+
 // use MyDpo\Performers\CustomerCursUser\GetCounter;
 // use MyDpo\Performers\CustomerCursUser\ChangeStatus;
 // use MyDpo\Performers\CustomerCursUser\AssignCursuri;
@@ -17,6 +19,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class CustomerCursUser extends Model {
 
+    use Itemable;
+    
     protected $table = 'customers-cursuri-users';
 
     protected $casts = [
