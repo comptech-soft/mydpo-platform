@@ -68,7 +68,7 @@ class CustomerCursFile extends Model {
     } 
 
     public function getIconAttribute() {
-        return config('app.url') . '/imgs/extensions/'. strtolower($this->file['file_original_extension']) . '.png';
+        return config('app.url') . '/imgs/extensions/'. strtolower($this->file_original_extension) . '.png';
     }
 
     public static function doInsert($input, $record) {
