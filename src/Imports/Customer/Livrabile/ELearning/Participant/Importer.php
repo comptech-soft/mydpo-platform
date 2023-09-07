@@ -9,11 +9,13 @@ use MyDpo\Models\System\Translation;
 class Importer implements ToCollection {
 
     protected $lines = NULL;
-
+    protected $input = NULL;
+    
     public function __construct($input) {
 
-        dd($this->input);
+        
         $this->input = $input;
+        dd($this->input);
     }
 
     public function collection(Collection $rows) {
