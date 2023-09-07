@@ -5,6 +5,7 @@ namespace MyDpo\Imports\Customer\Livrabile\ELearning\Participant;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use MyDpo\Models\Customer\ELearning\CustomerCursParticipant; 
+use MyDpo\Models\Customer\ELearning\CustomerCurs; 
 
 class Importer implements ToCollection {
 
@@ -18,6 +19,7 @@ class Importer implements ToCollection {
     public function collection(Collection $rows) {
         $this->CreateLines($rows);
         $this->Process();
+        CustomerCurs::Sync($this->input['customer_id']);
     }
 
     private function ValidRecord($record) {
