@@ -54,8 +54,7 @@ class CustomerCursParticipant extends Model {
     }
 
     public static function AfterAction($action, $input, $payload) {
-
-        dd($action, $input, $payload);
+        CustomerCurs::Sync($input['customer_id']);
     }
 
     // public static function getItems($input) {
