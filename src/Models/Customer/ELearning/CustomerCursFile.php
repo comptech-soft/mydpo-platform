@@ -58,7 +58,7 @@ class CustomerCursFile extends Model {
 
     public static function attachFile($file, $customer_curs_id, $customer_id) {
 
-        if(in_array($ext = strtolower($file->extension()), ['xls', 'xlsx', 'pdf', 'doc', 'docx', 'jpg', 'jpeg']))
+        if(in_array($ext = strtolower($file->extension()), ['xls', 'xlsx', 'pdf', 'doc', 'docx', 'jpg', 'jpeg', 'png']))
         {
             $filename = \Str::slug(str_replace($file->extension(), '', $file->getClientOriginalName())) . '.' .  strtolower($file->extension());
 
