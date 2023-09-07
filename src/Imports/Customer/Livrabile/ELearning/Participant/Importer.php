@@ -4,7 +4,7 @@ namespace MyDpo\Imports\Customer\Livrabile\ELearning\Participant;
 
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
-use MyDpo\Models\System\Translation; 
+use MyDpo\Models\Customer\ELearning\CustomerCursParticipant; 
 
 class Importer implements ToCollection {
 
@@ -12,47 +12,32 @@ class Importer implements ToCollection {
     protected $input = NULL;
     
     public function __construct($input) {
-
-        
         $this->input = $input;
-        dd($this->input);
     }
 
     public function collection(Collection $rows) {
-
         $this->CreateLines($rows);
-
         $this->Process();
     }
 
     private function ValidRecord($record) {
-        
-        return !! $record['ro'];
+        return true;
     }
 
     private function RowToRecord($row) {
         return [
-            'ro' => $row[1],
-            'en' => $row[2],
-            '__line' => $row['__line']
+            'customer_curs_id' => $this->input['customer_curs_id'],
+            'customer_id' => $this->input['customer_id'],
+            'platform' => config('app.platform'),
+            'data' => $row[1],
+            'last_name' => $row[2],
+            'first_name' => $row[3],
+            'functiia' => $row[4],
         ];
     }
 
     private function ProcessLine($line) {
-
-        $input = collect($line)->except(['__line'])->toArray();
-
-        $record = Translation::where('ro', $input['ro'])->first();
-
-        if( !! $record )
-        {
-            $record->update($input);
-        }
-        else
-        {
-            $record = Translation::create($input);
-        }
-
+        CustomerCursParticipant::create($line);
     }    
 
     protected function Process() {
@@ -75,7 +60,6 @@ class Importer implements ToCollection {
              */
             return [
                 ...$row,
-                '__line' => $i,
             ];
 
         })->filter( function($row, $i) use ($start_row) {
