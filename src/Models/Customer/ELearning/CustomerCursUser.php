@@ -183,21 +183,6 @@ class CustomerCursUser extends Model {
     //     $this->delete();
     // }
 
-    // public static function getItems($input) {
-    //     $q = self::query()
-    //     ->leftJoin(
-    //         'cursuri',
-    //         function($j) {
-    //             $j->on('cursuri.id', '=', 'customers-cursuri-users.curs_id');
-                
-    //         }
-    //     )
-    //     ->select('customers-cursuri-users.*');
-  
-    //     $input['permanent_filters']['not-deletede'] = "( (cursuri.deleted = 0) OR (cursuri.deleted IS NULL))";
-
-    //     return (new GetItems($input, $q, __CLASS__))->Perform();
-    // }
 
     // public static function getCounter($input) {
     //     return (new GetCounter($input))->Perform();
@@ -210,6 +195,10 @@ class CustomerCursUser extends Model {
     // public static function assignCursuri($input) {
     //     return (new AssignCursuri($input))->Perform();
     // }
+
+    public static function doDezasociere($input, $record) {
+        dd($input, $record);
+    }
 
     public static function AttachUser($input) {
 
