@@ -48,6 +48,11 @@ class CustomerCursFile extends Model {
         'deleted_by'
     ];
 
+    public static function doInsert($input, $record) {
+
+        dd($input);
+    }
+
     // public static function downloadFile($customer_id, $file_id) {
 
     //     $record = self::where('customer_id', $customer_id)->where('id', $file_id)->first();
