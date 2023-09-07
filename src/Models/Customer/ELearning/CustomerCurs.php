@@ -218,7 +218,7 @@ class CustomerCurs extends Model {
     }
 
     /**
-     * actualizeaza numarul de utilizatori care au cursurile: sended, startde, done
+     * actualizeaza numarul de utilizatori care au cursurile: sended, started, done
      */
     public static function Sync($customer_id) {
 
@@ -232,16 +232,12 @@ class CustomerCurs extends Model {
             $record->trimitere_date =  $record->trimitere->date;
             $record->trimitere_sended_by =  $record->trimitere->createdby->full_name;
 
-            $record->users_count = 0;
-            $record->users_count_sended = 0;
-            $record->users_count_started = 0;
-            $record->users_count_done = 0;
+            $record->users_count = $record->users_count_sended = $record->users_count_started = $record->users_count_done = 0;
 
             $record->save();
         }
 
-
-        $sql = "
+        $results = \DB::select("
             SELECT
                 `customers-cursuri-users`.customer_curs_id,
                 COUNT(*) AS users_count,
@@ -251,9 +247,7 @@ class CustomerCurs extends Model {
             FROM `customers-cursuri-users`
             WHERE `customers-cursuri-users`.customer_id = " . $customer_id . "
             GROUP BY 1
-        ";
-
-        $results = \DB::select($sql);
+        ");
 
         foreach($results as $i => $result)
         {
@@ -267,6 +261,14 @@ class CustomerCurs extends Model {
             $record->save();
         }
 
+        /**
+         * Se sterg inregistrarile care nu au utilizatori, fisiere si participanti
+         */
+        $records = self::where('customer_id', $customer_id)
+            ->where('users_count', 0)
+            ->where('files_count', 0)
+            ->where('participants_count', 0)
+            ->delete();
         
     }
 }

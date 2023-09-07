@@ -197,7 +197,17 @@ class CustomerCursUser extends Model {
     // }
 
     public static function doDezasociere($input, $record) {
-        dd($input, $record);
+        /**
+         * Se sterg inregitraile din tabela [customers-cursuri-users]
+         */
+        $records = self::where('customer_id', $input['customer_id'])
+            ->where('customer_curs_id', $input['customer_curs_id'])
+            ->whereIn('user_id', $input['users'])
+            ->delete();
+
+        CustomerCurs::Sync($input['customer_id']);
+
+        return $records;
     }
 
     public static function AttachUser($input) {
