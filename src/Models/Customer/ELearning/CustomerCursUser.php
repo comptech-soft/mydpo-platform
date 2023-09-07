@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 // use MyDpo\Models\Customer\Customer;
 
 use MyDpo\Traits\Itemable;
+use MyDpo\Traits\Actionable;
 
 // use MyDpo\Performers\CustomerCursUser\GetCounter;
 // use MyDpo\Performers\CustomerCursUser\ChangeStatus;
@@ -19,8 +20,8 @@ use MyDpo\Traits\Itemable;
 
 class CustomerCursUser extends Model {
 
-    use Itemable;
-    
+    use Itemable, Actionable;
+
     protected $table = 'customers-cursuri-users';
 
     protected $casts = [
