@@ -3,8 +3,8 @@
 namespace MyDpo\Models\Customer\ELearning;
 
 use Illuminate\Database\Eloquent\Model;
-use MyDpo\Helpers\Performers\Datatable\GetItems;
-use MyDpo\Performers\CustomerCursFile\AttachFiles;
+// use MyDpo\Helpers\Performers\Datatable\GetItems;
+// use MyDpo\Performers\CustomerCursFile\AttachFiles;
 
 class CustomerCursFile extends Model {
 
@@ -43,26 +43,26 @@ class CustomerCursFile extends Model {
         'deleted_by'
     ];
 
-    public static function downloadFile($customer_id, $file_id) {
+    // public static function downloadFile($customer_id, $file_id) {
 
-        $record = self::where('customer_id', $customer_id)->where('id', $file_id)->first();
+    //     $record = self::where('customer_id', $customer_id)->where('id', $file_id)->first();
 
-        if(!! $record )
-        {
-            $path = $record->url;          
-            $path = \Str::replace(config('filesystems.disks.s3.url'), '', $path);
-            return \Storage::disk('s3')->download($path, $record->file_original_name);
-        }
+    //     if(!! $record )
+    //     {
+    //         $path = $record->url;          
+    //         $path = \Str::replace(config('filesystems.disks.s3.url'), '', $path);
+    //         return \Storage::disk('s3')->download($path, $record->file_original_name);
+    //     }
 
-        return NULL;
-    }
+    //     return NULL;
+    // }
 
-    public static function getItems($input) {
-        return (new GetItems($input, self::query(), __CLASS__))->Perform();
-    }
+    // public static function getItems($input) {
+    //     return (new GetItems($input, self::query(), __CLASS__))->Perform();
+    // }
 
-    public static function attachFiles($input) {
-        return (new AttachFiles($input))->Perform();
-    }
+    // public static function attachFiles($input) {
+    //     return (new AttachFiles($input))->Perform();
+    // }
 
 }
