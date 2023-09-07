@@ -3,11 +3,16 @@
 namespace MyDpo\Models\Customer\ELearning;
 
 use Illuminate\Database\Eloquent\Model;
-// use MyDpo\Helpers\Performers\Datatable\GetItems;
+
 // use MyDpo\Performers\CustomerCursFile\AttachFiles;
+
+use MyDpo\Traits\Itemable;
+use MyDpo\Traits\Actionable;
 
 class CustomerCursFile extends Model {
 
+    use Itemable, Actionable;
+    
     protected $table = 'customers-cursuri-files';
 
     protected $casts = [

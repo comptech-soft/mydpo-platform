@@ -9,11 +9,11 @@ use MyDpo\Models\Customer\ELearning\CustomerCursFile;
 class CursuriFilesController extends Controller {
     
     public function getRecords(Request $r) {
-        return CustomerCursParticipant::getRecords($r->all());
+        return CustomerCursFile::getRecords($r->all());
     }
 
     public function doAction($action, Request $r) {
-        return CustomerCursParticipant::doAction($action, $r->all());
+        return CustomerCursFile::doAction($action, $r->all());
     }
 
 }
