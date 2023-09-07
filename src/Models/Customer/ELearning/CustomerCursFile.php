@@ -143,8 +143,6 @@ class CustomerCursFile extends Model {
     }
 
     public static function AfterAction($action, $input, $payload) {
-
-        dd($input);
         CustomerCurs::Sync($input['customer_id']);
     }
 
