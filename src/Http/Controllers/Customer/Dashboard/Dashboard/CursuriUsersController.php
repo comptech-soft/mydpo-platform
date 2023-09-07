@@ -3,15 +3,14 @@
 namespace MyDpo\Http\Controllers\Customer\Dashboard\Dashboard;
 
 use App\Http\Controllers\Controller;
-// use Illuminate\Http\Request;
-// use MyDpo\Helpers\Response;
-// use MyDpo\Models\Customer\CustomerCursUser;
+use Illuminate\Http\Request;
+use MyDpo\Models\Customer\ELearning\CustomerCursUser;
 
 class CursuriUsersController extends Controller {
     
-    // public function getItems(Request $r) {
-    //     return CustomerCursUser::getItems($r->all());
-    // }
+    public function getRecords(Request $r) {
+        return CustomerCursUser::getRecords($r->all());
+    }
 
     // public function getCounter(Request $r) {
     //     return CustomerCursUser::getCounter($r->all());
