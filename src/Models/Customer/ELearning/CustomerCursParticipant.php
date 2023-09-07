@@ -6,14 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 // use MyDpo\Performers\CustomerCursParticipant\ImportParticipants;
 
 use MyDpo\Exports\Customer\Livrabile\ELearning\Participant\Exporter;
+use MyDpo\Imports\Customer\Livrabile\ELearning\Participant\Importer;
 
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 use MyDpo\Traits\Exportable;
+use MyDpo\Traits\Importable;
 
 class CustomerCursParticipant extends Model {
 
-    use Itemable, Actionable, Exportable;
+    use Itemable, Actionable, Exportable, Importable;
 
     protected $table = 'customers-cursuri-participants';
 
@@ -45,6 +47,10 @@ class CustomerCursParticipant extends Model {
 
     protected static function GetExporter($input) {
         return new Exporter($input); 
+    }
+
+    protected static function GetImporter($input) {
+        return new Importer($input); 
     }
 
     // public static function getItems($input) {
