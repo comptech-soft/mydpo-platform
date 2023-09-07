@@ -156,6 +156,7 @@ class DoAction extends Perform {
         {
             return call_user_func([$this->model, $method], $this->input, $this->record);
         }
+        
         return $this->{$method}();
     }
 

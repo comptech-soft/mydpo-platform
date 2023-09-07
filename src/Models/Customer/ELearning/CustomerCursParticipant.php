@@ -53,6 +53,11 @@ class CustomerCursParticipant extends Model {
         return new Importer($input); 
     }
 
+    public static function AfterAction($action, $input, $payload) {
+
+        dd($action, $input, $payload);
+    }
+
     // public static function getItems($input) {
     //     return (new GetItems($input, self::query(), __CLASS__))->Perform();
     // }
