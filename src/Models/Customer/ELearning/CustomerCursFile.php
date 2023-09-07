@@ -48,6 +48,29 @@ class CustomerCursFile extends Model {
         'deleted_by'
     ];
 
+    protected $appends = [
+        'is_image', 
+        'is_office',
+        'is_pdf',
+        'icon'
+    ];
+
+    public function getIsImageAttribute() {
+        return in_array(strtolower($this->file_original_extension), ['jpg', 'jpeg', 'png']);
+    }   
+
+    public function getIsOfficeAttribute() {
+        return in_array(strtolower($this->file_original_extension), ['doc', 'docx', 'xls', 'xlsx']);
+    }  
+
+    public function getIsPdfAttribute() {
+        return in_array(strtolower($this->file_original_extension), ['pdf']);
+    } 
+
+    public function getIconAttribute() {
+        return config('app.url') . '/imgs/extensions/'. strtolower($this->file['file_original_extension']) . '.png';
+    }
+
     public static function doInsert($input, $record) {
         foreach($input['files'] as $i => $file)
         {
