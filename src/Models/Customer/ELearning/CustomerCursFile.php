@@ -126,6 +126,22 @@ class CustomerCursFile extends Model {
         }
     }
 
+    public static function doDownload($id) {
+
+        $record = self::where('id', $id)->first();
+
+        if(!! $record )
+        {
+            $path = $record->file['url'];
+            
+            $path = \Str::replace(config('filesystems.disks.s3.url'), '', $path);
+
+            return \Storage::disk('s3')->download($path, $record->file['file_original_name']);
+        }
+
+        return NULL;
+    }
+
     // public static function downloadFile($customer_id, $file_id) {
 
     //     $record = self::where('customer_id', $customer_id)->where('id', $file_id)->first();

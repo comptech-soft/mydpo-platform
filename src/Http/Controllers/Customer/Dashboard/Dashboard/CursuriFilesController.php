@@ -16,4 +16,8 @@ class CursuriFilesController extends Controller {
         return CustomerCursFile::doAction($action, $r->all());
     }
 
+    public function doDownload($id) {
+        return CustomerCursFile::doDownload($id);
+    }
+
 }
