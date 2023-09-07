@@ -32,7 +32,7 @@ class Importer implements ToCollection {
             'data' => $row[1],
             'last_name' => $row[2],
             'first_name' => $row[3],
-            'functiia' => $row[4],
+            'functiie' => $row[4],
         ];
     }
 
