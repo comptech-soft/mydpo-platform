@@ -12,6 +12,10 @@ class CursuriUsersController extends Controller {
         return CustomerCursUser::getRecords($r->all());
     }
 
+    public function doAction($action, Request $r) {
+        return CustomerCursUser::doAction($action, $r->all());
+    }
+
     // public function getCounter(Request $r) {
     //     return CustomerCursUser::getCounter($r->all());
     // }
