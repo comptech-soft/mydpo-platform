@@ -132,11 +132,11 @@ class CustomerCursFile extends Model {
 
         if(!! $record )
         {
-            $path = $record->file['url'];
+            $path = $record->url;
             
             $path = \Str::replace(config('filesystems.disks.s3.url'), '', $path);
 
-            return \Storage::disk('s3')->download($path, $record->file['file_original_name']);
+            return \Storage::disk('s3')->download($path, $record->file_original_name);
         }
 
         return NULL;
