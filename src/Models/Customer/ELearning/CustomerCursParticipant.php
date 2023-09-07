@@ -5,6 +5,8 @@ namespace MyDpo\Models\Customer\ELearning;
 use Illuminate\Database\Eloquent\Model;
 // use MyDpo\Performers\CustomerCursParticipant\ImportParticipants;
 
+use MyDpo\Exports\Customer\Livrabile\ELearning\Participant\Exporter;
+
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 use MyDpo\Traits\Exportable;
@@ -40,6 +42,10 @@ class CustomerCursParticipant extends Model {
         'updated_by',
         'deleted_by'
     ];
+
+    protected static function GetExporter($input) {
+        return new Exporter($input); 
+    }
 
     // public static function getItems($input) {
     //     return (new GetItems($input, self::query(), __CLASS__))->Perform();
