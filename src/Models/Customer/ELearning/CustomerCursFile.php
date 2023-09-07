@@ -49,8 +49,47 @@ class CustomerCursFile extends Model {
     ];
 
     public static function doInsert($input, $record) {
+        foreach($input['files'] as $i => $file)
+        {
+            self::attachFile($file, $input['customer_curs_id'], $input['customer_id']);
+        }
+        CustomerCurs::Sync($input['customer_id']);
+    }
 
-        dd($input);
+    public static function attachFile($file, $customer_curs_id, $customer_id) {
+
+        if(in_array($ext = strtolower($file->extension()), ['xls', 'xlsx', 'pdf', 'doc', 'docx', 'jpg', 'jpeg']))
+        {
+            $filename = \Str::slug(str_replace($file->extension(), '', $file->getClientOriginalName())) . '.' .  strtolower($file->extension());
+
+            $result = $file->storeAs('fisiere-cursuri/' . $customer_curs_id . '/' . \Auth::user()->id, $filename, 's3');
+
+            $input = [
+                'customer_curs_id' => $customer_curs_id,
+                'customer_id' => $customer_id,
+                'file_original_name' => $file->getClientOriginalName(),
+                'file_original_extension' => $file->extension(),
+                'file_full_name' => $filename,
+                'file_mime_type' => $file->getMimeType(),
+                'file_upload_ip' => request()->ip(),
+                'file_size' => $file->getSize(),
+                'url' => config('filesystems.disks.s3.url') . $result,
+                'platform' => config('app.platform'),
+                'created_by' => \Auth::user()->id,
+            ];
+            
+            $record = CustomerCursFile::where('customer_curs_id', $customer_curs_id)->where('url', $input['url'])->first();
+
+            if(! $record )
+            {
+                $record = self::create($input);
+            }
+            else
+            {
+                $record->deleted = 0;
+                $record->save();
+            }
+        }
     }
 
     // public static function downloadFile($customer_id, $file_id) {
