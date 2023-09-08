@@ -62,7 +62,7 @@ class CustomerCursUser extends Model {
     protected $with = [
         'user',
         // 'curs',
-        // 'trimitere',
+        'trimitere',
         // 'createdby',
     ];
 
