@@ -54,10 +54,10 @@ class CustomerCursUser extends Model {
         'deleted_by'
     ];
 
-    // protected $appends = [
-    //     'my_status',
-    //     'status_termen',
-    // ];
+    protected $appends = [
+        'my_status',
+        // 'status_termen',
+    ];
 
     protected $with = [
         'user',
@@ -66,34 +66,61 @@ class CustomerCursUser extends Model {
         // 'createdby',
     ];
 
-    // public function getMyStatusAttribute() {
-    //     $status = $color = '';
-    //     if($this->status == 'sended')
-    //     {
-    //         $status = 'Neînceput';
-    //         $color = 'red';
-    //     }
-    //     else
-    //     {
-    //         if($this->status == 'done')
-    //         {
-    //             $status = 'Finalizat';
-    //             $color = 'green';
-    //         }
-    //         else
-    //         {
-    //             if($this->status == 'started')
-    //             {
-    //                 $status = 'Început';
-    //                 $color = 'orange';
-    //             }
-    //         }
-    //     }
-    //     return [
-    //         'status' => $status,
-    //         'color' => $color,
-    //     ];
-    // }
+    protected $statuses = [
+
+        'sended' => [
+            'text' => 'Neînceput',
+            'color' => 'red',
+        ],
+
+        'done' => [
+            'text' => 'Finalizat',
+            'color' => 'green',
+        ],
+
+        'started' => [
+            'text' => 'Început',
+            'color' => 'orange',
+        ]
+    ];
+
+    public function getMyStatusAttribute() {
+
+        if( array_key_exists($this->status, $this->statuses) )
+        {
+            return $this->statuses[$this->status];
+        }
+        return [
+            'text' => '-',
+            'color' => 'grey',
+        ];
+        // $status = $color = '';
+        // if($this->status == 'sended')
+        // {
+        //     $status = 'Neînceput';
+        //     $color = 'red';
+        // }
+        // else
+        // {
+        //     if($this->status == 'done')
+        //     {
+        //         $status = 'Finalizat';
+        //         $color = 'green';
+        //     }
+        //     else
+        //     {
+        //         if($this->status == 'started')
+        //         {
+        //             $status = 'Început';
+        //             $color = 'orange';
+        //         }
+        //     }
+        // }
+        // return [
+        //     'status' => $status,
+        //     'color' => $color,
+        // ];
+    }
 
     // public function getStatusTermenAttribute() {
 
