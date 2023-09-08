@@ -95,7 +95,7 @@ class CustomerCursUser extends Model {
 
     public function getStatusTermenAttribute() {
 
-        if($this->status != 'done')
+        if($this->status != 'done' || ! $this->done_at)
         {
             return NULL;
         }
@@ -105,7 +105,7 @@ class CustomerCursUser extends Model {
         $color = 'green';
         $text = 'Finalizat';
 
-        if( $this->trimitere->date_to )
+        if( !! $this->trimitere->date_to)
         {
             $now = Carbon::createFromFormat('Y-m-d', $this->done_at);
             $expire = Carbon::createFromFormat('Y-m-d', $this->trimitere->date_to);
@@ -131,9 +131,8 @@ class CustomerCursUser extends Model {
                     $text = 'Asignate';
                 }
             }
-            
         }
-
+        
         return [
             'date_from' => $this->trimitere->date_from,
             'date_to' => $this->trimitere->date_to,
