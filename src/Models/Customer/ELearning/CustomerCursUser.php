@@ -5,7 +5,7 @@ namespace MyDpo\Models\Customer\ELearning;
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Models\Authentication\User;
 // use MyDpo\Models\Curs;
-// use MyDpo\Models\Sharematerial;
+use MyDpo\Models\Sharematerial;
 // use MyDpo\Models\SharematerialDetail;
 // use MyDpo\Models\Customer\Customer;
 
@@ -85,41 +85,12 @@ class CustomerCursUser extends Model {
     ];
 
     public function getMyStatusAttribute() {
-
-        if( array_key_exists($this->status, $this->statuses) )
-        {
-            return $this->statuses[$this->status];
-        }
-        return [
-            'text' => '-',
-            'color' => 'grey',
-        ];
-        // $status = $color = '';
-        // if($this->status == 'sended')
-        // {
-        //     $status = 'Neînceput';
-        //     $color = 'red';
-        // }
-        // else
-        // {
-        //     if($this->status == 'done')
-        //     {
-        //         $status = 'Finalizat';
-        //         $color = 'green';
-        //     }
-        //     else
-        //     {
-        //         if($this->status == 'started')
-        //         {
-        //             $status = 'Început';
-        //             $color = 'orange';
-        //         }
-        //     }
-        // }
-        // return [
-        //     'status' => $status,
-        //     'color' => $color,
-        // ];
+        return array_key_exists($this->status, $this->statuses) 
+            ? $this->statuses[$this->status]
+            : [
+                'text' => '-',
+                'color' => 'grey',
+            ];
     }
 
     // public function getStatusTermenAttribute() {
@@ -190,9 +161,9 @@ class CustomerCursUser extends Model {
     //     return $this->belongsTo(Curs::class, 'curs_id');
     // }
 
-    // public function trimitere() {
-    //     return $this->belongsTo(Sharematerial::class, 'trimitere_id');
-    // }
+    public function trimitere() {
+        return $this->belongsTo(Sharematerial::class, 'trimitere_id')->select(['id', 'number', 'date', 'date_from', 'date_to', 'sender_full_name']);
+    }
 
     // public function customer() {
     //     return $this->belongsTo(Customer::class, 'customer_id');
