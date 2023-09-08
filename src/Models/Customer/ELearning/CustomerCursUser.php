@@ -3,7 +3,7 @@
 namespace MyDpo\Models\Customer\ELearning;
 
 use Illuminate\Database\Eloquent\Model;
-// use MyDpo\Models\Authentication\User;
+use MyDpo\Models\Authentication\User;
 // use MyDpo\Models\Curs;
 // use MyDpo\Models\Sharematerial;
 // use MyDpo\Models\SharematerialDetail;
@@ -59,12 +59,12 @@ class CustomerCursUser extends Model {
     //     'status_termen',
     // ];
 
-    // protected $with = [
-    //     'user',
-    //     'curs',
-    //     'trimitere',
-    //     'createdby',
-    // ];
+    protected $with = [
+        'user',
+        // 'curs',
+        // 'trimitere',
+        // 'createdby',
+    ];
 
     // public function getMyStatusAttribute() {
     //     $status = $color = '';
@@ -151,9 +151,9 @@ class CustomerCursUser extends Model {
     //     ];
     // }
 
-    // public function user() {
-    //     return $this->belongsTo(User::class, 'user_id');
-    // }
+    public function user() {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 
     // public function createdby() {
     //     return $this->belongsTo(User::class, 'created_by');
