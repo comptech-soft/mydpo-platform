@@ -106,7 +106,15 @@ class CustomerCursUser extends Model {
         $daysDiff = $expire->diffInDays($now, false);
         $hoursDiff = $expire->diffInHours($now, false);
 
-        return $daysDiff . $hoursDiff;
+        return $daysDiff <= 0 
+            ? [
+                'text' => 'Da',
+                'color' => 'green'
+            ]
+            : [
+                'text' => 'Nu',
+                'color' => 'red'
+            ];
     }
 
     // public function getStatusTermenAttribute() {
