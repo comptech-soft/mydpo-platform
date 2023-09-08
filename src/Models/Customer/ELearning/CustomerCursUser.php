@@ -103,6 +103,8 @@ class CustomerCursUser extends Model {
         $daysDiff = $hoursDiff = NULL;
 
         $color = 'green';
+        $text = 'Finalizat';
+
         if( $this->trimitere->date_to )
         {
             $now = Carbon::createFromFormat('Y-m-d', $this->done_at);
