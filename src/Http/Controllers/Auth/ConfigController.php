@@ -10,6 +10,7 @@ use MyDpo\Models\Authentication\UserSetting;
 class ConfigController extends Controller {
 
     public function getConfig(Request $r) {
+        dd(111);
         return Config::getConfig();
     }
 
