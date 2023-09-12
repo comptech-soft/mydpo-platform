@@ -226,6 +226,11 @@ class CustomerCursUser extends Model {
         return $records;
     }
 
+    public static function doDelete($input, $record) {
+
+        dd($input, $record);
+    }
+
     public static function AttachUser($input) {
 
         $input = [
