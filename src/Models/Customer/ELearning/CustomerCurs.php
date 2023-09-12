@@ -118,8 +118,13 @@ class CustomerCurs extends Model {
     // }
 
     public static function doAsociere($input, $record) {
-        return Sharematerial::doInsert($input, $record);;
+        return Sharematerial::doInsert($input, $record);
     }
+
+    public static function GetRules($action, $input) {
+        return Sharematerial::GetRules($action, $input);
+    }
+
 
     public static function GetQuery() {
         return 
