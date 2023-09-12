@@ -303,7 +303,7 @@ class Sharematerial extends Model {
 
     public static function GetRules($action, $input) {
 
-        if(! in_array($action, ['insert', 'update']) )
+        if(! in_array($action, ['insert', 'update', 'asociere']) )
         {
             return NULL;
         }

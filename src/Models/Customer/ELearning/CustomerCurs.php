@@ -125,7 +125,6 @@ class CustomerCurs extends Model {
         return Sharematerial::GetRules($action, $input);
     }
 
-
     public static function GetQuery() {
         return 
             self::query()
