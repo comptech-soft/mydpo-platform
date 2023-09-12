@@ -228,7 +228,11 @@ class CustomerCursUser extends Model {
 
     public static function doDelete($input, $record) {
 
-        dd($input, $record);
+        $record->delete();
+
+        CustomerCurs::Sync($input['customer_id']);
+
+        return $record;
     }
 
     public static function AttachUser($input) {
