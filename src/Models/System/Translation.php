@@ -40,7 +40,7 @@ class Translation extends Model
         return (new Activate($input))->Perform();
     }
 
-    public static function createKeys($input) {
+    public static function doCreatekeys($input) {
         return (new CreateKeys($input))->Perform();
     }
 
