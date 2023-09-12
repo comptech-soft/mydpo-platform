@@ -5,7 +5,7 @@ namespace MyDpo\Http\Controllers\Customer\Dashboard\Dashboard;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
-use MyDpo\Models\Customer\CustomerCurs;
+use MyDpo\Models\Customer\ELearning\CustomerCurs;
 use MyDpo\Models\Customer\Customer;
 
 class CursuriDetailsController extends Controller {
