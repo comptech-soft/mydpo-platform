@@ -326,10 +326,16 @@ class Sharematerial extends Model {
             ],
             
             'customers' => [
+                'required',
+                'array',
+                'min:1',
                 new AtLeastOneCustomer($action, $input),
             ],
             
             'materiale_trimise' => [
+                'required',
+                'array',
+                'min:1',
                 new AtLeastOneMaterial($action, $input),
             ],
         ];
