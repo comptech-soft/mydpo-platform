@@ -10,7 +10,6 @@ use MyDpo\Models\Authentication\UserSetting;
 class ConfigController extends Controller {
 
     public function getConfig(Request $r) {
-        dd(111);
         return Config::getConfig();
     }
 
@@ -22,17 +21,17 @@ class ConfigController extends Controller {
     //     return UserSetting::saveActiveCustomer($r->all());
     // }
     
-    // public function setLocale($locale) {
+    public function setLocale($locale) {
         
-    //     if(! in_array($locale, ['en', 'ro']))
-    //     {
-    //         $locale = 'ro';
-    //     }
+        if(! in_array($locale, ['en', 'ro']))
+        {
+            $locale = 'ro';
+        }
 
-    //     \App::setlocale($locale);
-    //     session()->put('locale', $locale);
+        \App::setlocale($locale);
+        session()->put('locale', $locale);
 
-    //     return redirect()->back();
-    // } 
+        return redirect()->back();
+    } 
 
 }
