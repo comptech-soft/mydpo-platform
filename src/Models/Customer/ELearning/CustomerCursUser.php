@@ -250,7 +250,7 @@ class CustomerCursUser extends Model {
             //         $q->on('customers-departamente.id', '=', 'customers-persons.department_id');
             //     }
             // )
-            ->whereRaw("((`customers-cursuri`.`deleted` IS NULL) OR (`customers-cursuri`.`deleted` = 0))")
+            ->whereRaw("((`customers-cursuri-users`.`deleted` IS NULL) OR (`customers-cursuri-users`.`deleted` = 0))")
             ->select('customers-cursuri-users.*');
     }
 
