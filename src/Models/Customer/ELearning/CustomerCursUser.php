@@ -235,6 +235,25 @@ class CustomerCursUser extends Model {
         return $record;
     }
 
+    public static function GetQuery() {
+        return 
+            self::query()
+            ->leftJoin(
+                'users',
+                function($q) {
+                    $q->on('users.id', '=', 'customers-cursuri-users.user_id');
+                }
+            )
+            // ->leftJoin(
+            //     'customers-departamente',
+            //     function($q) {
+            //         $q->on('customers-departamente.id', '=', 'customers-persons.department_id');
+            //     }
+            // )
+            ->whereRaw("((`customers-cursuri`.`deleted` IS NULL) OR (`customers-cursuri`.`deleted` = 0))")
+            ->select('customers-cursuri-users.*');
+    }
+
     public static function AttachUser($input) {
 
         $input = [
