@@ -8,7 +8,9 @@ class IsAdmin {
 
     public function handle($request, Closure $next) {
 
-        $user = $request->user();
+        $user = \Auth::user();
+
+        dd($user);
 
         if( ! $user )
         {
