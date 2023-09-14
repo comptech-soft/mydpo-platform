@@ -4,15 +4,42 @@ namespace MyDpo\Http\Middleware;
 
 use Closure;
 
-// use MyDpo\Models\Customer\Customer;
-// use MyDpo\Models\Customer\Customer\CustomerAccount;
+use MyDpo\Models\Customer\Customer;
+use MyDpo\Models\Customer\Accounts\Account;
 
 class Customerable {
-
+    
     public function handle($request, Closure $next) {
+
+        $user = \Auth::user();
         
-        dd(__METHOD__);
-        // $customer = Customer::find($request->customer_id);
+        if(config('app.platform') == 'b2b')
+        {
+            /**
+             * Suntem pe platforma client
+             */
+            
+
+            if(! ($customer = Customer::find($request->customer_id)) )
+            {
+                /**
+                 * Nici macar nu avem clientul in tabela de clienti
+                 */
+                return $this->Logout();
+            }
+
+            $account = Account::where('user_id', $user->id)->where('customer_id', $customer->id)->first();
+
+            if(!! $account)
+            {
+                return $next($request);
+            }
+
+            dd('Nu avem cont');
+        }
+
+        dd(config('app.platform'));
+        // ;
 
         // if( ! $customer )
         // {
@@ -35,7 +62,7 @@ class Customerable {
         //  * Accesez: url/customer_id;
         //  * Cinee trebuie sa fiu eu in raport cu customer_id?
         //  */
-        // $account = CustomerAccount::where('user_id', \Auth::user()->id)->where('customer_id', $customer->id)->first();
+        //
        
         // /**
         //  * Nu avem corespondent in tabela [customers-persons]
@@ -51,5 +78,14 @@ class Customerable {
         //  */
         // return $next($request);
         
+    }
+
+    protected function Logout() {
+        \Auth::guard('web')->logout();
+
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
+
+        return redirect(config('app.url'));
     }
 }
