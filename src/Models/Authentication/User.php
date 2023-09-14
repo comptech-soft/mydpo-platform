@@ -124,9 +124,9 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail 
 
         if(config('app.platform') == 'b2b')
         {
-            if(!! request()->customer_id)
+            if( !! ($customer_id = request()->customer_id))
             {
-                $role_user = RoleUser::where('customer_id', request()->customer_id)->where('user_id', $this->id)->first();
+                $role_user = RoleUser::where('customer_id', $customer_id)->where('user_id', $this->id)->first();
 
                 if($role_user)
                 {
