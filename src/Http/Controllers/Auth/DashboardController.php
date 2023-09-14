@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use MyDpo\Helpers\Response;
 use MyDpo\Core\Http\Response\Index;
 use MyDpo\Models\Nomenclatoare\Livrabile\ELearning\Knolyx;
+use MyDpo\Models\Authentication\UserSetting;
 
 class DashboardController extends Controller {
     
@@ -49,8 +50,9 @@ class DashboardController extends Controller {
         /**
          * Suntem pe platforma b2b
          */
+        $customer_id = UserSetting::GetDefaultCustomer($user);
 
-        dd(config('app.platform'));
+        dd(config('app.platform'), $customer_id);
         // if($settings = $user->settings()->where('code', 'b2b-active-customer')->first())
         // {
         //     return redirect(config('app.url') . '/customer-dashboard/' . $settings->value);

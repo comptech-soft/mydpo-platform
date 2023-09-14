@@ -27,6 +27,13 @@ class UserSetting extends Model {
         'updated_by'
     ]; 
 
+    /**
+     * Returneaza customer-ul default pentru un anumit $user
+     */
+    public static function GetDefaultCustomer($user) {
+        dd($user);
+    }
+
     public static function getByUserAndCustomerAndCodeAndPlatform($user_id, $customer_id, $code, $platform) {
         return self::where('user_id', $user_id)
             ->where('code', $code)
