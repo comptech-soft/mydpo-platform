@@ -39,8 +39,6 @@ class Customerable {
         /**
          * Suntem pe platforma admin
          */
-        
-
         if(! ($customer = Customer::find($request->customer_id)) )
         {
             /**
