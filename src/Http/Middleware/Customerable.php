@@ -23,7 +23,7 @@ class Customerable {
                 /**
                  * Nici macar nu avem clientul in tabela de clienti
                  */
-                return $this->Logout();
+                return redirect(config('app.url') . '/clienti'); 
             }
             
             $account = Account::where('user_id', $user->id)->where('customer_id', $customer->id)->first();
@@ -40,53 +40,16 @@ class Customerable {
          * Suntem pe platforma admin
          */
         
+
         if(! ($customer = Customer::find($request->customer_id)) )
         {
             /**
              * Redirectam catre lista de clienti
              */
-            dd('?????');
             return redirect(config('app.url') . '/clienti'); 
         }
-        // ;
-
-        // if( ! $customer )
-        // {
-        //     if(config('app.platform') == 'admin')
-        //     {
-        //         return redirect(config('app.url') . '/admin/clienti');
-        //     }
-
-        //     return redirect(config('app.url')); 
-        // }
-
-        // if(config('app.platform') == 'admin')
-        // {
-        //     return $next($request);
-        // }
-
-        // /**
-        //  * Numai cei cu conturi pot intra
-        //  * Sunt: Auth::user();
-        //  * Accesez: url/customer_id;
-        //  * Cinee trebuie sa fiu eu in raport cu customer_id?
-        //  */
-        //
-       
-        // /**
-        //  * Nu avem corespondent in tabela [customers-persons]
-        //  */
-        // if(! $account )
-        // {
-        //     return redirect(config('app.url')); 
-        // }
-
-        // /**
-        //  * Avem inregistrare in [customers-persons]
-        //  * Ce alte restrictii mai sunt?
-        //  */
-        // return $next($request);
-        
+      
+        return $next($request);
     }
 
     protected function Logout() {
