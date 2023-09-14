@@ -138,7 +138,6 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail 
         return NULL;
     }
 
-
     public function getFullNameAttribute() {
         return collect([
 			$this->last_name,
