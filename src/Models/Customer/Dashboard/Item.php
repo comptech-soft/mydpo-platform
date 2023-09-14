@@ -57,10 +57,13 @@ class Item extends Model {
                 $r[$record->column_no] = [];
             }
 
-            $count = array_key_exists($record->slug, self::$myclasses) 
-                ? self::$myclasses[$record->slug]::CountLivrabile(request()->customer_id) 
-                : -1;
-
+            $count = -1;
+            if(!! request()->customer_id )
+            {
+                $count = array_key_exists($record->slug, self::$myclasses) 
+                    ? self::$myclasses[$record->slug]::CountLivrabile(request()->customer_id) 
+                    : -1;
+            }
 
             $r[$record->column_no][] = [
                 ...$record->toArray(),
@@ -107,7 +110,7 @@ class Item extends Model {
 
         }
 
-        // return self::getByColumns();
+        return self::getByColumns();
     }
 
 }
