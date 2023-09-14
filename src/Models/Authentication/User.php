@@ -104,14 +104,14 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail 
         return !! $this->email_verified_at && !! $this->activated_at;
     }
 
+    /**
+     * Role By Platform = Rolul potrivit platformei 
+     **/
     public function getRoleAttribute() {
-        /**
-         * Role By Platform = Rolul potrivit platformei 
-         **/
-        $r = NULL;
-
-        if( (config('app.platform') == 'admin') )
+        
+        if(config('app.platform') == 'admin')
         {
+            $r = NULL;
             foreach($this->roles as $i => $role)
             {
                 if($role->type == config('app.platform'))
@@ -122,8 +122,22 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail 
             return $r;
         }
 
-        return $r;
+        if(config('app.platform') == 'b2b')
+        {
+            if(!! request()->customer_id)
+            {
+                $role_user = RoleUser::where('customer_id', request()->customer_id)->where('user_id', $this->id)->first();
+
+                if($role_user)
+                {
+                    return $role_user->role;
+                }
+            }
+        }
+
+        return NULL;
     }
+
 
     public function getFullNameAttribute() {
         return collect([
