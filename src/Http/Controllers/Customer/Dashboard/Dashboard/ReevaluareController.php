@@ -16,20 +16,9 @@ class ReevaluareController extends Controller {
             payload: [
                 'customer_id' => $customer_id,
                 'customer' => Customer::find($customer_id),
+                'customer_user' => \Auth::user(),
             ],
         );        
     }
-
-    // public function index($customer_id, Request $r) {
-
-    //     return Response::View(
-    //         '~templates.index', 
-    //         asset('apps/customer-reevaluare/index.js'),
-    //         [], 
-    //         [
-    //             'customer_id' => $customer_id,
-    //         ]
-    //     );
-    // }
-
+    
 }
