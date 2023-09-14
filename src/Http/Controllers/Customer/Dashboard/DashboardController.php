@@ -31,7 +31,7 @@ class DashboardController extends Controller {
     }
 
     public function doAction($action, Request $r) {
-        return CustomerDashboardItem::doAction($action, $r->all());
+        return Item::doAction($action, $r->all());
     }
 
 }
