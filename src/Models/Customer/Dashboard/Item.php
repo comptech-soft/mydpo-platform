@@ -107,7 +107,7 @@ class Item extends Model {
 
         }
 
-        return self::getByColumns();
+        // return self::getByColumns();
     }
 
 }
