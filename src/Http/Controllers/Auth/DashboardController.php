@@ -19,18 +19,17 @@ class DashboardController extends Controller {
         Knolyx::createWebhook();
         
         $user = \Auth::user();
-
-        /**
-         * Suntem pe platforma admin
-         */
+       
         if(config('app.platform') == 'admin')
         {
-
             /**
-             * Admin. Userul nu are emailul verificat
+             * Suntem pe platforma admin
              */
             if(! $user->email_verified_at )
             {
+                /**
+                 * Admin. Userul nu are emailul verificat
+                 */
                 // apps/email-verify-prompt/index.js
                 return Index::View(
                     styles: ['css/app.css'],
@@ -50,12 +49,11 @@ class DashboardController extends Controller {
         /**
          * Suntem pe platforma b2b
          */
-
-        /** 
-         * Avem default customer
-         */
         if(!! ( $customer_id = UserSetting::GetDefaultCustomer(config('app.platform'), $user)) )
         {
+            /** 
+             * Avem default customer
+             */
             return redirect(config('app.url') . '/customer-dashboard/' . $customer_id);
         }
 

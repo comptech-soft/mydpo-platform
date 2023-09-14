@@ -23,7 +23,7 @@ class Customerable {
                 /**
                  * Nici macar nu avem clientul in tabela de clienti
                  */
-                return redirect(config('app.url') . '/clienti'); 
+                return redirect(config('app.url') . '/my-customers'); 
             }
             
             $account = Account::where('user_id', $user->id)->where('customer_id', $customer->id)->first();
