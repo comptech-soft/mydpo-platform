@@ -50,22 +50,29 @@ class DashboardController extends Controller {
         /**
          * Suntem pe platforma b2b
          */
-        $customer_id = UserSetting::GetDefaultCustomer(config('app.platform'), $user);
+
+        /** 
+         * Avem default customer
+         */
+        if(!! ( $customer_id = UserSetting::GetDefaultCustomer(config('app.platform'), $user)) )
+        {
+            return redirect(config('app.url') . '/customer-dashboard/' . $customer_id);
+        }
 
         dd(config('app.platform'), $customer_id);
         // if($settings = $user->settings()->where('code', 'b2b-active-customer')->first())
         // {
-        //     return redirect(config('app.url') . '/customer-dashboard/' . $settings->value);
+        //     
         // }
         
-        dd($user->customers);
+        // dd($user->customers);
         
-        if($user->customers->count());
-        {
-            return redirect(route('b2b.dashboard', [
-                'customer_id' => $user->customers[0],
-            ]));
-        }
+        // if($user->customers->count());
+        // {
+        //     return redirect(route('b2b.dashboard', [
+        //         'customer_id' => $user->customers[0],
+        //     ]));
+        // }
 
     
         
