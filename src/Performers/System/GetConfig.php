@@ -44,7 +44,6 @@ class GetConfig extends Perform {
             ],
             'translations' => $locale == 'ro' ? [] : Translation::pluck('en', 'ro')->toArray(),
         ];
-
     }
 
     protected static function parseSize($size) {

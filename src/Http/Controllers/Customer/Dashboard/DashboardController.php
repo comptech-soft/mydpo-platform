@@ -13,11 +13,13 @@ class DashboardController extends Controller {
     
     /**
      * Dashboard-ul unui client
-     * Se stie id-l clientului
+     * Se stie id-ul clientului
      * Se afiseaza linkuri catre livrabile si catre entitati
      */
 
     public function index($customer_id, Request $r) {
+
+
         return Index::View(
             styles: ['css/app.css'],
             scripts: ['apps/customer/dashboard/index.js'],
