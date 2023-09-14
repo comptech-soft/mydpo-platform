@@ -8,7 +8,7 @@ use MyDpo\Traits\Itemable;
 // use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Models\Authentication\User;
 use MyDpo\Models\Customer\Departments\Department;
-use MyDpo\Models\Customer\Customer_base as Customer;
+use MyDpo\Models\Customer\Customer;
 use MyDpo\Models\Authentication\RoleUser;
 
 use MyDpo\Performers\Customer\Account\GetUsers;
