@@ -3,9 +3,9 @@
 namespace MyDpo\Http\Middleware;
 
 use Closure;
-use MyDpo\Models\Activation;
-use MyDpo\Models\Customer\Customer\CustomerAccount;
-use MyDpo\Models\RoleUser;
+use MyDpo\Models\Customer\Accounts\Activation;
+// use MyDpo\Models\Customer\Customer\CustomerAccount;
+// use MyDpo\Models\RoleUser;
 
 class IsActivated {
 
@@ -16,10 +16,17 @@ class IsActivated {
             return $next($request);
         }
 
-        $user = $request->user();
+        if(! $request->customer_id)
+        {
+            return redirect( config('app.url') . '/my-customers');
+        }
+        
+        $user = \Auth::user();
 
         $activation = Activation::byUserAndCustomer($user->id, $request->customer_id);
 
+        dd( $activation);
+        
         if(! $activation )
         {
 
