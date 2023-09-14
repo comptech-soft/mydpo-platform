@@ -12,7 +12,7 @@ class MyCustomersController extends Controller {
 
         return Index::View(
             styles: ['css/app.css'],
-            scripts: ['apps/user/my-customers.js']
+            scripts: ['apps/user/my-customers/index.js']
         ); 
 
     }
