@@ -5,7 +5,7 @@ namespace MyDpo\Http\Middleware;
 use Closure;
 use MyDpo\Models\Customer\Accounts\Activation;
 use MyDpo\Models\Customer\Accounts\Account;
-// use MyDpo\Models\RoleUser;
+use MyDpo\Models\Authentication\RoleUser;
 
 class IsActivated {
 
@@ -21,49 +21,24 @@ class IsActivated {
             return redirect( config('app.url') . '/my-customers');
         }
         
-        $account = Account::where('user_id', $user->id)->where('customer_id', $request->customer_id)->first();
-
-
-        dd($account);
-        
         $user = \Auth::user();
 
-        dd($user->role);
+        $account = Account::where('user_id', $user->id)->where('customer_id', $request->customer_id)->first();
 
-
-        if( ! $user->inRoles(['master', 'customer']) )
+        if(! $account )
         {
             return redirect( config('app.url') . '/my-customers');
         }
         
-        $activation = Activation::byUserAndCustomer($user->id, $request->customer_id, $user->role->id);
-
+        $activation = Activation::byUserAndCustomer($account->user_id, $account->customer_id, $account->role_id);
+        $role_user = RoleUser::byUserAndCustomer($account->user_id, $account->customer_id, $account->role_id);
         
-        
-        dd( $activation);
-        
-        if(! $activation )
+        if( ! $user->inRoles(['master', 'customer']) )
         {
-
-            
-
-            if($account)
-            {
-                $role_user = RoleUser::where('user_id', $user->id)->where('customer_id', $request->customer_id)->first();
-
-                if($role_user)
-                {
-                    $activation = Activation::createActivation($user->id, $request->customer_id, $role_user->role_id);
-                }
-            }            
+            return redirect( config('app.url') . '/my-customers');
         }
 
-        if(! $activation )
-        {
-            return redirect(route('account.inactive', ['customer_id' => $request->customer_id]));
-        }
-
-        if( $activation && ($activation->activated == 0) )
+        if($activation->activated == 0)
         {
             return redirect( route('activate.account', ['token' => $activation->token]) );
         }
