@@ -7,12 +7,7 @@ use Closure;
 class IsAdmin {
 
     public function handle($request, Closure $next) {
-
-        $user = \Auth::user();
-
-        dd($user);
-
-        if( ! $user )
+        if( ! ($user = \Auth::user()) )
         {
             return redirect(config('app.url'));
         }
