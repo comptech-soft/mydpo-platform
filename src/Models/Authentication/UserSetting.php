@@ -30,9 +30,15 @@ class UserSetting extends Model {
     /**
      * Returneaza customer-ul default pentru un anumit $user
      */
-    public static function GetDefaultCustomer($user) {
-        dd($user);
+    public static function GetDefaultCustomer($platform, $user) {
+        
+        $record = self::wherePlatform($platform)->where('user_id', $user->id)->whereCode('b2b-active-customer')->first();
+
+        dd($record);
+        
+        // $settings = $user->settings()->where('code', )->first())
     }
+
 
     public static function getByUserAndCustomerAndCodeAndPlatform($user_id, $customer_id, $code, $platform) {
         return self::where('user_id', $user_id)

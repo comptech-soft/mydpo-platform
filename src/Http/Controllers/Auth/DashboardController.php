@@ -50,7 +50,7 @@ class DashboardController extends Controller {
         /**
          * Suntem pe platforma b2b
          */
-        $customer_id = UserSetting::GetDefaultCustomer($user);
+        $customer_id = UserSetting::GetDefaultCustomer(config('app.platform'), $user);
 
         dd(config('app.platform'), $customer_id);
         // if($settings = $user->settings()->where('code', 'b2b-active-customer')->first())
