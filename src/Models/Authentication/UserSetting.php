@@ -34,7 +34,12 @@ class UserSetting extends Model {
         
         $record = self::wherePlatform($platform)->where('user_id', $user->id)->whereCode('b2b-active-customer')->first();
 
-        dd($record);
+        if($record)
+        {
+            return $record->value;
+        }
+
+        
         
         // $settings = $user->settings()->where('code', )->first())
     }
