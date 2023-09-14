@@ -77,7 +77,6 @@ class Account extends Model {
         'user', 
         'department',
         'customer',
-        'activation'
     ];
 
     protected $appends = [
@@ -106,12 +105,6 @@ class Account extends Model {
 
     public function customer() {
         return $this->belongsTo(Customer::class, 'customer_id')->select(['id', 'name', 'status', 'logo', 'email', 'city_id']);
-    }
-
-    public function activation() {
-        return $this->hasOne(Activation::class, 'user_id', 'user_id')
-            ->where('role_id', $this->role_id)
-            ->where('customer_id', $this->customer_id);
     }
 
     // public static function doAction($action, $input) {
