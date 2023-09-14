@@ -10,7 +10,7 @@ use MyDpo\Models\Customer\Accounts\Account;
 class Customerable {
     
     public function handle($request, Closure $next) {
-
+        
         $user = \Auth::user();
         
         if(config('app.platform') == 'b2b')
@@ -18,8 +18,6 @@ class Customerable {
             /**
              * Suntem pe platforma client
              */
-            
-
             if(! ($customer = Customer::find($request->customer_id)) )
             {
                 /**
@@ -27,7 +25,7 @@ class Customerable {
                  */
                 return $this->Logout();
             }
-
+            
             $account = Account::where('user_id', $user->id)->where('customer_id', $customer->id)->first();
 
             if(!! $account)
@@ -38,7 +36,18 @@ class Customerable {
             dd('Nu avem cont');
         }
 
-        dd(config('app.platform'));
+        /**
+         * Suntem pe platforma admin
+         */
+        
+        if(! ($customer = Customer::find($request->customer_id)) )
+        {
+            /**
+             * Redirectam catre lista de clienti
+             */
+            dd('?????');
+            return redirect(config('app.url') . '/clienti'); 
+        }
         // ;
 
         // if( ! $customer )
