@@ -237,6 +237,13 @@ class Account extends Model {
         return (new GetCustomers($input))->Perform();
     }
 
+    /**
+     * 
+     */
+    public static function GetCustomersByUser($user) {
+        return $user->id;
+    }
+
     public static function GetQuery() {
         return 
             self::query()

@@ -7,6 +7,7 @@ use MyDpo\Models\System\SysMenu;
 use MyDpo\Models\System\SysAction;
 use MyDpo\Models\System\SysConfig;
 use MyDpo\Models\System\Translation;
+use MyDpo\Models\Customer\Accounts\Account;
 
 class Index {
 
@@ -52,7 +53,7 @@ class Index {
             'menus' => SysMenu::getMenus(),
             'actions' => SysAction::getActions(),
             'sysconfig' => SysConfig::all()->pluck('value', 'code'),
-            'mycustomers' => config('app.platform') == 'b2b' ? 'aaaa' : NULL,
+            'mycustomers' => config('app.platform') == 'b2b' ? Account::GetCustomersByUser($user) : NULL,
         ];
 
         return view($template)->withScripts($scripts)->withPayload($payload)->withStyles($styles);
