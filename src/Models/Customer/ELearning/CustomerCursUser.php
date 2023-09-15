@@ -56,7 +56,7 @@ class CustomerCursUser extends Model {
 
     protected $appends = [
         'my_status',
-        // 'status_termen',
+        'status_termen',
         'finalizat',
     ];
 
@@ -117,55 +117,61 @@ class CustomerCursUser extends Model {
             ];
     }
 
-    // public function getStatusTermenAttribute() {
+    public function getStatusTermenAttribute() {
 
-    //     if($this->status != 'done' || ! $this->done_at)
-    //     {
-    //         return NULL;
-    //     }
+        $daysDiff = $hoursDiff = NULL;
 
-    //     $daysDiff = $hoursDiff = NULL;
+        $color = NULL;
+        $text = NULL;
 
-    //     $color = 'green';
-    //     $text = 'Finalizat';
+        if($this->status == 'done')
+        {
 
-    //     if( !! $this->trimitere->date_to)
-    //     {
-    //         $now = Carbon::createFromFormat('Y-m-d h:i:s', $this->done_at);
-    //         $expire = Carbon::createFromFormat('Y-m-d', $this->trimitere->date_to);
-    
-    //         $daysDiff = $expire->diffInDays($now, false);
-    //         $hoursDiff = $expire->diffInHours($now, false);
-            
-    //         if( ($daysDiff > 0) || ( ($daysDiff == 0) && ($hoursDiff > 0)))
-    //         {
-    //             $color = 'red';
-    //             $text = 'Depășit';
-    //         }
-    //         else
-    //         {
-    //             if(-5 <= $daysDiff && $daysDiff <= 0 )
-    //             {
-    //                 $color = 'orange';
-    //                 $text = 'În curând';
-    //             }
-    //             else
-    //             {
-    //                 $color = 'blue';
-    //                 $text = 'Asignate';
-    //             }
-    //         }
-    //     }
+        }
+        else
+        {
+            $color = 'green';
+            if( $this->trimitere->date_to )
+            {
+                $now = Carbon::now();
+                $expire = Carbon::createFromFormat('Y-m-d', $this->trimitere->date_to);
+        
+                $daysDiff = $expire->diffInDays($now, false);
+                $hoursDiff = $expire->diffInHours($now, false);
 
-    //     return [
-    //         'date_from' => $this->trimitere->date_from,
-    //         'date_to' => $this->trimitere->date_to,
-    //         'days' => $daysDiff,
-    //         'hours' => $hoursDiff,
-    //         'color' => $color,
-    //         'caption' => $text,
-    //     ];
-    // }
+                
+                if( ($daysDiff > 0) || ( ($daysDiff == 0) && ($hoursDiff > 0)))
+                {
+                    $color = 'red';
+                    $text = 'Depășit';
+                }
+
+                else
+                {
+                    if(-5 <= $daysDiff && $daysDiff <= 0 )
+                    {
+                        $color = 'orange';
+                        $text = 'În curând';
+                    }
+                    else
+                    {
+                        $color = 'blue';
+                        $text = 'Asignate';
+                    }
+                }
+                
+            }
+        }
+
+        return [
+            'date_from' => $this->trimitere->date_from,
+            'date_to' => $this->trimitere->date_to,
+            'days' => $daysDiff,
+            'hours' => $hoursDiff,
+            'color' => $color,
+            'caption' => $text,
+        ];
+    }
 
     public function user() {
         return $this->belongsTo(User::class, 'user_id')->select(['id', 'first_name', 'last_name']);
