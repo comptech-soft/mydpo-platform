@@ -33,7 +33,10 @@ class Customerable {
                 return $next($request);
             }
 
-            dd('Nu avem cont');
+            /**
+             * Userul logat nu are cont la clientul specificat
+             */
+            return redirect(config('app.url') . '/my-customers'); 
         }
 
         /**

@@ -12,11 +12,6 @@ class CursuriController extends Controller {
 
     public function index($customer_id, Request $r) {
 
-        if(! ($customer = Customer::find($customer_id)) )
-        {
-            return redirect('clienti');
-        }
-
         CustomerCurs::Sync($customer_id);
 
         return Index::View(
@@ -25,6 +20,7 @@ class CursuriController extends Controller {
             payload: [
                 'customer_id' => $customer_id,
                 'customer' => Customer::find($customer_id),
+                'customer_user' => \Auth::user(),
             ],
         );        
     }
