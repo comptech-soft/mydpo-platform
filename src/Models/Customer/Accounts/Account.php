@@ -241,7 +241,7 @@ class Account extends Model {
      * 
      */
     public static function GetCustomersByUser($user) {
-        return $user->id;
+        return self::where('user_id', $user->id)->get();
     }
 
     public static function GetQuery() {
