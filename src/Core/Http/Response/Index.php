@@ -52,6 +52,7 @@ class Index {
             'menus' => SysMenu::getMenus(),
             'actions' => SysAction::getActions(),
             'sysconfig' => SysConfig::all()->pluck('value', 'code'),
+            'mycustomers' => config('app.platform') == 'b2b' ? 'aaaa' : NULL,
         ];
 
         return view($template)->withScripts($scripts)->withPayload($payload)->withStyles($styles);
