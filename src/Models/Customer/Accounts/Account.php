@@ -241,7 +241,15 @@ class Account extends Model {
      * 
      */
     public static function GetCustomersByUser($user) {
-        return self::where('user_id', $user->id)->get();
+        return self::where('user_id', $user->id)
+            ->leftJoin(
+                'customers',
+                function($q) {
+                    $q->on('customers.id', '=', 'customers-persons.customer_id');
+                }
+            )
+            ->whereRaw("((`customers`.`deleted` IS NULL) OR (`customers`.`deleted` = 0))")
+            ->get();
     }
 
     public static function GetQuery() {
