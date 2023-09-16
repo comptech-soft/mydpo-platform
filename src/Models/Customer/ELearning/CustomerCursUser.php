@@ -215,16 +215,23 @@ class CustomerCursUser extends Model {
     // }
 
     public static function doChangestatus($input, $record) {
+
+        $now = \Carbon\Carbon::now();
+
         $record->status = $input['status'];
 
         if($record->status == 'done')
         {
-            $record->done_at = \Carbon\Carbon::now();
+            $record->done_at = $now;
         }
         else
         {
             $record->done_at = NULL;
         }
+
+        $props = !! $record->props ? $record->props : [];
+        $props[$record->status . '_at'] = $now;
+        $record->props = $props;
 
         $record->save();
 
