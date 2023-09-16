@@ -218,6 +218,10 @@ class CustomerCursUser extends Model {
     //     return (new AssignCursuri($input))->Perform();
     // }
 
+    public static function doChangestatus($input, $record) {
+        dd($input, $record);
+    }
+
     public static function doDezasociere($input, $record) {
         /**
          * Se sterg inregitraile din tabela [customers-cursuri-users]
