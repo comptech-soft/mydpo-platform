@@ -12,11 +12,7 @@ use MyDpo\Models\Nomenclatoare\Livrabile\ELearning\Sharematerial;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 
-// use MyDpo\Performers\CustomerCursUser\GetCounter;
-// use MyDpo\Performers\CustomerCursUser\ChangeStatus;
-// use MyDpo\Performers\CustomerCursUser\AssignCursuri;
 use Carbon\Carbon;
-
 
 class CustomerCursUser extends Model {
 
@@ -219,7 +215,20 @@ class CustomerCursUser extends Model {
     // }
 
     public static function doChangestatus($input, $record) {
-        dd($input, $record);
+        $record->status = $input['status'];
+
+        if($record->status == 'done')
+        {
+            $record->done_at = \Carbon\Carbon::now();
+        }
+        else
+        {
+            $record->done_at = NULL;
+        }
+
+        $record->save();
+
+        return $record;
     }
 
     public static function doDezasociere($input, $record) {
