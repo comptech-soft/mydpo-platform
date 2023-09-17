@@ -12,8 +12,9 @@ class InfograficeController extends Controller {
     public function index($customer_id, Request $r) {
         return Index::View(
             styles: ['css/app.css'],
-            scripts: ['apps/customer/infografice/index.js'],
+            scripts: ['apps/customer/documents/index.js'],
             payload: [
+                'type' => 'infografice',
                 'customer_id' => $customer_id,
                 'customer' => Customer::find($customer_id),
             ],

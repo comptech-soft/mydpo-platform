@@ -12,24 +12,13 @@ class StudiiCazController extends Controller {
     public function index($customer_id, Request $r) {
         return Index::View(
             styles: ['css/app.css'],
-            scripts: ['apps/customer/studii-caz/index.js'],
+            scripts: ['apps/customer/documents/index.js'],
             payload: [
+                'type' => 'studiicaz',
                 'customer_id' => $customer_id,
                 'customer' => Customer::find($customer_id),
             ],
         );        
     }
-
-    // public function index($customer_id, Request $r) {
-
-    //     return Response::View(
-    //         '~templates.index', 
-    //         asset('apps/customer-studii-caz/index.js'),
-    //         [], 
-    //         [
-    //             'customer_id' => $customer_id,
-    //         ]
-    //     );
-    // }
 
 }
