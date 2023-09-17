@@ -135,7 +135,7 @@ class CustomerCurs extends Model {
             throw new \Exception('User Knolyx inexistent.');
         }
 
-        $course = Curs::find($this->input['curs_id']);
+        $course = Curs::find($input['curs_id']);
 
 			
         if( ! $course || ! $course->k_id)
