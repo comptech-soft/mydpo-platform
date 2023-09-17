@@ -3,7 +3,6 @@
 namespace MyDpo\Models\Customer\Documents;
 
 use Illuminate\Database\Eloquent\Model;
-use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Scopes\NotdeletedScope;
 
 class Folder extends Model  {
@@ -43,8 +42,9 @@ class Folder extends Model  {
         static::addGlobalScope( new NotdeletedScope() );
     }
 
-    public static function getItems($input) {
-        return (new GetItems($input, self::query(), __CLASS__))->Perform();
+    public static function CreateInfograficeFolder($customer_id) {
+
+        dd($customer_id);
     }
 
 }
