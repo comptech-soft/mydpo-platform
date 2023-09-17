@@ -7,14 +7,14 @@ use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
 use MyDpo\Models\Customer\Customer;
 
-class DocumentsController extends Controller {
+class DocumentsAnalizaGapController extends Controller {
     
     public function index($customer_id, Request $r) {
         return Index::View(
             styles: ['css/app.css'],
-            scripts: ['apps/customer/documents/index.js'],
+            scripts: ['apps/customer/documents-analizagap/index.js'],
             payload: [
-                'type' => 'documente',
+                'type' => 'analizagap',
                 'customer_id' => $customer_id,
                 'customer' => Customer::find($customer_id),
             ],
