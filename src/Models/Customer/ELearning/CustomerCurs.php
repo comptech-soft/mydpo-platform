@@ -117,6 +117,11 @@ class CustomerCurs extends Model {
     //     return (new GetSummary($input))->Perform();
     // }
 
+    
+    public static function doOpenknolyxcourse($input, $record) {
+        dd(__METHOD__, $input, $record);
+    }
+
     public static function doAsociere($input, $record) {
         return Sharematerial::doInsert($input, $record);
     }
@@ -140,12 +145,6 @@ class CustomerCurs extends Model {
                     $q->on('share-materiale.id', '=', 'customers-cursuri.trimitere_id');
                 }
             )
-            // ->leftJoin(
-            //     'customers-departamente',
-            //     function($q) {
-            //         $q->on('customers-departamente.id', '=', 'customers-persons.department_id');
-            //     }
-            // )
             ->whereRaw("((`customers-cursuri`.`deleted` IS NULL) OR (`customers-cursuri`.`deleted` = 0))")
             ->select('customers-cursuri.*');
     }
@@ -273,6 +272,5 @@ class CustomerCurs extends Model {
             ->where('files_count', 0)
             ->where('participants_count', 0)
             ->delete();
-        
     }
 }
