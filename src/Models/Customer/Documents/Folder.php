@@ -44,7 +44,27 @@ class Folder extends Model  {
 
     public static function CreateInfograficeFolder($customer_id) {
 
-        dd($customer_id);
+        $folder = self::where('customer_id', $customer_id)
+            ->where('name', 'Infografice')
+            ->where('platform', 'admin')
+            ->where('type', 'infografice')
+            ->whereNull('parent_id')
+            ->where('deleted', 0)
+            ->first();
+
+        if(! $folder)
+        {
+            $folder = self::create([
+                'customer_id' => $customer_id,
+                'name' => 'Infografice',
+                'platform' => 'admin',
+                'type' => 'infografice',
+                'parent_id' => NULL,
+                'deleted' => 0,
+            ]);
+        }
+
+        return $folder;
     }
 
 }
