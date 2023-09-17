@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 use MyDpo\Models\Nomenclatoare\Livrabile\ELearning\Curs;
 use MyDpo\Models\Nomenclatoare\Livrabile\ELearning\Sharematerial;
+use MyDpo\Models\Authentication\User;
+use MyDpo\Models\Nomenclatoare\Livrabile\ELearning\Knolyx;
 
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
@@ -118,8 +120,32 @@ class CustomerCurs extends Model {
     // }
 
     
-    public static function doOpenknolyxcourse($input, $record) {
-        dd(__METHOD__, $input, $record);
+    public static function doOpenknolyxcourse($input, $record) {        
+        $user = array_key_exists('user_id', $input) ? User::find($input['user_id']) : \Auth::user();
+
+        if( ! $user )
+        {
+            throw new \Exception('User inexistent.');
+        }
+	    
+        $user = Knolyx::CreateUser($user);
+
+        if( ! $user->k_id )
+        {
+            throw new \Exception('User Knolyx inexistent.');
+        }
+
+        $course = Curs::find($this->input['curs_id']);
+
+			
+        if( ! $course || ! $course->k_id)
+        {
+            throw new \Exception('Curs inexistent.');
+        }
+
+        $courseRole = Knolyx::GetCourseRole($course, $user);
+		
+		Knolyx::SetCourseRole($course->k_id, $courseRole);
     }
 
     public static function doAsociere($input, $record) {

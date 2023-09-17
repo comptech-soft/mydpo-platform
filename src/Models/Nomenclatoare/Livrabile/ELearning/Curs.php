@@ -12,7 +12,7 @@ use Illuminate\Http\UploadedFile;
 use MyDpo\Models\Livrabile\Categories\Category;
 // use MyDpo\Models\Cursadresare;
 // 
-// use MyDpo\Performers\Curs\OpenKnolyxCourse;
+// 
 // use MyDpo\Performers\Curs\GetKnolyxCourses;
 // use MyDpo\Models\Livrabile\ELearning\Knolyx;
 use MyDpo\Rules\Nomenclatoare\Livrabile\Cursuri\Curs\IsUrlPresent;
@@ -278,9 +278,6 @@ class Curs extends Model {
     //     return (new GetKnolyxCourses($input))->Perform();
     // }
 
-    // public static function openKnolyxCourse($input) {
-    //     return (new OpenKnolyxCourse($input))->Perform();
-    // }
 
     // public static function saveCoursesFromKnolyx($courses) {
     //     foreach($courses as $i => $course)
