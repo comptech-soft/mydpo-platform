@@ -6,10 +6,15 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
 use MyDpo\Models\Customer\Customer;
+use MyDpo\Models\Customer\Documents\Folder;
+use MyDpo\Models\Customer\Documents\CustomerFolder;
 
 class DocumentsController extends Controller {
     
     public function index($customer_id, Request $r) {
+
+        Folder::CreateDefaultFolders($customer_id);
+
         return Index::View(
             styles: ['css/app.css'],
             scripts: ['apps/customer/documents/index.js'],

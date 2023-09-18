@@ -3,6 +3,8 @@
 namespace MyDpo\Models\Customer\Documents;
 
 use Illuminate\Database\Eloquent\Model;
+use MyDpo\Models\Customer\Customer_base as Customer;
+
 use MyDpo\Scopes\NotdeletedScope;
 
 class Folder extends Model  {
@@ -40,6 +42,79 @@ class Folder extends Model  {
 
     protected static function booted() {
         static::addGlobalScope( new NotdeletedScope() );
+    }
+
+
+    public static function CreateDefaultFolders($customer_id) {
+
+        $customer = Customer::find($customer_id);
+
+        if(!! $customer && ! $customer->default_folders_created )
+        {
+            $defaultFolders = CustomerFolderDefault::whereNull('parent_id')->get();
+
+            foreach($defaultFolders as $i => $defaultFolder) 
+            {
+                self::CreateDefaultFolder($defaultFolder, NULL);
+            }
+
+            $this->default_folders_created = 1;
+            $this->save();
+        }
+    }
+
+    public static function CreateDefaultFolder($defaultFolder, $parent) {
+
+
+        $folder = CustomerFolder::where('customer_id', $this->id)->where('name', $defaultFolder->name);
+
+        if(!! $parent )
+        {
+            $folder = $folder->where('parent_id', $parent->id);
+        }
+
+        $folder = $folder->first();
+
+        $input = [
+            'name' => $defaultFolder->name,
+            'customer_id' => $this->id,
+            'default_folder_id' => $defaultFolder->id,
+            'platform' => 'admin',
+            'props' => [
+                'defaultfolder' => $defaultFolder, 
+            ],
+            'order_no' => 0,
+            'deleted' => 0,
+        ];
+
+        if($defaultFolder->id == 11)
+        {
+            $input['order_no'] = 32767;
+        }
+
+        if( ! $folder )
+        {
+            if(! $parent )
+            {
+                $folder = CustomerFolder::create($input);
+            }
+            else
+            {
+                $parent->children()->create($input);
+            }  
+        }
+        else
+        {
+            $folder->update($input);
+        }
+
+        if($defaultFolder->children->count())
+        {
+            foreach($defaultFolder->children as $i => $child) 
+            {
+                self::CreateDefaultFolder($child, $folder);
+            }
+        }
     }
 
     public static function CreateInfograficeFolder($customer_id) {

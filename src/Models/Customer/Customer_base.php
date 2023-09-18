@@ -133,73 +133,9 @@ class Customer_base extends Model {
         return $this->hasMany(UserCustomer::class, 'customer_id');
     }
 
-    public function createDefaultFolder($defaultFolder, $parent) {
 
-        if(! $parent )
-        {
-            $folder = CustomerFolder::where('customer_id', $this->id)->where('name', $defaultFolder->name)->first();
-        }
-        else
-        {
-            $folder = CustomerFolder::where('customer_id', $this->id)->where('name', $defaultFolder->name)->where('parent_id', $parent->id)->first();
-        }
 
-        $input = [
-            'name' => $defaultFolder->name,
-            'customer_id' => $this->id,
-            'default_folder_id' => $defaultFolder->id,
-            'platform' => 'admin',
-            'props' => [
-                'defaultfolder' => $defaultFolder, 
-            ],
-            'order_no' => 0,
-            'deleted' => 0,
-        ];
-
-        if($defaultFolder->id == 11)
-        {
-            $input['order_no'] = 32767;
-        }
-
-        if( ! $folder )
-        {
-            if(! $parent )
-            {
-                $folder = CustomerFolder::create($input);
-            }
-            else
-            {
-                $parent->children()->create($input);
-            }  
-        }
-        else
-        {
-            $folder->update($input);
-        }
-
-        if($defaultFolder->children->count())
-        {
-            foreach($defaultFolder->children as $i => $child) 
-            {
-                $this->createDefaultFolder($child, $folder);
-            }
-        }
-    }
-
-    public function createDefaultFolders() {
-        if( ! $this->default_folders_created )
-        {
-            $defaultFolders = CustomerFolderDefault::whereNull('parent_id')->get();
-
-            foreach($defaultFolders as $i => $defaultFolder) 
-            {
-                $this->createDefaultFolder($defaultFolder, NULL);
-            }
-
-            $this->default_folders_created = 1;
-            $this->save();
-        }
-    }
+    
 
     public static function getItems($input) {
         return (new GetItems($input, self::query(), __CLASS__))->Perform();
