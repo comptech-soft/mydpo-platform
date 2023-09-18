@@ -2,7 +2,6 @@
 
 namespace MyDpo\Models\Customer\Documents;
 
-use MyDpo\Models\Folder;
 use Kalnoy\Nestedset\NodeTrait;
 
 use MyDpo\Traits\Itemable;
