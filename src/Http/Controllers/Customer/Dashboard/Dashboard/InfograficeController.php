@@ -16,7 +16,7 @@ class InfograficeController extends Controller {
 
         return Index::View(
             styles: ['css/app.css'],
-            scripts: ['apps/customer/documents/index.js'],
+            scripts: ['apps/customer/infografice/index.js'],
             payload: [
                 'type' => 'infografice',
                 'customer_id' => $customer_id,

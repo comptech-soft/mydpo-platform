@@ -12,7 +12,7 @@ class SfaturiDpoController extends Controller {
     public function index($customer_id, Request $r) {
         return Index::View(
             styles: ['css/app.css'],
-            scripts: ['apps/customer/documents/index.js'],
+            scripts: ['apps/customer/sfaturi-dpo/index.js'],
             payload: [
                 'type' => 'sfaturidpo',
                 'customer_id' => $customer_id,
