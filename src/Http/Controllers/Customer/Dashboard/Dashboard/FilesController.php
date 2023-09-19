@@ -4,9 +4,13 @@ namespace MyDpo\Http\Controllers\Customer\Dashboard\Dashboard;
 
 use App\Http\Controllers\Controller;
 // use Illuminate\Http\Request;
-// use MyDpo\Models\Customer\CustomerFile;
+use MyDpo\Models\Customer\Documents\CustomerFile;
 
 class FilesController extends Controller {
+
+    public function getRecords(Request $r) {
+        return CustomerFile::getRecords($r->all());
+    }
 
     // public function getItems(Request $r) {
     //     return CustomerFile::getItems($r->all());
