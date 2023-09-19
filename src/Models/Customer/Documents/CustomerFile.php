@@ -3,26 +3,22 @@
 namespace MyDpo\Models\Customer\Documents;
 
 use Illuminate\Database\Eloquent\Model;
-use MyDpo\Helpers\Performers\Datatable\GetItems;
-use MyDpo\Helpers\Performers\Datatable\DoAction;
-use MyDpo\Models\Folder;
-use MyDpo\Models\Customer\Customer;
-use MyDpo\Models\Customer\ELearning\MaterialStatus;
-use MyDpo\Models\Authentication\User;
-use MyDpo\Models\RoleUser;
-use MyDpo\Performers\CustomerFile\ChangeFilesStatus;
-use MyDpo\Performers\CustomerFile\MoveFiles;
-use MyDpo\Performers\CustomerFile\DeleteFiles;
-use MyDpo\Events\CustomerDocuments\FilesUpload as FilesUploadEvent;
+// use MyDpo\Helpers\Performers\Datatable\GetItems;
+// use MyDpo\Helpers\Performers\Datatable\DoAction;
+// use MyDpo\Models\Folder;
+// use MyDpo\Models\Customer\Customer;
+// use MyDpo\Models\Customer\ELearning\MaterialStatus;
+// use MyDpo\Models\Authentication\User;
+// use MyDpo\Models\RoleUser;
+// use MyDpo\Performers\CustomerFile\ChangeFilesStatus;
+// use MyDpo\Performers\CustomerFile\MoveFiles;
+// use MyDpo\Performers\CustomerFile\DeleteFiles;
+// use MyDpo\Events\CustomerDocuments\FilesUpload as FilesUploadEvent;
 
 class CustomerFile extends Model {
     
     protected $table = 'customers-files';
-
-    protected $appends = ['icon', 'is_image', 'is_office', 'just_name'];
-
-    protected $with = ['mystatus'];
-
+    
     protected $casts = [
         'id' => 'integer',
         'created_by' => 'integer',
@@ -58,19 +54,33 @@ class CustomerFile extends Model {
         'deleted_by',
     ];
 
-    public function getIconAttribute() {
-        return config('app.url') . '/imgs/extensions/'. strtolower($this->file_original_extension) . '.png';
-    }
+    protected $appends = [
+        'is_image', 
+        'is_office',
+        'is_pdf',
+        'just_name',
+        'icon'
+    ];
+
+    protected $with = [
+        'mystatus'
+    ];
 
     public function getIsImageAttribute() {
-        $ext = strtolower($this->file_original_extension);
-        return in_array($ext, ['jpg', 'jpeg', 'png']);
+        return in_array(strtolower($this->file_original_extension), ['jpg', 'jpeg', 'png']);
     }   
 
     public function getIsOfficeAttribute() {
-        $ext = strtolower($this->file_original_extension);
-        return in_array($ext, ['doc', 'docx', 'xls', 'xlsx']);
+        return in_array(strtolower($this->file_original_extension), ['doc', 'docx', 'xls', 'xlsx']);
     }  
+
+    public function getIsPdfAttribute() {
+        return in_array(strtolower($this->file_original_extension), ['pdf']);
+    } 
+
+    public function getIconAttribute() {
+        return config('app.url') . '/imgs/extensions/'. strtolower($this->file_original_extension) . '.png';
+    }
 
     public function getJustNameAttribute() {
         return \Str::replace('.' . $this->file_original_extension, '', $this->file_original_name);
