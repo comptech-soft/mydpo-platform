@@ -15,8 +15,13 @@ use MyDpo\Models\Customer\ELearning\MaterialStatus;
 // use MyDpo\Performers\CustomerFile\DeleteFiles;
 // use MyDpo\Events\CustomerDocuments\FilesUpload as FilesUploadEvent;
 
+use MyDpo\Traits\Itemable;
+use MyDpo\Traits\Actionable;
+
 class CustomerFile extends Model {
     
+    use Itemable, Actionable; 
+
     protected $table = 'customers-files';
     
     protected $casts = [

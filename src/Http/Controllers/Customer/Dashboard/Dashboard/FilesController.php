@@ -3,7 +3,7 @@
 namespace MyDpo\Http\Controllers\Customer\Dashboard\Dashboard;
 
 use App\Http\Controllers\Controller;
-// use Illuminate\Http\Request;
+use Illuminate\Http\Request;
 use MyDpo\Models\Customer\Documents\CustomerFile;
 
 class FilesController extends Controller {
