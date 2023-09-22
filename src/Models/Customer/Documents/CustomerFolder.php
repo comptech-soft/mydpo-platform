@@ -69,8 +69,7 @@ class CustomerFolder extends Folder {
     //     }
     //     $result = [
     //         'customer_id' => 'required|exists:customers,id',
-    //         'platform' => 'in:admin,b2b',
-    //         'type' => 'required',
+            
     //         'name' => [
     //             'required',
     //             new ValidName($input),
@@ -127,6 +126,8 @@ class CustomerFolder extends Folder {
         }
         $result = [
             'customer_id' => 'required|exists:customers,id',
+            'platform' => 'in:admin,b2b',
+            'type' => 'in:documente,analizagap,infografice,sfaturidpo,studiicaz',
             'name' => [
                 'required',
                 new UniqueName($action, $input),
