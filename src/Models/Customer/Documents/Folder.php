@@ -55,7 +55,7 @@ class Folder extends Model  {
 
             foreach($defaultFolders as $i => $defaultFolder) 
             {
-                self::CreateDefaultFolder($defaultFolder, NULL);
+                self::CreateDefaultFolder($customer_id, $defaultFolder, NULL);
             }
 
             $this->default_folders_created = 1;
@@ -63,10 +63,10 @@ class Folder extends Model  {
         }
     }
 
-    public static function CreateDefaultFolder($defaultFolder, $parent) {
+    public static function CreateDefaultFolder($customer_id, $defaultFolder, $parent) {
 
 
-        $folder = CustomerFolder::where('customer_id', $this->id)->where('name', $defaultFolder->name);
+        $folder = CustomerFolder::where('customer_id', $customer_id)->where('name', $defaultFolder->name);
 
         if(!! $parent )
         {
@@ -77,7 +77,7 @@ class Folder extends Model  {
 
         $input = [
             'name' => $defaultFolder->name,
-            'customer_id' => $this->id,
+            'customer_id' => $customer_id,
             'default_folder_id' => $defaultFolder->id,
             'platform' => 'admin',
             'props' => [
