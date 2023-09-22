@@ -18,7 +18,7 @@ class UniqueName implements Rule {
 
     public function passes($attribute, $value) {   
 
-        $q = CustomerFolder::where('customer_id', $this->input['customer_id'])
+        $q = Folder::where('customer_id', $this->input['customer_id'])
             ->where('name', $this->input['name'])
             ->where('type', $this->input['type']);
 
