@@ -112,7 +112,7 @@ class Folder extends Model  {
         {
             foreach($defaultFolder->children as $i => $child) 
             {
-                self::CreateDefaultFolder($child, $folder);
+                self::CreateDefaultFolder($customer_id, $child, $folder);
             }
         }
     }
