@@ -31,7 +31,7 @@ class DocumentsController extends Controller {
     }
 
     public function doAction($action, Request $r) {
-        return CustomerFolder::doAction($r->all());
+        return CustomerFolder::doAction($action, $r->all());
     }
 
     // public function downloadFile($customer_id, $file_id, Request $r) {
