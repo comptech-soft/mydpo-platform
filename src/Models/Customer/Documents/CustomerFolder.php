@@ -7,6 +7,7 @@ use Kalnoy\Nestedset\NodeTrait;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 
+use MyDpo\Rules\Customer\Livrabile\Documentsable\Folders\UniqueName;
 // use MyDpo\Models\CustomerFile;
 // use MyDpo\Rules\CustomerFolder\ValidName;
 // use MyDpo\Performers\CustomerFolder\GetAncestors;
