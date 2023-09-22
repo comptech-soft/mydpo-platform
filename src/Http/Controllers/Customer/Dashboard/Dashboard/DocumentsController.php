@@ -30,7 +30,7 @@ class DocumentsController extends Controller {
         return CustomerFolder::getRecords($r->all());
     }
 
-    public function doAction(Request $r) {
+    public function doAction($action, Request $r) {
         return CustomerFolder::doAction($r->all());
     }
 
