@@ -120,7 +120,7 @@ class CustomerFolder extends Folder {
     }
 
     public static function GetRules($action, $input) {
-        if( ! in_array($action, ['insert', 'delete']) )
+        if( ! in_array($action, ['insert', 'update']) )
         {
             return NULL;
         }
