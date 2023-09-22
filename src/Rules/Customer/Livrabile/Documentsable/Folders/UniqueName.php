@@ -11,7 +11,7 @@ class UniqueName implements Rule {
     public $action = NULL;
     public $record = NULL;
 
-    public function __construct($input) {
+    public function __construct($action, $input) {
         $this->input = $input;
         $this->action = $action;
     }
