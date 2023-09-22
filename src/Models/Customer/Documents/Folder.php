@@ -58,8 +58,8 @@ class Folder extends Model  {
                 self::CreateDefaultFolder($customer_id, $defaultFolder, NULL);
             }
 
-            $this->default_folders_created = 1;
-            $this->save();
+            $customer->default_folders_created = 1;
+            $customer->save();
         }
     }
 
