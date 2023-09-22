@@ -7,8 +7,6 @@ use Kalnoy\Nestedset\NodeTrait;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 
-// use MyDpo\Helpers\Performers\Datatable\GetItems;
-// use MyDpo\Helpers\Performers\Datatable\DoAction;
 // use MyDpo\Models\CustomerFile;
 // use MyDpo\Rules\CustomerFolder\ValidName;
 // use MyDpo\Performers\CustomerFolder\GetAncestors;
@@ -106,25 +104,34 @@ class CustomerFolder extends Folder {
     //     return $folder;
     // }
 
-    // public static function doInsert($input, $folder) {
+    public static function doInsert($input, $folder) {
 
-    //     if(! array_key_exists('parent_id', $input) )
-    //     {
-    //         $input['parent_id'] = NULL;
-    //     } 
-
-    //     if( ! $input['parent_id'] )
-    //     {
-    //         $folder = new self($input);
-    //         $folder->save();
-    //     }
-    //     else
-    //     {
-    //         $parent = self::find($input['parent_id']);
-    //         $folder = $parent->children()->create($input);
-    //     }
+        if( ! $input['parent_id'] )
+        {
+            $folder = self::create($input);
+        }
+        else
+        {
+            $parent = self::find($input['parent_id']);
+            $folder = $parent->children()->create($input);
+        }
     
-    //     return $folder;
-    // }
+        return $folder;
+    }
+
+    public static function GetRules($action, $input) {
+        if( ! in_array($action, ['insert', 'delete']) )
+        {
+            return NULL;
+        }
+        $result = [
+            'customer_id' => 'required|exists:customers,id',
+            'name' => [
+                'required',
+                new UniqueName($action, $input),
+            ],
+        ];
+        return $result;
+    }
 
 }
