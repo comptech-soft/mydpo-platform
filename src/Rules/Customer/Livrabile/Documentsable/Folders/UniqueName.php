@@ -30,6 +30,7 @@ class UniqueName implements Rule {
         {
             $q->whereNull('parent_id');
         }    
+        
         if($this->action == 'update')
         {
             $q->where('id', '<>', $this->input['id']);
