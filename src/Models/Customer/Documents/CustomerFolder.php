@@ -36,16 +36,6 @@ class CustomerFolder extends Folder {
             ->whereRaw("((`customers-files`.`platform` = 'b2b') OR ( (`customers-files`.`platform` = 'admin') AND (`customers-files`.`status` <> 'protected')))");
     }
 
-    // public static function getItems($input) {
-    //     return (new GetItems(
-    //         $input, 
-    //         self::query()
-    //             ->whereRaw('((`customers-folders`.`deleted` IS NULL) OR (`customers-folders`.`deleted` = 0))')
-    //         ,
-    //         __CLASS__
-    //     ))->Perform();
-    // }
-
     // public static function getAncestors($input) {
     //     return (new GetAncestors($input))->Perform();
     // }
@@ -58,9 +48,12 @@ class CustomerFolder extends Folder {
     //     return (new SaveOrderdFolders($input))->Perform();
     // }
 
-    // public static function saveFoldersAccess($input) {
-    //     return (new SaveFoldersAccess($input))->Perform();
-    // }
+    public static function doPermissions($input, $action) {
+
+        dd(__METHOD__, $input, $action);
+
+        // return (new SaveFoldersAccess($input))->Perform();
+    }
 
     // public static function GetRules($action, $input) {
     //     if($action == 'delete')
