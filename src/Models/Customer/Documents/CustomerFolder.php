@@ -48,7 +48,7 @@ class CustomerFolder extends Folder {
     //     return (new SaveOrderdFolders($input))->Perform();
     // }
 
-    public static function doPermissions($input, $action) {
+    public static function doPermission($input, $action) {
 
         dd(__METHOD__, $input, $action);
 
