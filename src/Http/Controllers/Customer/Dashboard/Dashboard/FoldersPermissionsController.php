@@ -8,7 +8,7 @@ use MyDpo\Models\Customer\Documents\CustomerFolderPermission;
 
 class FoldersPermissionsController extends Controller {
     
-    public function getItems(Request $r) {
+    public function getRecords(Request $r) {
         return CustomerFolderPermission::getRecords($r->all());
     }
 
