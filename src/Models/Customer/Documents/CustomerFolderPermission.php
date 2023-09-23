@@ -3,11 +3,12 @@
 namespace MyDpo\Models\Customer\Documents;
 
 use Illuminate\Database\Eloquent\Model;
-use MyDpo\Helpers\Performers\Datatable\GetItems;
-use MyDpo\Models\Folder;
+use MyDpo\Traits\Itemable;
 
 class CustomerFolderPermission extends Model {
 
+    use Itemable;
+    
     protected $table = 'customers-folders-permissions';
     
     protected $casts = [
