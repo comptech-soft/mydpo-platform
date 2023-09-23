@@ -49,10 +49,7 @@ class CustomerFolder extends Folder {
     // }
 
     public static function doPermission($input, $action) {
-
-        dd(__METHOD__, $input, $action);
-
-        // return (new SaveFoldersAccess($input))->Perform();
+        return CustomerFolderPermission::UpdatePermissions($input);
     }
 
     // public static function GetRules($action, $input) {

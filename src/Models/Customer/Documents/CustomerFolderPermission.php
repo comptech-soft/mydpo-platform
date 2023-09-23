@@ -35,15 +35,19 @@ class CustomerFolderPermission extends Model {
         return $this->belongsTo(Folder::class, 'folder_id');
     }
 
-    public static function getItems($input) {
-
-        $q = self::query()->leftJoin(
-            'customers-folders',
-            function($j) {
-                $j->on('customers-folders.id', '=', 'customers-folders-permissions.folder_id');
-            }
-        );
-
-        return (new GetItems($input, $q->with(['folder']), __CLASS__))->Perform();
+    public static function UpdatePermissions($input) {
+        dd($input);
     }
+
+    // public static function getItems($input) {
+
+    //     $q = self::query()->leftJoin(
+    //         'customers-folders',
+    //         function($j) {
+    //             $j->on('customers-folders.id', '=', 'customers-folders-permissions.folder_id');
+    //         }
+    //     );
+
+    //     return (new GetItems($input, $q->with(['folder']), __CLASS__))->Perform();
+    // }
 }
