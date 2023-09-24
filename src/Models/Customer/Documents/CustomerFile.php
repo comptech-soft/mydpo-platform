@@ -361,91 +361,81 @@ class CustomerFile extends Model {
 
     public static function doInsert($input, $record) {
 
-        dd($input);
-        if( ! array_key_exists('files', $input) )
-        {
-            throw new \Exception('Nu am fișiere.');
-        }
-
-        if( ! is_array($input['files']) )
-        {
-            $input['files'] = [$input['files']];
-        }
-
-        $files = [];
         foreach($input['files'] as $file)
         {
-            $record = self::ProcessFile($file, $input);
 
-            if($record->status == 'public')
-            {
-                $files[] = $record;
-            } 
+            self::CreateFile($file, $input);
+
+            // $record = self::CreateFile($file, $input);
+
+            // if($record->status == 'public')
+            // {
+            //     $files[] = $record;
+            // } 
         }
 
-        $customer = Customer::find($input['customer_id']);
+        // $customer = Customer::find($input['customer_id']);
 
-        self::CreateNotifications($files, [
-            'customer' => $customer,
-            'folder_id' => $input['folder_id'],
-        ]);
+        // self::CreateNotifications($files, [
+        //     'customer' => $customer,
+        //     'folder_id' => $input['folder_id'],
+        // ]);
 
-        return $record;
+        // return $record;
     }
 
-    // public static function ProcessFile($file, $input) {
+    public static function CreateFile($file, $input) {
         
-    //     //$ext = strtolower($file->extension());
-	// 	$ext = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
-
-    //     if(in_array($ext, ['jpg', 'jpeg', 'png', 'doc', 'docx', 'xls', 'xlsx', 'pdf', 'txt', 'rar', 'zip']))
-    //     {
-    //         $filename = \Str::slug(str_replace($file->extension(), '', $file->getClientOriginalName())) . '.' .  strtolower($file->extension());
+        if(in_array($ext = $file->extension(), ['jpg', 'jpeg', 'png', 'doc', 'docx', 'xls', 'xlsx', 'pdf', 'txt', 'rar', 'zip']))
+        {
+            $filename = \Str::slug(str_replace($file->extension(), '', $file->getClientOriginalName())) . '.' .  strtolower($file->extension());
             
-    //         $result = $file->storeAs('documents/' . $input['customer_id'] . '/' . \Auth::user()->id, $filename, 's3');
+            $result = $file->storeAs('documents/' . $input['customer_id'] . '/' . \Auth::user()->id, $filename, 's3');
 
-    //         $inputdata = [
-    //             ...$input,
-    //             'file_original_name' => $file->getClientOriginalName(),
-    //             'file_original_extension' => $file->extension(),
-    //             'file_full_name' => $filename,
-    //             'file_mime_type' => $file->getMimeType(),
-    //             'file_upload_ip' => request()->ip(),
-    //             'file_size' => $file->getSize(),
-    //             'url' => config('filesystems.disks.s3.url') . $result,
-    //             'created_by' => \Auth::user()->id,
-    //         ];
+            $input = [
+                ...$input,
+                'file_original_name' => $file->getClientOriginalName(),
+                'file_original_extension' => $file->extension(),
+                'file_full_name' => $filename,
+                'file_mime_type' => $file->getMimeType(),
+                'file_upload_ip' => request()->ip(),
+                'file_size' => $file->getSize(),
+                'url' => config('filesystems.disks.s3.url') . $result,
+                'created_by' => \Auth::user()->id,
+                'deleted' => 0,
+            ];
 
-    //         if(in_array($ext, ['jpg', 'jpeg', 'png']))
-    //         {
-    //             $image = \Image::make($file);
-    //             $inputdata = [
-    //                 ...$inputdata,
-    //                 'file_size' => $image->filesize(),
-    //                 'file_width' => $image->width(),
-    //                 'file_height' => $image->height(),
-    //             ];
-    //         }
+            if(in_array($ext, ['jpg', 'jpeg', 'png']))
+            {
+                $image = \Image::make($file);
+                $input = [
+                    ...$input,
+                    'file_size' => $image->filesize(),
+                    'file_width' => $image->width(),
+                    'file_height' => $image->height(),
+                ];
+            }
 
-    //         $exist = self::where('customer_id', $inputdata['customer_id'])
-    //             ->where('folder_id', $inputdata['folder_id'])
-    //             ->where('url', $inputdata['url'])
-    //             ->first();
+            $record = self::where('customer_id', $input['customer_id'])
+                ->where('folder_id', $input['folder_id'])
+                ->where('url', $input['url'])
+                ->first();
 
-    //         if(! $exist )
-    //         {
-    //             return self::create($inputdata);
-    //         }
+            if(! $record )
+            {
+                $record = self::create($input);
+            }
+            else
+            {
+                $record->update($input);
+            }
 
-    //         $exist->deleted = 0;
-    //         $exist->save();
-
-    //         return $exist;
-    //     }
-    //     else
-    //     {
-    //         throw new \Exception('Fișier incorect.');
-    //     }
-    // }
+            return $record;
+        }
+        else
+        {
+            throw new \Exception('Fișier incorect.');
+        }
+    }
 
 }
