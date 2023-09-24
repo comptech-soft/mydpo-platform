@@ -12,13 +12,9 @@ class FilesController extends Controller {
         return CustomerFile::getRecords($r->all());
     }
 
-    // public function getItems(Request $r) {
-    //     return CustomerFile::getItems($r->all());
-    // }
-
-    // public function doAction($action, Request $r) {
-    //     return CustomerFile::doAction($action, $r->all());
-    // }
+    public function doAction($action, Request $r) {
+        return CustomerFile::doAction($action, $r->all());
+    }
 
     // public function changeFilesStatus(Request $r) {
     //     return CustomerFile::changeFilesStatus($r->all());
