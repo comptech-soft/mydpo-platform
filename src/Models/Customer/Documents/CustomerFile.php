@@ -430,7 +430,9 @@ class CustomerFile extends Model {
                 $record->update($input);
             }
 
-            return $record;
+            return [
+                'folder_id' => $input['folder_id'],
+            ];
         }
         else
         {
