@@ -118,6 +118,9 @@ class CustomerFile extends Model {
         return NULL;
     }
 
+    public static function doMove($input, $record) {
+        dd(__METHOD__, $input, $record);
+    }
     // public static function moveFiles($input) {
     //     return (new MoveFiles($input))
     //         ->SetSuccessMessage('Mutare fișiere cu success!')
