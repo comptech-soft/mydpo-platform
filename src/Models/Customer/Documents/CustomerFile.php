@@ -381,7 +381,9 @@ class CustomerFile extends Model {
         //     'folder_id' => $input['folder_id'],
         // ]);
 
-        // return $record;
+        return [
+            'folder_id' => $input['folder_id'],
+        ];
     }
 
     public static function CreateFile($file, $input) {
@@ -430,9 +432,7 @@ class CustomerFile extends Model {
                 $record->update($input);
             }
 
-            return [
-                'folder_id' => $input['folder_id'],
-            ];
+            
         }
         else
         {
