@@ -119,13 +119,14 @@ class CustomerFile extends Model {
     }
 
     public static function doMove($input, $record) {
-        dd(__METHOD__, $input, $record);
+        return selef::whereIn('id', $this->input['files'])->update([
+            'folder_id' => $this->input['folder_id'],
+            'updated_at' => \Carbon\Carbon::now(),
+            'updated_by' => \Auth::user()->id,
+
+        ]);
     }
-    // public static function moveFiles($input) {
-    //     return (new MoveFiles($input))
-    //         ->SetSuccessMessage('Mutare fișiere cu success!')
-    //         ->Perform();
-    // } 
+
 
     // public static function changeFilesStatus($input) {
     //     return (new ChangeFilesStatus($input))
