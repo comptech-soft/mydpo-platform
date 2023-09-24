@@ -16,6 +16,10 @@ class FilesController extends Controller {
         return CustomerFile::doAction($action, $r->all());
     }
 
+    public function doDownload($id) {
+        return CustomerFile::doDownload($id);
+    }
+
     // public function changeFilesStatus(Request $r) {
     //     return CustomerFile::changeFilesStatus($r->all());
     // }
