@@ -106,36 +106,17 @@ class CustomerFile extends Model {
         if(!! $record )
         {
             $path = $record->url;
-            
+            if(\Str::contains($path, 'decalexb2b') )
+            {
+                $path = \Str::replace(config('filesystems.disks.s3old.url'), '', $path);
+                return \Storage::disk('s3old')->download($path, $record->file_original_name);
+            }
             $path = \Str::replace(config('filesystems.disks.s3.url'), '', $path);
-
             return \Storage::disk('s3')->download($path, $record->file_original_name);
         }
 
         return NULL;
     }
-    
-    // public static function downloadFile($customer_id, $file_id) {
-
-    //     $record = self::where('customer_id', $customer_id)->where('id', $file_id)->first();
-
-    //     if(!! $record )
-    //     {
-    //         $path = $record->url;
-
-    //         if(\Str::contains($path, 'decalexb2b') )
-    //         {
-    //             $path = \Str::replace(config('filesystems.disks.s3old.url'), '', $path);
-    //             return \Storage::disk('s3old')->download($path, $record->file_original_name);
-    //         }
-            
-    //         $path = \Str::replace(config('filesystems.disks.s3.url'), '', $path);
-    //         return \Storage::disk('s3')->download($path, $record->file_original_name);
-    //     }
-
-    //     return NULL;
-    // }
-
 
     // public static function moveFiles($input) {
     //     return (new MoveFiles($input))
