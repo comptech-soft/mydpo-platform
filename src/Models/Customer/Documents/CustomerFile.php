@@ -119,17 +119,45 @@ class CustomerFile extends Model {
     }
 
     public static function doMove($input, $record) {
-        self::whereIn('id', $input['files_ids'])->update([
-            'folder_id' => $input['folder_id'],
-            'updated_at' => \Carbon\Carbon::now(),
-            'updated_by' => \Auth::user()->id,
 
-        ]);
+        foreach($input['files_ids'] as $i => $file_id)
+        {
+            $data = [
+                'id' => $file_id,
+                'customer_id' => $input['customer_id'],
+                'folder_id' => $input['folder_id'],
+                'updated_at' => \Carbon\Carbon::now()->format('Y-m-d'),
+                'updated_by' => \Auth::user()->id,
+            ];
+
+            self::MoveFile($data);
+        }
 
         return [
             'folder_id' => $input['folder_id'],
         ];
     }
+
+    public static function MoveFile($input) {
+
+        $original = self::where('id', $input['id'])->first();
+
+        $record = self::where('customer_id', $input['customer_id'])
+            ->where('folder_id', $input['folder_id'])
+            ->whereUrl($original->url)
+            ->whereDeleted(0)
+            ->first();
+
+        if(!! $record )
+        {
+            $original->delete();
+        }
+        else
+        {
+            $original->update($input);
+        }
+    }
+
 
 
     // public static function changeFilesStatus($input) {
