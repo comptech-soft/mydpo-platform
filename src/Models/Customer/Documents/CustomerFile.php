@@ -119,8 +119,8 @@ class CustomerFile extends Model {
     }
 
     public static function doMove($input, $record) {
-        self::whereIn('id', $this->input['files'])->update([
-            'folder_id' => $this->input['folder_id'],
+        self::whereIn('id', $input['files'])->update([
+            'folder_id' => $input['folder_id'],
             'updated_at' => \Carbon\Carbon::now(),
             'updated_by' => \Auth::user()->id,
 
