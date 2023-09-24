@@ -120,22 +120,6 @@ class CustomerFile extends Model {
     //     return NULL;
     // }
 
-    // public static function getItems($input) {
-    //     return (new GetItems(
-    //         $input, 
-    //         self::query()
-    //         ->leftJoin(
-    //             'customers-folders',
-    //             function($j) {
-    //                 $j->on('customers-folders.id', '=', 'customers-files.folder_id');
-    //             }
-    //         )
-    //         ->whereRaw('((`customers-folders`.`deleted` IS NULL) OR (`customers-folders`.`deleted` = 0))')
-    //         ->select('customers-files.*')
-    //         ->with(['folder']),
-    //         __CLASS__
-    //     ))->Perform();
-    // }
 
     // public static function moveFiles($input) {
     //     return (new MoveFiles($input))
@@ -375,37 +359,39 @@ class CustomerFile extends Model {
     //     }
     // }
 
-    // public static function doInsert($input, $record) {
-    //     if( ! array_key_exists('files', $input) )
-    //     {
-    //         throw new \Exception('Nu am fișiere.');
-    //     }
+    public static function doInsert($input, $record) {
 
-    //     if( ! is_array($input['files']) )
-    //     {
-    //         $input['files'] = [$input['files']];
-    //     }
+        dd($input);
+        if( ! array_key_exists('files', $input) )
+        {
+            throw new \Exception('Nu am fișiere.');
+        }
 
-    //     $files = [];
-    //     foreach($input['files'] as $file)
-    //     {
-    //         $record = self::ProcessFile($file, $input);
+        if( ! is_array($input['files']) )
+        {
+            $input['files'] = [$input['files']];
+        }
 
-    //         if($record->status == 'public')
-    //         {
-    //             $files[] = $record;
-    //         } 
-    //     }
+        $files = [];
+        foreach($input['files'] as $file)
+        {
+            $record = self::ProcessFile($file, $input);
 
-    //     $customer = Customer::find($input['customer_id']);
+            if($record->status == 'public')
+            {
+                $files[] = $record;
+            } 
+        }
 
-    //     self::CreateNotifications($files, [
-    //         'customer' => $customer,
-    //         'folder_id' => $input['folder_id'],
-    //     ]);
+        $customer = Customer::find($input['customer_id']);
 
-    //     return $record;
-    // }
+        self::CreateNotifications($files, [
+            'customer' => $customer,
+            'folder_id' => $input['folder_id'],
+        ]);
+
+        return $record;
+    }
 
     // public static function ProcessFile($file, $input) {
         
