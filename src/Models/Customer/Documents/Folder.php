@@ -83,14 +83,9 @@ class Folder extends Model  {
             'props' => [
                 'defaultfolder' => $defaultFolder, 
             ],
-            'order_no' => 0,
+            'order_no' => $defaultFolder->id == 11 ? 32767 : $defaultFolder->id,
             'deleted' => 0,
         ];
-
-        if($defaultFolder->id == 11)
-        {
-            $input['order_no'] = 32767;
-        }
 
         if( ! $folder )
         {
