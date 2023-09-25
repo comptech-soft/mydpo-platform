@@ -161,22 +161,18 @@ class CustomerFile extends Model {
     }
 
     public static function doDelete($input, $record) {
+        foreach($input['files_ids'] as $i => $file_id)
+        {
+            $record = self::find($file_id);
 
-        dd($input, $record, __METHOD__);
-        // foreach($input['files_ids'] as $i => $file_id)
-        // {
-        //     $record = self::find($file_id);
+            $record->delete();
 
-        //     $record->status = $input['status'];
+            // trimitere notificare
+        }
 
-        //     // trimitere notificare
-
-        //     $record->save();
-        // }
-
-        // return [
-        //     'folder_id' => $input['folder_id'],
-        // ];
+        return [
+            'folder_id' => $input['folder_id'],
+        ];
     }
 
     public static function MoveFile($input) {
