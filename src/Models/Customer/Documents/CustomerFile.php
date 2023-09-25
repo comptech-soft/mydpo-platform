@@ -144,7 +144,7 @@ class CustomerFile extends Model {
 
     public static function doStatus($input, $record) {
 
-        foreach($this->input['files_ids'] as $i => $file_id)
+        foreach($input['files_ids'] as $i => $file_id)
         {
             $record = self::find($file_id);
 
