@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 // use MyDpo\Models\Folder;
 // use MyDpo\Models\Customer\Customer;
 use MyDpo\Models\Customer\ELearning\MaterialStatus;
-// use MyDpo\Models\Authentication\User;
+use MyDpo\Models\Authentication\User;
 // use MyDpo\Models\RoleUser;
 // use MyDpo\Performers\CustomerFile\ChangeFilesStatus;
 // use MyDpo\Performers\CustomerFile\MoveFiles;
@@ -68,7 +68,8 @@ class CustomerFile extends Model {
     ];
 
     protected $with = [
-        'mystatus'
+        'mystatus',
+        'creator',
     ];
 
     public function getIsImageAttribute() {
@@ -97,6 +98,10 @@ class CustomerFile extends Model {
 
     function mystatus() {
         return $this->belongsTo(MaterialStatus::class, 'status', 'slug');
+    }
+
+    function creator() {
+        return $this->belongsTo(User::class, 'created_by')->select(['id', 'last_name', 'first_name', 'email', 'avatar']);
     }
 
     public static function doDownload($id) {
@@ -393,7 +398,16 @@ class CustomerFile extends Model {
     // }
 
     public static function doUpdate($input, $record) {
-        dd(__METHOD__, $input, $record);
+        $file_original_name = \Str::replace($record->file_original_extension, '', $input['file_original_name']) . '.' . $record->file_original_extension;
+
+        $input = [
+            ...$input,
+            'file_original_name' => $file_original_name,
+        ];
+
+        $record->update($input);
+
+        return $record;
     }
 
     public static function doInsert($input, $record) {
