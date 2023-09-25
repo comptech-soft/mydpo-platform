@@ -49,8 +49,8 @@ class Folder extends Model  {
 
         $customer = Customer::find($customer_id);
 
-        if(!! $customer && ! $customer->default_folders_created )
-        {
+        // if(!! $customer && ! $customer->default_folders_created )
+        // {
             $defaultFolders = CustomerFolderDefault::whereNull('parent_id')->get();
 
             foreach($defaultFolders as $i => $defaultFolder) 
@@ -60,7 +60,7 @@ class Folder extends Model  {
 
             $customer->default_folders_created = 1;
             $customer->save();
-        }
+        // }
     }
 
     public static function CreateDefaultFolder($customer_id, $defaultFolder, $parent) {
