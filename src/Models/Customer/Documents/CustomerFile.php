@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Model;
 use MyDpo\Models\Customer\ELearning\MaterialStatus;
 use MyDpo\Models\Authentication\User;
 // use MyDpo\Models\RoleUser;
-// use MyDpo\Performers\CustomerFile\ChangeFilesStatus;
 // use MyDpo\Performers\CustomerFile\MoveFiles;
 // use MyDpo\Performers\CustomerFile\DeleteFiles;
 // use MyDpo\Events\CustomerDocuments\FilesUpload as FilesUploadEvent;
@@ -145,23 +144,20 @@ class CustomerFile extends Model {
 
     public static function doStatus($input, $record) {
 
-        dd(__METHOD__, $input, $record);
-        // foreach($input['files_ids'] as $i => $file_id)
-        // {
-        //     $data = [
-        //         'id' => $file_id,
-        //         'customer_id' => $input['customer_id'],
-        //         'folder_id' => $input['folder_id'],
-        //         'updated_at' => \Carbon\Carbon::now()->format('Y-m-d'),
-        //         'updated_by' => \Auth::user()->id,
-        //     ];
+        foreach($this->input['files_ids'] as $i => $file_id)
+        {
+            $record = self::find($file_id);
 
-        //     self::MoveFile($data);
-        // }
+            $record->status = $input['status'];
 
-        // return [
-        //     'folder_id' => $input['folder_id'],
-        // ];
+            // trimitere notificare
+
+            $record->save();
+        }
+
+        return [
+            'folder_id' => $input['folder_id'],
+        ];
     }
 
     public static function MoveFile($input) {
