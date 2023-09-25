@@ -392,6 +392,10 @@ class CustomerFile extends Model {
     //     }
     // }
 
+    public static function doUpdate($input, $record) {
+        dd(__METHOD__, $input, $record);
+    }
+
     public static function doInsert($input, $record) {
 
         foreach($input['files'] as $file)
