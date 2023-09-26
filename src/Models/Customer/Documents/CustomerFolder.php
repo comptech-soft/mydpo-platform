@@ -49,7 +49,7 @@ class CustomerFolder extends Folder {
     
     public static function doSaveorder($input, $record) {
         
-        $code = $this->input['platform'] . '-' . $this->input['customer_id'] . '-customer-' . ($input['type'] == 'documente' ? 'folders' : $input['type']) . '-order';
+        $code = $input['platform'] . '-' . $input['customer_id'] . '-customer-' . ($input['type'] == 'documente' ? 'folders' : $input['type']) . '-order';
 
         dd($code);
     }
