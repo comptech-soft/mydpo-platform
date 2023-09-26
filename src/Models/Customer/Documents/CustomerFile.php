@@ -70,6 +70,7 @@ class CustomerFile extends Model {
         'mystatus',
         'creator',
         'folder',
+        'customer',
     ];
 
     public function getIsImageAttribute() {
