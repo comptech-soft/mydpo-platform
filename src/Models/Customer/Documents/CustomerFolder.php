@@ -4,7 +4,7 @@ namespace MyDpo\Models\Customer\Documents;
 
 use Kalnoy\Nestedset\NodeTrait;
 
-use MyDpo\MyDpo\Models\Authentication\UserSetting;
+use MyDpo\Models\Authentication\UserSetting;
 
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
