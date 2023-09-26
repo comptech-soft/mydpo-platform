@@ -53,13 +53,12 @@ class CustomerFolder extends Folder {
         $code = $input['platform'] . '-' . $input['customer_id'] . '-customer-' . ($input['type'] == 'documente' ? 'folders' : $input['type']) . '-order';
 
         UserSetting::saveSetting([
-            'user_id' => $this->input['user_id'], 
-            'platform' => $this->input['platform'],
-            'customer_id' => $this->input['customer_id'], 
+            'user_id' => $input['user_id'], 
+            'platform' => $input['platform'],
+            'customer_id' => $input['customer_id'], 
             'code' =>  $code,
-            'value' => $this->input['items'],
+            'value' => $input['items'],
         ]);  
-
 
     }
 
