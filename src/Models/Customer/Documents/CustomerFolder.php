@@ -62,26 +62,26 @@ class CustomerFolder extends Folder {
 
     }
 
-    // function deepDelete() {
+    function DeleteWithFiles() {
 
-    //     foreach($this->files as $file)
-    //     {
-    //         $file->delete();
-    //     }
+        foreach($this->files as $file)
+        {
+            $file->delete();
+        }
         
-    //     $this->deleted = 1;
-    //     $this->save();
+        $this->deleted = 1;
+        $this->save();
 
-    //     foreach($this->children as $child)
-    //     {
-    //         $child->deepDelete();
-    //     }
-    // }
+        foreach($this->children as $child)
+        {
+            $child->DeleteWithFiles();
+        }
+    }
 
-    // public static function doDelete($input, $folder) {
-    //     $folder->deepDelete();
-    //     return $folder;
-    // }
+    public static function doDelete($input, $folder) {
+        $folder->DeleteWithFiles();
+        return $folder;
+    }
 
     public static function doInsert($input, $folder) {
 
