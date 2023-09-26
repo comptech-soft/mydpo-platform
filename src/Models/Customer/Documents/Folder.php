@@ -79,6 +79,7 @@ class Folder extends Model  {
             ],
             'order_no' => $defaultFolder->id == 11 ? 32767 : $defaultFolder->id,
             'deleted' => 0,
+            'created_by' => \Auth::user()->id,
         ];
 
         if( ! $folder )
