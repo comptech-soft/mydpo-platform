@@ -4,12 +4,13 @@ namespace MyDpo\Models\Customer\Documents;
 
 use Kalnoy\Nestedset\NodeTrait;
 
+use MyDpo\MyDpo\Models\Authentication\UserSetting;
+
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 
 use MyDpo\Rules\Customer\Livrabile\Documentsable\Folders\UniqueName;
-// use MyDpo\Models\CustomerFile;
-// use MyDpo\Rules\CustomerFolder\ValidName;
+
 // use MyDpo\Performers\CustomerFolder\GetAncestors;
 // use MyDpo\Performers\CustomerFolder\GetSummary;
 // use MyDpo\Performers\CustomerFolder\SaveFoldersAccess;
@@ -51,7 +52,15 @@ class CustomerFolder extends Folder {
         
         $code = $input['platform'] . '-' . $input['customer_id'] . '-customer-' . ($input['type'] == 'documente' ? 'folders' : $input['type']) . '-order';
 
-        dd($code);
+        UserSetting::saveSetting([
+            'user_id' => $this->input['user_id'], 
+            'platform' => $this->input['platform'],
+            'customer_id' => $this->input['customer_id'], 
+            'code' =>  $code,
+            'value' => $this->input['items'],
+        ]);  
+
+
     }
 
     // function deepDelete() {
