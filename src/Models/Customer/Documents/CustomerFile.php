@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 // use MyDpo\Helpers\Performers\Datatable\GetItems;
 // use MyDpo\Helpers\Performers\Datatable\DoAction;
 // use MyDpo\Models\Folder;
-// use MyDpo\Models\Customer\Customer;
+use MyDpo\Models\Customer\Customer;
 use MyDpo\Models\Customer\ELearning\MaterialStatus;
 use MyDpo\Models\Authentication\User;
 // use MyDpo\Models\RoleUser;
@@ -102,6 +102,10 @@ class CustomerFile extends Model {
 
     function creator() {
         return $this->belongsTo(User::class, 'created_by')->select(['id', 'last_name', 'first_name', 'email', 'avatar']);
+    }
+
+    public function customer() {
+        return $this->belongsTo(Customer::class, 'customer_id')->select(['id', 'name', 'logo', 'status', 'city_id']);
     }
 
     public static function doDownload($id) {
