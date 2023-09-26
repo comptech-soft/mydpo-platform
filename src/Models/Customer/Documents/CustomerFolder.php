@@ -39,7 +39,7 @@ class CustomerFolder extends Folder {
     }
 
     public function customer() {
-        return $this->belongsTo(Customer::class, 'customer_id')->select(['id', 'name']);
+        return $this->belongsTo(Customer::class, 'customer_id')->select(['id', 'name', 'logo', 'status', 'city_id']);
     }
 
     // public static function getAncestors($input) {
