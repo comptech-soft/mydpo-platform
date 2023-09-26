@@ -44,23 +44,17 @@ class Folder extends Model  {
         static::addGlobalScope( new NotdeletedScope() );
     }
 
-
     public static function CreateDefaultFolders($customer_id) {
-
         $customer = Customer::find($customer_id);
+        $defaultFolders = CustomerFolderDefault::whereNull('parent_id')->get();
 
-        // if(!! $customer && ! $customer->default_folders_created )
-        // {
-            $defaultFolders = CustomerFolderDefault::whereNull('parent_id')->get();
+        foreach($defaultFolders as $i => $defaultFolder) 
+        {
+            self::CreateDefaultFolder($customer_id, $defaultFolder, NULL);
+        }
 
-            foreach($defaultFolders as $i => $defaultFolder) 
-            {
-                self::CreateDefaultFolder($customer_id, $defaultFolder, NULL);
-            }
-
-            $customer->default_folders_created = 1;
-            $customer->save();
-        // }
+        $customer->default_folders_created = 1;
+        $customer->save();
     }
 
     public static function CreateDefaultFolder($customer_id, $defaultFolder, $parent) {

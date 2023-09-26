@@ -51,27 +51,11 @@ class CustomerFolder extends Folder {
     public static function doPermission($input, $action) {
         return CustomerFolderPermission::UpdatePermissions($input);
     }
-
-    // public static function GetRules($action, $input) {
-    //     if($action == 'delete')
-    //     {
-    //         return NULL;
-    //     }
-    //     $result = [
-    //         'customer_id' => 'required|exists:customers,id',
-            
-    //         'name' => [
-    //             'required',
-    //             new ValidName($input),
-    //         ],
-           
-    //     ];
-    //     return $result;
-    // }
-
-    // public static function doAction($action, $input) {
-    //     return (new DoAction($action, $input, __CLASS__))->Perform();
-    // }
+    
+    public static function doSaveorder($input, $record) {
+       
+        dd($input, $record);
+    }
 
     // function deepDelete() {
 
