@@ -12,7 +12,6 @@ use MyDpo\Rules\Customer\Livrabile\Documentsable\Folders\UniqueName;
 // use MyDpo\Rules\CustomerFolder\ValidName;
 // use MyDpo\Performers\CustomerFolder\GetAncestors;
 // use MyDpo\Performers\CustomerFolder\GetSummary;
-// use MyDpo\Performers\CustomerFolder\SaveOrderdFolders;
 // use MyDpo\Performers\CustomerFolder\SaveFoldersAccess;
 
 class CustomerFolder extends Folder {
@@ -44,17 +43,15 @@ class CustomerFolder extends Folder {
     //     return (new GetSummary($input))->Perform();
     // }
 
-    // public static function saveOrderdFolders($input) {
-    //     return (new SaveOrderdFolders($input))->Perform();
-    // }
-
     public static function doPermission($input, $action) {
         return CustomerFolderPermission::UpdatePermissions($input);
     }
     
     public static function doSaveorder($input, $record) {
-       
-        dd($input, $record);
+        
+        $code = $this->input['platform'] . '-' . $this->input['customer_id'] . '-customer-' . ($input['type'] == 'documente' ? 'folders' : $input['type']) . '-order';
+
+        dd($code);
     }
 
     // function deepDelete() {
