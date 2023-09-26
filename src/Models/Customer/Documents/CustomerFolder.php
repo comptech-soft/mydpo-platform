@@ -5,6 +5,7 @@ namespace MyDpo\Models\Customer\Documents;
 use Kalnoy\Nestedset\NodeTrait;
 
 use MyDpo\Models\Authentication\UserSetting;
+use MyDpo\Models\Customer\Customer;
 
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
@@ -21,7 +22,8 @@ class CustomerFolder extends Folder {
     
     protected $with = [ 
         'children',
-        'files'
+        'files',
+        'customer'
     ];
     
     function files() {        
@@ -34,6 +36,10 @@ class CustomerFolder extends Folder {
 
         return $this->hasMany(CustomerFile::class, 'folder_id')
             ->whereRaw("((`customers-files`.`platform` = 'b2b') OR ( (`customers-files`.`platform` = 'admin') AND (`customers-files`.`status` <> 'protected')))");
+    }
+
+    public function customer() {
+        return $this->belongsTo(Customer::class, 'customer_id')->select(['id', 'name']);
     }
 
     // public static function getAncestors($input) {
