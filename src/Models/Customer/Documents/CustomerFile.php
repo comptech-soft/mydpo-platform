@@ -529,4 +529,16 @@ class CustomerFile extends Model {
         }
     }
 
+    public static function GetQuery() {
+        return 
+            self::query()
+            ->leftJoin(
+                'customers-folders',
+                function($q) {
+                    $q->on('customers-folders.id', '=', 'customers-files.folder_id');
+                }
+            )
+            ->select('customers-files.*');
+    }
+
 }
