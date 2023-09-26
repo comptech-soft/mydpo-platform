@@ -69,6 +69,7 @@ class CustomerFile extends Model {
     protected $with = [
         'mystatus',
         'creator',
+        'folder',
     ];
 
     public function getIsImageAttribute() {
@@ -92,7 +93,7 @@ class CustomerFile extends Model {
     } 
 
     function folder() {
-        return $this->belongsTo(Folder::class, 'folder_id');
+        return $this->belongsTo(Folder::class, 'folder_id')->select(['id', 'name']);
     }
 
     function mystatus() {
