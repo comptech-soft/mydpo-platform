@@ -64,7 +64,7 @@ class Role extends Model {
 
     public static function SaveDashboardSettings($role_id, $items) {
 
-        $role = self::find($role->id);
+        $role = self::find($role_id);
 
         $permissions = !! $role->permissions ? [...$role->permissions] : [];
 
