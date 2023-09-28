@@ -23,7 +23,7 @@ class Customer_base extends Model {
 
     protected $casts = [
         'logo' => 'json',
-        'logo' => 'props',
+        'props' => 'json',
         'city_id' => 'integer',
         'deleted' => 'integer',
         'created_by' => 'integer',
