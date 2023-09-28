@@ -3,7 +3,8 @@
 namespace MyDpo\Models\Customer\Dashboard;
 
 use Illuminate\Database\Eloquent\Model;
-use MyDpo\Helpers\Performers\Datatable\GetItems;
+use MyDpo\Models\Authentication\Role;
+// use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Traits\Actionable;
 
 class Item extends Model {
@@ -117,36 +118,7 @@ class Item extends Model {
      * Vizibilitatea pe roluri a itemurilor
      */
     public static function doRolessettingsave($input) {
-
-        dd($input);
-
-        foreach($input['dashboard'] as $i => $item)
-        {
-            $record = self::find($item['id']);
-
-            if(! $record->props )
-            {
-                $record->props = [];
-            }
-
-            $settings = array_key_exists('settings', $record->props) ? $record->props['settings'] : [];
-
-            $settings = [
-                ...$settings,
-                'visible' => $item['visible'],
-                'disabled' => $item['disabled'],
-            ];
-
-            $record->props = [
-                ...$record->props,
-                'settings' => $settings,
-            ];
-
-            $record->save();
-
-        }
-
-        return self::getByColumns();
+        return Role::SaveDashboardSettings($input['role_id'], $input['dashboard']);
     }
 
 }
