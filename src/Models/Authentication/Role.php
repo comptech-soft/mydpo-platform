@@ -69,8 +69,8 @@ class Role extends Model {
         $permissions = !! $role->permissions ? [...$role->permissions] : [];
 
         $role->permissions = [
-            'dashboard' => $items,
             ...$permissions,
+            'dashboard' => $items,
         ];
 
         $role->save();
