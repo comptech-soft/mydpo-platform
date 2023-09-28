@@ -113,4 +113,40 @@ class Item extends Model {
         return self::getByColumns();
     }
 
+    /**
+     * Vizibilitatea pe roluri a itemurilor
+     */
+    public static function doRolessettingsave($input) {
+
+        dd($input);
+
+        foreach($input['dashboard'] as $i => $item)
+        {
+            $record = self::find($item['id']);
+
+            if(! $record->props )
+            {
+                $record->props = [];
+            }
+
+            $settings = array_key_exists('settings', $record->props) ? $record->props['settings'] : [];
+
+            $settings = [
+                ...$settings,
+                'visible' => $item['visible'],
+                'disabled' => $item['disabled'],
+            ];
+
+            $record->props = [
+                ...$record->props,
+                'settings' => $settings,
+            ];
+
+            $record->save();
+
+        }
+
+        return self::getByColumns();
+    }
+
 }
