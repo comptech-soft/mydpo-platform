@@ -518,7 +518,10 @@ class CustomerFile extends Model {
             }
             else
             {
-                $record->update($input);
+                $record->update([
+                    'id' => $record->id,
+                    ...$input
+                ]);
             }
 
             
