@@ -23,6 +23,7 @@ class Customer_base extends Model {
 
     protected $casts = [
         'logo' => 'json',
+        'logo' => 'props',
         'city_id' => 'integer',
         'deleted' => 'integer',
         'created_by' => 'integer',
@@ -44,6 +45,7 @@ class Customer_base extends Model {
         'postal_code',
         'address',
         'vat',
+        'props',
         'newsletter',
         'locale',
         'status',
@@ -132,11 +134,7 @@ class Customer_base extends Model {
     function team() {
         return $this->hasMany(UserCustomer::class, 'customer_id');
     }
-
-
-
-    
-
+   
     public static function getItems($input) {
         return (new GetItems($input, self::query(), __CLASS__))->Perform();
     }
@@ -341,4 +339,19 @@ class Customer_base extends Model {
         }
     }
 
+    public static function SaveDashboardSettings($customer_id, $items) {
+
+        $customer = self::find($customer_id);
+
+        $props = !! $role->props ? [...$role->props] : [];
+
+        $customer->props = [
+            ...$props,
+            'dashboard' => $items,
+        ];
+
+        $customer->save();
+
+        return $customer->props;
+    }
 }

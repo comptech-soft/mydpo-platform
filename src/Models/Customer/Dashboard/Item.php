@@ -4,7 +4,7 @@ namespace MyDpo\Models\Customer\Dashboard;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Models\Authentication\Role;
-// use MyDpo\Helpers\Performers\Datatable\GetItems;
+use MyDpo\Models\Customer\Customer_base as Customer;
 use MyDpo\Traits\Actionable;
 
 class Item extends Model {
@@ -120,5 +120,13 @@ class Item extends Model {
     public static function doRolessettingsave($input) {
         return Role::SaveDashboardSettings($input['role_id'], $input['dashboard']);
     }
+
+    /**
+     * Vizibilitatea pe clienti a itemurilor
+     */
+    public static function doCustomerssettingsave($input) {
+        return Customer::SaveDashboardSettings($input['customer_id'], $input['dashboard']);
+    }
+    
 
 }
