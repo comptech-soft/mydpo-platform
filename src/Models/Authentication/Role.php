@@ -64,35 +64,20 @@ class Role extends Model {
 
     public static function SaveDashboardSettings($role_id, $items) {
 
-        dd($role_id, $items);
+        $role = self::find($role->id);
 
-        foreach($input['dashboard'] as $i => $item)
-        {
-            $record = self::find($item['id']);
+        $permissions = !! $role->permissions ? [...$role->permissions] : [];
 
-            if(! $record->props )
-            {
-                $record->props = [];
-            }
+        $role->permissions = [
+            'dashboard' => $items,
+            ...$permissions,
+        ];
 
-            $settings = array_key_exists('settings', $record->props) ? $record->props['settings'] : [];
+        $role->save();
 
-            $settings = [
-                ...$settings,
-                'visible' => $item['visible'],
-                'disabled' => $item['disabled'],
-            ];
+        return $items;
 
-            $record->props = [
-                ...$record->props,
-                'settings' => $settings,
-            ];
-
-            $record->save();
-
-        }
-
-        return self::getByColumns();;
+       
     }
 
 

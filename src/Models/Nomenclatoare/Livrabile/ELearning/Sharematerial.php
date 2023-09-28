@@ -174,7 +174,7 @@ class Sharematerial extends Model {
 
         if(!! $this->date_from && !! $this->date_to)
         {
-            return \Carbon\Carbon::createFromFormat('Y-m-d', $this->date_from)->format('d.m.Y') . ' - ' . \Carbon\Carbon::createFromFormat('Y-m-d', $this->date_to)->format('d.m.Y');;
+            return \Carbon\Carbon::createFromFormat('Y-m-d', $this->date_from)->format('d.m.Y') . ' - ' . \Carbon\Carbon::createFromFormat('Y-m-d', $this->date_to)->format('d.m.Y');
         }
 
         if(!! $this->date_from)

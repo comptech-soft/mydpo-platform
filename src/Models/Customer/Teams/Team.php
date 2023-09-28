@@ -69,7 +69,7 @@ class Team extends Model {
                 }
             )
             ->whereHas('user')
-            ->select('users-customers.*');;
+            ->select('users-customers.*');
     }
 
 }
