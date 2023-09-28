@@ -76,8 +76,6 @@ class Role extends Model {
         $role->save();
 
         return $items;
-
-       
     }
 
 
