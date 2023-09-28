@@ -343,7 +343,7 @@ class Customer_base extends Model {
 
         $customer = self::find($customer_id);
 
-        $props = !! $role->props ? [...$role->props] : [];
+        $props = !! $customer->props ? [...$customer->props] : [];
 
         $customer->props = [
             ...$props,
