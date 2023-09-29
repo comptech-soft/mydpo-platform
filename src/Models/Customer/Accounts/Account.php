@@ -296,6 +296,17 @@ class Account extends Model {
     }
 
     public static function SaveDashboardSettings($user_id, $customer_id, $items) {
-        dd($user_id, $customer_id, $items);
+        $account = self::where('customer_id', $customer_id)->where('user_id', $user_id)->first();
+
+        $props = !! $account->props ? [...$account->props] : [];
+
+        $account->props = [
+            ...$props,
+            'dashboard' => $items,
+        ];
+
+        $account->save();
+
+        return $account->props;
     }
 }
