@@ -5,6 +5,7 @@ namespace MyDpo\Models\Customer\Dashboard;
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Models\Authentication\Role;
 use MyDpo\Models\Customer\Customer_base as Customer;
+use MyDpo\Models\Customer\Accounts\Account;
 use MyDpo\Traits\Actionable;
 
 class Item extends Model {
@@ -126,6 +127,13 @@ class Item extends Model {
      */
     public static function doCustomerssettingsave($input) {
         return Customer::SaveDashboardSettings($input['customer_id'], $input['dashboard']);
+    }
+
+    /**
+     * Vizibilitatea pe accounts a itemurilor
+     */
+    public static function doAccountssettingsave($input) {
+        return Account::SaveDashboardSettings($input['user_id'], $input['customer_id'], $input['dashboard']);
     }
     
 

@@ -294,4 +294,8 @@ class Account extends Model {
             }
         }
     }
+
+    public static function SaveDashboardSettings($user_id, $customer_id, $items) {
+        dd($user_id, $customer_id, $items);
+    }
 }
