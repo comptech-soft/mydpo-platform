@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Helpers\Performers\Datatable\DoAction;
-use MyDpo\Rules\CustomerDepartment\UniqueName;
+use MyDpo\Rules\Customer\Entities\Department\UniqueName;
 
 use MyDpo\Traits\Itemable;
 

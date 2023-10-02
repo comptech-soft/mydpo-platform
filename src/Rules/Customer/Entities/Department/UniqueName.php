@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Rules\CustomerDepartment;
+namespace MyDpo\Rules\Customer\Entities\Department;
 
 use Illuminate\Contracts\Validation\Rule;
 use MyDpo\Models\Customer\Departments\Department;
