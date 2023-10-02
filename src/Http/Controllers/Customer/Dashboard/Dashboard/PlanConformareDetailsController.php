@@ -12,7 +12,7 @@ class PlanConformareDetailsController extends Controller {
     
     public function index($plan_id, Request $r) {
 
-        if( ! ($plan = CustomerPlanconformare::where('id', $plan_id)->without(['department'])->first()) )
+        if( ! ($plan = Planconformare::where('id', $plan_id)->without(['department'])->first()) )
         {
             return redirect()->back();
         }
