@@ -5,10 +5,10 @@ namespace MyDpo\Models\Customer\Planuriconformare;
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
+use MyDpo\Traits\Exportable;
 use MyDpo\Models\Livrabile\Planuriconformare\Planconformare as Structura;
 use MyDpo\Models\Customer\Departments\Department;
-use MyDpo\Traits\Exportable;
-use MyDpo\Exports\CustomerPlanconformare\Exporter;
+use MyDpo\Exports\Customer\Livrabile\Planconformare\Exporter;
 
 class Planconformare extends Model {
 
