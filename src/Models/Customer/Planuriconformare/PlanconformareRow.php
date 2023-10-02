@@ -62,7 +62,7 @@ class PlanconformareRow extends Model {
     ];
 
     public function mychildren() {
-        return $this->hasMany(CustomerPlanconformareRow::class, 'parent_id', 'plan_id');
+        return $this->hasMany(PlanconformareRow::class, 'parent_id', 'plan_id');
     }
 
     public function children()
