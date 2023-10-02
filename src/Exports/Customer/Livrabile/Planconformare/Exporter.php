@@ -6,8 +6,8 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithStrictNullComparison;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\FromView;
-use MyDpo\Models\Customer\CustomerPlanconformare;
-use MyDpo\Models\Customer\CustomerPlanconformareRow;
+use MyDpo\Models\Customer\Planuriconformare\Planconformare;
+use MyDpo\Models\Customer\Planuriconformare\PlanconformareRow;
 use Illuminate\Contracts\View\View;
 
 class Exporter implements FromView, WithStrictNullComparison, ShouldAutoSize {
@@ -19,7 +19,7 @@ class Exporter implements FromView, WithStrictNullComparison, ShouldAutoSize {
 
     public function __construct($input) {
         $this->input = $input;   
-        $this->plan = CustomerPlanconformare::find($this->input['plan_id']); 
+        $this->plan = Planconformare::find($this->input['plan_id']); 
         $this->plan->CalculateTree();
 
         $this->html_styles = [
@@ -50,7 +50,7 @@ class Exporter implements FromView, WithStrictNullComparison, ShouldAutoSize {
     }
 
     public function view(): View {
-        $nodes = CustomerPlanconformareRow::where('customer_plan_id', $this->plan->id)->whereNull('parent_id')->orderBy('order_no')->get();
+        $nodes = PlanconformareRow::where('customer_plan_id', $this->plan->id)->whereNull('parent_id')->orderBy('order_no')->get();
 
         $this->records = [];
 
