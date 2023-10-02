@@ -27,7 +27,6 @@ class PlanConformareController extends Controller {
     }
 
     public function doAction($action, Request $r) {
-        dd(__METHOD__);
         return Planconformare::doAction($action, $r->all());
     }
 
