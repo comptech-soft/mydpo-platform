@@ -92,6 +92,7 @@ class Planconformare extends Model {
 
     public static function doInsert($input, $record) { 
 
+        dd(__METHOD__, $input);
         $current_lines = Structura::whereNull('parent_id')->get()->toArray();
 
         $input = [
