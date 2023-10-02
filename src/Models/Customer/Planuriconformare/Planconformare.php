@@ -119,7 +119,7 @@ class Planconformare extends Model {
     }
 
     public function DeleteRows() {
-        $rows = CustomerPlanconformareRow::where('customer_plan_id', $this->id)->get();
+        $rows = PlanconformareRow::where('customer_plan_id', $this->id)->get();
         foreach($rows as $i => $row)
         {
             $row->delete();
@@ -148,7 +148,7 @@ class Planconformare extends Model {
        
             foreach($input['rows'] as $i => $data)
             {
-                $row = CustomerPlanconformareRow::find($data['id']);
+                $row = PlanconformareRow::find($data['id']);
                 $row->update($data);
 
                 $result[] = $row;
@@ -172,7 +172,7 @@ class Planconformare extends Model {
         {
             foreach($input['nodes'] as $id => $node)
             {
-                $row = CustomerPlanconformareRow::find($id);
+                $row = PlanconformareRow::find($id);
 
                 $row->value_inceput_an = $node['value_inceput_an'];
                 $row->value_final_s1 = $node['value_final_s1'];
@@ -216,18 +216,18 @@ class Planconformare extends Model {
                 'parent_id' => (!! $row->parent_id ?  $this->id . '#' . $row->parent_id : NULL),
             ];
             
-            CustomerPlanconformareRow::create($input);
+            PlanconformareRow::create($input);
         }
     }
 
     public function GetRowsAsTable() {
         $r = [];
-        CustomerPlanconformareRow::AddRows($this->id, NULL, $r, 1);
+        PlanconformareRow::AddRows($this->id, NULL, $r, 1);
         return $r;
     }
 
     public function GetTree() {
-        $nodes = CustomerPlanconformareRow::where('customer_plan_id', $this->id)->whereNull('parent_id')->with(['children'])->get();
+        $nodes = PlanconformareRow::where('customer_plan_id', $this->id)->whereNull('parent_id')->with(['children'])->get();
         return $nodes->toArray();
     }
 
@@ -235,7 +235,7 @@ class Planconformare extends Model {
      * Actualizeaza planul
      */
     public function UpdateSummary() {
-        $nodes = CustomerPlanconformareRow::where('customer_plan_id', $this->id)->whereNull('parent_id')->get();
+        $nodes = PlanconformareRow::where('customer_plan_id', $this->id)->whereNull('parent_id')->get();
 
         $sum_inceput_an = $sum_final_s1 = $sum_final_s2 = 0;
 
@@ -264,7 +264,7 @@ class Planconformare extends Model {
      */
 
     public function CalculateTree() {
-        CustomerPlanconformareRow::CalculateTree($this->id);
+        PlanconformareRow::CalculateTree($this->id);
         $this->UpdateSummary();
     }
 
