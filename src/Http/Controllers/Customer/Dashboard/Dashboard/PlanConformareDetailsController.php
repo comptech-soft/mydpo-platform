@@ -10,14 +10,14 @@ use MyDpo\Models\Customer\Planuriconformare\Planconformare;
 
 class PlanConformareDetailsController extends Controller {
     
-    public function index($plan_id, Request $r) {
+    public function index($customer_id, $plan_id, Request $r) {
 
         if( ! ($plan = Planconformare::where('id', $plan_id)->without(['department'])->first()) )
         {
             return redirect()->back();
         }
 
-        $customer = Customer::find($plan->customer_id);
+        $customer = Customer::find($customer_id);
                
         return Index::View(
             styles: ['css/app.css'],
