@@ -3,7 +3,7 @@
 namespace MyDpo\Rules\CustomerDepartment;
 
 use Illuminate\Contracts\Validation\Rule;
-use MyDpo\Models\Customer\CustomerDepartment;
+use MyDpo\Models\Customer\Departments\Department;
 
 class UniqueName implements Rule {
 
@@ -16,7 +16,7 @@ class UniqueName implements Rule {
 
     public function passes($attribute, $value) {   
 
-        $q = CustomerDepartment::where('departament', $this->input['departament'])->where('customer_id', $this->input['customer_id']);
+        $q = Department::where('departament', $this->input['departament'])->where('customer_id', $this->input['customer_id']);
 
         if(array_key_exists('id', $this->input) && $this->input['id'])
         {
@@ -25,12 +25,7 @@ class UniqueName implements Rule {
 
         $this->record = $q->first();
 
-        if($this->record)
-        {
-            return FALSE;
-        }
-        
-        return TRUE;
+        return ! $this->record;
     }
 
     public function message()
