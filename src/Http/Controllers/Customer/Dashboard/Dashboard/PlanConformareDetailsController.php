@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Http\Controllers\Customer;
+namespace MyDpo\Http\Controllers\Customer\Dashboard\Dashboard;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -8,13 +8,11 @@ use MyDpo\Core\Http\Response\Index;
 use MyDpo\Models\Customer\Customer;
 use MyDpo\Models\Customer\Customer\CustomerPlanconformare;
 
-class CustomerPlanConformareDetailsController extends Controller {
+class PlanConformareDetailsController extends Controller {
     
     public function index($plan_id, Request $r) {
 
-        $plan = CustomerPlanconformare::where('id', $plan_id)->without(['department'])->first();
-
-        if( ! $plan )
+        if( ! ($plan = CustomerPlanconformare::where('id', $plan_id)->without(['department'])->first()) )
         {
             return redirect()->back();
         }
