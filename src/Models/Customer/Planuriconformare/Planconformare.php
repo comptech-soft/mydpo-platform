@@ -91,13 +91,9 @@ class Planconformare extends Model {
     }
 
     public static function doInsert($input, $record) { 
-
-        dd(__METHOD__, $input);
-        $current_lines = Structura::whereNull('parent_id')->get()->toArray();
-
-        $input = [
+        $record = self::create([
             ...$input,
-            'current_lines' => $current_lines,
+            'current_lines' => Structura::whereNull('parent_id')->get()->toArray(),
             'columns' => Structura::GetColumns(),
             'pondere_total' => Structura::TotalPondere(),
             'value_inceput_an' => 0,
@@ -106,9 +102,7 @@ class Planconformare extends Model {
             'realizat_inceput_an' => 0,
             'realizat_final_s1' => 0,
             'realizat_final_s2' => 0,
-        ];
-
-        $record = self::create($input);
+        ]);
 
         $record->CreateRows();
 
