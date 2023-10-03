@@ -22,7 +22,6 @@ class TipRegistru extends Model {
     
     protected $casts = [
         'id' => 'integer',
-
         'category_id' => 'integer',
         'props' => 'json',
         'body' => 'json',
@@ -36,10 +35,8 @@ class TipRegistru extends Model {
         'created_by' => 'integer',
         'updated_by' => 'integer',
         'deleted_by' => 'integer',
-
         'on_registre_page' => 'integer',
         'on_audit_page' => 'integer',
-
         'has_nr_crt_column' => 'integer',
         'has_visibility_column' => 'integer',
         'has_status_column' => 'integer',
@@ -118,16 +115,13 @@ class TipRegistru extends Model {
                 'registers.name', 
                 'registers.category_id', 
                 'registers.description', 
-
                 'registers.on_registre_page', 
                 'registers.on_audit_page',
-
                 'registers.has_nr_crt_column',
                 'registers.has_visibility_column',
                 'registers.has_status_column',
                 'registers.has_files_column',
                 'registers.has_department_column',
-
                 'registers.props'
             ])
             ->withCount(['columns' => function($q) {

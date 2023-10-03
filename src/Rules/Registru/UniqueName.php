@@ -3,7 +3,7 @@
 namespace MyDpo\Rules\Registru;
 
 use Illuminate\Contracts\Validation\Rule;
-use MyDpo\Models\Livrabile\TipRegistru;
+use MyDpo\Models\Livrabile\Registre\TipRegistru;
 
 class UniqueName implements Rule {
 
@@ -30,8 +30,7 @@ class UniqueName implements Rule {
         return ! $this->record;
     }
 
-    public function message()
-    {
+    public function message() {
         return 'Registrul (' . $this->input['name'] . ') este deja definit.';
     }
 }
