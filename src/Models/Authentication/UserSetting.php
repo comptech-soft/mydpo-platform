@@ -39,7 +39,7 @@ class UserSetting extends Model {
             return $record->value;
         }
 
-        
+        dd($user);
         
         // $settings = $user->settings()->where('code', )->first())
     }
