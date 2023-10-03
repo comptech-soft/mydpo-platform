@@ -85,7 +85,7 @@ class TipRegistru extends Model {
     ];
 
     protected $columnsDefinition = [
-        'model' => \MyDpo\Models\Livrabile\TipRegistruColoana::class,
+        'model' => \MyDpo\Models\Livrabile\Registre\TipRegistruColoana::class,
         'foreign_key' => 'register_id',
     ];
 
