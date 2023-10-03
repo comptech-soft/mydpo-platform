@@ -5,8 +5,8 @@ namespace MyDpo\Http\Controllers\Nomenclatoare\Livrabile\Registre;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
-use MyDpo\Models\Livrabile\TipRegistru;
-use MyDpo\Models\Livrabile\TipRegistruColoana;
+use MyDpo\Models\Livrabile\Registre\TipRegistru;
+use MyDpo\Models\Livrabile\Registre\TipRegistruColoana;
 
 class TipRegistruColoaneController extends Controller {
     
@@ -14,7 +14,7 @@ class TipRegistruColoaneController extends Controller {
 
         if(! ($tip_registru = TipRegistru::find($tip_registru_id)) )
         {
-            return redirect('admin/tipuri-registre');
+            return redirect('tipuri-registre');
         }
 
         return Index::View(
