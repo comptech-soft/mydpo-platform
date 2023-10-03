@@ -4,6 +4,7 @@ namespace MyDpo\Models\Authentication;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Performers\UserSetting\SaveSetting;
+use MyDpo\Models\Customer\Accounts\Account;
 
 class UserSetting extends Model {
     
@@ -39,7 +40,10 @@ class UserSetting extends Model {
             return $record->value;
         }
 
-        dd($user);
+        $accounts = Account::where('user_id', $user->id)->get();
+
+
+        dd($accounts);
         
         // $settings = $user->settings()->where('code', )->first())
     }
