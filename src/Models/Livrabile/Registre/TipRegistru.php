@@ -179,7 +179,7 @@ class TipRegistru extends Model {
                 )
                 v_count_registre
             ON `registers`.`id` = v_count_registre.register_id
-            WHERE `registers`." . ($page == 'registre' ? 'on_registre_page ' : 'on_audit_page ') . "> 0
+            WHERE ((`registers`.`deleted` = 0) OR ((`registers`.`deleted` IS NULL)) AND (`registers`." . ($page == 'registre' ? 'on_registre_page ' : 'on_audit_page ') . "> 0)
         ";
 
         return \DB::select($sql);
