@@ -48,9 +48,14 @@ class UserSetting extends Model {
         }
 
         $account = $accounts->first();
-        dd($account);
+
+        self::saveActiveCustomer([
+            'user_id' => $user->id,
+            'platform' => config('app.platform'),
+            'customer_id' => $account->customer_id,
+        ]);
         
-        // $settings = $user->settings()->where('code', )->first())
+        return $account->customer_id;
     }
 
 
