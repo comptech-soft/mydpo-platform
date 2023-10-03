@@ -42,8 +42,13 @@ class UserSetting extends Model {
 
         $accounts = Account::where('user_id', $user->id)->get();
 
+        if($accounts->count() == 0)
+        {
+            return NULL;
+        }
 
-        dd($accounts);
+        $account = $accounts->first();
+        dd($account);
         
         // $settings = $user->settings()->where('code', )->first())
     }
