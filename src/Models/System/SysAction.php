@@ -169,23 +169,18 @@ class SysAction extends Model {
 
     protected function MakeVisibility($user) {
 
-        if( config('app.platform') == 'admin')
-        {   
-            $action_role = $this->roles()
-                ->wherePlatform(config('app.platform'))
-                ->where('role_id', $user->role->id)
-                ->first();
+        $action_role = $this->roles()
+            ->wherePlatform(config('app.platform'))
+            ->where('role_id', $user->role->id)
+            ->first();
 
-            $children = $this->MakeAction($user);
+        $children = $this->MakeAction($user);
 
-            return [
-                'visible' => !! $action_role ? $action_role->attributes['visible'] : 0,
-                'disabled' => !! $action_role ? $action_role->attributes['disabled'] : 1,
-                ...$children,
-            ];
-        }
-
-        return [];
+        return [
+            'visible' => !! $action_role ? $action_role->attributes['visible'] : 0,
+            'disabled' => !! $action_role ? $action_role->attributes['disabled'] : 1,
+            ...$children,
+        ];
     }
     
 }
