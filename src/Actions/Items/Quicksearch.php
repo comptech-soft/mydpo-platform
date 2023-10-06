@@ -37,7 +37,7 @@ class Quicksearch {
                 else 
                 {
                     // Nu incepe cu * ==> cautam doar la inceput
-                    $value = \DB::connection()->getPdo()->quote($value . '%');
+                    $value = \DB::connection()->getPdo()->quote('%' . $value . '%');
                 }
             
                 foreach($search['columns'] as $j => $column)
