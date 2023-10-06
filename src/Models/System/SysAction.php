@@ -108,7 +108,6 @@ class SysAction extends Model {
         }
 
         return $result;
-        
     }
 
     public function Settingrolesvisibility($input) {
@@ -134,7 +133,7 @@ class SysAction extends Model {
     }
 
     public static function getActions() {
-        
+
         $user = \Auth::user();
 
         if( ! $user )
@@ -155,7 +154,6 @@ class SysAction extends Model {
         return $r;
     }
 
-
     protected function MakeAction($user) {
         $r = [];
 
@@ -169,10 +167,17 @@ class SysAction extends Model {
 
     protected function MakeVisibility($user) {
 
-        $action_role = $this->roles()
-            ->wherePlatform(config('app.platform'))
-            ->where('role_id', $user->role->id)
-            ->first();
+        if($user->role)
+        {
+            $action_role = $this->roles()
+                ->wherePlatform(config('app.platform'))
+                ->where('role_id', $user->role->id)
+                ->first();
+        }
+        else
+        {
+            $action_role = NULL;
+        }
 
         $children = $this->MakeAction($user);
 
