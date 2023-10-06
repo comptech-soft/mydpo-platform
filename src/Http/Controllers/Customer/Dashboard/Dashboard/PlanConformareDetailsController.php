@@ -28,7 +28,7 @@ class PlanConformareDetailsController extends Controller {
                 'customer' => $customer,
                 'rows' => $plan->GetRowsAsTable(),
                 'tree' => $plan->GetTree(),
-                // 'customer_user' => \Auth::user(),
+                'customer_user' => \Auth::user(),
             ],
         );        
     }
