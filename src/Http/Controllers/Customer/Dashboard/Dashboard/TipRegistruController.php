@@ -9,7 +9,7 @@ use MyDpo\Models\Customer\Customer;
 use MyDpo\Models\Livrabile\TipRegistru;
 use MyDpo\Models\Customer\Customer\Registre\Registru;
 
-class CustomerTipRegistruController extends Controller {
+class TipRegistruController extends Controller {
     
     public function index($page, $customer_id, $tip_id, Request $r) {
 
