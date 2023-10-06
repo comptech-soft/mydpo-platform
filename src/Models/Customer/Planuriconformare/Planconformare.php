@@ -262,10 +262,13 @@ class Planconformare extends Model {
      * Calculeaza valorile pentru toate randurile
      * Actualizeaza planul
      */
-
     public function CalculateTree() {
         PlanconformareRow::CalculateTree($this->id);
         $this->UpdateSummary();
+    }
+
+    public static function GetQuery() {
+        return config('app.platform') == 'admin' ? self::query() : self::query()->whereVisibilitey(1);  
     }
 
 }
