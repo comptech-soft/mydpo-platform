@@ -268,7 +268,7 @@ class Planconformare extends Model {
     }
 
     public static function GetQuery() {
-        return config('app.platform') == 'admin' ? self::query() : self::query()->whereVisibilitey(1);  
+        return config('app.platform') == 'admin' ? self::query() : self::query()->whereVisibility(1);  
     }
 
 }
