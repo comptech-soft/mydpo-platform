@@ -30,6 +30,7 @@ class CursuriDetailsController extends Controller {
                 'customer' => Customer::find($customer_id),
                 'customer_curs_id' => $customer_curs_id,
                 'customer_curs' => $customer_curs,
+                'customer_user' => \Auth::user(),
             ],
         );     
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Http\Controllers\Customer\Centralizatoare;
+namespace MyDpo\Http\Controllers\Customer\Dashboard\Dashboard;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -38,10 +38,9 @@ class CustomerTipCentralizatorController extends Controller {
                 'customer' => $customer,
                 'tip' => $tip,
                 'model' => 'Customercentralizatoare',
+                'customer_user' => \Auth::user(),
             ],
-        );    
-
-      
+        );
     }
 
     public function getRecords(Request $r) {
