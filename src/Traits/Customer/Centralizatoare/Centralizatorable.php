@@ -2,7 +2,7 @@
 
 namespace MyDpo\Traits\Customer\Centralizatoare;
 
-use MyDpo\Models\Customer\CustomerDepartment;
+use MyDpo\Models\Customer\Departments\Department;
 use MyDpo\Models\Customer\Centralizatoare\Centralizator;
 
 trait Centralizatorable {
@@ -28,7 +28,7 @@ trait Centralizatorable {
      * Relatie catre departament
      */
     public function department() {
-        return $this->belongsTo(CustomerDepartment::class, 'department_id')->select(['id', 'departament']);
+        return $this->belongsTo(Department::class, 'department_id')->select(['id', 'departament']);
     }
 
     /**

@@ -2,7 +2,7 @@
 
 namespace MyDpo\Traits\Customer\Centralizatoare;
 
-use MyDpo\Models\Customer\CustomerDepartment;
+use MyDpo\Models\Customer\Departments\Department;
 use MyDpo\Models\Livrabile\TipCentralizator;
 use MyDpo\Models\Livrabile\TipCentralizatorColoana;
 
@@ -35,7 +35,7 @@ trait Rowable {
     }
 
     public function department() {
-        return $this->belongsTo(CustomerDepartment::class, 'department_id');
+        return $this->belongsTo(Department::class, 'department_id');
     }
 
     /**

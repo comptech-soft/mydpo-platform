@@ -10,7 +10,7 @@ use MyDpo\Traits\Numberable;
 use MyDpo\Traits\Customer\Centralizatoare\Centralizatorable;
 
 use MyDpo\Models\Livrabile\TipRegistru;
-use MyDpo\Models\Customer\CustomerDepartment;
+use MyDpo\Models\Customer\Departments\Department;
 
 class Registru extends Model {
 
@@ -159,7 +159,7 @@ class Registru extends Model {
                 /**
                  * Creez departamentul
                  */
-                $department_record = CustomerDepartment::CreateIfNecessary($old_customer_id, $new_customer_id, $old_department_id);
+                $department_record = Department::CreateIfNecessary($old_customer_id, $new_customer_id, $old_department_id);
 
                 /**
                  * Creez noul rand

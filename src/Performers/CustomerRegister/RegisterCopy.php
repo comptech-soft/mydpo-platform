@@ -6,7 +6,7 @@ use MyDpo\Helpers\Perform;
 use MyDpo\Models\CustomerRegister;
 use MyDpo\Models\CustomerRegistruRow;
 use MyDpo\Models\CustomerRegistruRowValue;
-use MyDpo\Models\CustomerDepartment;
+use MyDpo\Models\Customer\Departments\Department;
 
 class RegisterCopy extends Perform {
 
@@ -97,13 +97,13 @@ class RegisterCopy extends Perform {
 
     public function CreateDrpartament($departament_id, $customer_id) {
 
-        $targetDep = CustomerDepartment::find($departament_id);
+        $targetDep = Department::find($departament_id);
 
-        $exists = CustomerDepartment::where('departament', $targetDep->departament)->where('customer_id', $customer_id)->first();
+        $exists = Department::where('departament', $targetDep->departament)->where('customer_id', $customer_id)->first();
 
         if( ! $exists )
         {
-            $exists = CustomerDepartment::create([
+            $exists = Department::create([
                 'departament' => $targetDep->departament,
                 'customer_id' => $customer_id
             ]);

@@ -7,7 +7,7 @@ use Maatwebsite\Excel\Concerns\ToCollection;
 use Carbon\Carbon;
 
 use MyDpo\Models\Customer\Customer;
-use MyDpo\Models\Customer\CustomerDepartment;
+use MyDpo\Models\Customer\Departments\Department;
 
 use MyDpo\Models\Customer\Centralizatoare\Centralizator;
 use MyDpo\Models\Customer\Centralizatoare\Row;
@@ -49,7 +49,7 @@ class Importer implements ToCollection {
 
         $this->customer = Customer::find($this->input['customer_id']);
 
-        $this->departamente = CustomerDepartment::where('customer_id', $this->input['customer_id'])->pluck('id', 'departament')->toArray();
+        $this->departamente = Department::where('customer_id', $this->input['customer_id'])->pluck('id', 'departament')->toArray();
 
         $this->document = $this->myclasses[$this->input['model']]['document']::where('id', $this->input['document_id'])->first();
 
@@ -165,36 +165,6 @@ class Importer implements ToCollection {
             'rowvalues' => $line['rowvalues']
         ];
         $row->save();
-
-
-
-        // foreach($line as $i => $rowvalue)
-        // {
-        //     if($rowvalue['column'] == 'DEPARTMENT')
-        //     {
-        //         if( array_key_exists($rowvalue['value'], $this->departamente) )
-        //         {
-        //             $rowvalue['value'] = $this->departamente[$rowvalue['value']];
-        //         }
-        //         else
-        //         {
-        //             $departament = CustomerDepartment::create([
-        //                 'customer_id' => $this->centralizator->customer_id,
-        //                 'departament' => $rowvalue['value'],
-        //             ]);
-
-        //             $this->departamente = CustomerDepartment::where('customer_id', $this->centralizator->customer_id)->pluck('id', 'departament')->toArray();
-
-        //             $rowvalue['value'] = $departament->id;
-        //         }
-        //     }
-
-        //     CustomerCentralizatorRowValue::create([...$rowvalue, 'row_id' => $rowrecord->id]);
-        // }
-
-
-
-
     }
 
     protected function GetColumns() {

@@ -9,7 +9,7 @@ use MyDpo\Traits\Itemable;
 // use MyDpo\Traits\Importable;
 // use MyDpo\Performers\Customer\Centralizatoare\Centralizator\GetNextNumber;
 // use MyDpo\Performers\Customer\Centralizatoare\Centralizator\SaveSettings;
-// use MyDpo\Models\Customer\CustomerDepartment;
+// MyDpo\Models\Customer\Departments\Department;
 // 
 // use MyDpo\Models\Livrabile\TipCentralizatorColoana;
 
@@ -91,7 +91,7 @@ class Centralizator extends Model {
 
 
     // public function department() {
-    //     return $this->belongsTo(CustomerDepartment::class, 'department_id')->select(['id', 'departament']);
+    //     return $this->belongsTo(Department::class, 'department_id')->select(['id', 'departament']);
     // }
 
     
@@ -107,7 +107,7 @@ class Centralizator extends Model {
 
     //     if(!! $input['department_id'])
     //     {
-    //         $department = CustomerDepartment::CreateIfNecessary($record->customer_id, $input['customer_id'], $input['department_id']);
+    //         $department = Department::CreateIfNecessary($record->customer_id, $input['customer_id'], $input['department_id']);
     //     }
     //     else
     //     {

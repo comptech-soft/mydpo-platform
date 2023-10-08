@@ -132,7 +132,7 @@ class CustomerCentralizatorRow extends Model {
     //         {
     //             if(!! $rowvalue->value)
     //             {
-    //                 $department = CustomerDepartment::CreateIfNecessary(
+    //                 $department = Department::CreateIfNecessary(
     //                     $this->customercentralizator->customer_id, 
     //                     $new_customer_id, 
     //                     $rowvalue->value

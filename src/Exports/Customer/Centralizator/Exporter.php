@@ -7,7 +7,7 @@ use Maatwebsite\Excel\Concerns\WithStrictNullComparison;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\FromView;
 
-use MyDpo\Models\Customer\CustomerDepartment;
+use MyDpo\Models\Customer\Departments\Department;
 use MyDpo\Models\Customer\Centralizatoare\Centralizator;
 use MyDpo\Models\Customer\Centralizatoare\Row;
 
@@ -50,7 +50,7 @@ class Exporter implements FromView, WithStrictNullComparison, ShouldAutoSize {
 
         if(!! $this->department_ids)
         {
-            $this->departamente = CustomerDepartment::whereIn('id', $this->department_ids)->pluck('departament', 'id')->toArray();
+            $this->departamente = Department::whereIn('id', $this->department_ids)->pluck('departament', 'id')->toArray();
         }
         
         $this->document = $this->GetDocument();

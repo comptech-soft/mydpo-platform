@@ -68,7 +68,7 @@ class CustomerRegistruRow extends Model {
 
         $values = $this->values()->pluck('value', 'column_id')->toArray();
 
-        $departamente = CustomerDepartment::where('customer_id', $this->registru->customer_id)->pluck('departament', 'id')->toArray();
+        $departamente = Department::where('customer_id', $this->registru->customer_id)->pluck('departament', 'id')->toArray();
 
         foreach($r as $i => $item)
         {

@@ -7,7 +7,7 @@ use Maatwebsite\Excel\Concerns\ToCollection;
 use MyDpo\Models\CustomerRegister;
 use MyDpo\Models\CustomerRegistruRow;
 use MyDpo\Models\CustomerRegistruRowValue;
-use MyDpo\Models\CustomerDepartment;
+use MyDpo\Models\Customer\Departments\Department;
 use MyDpo\Models\Customer\Customer;
 
 class Importer implements ToCollection {
@@ -20,7 +20,7 @@ class Importer implements ToCollection {
         $this->input = $input;
         $this->registru = CustomerRegister::where('id', $this->input['id'])->first();
 
-        $this->departamente = CustomerDepartment::where('customer_id', $this->registru->customer_id)->pluck('id', 'departament')->toArray();
+        $this->departamente = Department::where('customer_id', $this->registru->customer_id)->pluck('id', 'departament')->toArray();
     }
 
     public function collection(Collection $rows) {
