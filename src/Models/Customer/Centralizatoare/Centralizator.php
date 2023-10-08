@@ -10,7 +10,7 @@ use MyDpo\Traits\Numberable;
 use MyDpo\Traits\Customer\Centralizatoare\Centralizatorable;
 
 use MyDpo\Models\Livrabile\TipCentralizator;
-use MyDpo\Models\Customer\CustomerDepartment;
+use MyDpo\Models\Customer\Departments\Department;
 use MyDpo\Models\Customer\Customer;
 // 
 // use MyDpo\Traits\Exportable;
@@ -172,7 +172,7 @@ class Centralizator extends Model {
                 /**
                  * Creez departamentul
                  */
-                $department_record = CustomerDepartment::CreateIfNecessary($old_customer_id, $new_customer_id, $old_department_id);
+                $department_record = Department::CreateIfNecessary($old_customer_id, $new_customer_id, $old_department_id);
 
                 /**
                  * Creez noul rand
