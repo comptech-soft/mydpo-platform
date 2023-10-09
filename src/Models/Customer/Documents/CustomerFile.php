@@ -128,6 +128,13 @@ class CustomerFile extends Model {
         return NULL;
     }
 
+
+    public static function doDownloadfiles($input) {
+
+        dd($input);
+        
+    }
+
     public static function doMove($input, $record) {
 
         foreach($input['files_ids'] as $i => $file_id)
