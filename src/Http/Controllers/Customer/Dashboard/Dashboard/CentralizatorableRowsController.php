@@ -10,7 +10,7 @@ use MyDpo\Models\Customer\Customer;
 
 use MyDpo\Models\Livrabile\Centralizatoare\TipCentralizator;
 use MyDpo\Models\Customer\Centralizatoare\Centralizator;
-use MyDpo\Models\Customer\Centralizatoar\Row as CentralizatorRow;
+use MyDpo\Models\Customer\Centralizatoare\Row as CentralizatorRow;
 
 use MyDpo\Models\Livrabile\TipRegistru;
 use MyDpo\Models\Customer\Customer\Registre\Registru;
