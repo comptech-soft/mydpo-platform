@@ -8,7 +8,7 @@ use MyDpo\Core\Http\Response\Index;
 
 use MyDpo\Models\Customer\Customer;
 
-use MyDpo\Models\Livrabile\TipCentralizator;
+use MyDpo\Models\Livrabile\Centralizatoare\TipCentralizator;
 use MyDpo\Models\Customer\Customer\Centralizatoare\Centralizator;
 use MyDpo\Models\Customer\Customer\Centralizatoare\Row as CentralizatorRow;
 
