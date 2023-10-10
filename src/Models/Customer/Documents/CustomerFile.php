@@ -128,11 +128,61 @@ class CustomerFile extends Model {
         return NULL;
     }
 
-
+    /**
+     * Download un grup de fisiere
+     */
     public static function doDownloadfiles($input) {
 
-        dd($input);
+        $files = self::whereIn('id', $input['files_ids'])->get()->map(function($item) {
+            return $item->url;
+        })->toArray();
+
+        $temp_directory = storage_path('temp');
+
+        // Verifică și creează directorul temporar dacă nu există
+        if (! \File::exists($temp_directory)) 
+        {
+            \File::makeDirectory($temp_directory, 0755, true);
+        }
         
+        foreach($files as $url) 
+        {
+            $fileName = basename($url);
+            $fileContents = \Storage::disk('s3')->get($url);
+            file_put_contents("$temp_directory/$fileName", $fileContents);
+        }
+
+        $zip = new \ZipArchive();
+
+        $zipFileName = 'arhiva.zip';
+
+        if ($zip->open($zipFileName, \ZipArchive::CREATE) === TRUE) 
+        {
+            // Adaugă fișierele descărcate în arhiva ZIP
+            $files = glob("$temp_directory/*");
+            
+            foreach ($files as $file) 
+            {
+                $zip->addFile($file, basename($file));
+            }
+    
+            $zip->close();
+            
+            // Șterge fișierele inițiale
+            foreach ($files as $file) 
+            {
+                unlink($file);
+            }
+
+            return [
+                'url' => asset($zipFileName),
+            ];
+
+            // Descarcă arhiva ZIP
+            // return response()->download($zipFileName)->deleteFileAfterSend(true);
+        } 
+       
+        throw new \Exception('Nu am putut crea arhiva ZIP.');        
     }
 
     public static function doMove($input, $record) {
