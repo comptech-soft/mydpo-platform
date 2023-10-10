@@ -148,7 +148,7 @@ class CustomerFile extends Model {
         foreach($files as $url) 
         {
             $fileName = basename($url);
-            $fileContents = \Storage::disk('s3')->get($url);
+            $fileContents = \Storage::disk('s3')->get(\Str::replace( config('filesystems.disks.s3.url'), '', $url));
             file_put_contents("$temp_directory/$fileName", $fileContents);
         }
 
