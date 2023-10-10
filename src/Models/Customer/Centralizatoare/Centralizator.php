@@ -9,7 +9,7 @@ use MyDpo\Traits\Actionable;
 use MyDpo\Traits\Numberable;
 use MyDpo\Traits\Customer\Centralizatoare\Centralizatorable;
 
-use MyDpo\Models\Livrabile\TipCentralizator;
+use MyDpo\Models\Livrabile\Centralizatoare\TipCentralizator;
 use MyDpo\Models\Customer\Departments\Department;
 use MyDpo\Models\Customer\Customer;
 // 
