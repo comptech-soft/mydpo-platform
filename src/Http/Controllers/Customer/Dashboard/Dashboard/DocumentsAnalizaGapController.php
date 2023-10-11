@@ -17,24 +17,10 @@ class DocumentsAnalizaGapController extends Controller {
                 'type' => 'analizagap',
                 'customer_id' => $customer_id,
                 'customer' => Customer::find($customer_id),
+                'customer_user' => \Auth::user(),
             ],
         );        
     }
-
-    // public function index($customer_id, Request $r) {
-
-    //     $customer = Customer::find($customer_id);
-    //     $customer->createDefaultFolders();
-
-    //     return Response::View(
-    //         '~templates.index', 
-    //         asset('apps/customer-documents/index.js'),
-    //         [], 
-    //         [
-    //             'customer_id' => $customer_id,
-    //         ]
-    //     );
-    // }
 
     // public function downloadFile($customer_id, $file_id, Request $r) {
     //     return CustomerFile::downloadFile($customer_id, $file_id);
