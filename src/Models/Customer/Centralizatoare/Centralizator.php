@@ -18,7 +18,7 @@ use MyDpo\Models\Customer\Customer;
 
 // 
 
-// use MyDpo\Models\Livrabile\TipCentralizatorColoana;
+// use MyDpo\Models\Livrabile\Centralizatoare\TipCentralizatorColoana;
 // use MyDpo\Exports\CustomerCentralizator\Exporter;
 // use MyDpo\Imports\CustomerCentralizator\Importer;
 

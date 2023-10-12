@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
 use MyDpo\Models\Livrabile\TipCentralizator;
-use MyDpo\Models\Livrabile\TipCentralizatorColoana;
+use MyDpo\Models\Livrabile\Centralizatoare\TipCentralizatorColoana;
 
 class TipCentralizatorColoaneController extends Controller {
     

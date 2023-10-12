@@ -4,7 +4,7 @@ namespace MyDpo\Traits\Customer\Centralizatoare;
 
 use MyDpo\Models\Customer\Departments\Department;
 use MyDpo\Models\Livrabile\TipCentralizator;
-use MyDpo\Models\Livrabile\TipCentralizatorColoana;
+use MyDpo\Models\Livrabile\Centralizatoare\TipCentralizatorColoana;
 
 trait Rowable {
 

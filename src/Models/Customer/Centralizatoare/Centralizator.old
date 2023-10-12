@@ -11,7 +11,7 @@ use MyDpo\Traits\Itemable;
 // use MyDpo\Performers\Customer\Centralizatoare\Centralizator\SaveSettings;
 // MyDpo\Models\Customer\Departments\Department;
 // 
-// use MyDpo\Models\Livrabile\TipCentralizatorColoana;
+// use MyDpo\Models\Livrabile\Centralizatoare\TipCentralizatorColoana;
 
 
 // use MyDpo\Performers\CustomerCentralizator\Import;

@@ -11,7 +11,7 @@ use MyDpo\Traits\Exportable;
 use MyDpo\Traits\Importable;
 
 use MyDpo\Models\Livrabile\TipCentralizator;
-use MyDpo\Models\Livrabile\TipCentralizatorColoana;
+use MyDpo\Models\Livrabile\Centralizatoare\TipCentralizatorColoana;
 
 use MyDpo\Exports\Customer\Centralizator\Exporter;
 use MyDpo\Imports\Customer\Centralizator\Importer;
