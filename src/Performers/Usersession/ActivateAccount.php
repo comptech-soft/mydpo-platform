@@ -4,7 +4,7 @@ namespace MyDpo\Performers\Usersession;
 
 use MyDpo\Helpers\Perform;
 use Illuminate\Support\Facades\Password;
-use MyDpo\Models\Activation;
+use MyDpo\Models\Customer\Accounts\Activation;
 use MyDpo\Models\Authentication\User;
 use MyDpo\Models\Customer\Customer;
 use MyDpo\Models\Authentication\UserSetting;
