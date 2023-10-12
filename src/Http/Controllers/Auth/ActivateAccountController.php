@@ -1,12 +1,12 @@
 <?php
 
-namespace MyDpo\Http\Controllers\Usersession;
+namespace MyDpo\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Helpers\Response;
 use MyDpo\Helpers\UserSession;
-use MyDpo\Models\Activation;
+use  MyDpo\Models\Customer\Accounts\Activation;
 
 class ActivateAccountController extends Controller {
 
