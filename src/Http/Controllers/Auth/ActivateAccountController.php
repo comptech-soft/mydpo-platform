@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Helpers\Response;
 use MyDpo\Helpers\UserSession;
-use  MyDpo\Models\Customer\Accounts\Activation;
+use MyDpo\Models\Customer\Accounts\Activation;
 
 class ActivateAccountController extends Controller {
 
