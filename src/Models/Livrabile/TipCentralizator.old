@@ -69,10 +69,7 @@ class TipCentralizator extends Model {
         'bool_col_department'
     ];
 
-    protected $columnsDefinition = [
-        'model' => \MyDpo\Models\Livrabile\TipCentralizatorColoana::class,
-        'foreign_key' => 'centralizator_id',
-    ];
+
 
     protected static function booted() {
         static::addGlobalScope(new NotdeletedScope());
@@ -82,9 +79,7 @@ class TipCentralizator extends Model {
         return $this->belongsTo(Category::class, 'category_id')->select(['id', 'name']);
     }
 
-    public function columns() {
-        return $this->hasMany(TipCentralizatorColoana::class, 'centralizator_id');
-    }
+
 
     public function getColumnsTreeAttribute() {
         $columns = collect($this->columns)

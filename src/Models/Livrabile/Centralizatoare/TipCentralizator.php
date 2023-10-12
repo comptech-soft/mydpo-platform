@@ -74,7 +74,7 @@ class TipCentralizator extends Model {
     ];
 
     protected $columnsDefinition = [
-        'model' => \MyDpo\Models\Livrabile\TipCentralizatorColoana::class,
+        'model' => \MyDpo\Models\Livrabile\Centralizatoare\TipCentralizatorColoana::class,
         'foreign_key' => 'centralizator_id',
     ];
 
