@@ -167,6 +167,12 @@ class SysMenu extends Model {
     }
 
     protected function MakeMenu($user) {
+
+        if(! $user->role)
+        {
+            return [];
+        }
+        
         $r = [];
 
         foreach($this->children as $i => $item)
@@ -179,37 +185,31 @@ class SysMenu extends Model {
 
     protected function MakeVisibility($user) {
 
-        if( 1 || config('app.platform') == 'admin')
-        {   
-
-            if( 1 || in_array('admin', $this->platform) )
-            {
-                $action_role = $this->roles()
-                    ->wherePlatform(config('app.platform'))
-                    ->where('role_id', $user->role->id)
-                    ->first();
-
-                $children = $this->MakeMenu($user);
-
-                return [
-                    'visible' => !! $action_role ? $action_role->attributes['visible'] : 0,
-                    'disabled' => !! $action_role ? $action_role->attributes['disabled'] : 1,
-                    'icon' => $this->icon,
-                    'order_no' => $this->order_no,
-                    'link' => $this->link,
-                    'props' => $this->props,
-                    'caption' => $this->caption,
-                    'platform' => $this->platform,
-                    'slug' => $this->slug,
-                    'id' => $this->id,
-                    'children' => $children,
-                ];
-            }
-            
+        if(! $user->role)
+        {
             return [];
         }
 
-        return [];
+        $action_role = $this->roles()
+            ->wherePlatform(config('app.platform'))
+            ->where('role_id', $user->role->id)
+            ->first();
+
+        $children = $this->MakeMenu($user);
+
+        return [
+            'visible' => !! $action_role ? $action_role->attributes['visible'] : 0,
+            'disabled' => !! $action_role ? $action_role->attributes['disabled'] : 1,
+            'icon' => $this->icon,
+            'order_no' => $this->order_no,
+            'link' => $this->link,
+            'props' => $this->props,
+            'caption' => $this->caption,
+            'platform' => $this->platform,
+            'slug' => $this->slug,
+            'id' => $this->id,
+            'children' => $children,
+        ];
     }
 
 }
