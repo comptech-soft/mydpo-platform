@@ -179,10 +179,10 @@ class SysMenu extends Model {
 
     protected function MakeVisibility($user) {
 
-        if( config('app.platform') == 'admin')
+        if( 1 || config('app.platform') == 'admin')
         {   
 
-            if( in_array('admin', $this->platform) )
+            if( 1 || in_array('admin', $this->platform) )
             {
                 $action_role = $this->roles()
                     ->wherePlatform(config('app.platform'))
