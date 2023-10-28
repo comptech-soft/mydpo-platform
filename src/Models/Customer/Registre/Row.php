@@ -10,7 +10,7 @@ use MyDpo\Traits\Customer\Centralizatoare\Rowable;
 use MyDpo\Traits\Exportable;
 
 use MyDpo\Models\Livrabile\Registre\TipRegistru;
-use MyDpo\Models\Livrabile\TipRegistruColoana;
+use MyDpo\Models\Livrabile\Registre\TipRegistru;
 
 class Row extends Model {
 

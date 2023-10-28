@@ -10,7 +10,7 @@ use MyDpo\Traits\Customer\Centralizatoare\Rowable;
 use MyDpo\Traits\Exportable;
 use MyDpo\Traits\Importable;
 
-use MyDpo\Models\Livrabile\TipCentralizator;
+use MyDpo\Models\Livrabile\Centralizatoare\TipCentralizator;
 use MyDpo\Models\Livrabile\Centralizatoare\TipCentralizatorColoana;
 
 use MyDpo\Exports\Customer\Centralizator\Exporter;

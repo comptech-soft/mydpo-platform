@@ -39,9 +39,13 @@ class CentralizatorableRowsController extends Controller {
         
         if( ! ($customer = Customer::find($customer_id)) )
         {
-            return redirect('admin/clienti');
+            if( config('app.platform') == 'b2b')
+            {
+                return redirect('/');
+            }
+            return redirect('clienti');
         }
-
+        
         if(! in_array($model, ['centralizatoare', 'registre']))
         {
             return redirect('customer-dashboard/' . $customer_id);
@@ -87,7 +91,7 @@ class CentralizatorableRowsController extends Controller {
     }
 
     public function doAction($action, Request $r) {
-        $this->myclasses[$model]['row']::doAction($action, $r->all());
+        return $this->myclasses[$r->model]['row']::doAction($action, $r->all());
     }
 
 }
