@@ -18,7 +18,6 @@ class Index {
         array $payload = [],
     ): View 
     {
-
         if( is_string($scripts) )
         {
             $scripts = [$scripts];
@@ -53,7 +52,7 @@ class Index {
             'menus' => SysMenu::getMenus(),
             'actions' => SysAction::getActions(),
             'sysconfig' => SysConfig::all()->pluck('value', 'code'),
-            'mycustomers' => config('app.platform') == 'b2b' ? Account::GetCustomersByUser($user) : NULL,
+            'mycustomers' => config('app.platform') == 'b2b' ? (!! $user ? Account::GetCustomersByUser($user) : NULL) : NULL,
         ];
 
         return view($template)->withScripts($scripts)->withPayload($payload)->withStyles($styles);
