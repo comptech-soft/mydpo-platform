@@ -46,6 +46,8 @@ class SysMenu extends Model {
         'roles',
     ];
 
+    protected static $permanent = ['Footerright'];
+
     function roles() {
         return $this->hasMany(SysMenuRole::class, 'menu_id');
     }
@@ -137,18 +139,26 @@ class SysMenu extends Model {
 
         $user = \Auth::user();
 
-        if( ! $user )
-        {
-            return [];
-        }
-
         $r = [];
 
         foreach(self::whereIsRoot()->get() as $i => $item)
         {
             if(in_array(config('app.platform'), $item->platform))
             {
-                // $r[$item->slug] = $item;
+
+                $children = [];
+                if( in_array($item->slug, self::$permanent) )
+                {
+                    $children = $item->MakeMenu($user, $item->slug, true);
+                }
+                else
+                {
+                    if(!! $user && !! $user->role)
+                    {
+                        $children = $item->MakeMenu($user, $item->slug, false);
+                    }
+                }
+                
                 $r[$item->slug] = [
                     'icon' => $item->icon,
                     'order_no' => $item->order_no,
@@ -158,48 +168,58 @@ class SysMenu extends Model {
                     'platform' => $item->platform,
                     'slug' => $item->slug,
                     'id' => $item->id,
-                    'children' => $item->MakeMenu($user)
+                    'children' => $children,
                 ];
             }
         }
-
+        
         return $r;
     }
 
-    protected function MakeMenu($user) {
-
-        if(! $user->role)
-        {
-            return [];
-        }
+    protected function MakeMenu($user, $slug, $permanent) {
         
+        if(! $user || ! $user->role)
+        {
+            if(! $permanent)
+            {
+                return [];
+            }
+        }
+
         $r = [];
 
         foreach($this->children as $i => $item)
         {
-            $r[] = $item->MakeVisibility($user);
+            $r[] = $item->MakeVisibility($user, $slug, $permanent);
         }
 
         return $r;
     }
 
-    protected function MakeVisibility($user) {
+    protected function MakeVisibility($user, $slug, $permanent) {
 
-        if(! $user->role)
+        if(! $user || ! $user->role)
         {
-            return [];
+            if(! $permanent)
+            {
+                return [];
+            }
         }
 
-        $action_role = $this->roles()
-            ->wherePlatform(config('app.platform'))
-            ->where('role_id', $user->role->id)
-            ->first();
+        $action_role = NULL;
+        if( !! $user && !! $user->role)
+        {
+            $action_role = $this->roles()
+                ->wherePlatform(config('app.platform'))
+                ->where('role_id', $user->role->id)
+                ->first();
+        }
 
-        $children = $this->MakeMenu($user);
+        $children = $this->MakeMenu($user, $slug, $permanent);
 
         return [
-            'visible' => !! $action_role ? $action_role->attributes['visible'] : 0,
-            'disabled' => !! $action_role ? $action_role->attributes['disabled'] : 1,
+            'visible' => !! $action_role ? $action_role->attributes['visible'] : ($permanent ? 1 : 0),
+            'disabled' => !! $action_role ? $action_role->attributes['disabled'] : ($permanent ? 0 : 1),
             'icon' => $this->icon,
             'order_no' => $this->order_no,
             'link' => $this->link,
