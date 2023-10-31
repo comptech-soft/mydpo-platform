@@ -33,6 +33,7 @@ class RegistreDashboardController extends Controller {
                 'customer' => $customer,
                 'page' => $page,
                 'tipuri' => $items,
+                'customer_user' => \Auth::user(),
             ],
         );     
 

@@ -77,7 +77,8 @@ class CentralizatorableRowsController extends Controller {
                 'tip_id' => $tip_id,
                 'tip' => $tip,
                 'document_id' => $document_id,
-                'document' => $document
+                'document' => $document,
+                'customer_user' => \Auth::user(),
             ],
         );
     }
