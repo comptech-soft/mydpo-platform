@@ -6,13 +6,22 @@ class Registre {
 
     public static function CountLivrabile($customer_id) {
 
+        $wheres = [
+            "(`customers-registers`.`customer_id` = " . $customer_id . ")",
+            "(`registers`.`on_registre_page` = 1)",
+        ];
+
+        if( config('app.platform') == 'b2b' )
+        {
+            $wheres[] = "(`customers-registers`.`visibility` = 1)";
+        }
+
         $sql = "
             SELECT
                 COUNT(*) AS count_records
             FROM `customers-registers`
-            WHERE 
-                (`customers-registers`.`customer_id` = " . $customer_id . ")
-            ";
+            LEFT JOIN `registers` ON `registers`.`id` = `customers-registers`.`register_id`
+            WHERE " . implode(' AND ', $wheres);
 
         $records = \DB::select($sql);
 
