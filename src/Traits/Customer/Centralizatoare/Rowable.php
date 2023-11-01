@@ -78,6 +78,7 @@ trait Rowable {
      * Editarea unui rand din centralizator | registru
      */
     public static function doUpdate($input, $record) {
+        
         $record->update([
             ...$input,
             'tooltip' => 'Editat de full_name la :action_at. (:customer)',
