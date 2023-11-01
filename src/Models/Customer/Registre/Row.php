@@ -22,6 +22,7 @@ class Row extends Model {
         'props' => 'json',
         'register_id' => 'integer',
         'customer_id' => 'integer',
+        'visibility' => 'integer',
         'departament_id' => 'integer',
         'customer_register_id' => 'integer',
         'order_no' => 'integer',
