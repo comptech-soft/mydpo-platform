@@ -190,33 +190,33 @@ class Account extends Model {
     //     return (new AssignUser($input))->Perform();
     // }
 
-    // public static function GetRules($action, $input) {
+    public static function GetRules($action, $input) {
        
-    //     if($action == 'delete')
-    //     {
-    //         return NULL;
-    //     }
+        if($action == 'delete')
+        {
+            return NULL;
+        }
 
-    //     $result = [
-    //         'customer_id' => 'required|exists:customers,id',
-    //         'department_id' => 'required|exists:customers-departamente,id', 
-    //         'role_id' => 'required|in:4,5', 
-    //     ];
+        $result = [
+            'customer_id' => 'required|exists:customers,id',
+            'department_id' => 'required|exists:customers-departamente,id', 
+            'role_id' => 'required|in:4,5', 
+        ];
 
-    //     if($action == 'insert')
-    //     {
-    //         $result['user.first_name'] = 'required';
-    //         $result['user.last_name'] = 'required';
+        if($action == 'insert')
+        {
+            $result['user.first_name'] = 'required';
+            $result['user.last_name'] = 'required';
             
-    //         $result['user.email'] = [
-    //             'required',
-    //             'email',
-    //             new ValidAccountEmail($input)
-    //         ];
-    //     }
+            $result['user.email'] = [
+                'required',
+                'email',
+                new ValidAccountEmail($input)
+            ];
+        }
     
-    //     return $result;
-    // }
+        return $result;
+    }
 
     /**
      * Din tabele customers-persons aflam utilizatorii
