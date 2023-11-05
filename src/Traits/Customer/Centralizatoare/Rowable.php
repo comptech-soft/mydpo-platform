@@ -78,6 +78,11 @@ trait Rowable {
      */
     public static function doUpdate($input, $record) {
         
+        if(! array_key_exists('rowvalues', $input) )
+        {
+            $input['rowvalues'] = [];
+        }
+        
         $record->update([
             ...$input,
             'props' => [
