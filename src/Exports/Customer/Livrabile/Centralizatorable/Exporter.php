@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Exports\Customer\Centralizator;
+namespace MyDpo\Exports\Customer\Livrabile\Centralizatorable;
 
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithStrictNullComparison;
