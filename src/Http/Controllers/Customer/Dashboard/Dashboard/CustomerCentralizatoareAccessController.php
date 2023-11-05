@@ -4,7 +4,7 @@ namespace MyDpo\Http\Controllers\Customer\Dashboard\Dashboard;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use MyDpo\Models\Customer\Customer\Centralizatoare\Access;
+use MyDpo\Models\Customer\Centralizatoare\Access;
 
 class CustomerCentralizatoareAccessController extends Controller {
     
