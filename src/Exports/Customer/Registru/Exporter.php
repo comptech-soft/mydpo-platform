@@ -19,6 +19,8 @@ class Exporter implements FromView, WithStrictNullComparison, ShouldAutoSize {
 
     public function __construct($id, $juststructure, $departamente_ids) {
 
+        dd(111);
+
         $this->juststructure = $juststructure;
         $this->departamente_ids = $departamente_ids;
 

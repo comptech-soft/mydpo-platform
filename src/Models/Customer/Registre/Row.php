@@ -12,6 +12,9 @@ use MyDpo\Traits\Exportable;
 use MyDpo\Models\Livrabile\Registre\TipRegistru;
 use MyDpo\Models\Livrabile\Registre\TipRegistruColoana;
 
+use MyDpo\Exports\Customer\Registru\Exporter;
+use MyDpo\Imports\Customer\Registru\Importer;
+
 class Row extends Model {
 
     use Itemable, Actionable, Rowable, Exportable;
@@ -74,6 +77,14 @@ class Row extends Model {
         'access' => Access::class,
     ];
 
+    protected static function GetExporter($input) {
+        return new Exporter($input); 
+    }
+
+    protected static function GetImporter($input) {
+        return new Importer($input); 
+    }
+    
     public function files() {
         return $this->hasMany(RowFile::class, 'row_id');
     }
