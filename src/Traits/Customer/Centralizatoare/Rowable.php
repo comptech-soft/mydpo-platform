@@ -82,7 +82,7 @@ trait Rowable {
         {
             $input['rowvalues'] = [];
         }
-        
+
         $record->update([
             ...$input,
             'props' => [
@@ -117,12 +117,10 @@ trait Rowable {
         $statuses = collect($input['statuses'])->pluck('text', 'value')->toArray();
 
         $rows = self::$myclasses['row']::whereIn('id', $input['selected_rows'])
-            ->update(
-                [
-                    'status' => $input['status'],
-                    'tooltip' => 'Setat ' . $statuses[$input['status']] . ' de full_name la :action_at. (:customer)',
-                ]
-            );
+            ->update([
+                'status' => $input['status'],
+                'tooltip' => 'Setat ' . $statuses[$input['status']] . ' de ' . \Auth::user()->full_name . '/' . \Auth::user()->role->name . ' la ' . \Carbon\Carbon::now()->format('d.m.Y'),
+            ]);
     }
 
     /**
