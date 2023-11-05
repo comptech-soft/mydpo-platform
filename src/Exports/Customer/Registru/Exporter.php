@@ -17,20 +17,21 @@ class Exporter implements FromView, WithStrictNullComparison, ShouldAutoSize {
     public $juststructure = 1;
     public $departamente_ids = NULL;
 
-    public function __construct($id, $juststructure, $departamente_ids) {
+    public function __construct($input) {
 
-        dd(111);
+        dd($input);
+        $this->input = $input;   
+        
+        $this->department_ids = array_key_exists('department_ids', $input) ? $input['department_ids'] : [];
+        $this->id = $input['document_id'];
+        $this->just_structure = $input['structure'];
 
-        $this->juststructure = $juststructure;
-        $this->departamente_ids = $departamente_ids;
-
-        $this->departamente = Department::whereIn('id', $departamente_ids)
-            ->select('departament')
-            ->get()
-            ->map( function($item) {return $item->departament; })
-            ->toArray();
-
-        $this->registru = CustomerRegister::where('id', $id)->first();
+        if(!! $this->department_ids)
+        {
+            $this->departamente = Department::whereIn('id', $this->department_ids)->pluck('departament', 'id')->toArray();
+        }
+        
+        $this->document = $this->GetDocument();
     }
 
     public function view(): View {
