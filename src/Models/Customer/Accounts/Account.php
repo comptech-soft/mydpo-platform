@@ -15,7 +15,7 @@ use MyDpo\Models\Authentication\RoleUser;
 use MyDpo\Performers\Customer\Account\GetUsers;
 use MyDpo\Performers\Customer\Account\GetCustomers;
 
-use MyDpo\Rules\Customer\Account\ValidAccountEmail;
+use MyDpo\Rules\Customer\Entities\Account\ValidAccountEmail;
 // use MyDpo\Events\CustomerPersons\CustomerPersonCreateAccount;
 // use MyDpo\Performers\CustomerFolder\SaveFoldersAccess;
 // use MyDpo\Performers\CustomerAccount\UpdateRole;
