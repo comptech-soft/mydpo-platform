@@ -116,10 +116,16 @@ trait Rowable {
        
         $statuses = collect($input['statuses'])->pluck('text', 'value')->toArray();
 
+        $tooltip = 'Setat ' . $statuses[$input['status']] . ' de ' . \Auth::user()->full_name . '/' . \Auth::user()->role->name . ' la ' . \Carbon\Carbon::now()->format('d.m.Y');
+
+        if( config('app.platform') == 'b2b')
+        {
+            $tooltip .= ' (' . $customer_id . ')';
+        }
         $rows = self::$myclasses['row']::whereIn('id', $input['selected_rows'])
             ->update([
                 'status' => $input['status'],
-                'tooltip' => 'Setat ' . $statuses[$input['status']] . ' de ' . \Auth::user()->full_name . '/' . \Auth::user()->role->name . ' la ' . \Carbon\Carbon::now()->format('d.m.Y'),
+                'tooltip' => $tooltip,
             ]);
     }
 
