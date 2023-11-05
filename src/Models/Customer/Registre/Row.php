@@ -12,7 +12,7 @@ use MyDpo\Traits\Exportable;
 use MyDpo\Models\Livrabile\Registre\TipRegistru;
 use MyDpo\Models\Livrabile\Registre\TipRegistruColoana;
 
-use MyDpo\Exports\Customer\Centralizatorable\Exporter;
+use MyDpo\Exports\Customer\Livrabile\Centralizatorable\Exporter;
 // use MyDpo\Imports\Customer\Centralizator\Importer;
 
 class Row extends Model {

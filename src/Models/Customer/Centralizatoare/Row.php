@@ -13,7 +13,7 @@ use MyDpo\Traits\Importable;
 use MyDpo\Models\Livrabile\Centralizatoare\TipCentralizator;
 use MyDpo\Models\Livrabile\Centralizatoare\TipCentralizatorColoana;
 
-use MyDpo\Exports\Customer\Centralizatorable\Exporter;
+use MyDpo\Exports\Customer\Livrabile\Centralizatorable\Exporter;
 use MyDpo\Imports\Customer\Centralizator\Importer;
 
 class Row extends Model {
