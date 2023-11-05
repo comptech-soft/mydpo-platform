@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Exports\Registru\Centralizator;
+namespace MyDpo\Exports\Customer\Registru;
 
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithStrictNullComparison;
