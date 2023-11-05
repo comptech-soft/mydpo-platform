@@ -9,7 +9,9 @@ use Maatwebsite\Excel\Concerns\FromView;
 
 use MyDpo\Models\Customer\Departments\Department;
 use MyDpo\Models\Customer\Centralizatoare\Centralizator;
-use MyDpo\Models\Customer\Centralizatoare\Row;
+use MyDpo\Models\Customer\Centralizatoare\CentralizatorRow;
+use MyDpo\Models\Customer\Registre\Registru;
+use MyDpo\Models\Customer\Registre\RegistruRow;
 
 use Illuminate\Contracts\View\View;
 
@@ -37,7 +39,12 @@ class Exporter implements FromView, WithStrictNullComparison, ShouldAutoSize {
     protected $myclasses = [
         'centralizatoare' => [
             'document' => Centralizator::class,
-            'row' => Row::class,
+            'row' => CentralizatorRow::class,
+        ],
+
+        'registre' => [
+            'document' => Registru::class,
+            'row' => RegistruRow::class,
         ],
     ];
 
@@ -149,7 +156,7 @@ class Exporter implements FromView, WithStrictNullComparison, ShouldAutoSize {
     }
 
     protected function GetDocument() {
-        return $this->myclasses['centralizatoare']['document']::find($this->input['document_id']);
+        return $this->myclasses[$this->input['model']]['document']::find($this->input['document_id']);
     }
 
 }
