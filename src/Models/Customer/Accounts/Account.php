@@ -5,6 +5,7 @@ namespace MyDpo\Models\Customer\Accounts;
 use Illuminate\Database\Eloquent\Model;
 // use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Traits\Itemable;
+use MyDpo\Traits\Actionable;
 // use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Models\Authentication\User;
 use MyDpo\Models\Customer\Departments\Department;
@@ -29,7 +30,7 @@ use MyDpo\Scopes\NotdeletedScope;
 
 class Account extends Model {
 
-    use Itemable;
+    use Itemable, Actionable;
     
     protected $table = 'customers-persons';
 
@@ -107,10 +108,6 @@ class Account extends Model {
         return $this->belongsTo(Customer::class, 'customer_id')->select(['id', 'name', 'status', 'logo', 'email', 'city_id']);
     }
 
-    // public static function doAction($action, $input) {
-    //     return (new DoAction($action, $input, __CLASS__))->Perform();
-    // }
-
     // public static function doUpdate($input, $account) {
 
     //     $account->update($input);
@@ -127,41 +124,43 @@ class Account extends Model {
     //     return $account;
     // }
 
-    // public static function doInsert($input) {
+    public static function doInsert($input) {
 
-    //     $accountInput = [
-    //         'customer_id' => $input['customer_id'],
-    //         'user_id' => $input['user_id'],
-    //         'department_id' => $input['department_id'],
-    //         'newsletter' => $input['newsletter'],
-    //         'locale' => $input['locale'],
-    //         'role_id' => $input['role_id'],
-    //     ];
+        dd($input);
 
-    //     $input['user']['password'] = $password = (\Str::random(10) . 'aA1!');
-    //     $input['user']['password_confirmation'] = $password;
-    //     $input['user']['type'] = 'b2b';
+        $accountInput = [
+            'customer_id' => $input['customer_id'],
+            'user_id' => $input['user_id'],
+            'department_id' => $input['department_id'],
+            'newsletter' => $input['newsletter'],
+            'locale' => $input['locale'],
+            'role_id' => $input['role_id'],
+        ];
 
-    //     $user = User::doAction('insert', $input['user']);
+        $input['user']['password'] = $password = (\Str::random(10) . 'aA1!');
+        $input['user']['password_confirmation'] = $password;
+        $input['user']['type'] = 'b2b';
 
-    //     $accountInput['user_id'] = $user['payload']['record']['id'];
+        $user = User::doAction('insert', $input['user']);
 
-    //     $account = self::create($accountInput);
+        $accountInput['user_id'] = $user['payload']['record']['id'];
 
-    //     $roleUser = RoleUser::CreateAccountRole(
-    //         $input['customer_id'], 
-    //         $accountInput['user_id'], 
-    //         $account->role_id,
-    //     );
+        $account = self::create($accountInput);
 
-    //     event(new CustomerPersonCreateAccount([
-    //         ...$input,
-    //         'account' => $account,
-    //         'roleUser' => $roleUser,
-    //     ]));
+        $roleUser = RoleUser::CreateAccountRole(
+            $input['customer_id'], 
+            $accountInput['user_id'], 
+            $account->role_id,
+        );
 
-    //     return $account;
-    // }
+        event(new CustomerPersonCreateAccount([
+            ...$input,
+            'account' => $account,
+            'roleUser' => $roleUser,
+        ]));
+
+        return $account;
+    }
 
     // public static function updateRole($action, $input) {
     //     return (new UpdateRole($input))->Perform();
