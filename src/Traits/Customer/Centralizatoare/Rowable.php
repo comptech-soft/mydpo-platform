@@ -50,7 +50,6 @@ trait Rowable {
 
         $row = self::create([
             ...$input,
-            'tooltip' => 'Creat de :full_name la :action_at. (:customer)',
             'props' => [
                 'rowvalues' => $input['rowvalues'],
             ] 
@@ -81,7 +80,6 @@ trait Rowable {
         
         $record->update([
             ...$input,
-            'tooltip' => 'Editat de full_name la :action_at. (:customer)',
             'props' => [
                 'rowvalues' => $input['rowvalues'],
             ] 
