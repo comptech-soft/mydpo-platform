@@ -3,6 +3,7 @@
 namespace MyDpo\Traits\Customer\Centralizatoare;
 
 use MyDpo\Models\Customer\Departments\Department;
+use MyDpo\Models\Customer\Customer;
 use MyDpo\Models\Livrabile\TipCentralizator;
 use MyDpo\Models\Livrabile\Centralizatoare\TipCentralizatorColoana;
 
@@ -120,7 +121,7 @@ trait Rowable {
 
         if( config('app.platform') == 'b2b')
         {
-            $tooltip .= ' (' . $customer_id . ')';
+            $tooltip .= ' (' . Customer::find($input['customer_id'])->name . ')';
         }
         $rows = self::$myclasses['row']::whereIn('id', $input['selected_rows'])
             ->update([
