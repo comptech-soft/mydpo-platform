@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Events\CustomerPersons;
+namespace MyDpo\Events\Customer\Entities\Account;
 
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
@@ -12,7 +12,7 @@ use Illuminate\Queue\SerializesModels;
 use MyDpo\Events\BaseBroadcastEvent;
 use MyDpo\Mail\CustomerPersons\CustomerPersonCreateAccount as CreateAccountMail;
 
-class CustomerPersonCreateAccount extends BaseBroadcastEvent {
+class CreateAccount extends BaseBroadcastEvent {
 
     public $account = NULL;
     public $roleUser = NULL;
@@ -22,6 +22,8 @@ class CustomerPersonCreateAccount extends BaseBroadcastEvent {
 
         parent::__construct('persons', 'create', $input);
                
+        dd($input);
+        
         $this->account = $this->input['account'];
         $this->roleUser = $this->input['roleUser'];
 

@@ -16,7 +16,7 @@ use MyDpo\Performers\Customer\Account\GetUsers;
 use MyDpo\Performers\Customer\Account\GetCustomers;
 
 use MyDpo\Rules\Customer\Entities\Account\ValidAccountEmail;
-use MyDpo\Events\CustomerPersons\CustomerPersonCreateAccount;
+use MyDpo\Events\Customer\Entities\Account\CreateAccount;
 // use MyDpo\Performers\CustomerFolder\SaveFoldersAccess;
 // use MyDpo\Performers\CustomerAccount\UpdateRole;
 // use MyDpo\Performers\CustomerAccount\UpdateStatus;
@@ -137,11 +137,7 @@ class Account extends Model {
 
         $role = RoleUser::CreateAccountRole($input['customer_id'], $user->id, $account->role_id);
 
-        // event(new CustomerPersonCreateAccount([
-        //     ...$input,
-        //     'account' => $account,
-        //     'roleUser' => $role,
-        // ]));
+        event(new CreateAccount([...$input, 'account' => $account, 'role' => $role]));
 
         return self::where('id', $account->id)->first();
     }
