@@ -17,11 +17,15 @@ class SystemMail extends Mailable {
     public $user = NULL;
     public $sender = NULL;
     public $template = NULL;
+    public $payload = NULL;
 
-    public function __construct($user, $sender, $template) {
+    public function __construct($user, $sender, $template, $payload) {
+
         $this->user = $user;
         $this->sender = $sender;
         $this->template = $template;
+        $this->payload = $payload;
+
     }
 
     /**
@@ -49,7 +53,7 @@ class SystemMail extends Mailable {
 
             if (method_exists($className, $methodName)) 
             {
-                $input = $className::$methodName($this->user, $this->sender, $this->template);
+                $input = $className::$methodName($this->user, $this->sender, $this->template, $this->payload);
             } 
             
             

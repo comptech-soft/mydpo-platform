@@ -40,6 +40,7 @@ class Send extends Command {
                     user: $email->user,
                     sender: $email->sender,
                     template: $email->props['template'],
+                    payload: $email->props['payload']
                 ));
             
             /**
