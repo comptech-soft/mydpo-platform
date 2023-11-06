@@ -47,9 +47,9 @@ class SystemMail extends Mailable {
 
             $input = [];
 
-            if (true || method_exists($className, $methodName)) 
+            if (method_exists($className, $methodName)) 
             {
-                $input = ['aaa' => 'bbbbb'];
+                $input = $className::$methodName($this->user);
             } 
             
             
