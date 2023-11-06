@@ -16,7 +16,7 @@ use MyDpo\Performers\Customer\Account\GetUsers;
 use MyDpo\Performers\Customer\Account\GetCustomers;
 
 use MyDpo\Rules\Customer\Entities\Account\ValidAccountEmail;
-// use MyDpo\Events\CustomerPersons\CustomerPersonCreateAccount;
+use MyDpo\Events\CustomerPersons\CustomerPersonCreateAccount;
 // use MyDpo\Performers\CustomerFolder\SaveFoldersAccess;
 // use MyDpo\Performers\CustomerAccount\UpdateRole;
 // use MyDpo\Performers\CustomerAccount\UpdateStatus;
@@ -126,40 +126,24 @@ class Account extends Model {
 
     public static function doInsert($input) {
 
-        dd($input);
+        $user = User::create([
+            ...$input['user'],
+            'type' => 'b2b',
+        ]);
 
-        $accountInput = [
-            'customer_id' => $input['customer_id'],
-            'user_id' => $input['user_id'],
-            'department_id' => $input['department_id'],
-            'newsletter' => $input['newsletter'],
-            'locale' => $input['locale'],
-            'role_id' => $input['role_id'],
-        ];
+        $input['user_id'] = $user->id;
 
-        $input['user']['password'] = $password = (\Str::random(10) . 'aA1!');
-        $input['user']['password_confirmation'] = $password;
-        $input['user']['type'] = 'b2b';
+        $account = self::create(collect($input)->except(['user'])->toArray());
 
-        $user = User::doAction('insert', $input['user']);
-
-        $accountInput['user_id'] = $user['payload']['record']['id'];
-
-        $account = self::create($accountInput);
-
-        $roleUser = RoleUser::CreateAccountRole(
-            $input['customer_id'], 
-            $accountInput['user_id'], 
-            $account->role_id,
-        );
+        $role = RoleUser::CreateAccountRole($input['customer_id'], $user->id, $account->role_id);
 
         event(new CustomerPersonCreateAccount([
             ...$input,
             'account' => $account,
-            'roleUser' => $roleUser,
+            'roleUser' => $role,
         ]));
 
-        return $account;
+        return self::where('id', $account->id)->first();
     }
 
     // public static function updateRole($action, $input) {
