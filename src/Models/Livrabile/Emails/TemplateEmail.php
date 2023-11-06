@@ -89,12 +89,9 @@ class TemplateEmail extends Model {
         return $customers;
     }
 
-        // public static function findByEntityActionPlatform($entity, $action, $platform) {
+    public static function FindByName($name) {
 
-    //     return self::where('entity', $entity)
-    //         ->where('action', $action)
-    //         ->where('platform', $platform)
-    //         ->first();
+        return self::whereName($name)->first();
             
-    // }
+    }
 }

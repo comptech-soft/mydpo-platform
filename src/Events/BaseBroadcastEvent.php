@@ -9,28 +9,26 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-use MyDpo\Models\Customer\Customer;
-use MyDpo\Models\CustomerNotification;
+// use MyDpo\Models\Customer\Customer;
+// use MyDpo\Models\CustomerNotification;
 use MyDpo\Models\Livrabile\Notifications\TemplateNotification;
+use MyDpo\Models\Livrabile\Emails\TemplateEmail;
 
 class BaseBroadcastEvent implements ShouldBroadcast {
 
     public $input = NULL;
+    public $template_email = NULL;
 
-    // public $entity = NULL;
-    // public $action = NULL;
+    public function __construct($template_name, $input) {
 
-    // public $sender = NULL;
-    // public $notification_template = NULL;
-    // public $customer = NULL;
-    // public $receiver = NULL;
+        // $this->template_name = $template_name;
+        $this->input = $input;
+        
 
-    // public $notification_record = [];
+        $this->template_email = TemplateEmail::FindByName($template_name);
 
-    public function __construct($template, $input) {
-
-        dd($template, $input);
-
+        dd($template_email->toArray());
+        
         // $this->entity = $entity;
         // $this->action = $action;
         // $this->input = $input;
