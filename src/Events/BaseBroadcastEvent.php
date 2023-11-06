@@ -97,7 +97,7 @@ class BaseBroadcastEvent implements ShouldBroadcast {
     }
 
     public function broadcastWith() {
-        return $this->template_email;
+        return $this->template_email->toArray();
     }
 
     // public function InsertNotification() {
