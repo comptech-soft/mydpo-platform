@@ -17,70 +17,72 @@ class BaseBroadcastEvent implements ShouldBroadcast {
 
     public $input = NULL;
 
-    public $entity = NULL;
-    public $action = NULL;
+    // public $entity = NULL;
+    // public $action = NULL;
 
-    public $sender = NULL;
-    public $notification_template = NULL;
-    public $customer = NULL;
-    public $receiver = NULL;
+    // public $sender = NULL;
+    // public $notification_template = NULL;
+    // public $customer = NULL;
+    // public $receiver = NULL;
 
-    public $notification_record = [];
+    // public $notification_record = [];
 
-    public function __construct($entity, $action, $input) {
+    public function __construct($input) {
 
-        $this->entity = $entity;
-        $this->action = $action;
-        $this->input = $input;
+        dd($input);
+
+        // $this->entity = $entity;
+        // $this->action = $action;
+        // $this->input = $input;
         
-        $this->sender = \Auth::user();
+        // $this->sender = \Auth::user();
         
-        if( ! $this->sender )
-        {
-            throw new \Exception('Nu avem user logat pentru acțiunea ' . $this->entity . '-' . $this->action . ' pe platforma ' . config('app.platform'));
-        }
+        // if( ! $this->sender )
+        // {
+        //     throw new \Exception('Nu avem user logat pentru acțiunea ' . $this->entity . '-' . $this->action . ' pe platforma ' . config('app.platform'));
+        // }
 
-        $this->receiver = array_key_exists('receiver', $input) ? $input['receiver'] : NULL;
+        // $this->receiver = array_key_exists('receiver', $input) ? $input['receiver'] : NULL;
 
-        if( array_key_exists('customer', $this->input))
-        {
-            $this->customer = $this->input['customer'];
-        }
-        else
-        {
-            if( array_key_exists('customer_id', $this->input))
-            {
-                $this->customer = Customer::find($this->input['customer_id']);
-            }
-        }
+        // if( array_key_exists('customer', $this->input))
+        // {
+        //     $this->customer = $this->input['customer'];
+        // }
+        // else
+        // {
+        //     if( array_key_exists('customer_id', $this->input))
+        //     {
+        //         $this->customer = Customer::find($this->input['customer_id']);
+        //     }
+        // }
         
-        $this->notification_template = TemplateNotification::findByEntityActionPlatform($entity, $action, config('app.platform'));
+        // $this->notification_template = TemplateNotification::findByEntityActionPlatform($entity, $action, config('app.platform'));
 
-        if( ! $this->notification_template )
-        {
-            throw new \Exception('Nu avem notificare definită pentru acțiunea ' . $this->entity . '-' . $this->action . ' pe platforma ' . config('app.platform'));
-        }
+        // if( ! $this->notification_template )
+        // {
+        //     throw new \Exception('Nu avem notificare definită pentru acțiunea ' . $this->entity . '-' . $this->action . ' pe platforma ' . config('app.platform'));
+        // }
 
-        $this->notification_record = [
+        // $this->notification_record = [
 
-            'type_id' => $this->notification_template->id,
-            'subject_type' => NULL,
-            'subject_id' => NULL,
-            'sender_id' => $this->sender->id,
-            'customer_id' => $this->customer ? $this->customer->id : NULL,
-            'receiver_id'=> $this->receiver ? $this->receiver->id : NULL,
-            'event' => $this->entity . '-' . $this->action,
-            'status' => 'sended',
-            'date_from' => NULL,
-            'date_to' => NULL,
-            'readed_at' => NULL,
-            'message' => $this->notification_template->message,
-            'props' => [
-                'title' => $this->notification_template->title,
-            ],
-            'deleted' => 0,
-            'created_by' => $this->sender->id,
-        ];
+        //     'type_id' => $this->notification_template->id,
+        //     'subject_type' => NULL,
+        //     'subject_id' => NULL,
+        //     'sender_id' => $this->sender->id,
+        //     'customer_id' => $this->customer ? $this->customer->id : NULL,
+        //     'receiver_id'=> $this->receiver ? $this->receiver->id : NULL,
+        //     'event' => $this->entity . '-' . $this->action,
+        //     'status' => 'sended',
+        //     'date_from' => NULL,
+        //     'date_to' => NULL,
+        //     'readed_at' => NULL,
+        //     'message' => $this->notification_template->message,
+        //     'props' => [
+        //         'title' => $this->notification_template->title,
+        //     ],
+        //     'deleted' => 0,
+        //     'created_by' => $this->sender->id,
+        // ];
 
     }
 
