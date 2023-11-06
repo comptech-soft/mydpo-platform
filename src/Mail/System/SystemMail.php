@@ -55,24 +55,18 @@ class SystemMail extends Mailable {
             {
                 $input = $className::$methodName($this->user, $this->sender, $this->template, $this->payload);
             } 
-            
-            
         }
-
-        dd([
-            'user' => collect($this->user->toArray())->only(['id', 'email', 'first_name', 'last_name'])->toArray(),
-            'body' => $this->template['body'],
-            ...$input,
-        ]);
 
         return new Content(
             markdown: $markdown,
             with: [
-                'user' => $this->user,
+                'user' => collect($this->user->toArray())->only(['id', 'email', 'first_name', 'last_name'])->toArray(),
                 'body' => $this->template['body'],
+                ...$input,
             ],
         );
     }
+    
     /**
      * Get the attachments for the message.
      */
