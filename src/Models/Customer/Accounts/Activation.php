@@ -66,6 +66,11 @@ class Activation extends Model {
         return $record;
     }
 
+    public static function RegisterActivation() {
+
+        return ['aaaa' => 'Ovidiu'];
+    }
+
     public static function createActivation($user_id, $customer_id, $role_id) {
 
         dd(__METHOD__);
