@@ -12,17 +12,17 @@ use Illuminate\Queue\SerializesModels;
 use MyDpo\Events\BaseBroadcastEvent;
 use MyDpo\Mail\CustomerPersons\CustomerPersonCreateAccount as CreateAccountMail;
 
-class CreateAccount extends BaseBroadcastEvent {
+class CreateAccountActivation extends BaseBroadcastEvent {
 
     public $account = NULL;
     public $roleUser = NULL;
 
 
-    public function __construct($input) {
+    public function __construct($template, $input) {
 
-        parent::__construct('persons', 'create', $input);
+        parent::__construct($template, $input);
                
-        dd($input);
+        // dd($input);
         
         $this->account = $this->input['account'];
         $this->roleUser = $this->input['roleUser'];

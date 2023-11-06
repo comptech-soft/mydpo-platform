@@ -27,9 +27,9 @@ class BaseBroadcastEvent implements ShouldBroadcast {
 
     // public $notification_record = [];
 
-    public function __construct($input) {
+    public function __construct($template, $input) {
 
-        dd($input);
+        dd($template, $input);
 
         // $this->entity = $entity;
         // $this->action = $action;
