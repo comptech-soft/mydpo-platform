@@ -49,6 +49,8 @@ class TemplateEmail extends Model {
      */
     public static function doSend($input, $record = NULL) {
 
+        dd($input);
+        
         if(array_key_exists('customers', $input))
         {
             /**

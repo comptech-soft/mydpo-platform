@@ -49,7 +49,7 @@ class SystemMail extends Mailable {
 
             if (method_exists($className, $methodName)) 
             {
-                $input = $className::$methodName($this->user);
+                $input = $className::$methodName($this->user, $this->sender, $this->template);
             } 
             
             
