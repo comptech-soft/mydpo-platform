@@ -14,29 +14,29 @@ use MyDpo\Mail\CustomerPersons\CustomerPersonCreateAccount as CreateAccountMail;
 
 class CreateAccountActivation extends BaseBroadcastEvent {
 
-    public $account = NULL;
-    public $roleUser = NULL;
+    // public $account = NULL;
+    // public $roleUser = NULL;
 
 
     public function __construct($template, $input) {
 
         parent::__construct($template, $input);
                
-        // dd($input);
+        // // dd($input);
         
-        $this->account = $this->input['account'];
-        $this->roleUser = $this->input['roleUser'];
+        // $this->account = $this->input['account'];
+        // $this->roleUser = $this->input['roleUser'];
 
-        $this->SetSubject(__CLASS__, $this->account->id);
+        // $this->SetSubject(__CLASS__, $this->account->id);
 
-        $this->CreateMessage([
-            // 'nume-fisier' => $this->file->file_original_name,
-            // 'nume-folder' => $this->folder->name,
-        ]);
+        // $this->CreateMessage([
+        //     // 'nume-fisier' => $this->file->file_original_name,
+        //     // 'nume-folder' => $this->folder->name,
+        // ]);
 
-        $this->InsertNotification();
+        // $this->InsertNotification();
 
-        \Mail::to($this->account->user)->send(new CreateAccountMail($this->entity, $this->action, $this->input));
+        // \Mail::to($this->account->user)->send(new CreateAccountMail($this->entity, $this->action, $this->input));
     }
 
     

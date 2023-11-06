@@ -47,7 +47,7 @@ class TemplateEmail extends Model {
      *      id = id-ul template-ului de email
      *      customers = un array [6#123, 6#434, ....], unde structura este customer_id#user_id
      */
-    public static function doSend($input, $record) {
+    public static function doSend($input, $record = NULL) {
 
         if(array_key_exists('customers', $input))
         {
