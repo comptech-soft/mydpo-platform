@@ -17,17 +17,21 @@ use MyDpo\Models\Livrabile\Emails\TemplateEmail;
 class BaseBroadcastEvent implements ShouldBroadcast {
 
     public $input = NULL;
+    public $template_name = NULL;
+
     public $template_email = NULL;
 
     public function __construct($template_name, $input) {
 
-        // $this->template_name = $template_name;
+        $this->template_name = $template_name;
         $this->input = $input;
         
 
         $this->template_email = TemplateEmail::FindByName($template_name);
 
-        dd($template_email->toArray());
+        $this->template_email->doSend($this->customers);
+
+        // dd(__METHOD__);
         
         // $this->entity = $entity;
         // $this->action = $action;
@@ -85,33 +89,37 @@ class BaseBroadcastEvent implements ShouldBroadcast {
     }
 
     public function broadcastAs() {
-        return $this->entity . '-' . $this->action;
+        return $this->template_name;
     }
 
     public function broadcastOn() {
-        return new PrivateChannel($this->entity . '-' . $this->action);
+        return new PrivateChannel($this->template_name);
     }
 
     public function broadcastWith() {
-        return $this->notification_record;
+        return $this->template_email;
     }
 
-    public function InsertNotification() {
-        CustomerNotification::create($this->notification_record);
-    }
+    // public function InsertNotification() {
+    //     CustomerNotification::create($this->notification_record);
+    // }
 
-    public function CreateMessage($replacements) {
-        $r = $this->notification_template->message;
-        foreach($replacements as $key => $value)
-        {
-            $r = \Str::replace('[' . $key . ']', $value, $r);
-        }
-        $this->notification_record['message'] = $r;
-    }
+    // public function CreateMessage($replacements) {
+    //     $r = $this->notification_template->message;
+    //     foreach($replacements as $key => $value)
+    //     {
+    //         $r = \Str::replace('[' . $key . ']', $value, $r);
+    //     }
+    //     $this->notification_record['message'] = $r;
+    // }
 
-    public function SetSubject($subject_type, $subject_id) {
-        $this->notification_record['subject_type'] = $subject_type;
-        $this->notification_record['subject_id'] = $subject_id;
+    // public function SetSubject($subject_type, $subject_id) {
+    //     $this->notification_record['subject_type'] = $subject_type;
+    //     $this->notification_record['subject_id'] = $subject_id;
+    // }
+
+    public function __get($property) {
+        return array_key_exists($property, $this->input) ? $this->input[$property] : NULL;
     }
 
 }
