@@ -49,24 +49,24 @@ class TemplateEmail extends Model {
      */
     public static function doSend($input, $record = NULL) {
 
-        dd(11, $input);
+        $payload = array_key_exists('payload', $input) ? $input['payload'] : [];
 
         if(array_key_exists('customers', $input))
         {
             /**
              * Se inregistreaza emailurile pentru a fi trimise
              */
-            $record->RegisterCustomersEmailsToSend(self::PrepareCustomersToSend($input['customers']));
+            $record->RegisterCustomersEmailsToSend(self::PrepareCustomersToSend($input['customers']), $payload);
         }
     }
 
     /**
      * Se inregistreaza emailurile pentru customer in vederea trimiterii
      */
-    public function RegisterCustomersEmailsToSend($customers) {
+    public function RegisterCustomersEmailsToSend($customers, $payload) {
         foreach($customers as $customer_id => $users)
         {
-            Email::RegisterToSend($this, $customer_id, $users);
+            Email::RegisterToSend($this, $customer_id, $users, $payload);
         }
     }
 

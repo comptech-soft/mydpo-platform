@@ -36,16 +36,16 @@ class EmailUser extends Model {
         return $this->belongsTo(User::class, 'sended_by');
     }
 
-    public static function RegisterUsersToSend($email, $users) {
+    public static function RegisterUsersToSend($email, $users, $payload) {
 
         foreach($users as $i => $user_id)
         {
-            self::RegisterUserToSend($email, $user_id);
+            self::RegisterUserToSend($email, $user_id, $payload);
         }
 
     }
 
-    public static function RegisterUserToSend($email, $user_id) {
+    public static function RegisterUserToSend($email, $user_id, $payload) {
 
         self::create([
             'customer_email_id' => $email->id,
@@ -55,6 +55,7 @@ class EmailUser extends Model {
             'sended_at' => NULL,
             'props' => [
                 'template' => $email->props['template'],
+                'payload' => $payload,
             ],
             'created_by' => \Auth::user()->id,
         ]);

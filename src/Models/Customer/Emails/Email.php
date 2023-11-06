@@ -33,7 +33,7 @@ class Email extends Model {
         'updated_by',
     ];
 
-    public static function RegisterToSend($template, $customer_id, $users) {
+    public static function RegisterToSend($template, $customer_id, $users, $payload) {
 
         $record = self::create([
             'customer_id' => $customer_id,
@@ -41,16 +41,17 @@ class Email extends Model {
             'descripton' => NULL,
             'props' => [
                 'template' => collect($template->toArray())->only(['id', 'subject', 'body', 'name', 'props', 'before_method', 'btn_url', 'btn_caption'])->toArray(),
+                'payload' => $payload,
             ],
             'created_by' => \Auth::user()->id,
         ]);
 
-        $record->RegisterUsersToSend($users);
+        $record->RegisterUsersToSend($users, $payload);
 
     }
 
-    public function RegisterUsersToSend($users) {
-        EmailUser::RegisterUsersToSend($this, $users);
+    public function RegisterUsersToSend($users, $payload) {
+        EmailUser::RegisterUsersToSend($this, $users, $payload);
     }
 
     // public static function getItems($input) {
