@@ -68,6 +68,7 @@ class Activation extends Model {
 
     public static function createActivation($user_id, $customer_id, $role_id) {
 
+        dd(__METHOD__);
         $record = self::where('user_id', $user_id)
             ->where('customer_id', $customer_id)
             ->first();

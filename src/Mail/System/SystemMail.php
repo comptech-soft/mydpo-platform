@@ -41,6 +41,26 @@ class SystemMail extends Mailable {
         
         $markdown = \View::exists($markdown = ('emails.' . $this->template['name'])) ? $markdown : 'emails.system';
         
+        if(!!$this->template['before_method'])
+        {
+            list($className, $methodName) = explode("::", $this->template['before_method']);
+
+            $input = [];
+
+            if (true || method_exists($className, $methodName)) 
+            {
+                $input = ['aaa' => 'bbbbb'];
+            } 
+            
+            
+        }
+
+        dd([
+            'user' => collect($this->user->toArray())->only(['id', 'email', 'first_name', 'last_name'])->toArray(),
+            'body' => $this->template['body'],
+            ...$input,
+        ]);
+
         return new Content(
             markdown: $markdown,
             with: [
@@ -49,7 +69,6 @@ class SystemMail extends Mailable {
             ],
         );
     }
-
     /**
      * Get the attachments for the message.
      */
