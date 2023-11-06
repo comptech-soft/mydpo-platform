@@ -70,7 +70,7 @@ class Activation extends Model {
         $activation = self::createActivation($payload['account']['user_id'], $payload['account']['customer_id'], $payload['account']['role_id']);
 
         return [
-            'btn_url' => \Str::replace('[token]', $activation->token, $template['btn_url']),
+            'btn_url' => config('app.rl') + '\\' . \Str::replace('[token]', $activation->token, $template['btn_url']),
             'btn_caption' => $template['btn_caption'],
         ];
     }
