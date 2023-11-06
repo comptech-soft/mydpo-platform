@@ -55,8 +55,8 @@ class EmailUser extends Model {
             'sended_at' => NULL,
             'props' => [
                 'template' => $email->props['template'],
-                'created_by' => \Auth::user()->id,
-            ]
+            ],
+            'created_by' => \Auth::user()->id,
         ]);
 
     }
