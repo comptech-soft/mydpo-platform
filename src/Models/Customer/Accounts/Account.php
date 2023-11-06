@@ -137,11 +137,11 @@ class Account extends Model {
 
         $role = RoleUser::CreateAccountRole($input['customer_id'], $user->id, $account->role_id);
 
-        event(new CustomerPersonCreateAccount([
-            ...$input,
-            'account' => $account,
-            'roleUser' => $role,
-        ]));
+        // event(new CustomerPersonCreateAccount([
+        //     ...$input,
+        //     'account' => $account,
+        //     'roleUser' => $role,
+        // ]));
 
         return self::where('id', $account->id)->first();
     }
