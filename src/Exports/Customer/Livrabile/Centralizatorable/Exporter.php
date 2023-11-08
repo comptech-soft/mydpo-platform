@@ -64,9 +64,6 @@ class Exporter implements FromView, WithStrictNullComparison, ShouldAutoSize {
     }
     
     public function view(): View {
-
-        dd($this->GetHeader());
-
         return view('exports.customer.centralizatorable.export', [
             'document' => $this->document->toArray(),
             'header' => $this->GetHeader(),
@@ -148,12 +145,13 @@ class Exporter implements FromView, WithStrictNullComparison, ShouldAutoSize {
 
     protected function GetHeader() {
         /**
-         * Nu vom transmite coloanele CHECK, FILES
+         * Nu vom transmite coloanele NRTCRT, CHECK, FILES, EMPTY
          */
+        $ommited_columns = ($this->just_structure == 1 ? ['NRCRT', 'CHECK', 'FILES', 'EMPTY'] : ['CHECK', 'FILES', 'EMPTY']);
 
         return collect($this->document->table_headers)
-            ->filter( function($column) {
-                return ! in_array($column['type'], ['CHECK', 'FILES', 'EMPTY']);
+            ->filter( function($column) use ($ommited_columns){
+                return ! in_array($column['type'], $ommited_columns);
             })
             ->toArray();
     }
