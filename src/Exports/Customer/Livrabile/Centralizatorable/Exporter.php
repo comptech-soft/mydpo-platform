@@ -64,6 +64,9 @@ class Exporter implements FromView, WithStrictNullComparison, ShouldAutoSize {
     }
     
     public function view(): View {
+
+        dd($this->GetHeader());
+
         return view('exports.customer.centralizatorable.export', [
             'document' => $this->document->toArray(),
             'header' => $this->GetHeader(),
