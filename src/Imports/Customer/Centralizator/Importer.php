@@ -64,11 +64,10 @@ class Importer implements ToCollection {
     private function RowToRecord($row) {
 
         $record = [
-            'nrcrt' => $row[0],
             'rowvalues' => [],
         ];
 
-        $i = 1;
+        $i = 0;
 
         if($this->document->visibility_column_id)
         {
@@ -142,17 +141,39 @@ class Importer implements ToCollection {
 
     private function ProcessLine($line) {
 
-        $row = $this->myclasses[$this->input['model']]['row']::create([
+        if(config('app.platform') == 'admin')
+        {
+            $tooltip = __('Importat de :user/:role la :date', [
+                'user' => \Auth::user()->full_name,
+                'role' => \Auth::user()->role->name,
+                'date' => Carbon::now()->format('d.m.Y H:i:s')
+            ]);
+        }
+        else
+        {
+            $tooltip = __('Importat de :user/:role la :date. (:customer)', [
+                'user' => \Auth::user()->full_name,
+                'role' => \Auth::user()->role->name,
+                'date' => Carbon::now()->format('d.m.Y H:i:s'),
+                'customer' => $this->customer->name,
+            ]);
+        }
+
+        $input = [
             $this->myclasses[$this->input['model']]['fk_col'] => $this->document->id,
             $this->myclasses[$this->input['model']]['tip_col'] => $this->input['tip_id'],
             'customer_id' => $this->input['customer_id'],
             'order_no' => 1 + $this->myclasses[$this->input['model']]['row']::where($this->myclasses[$this->input['model']]['fk_col'], $this->document->id)->count(),
             'action_at' => Carbon::now()->format('Y-m-d'),
-            'tooltip' => '???',
+            'tooltip' => $tooltip,
             'visibility' => array_key_exists('visibility', $line) ? $line['visibility'] : 0,
             'status' => array_key_exists('status', $line) ? $line['status'] : NULL,
-            'department_id' => array_key_exists('department_id', $line) ? $this->departamente[$line['department_id']] : NULL,
-        ]);
+            'department_id' => array_key_exists('department_id', $line) 
+                ? !! $line['department_id'] ? $this->departamente[$line['department_id']] : NULL
+                : NULL,
+        ];
+        
+        $row = $this->myclasses[$this->input['model']]['row']::create($input);
 
         foreach($line['rowvalues'] as $i => $rowvalue)
         {
@@ -175,204 +196,4 @@ class Importer implements ToCollection {
             })
             ->toArray();
     }
-    
-    // private function processRow($value_columns, $row, $order_no) {
-        
-
-		
-
-
-    //     
-
-    //     $this->AttachRowValues($rowrecord, $value_columns, $row->toArray());
-    
-    // }      
-
-    // protected function AttachRowValues($rowrecord, $value_columns, $rows) {
-
-    //     foreach($value_columns as $i => $column)
-    //     {
-    //         $this->AttachRowValue($rowrecord, $column, $rows[$i]);
-            
-    //     }
-    // }
-
-    // protected function AttachRowValue($rowrecord, $column, $row) {
-
-    //     $input = [
-    //         'row_id' => $rowrecord->id,
-    //         'column_id' => $column['id'],
-    //     ];
-
-    //     $method = 'value' . ucfirst(strtolower($column['type']));
-
-    //     $input['value'] = $this->{$method}($row, $column);
-
-    //     
-
-    // }   
-
-    // protected function valueVisibility($value, $column) {
-    //     return $value;
-    // }
-
-    // protected function valueStatus($value, $column) {
-    //     return $value;
-    // }
-
-    // protected function valueDepartment($value, $column) {
-
-
-        
-    //     return NULL;
-    // }
-
-    // protected function valueO($value, $column) {
-
-    //     $options = collect($column['props'])->pluck('value', 'text')->toArray();
-
-    //     if( array_key_exists($value, $options) )
-    //     {
-    //         return $options[$value];
-    //     }
-
-    //     return NULL;
-    // }
-
-    // protected function valueN($value, $column) {
-    //     return $value;
-    // }
-
-    // protected function valueC($value, $column) {
-    //     return $value;
-    // }
-
-    // protected function valueD($value, $column) {
-    //     return $value;
-    // }
-
-    // protected function valueT($value, $column) {
-    //     return $value;
-    // }
-
-    // protected function columns() {
-    //     return collect($this->centralizator->columns)->filter(function($item){
-
-    //         if( in_array($item['type'], ['NRCRT', 'CHECK', 'FILES']) )
-    //         {
-    //             return false;
-    //         }
-
-    //         if( ! $item['type']  )
-    //         {
-    //             return count($item['children']) > 0;
-    //         }
-
-    //         return true;
-    //     });
-    // }
-
-    // protected function value_columns($columns) {
-
-    //     $value_columns = [];
-        
-    //     foreach($columns as $i => $column)
-    //     {
-    //         if( count($column['children']) == 0)
-    //         {
-    //             $value_columns[] = $column;
-    //         }
-    //         else
-    //         {
-    //             foreach( $column['children'] as $j => $child)
-    //             {
-    //                 $value_columns[] = $child;
-    //             }
-    //         }
-    //     }
-
-    //     return $value_columns;
-    // }
-
-    // protected function has_children_header() {
-    //     $r = FALSE;
-
-    //     foreach($this->centralizator->columns as $i => $column)
-    //     {
-    //         if( !! count($column['children']) )
-    //         {
-    //             $r = TRUE;
-    //         }
-    //     }
-    //     return $r;
-    // }
-
-    // protected function Columns() {
-    //     return collect($this->centralizator->columns_tree)->filter( function($item) {
-    //         return ! in_array($item['type'], ['CHECK', 'FILES', 'EMPTY']);
-    //     })->map(function($item){
-
-    //         $caption = $item['caption'];
-
-    //         if(is_string($caption))
-    //         {
-    //             $caption = \Str::replace('#', ' ', $caption);
-    //         }
-    //         else
-    //         {
-    //             if(is_array($caption))
-    //             {
-    //                 $caption = implode(' ', $caption);
-    //             }
-    //         }
-
-    //         $type = $item['type'];
-
-    //         if( ! $type )
-    //         {
-    //             $type = 'group';
-    //         }
-
-    //         return [
-    //             ...$item,
-    //             'caption' => $caption,
-    //             'type' => $type,
-    //         ];
-
-    //     })->toArray();
-    // }
-
-    // protected function Children() {
-    //     return collect($this->Columns())->filter(function($item){
-    //         return count($item['children']) > 0;
-    //     });
-    // }
-
-    // protected function List() {
-    //     $list = [];
-
-    //     foreach($this->Columns() as $i => $column)
-    //     {
-    //         if( count($column['children']) == 0)
-    //         {
-    //             $list[] = [
-    //                 'column_id' => $column['id'],
-    //                 'type' => $column['type'],
-    //             ];
-    //         }
-    //         else
-    //         {
-    //             foreach($column['children'] as $j => $child)
-    //             {
-    //                 $list[] = [
-    //                     'column_id' => $child['id'],
-    //                     'type' => $child['type'],
-    //                 ];
-    //             }
-    //         }
-    //     }
-
-    //     return $list;
-    // }
-
 }
