@@ -39,7 +39,7 @@ class Importer implements ToCollection {
             'document' => Registru::class,
             'row' => Row::class,
             'rowvalue' => Rowvalue::class,
-            'fk_col' => 'customer_registru_id',
+            'fk_col' => 'customer_register_id',
             'tip_col' => 'register_id',
         ],
     ];
