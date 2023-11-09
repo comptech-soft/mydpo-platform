@@ -8,16 +8,17 @@ use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 use MyDpo\Traits\Customer\Centralizatoare\Rowable;
 use MyDpo\Traits\Exportable;
+use MyDpo\Traits\Importable;
 
 use MyDpo\Models\Livrabile\Registre\TipRegistru;
 use MyDpo\Models\Livrabile\Registre\TipRegistruColoana;
 
 use MyDpo\Exports\Customer\Livrabile\Centralizatorable\Exporter;
-// use MyDpo\Imports\Customer\Centralizator\Importer;
+use MyDpo\Imports\Customer\Registru\Importer;
 
 class Row extends Model {
 
-    use Itemable, Actionable, Rowable, Exportable;
+    use Itemable, Actionable, Rowable, Exportable, Importable;
 
     protected $table = 'customers-registers-rows';
 
