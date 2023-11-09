@@ -32,7 +32,7 @@ trait Rowable {
     ];
 
     public function getHumanStatusAttribute() {
-        return $this->statuses[$this->status];
+        return $this->statuses[ trim($this->status) ];
     }
 
     public function department() {

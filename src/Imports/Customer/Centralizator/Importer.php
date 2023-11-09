@@ -167,7 +167,7 @@ class Importer implements ToCollection {
             'action_at' => Carbon::now()->format('Y-m-d'),
             'tooltip' => $tooltip,
             'visibility' => array_key_exists('visibility', $line) ? $line['visibility'] : 0,
-            'status' => array_key_exists('status', $line) ? $line['status'] : NULL,
+            'status' => array_key_exists('status', $line) ? trim($line['status']) : NULL,
             'department_id' => array_key_exists('department_id', $line) 
                 ? !! $line['department_id'] ? $this->departamente[$line['department_id']] : NULL
                 : NULL,
