@@ -11,7 +11,7 @@ use MyDpo\Models\Customer\Departments\Department;
 
 use MyDpo\Models\Customer\Centralizatoare\Centralizator;
 use MyDpo\Models\Customer\Centralizatoare\Row;
-use MyDpo\Models\Customer\Centralizatoare\Rowvalue;
+use MyDpo\Models\Customer\Centralizatoare\RowValue;
 
 class Importer implements ToCollection {
 
