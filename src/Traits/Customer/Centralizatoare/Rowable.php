@@ -32,7 +32,7 @@ trait Rowable {
     ];
 
     public function getHumanStatusAttribute() {
-        return $this->statuses[ trim($this->status) ];
+        return $this->statuses[ preg_replace('/[\x00-\x1F\x7F\xC2\xA0]/', '', $this->status) ];
     }
 
     public function department() {
