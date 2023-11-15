@@ -13,14 +13,12 @@ class CursuriController extends Controller {
 
         Curs::CalculateInfos();
 
-        // return Response::View(
-        //     '~templates.index', 
-        //     asset('apps/elearning/index.js')
-        // );
-
         return Index::View(
             styles: ['css/app.css'],
             scripts: ['apps/nomenclatoare/livrabile/cursuri/cursuri/index.js'],
+            payload: [
+                'type' => 'curs',
+            ],
         );
     }
 
