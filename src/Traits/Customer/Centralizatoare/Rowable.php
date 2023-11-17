@@ -28,11 +28,23 @@ trait Rowable {
         'na' => [
             'color' => 'red',
             'icon' => 'mdi-minus-circle-outline',
+        ],
+
+        'unkown' => [
+            'color' => 'grey',
+            'icon' => 'mdi-help',
         ]
     ];
 
     public function getHumanStatusAttribute() {
-        return $this->statuses[ preg_replace('/[\x00-\x1F\x7F\xC2\xA0]/', '', $this->status) ];
+        $status = preg_replace('/[\x00-\x1F\x7F\xC2\xA0]/', '', $this->status);
+
+        if(! array_key_exists($status, $this->statuses) )
+        {
+            return $this->statuses[ $status ];
+        }
+
+        return $this->statuses['unkown'];
     }
 
     public function department() {
