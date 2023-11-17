@@ -86,6 +86,18 @@ class Importer implements ToCollection {
 
         foreach($this->columns as $j => $column)
         {
+            $value = $row[$i++];
+			
+			if($column['type'] == 'O')
+			{
+				$first = collect($column['props'])->where('text', $value)->first();
+				
+				if(!! $first)
+				{
+					$value = $first['value'];
+				}
+			}
+            
             $record['rowvalues']['col-' . $column['id']] = [
                 'id' => NULL,
                 'row_id' => NULL,
