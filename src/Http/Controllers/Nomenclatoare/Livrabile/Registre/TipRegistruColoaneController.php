@@ -17,14 +17,13 @@ class TipRegistruColoaneController extends Controller {
             return redirect('tipuri-registre');
         }
 
-        dd($tip_registru->columns->toArray(), $tip_registru->columns_tree);
-
         return Index::View(
             styles: ['css/app.css'],
             scripts: ['apps/admin/tip-registru-coloane/index.js'],
             payload: [
                 'tip_registru_id' => $tip_registru_id,
                 'tip_registru' => $tip_registru,
+                'columns_tree' => $tip_registru->columns_tree
             ],
         );        
     }
