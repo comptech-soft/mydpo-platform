@@ -17,6 +17,8 @@ class TipRegistruColoaneController extends Controller {
             return redirect('tipuri-registre');
         }
 
+        dd($tip_registru->toArray());
+
         return Index::View(
             styles: ['css/app.css'],
             scripts: ['apps/admin/tip-registru-coloane/index.js'],
