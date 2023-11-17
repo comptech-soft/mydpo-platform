@@ -97,12 +97,12 @@ class Importer implements ToCollection {
 					$value = $first['value'];
 				}
 			}
-            
+
             $record['rowvalues']['col-' . $column['id']] = [
                 'id' => NULL,
                 'row_id' => NULL,
                 'column_id' => $column['id'],
-                'value' => $row[$i++],
+                'value' => $value,
                 'type' => $column['type'],
                 'column' => $column['type'],
             ]; 
