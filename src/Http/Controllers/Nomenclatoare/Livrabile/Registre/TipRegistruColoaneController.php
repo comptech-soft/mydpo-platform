@@ -17,7 +17,7 @@ class TipRegistruColoaneController extends Controller {
             return redirect('tipuri-registre');
         }
 
-        dd($tip_registru->columns->toArray());
+        dd($tip_registru->columns->toArray(), $tip_registru->columns_tree);
 
         return Index::View(
             styles: ['css/app.css'],
