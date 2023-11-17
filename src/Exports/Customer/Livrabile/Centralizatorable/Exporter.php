@@ -8,10 +8,12 @@ use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\FromView;
 
 use MyDpo\Models\Customer\Departments\Department;
+
 use MyDpo\Models\Customer\Centralizatoare\Centralizator;
-use MyDpo\Models\Customer\Centralizatoare\CentralizatorRow;
+use MyDpo\Models\Customer\Centralizatoare\Row as CentralizatorRow;
+
 use MyDpo\Models\Customer\Registre\Registru;
-use MyDpo\Models\Customer\Registre\RegistruRow;
+use MyDpo\Models\Customer\Registre\Row as RegistruRow;
 
 use Illuminate\Contracts\View\View;
 
@@ -73,7 +75,7 @@ class Exporter implements FromView, WithStrictNullComparison, ShouldAutoSize {
     }
 
     protected function GetRows(){
-        $rows = $this->myclasses['centralizatoare']['row']::where('customer_centralizator_id', $this->input['document_id'])
+        $rows = $this->myclasses[$this->input['model']]['row']::where('customer_centralizator_id', $this->input['document_id'])
             ->orderBy('order_no')
             ->get()
             ->map(function($row) {
