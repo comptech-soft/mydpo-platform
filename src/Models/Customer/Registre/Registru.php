@@ -144,6 +144,26 @@ class Registru extends Model {
      */
     protected function DuplicateRows($id, $department_ids, $new_customer_id, $old_customer_id) {
 
+        $action_at = \Carbon\Carbon::now();
+
+        if( config('app.platform') == 'admin')
+        {
+            $tooltip = __('Creat de :full_name/:role la :action_at.', [
+                'full_name' => \Auth::user()->full_name,
+                'action_at' => $action_at->format('d.m.Y'),
+                'role' => \Auth::user()->role->name,
+            ]);
+        }
+        else
+        {
+            $tooltip = __('Creat de :full_name/:role la :action_at. (:customer)', [
+                'full_name' => \Auth::user()->full_name,
+                'action_at' => $action_at->format('d.m.Y'),
+                'role' => \Auth::user()->role->name,
+                'customer' => \MyDpo\Models\Customer\Customer::find($new_customer_id)->name,
+            ]);
+        }
+
         /**
          * Randurile vechiului document, pentru fiecare rand
          */
@@ -169,9 +189,9 @@ class Registru extends Model {
                     'id' => NULL,
                     'customer_register_id' => $id,
                     'department_id' => $department_record->id,
-                    'action_at' => ($action_at = \Carbon\Carbon::now()),
+                    'action_at' => $action_at,
                     'status' => 'new',
-                    'tooltip' => 'Duplicat de :full_name la :action_at. (:customer)',
+                    'tooltip' => $tooltip,
                 ]);
 
                 /**
