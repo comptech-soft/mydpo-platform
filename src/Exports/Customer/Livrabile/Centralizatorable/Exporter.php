@@ -42,11 +42,13 @@ class Exporter implements FromView, WithStrictNullComparison, ShouldAutoSize {
         'centralizatoare' => [
             'document' => Centralizator::class,
             'row' => CentralizatorRow::class,
+            'field' => 'customer_centralizator_id',
         ],
 
         'registre' => [
             'document' => Registru::class,
             'row' => RegistruRow::class,
+            'field' => 'customer_register_id',
         ],
     ];
 
@@ -75,7 +77,7 @@ class Exporter implements FromView, WithStrictNullComparison, ShouldAutoSize {
     }
 
     protected function GetRows(){
-        $rows = $this->myclasses[$this->input['model']]['row']::where('customer_centralizator_id', $this->input['document_id'])
+        $rows = $this->myclasses[$this->input['model']]['row']::where($this->myclasses[$this->input['model']]['field'], $this->input['document_id'])
             ->orderBy('order_no')
             ->get()
             ->map(function($row) {
