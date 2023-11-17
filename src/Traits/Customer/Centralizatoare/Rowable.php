@@ -39,7 +39,7 @@ trait Rowable {
     public function getHumanStatusAttribute() {
         $status = preg_replace('/[\x00-\x1F\x7F\xC2\xA0]/', '', $this->status);
 
-        if(! array_key_exists($status, $this->statuses) )
+        if(array_key_exists($status, $this->statuses) )
         {
             return $this->statuses[ $status ];
         }
