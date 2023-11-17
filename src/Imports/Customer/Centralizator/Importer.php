@@ -97,6 +97,28 @@ class Importer implements ToCollection {
 					$value = $first['value'];
 				}
 			}
+			
+			if($column['type'] == 'D')
+			{
+				if (strpos($value, '.') !== false) 
+				{
+					$value = \Carbon\Carbon::createFromFormat('d.m.Y', $value)->format('Y-m-d');
+				}
+			}
+			
+			if($column['type'] == 'T')
+			{
+				$parts = explode(',', $value);
+				$d = trim($parts[0]);
+				$t = trim($parts[1]);
+				
+				if (strpos($d, '.') !== false) 
+				{
+					$d = \Carbon\Carbon::createFromFormat('d.m.Y', $d)->format('Y-m-d');
+					
+					$value = $d . ' ' . $t;
+				}
+			}
 
             $record['rowvalues']['col-' . $column['id']] = [
                 'id' => NULL,
@@ -155,7 +177,7 @@ class Importer implements ToCollection {
 
         if(config('app.platform') == 'admin')
         {
-            $tooltip = __('Importat de :user/:role la :date', [
+            $tooltip = __('Creat de :user/:role la :date', [
                 'user' => \Auth::user()->full_name,
                 'role' => \Auth::user()->role->name,
                 'date' => Carbon::now()->format('d.m.Y H:i:s')
@@ -163,7 +185,7 @@ class Importer implements ToCollection {
         }
         else
         {
-            $tooltip = __('Importat de :user/:role la :date. (:customer)', [
+            $tooltip = __('Creat de :user/:role la :date. (:customer)', [
                 'user' => \Auth::user()->full_name,
                 'role' => \Auth::user()->role->name,
                 'date' => Carbon::now()->format('d.m.Y H:i:s'),
