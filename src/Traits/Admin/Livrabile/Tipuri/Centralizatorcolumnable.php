@@ -33,8 +33,6 @@ trait Centralizatorcolumnable {
         return array_key_exists($this->type, $types) ? $types[$this->type] : $this->type;
     }
 
-
-
     public static function doInsert($input, $record) {
 
         if( ! array_key_exists('props', $input) )
@@ -80,16 +78,33 @@ trait Centralizatorcolumnable {
 
         $record->update($input);
 
-        return $record;
+        if(array_key_exists('register_id', $input))
+        {
+            $columns_tree = \MyDpo\Models\Livrabile\Registre\TipRegistru::find($input['register_id'])->columns_tree;
+        }
+
+        return [
+            ...$record->toArray(),
+            'columns_tree' => $columns_tree,
+        ];
     }
 
     public static function doDelete($input, $record) {
 
+        
         self::where('group_id', $record->id)->delete();
         
         $record->delete();
         
-        return $record;
+        if(array_key_exists('register_id', $input))
+        {
+            $columns_tree = \MyDpo\Models\Livrabile\Registre\TipRegistru::find($input['register_id'])->columns_tree;
+        }
+
+        return [
+            ...$record->toArray(),
+            'columns_tree' => $columns_tree,
+        ];
         
     }
     
