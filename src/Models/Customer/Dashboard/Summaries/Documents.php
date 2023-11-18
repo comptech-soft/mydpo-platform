@@ -2,6 +2,8 @@
 
 namespace MyDpo\Models\Customer\Dashboard\Summaries;
 
+use MyDpo\Models\Customer\Documents\CustomerFolderPermission;
+
 class Documents {
 
     public static function CountLivrabile($customer_id) {
@@ -24,6 +26,8 @@ class Documents {
             return $records[0]->count_records;
         }
 
+        // 'customers-folders-permissions'
+        
         return 198;
     } 
 
