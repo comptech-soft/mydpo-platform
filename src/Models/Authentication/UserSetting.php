@@ -35,7 +35,7 @@ class UserSetting extends Model {
 
         $record = self::wherePlatform($platform)->where('user_id', $user->id)->whereCode('b2b-active-customer')->first();
 
-        $accounts = Account::where('user_id', $user->id)->get();
+        $accounts = Account::GetCustomersByUser($user);
 
         if($record && $record->value)
         {
