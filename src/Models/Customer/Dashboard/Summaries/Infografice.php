@@ -4,7 +4,7 @@ namespace MyDpo\Models\Customer\Dashboard\Summaries;
 
 use MyDpo\Models\Customer\Documents\CustomerFolderPermission;
 
-class Documents {
+class Infografice {
 
     public static function CountLivrabile($customer_id) {
 
