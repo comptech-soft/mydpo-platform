@@ -62,7 +62,7 @@ trait Centralizatorcolumnable {
 
         return [
             'record' => $record,
-            'columns_tree' => aaaa,
+            'columns_tree' => 'aaa',
         ];
     }
 
