@@ -6,8 +6,7 @@ class Documents {
 
     public static function CountLivrabile($customer_id) {
 
-        dd(\Auth::user()->role->toArray());
-        if( (config('app.platform') == 'admin') || ((config('app.platform') == 'b2b') && (1 > 0)) )
+        if( (config('app.platform') == 'admin') || ((config('app.platform') == 'b2b') && (\Auth::user()->role->name == 'master')) )
         {
             $sql = "
                 SELECT
