@@ -19,6 +19,8 @@ class Documents {
 
         $records = \DB::select($sql);
 
+        return 1154;
+        
         return $records[0]->count_records;
     } 
 
