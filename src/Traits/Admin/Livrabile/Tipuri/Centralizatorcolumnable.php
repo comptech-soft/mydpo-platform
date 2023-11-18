@@ -90,7 +90,6 @@ trait Centralizatorcolumnable {
     }
 
     public static function doDelete($input, $record) {
-
         
         self::where('group_id', $record->id)->delete();
         

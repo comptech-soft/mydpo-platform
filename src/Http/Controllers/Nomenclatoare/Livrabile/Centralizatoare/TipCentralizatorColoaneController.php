@@ -23,6 +23,7 @@ class TipCentralizatorColoaneController extends Controller {
             payload: [
                 'centralizator_id' => $centralizator_id,
                 'centralizator' => $centralizator,
+                'columns_tree' => $centralizator->columns_tree
             ],
         );        
     }
