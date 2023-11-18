@@ -17,6 +17,9 @@ class DashboardController extends Controller {
      * Se afiseaza linkuri catre livrabile si catre entitati
      */
     public function index($customer_id, Request $r) {
+
+        dd(Item::getByColumns(), \Auth::user()->toArray());
+
         return Index::View(
             styles: ['css/app.css'],
             scripts: ['apps/customer/dashboard/index.js'],
