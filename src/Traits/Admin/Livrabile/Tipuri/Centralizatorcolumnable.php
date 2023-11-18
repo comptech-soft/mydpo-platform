@@ -60,7 +60,10 @@ trait Centralizatorcolumnable {
 
         $record = self::create($input);
 
-        return $record;
+        return [
+            'record' => $record,
+            'columns_tree' => aaaa,
+        ];
     }
 
     public static function doUpdate($input, $record) {
