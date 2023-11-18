@@ -66,7 +66,7 @@ trait Centralizatorcolumnable {
         }
 
         return [
-            ...$record,
+            ...$record->toArray(),
             'columns_tree' => $columns_tree,
         ];
     }
