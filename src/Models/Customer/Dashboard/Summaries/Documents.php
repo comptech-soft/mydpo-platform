@@ -26,9 +26,24 @@ class Documents {
             return $records[0]->count_records;
         }
 
-        // 'customers-folders-permissions'
+        $sql = "
+            SELECT
+                COUNT(*) AS count_records
+            FROM `customers-files`
+            LEFT JOIN `customers-folders`
+                INNER JOIN `customers-folders-permissions`
+                ON `customers-folders-permissions`.folder_id = `customers-folders`.id
+            ON `customers-folders`.`id` = `customers-files`.`folder_id`
+            WHERE 
+                (`customers-folders`.`type` = 'documente') AND
+                (`customers-files`.`customer_id` = " . $customer_id . ") AND
+                (`customers-folders-permissions`.user_id = " . \Auth::user()->id . ") AND 
+                (`customers-folders-permissions`.has_access = 1)
+        ";
         
-        return 198;
+        $records = \DB::select($sql);
+        
+        return $records[0]->count_records;
     } 
 
 }
