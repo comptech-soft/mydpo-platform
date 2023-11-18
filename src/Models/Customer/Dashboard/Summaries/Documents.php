@@ -24,7 +24,7 @@ class Documents {
             return $records[0]->count_records;
         }
 
-        return -198;
+        return 198;
     } 
 
 }
