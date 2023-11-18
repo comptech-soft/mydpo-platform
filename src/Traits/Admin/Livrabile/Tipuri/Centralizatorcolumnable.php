@@ -60,9 +60,14 @@ trait Centralizatorcolumnable {
 
         $record = self::create($input);
 
+        if(array_key_exists('register_id', $input))
+        {
+            $columns_tree = \MyDpo\Models\Livrabile\Registre\TipRegistru::find($input['register_id'])->columns_tree;
+        }
+
         return [
-            'record' => $record,
-            'columns_tree' => 'aaa',
+            ...$record,
+            'columns_tree' => $columns_tree,
         ];
     }
 
