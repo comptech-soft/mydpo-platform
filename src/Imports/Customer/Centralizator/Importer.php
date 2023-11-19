@@ -175,23 +175,17 @@ class Importer implements ToCollection {
 
     private function ProcessLine($line) {
 
-        if(config('app.platform') == 'admin')
-        {
-            $tooltip = __('Creat de :user/:role la :date', [
-                'user' => \Auth::user()->full_name,
+        $action_at = \Carbon\Carbon::now();
+
+        $tooltip = [
+            'text' => 'Creat de :full_name/:role la :action_at. (:customer)',
+            'values' => [
+                'full_name' => \Auth::user()->full_name,
+                'action_at' => $action_at->format('d.m.Y'),
                 'role' => \Auth::user()->role->name,
-                'date' => Carbon::now()->format('d.m.Y H:i:s')
-            ]);
-        }
-        else
-        {
-            $tooltip = __('Creat de :user/:role la :date. (:customer)', [
-                'user' => \Auth::user()->full_name,
-                'role' => \Auth::user()->role->name,
-                'date' => Carbon::now()->format('d.m.Y H:i:s'),
                 'customer' => $this->customer->name,
-            ]);
-        }
+            ]
+        ];
 
         $input = [
             $this->myclasses[$this->input['model']]['fk_col'] => $this->document->id,
