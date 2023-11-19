@@ -24,6 +24,7 @@ class Row extends Model {
 
     protected $casts = [
         'props' => 'json',
+        'tooltip' => 'json',
         'register_id' => 'integer',
         'customer_id' => 'integer',
         'visibility' => 'integer',
