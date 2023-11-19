@@ -129,12 +129,18 @@ trait Rowable {
        
         $statuses = collect($input['statuses'])->pluck('text', 'value')->toArray();
 
-        $tooltip = 'Setat ' . $statuses[$input['status']] . ' de ' . \Auth::user()->full_name . '/' . \Auth::user()->role->name . ' la ' . \Carbon\Carbon::now()->format('d.m.Y');
+        $action_at = \Carbon\Carbon::now();
 
-        if( config('app.platform') == 'b2b')
-        {
-            $tooltip .= ' (' . Customer::find($input['customer_id'])->name . ')';
-        }
+        $tooltip = [
+            'text' => $statuses[$input['status']] . ' de :full_name/:role la :action_at. (:customer)',
+            'values' => [
+                'full_name' => \Auth::user()->full_name,
+                'action_at' => $action_at->format('d.m.Y'),
+                'role' => \Auth::user()->role->name,
+                'customer' => Customer::find($input['customer_id'])->name,
+            ]
+        ];
+
         $rows = self::$myclasses['row']::whereIn('id', $input['selected_rows'])
             ->update([
                 'status' => $input['status'],
