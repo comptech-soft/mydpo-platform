@@ -11,8 +11,6 @@ class Importer implements ToCollection {
     protected $lines = NULL;
 
     public function __construct($input) {
-
-        dd($input);
         $this->input = $input;
     }
 
@@ -25,14 +23,14 @@ class Importer implements ToCollection {
 
     private function ValidRecord($record) {
         
-        return !! $record['ro'];
+        return !! $record['last_name'] && !! $record['first_name'] && !! $record['email'];
     }
 
     private function RowToRecord($row) {
         return [
-            'ro' => $row[1],
-            'en' => $row[2],
-            '__line' => $row['__line']
+            'last_name' => trim($row[0]),
+            'first_name' => trim($row[1]),
+            'email' =>  trim($row[2]),
         ];
     }
 
@@ -54,6 +52,9 @@ class Importer implements ToCollection {
     }    
 
     protected function Process() {
+
+        dd($this->lines);
+        
         foreach($this->lines as $i => $line) 
         {
             $this->ProcessLine($line);
