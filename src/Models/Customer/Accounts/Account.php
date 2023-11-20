@@ -251,6 +251,13 @@ class Account extends Model {
             return NULL;
         }
 
+        if($action == 'export')
+        {
+            return [
+                'file' => 'required',
+            ];
+        }
+
         $result = [
             'customer_id' => 'required|exists:customers,id',
             'department_id' => 'required|exists:customers-departamente,id', 
