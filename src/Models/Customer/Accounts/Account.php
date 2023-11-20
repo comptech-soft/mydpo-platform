@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 use MyDpo\Traits\Exportable;
+use MyDpo\Traits\Importable;
 
 use MyDpo\Models\Authentication\User;
 use MyDpo\Models\Authentication\RoleUser;
@@ -14,6 +15,7 @@ use MyDpo\Models\Customer\Departments\Department;
 use MyDpo\Models\Customer\Customer;
 
 use MyDpo\Exports\Customer\Entities\Account\Exporter;
+use MyDpo\Imports\Customer\Entities\Account\Importer;
 
 use MyDpo\Performers\Customer\Account\GetUsers;
 use MyDpo\Performers\Customer\Account\GetCustomers;
@@ -34,7 +36,7 @@ use MyDpo\Scopes\NotdeletedScope;
 
 class Account extends Model {
 
-    use Itemable, Actionable, Exportable;
+    use Itemable, Actionable, Exportable, Importable;
     
     protected $table = 'customers-persons';
 
@@ -114,6 +116,10 @@ class Account extends Model {
 
     protected static function GetExporter($input) {
         return new Exporter($input); 
+    }
+
+    protected static function GetImporter($input) {
+        return new Importer($input); 
     }
 
     public static function doInsert($input) {
