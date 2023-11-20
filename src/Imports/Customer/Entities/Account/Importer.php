@@ -19,6 +19,8 @@ class Importer implements ToCollection {
         $this->input = $input;
 
         $this->departamente = Department::where('customer_id', $this->input['customer_id'])->pluck('id', 'departament')->toArray();
+
+        dd($this->departamente);
     }
 
     public function collection(Collection $rows) {
