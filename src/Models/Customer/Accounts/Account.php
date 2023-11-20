@@ -148,7 +148,27 @@ class Account extends Model {
 
     public static function doAttach($input) {
 
-        dd($input);
+        $user = User::find($input['user_id']);
+
+        $account = self::where('customer_id', $input['customer_id'])
+            ->where('user_id', $input['user_id'])
+            ->where('role_id', $input['role_id'])
+            ->first();
+
+        if(! $account)
+        {
+            $account = self::create(collect($input)->except(['user'])->toArray());
+        }
+
+        $role = RoleUser::CreateAccountRole($input['customer_id'], $user->id, $account->role_id);
+
+        $customers = [
+            $input['customer_id'] . '#' . $user->id,
+        ];
+
+        event(new CreateAccountActivation('account.activation', [...$input, 'customers' => $customers, 'account' => $account, 'role' => $role]));
+
+        return self::where('id', $account->id)->first();
     }
 
     // public static function updateRole($action, $input) {
@@ -202,6 +222,11 @@ class Account extends Model {
                 'email',
                 new ValidAccountEmail($input)
             ];
+        }
+
+        if($action == 'attach')
+        {
+            $result['user_id'] = 'required|exists:users,id'; 
         }
     
         return $result;
