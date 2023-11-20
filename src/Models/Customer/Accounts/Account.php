@@ -196,6 +196,14 @@ class Account extends Model {
         return self::where('id', $account->id)->first();
     }
 
+    /**
+     * Resetarea parolei
+     */
+    public static function doPassword($input, $account) {
+
+        dd($input, $account);
+    }
+    
     public static function doDelete($input, $account) {
 
         Activation::where('customer_id', $input['customer_id'])->where('user_id', $input['user_id'])->delete();
