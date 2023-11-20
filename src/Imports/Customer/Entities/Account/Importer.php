@@ -4,14 +4,21 @@ namespace MyDpo\Imports\Customer\Entities\Account;
 
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
-// use MyDpo\Models\System\Translation; 
+use MyDpo\Models\Customer\Departments\Department;
 
 class Importer implements ToCollection {
 
     protected $lines = NULL;
 
+    /**
+     * departamentele clientului
+     */
+    public $departamente = NULL;
+
     public function __construct($input) {
         $this->input = $input;
+
+        $this->departamente = Department::where('customer_id', $this->input['customer_id'])->pluck('id', 'departament')->toArray();
     }
 
     public function collection(Collection $rows) {
@@ -54,7 +61,7 @@ class Importer implements ToCollection {
     protected function Process() {
 
         dd($this->lines);
-        
+
         foreach($this->lines as $i => $line) 
         {
             $this->ProcessLine($line);
