@@ -108,22 +108,6 @@ class Account extends Model {
         return $this->belongsTo(Customer::class, 'customer_id')->select(['id', 'name', 'status', 'logo', 'email', 'city_id']);
     }
 
-    // public static function doUpdate($input, $account) {
-
-    //     $account->update($input);
-
-    //     if(array_key_exists('user', $input) && array_key_exists('role_id', $input['user']) )
-    //     {
-    //         $roleUser = RoleUser::CreateAccountRole(
-    //             $input['customer_id'], 
-    //             $input['user_id'], 
-    //             $input['user']['role_id']
-    //         );
-    //     }
-
-    //     return $account;
-    // }
-
     public static function doInsert($input) {
 
         $user = User::create([
@@ -183,8 +167,16 @@ class Account extends Model {
     }
 
     public static function doDelete($input, $account) {
-        dd( $account->toArray() );
+
+        Activation::where('customer_id', $input['customer_id'])->where('user_id', $input['user_id'])->delete();
+
+        RoleUser::where('customer_id', $input['customer_id'])->where('user_id', $input['user_id'])->delete();
+
+        $account->delete();
+
+        return self::where('id', $account->id)->first();
     }
+
     // public static function updateRole($action, $input) {
     //     return (new UpdateRole($input))->Perform();
     // }
