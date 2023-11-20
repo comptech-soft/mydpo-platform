@@ -5,6 +5,10 @@ namespace MyDpo\Imports\Customer\Entities\Account;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use MyDpo\Models\Customer\Departments\Department;
+use MyDpo\Models\Authentication\User;
+use MyDpo\Models\Customer\Accounts\Account;
+use MyDpo\Models\Authentication\RoleUser;
+use MyDpo\Events\Customer\Entities\Account\CreateAccountActivation;
 
 class Importer implements ToCollection {
 
@@ -33,37 +37,53 @@ class Importer implements ToCollection {
         return !! $record['last_name'] && !! $record['first_name'] && !! $record['email'];
     }
 
-    private function RowToRecord($row) {
+    private function RowToRecord($row) {      
+        $department = Department::CreateIfNotExists($this->input['customer_id'], trim($row[3]));
 
-        dd($row);
-        
         return [
             'last_name' => trim($row[0]),
             'first_name' => trim($row[1]),
             'email' =>  trim($row[2]),
+            'department_id'=> $department->id,
+            'role_id' => strtolower(trim($row[4])) == 'master' ? 4 : 5,
+            'phone' => trim($row[5]),
         ];
     }
 
     private function ProcessLine($line) {
 
-        $input = collect($line)->except(['__line'])->toArray();
+        $user = User::whereEmail($line['email'])->first();
 
-        $record = Translation::where('ro', $input['ro'])->first();
+        if(! $user )
+        {
+            $user = User::create([
+                'last_name' => $line['last_name'],
+                'first_name' => $line['first_name'],
+                'email' => $line['email'],
+                'type' => 'b2b',
+                'password' => \Hash::make(\Str::random(8)),
+            ]);
+        }
 
-        if( !! $record )
-        {
-            $record->update($input);
-        }
-        else
-        {
-            $record = Translation::create($input);
-        }
+        $account = Account::create([
+            'customer_id' => $this->input['customer_id'],
+            'user_id' => $user->id,
+            'role_id' => $line['role_id'],
+            'department_id' => $line['department_id'],
+            'phone' => $line['phone'],
+        ]);
+
+        $role = RoleUser::CreateAccountRole($this->input['customer_id'], $user->id, $account->role_id);
+
+        $customers = [
+            $this->input['customer_id'] . '#' . $user->id,
+        ];
+
+        event(new CreateAccountActivation('account.activation', ['customers' => $customers, 'account' => $account, 'role' => $role]));
 
     }    
 
     protected function Process() {
-
-        dd($this->lines);
 
         foreach($this->lines as $i => $line) 
         {
@@ -84,7 +104,6 @@ class Importer implements ToCollection {
              */
             return [
                 ...$row,
-                '__line' => $i,
             ];
 
         })->filter( function($row, $i) use ($start_row) {
