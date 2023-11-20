@@ -26,10 +26,9 @@ class AccountDashboardController extends Controller {
                 'customer' => $account->customer->toArray(),
                 'account' => $account->toArray(),
                 'customer_user' => \Auth::user(),
+                'accounts' => Account::where('user_id', $account->user_id)->where('id', '<>', $account->id)->get()->toArray(),
             ],
         );        
     }
-
-
 
 }
