@@ -199,9 +199,18 @@ class Account extends Model {
     /**
      * Resetarea parolei
      */
+    /**
+     * Resetarea parolei
+     */
     public static function doPassword($input, $account) {
+        
+        $user = User::find($input['user_id']);
 
-        dd($input, $account);
+        $user->update([
+            'password' => \Hash::make($input['user']['password'])
+        ]);
+
+        return self::where('id', $account->id)->first();
     }
     
     public static function doDelete($input, $account) {
