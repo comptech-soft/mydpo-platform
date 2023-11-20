@@ -171,6 +171,10 @@ class Account extends Model {
         return self::where('id', $account->id)->first();
     }
 
+    public static function doUpdate($input) {
+
+        dd($input);
+    }
     // public static function updateRole($action, $input) {
     //     return (new UpdateRole($input))->Perform();
     // }
