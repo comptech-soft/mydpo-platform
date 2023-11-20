@@ -266,6 +266,14 @@ class Account extends Model {
             ];
         }
 
+        if($action == 'import')
+        {
+            return [
+                'file' => 'required',
+                'customer_id' => 'required|exists:customers,id',
+            ];
+        }
+
         $result = [
             'customer_id' => 'required|exists:customers,id',
             'department_id' => 'required|exists:customers-departamente,id', 
