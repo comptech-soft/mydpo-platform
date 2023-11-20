@@ -181,6 +181,10 @@ class Account extends Model {
 
         return self::where('id', $account->id)->first();
     }
+
+    public static function doDelete($input, $account) {
+        dd( $account->toArray() );
+    }
     // public static function updateRole($action, $input) {
     //     return (new UpdateRole($input))->Perform();
     // }
