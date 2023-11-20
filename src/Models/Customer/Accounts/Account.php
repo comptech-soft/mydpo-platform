@@ -171,9 +171,15 @@ class Account extends Model {
         return self::where('id', $account->id)->first();
     }
 
-    public static function doUpdate($input) {
+    public static function doUpdate($input, $account) {
 
-        dd($input);
+        $user = User::find($input['user_id']);
+
+        $user->update($input['user']);
+
+        $account->update(collect($input)->except(['user'])->toArray());
+
+        return self::where('id', $account->id)->first();
     }
     // public static function updateRole($action, $input) {
     //     return (new UpdateRole($input))->Perform();
