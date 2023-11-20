@@ -50,6 +50,20 @@ class Department extends Model {
         return $this->hasMany(Account::class, 'department_id');
     }
 
+    public static function CreateIfNotExists($customer_id, $name) {
+        $record = self::where('customer_id', $customer_id)->where('departament', $name)->first();
+
+        if(! $record)
+        {
+            $record = self::create([
+                'customer_id' => $customer_id,
+                'departament' => $name,
+            ]);
+        }
+
+        return $record;
+    }
+
     public static function CreateIfNecessary($customer_id, $new_customer_id, $department_id) {
 
         $record = self::find($department_id);
@@ -65,7 +79,6 @@ class Department extends Model {
         }
     
         return $exists; 
-
     }
 
     public static function getItems($input) {

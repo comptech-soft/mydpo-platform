@@ -19,8 +19,6 @@ class Importer implements ToCollection {
         $this->input = $input;
 
         $this->departamente = Department::where('customer_id', $this->input['customer_id'])->pluck('id', 'departament')->toArray();
-
-        dd($this->departamente);
     }
 
     public function collection(Collection $rows) {
@@ -36,6 +34,9 @@ class Importer implements ToCollection {
     }
 
     private function RowToRecord($row) {
+
+        dd($row);
+        
         return [
             'last_name' => trim($row[0]),
             'first_name' => trim($row[1]),
