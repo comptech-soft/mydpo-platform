@@ -3,19 +3,23 @@
 namespace MyDpo\Models\Customer\Accounts;
 
 use Illuminate\Database\Eloquent\Model;
-// use MyDpo\Helpers\Performers\Datatable\GetItems;
+
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
-// use MyDpo\Helpers\Performers\Datatable\DoAction;
+use MyDpo\Traits\Exportable;
+
 use MyDpo\Models\Authentication\User;
+use MyDpo\Models\Authentication\RoleUser;
 use MyDpo\Models\Customer\Departments\Department;
 use MyDpo\Models\Customer\Customer;
-use MyDpo\Models\Authentication\RoleUser;
+
+use MyDpo\Exports\Customer\Entities\Account\Exporter;
 
 use MyDpo\Performers\Customer\Account\GetUsers;
 use MyDpo\Performers\Customer\Account\GetCustomers;
 
 use MyDpo\Rules\Customer\Entities\Account\ValidAccountEmail;
+
 use MyDpo\Events\Customer\Entities\Account\CreateAccountActivation;
 // use MyDpo\Performers\CustomerFolder\SaveFoldersAccess;
 // use MyDpo\Performers\CustomerAccount\UpdateRole;
@@ -30,7 +34,7 @@ use MyDpo\Scopes\NotdeletedScope;
 
 class Account extends Model {
 
-    use Itemable, Actionable;
+    use Itemable, Actionable, Exportable;
     
     protected $table = 'customers-persons';
 
@@ -106,6 +110,10 @@ class Account extends Model {
 
     public function customer() {
         return $this->belongsTo(Customer::class, 'customer_id')->select(['id', 'name', 'status', 'logo', 'email', 'city_id']);
+    }
+
+    protected static function GetExporter($input) {
+        return new Exporter($input); 
     }
 
     public static function doInsert($input) {
