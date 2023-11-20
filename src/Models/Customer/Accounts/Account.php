@@ -254,7 +254,7 @@ class Account extends Model {
         if($action == 'export')
         {
             return [
-                'file' => 'required',
+                'file_name' => 'required',
             ];
         }
 
