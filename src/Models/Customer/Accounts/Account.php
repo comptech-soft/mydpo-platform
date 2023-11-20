@@ -168,7 +168,32 @@ class Account extends Model {
 
     public static function doActivation($input, $account) {
 
-        dd($input, $account);
+        $activation = Activation::byUserAndCustomer($input['user_id'], $input['customer_id'], $input['role_id']);
+
+        RoleUser::CreateAccountRole($input['customer_id'], $input['user_id'], $input['role_id']);
+
+        if($input['activated'] == 0)
+        {
+            // Contul trebuie deactivat
+            $activation->update(['activated' => 0]);
+            $account->update([
+                'activated' => 0,
+                'activated_at' => NULL,
+                'role_id' => $input['role_id']
+            ]);
+        }
+        else
+        {
+            // Contul trebuie activat
+            $activation->update(['activated' => 1]);
+            $account->update([
+                'activated' => 1,
+                'activated_at' => \Carbon\Carbon::now(),
+                'role_id' => $input['role_id']
+            ]);
+        }
+        
+        return self::where('id', $account->id)->first();
     }
 
     public static function doDelete($input, $account) {
@@ -181,14 +206,6 @@ class Account extends Model {
 
         return self::where('id', $account->id)->first();
     }
-
-    // public static function updateRole($action, $input) {
-    //     return (new UpdateRole($input))->Perform();
-    // }
-
-    // public static function updateStatus($action, $input) {
-    //     return (new UpdateStatus($input))->Perform();
-    // }
 
     // public static function saveDashboardPermissions($input) {
     //     return (new SaveDashboardPermissions($input))->Perform();
