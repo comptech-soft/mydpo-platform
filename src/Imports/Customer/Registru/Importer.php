@@ -233,6 +233,10 @@ class Importer implements ToCollection {
                     $department_id = $this->departamente[$line['department_id']];
                 }
             }
+            else
+            {
+                dd($line['department_id']);
+            }
         }
 
         dd($department_id);
