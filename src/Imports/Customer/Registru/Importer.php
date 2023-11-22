@@ -155,7 +155,7 @@ class Importer implements ToCollection {
 
         if( array_key_exists('status', $record))
         {
-            if( in_array($record['status'], ['new']) )
+            if( !! $record['status'] )
             {
                 $r = TRUE;
             }
@@ -253,7 +253,6 @@ class Importer implements ToCollection {
             'department_id' => $department_id,
         ];
         
-
         try
         {
             $row = $this->myclasses[$this->input['model']]['row']::create($input);

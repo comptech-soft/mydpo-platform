@@ -155,7 +155,7 @@ class Importer implements ToCollection {
 
         if( array_key_exists('status', $record))
         {
-            if( in_array($record['status'], ['new']) )
+            if( !! $record['status'] )
             {
                 $r = TRUE;
             }
@@ -273,7 +273,7 @@ class Importer implements ToCollection {
         catch(\Exception $e)
         {
         }
-        
+
     }
 
     protected function GetColumns() {
