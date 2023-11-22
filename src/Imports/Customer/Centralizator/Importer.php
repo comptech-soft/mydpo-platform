@@ -88,7 +88,7 @@ class Importer implements ToCollection {
         {
             $value = $row[$i++];
 			
-			if($column['type'] == 'O')
+            if( ($column['type'] == 'O') && !! $value)
 			{
 				$first = collect($column['props'])->where('text', $value)->first();
 				
@@ -98,7 +98,7 @@ class Importer implements ToCollection {
 				}
 			}
 			
-			if($column['type'] == 'D')
+			if( ($column['type'] == 'D') && !! $value )
 			{
 				if (strpos($value, '.') !== false) 
 				{
@@ -106,7 +106,7 @@ class Importer implements ToCollection {
 				}
 			}
 			
-			if($column['type'] == 'T')
+			if( ($column['type'] == 'T') && !! $value )
 			{
 				$parts = explode(',', $value);
 				$d = trim($parts[0]);
@@ -116,7 +116,7 @@ class Importer implements ToCollection {
 				{
 					$d = \Carbon\Carbon::createFromFormat('d.m.Y', $d)->format('Y-m-d');
 					
-					$value = $d . ' ' . $t;
+					$value = $d . ', ' . $t;
 				}
 			}
 
@@ -134,7 +134,42 @@ class Importer implements ToCollection {
     }
 
     private function ValidRecord($record) {
-        return TRUE;
+
+        $r = FALSE;
+
+        foreach($record['rowvalues'] as $col => $item)
+        {
+            if(!! $item['value'])
+            {
+                $r = TRUE;
+            }
+        }
+
+        if( array_key_exists('visibility', $record))
+        {
+            if( in_array($record['visibility'], [0, 1]) )
+            {
+                $r = TRUE;
+            }
+        }
+
+        if( array_key_exists('status', $record))
+        {
+            if( in_array($record['status'], ['new']) )
+            {
+                $r = TRUE;
+            }
+        }
+
+        if( array_key_exists('department_id', $record))
+        {
+            if( !! $record['department_id'] )
+            {
+                $r = TRUE;
+            }
+        }
+
+        return $r;
     }
 
     protected function CreateLines($rows) {
@@ -187,6 +222,25 @@ class Importer implements ToCollection {
             ]
         ];
 
+        $department_id = NULL;
+
+        if(array_key_exists('department_id', $line))
+        {
+            if(!! $line['department_id'])
+            {
+                if(array_key_exists($line['department_id'], $this->departamente))
+                {
+                    $department_id = $this->departamente[$line['department_id']];
+                }
+                else
+                {
+                    $department = Department::CreateIfNotExists($this->input['customer_id'], trim($line['department_id']));
+
+                    $department_id = $department->id;
+                }
+            }
+        }
+
         $input = [
             $this->myclasses[$this->input['model']]['fk_col'] => $this->document->id,
             $this->myclasses[$this->input['model']]['tip_col'] => $this->input['tip_id'],
@@ -196,24 +250,30 @@ class Importer implements ToCollection {
             'tooltip' => $tooltip,
             'visibility' => array_key_exists('visibility', $line) ? $line['visibility'] : 0,
             'status' => array_key_exists('status', $line) ? preg_replace('/[\x00-\x1F\x7F\xC2\xA0]/', '', $line['status']) : NULL,
-            'department_id' => array_key_exists('department_id', $line) 
-                ? !! $line['department_id'] ? $this->departamente[$line['department_id']] : NULL
-                : NULL,
+            'department_id' => $department_id,
         ];
         
-        $row = $this->myclasses[$this->input['model']]['row']::create($input);
-
-        foreach($line['rowvalues'] as $i => $rowvalue)
+        try
         {
-            $line['rowvalues'][$i]['row_id'] = $row->id;
-            $value = $this->myclasses[$this->input['model']]['rowvalue']::create($line['rowvalues'][$i]);
-            $line['rowvalues'][$i]['id'] = $value->id;
-        }
+            $row = $this->myclasses[$this->input['model']]['row']::create($input);
 
-        $row->props = [
-            'rowvalues' => $line['rowvalues']
-        ];
-        $row->save();
+            foreach($line['rowvalues'] as $i => $rowvalue)
+            {
+                $line['rowvalues'][$i]['row_id'] = $row->id;
+                $value = $this->myclasses[$this->input['model']]['rowvalue']::create($line['rowvalues'][$i]);
+                $line['rowvalues'][$i]['id'] = $value->id;
+            }
+
+            $row->props = [
+                'rowvalues' => $line['rowvalues']
+            ];
+
+            $row->save();
+        }
+        catch(\Exception $e)
+        {
+        }
+        
     }
 
     protected function GetColumns() {

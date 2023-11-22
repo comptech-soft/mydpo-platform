@@ -88,7 +88,7 @@ class Importer implements ToCollection {
         {
             $value = $row[$i++];
 			
-			if($column['type'] == 'O')
+			if( ($column['type'] == 'O') && !! $value)
 			{
 				$first = collect($column['props'])->where('text', $value)->first();
 				
@@ -98,7 +98,7 @@ class Importer implements ToCollection {
 				}
 			}
 			
-			if($column['type'] == 'D' )
+			if( ($column['type'] == 'D') && !! $value )
 			{
 				if (strpos($value, '.') !== false) 
 				{
@@ -106,7 +106,7 @@ class Importer implements ToCollection {
 				}
 			}
 			
-			if( ($column['type'] == 'T') && $value )
+			if( ($column['type'] == 'T') && !! $value )
 			{
 				$parts = explode(',', $value);
 				$d = trim($parts[0]);
