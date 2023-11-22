@@ -97,32 +97,37 @@ class Exporter implements FromView, WithStrictNullComparison, ShouldAutoSize {
 
         $value = $record['value'];
 
-        if($record['type'] == 'O')
+        try
         {
-            $options = collect(collect($this->document->columns_with_values)->first(function($column) use ($record){
-                return $column['id'] == $record['column_id'];
-            })['props'])->pluck('text', 'value')->toArray();
-
-            return $options[$value];
-
-        }
-
-        if($record['type'] == 'D')
-        {
-            if(!! $value )
+            if($record['type'] == 'O')
             {
-                dd($value);
-                return \Carbon\Carbon::createFromFormat('Y-m-d', $value)->format('d.m.Y');
+                $options = collect(collect($this->document->columns_with_values)->first(function($column) use ($record){
+                    return $column['id'] == $record['column_id'];
+                })['props'])->pluck('text', 'value')->toArray();
+
+                return $options[$value];
+
+            }
+
+            if($record['type'] == 'D')
+            {
+                if(!! $value )
+                {
+                    return \Carbon\Carbon::createFromFormat('Y-m-d', $value)->format('d.m.Y');
+                }
+            }
+
+            if($record['type'] == 'T')
+            {
+                if(!! $value )
+                {
+                    return \Carbon\Carbon::createFromFormat('Y-m-d, H:i', $value)->format('d.m.Y, H:i');
+                }
             }
         }
-
-        if($record['type'] == 'T')
+        catch(\Exception $e)
         {
-            if(!! $value )
-            {
-                dd($value);
-                return \Carbon\Carbon::createFromFormat('Y-m-d, H:i', $value)->format('d.m.Y, H:i');
-            }
+
         }
 
         return $value;
