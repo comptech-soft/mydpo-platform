@@ -98,7 +98,7 @@ class Importer implements ToCollection {
 				}
 			}
 			
-			if($column['type'] == 'D')
+			if($column['type'] == 'D' )
 			{
 				if (strpos($value, '.') !== false) 
 				{
@@ -135,8 +135,41 @@ class Importer implements ToCollection {
 
     private function ValidRecord($record) {
 
-        dd($record);
-        return TRUE;
+        $r = FALSE;
+
+        foreach($record['rowvalues'] as $col => $item)
+        {
+            if(!! $item['value'])
+            {
+                $r = TRUE;
+            }
+        }
+
+        if( array_key_exists('visibility', $record))
+        {
+            if( in_array($record['visibility'], [0, 1]) )
+            {
+                $r = TRUE;
+            }
+        }
+
+        if( array_key_exists('status', $record))
+        {
+            if( in_array($record['status'], ['new']) )
+            {
+                $r = TRUE;
+            }
+        }
+
+        if( array_key_exists('department_id', $record))
+        {
+            if( !! $record['department_id'] )
+            {
+                $r = TRUE;
+            }
+        }
+
+        return $r;
     }
 
     protected function CreateLines($rows) {
