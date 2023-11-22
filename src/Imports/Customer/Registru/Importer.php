@@ -241,8 +241,6 @@ class Importer implements ToCollection {
             }
         }
 
-        // dd($department_id);
-
         $input = [
             $this->myclasses[$this->input['model']]['fk_col'] => $this->document->id,
             $this->myclasses[$this->input['model']]['tip_col'] => $this->input['tip_id'],
@@ -256,22 +254,27 @@ class Importer implements ToCollection {
         ];
         
 
-        dd($input);
-        
-        $row = $this->myclasses[$this->input['model']]['row']::create($input);
-
-        foreach($line['rowvalues'] as $i => $rowvalue)
+        try
         {
-            $line['rowvalues'][$i]['row_id'] = $row->id;
-            $value = $this->myclasses[$this->input['model']]['rowvalue']::create($line['rowvalues'][$i]);
-            $line['rowvalues'][$i]['id'] = $value->id;
+            $row = $this->myclasses[$this->input['model']]['row']::create($input);
+
+            foreach($line['rowvalues'] as $i => $rowvalue)
+            {
+                $line['rowvalues'][$i]['row_id'] = $row->id;
+                $value = $this->myclasses[$this->input['model']]['rowvalue']::create($line['rowvalues'][$i]);
+                $line['rowvalues'][$i]['id'] = $value->id;
+            }
+
+            $row->props = [
+                'rowvalues' => $line['rowvalues']
+            ];
+
+            $row->save();
         }
-
-        $row->props = [
-            'rowvalues' => $line['rowvalues']
-        ];
-
-        $row->save();
+        catch(\Exception $e)
+        {
+            dd($e->getMessage(), $input);
+        }
     }
 
     protected function GetColumns() {
