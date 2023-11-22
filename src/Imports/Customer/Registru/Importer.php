@@ -234,7 +234,9 @@ class Importer implements ToCollection {
                 }
                 else
                 {
-                    dd($line['department_id']);
+                    $department = Department::CreateIfNotExists($this->input['customer_id'], trim($line['department_id']));
+
+                    $department_id = $department->id;
                 }
             }
         }
