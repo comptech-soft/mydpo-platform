@@ -273,7 +273,6 @@ class Importer implements ToCollection {
         }
         catch(\Exception $e)
         {
-            dd($e->getMessage(), $input);
         }
     }
 
