@@ -222,6 +222,8 @@ class Importer implements ToCollection {
             ]
         ];
 
+        dd($line);
+
         $input = [
             $this->myclasses[$this->input['model']]['fk_col'] => $this->document->id,
             $this->myclasses[$this->input['model']]['tip_col'] => $this->input['tip_id'],
