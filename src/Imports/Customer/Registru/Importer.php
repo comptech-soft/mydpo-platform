@@ -255,6 +255,9 @@ class Importer implements ToCollection {
             'department_id' => $department_id,
         ];
         
+
+        dd($input);
+        
         $row = $this->myclasses[$this->input['model']]['row']::create($input);
 
         foreach($line['rowvalues'] as $i => $rowvalue)
@@ -267,6 +270,7 @@ class Importer implements ToCollection {
         $row->props = [
             'rowvalues' => $line['rowvalues']
         ];
+
         $row->save();
     }
 
