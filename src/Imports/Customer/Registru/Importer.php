@@ -226,9 +226,16 @@ class Importer implements ToCollection {
 
         if(array_key_exists('department_id', $line))
         {
-            dd($line['department_id']);
+            if(!! $line['department_id'])
+            {
+                if(array_key_exists($line['department_id'], $this->departamente))
+                {
+                    $department_id = $this->departamente[$line['department_id']];
+                }
+            }
         }
 
+        dd($department_id);
 
         $input = [
             $this->myclasses[$this->input['model']]['fk_col'] => $this->document->id,
@@ -239,9 +246,7 @@ class Importer implements ToCollection {
             'tooltip' => $tooltip,
             'visibility' => array_key_exists('visibility', $line) ? $line['visibility'] : 0,
             'status' => array_key_exists('status', $line) ? preg_replace('/[\x00-\x1F\x7F\xC2\xA0]/', '', $line['status']) : NULL,
-            'department_id' => array_key_exists('department_id', $line) 
-                ? !! $line['department_id'] ? $this->departamente[$line['department_id']] : NULL
-                : NULL,
+            'department_id' => $department_id,
         ];
         
         $row = $this->myclasses[$this->input['model']]['row']::create($input);
