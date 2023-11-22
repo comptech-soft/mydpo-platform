@@ -120,6 +120,7 @@ class Exporter implements FromView, WithStrictNullComparison, ShouldAutoSize {
         {
             if(!! $value )
             {
+                dd($value);
                 return \Carbon\Carbon::createFromFormat('Y-m-d, H:i', $value)->format('d.m.Y, H:i');
             }
         }
