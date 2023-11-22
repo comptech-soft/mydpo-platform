@@ -117,6 +117,8 @@ class Importer implements ToCollection {
 					$d = \Carbon\Carbon::createFromFormat('d.m.Y', $d)->format('Y-m-d');
 					
 					$value = $d . ' ' . $t;
+
+                    dd($value);
 				}
 			}
 
