@@ -222,7 +222,13 @@ class Importer implements ToCollection {
             ]
         ];
 
-        dd($line);
+        $department_id = NULL;
+
+        if(array_key_exists('department_id', $line))
+        {
+            dd($line['department_id']);
+        }
+
 
         $input = [
             $this->myclasses[$this->input['model']]['fk_col'] => $this->document->id,
