@@ -106,7 +106,7 @@ class Importer implements ToCollection {
 				}
 			}
 			
-			if($column['type'] == 'T' && $value)
+			if( ($column['type'] == 'T') && $value )
 			{
 				$parts = explode(',', $value);
 				$d = trim($parts[0]);
