@@ -23,13 +23,6 @@ use MyDpo\Performers\Customer\Account\GetCustomers;
 use MyDpo\Rules\Customer\Entities\Account\ValidAccountEmail;
 
 use MyDpo\Events\Customer\Entities\Account\CreateAccountActivation;
-// use MyDpo\Performers\CustomerFolder\SaveFoldersAccess;
-// use MyDpo\Performers\CustomerAccount\UpdateRole;
-// use MyDpo\Performers\CustomerAccount\UpdateStatus;
-
-// use MyDpo\Performers\CustomerAccount\SavePermissions;
-// use MyDpo\Performers\CustomerAccount\SaveFolderAccess;
-// use MyDpo\Performers\CustomerAccount\AssignUser;
 
 use MyDpo\Scopes\NotdeletedScope;
 
@@ -218,9 +211,6 @@ class Account extends Model {
     /**
      * Resetarea parolei
      */
-    /**
-     * Resetarea parolei
-     */
     public static function doPassword($input, $account) {
         
         $user = User::find($input['user_id']);
@@ -261,25 +251,15 @@ class Account extends Model {
 
     public static function doActionsitems($input, $account) {
 
-        dd($input);
-        $account->menus_items_visibility = $input['actions_items_visibility'];
+        $actions_items_visibility = !! $account->actions_items_visibility ? $account->actions_items_visibility : [];
+
+        $actions_items_visibility[$input['active_node']['id']] = $input['active_node'];
+
+        $account->actions_items_visibility = $actions_items_visibility;
         $account->save();
 
         return self::where('id', $account->id)->first();
     }
-
-
-    // public static function savePermissions($input) {
-    //     return (new SavePermissions($input))->Perform();
-    // }
-
-    // public static function saveFolderAccess($input) {
-    //     return (new SaveFolderAccess($input))->Perform();
-    // }
-
-    // public static function assignUser($input) {
-    //     return (new AssignUser($input))->Perform();
-    // }
 
     public static function GetRules($action, $input) {
        
