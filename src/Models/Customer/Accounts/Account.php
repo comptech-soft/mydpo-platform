@@ -26,8 +26,7 @@ use MyDpo\Events\Customer\Entities\Account\CreateAccountActivation;
 // use MyDpo\Performers\CustomerFolder\SaveFoldersAccess;
 // use MyDpo\Performers\CustomerAccount\UpdateRole;
 // use MyDpo\Performers\CustomerAccount\UpdateStatus;
-// use MyDpo\Performers\CustomerAccount\SaveDashboardPermissions;
-// use MyDpo\Performers\CustomerAccount\SaveFolderPermissions;
+
 // use MyDpo\Performers\CustomerAccount\SavePermissions;
 // use MyDpo\Performers\CustomerAccount\SaveFolderAccess;
 // use MyDpo\Performers\CustomerAccount\AssignUser;
@@ -43,6 +42,7 @@ class Account extends Model {
     protected $casts = [
         'props' => 'json',
         'permissions' => 'json',
+        'dashboard_items_visibility' => 'json',
         'id' => 'integer',
         'newsletter' => 'integer',
         'customer_id' => 'integer',
@@ -68,6 +68,7 @@ class Account extends Model {
         'activated',
         'activated_at',
         'props',
+        'dashboard_items_visibility',
         'permissions',
         'order_no',
         'created_by',
@@ -238,13 +239,14 @@ class Account extends Model {
         return self::where('id', $account->id)->first();
     }
 
-    // public static function saveDashboardPermissions($input) {
-    //     return (new SaveDashboardPermissions($input))->Perform();
-    // }
+    public static function doDashoarditems($input, $account) {
 
-    // public static function saveFolderPermissions($input) {
-    //     return (new SaveFolderPermissions($input))->Perform();
-    // }
+        $account->dashboard_items_visibility = $input['dashboard_items_visibility'];
+        $account->save();
+
+        return self::where('id', $account->id)->first();
+    }
+
 
     // public static function savePermissions($input) {
     //     return (new SavePermissions($input))->Perform();
@@ -265,6 +267,11 @@ class Account extends Model {
             return NULL;
         }
 
+        if($action == 'dashoarditems')
+        {
+            return NULL;
+        }
+        
         if($action == 'export')
         {
             return [
