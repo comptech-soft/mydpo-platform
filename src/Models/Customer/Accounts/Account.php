@@ -259,6 +259,14 @@ class Account extends Model {
         return self::where('id', $account->id)->first();
     }
 
+    public static function doActionsitems($input, $account) {
+
+        $account->menus_items_visibility = $input['actions_items_visibility'];
+        $account->save();
+
+        return self::where('id', $account->id)->first();
+    }
+
 
     // public static function savePermissions($input) {
     //     return (new SavePermissions($input))->Perform();
@@ -274,7 +282,7 @@ class Account extends Model {
 
     public static function GetRules($action, $input) {
        
-        if( in_array($action, ['delete', 'dashoarditems', 'menuitems']) )
+        if( in_array($action, ['delete', 'dashoarditems', 'menuitems', 'actionsitems']) )
         {
             return NULL;
         }
