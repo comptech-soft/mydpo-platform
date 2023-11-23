@@ -38,6 +38,7 @@ class TipRegistruController extends Controller {
                 'customer' => $customer,
                 'tip' => $tip,
                 'model' => 'Customerregistre',
+                'customer_user' => \Auth::user(),
             ],
         );        
     }
