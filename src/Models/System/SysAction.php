@@ -132,46 +132,45 @@ class SysAction extends Model {
         return $r;
     }
 
-    public static function getActions() {
-
-        $user = \Auth::user();
-
-        if( ! $user )
-        {
-            return [];
-        }
+    public static function getActions($platform = NULL, $account = NULL) {
 
         $r = [];
+
+        $user = (! $account ? \Auth::user() : \MyDpo\Models\Authentication\User::find($account->user_id));
+
+        $platform = (!! $platform ? $platform : config('app.platform'));
+
+        $role = (! $account ? $user->role : \MyDpo\Models\Authentication\Role::find($account->role_id));
         
         foreach(self::whereIsRoot()->get() as $i => $item)
         {
-            if(in_array(config('app.platform'), $item->platform))
+            if(in_array($platform, $item->platform))
             {
-                $r[$item->slug] = $item->MakeAction($user);
+                $r[$item->slug] = $item->MakeAction($user, $role);
             }
         }
 
         return $r;
     }
 
-    protected function MakeAction($user) {
+    protected function MakeAction($user, $role) {
         $r = [];
 
         foreach($this->children as $i => $item)
         {
-            $r[$item->slug] = $item->MakeVisibility($user);
+            $r[$item->slug] = $item->MakeVisibility($user, $role);
         }
 
         return $r;
     }
 
-    protected function MakeVisibility($user) {
+    protected function MakeVisibility($user, $role) {
 
-        if($user->role)
+        if(!! $role)
         {
             $action_role = $this->roles()
                 ->wherePlatform(config('app.platform'))
-                ->where('role_id', $user->role->id)
+                ->where('role_id', $role->id)
                 ->first();
         }
         else
@@ -179,7 +178,7 @@ class SysAction extends Model {
             $action_role = NULL;
         }
 
-        $children = $this->MakeAction($user);
+        $children = $this->MakeAction($user, $role);
 
         return [
             'visible' => !! $action_role ? $action_role->attributes['visible'] : 0,

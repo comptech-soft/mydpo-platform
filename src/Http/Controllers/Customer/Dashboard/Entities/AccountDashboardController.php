@@ -30,6 +30,7 @@ class AccountDashboardController extends Controller {
                 'accounts' => Account::where('user_id', $account->user_id)->where('id', '<>', $account->id)->get()->toArray(),
                 'dashboard_items' => Item::getByColumns(),
                 'drawer_items' => \MyDpo\Models\System\SysMenu::getMenus('b2b', $account)['DrawerB2B'],
+                'actions_items' => \MyDpo\Models\System\SysAction::getActions('b2b', $account),
             ],
         );        
     }
