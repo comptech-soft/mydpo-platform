@@ -251,6 +251,14 @@ class Account extends Model {
         return self::where('id', $account->id)->first();
     }
 
+    public static function doMenuitems($input, $account) {
+
+        $account->menus_items_visibility = $input['menus_items_visibility'];
+        $account->save();
+
+        return self::where('id', $account->id)->first();
+    }
+
 
     // public static function savePermissions($input) {
     //     return (new SavePermissions($input))->Perform();
