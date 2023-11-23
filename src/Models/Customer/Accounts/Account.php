@@ -43,6 +43,8 @@ class Account extends Model {
         'props' => 'json',
         'permissions' => 'json',
         'dashboard_items_visibility' => 'json',
+        'menus_items_visibility' => 'json',
+        'actions_items_visibility' => 'json',
         'id' => 'integer',
         'newsletter' => 'integer',
         'customer_id' => 'integer',
@@ -69,6 +71,8 @@ class Account extends Model {
         'activated_at',
         'props',
         'dashboard_items_visibility',
+        'menus_items_visibility',
+        'actions_items_visibility',
         'permissions',
         'order_no',
         'created_by',
@@ -271,7 +275,7 @@ class Account extends Model {
         {
             return NULL;
         }
-        
+
         if($action == 'export')
         {
             return [
