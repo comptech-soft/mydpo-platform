@@ -218,7 +218,7 @@ class Importer implements ToCollection {
                 'full_name' => \Auth::user()->full_name,
                 'action_at' => $action_at->format('d.m.Y'),
                 'role' => \Auth::user()->role->name,
-                'customer' => $this->customer->name,
+                'customer' => config('app.platform') == 'b2b' ? $this->customer->name : 'Decalex',
             ]
         ];
 

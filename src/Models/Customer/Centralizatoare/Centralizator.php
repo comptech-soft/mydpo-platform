@@ -164,7 +164,7 @@ class Centralizator extends Model {
                 'full_name' => \Auth::user()->full_name,
                 'action_at' => $action_at->format('d.m.Y'),
                 'role' => \Auth::user()->role->name,
-                'customer' => \MyDpo\Models\Customer\Customer::find($new_customer_id)->name,
+                'customer' => config('app.platform') == 'b2b' ? \MyDpo\Models\Customer\Customer::find($new_customer_id)->name : 'Decalex', 
             ]
         ];
 
