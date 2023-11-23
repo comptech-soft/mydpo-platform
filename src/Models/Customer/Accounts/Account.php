@@ -266,12 +266,7 @@ class Account extends Model {
 
     public static function GetRules($action, $input) {
        
-        if($action == 'delete')
-        {
-            return NULL;
-        }
-
-        if($action == 'dashoarditems')
+        if( in_array($action, ['delete', 'dashoarditems', 'menuitems']) )
         {
             return NULL;
         }
