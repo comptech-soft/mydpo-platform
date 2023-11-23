@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
 use MyDpo\Models\Customer\Accounts\Account;
+use MyDpo\Models\Customer\Dashboard\Item;
 
 class AccountDashboardController extends Controller {
     
@@ -27,6 +28,7 @@ class AccountDashboardController extends Controller {
                 'account' => $account->toArray(),
                 'customer_user' => \Auth::user(),
                 'accounts' => Account::where('user_id', $account->user_id)->where('id', '<>', $account->id)->get()->toArray(),
+                'dashboard_items' => Item::getByColumns(),
             ],
         );        
     }
