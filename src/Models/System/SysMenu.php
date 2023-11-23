@@ -135,15 +135,19 @@ class SysMenu extends Model {
      * Returneaza meniurile definite in sistem
      * Se tine cont de platforma
      */
-    public static function getMenus() {
-
-        $user = \Auth::user();
-
+    public static function getMenus($platform = NULL, $account = NULL) {
+       
         $r = [];
 
+        $user = (! $account ? \Auth::user() : \MyDpo\Models\Authentication\User::find($account->user_id));
+
+        $platform = (!! $platform ? $platform : config('app.platform'));
+
+        $role = (! $account ? $user->role : \MyDpo\Models\Authentication\Role::find($account->role_id));
+       
         foreach(self::whereIsRoot()->get() as $i => $item)
         {
-            if(in_array(config('app.platform'), $item->platform))
+            if(in_array($platform, $item->platform))
             {
 
                 $children = [];
@@ -153,7 +157,7 @@ class SysMenu extends Model {
                 }
                 else
                 {
-                    if(!! $user && !! $user->role)
+                    if(!! $user && !! $role)
                     {
                         $children = $item->MakeMenu($user, $item->slug, false);
                     }
@@ -175,7 +179,7 @@ class SysMenu extends Model {
         
         return $r;
     }
-
+    
     protected function MakeMenu($user, $slug, $permanent) {
         
         if(! $user || ! $user->role)
