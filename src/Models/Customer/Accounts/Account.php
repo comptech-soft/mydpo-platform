@@ -261,6 +261,7 @@ class Account extends Model {
 
     public static function doActionsitems($input, $account) {
 
+        dd($input);
         $account->menus_items_visibility = $input['actions_items_visibility'];
         $account->save();
 
