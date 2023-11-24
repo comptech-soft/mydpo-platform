@@ -580,11 +580,9 @@ class CustomerFile extends Model {
                 $record->update([...$input, 'id' => $record->id]);
             }
 
-            dd(self::CreateUploadReceivers($input['customer_id'], $input['folder_id']));
-
             event(new \MyDpo\Events\Customer\Livrabile\Documents\UploadFile('upload.file', [
                 ...$input, 
-                'customers' => $this->CreateUploadReceivers($input['customer_id']), 
+                'customers' => self::CreateUploadReceivers($input['customer_id'], $input['folder_id']), 
                 // 'account' => $account, 
                 // 'role' => $role
             ]));
