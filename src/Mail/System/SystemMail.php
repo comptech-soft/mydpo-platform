@@ -61,7 +61,6 @@ class SystemMail extends Mailable {
          * traduceri
          * substitutii
          */
-        dd($this->template);
 
         return new Content(
             markdown: $markdown,
