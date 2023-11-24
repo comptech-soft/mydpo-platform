@@ -22,7 +22,7 @@ class CreateAccountActivation extends BaseBroadcastEvent {
 
         parent::__construct($template, $input);
             
-        dd($template, $input);
+        // dd($template, $input);
         // // dd($input);
         
         // $this->account = $this->input['account'];
