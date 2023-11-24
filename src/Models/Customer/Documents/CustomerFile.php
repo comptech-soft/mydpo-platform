@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Model;
 use MyDpo\Models\Customer\Customer;
 use MyDpo\Models\Customer\ELearning\MaterialStatus;
 use MyDpo\Models\Authentication\User;
+use MyDpo\Models\Customer\Accounts\Account;
+
 // use MyDpo\Models\RoleUser;
 // use MyDpo\Performers\CustomerFile\MoveFiles;
 // use MyDpo\Performers\CustomerFile\DeleteFiles;
@@ -578,13 +580,11 @@ class CustomerFile extends Model {
                 $record->update([...$input, 'id' => $record->id]);
             }
 
-            dd($input['customer_id']);
+            dd(self::CreateUploadReceivers($input['customer_id'], $input['folder_id']));
 
             event(new \MyDpo\Events\Customer\Livrabile\Documents\UploadFile('upload.file', [
                 ...$input, 
-                // 'customers' => [
-                //     $input['customer_id'] . '#' . $user->id,
-                // ], 
+                'customers' => $this->CreateUploadReceivers($input['customer_id']), 
                 // 'account' => $account, 
                 // 'role' => $role
             ]));
@@ -594,6 +594,23 @@ class CustomerFile extends Model {
         {
             throw new \Exception('Fișier incorect.');
         }
+    }
+
+
+    public static function CreateUploadReceivers($customer_id, $folder_id) {
+        
+        $r = [];
+        foreach($accounts = Account::where('customer_id', $customer_id)->get() as $i => $account)
+        {
+            if( ! in_array($account->user_id, $r) )
+            {
+                $r[] = $account->user_id;
+            }
+        }
+
+        return collect($r)->map(function($user_id) use ($customer_id){
+            return $customer_id . '#' . $user_id;
+        })->toArray();
     }
 
     public static function GetQuery() {
