@@ -36,6 +36,11 @@ class BaseBroadcastEvent implements ShouldBroadcast {
 
         $this->template_notification = TemplateNotification::FindByName($template_name);
 
+        if(!! $this->template_notification)
+        {
+            TemplateNotification::doSend(['customers' => $this->customers, 'payload' => $this->input], $this->template_notification);
+        }
+
         dd($this->template_notification);
 
         // dd(__METHOD__);
@@ -96,15 +101,26 @@ class BaseBroadcastEvent implements ShouldBroadcast {
     }
 
     public function broadcastAs() {
-        return $this->template_name;
+        if(!! $this->template_notification)
+        {
+            return $this->template_name;
+        }
+        return NULL;
     }
 
     public function broadcastOn() {
-        return new PrivateChannel($this->template_name);
+        if(!! $this->template_notification)
+        {
+            return new PrivateChannel($this->template_name);
+        }
     }
 
     public function broadcastWith() {
-        return $this->template_email->toArray();
+        if(!! $this->template_email)
+        {
+            return $this->template_email->toArray();
+        }
+        return NULL;
     }
 
     // public function InsertNotification() {
