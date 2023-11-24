@@ -52,8 +52,10 @@ class TemplateNotification extends Model {
         if(array_key_exists('customers', $input))
         {
             /**
-             * Se inregistreaza emailurile pentru a fi trimise
+             * Se inregistreaza notificarile pentru a fi trimise
              */
+            dd($input['customers']);
+
             $record->RegisterCustomersNotificationsToSend(self::PrepareCustomersToSend($input['customers']));
         }
     }

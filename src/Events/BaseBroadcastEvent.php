@@ -41,8 +41,6 @@ class BaseBroadcastEvent implements ShouldBroadcast {
             TemplateNotification::doSend(['customers' => $this->customers, 'payload' => $this->input], $this->template_notification);
         }
 
-        dd($this->template_notification);
-
         // dd(__METHOD__);
         
         // $this->entity = $entity;
