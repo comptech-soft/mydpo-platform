@@ -578,13 +578,13 @@ class CustomerFile extends Model {
                 $record->update([...$input, 'id' => $record->id]);
             }
 
-            event(new UploadFile('upload.file', [
+            event(new \MyDpo\Events\Customer\Livrabile\Documents\UploadFile('upload.file', [
                 ...$input, 
-                'customers' => [
-                    $input['customer_id'] . '#' . $user->id,
-                ], 
-                'account' => $account, 
-                'role' => $role
+                // 'customers' => [
+                //     $input['customer_id'] . '#' . $user->id,
+                // ], 
+                // 'account' => $account, 
+                // 'role' => $role
             ]));
 
             // dd($record);
