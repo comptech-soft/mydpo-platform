@@ -106,7 +106,8 @@ class Notification extends Model {
 
         foreach($users as $i => $user_id)
         {
-            $r[$customer_id]  =  self::RegisterUserToSend($template, $customer_id, $user_id);
+
+            $r[] = self::RegisterUserToSend($template, $customer_id, $user_id);
         }
         
         return $r;

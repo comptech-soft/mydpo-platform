@@ -67,7 +67,7 @@ class TemplateNotification extends Model {
         $r = [];
         foreach($customers as $customer_id => $users)
         {
-            $r[] = Notification::RegisterToSend($this, $customer_id, $users);
+            $r[$customer_id] = Notification::RegisterToSend($this, $customer_id, $users);
         }
         return $r;
     }
