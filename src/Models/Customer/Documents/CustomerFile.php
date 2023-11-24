@@ -575,11 +575,19 @@ class CustomerFile extends Model {
             }
             else
             {
-                $record->update([
-                    ...$input,
-                    'id' => $record->id,
-                ]);
+                $record->update([...$input, 'id' => $record->id]);
             }
+
+            event(new UploadFile('upload.file', [
+                ...$input, 
+                'customers' => [
+                    $input['customer_id'] . '#' . $user->id,
+                ], 
+                'account' => $account, 
+                'role' => $role
+            ]));
+
+            // dd($record);
         }
         else
         {

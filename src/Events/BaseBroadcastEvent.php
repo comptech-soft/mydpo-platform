@@ -23,6 +23,7 @@ class BaseBroadcastEvent implements ShouldBroadcast {
 
     public function __construct($template_name, $input) {
 
+        dd(__METHOD__);
         $this->template_name = $template_name;
         $this->input = $input;
         
