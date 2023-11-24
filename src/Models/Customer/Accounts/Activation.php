@@ -67,10 +67,11 @@ class Activation extends Model {
     }
 
     public static function RegisterActivation($user, $sender, $template, $payload) {
+
         $activation = self::createActivation($payload['account']['user_id'], $payload['account']['customer_id'], $payload['account']['role_id']);
 
         return [
-            'btn_url' => config('app.url') . '/' . \Str::replace('[token]', $activation->token, $template['btn_url']),
+            'btn_url' => \MyDpo\Models\System\Platform::find(2)->url . '/' . \Str::replace('[token]', $activation->token, $template['btn_url']),
             'btn_caption' => $template['btn_caption'],
             'customer_name' => Customer::find($payload['account']['customer_id'])->name,
         ];
