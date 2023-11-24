@@ -57,19 +57,42 @@ class SystemMail extends Mailable {
             } 
         }
 
-        /**
-         * traduceri
-         * substitutii
-         */
-
+        
         return new Content(
             markdown: $markdown,
             with: [
                 'user' => collect($this->user->toArray())->only(['id', 'email', 'first_name', 'last_name'])->toArray(),
-                'body' => $this->template['body'],
+                'body' => $this->BodyContent($input),
                 ...$input,
             ],
         );
+    }
+
+    /**
+     * traduceri
+     * substitutii
+     */
+    protected function BodyContent($input) {
+
+        // dd($this->template);
+
+        $body = $this->template['body'];
+
+        // $body = \Str::replace('[button]', $this->template['btn_caption'], $body);
+
+        foreach(['email', 'first_name', 'last_name', 'full_name'] as $i => $field)
+        {
+            $body = \Str::replace('[' . $field . ']', $this->user->{$field}, $body);
+        }
+
+        foreach(['btn_url', 'btn_caption'] as $i => $field)
+        {
+            $body = \Str::replace('[' . $field . ']', $input[$field], $body);
+        }
+
+        dd($body);
+        
+        return $body;
     }
     
     /**
