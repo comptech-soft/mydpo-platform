@@ -89,8 +89,6 @@ class SystemMail extends Mailable {
         {
             $body = \Str::replace('[' . $field . ']', $input[$field], $body);
         }
-
-        dd($body);
         
         return $body;
     }
