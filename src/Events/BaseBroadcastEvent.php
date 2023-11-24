@@ -9,8 +9,6 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-// use MyDpo\Models\Customer\Customer;
-// use MyDpo\Models\CustomerNotification;
 use MyDpo\Models\Livrabile\Notifications\TemplateNotification;
 use MyDpo\Models\Livrabile\Emails\TemplateEmail;
 
@@ -64,24 +62,6 @@ class BaseBroadcastEvent implements ShouldBroadcast {
         }
         return NULL;
     }
-
-    // public function InsertNotification() {
-    //     CustomerNotification::create($this->notification_record);
-    // }
-
-    // public function CreateMessage($replacements) {
-    //     $r = $this->notification_template->message;
-    //     foreach($replacements as $key => $value)
-    //     {
-    //         $r = \Str::replace('[' . $key . ']', $value, $r);
-    //     }
-    //     $this->notification_record['message'] = $r;
-    // }
-
-    // public function SetSubject($subject_type, $subject_id) {
-    //     $this->notification_record['subject_type'] = $subject_type;
-    //     $this->notification_record['subject_id'] = $subject_id;
-    // }
 
     public function __get($property) {
         return array_key_exists($property, $this->input) ? $this->input[$property] : NULL;
