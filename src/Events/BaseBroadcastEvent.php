@@ -38,6 +38,7 @@ class BaseBroadcastEvent implements ShouldBroadcast {
 
         if(!! $this->template_notification)
         {
+            dd($this->template_notification->toArray());
             $this->notifications = TemplateNotification::doSend(['customers' => $this->customers, 'payload' => $this->input], $this->template_notification);
         }
     }

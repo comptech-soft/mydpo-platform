@@ -115,6 +115,8 @@ class Notification extends Model {
 
     public static function RegisterUserToSend($template, $customer_id, $user_id) {
 
+        dd($template->name);
+        
         return self::create([
             'type_id' => $template->id,
             'subject_type' => $template->name,
@@ -137,9 +139,5 @@ class Notification extends Model {
         ])->toArray();
 
     }
-
-    // public static function doAction($action, $input) {
-    //     return (new DoAction($action, $input, __CLASS__))->Perform();
-    // }
 
 }
