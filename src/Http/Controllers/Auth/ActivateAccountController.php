@@ -32,7 +32,7 @@ class ActivateAccountController extends Controller {
             );
         }
         
-        return redirect(route('dashboard'));
+        return redirect('/');
     }
 
     public function activateAccount(Request $r) {
@@ -47,10 +47,7 @@ class ActivateAccountController extends Controller {
     }
 
     public function getInfosByToken(Request $r) {
-        return UserSession::getInfosByToken($r->only([
-            'token', 
-        ]));
+        return UserSession::getInfosByToken($r->only(['token']));
     }
     
-
 }

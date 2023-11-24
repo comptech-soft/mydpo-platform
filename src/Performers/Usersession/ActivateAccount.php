@@ -71,11 +71,7 @@ class ActivateAccount extends Perform {
 
         \Auth::login($user);
 
-        event(new Login(
-            \Auth::guard(), 
-            \Auth::user(),
-            false,
-        ));
+        event(new Login(\Auth::guard(), \Auth::user(), false));
 
         UserSetting::saveActiveCustomer([
             'user_id' => $user->id,
@@ -85,5 +81,4 @@ class ActivateAccount extends Perform {
 
     }
 
-   
 }
