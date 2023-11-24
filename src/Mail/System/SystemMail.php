@@ -85,9 +85,9 @@ class SystemMail extends Mailable {
             $body = \Str::replace('[' . $field . ']', $this->user->{$field}, $body);
         }
 
-        foreach(['btn_url', 'btn_caption'] as $i => $field)
+        foreach($input as $field => $value)
         {
-            $body = \Str::replace('[' . $field . ']', $input[$field], $body);
+            $body = \Str::replace('[' . $field . ']', $value, $body);
         }
         
         return $body;
