@@ -54,8 +54,6 @@ class TemplateNotification extends Model {
             /**
              * Se inregistreaza notificarile pentru a fi trimise
              */
-            dd($input['customers']);
-
             $record->RegisterCustomersNotificationsToSend(self::PrepareCustomersToSend($input['customers']));
         }
     }

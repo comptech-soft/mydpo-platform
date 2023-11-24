@@ -40,62 +40,6 @@ class BaseBroadcastEvent implements ShouldBroadcast {
         {
             TemplateNotification::doSend(['customers' => $this->customers, 'payload' => $this->input], $this->template_notification);
         }
-
-        // dd(__METHOD__);
-        
-        // $this->entity = $entity;
-        // $this->action = $action;
-        // $this->input = $input;
-        
-        // $this->sender = \Auth::user();
-        
-        // if( ! $this->sender )
-        // {
-        //     throw new \Exception('Nu avem user logat pentru acțiunea ' . $this->entity . '-' . $this->action . ' pe platforma ' . config('app.platform'));
-        // }
-
-        // $this->receiver = array_key_exists('receiver', $input) ? $input['receiver'] : NULL;
-
-        // if( array_key_exists('customer', $this->input))
-        // {
-        //     $this->customer = $this->input['customer'];
-        // }
-        // else
-        // {
-        //     if( array_key_exists('customer_id', $this->input))
-        //     {
-        //         $this->customer = Customer::find($this->input['customer_id']);
-        //     }
-        // }
-        
-        // $this->notification_template = TemplateNotification::findByEntityActionPlatform($entity, $action, config('app.platform'));
-
-        // if( ! $this->notification_template )
-        // {
-        //     throw new \Exception('Nu avem notificare definită pentru acțiunea ' . $this->entity . '-' . $this->action . ' pe platforma ' . config('app.platform'));
-        // }
-
-        // $this->notification_record = [
-
-        //     'type_id' => $this->notification_template->id,
-        //     'subject_type' => NULL,
-        //     'subject_id' => NULL,
-        //     'sender_id' => $this->sender->id,
-        //     'customer_id' => $this->customer ? $this->customer->id : NULL,
-        //     'receiver_id'=> $this->receiver ? $this->receiver->id : NULL,
-        //     'event' => $this->entity . '-' . $this->action,
-        //     'status' => 'sended',
-        //     'date_from' => NULL,
-        //     'date_to' => NULL,
-        //     'readed_at' => NULL,
-        //     'message' => $this->notification_template->message,
-        //     'props' => [
-        //         'title' => $this->notification_template->title,
-        //     ],
-        //     'deleted' => 0,
-        //     'created_by' => $this->sender->id,
-        // ];
-
     }
 
     public function broadcastAs() {

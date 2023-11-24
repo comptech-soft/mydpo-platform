@@ -581,12 +581,10 @@ class CustomerFile extends Model {
             }
 
             event(new \MyDpo\Events\Customer\Livrabile\Documents\UploadFile('upload.file', [
-                ...$input, 
+                ...collect($input)->except('files')->toArray(), 
                 'customers' => self::CreateUploadReceivers($input['customer_id'], $input['folder_id']), 
-                // 'account' => $account, 
-                // 'role' => $role
             ]));
-
+            
         }
         else
         {
