@@ -120,24 +120,40 @@ class Account extends Model {
         return new Importer($input); 
     }
 
+    /**
+     * Crearea unui cont client
+     */
     public static function doInsert($input) {
 
-        $user = User::create([
-            ...$input['user'],
-            'type' => 'b2b',
-        ]);
-
+        /**
+         * #1. Se creaza inregistrarea in tabela [users]
+         * se ataseaza id-ul userului la $input
+         */
+        $user = User::create([...$input['user'], 'type' => 'b2b']);
         $input['user_id'] = $user->id;
 
+        /** 
+         * #2. Se creaza inregistrarea in [customers-persons] 
+         **/
         $account = self::create(collect($input)->except(['user'])->toArray());
 
+        /** 
+         * #3. Se ataseaza rolul in tabela [role-users] 
+         **/
         $role = RoleUser::CreateAccountRole($input['customer_id'], $user->id, $account->role_id);
 
-        $customers = [
-            $input['customer_id'] . '#' . $user->id,
-        ];
-
-        event(new CreateAccountActivation('account.activation', [...$input, 'customers' => $customers, 'account' => $account, 'role' => $role]));
+        /** 
+         * #4. Se genereaza evenimentul CreateAccountActivation 
+         * cu template-ul de email account.activation 
+         **/
+        event(new CreateAccountActivation('account.activation', [
+            ...$input, 
+            'customers' => [
+                $input['customer_id'] . '#' . $user->id,
+            ], 
+            'account' => $account, 
+            'role' => $role
+        ]));
 
         return self::where('id', $account->id)->first();
     }
