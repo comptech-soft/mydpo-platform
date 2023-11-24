@@ -19,13 +19,11 @@ class SuccessMail extends Mailable {
     public $template = NULL;
     public $payload = NULL;
 
-    public function __construct($user, $sender, $template, $payload) {
-
+    public function __construct($user, $sender, $template, $payload ) {
         $this->user = $user;
         $this->sender = $sender;
         $this->template = $template;
         $this->payload = $payload;
-
     }
 
     /**
@@ -41,26 +39,24 @@ class SuccessMail extends Mailable {
     /**
      * Get the message content definition.
      */
-    public function content() {
-        
-        $markdown = 'emails.system';
-        
+    public function content() {        
         return new Content(
-            markdown: $markdown,
+            markdown: 'emails.system',
             with: [
                 'user' => collect($this->user->toArray())->only(['id', 'email', 'first_name', 'last_name'])->toArray(),
-                'body' => $this->BodyContent($input),
-                ...$input,
+                'body' => $this->BodyContent(),
             ],
         );
     }
 
-    protected function BodyContent($input) {
-
-
-        $body = 'Email trimis cu succes.';
-
-        return $body;
+    protected function BodyContent() {
+        $body = [
+            'Email trimis cu succes.',
+            $this->template['name'],
+            $this->template['subject'],
+            $this->user->full_name,
+        ];
+        return implode('<br/>', $body);
     }
     
     /**

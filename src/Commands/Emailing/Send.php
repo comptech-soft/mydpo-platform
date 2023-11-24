@@ -6,9 +6,6 @@ use Illuminate\Console\Command;
 use Carbon\Carbon;
 
 use MyDpo\Models\Customer\Emails\EmailUser;
-use MyDpo\Mail\System\SystemMail;
-use MyDpo\Mail\System\SuccessMail;
-use MyDpo\Mail\System\ExceptionMail;
 
 class Send extends Command {
 
@@ -34,22 +31,21 @@ class Send extends Command {
                 break;
             }
 
-            $this->send($email);
+            $this->sendEmail($email);
         }
         
         $this->info('Sent ' . count($pending_emails) . ' emails.');
     
     }
 
-    protected function send($email) {
+    protected function sendEmail($email) {
         try
         {
-            // $x = 7/0;
             /**
              * Trimiteți emailul folosind clasa de email corespunzătoare
              **/ 
             \Mail::to($email->user->email)->send(
-                new SystemMail(
+                new \MyDpo\Mail\System\SystemMail(
                     user: $email->user,
                     sender: $email->sender,
                     template: $email->props['template'],
@@ -59,27 +55,30 @@ class Send extends Command {
             /**
              * Se actualizeaza câmpul 'sended_at' pentru email
              */
-
             $email->update(['sended_at' => Carbon::now()]);
+            
+            \Mail::to(config('app.developer.email'))->send(new \MyDpo\Mail\System\SuccessMail(
+                user: $email->user,
+                sender: $email->sender,
+                template: $email->props['template'],
+                payload: $email->props['payload']
+            ));
 
             sleep(1);
-
-            \Mail::to(config('app.developer.email'))->send(
-                new SuccessMail(
-                    user: $email->user,
-                    sender: $email->sender,
-                    template: $email->props['template'],
-                    payload: $email->props['payload']
-                ));
         }
         catch(\Exception $e)
         {
             \Mail::to(config('app.developer.email'))->send(
-                new ExceptionMail(
+                new \MyDpo\Mail\System\ExceptionMail(
                     user: $email->user,
                     sender: $email->sender,
                     template: $email->props['template'],
-                    payload: $email->props['payload']
+                    payload: [
+                        ...$email->props['payload'],
+                        'file' => $e->getFile(),
+                        'line' => $e->getLine(),
+                        'message' => $e->getMessage(),
+                    ],
                 ));
         }
     }
