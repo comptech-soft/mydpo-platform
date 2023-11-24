@@ -89,14 +89,7 @@ class TemplateNotification extends Model {
         return $customers;
     }
 
-    // public static function findByEntityActionPlatform($entity, $action, $platform) {
-
-    //     return self::where('entity', $entity)
-    //         ->where('action', $action)
-    //         ->where('platform', $platform)
-    //         ->first();
-            
-    // }
-
-
+    public static function FindByName($name) {
+        return self::whereName($name)->first();
+    }
 }

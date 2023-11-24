@@ -92,8 +92,6 @@ class TemplateEmail extends Model {
     }
 
     public static function FindByName($name) {
-
         return self::whereName($name)->first();
-            
     }
 }
