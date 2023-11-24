@@ -7,6 +7,8 @@ use Carbon\Carbon;
 
 use MyDpo\Models\Customer\Emails\EmailUser;
 use MyDpo\Mail\System\SystemMail;
+use MyDpo\Mail\System\SuccessEmail;
+use MyDpo\Mail\System\ExceptionMail;
 
 class Send extends Command {
 
