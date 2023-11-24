@@ -578,6 +578,8 @@ class CustomerFile extends Model {
                 $record->update([...$input, 'id' => $record->id]);
             }
 
+            dd($input['customer_id']);
+
             event(new \MyDpo\Events\Customer\Livrabile\Documents\UploadFile('upload.file', [
                 ...$input, 
                 // 'customers' => [
@@ -587,7 +589,6 @@ class CustomerFile extends Model {
                 // 'role' => $role
             ]));
 
-            // dd($record);
         }
         else
         {
