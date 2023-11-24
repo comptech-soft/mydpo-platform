@@ -513,9 +513,9 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail 
     //     return self::whereIn('id', $ids)->get();
     // }
 
-    // public static function byEmail($email) {
-    //     return self::where('email', $email)->first();
-    // }
+    public static function byEmail($email) {
+        return self::where('email', $email)->first();
+    }
 
     // public function GetMyAdmins($all) {
     //     /**
