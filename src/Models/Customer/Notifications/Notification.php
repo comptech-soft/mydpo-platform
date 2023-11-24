@@ -17,6 +17,7 @@ class Notification extends Model {
 
     protected $casts = [
         'props' => 'json',
+        'message' => 'json',
         'id' => 'integer',
         'type_id' => 'integer',
         'customer_id' => 'integer',
@@ -107,17 +108,15 @@ class Notification extends Model {
         foreach($users as $i => $user_id)
         {
 
-            $r[] = self::RegisterUserToSend($template, $customer_id, $user_id);
+            $r[$user_id] = self::RegisterUserToSend($template, $customer_id, $user_id, $message);
         }
         
         return $r;
     }
 
-    public static function RegisterUserToSend($template, $customer_id, $user_id) {
+    public static function RegisterUserToSend($template, $customer_id, $user_id, $message) {
 
-        dd($template->name);
-
-        return self::create([
+        $record = self::create([
             'type_id' => $template->id,
             'subject_type' => $template->name,
             'subject_id' => NULL,
@@ -129,7 +128,7 @@ class Notification extends Model {
             'customer_id' => $customer_id,
             'receiver_id' => $user_id,
             'event' => $template->name,
-            'message' => $template->message,
+            'message' => $message,
             'status' => 'created',
             'payload' => NULL,
             'created_by' => \Auth::user()->id,
@@ -137,6 +136,8 @@ class Notification extends Model {
                 'template' => $template->toArray(),
             ]
         ])->toArray();
+
+        return collect($record)->only('id', 'subject_type', 'sender_id', 'status', 'created_at', 'noty_status')->toArray();
 
     }
 
