@@ -131,11 +131,13 @@ class Account extends Model {
          */
         $user = User::create([...$input['user'], 'type' => 'b2b']);
         $input['user_id'] = $user->id;
+        \Log::info('#1. Creare inregistrare users=(#' . $user->id . ', ' . $user->full_name . ')');
 
         /** 
          * #2. Se creaza inregistrarea in [customers-persons] 
          **/
         $account = self::create(collect($input)->except(['user'])->toArray());
+        \Log::info('#2. Creare inregistrare customers-persons=(#' . $account->customer_id . ', ' . $account->user_id . ', ' + $account->role_id + ')');
 
         /** 
          * #3. Se ataseaza rolul in tabela [role-users] 
