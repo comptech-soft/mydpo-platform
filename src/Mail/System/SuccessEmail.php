@@ -10,7 +10,7 @@ use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Mail\Mailables\Address;
 use Illuminate\Queue\SerializesModels;
 
-class SystemMail extends Mailable {
+class SuccessEmail extends Mailable {
 
     use Queueable, SerializesModels;
 
@@ -34,7 +34,7 @@ class SystemMail extends Mailable {
     public function envelope() {
         return new Envelope(
             from: new Address($this->sender->email,  $this->sender->full_name),
-            subject: $this->template['subject'],
+            subject: 'Email trimis cu succes',
         );
     }
 
@@ -43,20 +43,7 @@ class SystemMail extends Mailable {
      */
     public function content() {
         
-        $markdown = \View::exists($markdown = ('emails.' . $this->template['name'])) ? $markdown : 'emails.system';
-        
-        if(!!$this->template['before_method'])
-        {
-            list($className, $methodName) = explode("::", $this->template['before_method']);
-
-            $input = [];
-
-            if (method_exists($className, $methodName)) 
-            {
-                $input = $className::$methodName($this->user, $this->sender, $this->template, $this->payload);
-            } 
-        }
-
+        $markdown = 'emails.system';
         
         return new Content(
             markdown: $markdown,
@@ -70,18 +57,9 @@ class SystemMail extends Mailable {
 
     protected function BodyContent($input) {
 
-        $body = $this->template['body'];
 
-        foreach(['email', 'first_name', 'last_name', 'full_name'] as $i => $field)
-        {
-            $body = \Str::replace('[' . $field . ']', $this->user->{$field}, $body);
-        }
+        $body = 'Email trimis cu succes.';
 
-        foreach($input as $field => $value)
-        {
-            $body = \Str::replace('[' . $field . ']', $value, $body);
-        }
-        
         return $body;
     }
     

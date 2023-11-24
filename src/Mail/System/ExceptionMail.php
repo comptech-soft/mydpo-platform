@@ -10,7 +10,7 @@ use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Mail\Mailables\Address;
 use Illuminate\Queue\SerializesModels;
 
-class SystemMail extends Mailable {
+class ExceptionMail extends Mailable {
 
     use Queueable, SerializesModels;
 
@@ -68,9 +68,17 @@ class SystemMail extends Mailable {
         );
     }
 
+    /**
+     * traduceri
+     * substitutii
+     */
     protected function BodyContent($input) {
 
+        // dd($this->template);
+
         $body = $this->template['body'];
+
+        // $body = \Str::replace('[button]', $this->template['btn_caption'], $body);
 
         foreach(['email', 'first_name', 'last_name', 'full_name'] as $i => $field)
         {

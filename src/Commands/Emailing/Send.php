@@ -32,35 +32,53 @@ class Send extends Command {
                 break;
             }
 
-            try
-            {
-                /**
-                 * Trimiteți emailul folosind clasa de email corespunzătoare
-                 **/ 
-                \Mail::to($email->user->email)->send(
-                    new SystemMail(
-                        user: $email->user,
-                        sender: $email->sender,
-                        template: $email->props['template'],
-                        payload: $email->props['payload']
-                    ));
-                
-                /**
-                 * Se actualizeaza câmpul 'sended_at' pentru email
-                 */
-                $email->update([
-                    'sended_at' => Carbon::now()
-                ]);
-
-                sleep(1);
-            }
-            catch(\Exception $e)
-            {
-                \Log::info($e->getMessage());
-            }
+            $this->send($email);
         }
         
         $this->info('Sent ' . count($pending_emails) . ' emails.');
     
+    }
+
+    protected function send($email) {
+        try
+        {
+            // $x = 7/0;
+            /**
+             * Trimiteți emailul folosind clasa de email corespunzătoare
+             **/ 
+            \Mail::to($email->user->email)->send(
+                new SystemMail(
+                    user: $email->user,
+                    sender: $email->sender,
+                    template: $email->props['template'],
+                    payload: $email->props['payload']
+                ));
+            
+            /**
+             * Se actualizeaza câmpul 'sended_at' pentru email
+             */
+
+            $email->update(['sended_at' => Carbon::now()]);
+
+            sleep(1);
+
+            \Mail::to(config('app.developer.email'))->send(
+                new SuccessMail(
+                    user: $email->user,
+                    sender: $email->sender,
+                    template: $email->props['template'],
+                    payload: $email->props['payload']
+                ));
+        }
+        catch(\Exception $e)
+        {
+            \Mail::to(config('app.developer.email'))->send(
+                new ExceptionMail(
+                    user: $email->user,
+                    sender: $email->sender,
+                    template: $email->props['template'],
+                    payload: $email->props['payload']
+                ));
+        }
     }
 }
