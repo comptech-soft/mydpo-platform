@@ -54,18 +54,22 @@ class TemplateNotification extends Model {
             /**
              * Se inregistreaza notificarile pentru a fi trimise
              */
-            $record->RegisterCustomersNotificationsToSend(self::PrepareCustomersToSend($input['customers']));
+            return $record->RegisterCustomersNotificationsToSend(self::PrepareCustomersToSend($input['customers']));
         }
+
+        return [];
     }
 
     /**
      * Se inregistreaza notificarile pentru customer in vederea trimiterii
      */
     public function RegisterCustomersNotificationsToSend($customers) {
+        $r = [];
         foreach($customers as $customer_id => $users)
         {
-            Notification::RegisterToSend($this, $customer_id, $users);
+            $r[] = Notification::RegisterToSend($this, $customer_id, $users);
         }
+        return $r;
     }
 
     /**

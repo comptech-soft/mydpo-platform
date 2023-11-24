@@ -20,6 +20,8 @@ class BaseBroadcastEvent implements ShouldBroadcast {
     public $template_email = NULL;
     public $template_notification = NULL;
 
+    public $notifications = NULL;
+
     public function __construct($template_name, $input) {
 
         $this->template_name = $template_name;
@@ -36,7 +38,7 @@ class BaseBroadcastEvent implements ShouldBroadcast {
 
         if(!! $this->template_notification)
         {
-            TemplateNotification::doSend(['customers' => $this->customers, 'payload' => $this->input], $this->template_notification);
+            $this->notifications = TemplateNotification::doSend(['customers' => $this->customers, 'payload' => $this->input], $this->template_notification);
         }
     }
 
@@ -60,7 +62,7 @@ class BaseBroadcastEvent implements ShouldBroadcast {
         {
             return $this->template_email->toArray();
         }
-        return NULL;
+        return $this->notifications;
     }
 
     public function __get($property) {

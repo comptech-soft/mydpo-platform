@@ -102,17 +102,19 @@ class Notification extends Model {
     }
 
     public static function RegisterToSend($template, $customer_id, $users) {
+        $r = [];
 
         foreach($users as $i => $user_id)
         {
-            self::RegisterUserToSend($template, $customer_id, $user_id);
+            $r[]  =  self::RegisterUserToSend($template, $customer_id, $user_id);
         }
-
+        
+        return $r;
     }
 
     public static function RegisterUserToSend($template, $customer_id, $user_id) {
 
-        self::create([
+        return self::create([
             'type_id' => $template->id,
             'subject_type' => $template->name,
             'subject_id' => NULL,
@@ -130,7 +132,6 @@ class Notification extends Model {
             'created_by' => \Auth::user()->id,
             'props' => [
                 'template' => $template->toArray(),
-                
             ]
         ]);
 
