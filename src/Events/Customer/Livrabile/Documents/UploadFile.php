@@ -11,7 +11,7 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use MyDpo\Events\BaseBroadcastEvent;
 
-class CreateAccountActivation extends BaseBroadcastEvent {
+class UploadFile extends BaseBroadcastEvent {
 
     public function __construct($template, $input) {
         parent::__construct($template, $input);
