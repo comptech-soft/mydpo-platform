@@ -38,8 +38,10 @@ class BaseBroadcastEvent implements ShouldBroadcast {
 
         if(!! $this->template_notification)
         {
-            dd($this->template_notification->toArray());
-            $this->notifications = TemplateNotification::doSend(['customers' => $this->customers, 'payload' => $this->input], $this->template_notification);
+            $this->notifications = TemplateNotification::doSend([
+                'customers' => $this->customers, 
+                'payload' => $message = $this->CreateMessage()
+            ], $this->template_notification);
         }
     }
 
@@ -66,6 +68,12 @@ class BaseBroadcastEvent implements ShouldBroadcast {
         return $this->notifications;
     }
 
+    protected function CreateMessage() {
+        return [
+            'text' => $this->template_notification->message,
+            'replacements' => collect($this->input)->except(['customers'])->toArray(),
+        ];
+    }
     public function __get($property) {
         return array_key_exists($property, $this->input) ? $this->input[$property] : NULL;
     }
