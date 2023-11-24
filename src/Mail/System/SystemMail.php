@@ -57,6 +57,8 @@ class SystemMail extends Mailable {
             } 
         }
 
+        dd($this->template->toArray());
+        
         return new Content(
             markdown: $markdown,
             with: [
