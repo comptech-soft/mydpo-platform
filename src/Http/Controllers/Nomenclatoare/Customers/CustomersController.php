@@ -13,8 +13,6 @@ class CustomersController extends Controller {
 
         Customer::beforeShowIndex();
 
-        dd(__METHOD__);
-
         return Index::View(
             styles: ['css/app.css'],
             scripts: ['apps/nomenclatoare/customers/customers/index.js'],
