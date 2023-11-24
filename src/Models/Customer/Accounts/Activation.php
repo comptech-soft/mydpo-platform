@@ -72,6 +72,7 @@ class Activation extends Model {
         return [
             'btn_url' => config('app.url') . '/' . \Str::replace('[token]', $activation->token, $template['btn_url']),
             'btn_caption' => $template['btn_caption'],
+            'customer_name' => Customer::find($payload['account']['customer_id'])->name,
         ];
     }
 
