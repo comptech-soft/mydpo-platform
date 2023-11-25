@@ -580,6 +580,8 @@ class CustomerFile extends Model {
                 $record->update([...$input, 'id' => $record->id]);
             }
 
+            dd($input);
+            
             event(new \MyDpo\Events\Customer\Livrabile\Documents\UploadFile('upload.file', [
                 'nume_fisier' => $record->file_original_name,
                 'nume_folder' => $record->folder->name,
