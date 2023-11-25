@@ -229,10 +229,14 @@ class CustomerFile extends Model {
         foreach($input['files_ids'] as $i => $file_id)
         {
             $record = self::find($file_id);
+            
+            event(new \MyDpo\Events\Customer\Livrabile\Documents\UploadFile('delete.file', [
+                'nume_fisier' => $record->file_original_name,
+                'nume_folder' => $record->folder->name,
+                'customers' => self::CreateUploadReceivers($record->customer_id, $record->folder_id), 
+            ]));
 
             $record->delete();
-
-            // trimitere notificare
         }
 
         return [
