@@ -8,7 +8,7 @@ use MyDpo\Models\Customer\Customer;
 use MyDpo\Models\Customer\ELearning\MaterialStatus;
 use MyDpo\Models\Authentication\User;
 use MyDpo\Models\Customer\Accounts\Account;
-
+use MyDpo\Models\Customer\Teams\Team;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 
@@ -385,11 +385,24 @@ class CustomerFile extends Model {
         /**
          * Toti adminii
          */
-        foreach(User::whereType('admin') as $i => $user)
+        foreach(User::whereType('admin')->get() as $i => $user)
         {
-            dd($user);
+            if($user->role->id <= 3)
+            {
+                if( ! in_array($user->id, $r) )
+                {
+                    $r[] = $user->id;
+                }
+            }
         }
 
+        /**
+         * Team-ul
+         */
+        foreach(Team::all() as $i => $member)
+        {
+            dd($member);
+        }
 
         return collect($r)->map(function($user_id) use ($customer_id){
             return $customer_id . '#' . $user_id;
