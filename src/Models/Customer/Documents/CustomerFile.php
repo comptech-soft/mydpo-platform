@@ -365,17 +365,31 @@ class CustomerFile extends Model {
         }
     }
 
-
+    /**
+     * Toti utilizatorii care primesc notificari
+     */
     public static function CreateUploadReceivers($customer_id, $folder_id) {
         $r = [];
 
-        foreach($accounts = Account::where('customer_id', $customer_id)->get() as $i => $account)
+        /**
+         * Toate conturile atasate clientului
+         */
+        foreach(Account::where('customer_id', $customer_id)->get() as $i => $account)
         {
             if( ! in_array($account->user_id, $r) )
             {
                 $r[] = $account->user_id;
             }
         }
+
+        /**
+         * Toti adminii
+         */
+        foreach(User::whereType('admin') as $i => $user)
+        {
+            dd($user);
+        }
+
 
         return collect($r)->map(function($user_id) use ($customer_id){
             return $customer_id . '#' . $user_id;
