@@ -387,7 +387,7 @@ class CustomerFile extends Model {
          */
         foreach(User::whereType('admin')->get() as $i => $user)
         {
-            if($user->role->id <= 3)
+            if($user->role->id <= 2)
             {
                 if( ! in_array($user->id, $r) )
                 {
@@ -399,9 +399,12 @@ class CustomerFile extends Model {
         /**
          * Team-ul
          */
-        foreach(Team::all() as $i => $member)
+        foreach(Team::where('customer_id', $customer_id)->get() as $i => $member)
         {
-            dd($member);
+            if( ! in_array($member->user_id, $r) )
+            {
+                $r[] = $member->user_id;
+            }
         }
 
         return collect($r)->map(function($user_id) use ($customer_id){
