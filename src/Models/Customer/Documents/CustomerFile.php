@@ -242,6 +242,7 @@ class CustomerFile extends Model {
 
     public static function MoveFile($input) {
 
+        dd($input);
         $original = self::where('id', $input['id'])->first();
 
         $record = self::where('customer_id', $input['customer_id'])
@@ -259,10 +260,125 @@ class CustomerFile extends Model {
             $original->update($input);
         }
     }
+    
+    public static function doUpdate($input, $record) {
+        $file_original_name = \Str::replace($record->file_original_extension, '', $input['file_original_name']) . '.' . $record->file_original_extension;
+
+        $input = [
+            ...$input,
+            'file_original_name' => $file_original_name,
+        ];
+
+        $record->update($input);
+
+        return $record;
+    }
+
+    public static function doInsert($input, $record) {
+
+        foreach($input['files'] as $file)
+        {
+            self::CreateFile($file, $input);
+        }
+
+        return [
+            'folder_id' => $input['folder_id'],
+        ];
+    }
+
+    public static function CreateFile($file, $input) {
+        
+        if(in_array($ext = $file->extension(), ['jpg', 'jpeg', 'png', 'doc', 'docx', 'xls', 'xlsx', 'pdf', 'txt', 'rar', 'zip']))
+        {
+            $filename = \Str::slug(str_replace($file->extension(), '', $file->getClientOriginalName())) . '.' .  strtolower($file->extension());
+            
+            $result = $file->storeAs('documents/' . $input['customer_id'] . '/' . \Auth::user()->id, $filename, 's3');
+
+            $input = [
+                ...$input,
+                'file_original_name' => $file->getClientOriginalName(),
+                'file_original_extension' => $file->extension(),
+                'file_full_name' => $filename,
+                'file_mime_type' => $file->getMimeType(),
+                'file_upload_ip' => request()->ip(),
+                'file_size' => $file->getSize(),
+                'url' => config('filesystems.disks.s3.url') . $result,
+                'created_by' => \Auth::user()->id,
+                'deleted' => 0,
+            ];
+
+            if(in_array($ext, ['jpg', 'jpeg', 'png']))
+            {
+                $image = \Image::make($file);
+                $input = [
+                    ...$input,
+                    'file_size' => $image->filesize(),
+                    'file_width' => $image->width(),
+                    'file_height' => $image->height(),
+                ];
+            }
+
+            $record = self::where('customer_id', $input['customer_id'])
+                ->where('folder_id', $input['folder_id'])
+                ->where('url', $input['url'])
+                ->first();
+
+            if(! $record )
+            {
+                $record = self::create($input);
+            }
+            else
+            {
+                $record->update([...$input, 'id' => $record->id]);
+            }
+
+            if($input['status'] == 'public')
+            {
+                event(new \MyDpo\Events\Customer\Livrabile\Documents\UploadFile('upload.file', [
+                    'nume_fisier' => $record->file_original_name,
+                    'nume_folder' => $record->folder->name,
+                    'customers' => self::CreateUploadReceivers($input['customer_id'], $input['folder_id']), 
+                ]));
+            }
+        }
+        else
+        {
+            throw new \Exception('Fișier incorect.');
+        }
+    }
 
 
+    public static function CreateUploadReceivers($customer_id, $folder_id) {
+        $r = [];
 
-    // public static function changeFilesStatus($input) {
+        foreach($accounts = Account::where('customer_id', $customer_id)->get() as $i => $account)
+        {
+            if( ! in_array($account->user_id, $r) )
+            {
+                $r[] = $account->user_id;
+            }
+        }
+
+        return collect($r)->map(function($user_id) use ($customer_id){
+            return $customer_id . '#' . $user_id;
+        })->toArray();
+    }
+
+    public static function GetQuery() {
+        return 
+            self::query()
+            ->leftJoin(
+                'customers-folders',
+                function($q) {
+                    $q->on('customers-folders.id', '=', 'customers-files.folder_id');
+                }
+            )
+            ->select('customers-files.*');
+    }
+
+}
+
+// public static function changeFilesStatus($input) {
     //     return (new ChangeFilesStatus($input))
     //         ->SetSuccessMessage('Schimbare status cu success!')
     //         ->Perform();
@@ -493,122 +609,3 @@ class CustomerFile extends Model {
     //         }
     //     }
     // }
-
-    public static function doUpdate($input, $record) {
-        $file_original_name = \Str::replace($record->file_original_extension, '', $input['file_original_name']) . '.' . $record->file_original_extension;
-
-        $input = [
-            ...$input,
-            'file_original_name' => $file_original_name,
-        ];
-
-        dd($input);
-
-        $record->update($input);
-
-        return $record;
-    }
-
-    public static function doInsert($input, $record) {
-
-        foreach($input['files'] as $file)
-        {
-            self::CreateFile($file, $input);
-        }
-
-        return [
-            'folder_id' => $input['folder_id'],
-        ];
-    }
-
-    public static function CreateFile($file, $input) {
-        
-        if(in_array($ext = $file->extension(), ['jpg', 'jpeg', 'png', 'doc', 'docx', 'xls', 'xlsx', 'pdf', 'txt', 'rar', 'zip']))
-        {
-            $filename = \Str::slug(str_replace($file->extension(), '', $file->getClientOriginalName())) . '.' .  strtolower($file->extension());
-            
-            $result = $file->storeAs('documents/' . $input['customer_id'] . '/' . \Auth::user()->id, $filename, 's3');
-
-            $input = [
-                ...$input,
-                'file_original_name' => $file->getClientOriginalName(),
-                'file_original_extension' => $file->extension(),
-                'file_full_name' => $filename,
-                'file_mime_type' => $file->getMimeType(),
-                'file_upload_ip' => request()->ip(),
-                'file_size' => $file->getSize(),
-                'url' => config('filesystems.disks.s3.url') . $result,
-                'created_by' => \Auth::user()->id,
-                'deleted' => 0,
-            ];
-
-            if(in_array($ext, ['jpg', 'jpeg', 'png']))
-            {
-                $image = \Image::make($file);
-                $input = [
-                    ...$input,
-                    'file_size' => $image->filesize(),
-                    'file_width' => $image->width(),
-                    'file_height' => $image->height(),
-                ];
-            }
-
-            $record = self::where('customer_id', $input['customer_id'])
-                ->where('folder_id', $input['folder_id'])
-                ->where('url', $input['url'])
-                ->first();
-
-            if(! $record )
-            {
-                $record = self::create($input);
-            }
-            else
-            {
-                $record->update([...$input, 'id' => $record->id]);
-            }
-
-            if($input['status'] == 'public')
-            {
-                event(new \MyDpo\Events\Customer\Livrabile\Documents\UploadFile('upload.file', [
-                    'nume_fisier' => $record->file_original_name,
-                    'nume_folder' => $record->folder->name,
-                    'customers' => self::CreateUploadReceivers($input['customer_id'], $input['folder_id']), 
-                ]));
-            }
-        }
-        else
-        {
-            throw new \Exception('Fișier incorect.');
-        }
-    }
-
-
-    public static function CreateUploadReceivers($customer_id, $folder_id) {
-        $r = [];
-
-        foreach($accounts = Account::where('customer_id', $customer_id)->get() as $i => $account)
-        {
-            if( ! in_array($account->user_id, $r) )
-            {
-                $r[] = $account->user_id;
-            }
-        }
-
-        return collect($r)->map(function($user_id) use ($customer_id){
-            return $customer_id . '#' . $user_id;
-        })->toArray();
-    }
-
-    public static function GetQuery() {
-        return 
-            self::query()
-            ->leftJoin(
-                'customers-folders',
-                function($q) {
-                    $q->on('customers-folders.id', '=', 'customers-files.folder_id');
-                }
-            )
-            ->select('customers-files.*');
-    }
-
-}
