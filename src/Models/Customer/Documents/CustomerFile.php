@@ -3,18 +3,11 @@
 namespace MyDpo\Models\Customer\Documents;
 
 use Illuminate\Database\Eloquent\Model;
-// use MyDpo\Helpers\Performers\Datatable\GetItems;
-// use MyDpo\Helpers\Performers\Datatable\DoAction;
-// use MyDpo\Models\Folder;
+
 use MyDpo\Models\Customer\Customer;
 use MyDpo\Models\Customer\ELearning\MaterialStatus;
 use MyDpo\Models\Authentication\User;
 use MyDpo\Models\Customer\Accounts\Account;
-
-// use MyDpo\Models\RoleUser;
-// use MyDpo\Performers\CustomerFile\MoveFiles;
-// use MyDpo\Performers\CustomerFile\DeleteFiles;
-// use MyDpo\Events\CustomerDocuments\FilesUpload as FilesUploadEvent;
 
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
