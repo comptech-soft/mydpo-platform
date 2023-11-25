@@ -502,6 +502,8 @@ class CustomerFile extends Model {
             'file_original_name' => $file_original_name,
         ];
 
+        dd($input);
+
         $record->update($input);
 
         return $record;
@@ -582,8 +584,8 @@ class CustomerFile extends Model {
 
 
     public static function CreateUploadReceivers($customer_id, $folder_id) {
-        
         $r = [];
+
         foreach($accounts = Account::where('customer_id', $customer_id)->get() as $i => $account)
         {
             if( ! in_array($account->user_id, $r) )
