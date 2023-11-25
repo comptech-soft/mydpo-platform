@@ -511,23 +511,8 @@ class CustomerFile extends Model {
 
         foreach($input['files'] as $file)
         {
-
             self::CreateFile($file, $input);
-
-            // $record = self::CreateFile($file, $input);
-
-            // if($record->status == 'public')
-            // {
-            //     $files[] = $record;
-            // } 
         }
-
-        // $customer = Customer::find($input['customer_id']);
-
-        // self::CreateNotifications($files, [
-        //     'customer' => $customer,
-        //     'folder_id' => $input['folder_id'],
-        // ]);
 
         return [
             'folder_id' => $input['folder_id'],
@@ -579,7 +564,7 @@ class CustomerFile extends Model {
             {
                 $record->update([...$input, 'id' => $record->id]);
             }
-            
+
             if($input['status'] == 'public')
             {
                 event(new \MyDpo\Events\Customer\Livrabile\Documents\UploadFile('upload.file', [
