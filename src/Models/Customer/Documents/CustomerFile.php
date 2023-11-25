@@ -180,8 +180,6 @@ class CustomerFile extends Model {
                 'url' => asset($zipFileName),
             ];
 
-            // Descarcă arhiva ZIP
-            // return response()->download($zipFileName)->deleteFileAfterSend(true);
         } 
        
         throw new \Exception('Nu am putut crea arhiva ZIP.');        
@@ -215,9 +213,16 @@ class CustomerFile extends Model {
 
             $record->status = $input['status'];
 
-            // trimitere notificare
-
             $record->save();
+
+            if($record->status == 'public')
+            { 
+                event(new \MyDpo\Events\Customer\Livrabile\Documents\UploadFile('upload.file', [
+                    'nume_fisier' => $record->file_original_name,
+                    'nume_folder' => $record->folder->name,
+                    'customers' => self::CreateUploadReceivers($record->customer_id, $record->folder_id), 
+                ]));
+            }
         }
 
         return [
