@@ -241,10 +241,14 @@ class CustomerFile extends Model {
     }
 
     public static function MoveFile($input) {
-
-        dd($input);
+        /**
+         * Fisierul care se muta
+         */
         $original = self::where('id', $input['id'])->first();
-
+        $nume_folder_sursa = $original->folder->name;
+        /**
+         * 
+         */
         $record = self::where('customer_id', $input['customer_id'])
             ->where('folder_id', $input['folder_id'])
             ->whereUrl($original->url)
@@ -258,6 +262,18 @@ class CustomerFile extends Model {
         else
         {
             $original->update($input);
+            $original->refresh();
+
+            if($original->status == 'public')
+            {       
+                event(new \MyDpo\Events\Customer\Livrabile\Documents\UploadFile('move.file', [
+                    'nume_fisier' => $original->file_original_name,
+                    'nume_folder_dest' => $original->folder->name,
+                    'nume_folder_sursa' => $nume_folder_sursa,
+                    'customers' => self::CreateUploadReceivers($original->customer_id, $original->folder_id), 
+                ]));
+            }
+            
         }
     }
     
