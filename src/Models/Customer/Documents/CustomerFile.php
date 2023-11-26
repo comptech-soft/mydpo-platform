@@ -214,6 +214,7 @@ class CustomerFile extends Model {
                     'nume_fisier' => $record->file_original_name,
                     'nume_folder' => $record->folder->name,
                     'customers' => self::CreateUploadReceivers($record->customer_id, $record->folder_id), 
+                    'link' => config('app.url') . '/customer-documents/' . $input['customer_id'],
                 ]));
             }
         }
@@ -352,10 +353,12 @@ class CustomerFile extends Model {
 
             if($input['status'] == 'public')
             {
+                
                 event(new \MyDpo\Events\Customer\Livrabile\Documents\UploadFile('upload.file', [
                     'nume_fisier' => $record->file_original_name,
                     'nume_folder' => $record->folder->name,
                     'customers' => self::CreateUploadReceivers($input['customer_id'], $input['folder_id']), 
+                    'link' => config('app.url') . '/customer-documents/' . $input['customer_id'],
                 ]));
             }
         }
