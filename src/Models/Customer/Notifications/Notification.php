@@ -37,6 +37,7 @@ class Notification extends Model {
         'customer_id',
         'receiver_id',
         'event',
+        'link',
         'date_from',
         'date_to',
         'readed_at',
@@ -114,7 +115,7 @@ class Notification extends Model {
         return $r;
     }
 
-    public static function RegisterUserToSend($template, $customer_id, $user_id, $message) {
+    public static function RegisterUserToSend($template, $customer_id, $user_id, $message, $link) {
 
         $record = self::create([
             'type_id' => $template->id,
@@ -130,6 +131,7 @@ class Notification extends Model {
             'event' => $template->name,
             'message' => $message,
             'status' => 'created',
+            'link' => $link,
             'payload' => NULL,
             'created_by' => \Auth::user()->id,
             'props' => [

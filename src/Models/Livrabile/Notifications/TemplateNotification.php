@@ -48,16 +48,13 @@ class TemplateNotification extends Model {
      *      customers = un array [6#123, 6#434, ....], unde structura este customer_id#user_id
      */
     public static function doSend($input, $record) {
-
-        dd($input);
-        
         if(array_key_exists('customers', $input))
         {
             /**
              * Se inregistreaza notificarile pentru a fi trimise
              */
             return [
-                'customers' => $record->RegisterCustomersNotificationsToSend(self::PrepareCustomersToSend($input['customers']), $input['payload']),
+                'customers' => $record->RegisterCustomersNotificationsToSend(self::PrepareCustomersToSend($input['customers']), $input['payload'], $input['link']),
                 'message' => $input['payload'],
             ];
         }
@@ -68,11 +65,11 @@ class TemplateNotification extends Model {
     /**
      * Se inregistreaza notificarile pentru customer in vederea trimiterii
      */
-    public function RegisterCustomersNotificationsToSend($customers, $message) {
+    public function RegisterCustomersNotificationsToSend($customers, $message, $link) {
         $r = [];
         foreach($customers as $customer_id => $users)
         {
-            $r[$customer_id] = Notification::RegisterToSend($this, $customer_id, $users, $message);
+            $r[$customer_id] = Notification::RegisterToSend($this, $customer_id, $users, $message, $link);
         }
         return $r;
     }
