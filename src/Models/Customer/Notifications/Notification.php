@@ -103,13 +103,13 @@ class Notification extends Model {
         return $this->belongsTo(User::class, 'receiver_id');
     }
 
-    public static function RegisterToSend($template, $customer_id, $users, $message) {
+    public static function RegisterToSend($template, $customer_id, $users, $message, $link) {
         $r = [];
 
         foreach($users as $i => $user_id)
         {
 
-            $r[$user_id] = self::RegisterUserToSend($template, $customer_id, $user_id, $message);
+            $r[$user_id] = self::RegisterUserToSend($template, $customer_id, $user_id, $message, $link);
         }
         
         return $r;
