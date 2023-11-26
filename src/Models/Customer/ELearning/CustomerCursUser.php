@@ -235,6 +235,11 @@ class CustomerCursUser extends Model {
         return $record;
     }
 
+    public static function doSetstatus($input, $record) {
+
+        dd($input, $record);
+    }
+
     public static function doDezasociere($input, $record) {
         /**
          * Se sterg inregistraile din tabela [customers-cursuri-users]
