@@ -301,5 +301,12 @@ class CustomerCursUser extends Model {
             $record = self::create($input);
         }
 
+        dd($record->regredh()->toArray());
+        event(new \MyDpo\Events\Customer\Livrabile\Cursuri\Trimitere('curs.trimitere', [
+            // 'nume_fisier' => $record->file_original_name,
+            // 'nume_folder' => $record->folder->name,
+            // 'customers' => self::CreateUploadReceivers($input['customer_id'], $input['folder_id']), 
+        ]));
+
     }
 }
