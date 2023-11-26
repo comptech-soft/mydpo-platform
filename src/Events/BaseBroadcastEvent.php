@@ -31,7 +31,10 @@ class BaseBroadcastEvent implements ShouldBroadcast {
         
         if(!! $this->template_email)
         {
-            TemplateEmail::doSend(['customers' => $this->customers, 'payload' => $this->input], $this->template_email);
+            TemplateEmail::doSend([
+                'customers' => $this->customers, 
+                'payload' => $this->input
+            ], $this->template_email);
         }
 
         $this->template_notification = TemplateNotification::FindByName($template_name);

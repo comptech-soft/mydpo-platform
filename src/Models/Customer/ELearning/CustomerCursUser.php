@@ -236,8 +236,7 @@ class CustomerCursUser extends Model {
     }
 
     public static function doSetstatus($input, $record) {
-
-        dd($input, $record);
+        return self::doChangestatus($input, $record);
     }
 
     public static function doDezasociere($input, $record) {
@@ -299,10 +298,16 @@ class CustomerCursUser extends Model {
 
         $record->refresh();
 
-        event(new \MyDpo\Events\Customer\Livrabile\Cursuri\Trimitere('curs.trimitere', [
-            'nume_curs' => $record->curs->name,
-            'customers' => [$input['customer_id'] . '#' . $input['user_id']],
-        ]));
+        event(
+            new \MyDpo\Events\Customer\Livrabile\Cursuri\Trimitere(
+                'curs.trimitere', 
+                [
+                    'nume_curs' => $record->curs->name,
+                    'customers' => [$input['customer_id'] . '#' . $input['user_id']],
+                    'link' => config('app.url') . '/customer-elearning/' . $input['customer_id'],
+                ]
+            )
+        );
 
     }
 }
