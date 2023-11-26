@@ -48,6 +48,7 @@ class BaseBroadcastEvent implements ShouldBroadcast {
     public function broadcastAs() {
         if(!! $this->template_notification)
         {
+            \Log::info(__METHOD__. '(' . $this->template_name . ')');
             return $this->template_name;
         }
         return NULL;
@@ -56,6 +57,7 @@ class BaseBroadcastEvent implements ShouldBroadcast {
     public function broadcastOn() {
         if(!! $this->template_notification)
         {
+            \Log::info(__METHOD__. '(' . $this->template_name . ')');
             return new PrivateChannel($this->template_name);
         }
     }
