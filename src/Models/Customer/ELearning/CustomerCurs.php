@@ -177,7 +177,6 @@ class CustomerCurs extends Model {
 
     public static function CreateRecordsByTrimitere($trimitere) {
 
-        dd($trimitere->toArray());
         $numberOfitems = $trimitere->count_users * $trimitere->count_materiale;
         $calculated_time = ($numberOfitems > 0) ? $trimitere->effective_time/$numberOfitems : 0; 
 

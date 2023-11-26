@@ -4,10 +4,8 @@ namespace MyDpo\Models\Customer\ELearning;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Models\Authentication\User;
-// use MyDpo\Models\Curs;
+use MyDpo\Models\Nomenclatoare\Livrabile\ELearning\Curs;
 use MyDpo\Models\Nomenclatoare\Livrabile\ELearning\Sharematerial;
-// use MyDpo\Models\SharematerialDetail;
-// use MyDpo\Models\Customer\Customer;
 
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
@@ -58,7 +56,6 @@ class CustomerCursUser extends Model {
 
     protected $with = [
         'user',
-        // 'curs',
         'trimitere',
         // 'createdby',
     ];
@@ -177,9 +174,9 @@ class CustomerCursUser extends Model {
     //     return $this->belongsTo(User::class, 'created_by');
     // }
 
-    // public function curs() {
-    //     return $this->belongsTo(Curs::class, 'curs_id');
-    // }
+    public function curs() {
+        return $this->belongsTo(Curs::class, 'curs_id');
+    }
 
     public function trimitere() {
         return $this->belongsTo(Sharematerial::class, 'trimitere_id')->select(['id', 'number', 'date', 'date_from', 'date_to', 'sender_full_name']);
@@ -240,7 +237,7 @@ class CustomerCursUser extends Model {
 
     public static function doDezasociere($input, $record) {
         /**
-         * Se sterg inregitraile din tabela [customers-cursuri-users]
+         * Se sterg inregistraile din tabela [customers-cursuri-users]
          */
         $records = self::where('customer_id', $input['customer_id'])
             ->where('customer_curs_id', $input['customer_curs_id'])
@@ -270,12 +267,6 @@ class CustomerCursUser extends Model {
                     $q->on('users.id', '=', 'customers-cursuri-users.user_id');
                 }
             )
-            // ->leftJoin(
-            //     'customers-departamente',
-            //     function($q) {
-            //         $q->on('customers-departamente.id', '=', 'customers-persons.department_id');
-            //     }
-            // )
             ->whereRaw("((`customers-cursuri-users`.`deleted` IS NULL) OR (`customers-cursuri-users`.`deleted` = 0))")
             ->select('customers-cursuri-users.*');
     }
@@ -301,11 +292,11 @@ class CustomerCursUser extends Model {
             $record = self::create($input);
         }
 
-        dd($record->regredh()->toArray());
+        $record->refresh();
+
         event(new \MyDpo\Events\Customer\Livrabile\Cursuri\Trimitere('curs.trimitere', [
-            // 'nume_fisier' => $record->file_original_name,
-            // 'nume_folder' => $record->folder->name,
-            // 'customers' => self::CreateUploadReceivers($input['customer_id'], $input['folder_id']), 
+            'nume_curs' => $record->curs->name,
+            'customers' => [$input['customer_id'] . '#' . $input['user_id']],
         ]));
 
     }
