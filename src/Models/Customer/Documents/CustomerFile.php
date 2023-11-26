@@ -387,7 +387,7 @@ class CustomerFile extends Model {
          */
         foreach(User::whereType('admin')->get() as $i => $user)
         {
-            if($user->role->id <= 2)
+            if($user->role && $user->role->id <= 2)
             {
                 if( ! in_array($user->id, $r) )
                 {
