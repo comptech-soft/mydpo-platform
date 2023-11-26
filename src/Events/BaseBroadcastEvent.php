@@ -5,7 +5,7 @@ namespace MyDpo\Events;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
-use Illuminate\Broadcasting\PrivateChannel;
+use Illuminate\Broadcasting\Channel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
@@ -58,7 +58,7 @@ class BaseBroadcastEvent implements ShouldBroadcast {
         if(!! $this->template_notification)
         {
             \Log::info(__METHOD__. '(' . $this->template_name . ')');
-            return new PrivateChannel($this->template_name);
+            return new Channel($this->template_name);
         }
     }
 
