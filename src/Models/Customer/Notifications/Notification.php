@@ -137,7 +137,7 @@ class Notification extends Model {
             ]
         ])->toArray();
 
-        return collect($record)->only('id', 'subject_type', 'sender_id', 'status', 'created_at', 'noty_status')->toArray();
+        return collect($record)->only('id', 'receiver_id')->toArray();
 
     }
 
