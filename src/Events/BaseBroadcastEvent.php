@@ -43,7 +43,8 @@ class BaseBroadcastEvent implements ShouldBroadcast {
         {
             $this->notifications = TemplateNotification::doSend([
                 'customers' => $this->customers, 
-                'payload' => $message = $this->CreateMessage()
+                'payload' => $message = $this->CreateMessage(),
+                'link' => $this->link,
             ], $this->template_notification);
         }
     }
@@ -76,7 +77,7 @@ class BaseBroadcastEvent implements ShouldBroadcast {
     protected function CreateMessage() {
         return [
             'text' => $this->template_notification->message,
-            'replacements' => collect($this->input)->except(['customers'])->toArray(),
+            'replacements' => collect($this->input)->except(['customers', 'link'])->toArray(),
         ];
     }
     public function __get($property) {
