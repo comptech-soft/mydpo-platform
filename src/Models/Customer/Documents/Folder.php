@@ -40,6 +40,22 @@ class Folder extends Model  {
         'deleted_by',
     ];
 
+    protected $links = [
+        'documente' => 'customer-documents',
+        'infografice' => 'customer-infografice',
+        'studiicaz' => 'customer-studii-de-caz',
+        'sfaturidpo' => 'customer-sfaturi-dpo',
+        'analizagap' => 'customer-documents-analizagap',
+    ];
+    
+    protected $appends = [
+        'page_link',
+    ];
+
+    public function getPageLinkAttribute() {
+        return $this->links[$this->type];
+    } 
+
     protected static function booted() {
         static::addGlobalScope( new NotdeletedScope() );
     }
@@ -58,8 +74,6 @@ class Folder extends Model  {
     }
 
     public static function CreateDefaultFolder($customer_id, $defaultFolder, $parent) {
-
-
         $folder = CustomerFolder::where('customer_id', $customer_id)->where('name', $defaultFolder->name);
 
         if(!! $parent )

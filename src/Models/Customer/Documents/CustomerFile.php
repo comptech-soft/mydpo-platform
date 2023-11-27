@@ -89,7 +89,7 @@ class CustomerFile extends Model {
     } 
 
     function folder() {
-        return $this->belongsTo(Folder::class, 'folder_id')->select(['id', 'name']);
+        return $this->belongsTo(Folder::class, 'folder_id')->select(['id', 'name', 'type']);
     }
 
     function mystatus() {
@@ -214,7 +214,7 @@ class CustomerFile extends Model {
                     'nume_fisier' => $record->file_original_name,
                     'nume_folder' => $record->folder->name,
                     'customers' => self::CreateUploadReceivers($record->customer_id, $record->folder_id), 
-                    'link' => config('app.url') . '/customer-documents/' . $input['customer_id'],
+                    'link' => config('app.url') . '/' . $record->folder->page_link . '/' . $input['customer_id'],
                 ]));
             }
         }
@@ -233,6 +233,7 @@ class CustomerFile extends Model {
                 'nume_fisier' => $record->file_original_name,
                 'nume_folder' => $record->folder->name,
                 'customers' => self::CreateUploadReceivers($record->customer_id, $record->folder_id), 
+                'link' => config('app.url') . '/' . $original->record->page_link . '/' . $input['customer_id'],
             ]));
 
             $record->delete();
@@ -249,9 +250,7 @@ class CustomerFile extends Model {
          */
         $original = self::where('id', $input['id'])->first();
         $nume_folder_sursa = $original->folder->name;
-        /**
-         * 
-         */
+
         $record = self::where('customer_id', $input['customer_id'])
             ->where('folder_id', $input['folder_id'])
             ->whereUrl($original->url)
@@ -274,6 +273,7 @@ class CustomerFile extends Model {
                     'nume_folder_dest' => $original->folder->name,
                     'nume_folder_sursa' => $nume_folder_sursa,
                     'customers' => self::CreateUploadReceivers($original->customer_id, $original->folder_id), 
+                    'link' => config('app.url') . '/' . $original->folder->page_link . '/' . $input['customer_id'],
                 ]));
             }
             
@@ -353,12 +353,11 @@ class CustomerFile extends Model {
 
             if($input['status'] == 'public')
             {
-                
                 event(new \MyDpo\Events\Customer\Livrabile\Documents\UploadFile('upload.file', [
                     'nume_fisier' => $record->file_original_name,
                     'nume_folder' => $record->folder->name,
                     'customers' => self::CreateUploadReceivers($input['customer_id'], $input['folder_id']), 
-                    'link' => config('app.url') . '/customer-documents/' . $input['customer_id'],
+                    'link' => config('app.url') . '/' . $record->folder->page_link . '/' . $input['customer_id'],
                 ]));
             }
         }
@@ -428,235 +427,3 @@ class CustomerFile extends Model {
     }
 
 }
-
-// public static function changeFilesStatus($input) {
-    //     return (new ChangeFilesStatus($input))
-    //         ->SetSuccessMessage('Schimbare status cu success!')
-    //         ->Perform();
-    // } 
-
-    // public static function deleteFiles($input) {
-    //     return (new DeleteFiles($input))
-    //         ->SetSuccessMessage('Ștergere fișiere cu success!')
-    //         ->Perform();
-    // } 
-
-    // public static function GetRules($action, $input) {
-    //     if( ($action == 'delete') || ($action == 'insert') )
-    //     {
-    //         return NULL;
-    //     }
-    //     $result = [
-    //         'customer_id' => 'required|exists:customers,id',
-    //         'file_original_extension' => 'required',
-    //         'platform' => 'in:admin,b2b',
-    //         'folder_id' => 'required|exists:customers-folders,id',
-    //         'url' => 'required',
-    //     ];
-    //     return $result;
-    // }
-
-    // public static function doAction($action, $input) {
-    //     if($action == 'update')
-    //     {
-    //         $input['file_original_name'] = $input['name'] . '.' . $input['file_original_extension'];
-    //     }
-    //     return (new DoAction($action, $input, __CLASS__))->Perform();
-    // }
-
-    // public static function CreateNotificationReceiversAdmin($input) {
-    //     $user = \Auth::user();
-
-    //     if($user->inRoles(['sa', 'admin']))
-    //     {
-    //         /**
-    //          * 1.1. Admin face upload
-    //          *       A. Admini           - toti adminii diferiti de cel care face upload
-    //          *       B. Operatori        - operatorii care au clientul asociat
-    //          *       C. Masteri          - toti masterii clientului
-    //          *       D. Useri            - daca s-a urcat in structura la care el are acces
-    //          */
-
-    //         /** A. Admini           - toti adminii diferiti de cel care face upload */
-    //         $admins = $user->GetMyAdmins(false);
-
-    //         /** B. Operatori        - operatorii care au clientul asociat **/
-    //         $operators = $input['customer']->GetMyOperators(true);
-
-    //         /** C. Masteri          - toti masterii clientului */
-    //         $masters = $input['customer']->GetMyMasters(true);
-
-    //         /** D. Useri            - daca s-a urcat in structura la care el are acces */
-    //         $users = $input['customer']->GetMyUserByFolderAccess($input['folder_id'], true);
-
-    //         $users = [
-    //             ...$admins,
-    //             ...$operators,
-    //             ...$masters,
-    //             ...$users,
-    //         ];            
-    //     }
-    //     else
-    //     {
-    //         if($user->inRoles(['operator']))
-    //         {
-    //             /**
-    //              * 1.2. Operator face upload
-    //              *       A. Admini           - toti adminii
-    //              *       B. Operatori        - operatorii care au clientul asociat, diferit de operatorul care face upload
-    //              *       C. Masteri          - toti masterii clientului
-    //              *       D. Useri            - daca s-a urcat in structura la care el are acces
-    //              */
-
-    //             /** A. Admini           -  toti adminii */
-    //             $admins = $user->GetMyAdmins(true);
-
-    //             /** B. Operatori        - operatorii care au clientul asociat, diferit de operatorul care face upload **/
-    //             $operators = $input['customer']->GetMyOperators(false);
-
-    //             /** C. Masteri          - toti masterii clientului */
-    //             $masters = $input['customer']->GetMyMasters(true);
-
-    //             /** D. Useri            - daca s-a urcat in structura la care el are acces */
-    //             $users = $input['customer']->GetMyUserByFolderAccess($input['folder_id'], true);
-
-    //             $users = [
-    //                 ...$admins,
-    //                 ...$operators,
-    //                 ...$masters,
-    //                 ...$users,
-    //             ];
-    //         }  
-    //         else
-    //         {
-    //             $users = [];
-    //         }
-    //     }
-        
-    //     return User::GetUsersByIds($users);
-    // }
-
-    // public static function CreateNotificationReceiversB2b($input) {
-
-    //     $user = \Auth::user();
-
-    //     $user = \Auth::user();
-
-    //     $roleUser = RoleUser::where('user_id', $user->id)
-    //         ->where('customer_id', $input['customer']->id)
-    //         ->whereIn('role_id', [4, 5])
-    //         ->first();
-
-    //     if($roleUser->role->slug == 'master')
-    //     {
-    //         /**
-    //          * 2.1. Master face upload
-    //          *    A. Admini           - toti adminii
-    //          *    B. Operatori        - operatorii care au clientul asociat
-    //          *    C. Masteri          - toti masterii clientului, diferit de masterul care face upload
-    //          *    D. Useri            - daca s-a urcat in structura la care el are acces
-    //          */
-
-    //         /** A. Admini           -  toti adminii */
-    //         $admins = $user->GetMyAdmins(true);
-
-    //         /** B. Operatori        - operatorii care au clientul asociat **/
-    //         $operators = $input['customer']->GetMyOperators(true);
-
-    //         /** C.Masteri          - toti masterii clientului, diferit de masterul care face upload */
-    //         $masters = $input['customer']->GetMyMasters(false);
-
-    //         /** D. Useri            - daca s-a urcat in structura la care el are acces */
-    //         $users = $input['customer']->GetMyUserByFolderAccess($input['folder_id'], true);
-
-    //         $users = [
-    //             ...$admins,
-    //             ...$operators,
-    //             ...$masters,
-    //             ...$users,
-    //         ];
-    //     }
-    //     else
-    //     {
-    //         if($roleUser->role->slug == 'customer')
-    //         {
-    //             /**
-    //              * 2.2. User face upload
-    //              *   A. Admini           - toti adminii
-    //              *   B. Operatori        - operatorii care au clientul asociat
-    //              *   C. Masteri          - toti masterii clientului
-    //              *   D. Useri            - daca s-a urcat in structura la care el are acces
-    //              * 
-    //              */
-
-    //             /** A. Admini           -  toti adminii */
-    //             $admins = $user->GetMyAdmins(true);
-
-    //             /** B. Operatori        - operatorii care au clientul asociat **/
-    //             $operators = $input['customer']->GetMyOperators(true);
-
-    //             /** C. Masteri          - toti masterii clientului */
-    //             $masters = $input['customer']->GetMyMasters(true);
-
-    //             /** D. Useri            - daca s-a urcat in structura la care el are acces */
-    //             $users = $input['customer']->GetMyUserByFolderAccess($input['folder_id'], false);
-               
-    //         }
-    //         else
-    //         {
-    //             $users = [];
-    //         }
-    //     }
-            
-    //     return User::GetUsersByIds($users);
-    
-    // }
-
-    // public static function CreateNotifications($files, $input) {
-    //     /**
-    //      * REGULI TRIMITER NOTIFICARE upload-files
-    //      * 
-    //      * 1. Platforma MyDPOAdmin
-    //      *      1.1. Admin face upload
-    //      *              A. Admini           - toti adminii diferiti de cel care face upload
-    //      *              B. Operatori        - operatorii care au clientul asociat
-    //      *              C. Masteri          - toti masterii clientului
-    //      *              D. Useri            - daca s-a urcat in structura la care el are acces
-    //      *      1.2. Oerator face upload
-    //      *              A. Admini           - toti adminii
-    //      *              B. Operatori        - operatorii care au clientul asociat, diferit de operatorul care face upload
-    //      *              C. Masteri          - toti masterii clientului
-    //      *              D. Useri            - daca s-a urcat in structura la care el are acces
-    //      * 2. Platforma MyDpo
-    //      *      2.1. Master face upload
-    //      *              A. Admini           - toti adminii
-    //      *              B. Operatori        - operatorii care au clientul asociat
-    //      *              C. Masteri          - toti masterii clientului, diferit de masterul care face upload
-    //      *              D. Useri            - daca s-a urcat in structura la care el are acces
-    //      *      2.2. User face upload
-    //      *              A. Admini           - toti adminii
-    //      *              B. Operatori        - operatorii care au clientul asociat
-    //      *              C. Masteri          - toti masterii clientului
-    //      *              D. Useri            - daca s-a urcat in structura la care el are acces
-    //      */
-    //     $method = 'CreateNotificationReceivers' . ucfirst(config('app.platform'));
-
-    //     $receivers = call_user_func([__CLASS__, $method], $input);
-
-    //     if(! $receivers )
-    //     {
-    //         return NULL;
-    //     }
-
-    //     foreach($files as $i => $file) 
-    //     {
-    //         foreach($receivers as $j => $receiver)
-    //         {
-    //             event(new FilesUploadEvent([
-    //                 ...$input,
-    //                 'file' => $file,
-    //                 'receiver' => $receiver,
-    //             ]));
-    //         }
-    //     }
-    // }
