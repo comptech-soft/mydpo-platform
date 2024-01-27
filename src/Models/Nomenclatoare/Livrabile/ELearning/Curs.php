@@ -228,22 +228,6 @@ class Curs extends Model {
     //     return $input;
     // }
 
-
-
-
-    
-
-
-
-
-
-
-
-
-
-    
-
-
     // public static function getKnolyxCoursesImages() {
 
     //     $courses = Curs::whereNotNull('k_id')->get();

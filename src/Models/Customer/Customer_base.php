@@ -12,7 +12,8 @@ use MyDpo\Models\Customer\Accounts\Account;
 use MyDpo\Models\Customer\Documents\CustomerFolder;
 use MyDpo\Models\UserCustomer;
 use MyDpo\Performers\Customer\GetCustomersByIds;
-// use MyDpo\Scopes\NotdeletedScope;
+use MyDpo\Models\Customer\Dashboard\Item;
+
 use MyDpo\Traits\Itemable;
 
 class Customer_base extends Model {
@@ -161,6 +162,10 @@ class Customer_base extends Model {
 
     public static function AfterAction($action, $input, $payload) {
         $payload['record']->SyncronizeField();
+        if($action == 'insert')
+        {
+            $payload['record']->SetDefaultDashboardPermissions();
+        }
     }
     
     public static function GetRules($action, $input) {
@@ -331,11 +336,28 @@ class Customer_base extends Model {
         $this->save();
     }
 
+    public function SetDefaultDashboardPermissions() {
+ 
+        $items = Item::all();
+
+        $props['dashboard'] = $items->map( function($item) {
+
+            return [
+                'id' => $item->id,
+                'name' => $item->name,
+                'visible' => $item['props']['settings']['visible'],
+                'disabled' => $item['props']['settings']['disabled'],
+            ];
+        })->toArray();
+
+        $this->props = $props;
+        $this->save();
+    }
+
     public static function beforeShowIndex() {
         foreach(self::all() as $i => $customer)
         {
             $customer->SyncronizeField();
-            
         }
     }
 
