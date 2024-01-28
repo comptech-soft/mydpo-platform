@@ -4,6 +4,7 @@ namespace MyDpo\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use MyDpo\Core\Http\Response\Index;
 
 class MyProfileController extends Controller {
     
@@ -12,11 +13,12 @@ class MyProfileController extends Controller {
      */
     public function index(Request $r) {
 
-        dd(__METHOD__);
-
-        // return Response::View(
-        //     '~templates.index', 
-        //     asset('apps/login/index.js')
-        // );
+        return Index::View(
+            styles: ['css/app.css'],
+            scripts: ['apps/customer/dashboard/index.js'],
+            payload: [
+                'customer_user' => \Auth::user(),
+            ],
+        );    
     }
 }
