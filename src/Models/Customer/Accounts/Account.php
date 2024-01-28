@@ -145,6 +145,8 @@ class Account extends Model {
         /** 
          * #4. Se genereaza evenimentul CreateAccountActivation 
          * cu template-ul de email account.activation 
+         * ATENTIE! Emailul se trimite cu php artisan emails:send
+         * Acesta trebuie sa fie in jobs
          **/
         event(new CreateAccountActivation('account.activation', [
             ...$input, 
@@ -390,13 +392,22 @@ class Account extends Model {
     public static function SyncRecords($customer_id = NULL) {
 
         $accounts = (!! $customer_id ? self::where('customer_id', $customer_id)->get() : self::all());
-
+        
         foreach($accounts as $i => $account)
         {
+
+
             if($account->role_id)
             {
                 $activation = Activation::byUserAndCustomer($account->user_id, $account->customer_id, $account->role_id);
                 $role_user = RoleUser::byUserAndCustomer($account->user_id, $account->customer_id, $account->role_id);
+
+                if(!! $activation)
+                {
+                    $account->activated = $activation->activated;
+                    $account->activated_at = $activation->activated_at;
+                    $account->save();
+                }
             }
         }
     }
