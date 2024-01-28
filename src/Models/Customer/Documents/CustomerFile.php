@@ -267,7 +267,7 @@ class CustomerFile extends Model {
             $original->refresh();
 
             if($original->status == 'public')
-            {       
+            {    
                 event(new \MyDpo\Events\Customer\Livrabile\Documents\UploadFile('move.file', [
                     'nume_fisier' => $original->file_original_name,
                     'nume_folder_dest' => $original->folder->name,
@@ -353,6 +353,7 @@ class CustomerFile extends Model {
 
             if($input['status'] == 'public')
             {
+
                 event(new \MyDpo\Events\Customer\Livrabile\Documents\UploadFile('upload.file', [
                     'nume_fisier' => $record->file_original_name,
                     'nume_folder' => $record->folder->name,
@@ -378,9 +379,39 @@ class CustomerFile extends Model {
          */
         foreach(Account::where('customer_id', $customer_id)->get() as $i => $account)
         {
-            if( ! in_array($account->user_id, $r) )
+
+            if($account->role_id == 4)
             {
-                $r[] = $account->user_id;
+                /**
+                 * Contul este de master
+                 */
+                if( ! in_array($account->user_id, $r) )
+                {
+                    $r[] = $account->user_id;
+                }
+            }
+            else
+            {
+                if($account->role_id == 5)
+                {
+                    /**
+                     * Contul este de user
+                     * Verific daca are acces pe folderul respectiv
+                     */
+
+                    $folder_permission = CustomerFolderPermission::where('customer_id', $customer_id)
+                        ->where('user_id',  $account->user_id)
+                        ->where('folder_id',  $folder_id)
+                        ->first();
+                   
+                    if(!! $folder_permission && ($folder_permission->has_access == 1))
+                    {
+                        if( ! in_array($account->user_id, $r) )
+                        {
+                            $r[] = $account->user_id;
+                        }
+                    } 
+                }
             }
         }
 
