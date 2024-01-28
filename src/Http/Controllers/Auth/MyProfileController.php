@@ -15,7 +15,7 @@ class MyProfileController extends Controller {
 
         return Index::View(
             styles: ['css/app.css'],
-            scripts: ['apps/customer/dashboard/index.js'],
+            scripts: ['apps/my-profile/index.js'],
             payload: [
                 'customer_user' => \Auth::user(),
             ],
