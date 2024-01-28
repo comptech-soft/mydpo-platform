@@ -9,6 +9,7 @@ use MyDpo\Models\Authentication\User;
 use MyDpo\Models\Customer\Customer;
 use MyDpo\Models\Authentication\UserSetting;
 use Illuminate\Auth\Events\Login;
+use MyDpo\Models\Customer\Accounts\Account;
 
 class ActivateAccount extends Perform {
 
@@ -78,6 +79,8 @@ class ActivateAccount extends Perform {
             'platform' => config('app.platform'),
             'customer_id' => $customer->id,
         ]);
+
+        Account::SyncRecords($customer->id);
 
     }
 
