@@ -304,7 +304,7 @@ class CustomerCursUser extends Model {
                 [
                     'nume_curs' => $record->curs->name,
                     'customers' => [$input['customer_id'] . '#' . $input['user_id']],
-                    'link' => config('app.url') . '/customer-my-elearning/' . $input['customer_id'],
+                    'link' => '/customer-my-elearning/' . $input['customer_id'],
                 ]
             )
         );

@@ -214,7 +214,7 @@ class CustomerFile extends Model {
                     'nume_fisier' => $record->file_original_name,
                     'nume_folder' => $record->folder->name,
                     'customers' => self::CreateUploadReceivers($record->customer_id, $record->folder_id), 
-                    'link' => config('app.url') . '/' . $record->folder->page_link . '/' . $input['customer_id'],
+                    'link' => '/' . $record->folder->page_link . '/' . $input['customer_id'],
                 ]));
             }
         }
@@ -233,7 +233,7 @@ class CustomerFile extends Model {
                 'nume_fisier' => $record->file_original_name,
                 'nume_folder' => $record->folder->name,
                 'customers' => self::CreateUploadReceivers($record->customer_id, $record->folder_id), 
-                'link' => config('app.url') . '/' . $original->record->page_link . '/' . $input['customer_id'],
+                'link' => '/' . $original->record->page_link . '/' . $input['customer_id'],
             ]));
 
             $record->delete();
@@ -273,7 +273,7 @@ class CustomerFile extends Model {
                     'nume_folder_dest' => $original->folder->name,
                     'nume_folder_sursa' => $nume_folder_sursa,
                     'customers' => self::CreateUploadReceivers($original->customer_id, $original->folder_id), 
-                    'link' => config('app.url') . '/' . $original->folder->page_link . '/' . $input['customer_id'],
+                    'link' => '/' . $original->folder->page_link . '/' . $input['customer_id'],
                 ]));
             }
             
@@ -357,7 +357,7 @@ class CustomerFile extends Model {
                     'nume_fisier' => $record->file_original_name,
                     'nume_folder' => $record->folder->name,
                     'customers' => self::CreateUploadReceivers($input['customer_id'], $input['folder_id']), 
-                    'link' => config('app.url') . '/' . $record->folder->page_link . '/' . $input['customer_id'],
+                    'link' => '/' . $record->folder->page_link . '/' . $input['customer_id'],
                 ]));
             }
         }
