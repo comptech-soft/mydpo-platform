@@ -11,6 +11,7 @@ use MyDpo\Traits\Importable;
 
 use MyDpo\Models\Authentication\User;
 use MyDpo\Models\Authentication\RoleUser;
+use MyDpo\Models\Authentication\Role;
 use MyDpo\Models\Customer\Departments\Department;
 use MyDpo\Models\Customer\Customer;
 
@@ -134,8 +135,10 @@ class Account extends Model {
 
         /** 
          * #2. Se creaza inregistrarea in [customers-persons] 
+         * se preiau setarile default (de la rolul master sau user) pentru dashboard items visibility si se salveaza
          **/
         $account = self::create(collect($input)->except(['user'])->toArray());
+        $account->setDefaultDashboardItemsVisibility();
 
         /** 
          * #3. Se ataseaza rolul in tabela [role-users] 
@@ -158,6 +161,19 @@ class Account extends Model {
         ]));
 
         return self::where('id', $account->id)->first();
+    }
+
+    /**
+     * se preiau setarile default (de la rolul master sau user) pentru dashboard items visibility si se salveaza
+     */
+    public function setDefaultDashboardItemsVisibility() {
+
+        $role = Role::find($this->role_id);
+
+        $dashboard = array_key_exists('dashboard', $role->permissions) ? $role->permissions['dashboard'] : NULL; 
+
+        $this->dashboard_items_visibility = $dashboard;
+        $this->save();
     }
 
     public static function doAttach($input) {
