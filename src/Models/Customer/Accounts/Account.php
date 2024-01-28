@@ -428,6 +428,10 @@ class Account extends Model {
         }
     }
 
+    /**
+     * ATENTIE.
+     * Avem in doua locuri: props['dashboard'] si in dashboard_items_visibility
+     */
     public static function SaveDashboardSettings($user_id, $customer_id, $items) {
         $account = self::where('customer_id', $customer_id)->where('user_id', $user_id)->first();
 
@@ -437,6 +441,8 @@ class Account extends Model {
             ...$props,
             'dashboard' => $items,
         ];
+
+        $account->dashboard_items_visibility = $items;
 
         $account->save();
 
