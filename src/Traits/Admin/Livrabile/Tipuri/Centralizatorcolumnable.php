@@ -62,6 +62,13 @@ trait Centralizatorcolumnable {
         {
             $columns_tree = \MyDpo\Models\Livrabile\Registre\TipRegistru::find($input['register_id'])->columns_tree;
         }
+        else
+        {
+            if(array_key_exists('centralizator_id', $input))
+            {
+                $columns_tree = \MyDpo\Models\Livrabile\Centralizatoare\TipCentralizator::find($input['centralizator_id'])->columns_tree;
+            }
+        }
 
         return [
             ...$record->toArray(),
@@ -82,6 +89,13 @@ trait Centralizatorcolumnable {
         {
             $columns_tree = \MyDpo\Models\Livrabile\Registre\TipRegistru::find($input['register_id'])->columns_tree;
         }
+        else
+        {
+            if(array_key_exists('centralizator_id', $input))
+            {
+                $columns_tree = \MyDpo\Models\Livrabile\Centralizatoare\TipCentralizator::find($input['centralizator_id'])->columns_tree;
+            }
+        }
 
         return [
             ...$record->toArray(),
@@ -98,6 +112,13 @@ trait Centralizatorcolumnable {
         if(array_key_exists('register_id', $input))
         {
             $columns_tree = \MyDpo\Models\Livrabile\Registre\TipRegistru::find($input['register_id'])->columns_tree;
+        }
+        else
+        {
+            if(array_key_exists('centralizator_id', $input))
+            {
+                $columns_tree = \MyDpo\Models\Livrabile\Centralizatoare\TipCentralizator::find($input['centralizator_id'])->columns_tree;
+            }
         }
 
         return [
