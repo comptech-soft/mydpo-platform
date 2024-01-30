@@ -52,7 +52,10 @@ class CustomerCursParticipant extends Model {
     }
 
     public static function AfterAction($action, $input, $payload) {
-        CustomerCurs::Sync($input['customer_id']);
+        if( array_key_exists('customer_id', $input) ) 
+        {
+            CustomerCurs::Sync($input['customer_id']);
+        }
     }
 
 }
