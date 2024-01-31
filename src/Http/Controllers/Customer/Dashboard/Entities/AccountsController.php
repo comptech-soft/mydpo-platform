@@ -11,6 +11,9 @@ use MyDpo\Models\Customer\Accounts\Account;
 class AccountsController extends Controller {
     
     public function index($customer_id, Request $r) {
+
+        Account::SyncRecords($customer_id);
+
         return Index::View(
             styles: ['css/app.css'],
             scripts: ['apps/customer/conturi/index.js'],
