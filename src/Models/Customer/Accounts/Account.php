@@ -411,16 +411,16 @@ class Account extends Model {
         
         foreach($accounts as $i => $account)
         {
-
-
+            
             if($account->role_id)
             {
                 $activation = Activation::byUserAndCustomer($account->user_id, $account->customer_id, $account->role_id);
+
                 $role_user = RoleUser::byUserAndCustomer($account->user_id, $account->customer_id, $account->role_id);
 
                 if(!! $activation)
                 {
-                    $account->activated = $activation->activated;
+                    $account->activated = (!! $activation->activated ? 1 : 0);
                     $account->activated_at = $activation->activated_at;
                     $account->save();
                 }
