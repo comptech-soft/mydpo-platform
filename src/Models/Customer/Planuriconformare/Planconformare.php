@@ -227,7 +227,11 @@ class Planconformare extends Model {
     }
 
     public function GetTree() {
-        $nodes = PlanconformareRow::where('customer_plan_id', $this->id)->whereNull('parent_id')->with(['children'])->get();
+        $nodes = PlanconformareRow::where('customer_plan_id', $this->id)
+            ->whereNull('parent_id')
+            ->orderBy('order_no')
+            ->with(['children'])
+            ->get();
         return $nodes->toArray();
     }
 
