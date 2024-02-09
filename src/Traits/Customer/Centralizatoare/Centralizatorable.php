@@ -60,6 +60,15 @@ trait Centralizatorable {
             $notification_type_name = array_key_exists('register_id', $input) ? 'registru.trimitere' : 'centralizator.trimitere';
 
             /**
+             * Link
+             * 
+             * http://mydpo-admin.local/registre-list/registre/2/80#/
+             * http://mydpo-admin.local/registre-list/gap/2/85#/
+             * 
+             * http://mydpo-admin.local/centralizatoare-list/centralizatoare/2/117#/
+             * http://mydpo-admin.local/centralizatoare-list/gap/2/117#/
+             */
+            /**
              * Se trimite notificare
              */
             event(new \MyDpo\Events\Customer\Livrabile\Centralizatorable\InsertDocument($notification_type_name, [
@@ -68,6 +77,7 @@ trait Centralizatorable {
                 'customers' => [$input['customer_id'] . '#' . \Auth::user()->id],
                 'link' => '/' . 'aaaaa' . '/' . $input['customer_id'],
             ]));
+
 
 
             // event(new \MyDpo\Events\Customer\Livrabile\Centralizatorable\InsertDocument($notification_type_name, [
