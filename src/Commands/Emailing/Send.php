@@ -64,7 +64,7 @@ class Send extends Command {
                 payload: $email->props['payload']
             ));
 
-            sleep(1);
+            sleep(5);
         }
         catch(\Exception $e)
         {
