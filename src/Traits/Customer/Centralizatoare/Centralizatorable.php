@@ -57,39 +57,21 @@ trait Centralizatorable {
 
         if($input['visibility'] == 1)
         {
-            self::SendNotification($input, $ip, $record);
+            self::SendNotification($input, $tip, $record);
         }
 
         return $record;
     }
 
-    public static function SendNotification($input, $ip, $record) {
-        if(array_key_exists('register_id', $input))
-            {
-                $notification_type_name = 'registru.trimitere';
+    public static function SendNotification($input, $tip, $record) {
 
-                if($tip->on_registre_page == 1)
-                {
-                    $link = '/registre-list/registre/' . $input['customer_id'] . '/' . $tip->id; 
-                }
-                else
-                {
-                    $link = '/registre-list/gap/' . $input['customer_id'] . '/' . $tip->id; 
-                }
-            }
-            else
-            {
-                $notification_type_name = 'centralizator.trimitere';
-            }
-            /**
-             * Link
-             * 
-             * http://mydpo-admin.local/registre-list/registre/2/80#/
-             * http://mydpo-admin.local/registre-list/gap/2/85#/
-             * 
-             * http://mydpo-admin.local/centralizatoare-list/centralizatoare/2/117#/
-             * http://mydpo-admin.local/centralizatoare-list/gap/2/117#/
-             */
+        $notification_type_name = self::GetNotificationTypeName($input);
+
+        $link = self::GetNotificationLink($input, $tip);
+
+        dd($notification_type_name, $link);
+
+           
             /**
              * Se trimite notificare
              */
@@ -108,6 +90,32 @@ trait Centralizatorable {
             //     // 'customers' => self::CreateUploadReceivers($input['customer_id'], $input['folder_id']), 
             //     // 'link' => '/' . $record->folder->page_link . '/' . $input['customer_id'],
             // ]));
+    }
+
+    public static function GetNotificationLink($input, $tip) {
+         /**
+         * Link
+         * 
+         * http://mydpo-admin.local/registre-list/registre/2/80#/
+         * http://mydpo-admin.local/registre-list/gap/2/85#/
+         * 
+         * http://mydpo-admin.local/centralizatoare-list/centralizatoare/2/117#/
+         * http://mydpo-admin.local/centralizatoare-list/gap/2/117#/
+         */
+        if(array_key_exists('register_id', $input))
+        {
+            if($tip->on_registre_page == 1)
+            {
+                return '/registre-list/registre/' . $input['customer_id'] . '/' . $tip->id; 
+            }
+            
+            return '/registre-list/gap/' . $input['customer_id'] . '/' . $tip->id; 
+        }
+
+    }
+
+    public static function GetNotificationTypeName($input) {
+        return array_key_exists('register_id', $input) ? 'registru.trimitere' : 'centralizator.trimitere';
     }
 
     /**
