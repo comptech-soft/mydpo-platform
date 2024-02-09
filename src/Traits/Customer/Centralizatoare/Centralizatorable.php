@@ -77,7 +77,7 @@ trait Centralizatorable {
         event(new \MyDpo\Events\Customer\Livrabile\Centralizatorable\InsertDocument($notification_type_name, [
             'tip' => $tip->name,
             'numar' => $record->number,
-            'data' => $record->date,
+            'data' => \Carbon\Carbon::createFromFormat('Y-m-d', $record->date)->format('d.m.Y'),
             'customers' => $receivers,
             'link' => $link,
         ]));
