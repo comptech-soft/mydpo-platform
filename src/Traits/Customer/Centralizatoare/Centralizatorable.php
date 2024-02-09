@@ -55,6 +55,9 @@ trait Centralizatorable {
             'current_columns' => $tip->columns->toArray(), 
         ]);
 
+        /**
+         * Se trimite notificare
+         */
         if($input['visibility'] == 1)
         {
             self::SendNotification($input, $tip, $record);
@@ -69,18 +72,17 @@ trait Centralizatorable {
 
         $link = self::GetNotificationLink($input, $tip);
 
-        dd($notification_type_name, $link);
+        $receivers = self::GetReceivers($input['customer_id']);
 
            
-            /**
-             * Se trimite notificare
-             */
-            event(new \MyDpo\Events\Customer\Livrabile\Centralizatorable\InsertDocument($notification_type_name, [
-                'tip' => $tip->name,
-                'document' => $record->number . ' / ' . $record->date,
-                'customers' => [$input['customer_id'] . '#' . \Auth::user()->id],
-                'link' => $link,
-            ]));
+        dd($receivers);
+
+        event(new \MyDpo\Events\Customer\Livrabile\Centralizatorable\InsertDocument($notification_type_name, [
+            'tip' => $tip->name,
+            'document' => $record->number . ' / ' . $record->date,
+            'customers' => [$input['customer_id'] . '#' . \Auth::user()->id],
+            'link' => $link,
+        ]));
 
 
 
@@ -90,6 +92,18 @@ trait Centralizatorable {
             //     // 'customers' => self::CreateUploadReceivers($input['customer_id'], $input['folder_id']), 
             //     // 'link' => '/' . $record->folder->page_link . '/' . $input['customer_id'],
             // ]));
+    }
+
+    public static function GetReceivers($customer_id) {
+
+        $sql = "SELECT id, user_id FROM `customers-persons` WHERE customer_id = " . $customer_id;
+    
+        $accounts = collect(\DB::select($sql));
+
+        return $accounts->map(function($item) use ($customer_id) {
+            return $customer_id . '#' . $item->user_id;
+        })->toArray();
+
     }
 
     public static function GetNotificationLink($input, $tip) {
