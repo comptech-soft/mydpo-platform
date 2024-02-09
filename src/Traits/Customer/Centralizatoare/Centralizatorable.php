@@ -60,6 +60,15 @@ trait Centralizatorable {
             if(array_key_exists('register_id', $input))
             {
                 $notification_type_name = 'registru.trimitere';
+
+                if($tip->on_registre_page == 1)
+                {
+                    $link = 'registre-list/registre/' . $input['customer_id'] . '/' . $tip->id; 
+                }
+                else
+                {
+                    $link = 'registre-list/gap/' . $input['customer_id'] . '/' . $tip->id; 
+                }
             }
             else
             {
