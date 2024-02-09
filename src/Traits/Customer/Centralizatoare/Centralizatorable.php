@@ -54,6 +54,22 @@ trait Centralizatorable {
             'current_columns' => $tip->columns->toArray(), 
         ]);
 
+        if($input['visibility'] == 1)
+        {
+    
+            $notification_type_name = array_key_exists('register_id', $input) ? 'registru.trimitere' : 'centralizator.trimitere';
+
+            /**
+             * Se trimite notificare
+             */
+            event(new \MyDpo\Events\Customer\Livrabile\Centralizatorable\InsertDocument($notification_type_name, [
+                // 'nume_fisier' => $record->file_original_name,
+                // 'nume_folder' => $record->folder->name,
+                // 'customers' => self::CreateUploadReceivers($input['customer_id'], $input['folder_id']), 
+                // 'link' => '/' . $record->folder->page_link . '/' . $input['customer_id'],
+            ]));
+        }
+
         return $record;
     }
 
