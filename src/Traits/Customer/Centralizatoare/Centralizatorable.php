@@ -56,9 +56,15 @@ trait Centralizatorable {
 
         if($input['visibility'] == 1)
         {
-    
-            $notification_type_name = array_key_exists('register_id', $input) ? 'registru.trimitere' : 'centralizator.trimitere';
-
+            
+            if(array_key_exists('register_id', $input))
+            {
+                $notification_type_name = 'registru.trimitere';
+            }
+            else
+            {
+                $notification_type_name = 'centralizator.trimitere';
+            }
             /**
              * Link
              * 
