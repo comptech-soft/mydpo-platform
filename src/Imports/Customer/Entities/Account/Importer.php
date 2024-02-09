@@ -75,11 +75,20 @@ class Importer implements ToCollection {
 
         $role = RoleUser::CreateAccountRole($this->input['customer_id'], $user->id, $account->role_id);
 
+        $account->setDefaultDashboardItemsVisibility();
+        
         $customers = [
             $this->input['customer_id'] . '#' . $user->id,
         ];
 
-        event(new CreateAccountActivation('account.activation', ['customers' => $customers, 'account' => $account, 'role' => $role]));
+        event(new CreateAccountActivation(
+            'account.activation', 
+            [
+                'customers' => $customers, 
+                'account' => $account, 
+                'role' => $role
+            ]
+        ));
 
     }    
 
