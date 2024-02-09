@@ -4,6 +4,7 @@ namespace MyDpo\Traits\Customer\Centralizatoare;
 
 use MyDpo\Models\Customer\Departments\Department;
 use MyDpo\Models\Customer\Centralizatoare\Centralizator;
+use MyDpo\Models\Customer\Accounts\Account;
 
 trait Centralizatorable {
 
@@ -54,6 +55,12 @@ trait Centralizatorable {
             'current_columns' => $tip->columns->toArray(), 
         ]);
 
+        self::SendNotification($input, $ip, $record);
+        
+        return $record;
+    }
+
+    public static function SendNotification($input, $ip, $record) {
         if($input['visibility'] == 1)
         {
             
@@ -102,8 +109,6 @@ trait Centralizatorable {
             //     // 'link' => '/' . $record->folder->page_link . '/' . $input['customer_id'],
             // ]));
         }
-
-        return $record;
     }
 
     /**
