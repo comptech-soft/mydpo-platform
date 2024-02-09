@@ -55,16 +55,16 @@ trait Centralizatorable {
             'current_columns' => $tip->columns->toArray(), 
         ]);
 
-        self::SendNotification($input, $ip, $record);
-        
+        if($input['visibility'] == 1)
+        {
+            self::SendNotification($input, $ip, $record);
+        }
+
         return $record;
     }
 
     public static function SendNotification($input, $ip, $record) {
-        if($input['visibility'] == 1)
-        {
-            
-            if(array_key_exists('register_id', $input))
+        if(array_key_exists('register_id', $input))
             {
                 $notification_type_name = 'registru.trimitere';
 
@@ -108,7 +108,6 @@ trait Centralizatorable {
             //     // 'customers' => self::CreateUploadReceivers($input['customer_id'], $input['folder_id']), 
             //     // 'link' => '/' . $record->folder->page_link . '/' . $input['customer_id'],
             // ]));
-        }
     }
 
     /**
