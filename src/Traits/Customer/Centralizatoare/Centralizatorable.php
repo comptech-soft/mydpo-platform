@@ -63,11 +63,11 @@ trait Centralizatorable {
 
                 if($tip->on_registre_page == 1)
                 {
-                    $link = 'registre-list/registre/' . $input['customer_id'] . '/' . $tip->id; 
+                    $link = '/registre-list/registre/' . $input['customer_id'] . '/' . $tip->id; 
                 }
                 else
                 {
-                    $link = 'registre-list/gap/' . $input['customer_id'] . '/' . $tip->id; 
+                    $link = '/registre-list/gap/' . $input['customer_id'] . '/' . $tip->id; 
                 }
             }
             else
