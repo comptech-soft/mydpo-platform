@@ -124,6 +124,13 @@ trait Centralizatorable {
             return '/registre-list/gap/' . $input['customer_id'] . '/' . $tip->id; 
         }
 
+        if($tip->on_gap_page == 1)
+        {
+            return '/centralizatoare-list/centralizatoare/' . $input['customer_id'] . '/' . $tip->id; 
+        }
+        
+        return '/centralizatoare-list/gap/' . $input['customer_id'] . '/' . $tip->id;
+
     }
 
     public static function GetNotificationTypeName($input) {
