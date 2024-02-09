@@ -90,7 +90,7 @@ trait Centralizatorable {
                 'tip' => $tip->name,
                 'document' => $record->number . ' / ' . $record->date,
                 'customers' => [$input['customer_id'] . '#' . \Auth::user()->id],
-                'link' => '/' . 'aaaaa' . '/' . $input['customer_id'],
+                'link' => $link,
             ]));
 
 
