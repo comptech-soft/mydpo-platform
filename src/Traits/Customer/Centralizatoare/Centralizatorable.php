@@ -63,11 +63,19 @@ trait Centralizatorable {
              * Se trimite notificare
              */
             event(new \MyDpo\Events\Customer\Livrabile\Centralizatorable\InsertDocument($notification_type_name, [
-                // 'nume_fisier' => $record->file_original_name,
-                // 'nume_folder' => $record->folder->name,
-                // 'customers' => self::CreateUploadReceivers($input['customer_id'], $input['folder_id']), 
-                // 'link' => '/' . $record->folder->page_link . '/' . $input['customer_id'],
+                'tip' => $tip->name,
+                'document' => $record->number . ' / ' . $record->date,
+                'customers' => [$input['customer_id'] . '#' . \Auth::user()->id],
+                'link' => '/' . 'aaaaa' . '/' . $input['customer_id'],
             ]));
+
+
+            // event(new \MyDpo\Events\Customer\Livrabile\Centralizatorable\InsertDocument($notification_type_name, [
+            //     // 'nume_fisier' => $record->file_original_name,
+            //     // 'nume_folder' => $record->folder->name,
+            //     // 'customers' => self::CreateUploadReceivers($input['customer_id'], $input['folder_id']), 
+            //     // 'link' => '/' . $record->folder->page_link . '/' . $input['customer_id'],
+            // ]));
         }
 
         return $record;
