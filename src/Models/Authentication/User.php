@@ -368,7 +368,23 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail 
     //     return $user;
     // }
 
-    // public static function GetRules($action, $input) {
+    public static function GetRules($action, $input) {
+
+        if($action == 'changepassword')
+        {
+            return [
+                'oldpassword' => [
+                    'required',
+                    new Oldpassword($input),
+                ],
+
+                'password' => [
+                    'required', 
+                    'confirmed', 
+                    Rules\Password::defaults()->mixedCase()->letters()->numbers()->symbols()
+                ]
+            ];
+        }
         
     //     if($action == 'delete')
     //     {
@@ -407,7 +423,7 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail 
     //     }
         
     //     return $result;
-    // }
+    }
 
     // public static function GetMessages($action, $input) {
     //     return [
@@ -431,18 +447,7 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail 
 dd($input);
         // return (new Changepassword(
         //     $input,
-        //     [
-        //         'oldpassword' => [
-        //             'required',
-        //             new Oldpassword($input),
-        //         ],
-
-        //         'password' => [
-        //             'required', 
-        //             'confirmed', 
-        //             Rules\Password::defaults()->mixedCase()->letters()->numbers()->symbols()
-        //         ]
-        //     ],
+            
         //     [
         //         'password.min' => 'Parola trebuie să fie de cel puțin 8 caractere și să conțină litere mari și mici, cifre și caractere speciale.',
         //     ]
