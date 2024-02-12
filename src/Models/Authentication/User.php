@@ -473,7 +473,7 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail 
             $record->update(['value' => $input['email_signature']]);
         }
 
-        return $record;
+        return self::find($user->id);
 
     }
 
