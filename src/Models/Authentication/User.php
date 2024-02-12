@@ -451,6 +451,10 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail 
 
     }
 
+    public static function doSetemailsignature($input, $user) {
+        dd($input, $user->toArray());
+    }
+
     // public static function updatePassword($input) {
     //     return (new Changepassword(
     //         $input,
