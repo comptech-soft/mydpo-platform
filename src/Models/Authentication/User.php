@@ -426,29 +426,30 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail 
     //         ->Perform();
     // }
 
-    // public static function changePassword($input) {
+    public static function doChangepassword($input) {
 
-    //     return (new Changepassword(
-    //         $input,
-    //         [
-    //             'oldpassword' => [
-    //                 'required',
-    //                 new Oldpassword($input),
-    //             ],
 
-    //             'password' => [
-    //                 'required', 
-    //                 'confirmed', 
-    //                 Rules\Password::defaults()->mixedCase()->letters()->numbers()->symbols()
-    //             ]
-    //         ],
-    //         [
-    //             'password.min' => 'Parola trebuie să fie de cel puțin 8 caractere și să conțină litere mari și mici, cifre și caractere speciale.',
-    //         ]
-    //     ))
-    //         ->SetSuccessMessage('Schimbare parolă cu success!')
-    //         ->Perform();
-    // }
+        // return (new Changepassword(
+        //     $input,
+        //     [
+        //         'oldpassword' => [
+        //             'required',
+        //             new Oldpassword($input),
+        //         ],
+
+        //         'password' => [
+        //             'required', 
+        //             'confirmed', 
+        //             Rules\Password::defaults()->mixedCase()->letters()->numbers()->symbols()
+        //         ]
+        //     ],
+        //     [
+        //         'password.min' => 'Parola trebuie să fie de cel puțin 8 caractere și să conțină litere mari și mici, cifre și caractere speciale.',
+        //     ]
+        // ))
+        //     ->SetSuccessMessage('Schimbare parolă cu success!')
+        //     ->Perform();
+    }
 
     // public static function updatePassword($input) {
     //     return (new Changepassword(
