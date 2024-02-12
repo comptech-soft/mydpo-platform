@@ -443,13 +443,12 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail 
 
     public static function doChangepassword($input, $user) {
 
-        dd($user->toArray());
-        
-        $user = User::find($input['id']);
-
         $user->update([
-            'password' => \Hash::make($this->input['password'])
+            'password' => \Hash::make($input['password'])
         ]);
+
+        return $user;
+
     }
 
     // public static function updatePassword($input) {
