@@ -231,10 +231,13 @@ class Account extends Model {
         else
         {
             // Contul trebuie activat
-            $activation->update(['activated' => 1]);
+            $activation->update([
+                'activated' => 1,
+                'activated_at' => ($d = \Carbon\Carbon::now()),
+            ]);
             $account->update([
                 'activated' => 1,
-                'activated_at' => \Carbon\Carbon::now(),
+                'activated_at' => $d,
                 'role_id' => $input['role_id']
             ]);
         }
