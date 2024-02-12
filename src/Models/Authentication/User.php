@@ -25,7 +25,7 @@ use Illuminate\Support\Facades\Hash;
 // use MyDpo\Performers\User\Changepassword;
 // use MyDpo\Performers\User\UpdatePermissions;
 // use MyDpo\Performers\User\UpdateStatus;
-// use MyDpo\Rules\User\Oldpassword;
+use MyDpo\Rules\User\Oldpassword;
 // use MyDpo\Scopes\NotdeletedScope;
 
 class User extends Authenticatable implements CanResetPassword, MustVerifyEmail {
