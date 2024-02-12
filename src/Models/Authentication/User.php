@@ -14,6 +14,7 @@ use Laravel\Passport\HasApiTokens;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 use MyDpo\Models\Authentication\Role;
+use MyDpo\Models\Authentication\UserSetting;
 // use MyDpo\Models\RoleUser;
 // use MyDpo\Models\Customer\Customer;
 // use MyDpo\Models\UserCustomer;
@@ -384,6 +385,11 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail 
                 ]
             ];
         }
+
+        if($action == 'etemailsignature')
+        {
+
+        }
         
     //     if($action == 'delete')
     //     {
@@ -435,12 +441,6 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail 
     //     ];
     // }
 
-    // public static function saveUserSettings($input) {
-    //     return (new SaveSetting($input))
-    //         ->SetSuccessMessage('Schimbare status cu success!')
-    //         ->Perform();
-    // }
-
     public static function doChangepassword($input, $user) {
 
         $user->update([
@@ -452,7 +452,28 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail 
     }
 
     public static function doSetemailsignature($input, $user) {
-        dd($input, $user->toArray());
+        $record = UserSetting::getByUserAndCustomerAndCodeAndPlatform(
+            $user->id, 
+            NULL, 
+            $input['code'],
+            NULL,
+        );
+        
+        if(! $record)
+        {
+            $record = UserSetting::create([
+                'user_id' => $user->id,
+                'code' => $input['code'],
+                'value' => $input['email_signature']
+            ]);
+        }
+        else
+        {
+            $record->update(['value' => $input['email_signature']]);
+        }
+
+        return $record;
+
     }
 
     // public static function updatePassword($input) {

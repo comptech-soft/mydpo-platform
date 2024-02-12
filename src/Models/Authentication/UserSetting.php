@@ -60,15 +60,21 @@ class UserSetting extends Model {
         
         return $account->customer_id;
     }
-
-
-
+    
     public static function getByUserAndCustomerAndCodeAndPlatform($user_id, $customer_id, $code, $platform) {
-        return self::where('user_id', $user_id)
-            ->where('code', $code)
-            ->where('customer_id', $customer_id)
-            ->where('platform', $platform)
-            ->first();
+        $q = self::where('user_id', $user_id)->where('code', $code);
+
+        if(!! $customer_id)
+        {
+            $q->where('customer_id', $customer_id);
+        }
+        
+        if(!! $platform)
+        {
+            $q->where('platform', $platform);
+        }
+        
+        return $q->first();
     }
 
     public static function saveActiveCustomer($input) {
