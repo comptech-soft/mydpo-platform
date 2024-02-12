@@ -22,7 +22,6 @@ use MyDpo\Models\Authentication\Role;
 use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Hash;
 // use MyDpo\Performers\UserSetting\SaveSetting;
-// use MyDpo\Performers\User\Changepassword;
 // use MyDpo\Performers\User\UpdatePermissions;
 // use MyDpo\Performers\User\UpdateStatus;
 use MyDpo\Rules\User\Oldpassword;
@@ -442,18 +441,15 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail 
     //         ->Perform();
     // }
 
-    public static function doChangepassword($input) {
+    public static function doChangepassword($input, $user) {
 
-dd($input);
-        // return (new Changepassword(
-        //     $input,
-            
-        //     [
-        //         'password.min' => 'Parola trebuie să fie de cel puțin 8 caractere și să conțină litere mari și mici, cifre și caractere speciale.',
-        //     ]
-        // ))
-        //     ->SetSuccessMessage('Schimbare parolă cu success!')
-        //     ->Perform();
+        dd($user->toArray());
+        
+        $user = User::find($input['id']);
+
+        $user->update([
+            'password' => \Hash::make($this->input['password'])
+        ]);
     }
 
     // public static function updatePassword($input) {
