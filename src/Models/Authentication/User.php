@@ -428,7 +428,7 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail 
 
     public static function doChangepassword($input) {
 
-
+dd($input);
         // return (new Changepassword(
         //     $input,
         //     [
