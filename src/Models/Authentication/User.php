@@ -456,7 +456,7 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail 
             $user->id, 
             NULL, 
             $input['code'],
-            NULL,
+            config('app.platform'),
         );
         
         if(! $record)
@@ -464,7 +464,8 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail 
             $record = UserSetting::create([
                 'user_id' => $user->id,
                 'code' => $input['code'],
-                'value' => $input['email_signature']
+                'value' => $input['email_signature'],
+                'platform' => config('app.platform')
             ]);
         }
         else
