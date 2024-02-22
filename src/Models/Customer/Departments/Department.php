@@ -102,6 +102,11 @@ class Department extends Model {
         return $result;
     }
 
+    public static function doDelete($input, $record) {
+
+        dd(__METHOD__, $input);
+    }
+
     public static function doAction($action, $input) {
         return (new DoAction($action, $input, __CLASS__))->Perform();
     }
