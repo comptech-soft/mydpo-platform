@@ -104,7 +104,11 @@ class Department extends Model {
 
     public static function doDelete($input, $record) {
 
-        dd(__METHOD__, $input);
+        Account::where('department_id', $record->id)->update(['department_id' => NULL]);
+
+        $record->delete();
+
+        return $record;
     }
 
     public static function doAction($action, $input) {
