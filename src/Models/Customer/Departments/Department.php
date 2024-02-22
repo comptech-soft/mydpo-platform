@@ -11,6 +11,7 @@ use MyDpo\Rules\Customer\Entities\Department\UniqueName;
 use MyDpo\Traits\Itemable;
 
 use MyDpo\Models\Customer\Accounts\Account;
+use MyDpo\Models\Customer\Planuriconformare\Planconformare;
 
 class Department extends Model {
 
@@ -105,6 +106,7 @@ class Department extends Model {
     public static function doDelete($input, $record) {
 
         Account::where('department_id', $record->id)->update(['department_id' => NULL]);
+        Planconformare::where('department_id', $record->id)->update(['department_id' => NULL]);
 
         $record->delete();
 
