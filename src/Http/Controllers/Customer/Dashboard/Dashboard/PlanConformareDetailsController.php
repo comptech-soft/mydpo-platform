@@ -19,17 +19,16 @@ class PlanConformareDetailsController extends Controller {
 
         $customer = Customer::find($customer_id);
                
-        dd(111);
-        
         return Index::View(
             styles: ['css/app.css'],
             scripts: ['apps/customer/plan-conformare-details/index.js'],
             payload: [
                 'plan_id' => $plan_id,
                 'plan' => $plan,
-                'customer' => $customer,
                 'rows' => $plan->GetRowsAsTable(),
                 'tree' => $plan->GetTree(),
+                'customer_id' => $customer_id,
+                'customer' => Customer::find($customer_id),
                 'customer_user' => \Auth::user(),
             ],
         );        
