@@ -380,6 +380,11 @@ class Account extends Model {
     }
 
     public static function GetQuery() {
+
+        /**
+         * Atentie! S-ar putea ca si userii sa fie deleted
+         */
+        
         return 
             self::query()
             ->leftJoin(

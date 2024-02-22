@@ -19,6 +19,8 @@ class PlanConformareDetailsController extends Controller {
 
         $customer = Customer::find($customer_id);
                
+        dd(111);
+        
         return Index::View(
             styles: ['css/app.css'],
             scripts: ['apps/customer/plan-conformare-details/index.js'],
