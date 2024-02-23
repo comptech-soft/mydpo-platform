@@ -118,8 +118,8 @@ class Contract extends Model {
         
         foreach(self::all() as $i => $contract)
         {
-            $this->contract_expirat = ($this->days_difference['days'] > 0 ? 1 : 0);
-            $this->save();
+            $contract->contract_expirat = ($contract->days_difference['days'] > 0 ? 1 : 0);
+            $contract->save();
         }
 
     }
