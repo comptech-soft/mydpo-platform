@@ -89,7 +89,6 @@ class Contract extends Model {
         return $contract;
     }
 
-
     public static function GetRules($action, $input) {
        
         if($action == 'delete')
@@ -112,6 +111,33 @@ class Contract extends Model {
         
         return $result;
     }
+
+    public function SyncronizeField() {
+
+        dd(__METHOD__);
+        // $this->city_name = $this->city 
+        //     ? $this->city->name 
+        //     : NULL;
+            
+        // $this->region = $this->city && $this->city->region 
+        //     ? $this->city->region->name 
+        //     : NULL;
+            
+        // $this->country = $this->city && $this->city->region && $this->city->region->country 
+        //     ? $this->city->region->country->name 
+        //     : NULL;           
+            
+        // $this->has_contract = (!! $this->contracts->count() ? 1 : 0);    
+            
+        // if($this->has_contract)
+        // {
+        //     $days_difference = $this->contracts->first()->days_difference;
+        //     $this->contract_expirat = ($days_difference['days'] > 0 ? 1 : 0);
+        // }
+
+        $this->save();
+    }
+
 
 
 }
