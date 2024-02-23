@@ -36,8 +36,8 @@ class CustomerContract extends Contract {
     //     return (new GetItems($input, self::query()->with(['orders.services.service.type', 'customer']), __CLASS__))->Perform();
     // }
 
-    public static function GetQuery() {
-        return self::query()->withCount(['orders']);
-    }
+    // public static function GetQuery() {
+    //     return self::query()->withCount(['orders']);
+    // }
 
 }
