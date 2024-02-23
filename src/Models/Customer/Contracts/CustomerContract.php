@@ -25,12 +25,12 @@ class CustomerContract extends Contract {
     // }
 
     function orders() {
-        return $this->hasMany(CustomerOrder::class, 'contract_id')->orderBy('date_to', 'desc');
+        return $this->hasMany(Order::class, 'contract_id')->orderBy('date_to', 'desc');
     }
 
-    public function customer() {
-        return $this->belongsTo(Customer::class, 'customer_id')->select(['id', 'name', 'status'])->with(['mystatus']);
-    }
+    // public function customer() {
+    //     return $this->belongsTo(Customer::class, 'customer_id')->select(['id', 'name', 'status'])->with(['mystatus']);
+    // }
     
     // public static function getItems($input) {
     //     return (new GetItems($input, self::query()->with(['orders.services.service.type', 'customer']), __CLASS__))->Perform();
