@@ -219,6 +219,10 @@ trait Centralizatorable {
 
     }
 
+    public static function doGetheader($input, $record) {
+        return $record->columns_tree;
+    }
+    
     /**
      * Adaugare tip centralizator + coloanele implicite
      */
