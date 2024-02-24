@@ -3,9 +3,8 @@
 namespace MyDpo\Models\Customer\Contracts;
 
 use Illuminate\Database\Eloquent\Model;
-use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Models\Customer\Customer;
-use MyDpo\Rules\CustomerContract\ContractNumber;
+use MyDpo\Rules\Customer\Entities\Contract\ContractNumber;
 use MyDpo\Traits\DaysDifference;
 
 class Contract extends Model {
@@ -48,10 +47,6 @@ class Contract extends Model {
     public function customer() {
         return $this->belongsTo(Customer::class, 'customer_id');
     }
-
-    // public static function doAction($action, $input) {
-    //     return (new DoAction($action, $input, __CLASS__))->Perform();
-    // }
 
     // public function attachOrder($order) {
     //     return CustomerOrder::doAction('insert', [
