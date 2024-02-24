@@ -84,6 +84,9 @@ class Contract extends Model {
         return $contract;
     }
 
+    public static function doDelete($input, $contract) {
+        dd($input);
+    }
     public static function GetRules($action, $input) {
        
         if($action == 'delete')
