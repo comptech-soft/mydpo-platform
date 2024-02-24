@@ -50,7 +50,7 @@ class Order extends Model {
     ];
 
     protected $with = [
-        'services',
+        'services.service',
     ];
 
     function services() {

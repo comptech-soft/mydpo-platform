@@ -44,9 +44,9 @@ class OrderService extends Model {
         'deleted_by'
     ];
 
-    // public function service() {
-    //     return $this->belongsTo(Service::class, 'service_id');
-    // }
+    public function service() {
+        return $this->belongsTo(\MyDpo\Models\Livrabile\Services\Service::class, 'service_id');
+    }
 
     public function order() {
         return $this->belongsTo(Order::class, 'order_id');
