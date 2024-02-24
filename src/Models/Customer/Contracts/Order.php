@@ -49,6 +49,10 @@ class Order extends Model {
         'days_difference',
     ];
 
+    protected $withCount = [
+        'services',
+    ];
+
     function services() {
         return $this->hasMany(CustomerService::class, 'order_id');
     }
