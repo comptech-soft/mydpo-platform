@@ -8,7 +8,7 @@ use MyDpo\Models\Customer\Contracts\CustomerContract;
 class ContractNumber implements Rule {
 
     public $input = NULL;
-    public $contract = NULL;
+    public $record = NULL;
 
     public function __construct($input)
     {
@@ -24,7 +24,7 @@ class ContractNumber implements Rule {
             $q->where('id', '<>', $this->input['id']);
         }
 
-        $this->contract = $q->first();
+        $this->record = $q->first();
 
         return ! $this->record;
     }
