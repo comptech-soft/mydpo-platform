@@ -135,6 +135,7 @@ class Contract extends Model {
         {
             $order->deleteRecord();
         }
+        $this->delete();
     }
 
 }

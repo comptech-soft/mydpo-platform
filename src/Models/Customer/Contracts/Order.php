@@ -134,6 +134,11 @@ class Order extends Model {
      */
     public function deleteRecord() {
 
-        dd(__METHOD__);
+        foreach($this->services as $i => $service)
+        {
+            $service->delete();
+        }
+
+        $this->delete();
     }
 }
