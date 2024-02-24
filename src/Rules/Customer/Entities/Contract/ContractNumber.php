@@ -1,9 +1,9 @@
 <?php
 
-namespace MyDpo\Rules\CustomerContract;
+namespace MyDpo\Rules\Customer\Entities\Contract;
 
 use Illuminate\Contracts\Validation\Rule;
-use MyDpo\Models\CustomerContract;
+use MyDpo\Models\Customer\Contracts\CustomerContract;
 
 class ContractNumber implements Rule {
 
@@ -26,12 +26,7 @@ class ContractNumber implements Rule {
 
         $this->contract = $q->first();
 
-        if($this->contract)
-        {
-            return FALSE;
-        }
-        
-        return TRUE;
+        return ! $this->record;
     }
 
     public function message()

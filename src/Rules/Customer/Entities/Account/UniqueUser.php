@@ -27,12 +27,7 @@ class UniqueUser implements Rule {
 
         $this->record = $q->first();
 
-        if($this->record)
-        {
-            return FALSE;
-        }
-        
-        return TRUE;
+        return ! $this->record;
     }
 
     public function message()
