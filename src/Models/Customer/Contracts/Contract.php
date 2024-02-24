@@ -85,7 +85,12 @@ class Contract extends Model {
     }
 
     public static function doDelete($input, $contract) {
-        dd($input);
+
+        $contract->deleteOrders();
+        
+        $contract->delete();
+        
+        return $contract;
     }
     public static function GetRules($action, $input) {
        
