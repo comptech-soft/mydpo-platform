@@ -26,8 +26,8 @@ class ContracteController extends Controller {
         return Contract::getRecords($r->all());
     }
     
-    // public function doAction($action, Request $r) {
-    //     return CustomerContract::doAction($action, $r->all());
-    // }
+    public function doAction($action, Request $r) {
+        return Contract::doAction($action, $r->all());
+    }
 
 }
