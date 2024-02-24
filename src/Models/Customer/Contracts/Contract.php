@@ -49,17 +49,17 @@ class Contract extends Model {
         return $this->belongsTo(Customer::class, 'customer_id');
     }
 
-    public static function doAction($action, $input) {
-        return (new DoAction($action, $input, __CLASS__))->Perform();
-    }
+    // public static function doAction($action, $input) {
+    //     return (new DoAction($action, $input, __CLASS__))->Perform();
+    // }
 
-    public function attachOrder($order) {
-        return CustomerOrder::doAction('insert', [
-            'id' => NULL,
-            ...$order,
-            'contract_id' => $this->id,
-        ]);
-    }
+    // public function attachOrder($order) {
+    //     return CustomerOrder::doAction('insert', [
+    //         'id' => NULL,
+    //         ...$order,
+    //         'contract_id' => $this->id,
+    //     ]);
+    // }
 
     public static function doInsert($input, $contract) {
         
@@ -74,17 +74,17 @@ class Contract extends Model {
             ]
         ]);
 
-        if( array_key_exists('orders', $input) )
-        {
-            foreach($input['orders'] as $i => $order)
-            {
-                $result = $contract->attachOrder($order);
-                if( ! $result['success'] )
-                {
-                    throw new \Exception($result['message']);
-                }
-            }
-        }
+        // if( array_key_exists('orders', $input) )
+        // {
+        //     foreach($input['orders'] as $i => $order)
+        //     {
+        //         $result = $contract->attachOrder($order);
+        //         if( ! $result['success'] )
+        //         {
+        //             throw new \Exception($result['message']);
+        //         }
+        //     }
+        // }
 
         return $contract;
     }
