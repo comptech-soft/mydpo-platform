@@ -45,9 +45,9 @@ class OrderService extends Model {
     ];
 
     public function service() {
-        return $this->belongsTo(\MyDpo\Models\Livrabile\Services\Service::class, 'service_id');
+        return $this->belongsTo(\MyDpo\Models\Livrabile\Contracts\Service::class, 'service_id');
     }
-
+                                 
     public function order() {
         return $this->belongsTo(Order::class, 'order_id');
     }
