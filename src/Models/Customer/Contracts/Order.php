@@ -49,7 +49,7 @@ class Order extends Model {
         'days_difference',
     ];
 
-    protected $withCount = [
+    protected $with = [
         'services',
     ];
 
