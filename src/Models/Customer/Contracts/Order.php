@@ -128,4 +128,12 @@ class Order extends Model {
         ];
         return $result;
     }
+
+    /**
+     * Stergerea unei comenzi
+     */
+    public function deleteRecord() {
+
+        dd(__METHOD__);
+    }
 }

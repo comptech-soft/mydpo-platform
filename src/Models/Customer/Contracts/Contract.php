@@ -127,4 +127,14 @@ class Contract extends Model {
 
     }
 
+    /**
+     * Stergerea comenzilor asociate unui contract
+     */
+    public function deleteOrders() {
+        foreach($this->orders as $i => $order)
+        {
+            $order->deleteRecord();
+        }
+    }
+
 }
