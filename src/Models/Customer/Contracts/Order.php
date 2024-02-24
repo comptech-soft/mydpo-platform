@@ -54,7 +54,7 @@ class Order extends Model {
     ];
 
     function services() {
-        return $this->hasMany(CustomerService::class, 'order_id');
+        return $this->hasMany(OrderService::class, 'order_id');
     }
     
     public function customer() {
