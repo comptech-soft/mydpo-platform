@@ -12,6 +12,8 @@ use MyDpo\Traits\Itemable;
 
 use MyDpo\Models\Customer\Accounts\Account;
 use MyDpo\Models\Customer\Planuriconformare\Planconformare;
+use MyDpo\Models\Customer\Registre\Registru;
+use MyDpo\Models\Customer\Centralizatoare\Centralizator;
 
 class Department extends Model {
 
@@ -107,6 +109,8 @@ class Department extends Model {
 
         Account::where('department_id', $record->id)->update(['department_id' => NULL]);
         Planconformare::where('department_id', $record->id)->update(['department_id' => NULL]);
+        Registru::where('department_id', $record->id)->update(['department_id' => NULL]);
+        Registru::where('department_id', $record->id)->update(['department_id' => NULL]);
 
         $record->delete();
 
