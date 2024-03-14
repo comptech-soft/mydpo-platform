@@ -41,7 +41,7 @@ class CustomerFolderPermission extends Model {
      */
     public static function UpdatePermissions($input) {
         
-        self::where('customer_id',$input['customer_id'])
+        self::where('customer_id', $input['customer_id'])
             ->where('user_id',  $input['user_id'])
             ->update([
                 'has_access' => 0,
@@ -57,11 +57,11 @@ class CustomerFolderPermission extends Model {
             self::MakeAccess($folder_id, $input['customer_id'], $input['user_id']);
         }
 
-        dd($input);
+        dd($input['user_id'], \Auth::user()->id);
        
         event(new \MyDpo\Events\Customer\Livrabile\Documents\FolderPermissions('folder.permissions', [
             'foldere' => 'bbb',
-            'customers' => 'ccc', 
+            'customers' => [$input['customer_id'] . '#' . $input['user_id']], 
             'link' => $input['pathname'],            
         ]));
 
