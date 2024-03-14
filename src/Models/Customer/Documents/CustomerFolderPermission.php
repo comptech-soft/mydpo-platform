@@ -57,7 +57,7 @@ class CustomerFolderPermission extends Model {
             self::MakeAccess($folder_id, $input['customer_id'], $input['user_id']);
         }
 
-        if( true ||  (count($input['folders_ids']) > 0) && (\Auth::user()->id != $input['user_id']) )
+        if( (count($input['folders_ids']) > 0) && (\Auth::user()->id != $input['user_id']) )
         {
                 // 
             $folders = CustomerFolder::whereIn('id', $input['folders_ids'])->get()->map( function($folder){

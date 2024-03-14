@@ -66,6 +66,13 @@ trait Centralizatorable {
         return $record;
     }
 
+    /**
+     * Editarea unui document
+     */
+    public static function doUpdate($input, $record) {
+        dd($input, $record->toArray());
+    }
+
     public static function SendNotification($input, $tip, $record) {
 
         $notification_type_name = self::GetNotificationTypeName($input);
@@ -81,15 +88,6 @@ trait Centralizatorable {
             'customers' => $receivers,
             'link' => $link,
         ]));
-
-
-
-        // event(new \MyDpo\Events\Customer\Livrabile\Centralizatorable\InsertDocument($notification_type_name, [
-        //     // 'nume_fisier' => $record->file_original_name,
-        //     // 'nume_folder' => $record->folder->name,
-        //     // 'customers' => self::CreateUploadReceivers($input['customer_id'], $input['folder_id']), 
-        //     // 'link' => '/' . $record->folder->page_link . '/' . $input['customer_id'],
-        // ]));
     }
 
     public static function GetReceivers($customer_id) {
@@ -105,7 +103,7 @@ trait Centralizatorable {
     }
 
     public static function GetNotificationLink($input, $tip) {
-         /**
+        /**
          * Link
          * 
          * http://mydpo-admin.local/registre-list/registre/2/80#/
@@ -150,10 +148,8 @@ trait Centralizatorable {
      * Stergerea unui document
      */
     public static function doDelete($input, $record) {
-
         $record->DeleteRows();
         $record->delete();
-        
         return $record;
     }
     

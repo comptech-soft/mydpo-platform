@@ -3,12 +3,10 @@
 namespace MyDpo\Models\Customer\Registre;
 
 use Illuminate\Database\Eloquent\Model;
-
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 use MyDpo\Traits\Numberable;
 use MyDpo\Traits\Customer\Centralizatoare\Centralizatorable;
-
 use MyDpo\Models\Livrabile\Registre\TipRegistru;
 use MyDpo\Models\Customer\Departments\Department;
 
