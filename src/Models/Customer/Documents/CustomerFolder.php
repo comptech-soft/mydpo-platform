@@ -3,19 +3,12 @@
 namespace MyDpo\Models\Customer\Documents;
 
 use Kalnoy\Nestedset\NodeTrait;
-
 use MyDpo\Models\Authentication\UserSetting;
 use MyDpo\Models\Customer\Customer;
 use MyDpo\Models\Authentication\User;
-
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
-
 use MyDpo\Rules\Customer\Livrabile\Documentsable\Folders\UniqueName;
-
-// use MyDpo\Performers\CustomerFolder\GetAncestors;
-// use MyDpo\Performers\CustomerFolder\GetSummary;
-// use MyDpo\Performers\CustomerFolder\SaveFoldersAccess;
 
 class CustomerFolder extends Folder {
 
@@ -47,14 +40,6 @@ class CustomerFolder extends Folder {
     function creator() {
         return $this->belongsTo(User::class, 'created_by')->select(['id', 'last_name', 'first_name', 'email', 'avatar']);
     }
-
-    // public static function getAncestors($input) {
-    //     return (new GetAncestors($input))->Perform();
-    // }
-
-    // public static function getSummary($input) {
-    //     return (new GetSummary($input))->Perform();
-    // }
 
     public static function doPermission($input, $action) {
         return CustomerFolderPermission::UpdatePermissions($input);

@@ -57,10 +57,10 @@ class CustomerFolderPermission extends Model {
             self::MakeAccess($folder_id, $input['customer_id'], $input['user_id']);
         }
 
+        dd($input);
        
         event(new \MyDpo\Events\Customer\Livrabile\Documents\FolderPermissions('folder.permissions', [
-            'nume_fisier' => 'aaa',
-            'nume_folder' => 'bbb',
+            'foldere' => 'bbb',
             'customers' => 'ccc', 
             'link' => $input['pathname'],            
         ]));
