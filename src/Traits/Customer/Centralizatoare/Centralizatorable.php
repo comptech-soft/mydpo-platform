@@ -70,7 +70,21 @@ trait Centralizatorable {
      * Editarea unui document
      */
     public static function doUpdate($input, $record) {
-        dd($input, $record->toArray());
+        $record->upate($input);
+
+        /**
+         * Se trimite notificare
+         */
+        $tip = self::GetTip($input);
+
+        dd($tip);
+        
+        if($input['visibility'] == 1)
+        {
+            self::SendNotification($input, $tip, $record);
+        }
+
+        return $record;
     }
 
     public static function SendNotification($input, $tip, $record) {
