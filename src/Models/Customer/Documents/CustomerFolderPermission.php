@@ -36,8 +36,20 @@ class CustomerFolderPermission extends Model {
         return $this->belongsTo(Folder::class, 'folder_id');
     }
 
+    /**
+     * Setarea permisiunilor pe un folder
+     */
     public static function UpdatePermissions($input) {
         
+        dd($input);
+        
+        // event(new \MyDpo\Events\Customer\Livrabile\Documents\UploadFile('upload.file', [
+        //     'nume_fisier' => $record->file_original_name,
+        //     'nume_folder' => $record->folder->name,
+        //     'customers' => self::CreateUploadReceivers($record->customer_id, $record->folder_id), 
+        //     'link' => '/' . $record->folder->page_link . '/' . $input['customer_id'] . '?folder_id=' . $record->folder_id,
+        // ]));
+
         self::where('customer_id',$input['customer_id'])
             ->where('user_id',  $input['user_id'])
             ->update([
