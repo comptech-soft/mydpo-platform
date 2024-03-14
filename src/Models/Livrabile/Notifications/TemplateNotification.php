@@ -49,8 +49,6 @@ class TemplateNotification extends Model {
      */
     public static function doSend($input, $record) {
 
-        dd(__METHOD__, $input);
-        
         if(array_key_exists('customers', $input))
         {
             /**
