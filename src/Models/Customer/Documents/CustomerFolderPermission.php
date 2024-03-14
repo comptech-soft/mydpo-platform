@@ -41,15 +41,6 @@ class CustomerFolderPermission extends Model {
      */
     public static function UpdatePermissions($input) {
         
-        dd($input);
-        
-        // event(new \MyDpo\Events\Customer\Livrabile\Documents\UploadFile('upload.file', [
-        //     'nume_fisier' => $record->file_original_name,
-        //     'nume_folder' => $record->folder->name,
-        //     'customers' => self::CreateUploadReceivers($record->customer_id, $record->folder_id), 
-        //     'link' => '/' . $record->folder->page_link . '/' . $input['customer_id'] . '?folder_id=' . $record->folder_id,
-        // ]));
-
         self::where('customer_id',$input['customer_id'])
             ->where('user_id',  $input['user_id'])
             ->update([
@@ -65,6 +56,16 @@ class CustomerFolderPermission extends Model {
         {
             self::MakeAccess($folder_id, $input['customer_id'], $input['user_id']);
         }
+
+       
+        event(new \MyDpo\Events\Customer\Livrabile\Documents\FolderPermissions('folder.permissions', [
+            'nume_fisier' => 'aaa',
+            'nume_folder' => 'bbb',
+            'customers' => 'ccc', 
+            'link' => 'ddd', 
+            
+            // '/' . $record->folder->page_link . '/' . $input['customer_id'] . '?folder_id=' . $record->folder_id,
+        ]));
 
     }
 
