@@ -57,13 +57,21 @@ class CustomerFolderPermission extends Model {
             self::MakeAccess($folder_id, $input['customer_id'], $input['user_id']);
         }
 
-        dd($input['user_id'], \Auth::user()->id);
-       
-        event(new \MyDpo\Events\Customer\Livrabile\Documents\FolderPermissions('folder.permissions', [
-            'foldere' => 'bbb',
-            'customers' => [$input['customer_id'] . '#' . $input['user_id']], 
-            'link' => $input['pathname'],            
-        ]));
+        if( true ||  (count($input['folders_ids']) > 0) && (\Auth::user()->id != $input['user_id']) )
+        {
+                // 
+            $folders = CustomerFolder::whereIn('id', $input['folders_ids'])->get()->map( function($folder){
+                return $folder->name;
+            })->implode(', ');
+
+
+
+            event(new \MyDpo\Events\Customer\Livrabile\Documents\FolderPermissions('folder.permissions', [
+                'foldere' => $folders,
+                'customers' => [$input['customer_id'] . '#' . $input['user_id']], 
+                'link' => $input['pathname'],            
+            ]));
+        }
 
     }
 
