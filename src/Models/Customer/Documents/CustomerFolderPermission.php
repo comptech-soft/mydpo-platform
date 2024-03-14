@@ -62,9 +62,7 @@ class CustomerFolderPermission extends Model {
             'nume_fisier' => 'aaa',
             'nume_folder' => 'bbb',
             'customers' => 'ccc', 
-            'link' => 'ddd', 
-            
-            // '/' . $record->folder->page_link . '/' . $input['customer_id'] . '?folder_id=' . $record->folder_id,
+            'link' => $input['pathname'],            
         ]));
 
     }

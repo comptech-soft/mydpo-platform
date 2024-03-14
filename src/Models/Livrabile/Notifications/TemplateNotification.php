@@ -48,6 +48,9 @@ class TemplateNotification extends Model {
      *      customers = un array [6#123, 6#434, ....], unde structura este customer_id#user_id
      */
     public static function doSend($input, $record) {
+
+        dd(__METHOD__, $input);
+        
         if(array_key_exists('customers', $input))
         {
             /**
