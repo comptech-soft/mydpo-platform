@@ -13,6 +13,7 @@ use MyDpo\Models\Customer\Documents\CustomerFolder;
 use MyDpo\Models\UserCustomer;
 use MyDpo\Performers\Customer\GetCustomersByIds;
 use MyDpo\Models\Customer\Dashboard\Item;
+use MyDpo\Models\Customer\Documents\Folder;
 
 use MyDpo\Traits\Itemable;
 
@@ -165,6 +166,11 @@ class Customer_base extends Model {
         if($action == 'insert')
         {
             $payload['record']->SetDefaultDashboardPermissions();
+
+            /**
+             * La crearea customer sa se creeze automat folderele default
+             */
+            Folder::CreateDefaultFolders($payload['record']->id);
         }
     }
     
