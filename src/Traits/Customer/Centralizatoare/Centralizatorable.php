@@ -77,8 +77,6 @@ trait Centralizatorable {
          */
         $tip = self::GetTip($input);
 
-        dd($tip);
-
         if($input['visibility'] == 1)
         {
             self::SendNotification($input, $tip, $record);
