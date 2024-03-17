@@ -10,6 +10,11 @@ use MyDpo\Http\Requests\Auth\LoginRequest;
 use MyDpo\Helpers\Response;
 
 class AuthenticatedSessionController extends Controller {
+
+    public function redirectLogin() {
+        return redirect('connect');
+    }
+
     /**
      * Display the login view.
      */
