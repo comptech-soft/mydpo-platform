@@ -91,6 +91,8 @@ trait Centralizatorable {
 
         $link = self::GetNotificationLink($input, $tip);
 
+        dd($tip);
+        
         $receivers = self::GetReceivers($input['customer_id']);
 
         event(new \MyDpo\Events\Customer\Livrabile\Centralizatorable\InsertDocument($notification_type_name, [
@@ -104,7 +106,15 @@ trait Centralizatorable {
 
     public static function GetReceivers($customer_id) {
 
-        $sql = "SELECT id, user_id FROM `customers-persons` WHERE (customer_id = " . $customer_id . ") AND (user_id <> " . \Auth::user()->id . ")";
+        $sql = "
+            SELECT 
+                id, user_id 
+            FROM `customers-persons` 
+            WHERE 
+                (role_id = 4) AND
+                (customer_id = " . $customer_id . ") AND 
+                (user_id <> " . \Auth::user()->id . ")"
+        ;
     
         $accounts = collect(\DB::select($sql));
 
@@ -151,9 +161,7 @@ trait Centralizatorable {
      * Duplicarea unui element
      */
     public static function doDuplicate($input, $record) {
-
         return self::Duplicate($input);
-
     }
 
     /**
@@ -169,14 +177,11 @@ trait Centralizatorable {
      * Generarea inregistrarilor
      */
     public static function GetQuery() {
-
         $q = self::query();
-
         if(config('app.platform') == 'b2b')
         {
             $q = $q->where('visibility', 1);
         }
-        
         return $q;
     }
 
