@@ -104,7 +104,7 @@ trait Centralizatorable {
 
     public static function GetReceivers($customer_id) {
 
-        $sql = "SELECT id, user_id FROM `customers-persons` WHERE customer_id = " . $customer_id;
+        $sql = "SELECT id, user_id FROM `customers-persons` WHERE (customer_id = " . $customer_id . ") AND (user_id <> " . \Auth::user()->id . ")";
     
         $accounts = collect(\DB::select($sql));
 
