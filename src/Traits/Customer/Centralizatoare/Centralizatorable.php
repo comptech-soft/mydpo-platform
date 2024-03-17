@@ -90,10 +90,8 @@ trait Centralizatorable {
         $notification_type_name = self::GetNotificationTypeName($input);
 
         $link = self::GetNotificationLink($input, $tip);
-
-        dd($tip);
-        
-        $receivers = self::GetReceivers($input['customer_id']);
+       
+        $receivers = self::GetReceivers($input['customer_id'], $notification_type_name, $record);
 
         event(new \MyDpo\Events\Customer\Livrabile\Centralizatorable\InsertDocument($notification_type_name, [
             'tip' => $tip->name,
@@ -104,22 +102,57 @@ trait Centralizatorable {
         ]));
     }
 
-    public static function GetReceivers($customer_id) {
+    public static function GetReceivers($customer_id, $notification_type_name, $record) {
 
         $sql = "
             SELECT 
-                id, user_id 
+                user_id 
             FROM `customers-persons` 
             WHERE 
                 (role_id = 4) AND
                 (customer_id = " . $customer_id . ") AND 
-                (user_id <> " . \Auth::user()->id . ")"
-        ;
-    
-        $accounts = collect(\DB::select($sql));
+                (user_id <> " . \Auth::user()->id . ")
+        ";
 
-        return $accounts->map(function($item) use ($customer_id) {
-            return $customer_id . '#' . $item->user_id;
+        $accounts_masters = \DB::select($sql);
+
+        if($notification_type_name == 'centralizator.trimitere')
+        {
+            $sql = "
+                SELECT
+                    user_id
+                FROM `customers-centralizatoare-access`
+                WHERE
+                    (customer_id = " . $customer_id . ") AND 
+                    (customer_centralizator_id = " . $record->id . ")
+            ";
+        }
+        else
+        {
+            $sql = "
+                SELECT
+                    user_id
+                FROM `customers-registers-users`
+                WHERE
+                    (customer_id = " . $customer_id . ") AND 
+                    (customer_registru_id = " . $record->id . ")
+            ";
+        }    
+        
+        $accounts_users = \DB::select($sql);
+
+        $accounts = [];
+        
+        foreach([...$accounts_masters, ...$accounts_users] as $i => $item)
+        {
+            if(! in_array($item->user_id, $accounts) )
+            {
+                $accounts[] = $item->user_id;
+            }
+        }
+
+        return collect($accounts)->map(function($item) use ($customer_id) {
+            return $customer_id . '#' . $item;
         })->toArray();
 
     }
