@@ -138,12 +138,23 @@ trait Centralizatorable {
                     (customer_registru_id = " . $record->id . ")
             ";
         }    
-        
+
         $accounts_users = \DB::select($sql);
+
+        $sql = "
+            SELECT
+                id as user_id
+            FROM `users`
+            WHERE
+                (type = 'admin') AND 
+                (id <> " . \Auth::user()->id . ")
+        ";
+        
+        $admins = \DB::select($sql);
 
         $accounts = [];
         
-        foreach([...$accounts_masters, ...$accounts_users] as $i => $item)
+        foreach([...$accounts_masters, ...$accounts_users, ...$admins] as $i => $item)
         {
             if(! in_array($item->user_id, $accounts) )
             {
