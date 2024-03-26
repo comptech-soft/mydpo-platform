@@ -86,8 +86,31 @@ trait Centralizatorable {
     }
 
     public static function SendNotificationToUsers($input) {
+        
+        $notification_type_name = $input['model'] != 'centralizatoare' ? 'registru.trimitere' : 'centralizator.trimitere';
 
-        dd($input);
+        if($input['model'] == 'centralizatoare' )
+        {
+            $tip = self::GetTip([
+                'centralizator_id' => $input['tip_id']
+            ]);
+        }
+        else
+        {
+            $tip = self::GetTip([
+                'register_id' => $input['tip_id']
+            ]);
+        }
+
+        $link = self::GetNotificationLink($input, $tip);
+
+        $receivers = [];
+        foreach($input['user_ids'] as $i => $user_id)
+        {
+            $receivers[] = ($input['customer_id'] . '#' . $user_id);
+        }
+
+        dd($notification_type_name, $link, $receivers, $input);
     }
 
     public static function SendNotification($input, $tip, $record) {

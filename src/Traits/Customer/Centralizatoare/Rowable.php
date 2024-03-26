@@ -254,7 +254,7 @@ trait Rowable {
                     'tip_id' => $input['tip_id'],
                     'document_id' => $input['document_id'],
                     'user_ids' => array_keys($users),
-                    'customer_id' => $input['document_id'],
+                    'customer_id' => $input['customer_id'],
                 ]); 
             }
         }
