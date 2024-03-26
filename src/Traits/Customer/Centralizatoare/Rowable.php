@@ -246,6 +246,11 @@ trait Rowable {
                     'departamente' => $departamente,                    
                 ]);
             }
+
+            if(count($users) > 0)
+            {
+                call_user_func([self::$myclasses['document'], 'SendNotificationToUsers'], $users); 
+            }
         }
     }
 
