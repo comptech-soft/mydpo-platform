@@ -85,6 +85,11 @@ trait Centralizatorable {
         return $record;
     }
 
+    public static function SendNotificationToUsers($users) {
+
+        dd($users);
+    }
+
     public static function SendNotification($input, $tip, $record) {
 
         $notification_type_name = self::GetNotificationTypeName($input);

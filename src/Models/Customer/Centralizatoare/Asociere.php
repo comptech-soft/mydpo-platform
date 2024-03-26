@@ -38,7 +38,6 @@ class Asociere extends Model {
     }
 
     public static function UpdateOrCreateAsociere($input) {
-
         $input['id'] = NULL;
         unset($input['id']);
 
