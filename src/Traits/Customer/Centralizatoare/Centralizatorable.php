@@ -110,7 +110,15 @@ trait Centralizatorable {
             $receivers[] = ($input['customer_id'] . '#' . $user_id);
         }
 
-        dd($notification_type_name, $link, $receivers, $input);
+        $record = self::find($input['document_id']);
+        
+        event(new \MyDpo\Events\Customer\Livrabile\Centralizatorable\InsertDocument($notification_type_name, [
+            'tip' => $tip->name,
+            'numar' => $record->number,
+            'data' => \Carbon\Carbon::createFromFormat('Y-m-d', $record->date)->format('d.m.Y'),
+            'customers' => $receivers,
+            'link' => $link,
+        ]));
     }
 
     public static function SendNotification($input, $tip, $record) {
