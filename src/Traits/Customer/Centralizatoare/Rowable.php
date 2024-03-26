@@ -249,7 +249,13 @@ trait Rowable {
 
             if(count($users) > 0)
             {
-                call_user_func([self::$myclasses['document'], 'SendNotificationToUsers'], $users); 
+                call_user_func([self::$myclasses['document'], 'SendNotificationToUsers'], [
+                    'model' => $input['document_id'],
+                    'tip_id' => $input['tip_id'],
+                    'dcument_id' => $input['document_id'],
+                    'user_ids' => array_keys($users),
+                    'customer_id' => $input['document_id'],
+                ]); 
             }
         }
     }

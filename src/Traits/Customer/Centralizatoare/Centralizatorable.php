@@ -85,9 +85,9 @@ trait Centralizatorable {
         return $record;
     }
 
-    public static function SendNotificationToUsers($users) {
+    public static function SendNotificationToUsers($input) {
 
-        dd($users);
+        dd($input);
     }
 
     public static function SendNotification($input, $tip, $record) {
