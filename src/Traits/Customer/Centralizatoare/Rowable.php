@@ -205,20 +205,20 @@ trait Rowable {
      */
     public static function doAccountaccess($input, $record) {
         
+        $fields = [
+            'centralizatoare' => [
+                'customer_centralizator_id', 
+                'centralizator_id'
+            ],
+            'registre' => [
+                'customer_registru_id', 'register_id'
+            ],
+        ];
+
+        self::$myclasses['access']::where($fields[$input['model']][0], $input['document_id'])->delete();
+
         if(array_key_exists('departments', $input) && !! count($input['departments']) )
         {
-            $fields = [
-                'centralizatoare' => [
-                    'customer_centralizator_id', 
-                    'centralizator_id'
-                ],
-                'registre' => [
-                    'customer_registru_id', 'register_id'
-                ],
-            ];
-
-            self::$myclasses['access']::where($fields[$input['model']][0], $input['document_id'])->delete();
-
             $users = [];
 
             foreach($input['departments'] as $i => $item)
