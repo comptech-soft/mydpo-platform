@@ -115,14 +115,59 @@ class Planconformare extends Model {
 
         if($record->visibility == 1)
         {
+            $receivers = self::GetReceivers($record->customer_id);
+
+            dd($receivers);
+
             event(new \MyDpo\Events\Customer\Livrabile\Planuriconformare\Visibility('planconformare.visibility', [
-                'plan' => $record,
+                'numar' => $record->number,
+                'year' => $record->year,
                 'customers' => [$record->customer_id . '#' . 1], 
-                'link' => 'customer-plan-conformare-details/' . $record->customer_id . '/' . $record->id,            
+                'link' => '/customer-plan-conformare-details/' . $record->customer_id . '/' . $record->id,            
             ]));
         }
         
         return self::find($record->id);
+    }
+
+    public static function GetReceivers($customer_id) {
+
+        $sql = "
+            SELECT 
+                user_id 
+            FROM `customers-persons` 
+            WHERE 
+                (customer_id = " . $customer_id . ") AND 
+                (user_id <> " . \Auth::user()->id . ")
+        ";
+
+        $accounts = \DB::select($sql);
+       
+        $sql = "
+            SELECT
+                id as user_id
+            FROM `users`
+            WHERE
+                (type = 'admin') AND 
+                (id <> " . \Auth::user()->id . ")
+        ";
+        
+        $admins = \DB::select($sql);
+
+        $accounts = [];
+        
+        foreach([...$accounts, ...$admins] as $i => $item)
+        {
+            if(! in_array($item->user_id, $accounts) )
+            {
+                $accounts[] = $item->user_id;
+            }
+        }
+
+        return collect($accounts)->map(function($item) use ($customer_id) {
+            return $customer_id . '#' . $item;
+        })->toArray();
+
     }
     
     public static function doDuplicate($input, $record) {
