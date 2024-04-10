@@ -115,11 +115,10 @@ class Planconformare extends Model {
 
         if($record->visibility == 1)
         {
-            dd($record);
             event(new \MyDpo\Events\Customer\Livrabile\Planuriconformare\Visibility('planconformare.visibility', [
                 'plan' => $record,
-                'customers' => [$input['customer_id'] . '#' . $input['user_id']], 
-                'link' => $input['pathname'],            
+                'customers' => [$record->customer_id . '#' . 1], 
+                'link' => 'customer-plan-conformare-details/' . $record->customer_id . '/' . $record->id,            
             ]));
         }
         
