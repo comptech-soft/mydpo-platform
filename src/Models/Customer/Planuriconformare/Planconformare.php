@@ -106,6 +106,18 @@ class Planconformare extends Model {
 
         $record->CreateRows();
 
+        if($record->visibility == 1)
+        {
+            $receivers = self::GetReceivers($record->customer_id);
+
+            event(new \MyDpo\Events\Customer\Livrabile\Planuriconformare\Visibility('planconformare.visibility', [
+                'numar' => $record->number,
+                'year' => $record->year,
+                'customers' => $receivers, 
+                'link' => '/customer-plan-conformare-details/' . $record->customer_id . '/' . $record->id,            
+            ]));
+        }
+        
         return self::find($record->id);
     }
 
