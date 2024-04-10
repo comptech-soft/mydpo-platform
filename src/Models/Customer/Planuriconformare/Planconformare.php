@@ -117,12 +117,10 @@ class Planconformare extends Model {
         {
             $receivers = self::GetReceivers($record->customer_id);
 
-            dd($receivers);
-
             event(new \MyDpo\Events\Customer\Livrabile\Planuriconformare\Visibility('planconformare.visibility', [
                 'numar' => $record->number,
                 'year' => $record->year,
-                'customers' => [$record->customer_id . '#' . 1], 
+                'customers' => $receivers, 
                 'link' => '/customer-plan-conformare-details/' . $record->customer_id . '/' . $record->id,            
             ]));
         }
