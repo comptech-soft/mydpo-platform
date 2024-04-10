@@ -69,7 +69,6 @@ class CustomerFolderPermission extends Model {
                 'link' => $input['pathname'],            
             ]));
         }
-
     }
 
     public static function MakeAccess($folder_id, $customer_id, $user_id) {

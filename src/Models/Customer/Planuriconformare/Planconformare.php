@@ -109,6 +109,23 @@ class Planconformare extends Model {
         return self::find($record->id);
     }
 
+    public static function doUpdate($input, $record) {
+
+        $record->update($input);
+
+        if($record->visibility == 1)
+        {
+            dd($record);
+            event(new \MyDpo\Events\Customer\Livrabile\Planuriconformare\Visibility('planconformare.visibility', [
+                'plan' => $record,
+                'customers' => [$input['customer_id'] . '#' . $input['user_id']], 
+                'link' => $input['pathname'],            
+            ]));
+        }
+        
+        return self::find($record->id);
+    }
+    
     public static function doDuplicate($input, $record) {
     }
 
