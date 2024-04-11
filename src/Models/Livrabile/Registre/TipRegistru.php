@@ -185,4 +185,8 @@ class TipRegistru extends Model {
         return \DB::select($sql);
     }
 
+    public function RowsCountByUser($customer_id) {
+        dd($customer_id);
+    }
+
 }

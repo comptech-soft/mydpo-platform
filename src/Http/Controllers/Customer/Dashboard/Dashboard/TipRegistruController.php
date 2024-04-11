@@ -31,7 +31,7 @@ class TipRegistruController extends Controller {
             return redirect('registre-dashboard/' . $page . '/' . $customer_id);
         }
 
-        dd($tip->toArray());
+        $tip->RowsCountByUser($customer_id);
 
         return Index::View(
             styles: ['css/app.css'],
