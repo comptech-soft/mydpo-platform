@@ -202,5 +202,10 @@ class Registru extends Model {
             $row->delete();
         }
     }
+
+    public function RowsCountByUser($customer_id, $user_id) {
+
+        dd($customer_id, $user_id, $this->id);
+    }
     
 }

@@ -183,12 +183,12 @@ class TipRegistru extends Model {
     }
 
     public function RowsCountByUser($customer_id, $user_id) {
-
         $registre = Registru::where('customer_id', $customer_id)->where('register_id', $this->id)->get();
 
-        dd($user_id, $registre);
-
-        dd($customer_id, $this->id);
+        foreach($registre as $i => $registru)
+        {
+            $registru->RowsCountByUser($customer_id, $user_id);
+        }
     }
 
 }
