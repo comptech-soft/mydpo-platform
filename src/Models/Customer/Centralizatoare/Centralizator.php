@@ -218,4 +218,64 @@ class Centralizator extends Model {
         }
     }
 
+    public function RowsCountByUser($customer_id, $user) {
+
+        $cnt = $this->rows->count();
+
+        if($user->role->id == 5)
+        {
+            if($cnt > 0)
+            {
+                $number_of_rows = $this->CountRows($customer_id, $user);
+            }
+            else
+            {
+                $number_of_rows = $cnt;
+            }
+        }
+        else
+        {
+            $number_of_rows = $cnt;
+        }
+
+        $rows_counter = !! $this->rows_counter ? $this->rows_counter : [];
+        $rows_counter = [
+            ...$rows_counter,
+            $user->id => $number_of_rows,
+        ];
+
+        $this->rows_counter = $rows_counter;
+        $this->save();
+
+    }
+
+    public function CountRows($customer_id, $user) {
+
+        dd($customer_id, $user);
+        
+        $rows = ! $this->visibility_column_id ? $this->rows : $this->rows()->where('visibility', 1)->get();
+
+        $access = Access::where('user_id', $user->id)->where('customer_id', $customer_id)->where('customer_registru_id', $this->id)->first();
+
+        if( ! $access )
+        {
+            return 0;
+        }
+
+        $departamente = !! $access->departamente ? $access->departamente : [];
+
+        
+        $cnt = 0;
+
+        foreach($rows as $i => $row)
+        {
+            if(in_array($row->department_id, $departamente))
+            {
+                $cnt++;
+            }
+        }
+
+        return $cnt;
+    }
+
 }
