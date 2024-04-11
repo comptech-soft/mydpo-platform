@@ -28,6 +28,8 @@ class TipCentralizatorController extends Controller {
             return redirect('centralizatoare-dashboard/' . $page . '/' . $customer_id);
         }
 
+        $tip->RowsCountByUser($customer_id, \Auth::user());
+        
         return Index::View(
             styles: ['css/app.css'],
             scripts: ['apps/customer/customers-centralizatoare-list/index.js'],
