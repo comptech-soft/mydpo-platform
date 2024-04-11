@@ -203,9 +203,24 @@ class Registru extends Model {
         }
     }
 
-    public function RowsCountByUser($customer_id, $user_id) {
+    public function RowsCountByUser($customer_id, $user) {
 
-        dd($customer_id, $user_id, $this->id);
+        if($this->rows->count())
+        {
+
+            dd($user->toArray());
+            
+            $rows_counter = !! $this->rows_counter ? $this->rows_counter : [];
+
+            $rows_counter = [
+                ...$rows_counter,
+                $user->id => 85,
+            ];
+
+            $this->rows_counter = $rows_counter;
+            $this->save();
+        }
+
     }
     
 }
