@@ -8,11 +8,10 @@ use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 use MyDpo\Traits\Numberable;
 use MyDpo\Traits\Customer\Centralizatoare\Centralizatorable;
-
 use MyDpo\Models\Livrabile\Centralizatoare\TipCentralizator;
 use MyDpo\Models\Customer\Departments\Department;
 use MyDpo\Models\Customer\Customer;
-// 
+use MyDpo\Models\Customer\Centralizatoare\Access;
 // use MyDpo\Traits\Exportable;
 // use MyDpo\Traits\Importable;
 
@@ -251,11 +250,9 @@ class Centralizator extends Model {
 
     public function CountRows($customer_id, $user) {
 
-        dd($customer_id, $user);
-        
         $rows = ! $this->visibility_column_id ? $this->rows : $this->rows()->where('visibility', 1)->get();
 
-        $access = Access::where('user_id', $user->id)->where('customer_id', $customer_id)->where('customer_registru_id', $this->id)->first();
+        $access = Access::where('user_id', $user->id)->where('customer_id', $customer_id)->where('customer_centralizator_id', $this->id)->first();
 
         if( ! $access )
         {
@@ -263,7 +260,6 @@ class Centralizator extends Model {
         }
 
         $departamente = !! $access->departamente ? $access->departamente : [];
-
         
         $cnt = 0;
 
