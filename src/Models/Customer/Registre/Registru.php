@@ -18,6 +18,7 @@ class Registru extends Model {
 
     protected $casts = [
         'props' => 'json',
+        'rows_counter' => 'json',
         'columns' => 'json',
         'register_id' => 'integer',
         'customer_id' => 'integer',

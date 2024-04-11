@@ -31,6 +31,7 @@ class Centralizator extends Model {
 
     protected $casts = [
         'props' => 'json',
+        'rows_counter' => 'json',
         'current_columns' => 'json',
         'columns_tree' => 'json',
         'columns_items' => 'json',
