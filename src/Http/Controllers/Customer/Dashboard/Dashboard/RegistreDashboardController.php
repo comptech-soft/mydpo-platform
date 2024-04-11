@@ -11,6 +11,9 @@ use MyDpo\Models\Customer\Registre\Asociere;
 
 class RegistreDashboardController extends Controller {
     
+    /**
+     * Dashboard registre: lista categoriilor de registre
+     */
     public function index($page, $customer_id, Request $r) {
         
         if(! ($customer = Customer::find($customer_id)) )

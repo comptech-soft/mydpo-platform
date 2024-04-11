@@ -11,6 +11,9 @@ use MyDpo\Models\Customer\Registre\Registru;
 
 class TipRegistruController extends Controller {
     
+    /**
+     * Lista cu registrele de un anumit tip
+     */
     public function index($page, $customer_id, $tip_id, Request $r) {
 
         if( ! ($customer = Customer::find($customer_id)) )
@@ -27,6 +30,8 @@ class TipRegistruController extends Controller {
         {
             return redirect('registre-dashboard/' . $page . '/' . $customer_id);
         }
+
+        dd($tip->toArray());
 
         return Index::View(
             styles: ['css/app.css'],
