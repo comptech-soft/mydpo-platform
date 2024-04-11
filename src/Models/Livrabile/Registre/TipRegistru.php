@@ -3,16 +3,13 @@
 namespace MyDpo\Models\Livrabile\Registre;
 
 use Illuminate\Database\Eloquent\Model;
-
 use MyDpo\Models\Livrabile\Categories\Category;
-
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 use MyDpo\Traits\Admin\Livrabile\Tipuri\Centralizatorable;
-
 use MyDpo\Scopes\NotdeletedScope;
-
 use MyDpo\Rules\Registru\UniqueName;
+use MyDpo\Models\Customer\Registre\Registru;
 
 class TipRegistru extends Model {
 
@@ -185,8 +182,13 @@ class TipRegistru extends Model {
         return \DB::select($sql);
     }
 
-    public function RowsCountByUser($customer_id) {
-        dd($customer_id);
+    public function RowsCountByUser($customer_id, $user_id) {
+
+        $registre = Registru::where('customer_id', $customer_id)->where('register_id', $this->id)->get();
+
+        dd($user_id, $registre);
+
+        dd($customer_id, $this->id);
     }
 
 }
