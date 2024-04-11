@@ -9,6 +9,7 @@ use MyDpo\Traits\Numberable;
 use MyDpo\Traits\Customer\Centralizatoare\Centralizatorable;
 use MyDpo\Models\Livrabile\Registre\TipRegistru;
 use MyDpo\Models\Customer\Departments\Department;
+use MyDpo\Models\Customer\Registre\Access;
 
 class Registru extends Model {
 
@@ -235,7 +236,31 @@ class Registru extends Model {
     }
 
     public function CountRows($customer_id, $user) {
-        return 1907;
+
+        
+        $rows = ! $this->visibility_column_id ? $this->rows : $this->rows()->where('visibility', 1)->get();
+
+        $access = Access::where('user_id', $user->id)->where('customer_id', $customer_id)->where('customer_registru_id', $this->id)->first();
+
+        if( ! $access )
+        {
+            return 0;
+        }
+
+        $departamente = !! $access->departamente ? $access->departamente : [];
+
+        
+        $cnt = 0;
+
+        foreach($rows as $i => $row)
+        {
+            if(in_array($row->department_id, $departamente))
+            {
+                $cnt++;
+            }
+        }
+
+        return $cnt;
     }
     
 }
