@@ -3,14 +3,12 @@
 namespace MyDpo\Models\Livrabile\Centralizatoare;
 
 use Illuminate\Database\Eloquent\Model;
-
 use MyDpo\Models\Livrabile\Categories\Category;
-
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 use MyDpo\Traits\Admin\Livrabile\Tipuri\Centralizatorable;
-
 use MyDpo\Scopes\NotdeletedScope;
+use MyDpo\Models\Customer\Centralizatoare\Centralizator;
 
 class TipCentralizator extends Model {
 
@@ -174,6 +172,15 @@ class TipCentralizator extends Model {
         ";
 
         return \DB::select($sql);
+    }
+
+    public function RowsCountByUser($customer_id, $user) {
+        $centralizatoare = Centralizatore::where('customer_id', $customer_id)->where('centralizator_id', $this->id)->get();
+
+        foreach($centralizatoare as $i => $centralizator)
+        {
+            $centralizator->RowsCountByUser($customer_id, $user);
+        }
     }
 
 }
