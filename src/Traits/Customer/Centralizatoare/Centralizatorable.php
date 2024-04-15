@@ -214,7 +214,8 @@ trait Centralizatorable {
          * http://mydpo-admin.local/centralizatoare-list/centralizatoare/2/117#/
          * http://mydpo-admin.local/centralizatoare-list/gap/2/117#/
          */
-        if(array_key_exists('register_id', $input))
+
+        if(array_key_exists('register_id', $input) || (array_key_exists('model', $input) && ($input['model'] == 'registre')))
         {
             if($tip->on_registre_page == 1)
             {
@@ -230,7 +231,6 @@ trait Centralizatorable {
         }
         
         return '/centralizatoare-list/gap/' . $input['customer_id'] . '/' . $tip->id;
-
     }
 
     public static function GetNotificationTypeName($input) {
