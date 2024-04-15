@@ -88,6 +88,15 @@ class CustomerFile extends Model {
         return \Str::replace('.' . $this->file_original_extension, '', $this->file_original_name);
     } 
 
+    public function getFullPathAttribute() {
+        $folder = CustomerFolder::find($this->folder_id);
+        $r = collect([
+            ...$folder->ancestors->map( function($item) {return $item->name; }),
+            $this->folder->name,
+        ])->implode('/');
+        return $r;
+    }
+
     function folder() {
         return $this->belongsTo(Folder::class, 'folder_id')->select(['id', 'name', 'type']);
     }
@@ -212,7 +221,7 @@ class CustomerFile extends Model {
             { 
                 event(new \MyDpo\Events\Customer\Livrabile\Documents\UploadFile('upload.file', [
                     'nume_fisier' => $record->file_original_name,
-                    'nume_folder' => $record->folder->name,
+                    'nume_folder' => $record->full_path,
                     'customers' => self::CreateUploadReceivers($record->customer_id, $record->folder_id), 
                     'link' => '/' . $record->folder->page_link . '/' . $input['customer_id'] . '?folder_id=' . $record->folder_id,
                 ]));
@@ -231,7 +240,7 @@ class CustomerFile extends Model {
             
             event(new \MyDpo\Events\Customer\Livrabile\Documents\UploadFile('delete.file', [
                 'nume_fisier' => $record->file_original_name,
-                'nume_folder' => $record->folder->name,
+                'nume_folder' => $record->full_path,
                 'customers' => self::CreateUploadReceivers($record->customer_id, $record->folder_id), 
                 'link' => '/' . $record->page_link . '/' . $input['customer_id'] . '?folder_id=' . $record->folder_id,
             ]));
@@ -249,7 +258,7 @@ class CustomerFile extends Model {
          * Fisierul care se muta
          */
         $original = self::where('id', $input['id'])->first();
-        $nume_folder_sursa = $original->folder->name;
+        $nume_folder_sursa = $original->full_path;
 
         $record = self::where('customer_id', $input['customer_id'])
             ->where('folder_id', $input['folder_id'])
@@ -270,7 +279,7 @@ class CustomerFile extends Model {
             {    
                 event(new \MyDpo\Events\Customer\Livrabile\Documents\UploadFile('move.file', [
                     'nume_fisier' => $original->file_original_name,
-                    'nume_folder_dest' => $original->folder->name,
+                    'nume_folder_dest' => $original->full_path,
                     'nume_folder_sursa' => $nume_folder_sursa,
                     'customers' => self::CreateUploadReceivers($original->customer_id, $original->folder_id), 
                     'link' => '/' . $original->folder->page_link . '/' . $input['customer_id'] . '?folder_id=' . $original->folder_id,
@@ -355,7 +364,7 @@ class CustomerFile extends Model {
             {
                 event(new \MyDpo\Events\Customer\Livrabile\Documents\UploadFile('upload.file', [
                     'nume_fisier' => $record->file_original_name,
-                    'nume_folder' => $record->folder->name,
+                    'nume_folder' => $record->full_path,
                     'customers' => self::CreateUploadReceivers($input['customer_id'], $input['folder_id']), 
                     'link' => '/' . $record->folder->page_link . '/' . $input['customer_id'] . '?folder_id=' . $record->folder_id,
                 ]));
