@@ -273,7 +273,7 @@ class CustomerFile extends Model {
                     'nume_folder_dest' => $original->folder->name,
                     'nume_folder_sursa' => $nume_folder_sursa,
                     'customers' => self::CreateUploadReceivers($original->customer_id, $original->folder_id), 
-                    'link' => '/' . $original->folder->page_link . '/' . $input['customer_id'] . '?folder_id=' . $record->folder_id,
+                    'link' => '/' . $original->folder->page_link . '/' . $input['customer_id'] . '?folder_id=' . $original->folder_id,
                 ]));
             }
             
