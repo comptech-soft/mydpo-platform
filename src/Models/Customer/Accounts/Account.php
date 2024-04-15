@@ -8,23 +8,17 @@ use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 use MyDpo\Traits\Exportable;
 use MyDpo\Traits\Importable;
-
 use MyDpo\Models\Authentication\User;
 use MyDpo\Models\Authentication\RoleUser;
 use MyDpo\Models\Authentication\Role;
 use MyDpo\Models\Customer\Departments\Department;
 use MyDpo\Models\Customer\Customer;
-
 use MyDpo\Exports\Customer\Entities\Account\Exporter;
 use MyDpo\Imports\Customer\Entities\Account\Importer;
-
 use MyDpo\Performers\Customer\Account\GetUsers;
 use MyDpo\Performers\Customer\Account\GetCustomers;
-
 use MyDpo\Rules\Customer\Entities\Account\ValidAccountEmail;
-
 use MyDpo\Events\Customer\Entities\Account\CreateAccountActivation;
-
 use MyDpo\Scopes\NotdeletedScope;
 
 class Account extends Model {
@@ -125,7 +119,6 @@ class Account extends Model {
      * Crearea unui cont client
      */
     public static function doInsert($input) {
-
         /**
          * #1. Se creaza inregistrarea in tabela [users]
          * se ataseaza id-ul userului la $input
@@ -188,6 +181,7 @@ class Account extends Model {
         if(! $account)
         {
             $account = self::create(collect($input)->except(['user'])->toArray());
+            $account->setDefaultDashboardItemsVisibility();
         }
 
         $role = RoleUser::CreateAccountRole($input['customer_id'], $user->id, $account->role_id);
@@ -260,41 +254,29 @@ class Account extends Model {
     }
     
     public static function doDelete($input, $account) {
-
         Activation::where('customer_id', $input['customer_id'])->where('user_id', $input['user_id'])->delete();
-
         RoleUser::where('customer_id', $input['customer_id'])->where('user_id', $input['user_id'])->delete();
-
         $account->delete();
-
         return self::where('id', $account->id)->first();
     }
 
     public static function doDashoarditems($input, $account) {
-
         $account->dashboard_items_visibility = $input['dashboard_items_visibility'];
         $account->save();
-
         return self::where('id', $account->id)->first();
     }
 
     public static function doMenuitems($input, $account) {
-
         $account->menus_items_visibility = $input['menus_items_visibility'];
         $account->save();
-
         return self::where('id', $account->id)->first();
     }
 
     public static function doActionsitems($input, $account) {
-
         $actions_items_visibility = !! $account->actions_items_visibility ? $account->actions_items_visibility : [];
-
         $actions_items_visibility[$input['active_node']['id']] = $input['active_node'];
-
         $account->actions_items_visibility = $actions_items_visibility;
         $account->save();
-
         return self::where('id', $account->id)->first();
     }
 
