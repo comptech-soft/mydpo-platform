@@ -233,7 +233,7 @@ class CustomerFile extends Model {
                 'nume_fisier' => $record->file_original_name,
                 'nume_folder' => $record->folder->name,
                 'customers' => self::CreateUploadReceivers($record->customer_id, $record->folder_id), 
-                'link' => '/' . $original->record->page_link . '/' . $input['customer_id'] . '?folder_id=' . $record->folder_id,
+                'link' => '/' . $record->page_link . '/' . $input['customer_id'] . '?folder_id=' . $record->folder_id,
             ]));
 
             $record->delete();
