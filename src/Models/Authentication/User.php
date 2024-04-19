@@ -240,7 +240,36 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail 
      * ACTIONS                  *
      ****************************/
     public static function doInsertteam($input, $record) {
-        dd($input, $record);
+       
+        $input['password'] = $input['password_confirmation'] = \Str::random(10) . 'aA?1';
+        
+        $user = self::create($input);
+
+        
+
+        if(array_key_exists('role_id', $input) && $input['role_id'])
+        {
+
+            $role = RoleUser::where('user_id', $user->id)->whereNull('customer_id')->first();
+
+            if(!$role)
+            {
+                    RoleUser::create([
+                        'user_id' => $user->id,
+                        'role_id' => $input['role_id'],
+                        'customer_id' => NULL,
+                    ]);
+                }
+            else
+            {
+                $role->role_id = $input['role_id'];
+                $role->save();
+            }
+        }
+
+
+        
+
     }
     // public static function doAction($action, $input) {
 
@@ -373,6 +402,21 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail 
 
     public static function GetRules($action, $input) {
 
+        if($action == 'insertteam')
+        {
+            return [
+                'last_name' => ['required', 'string', 'max:255'],
+                'first_name' => ['required', 'string', 'max:255'],
+                'email' => [
+                    'required', 
+                    'string', 
+                    'email', 
+                    'max:255', 
+                    'unique:users,email'
+                ]
+                ];
+        }
+        
         if($action == 'changepassword')
         {
             return [
@@ -389,7 +433,7 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail 
             ];
         }
 
-        if($action == 'etemailsignature')
+        if($action == 'emailsignature')
         {
 
         }
