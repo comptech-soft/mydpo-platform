@@ -202,6 +202,8 @@ class Account extends Model {
         $user->update($input['user']);
 
         $account->update(collect($input)->except(['user'])->toArray());
+        
+        RoleUser::CreateAccountRole($input['customer_id'], $user->id, $account->role_id);
 
         return self::where('id', $account->id)->first();
     }
