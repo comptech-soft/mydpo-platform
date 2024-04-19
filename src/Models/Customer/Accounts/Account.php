@@ -231,11 +231,22 @@ class Account extends Model {
                 'activated' => 1,
                 'activated_at' => ($d = \Carbon\Carbon::now()),
             ]);
+            
             $account->update([
                 'activated' => 1,
                 'activated_at' => $d,
                 'role_id' => $input['role_id']
             ]);
+
+            $user = User::find($input['user_id']);
+
+            if(! $user->email_verified_at )
+            {
+                $user->update([
+                    'email_verified_at' => $d,
+                    'activated_at' => $d,
+                ]);
+            }
         }
         
         return self::where('id', $account->id)->first();
