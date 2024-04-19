@@ -239,6 +239,9 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail 
     /** *************************
      * ACTIONS                  *
      ****************************/
+    public static function doInsertteam($input, $record) {
+        dd($input, $action);
+    }
     // public static function doAction($action, $input) {
 
     //     /**
