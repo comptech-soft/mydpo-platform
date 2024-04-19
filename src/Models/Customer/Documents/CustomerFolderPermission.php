@@ -59,9 +59,17 @@ class CustomerFolderPermission extends Model {
 
         if( (count($input['folders_ids']) > 0) && (\Auth::user()->id != $input['user_id']) )
         {
-            $folders = CustomerFolder::whereIn('id', $input['folders_ids'])->get()->map( function($folder){
-                return $folder->name;
-            })->implode(', ');
+            $folders = CustomerFolder::with(['ancestors'])->whereIn('id', $input['folders_ids'])->get()->map( function($folder){
+                $r = [];
+                foreach($folder->ancestors as $i => $item)
+                {
+                    $r = [...$r, $item->name];
+                }
+                $r = [...$r, $folder->name];
+                
+                return implode('/', $r);
+            })->implode('<br/>');
+
             
             event(new \MyDpo\Events\Customer\Livrabile\Documents\FolderPermissions('folder.permissions', [
                 'foldere' => $folders,
