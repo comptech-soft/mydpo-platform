@@ -15,17 +15,21 @@ use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 use MyDpo\Models\Authentication\Role;
 use MyDpo\Models\Authentication\UserSetting;
+use MyDpo\Events\Authentication\Team\CreateTeamActivation;
+use Illuminate\Validation\Rules;
+use Illuminate\Support\Facades\Hash;
+use MyDpo\Rules\User\Oldpassword;
+
 // use MyDpo\Models\RoleUser;
 // use MyDpo\Models\Customer\Customer;
 // use MyDpo\Models\UserCustomer;
 // use MyDpo\Helpers\Performers\Datatable\GetItems;
 // use MyDpo\Helpers\Performers\Datatable\DoAction;
-use Illuminate\Validation\Rules;
-use Illuminate\Support\Facades\Hash;
+
 // use MyDpo\Performers\UserSetting\SaveSetting;
 // use MyDpo\Performers\User\UpdatePermissions;
 // use MyDpo\Performers\User\UpdateStatus;
-use MyDpo\Rules\User\Oldpassword;
+
 // use MyDpo\Scopes\NotdeletedScope;
 
 class User extends Authenticatable implements CanResetPassword, MustVerifyEmail {
@@ -245,29 +249,28 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail 
         
         $user = self::create($input);
 
-        
+        $role = RoleUser::where('user_id', $user->id)->whereNull('customer_id')->first();
 
-        if(array_key_exists('role_id', $input) && $input['role_id'])
+        if( ! $role)
         {
-
-            $role = RoleUser::where('user_id', $user->id)->whereNull('customer_id')->first();
-
-            if(!$role)
-            {
-                    RoleUser::create([
-                        'user_id' => $user->id,
-                        'role_id' => $input['role_id'],
-                        'customer_id' => NULL,
-                    ]);
-                }
-            else
-            {
-                $role->role_id = $input['role_id'];
-                $role->save();
+                RoleUser::create([
+                    'user_id' => $user->id,
+                    'role_id' => $input['role_id'],
+                    'customer_id' => NULL,
+                ]);
             }
+        else
+        {
+            $role->role_id = $input['role_id'];
+            $role->save();
         }
 
-
+        event(new CreateTeamActivation('team.activation', [
+            ...$input, 
+            'customers' => [], 
+            'user' => $user, 
+            'role' => $role
+        ]));
         
 
     }
@@ -413,8 +416,9 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail 
                     'email', 
                     'max:255', 
                     'unique:users,email'
-                ]
-                ];
+                ],
+                'role_id' => ['required'],
+            ];
         }
         
         if($action == 'changepassword')
