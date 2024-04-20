@@ -68,6 +68,7 @@ class Activation extends Model {
 
     public static function RegisterActivation($user, $sender, $template, $payload) {
 
+        dd( array_keys($payload));
         $activation = self::createActivation($payload['account']['user_id'], $payload['account']['customer_id'], $payload['account']['role_id']);
 
         return [

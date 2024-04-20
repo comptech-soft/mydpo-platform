@@ -60,9 +60,6 @@ class TemplateEmail extends Model {
         {
             $user = $input['payload']['user'];
 
-            
-            dd( $input['payload']['role'] );
-            
             \Mail::to($user->email)->send(
                 new \MyDpo\Mail\System\SystemMail(
                     user: $user,
