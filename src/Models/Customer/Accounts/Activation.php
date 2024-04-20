@@ -78,12 +78,6 @@ class Activation extends Model {
         }
         else
         {
-            dd([
-                'btn_url' => \MyDpo\Models\System\Platform::find(1)->url . '/' . \Str::replace('[token]', $activation->token, $template['btn_url']),
-                'btn_caption' => $template['btn_caption'],
-                'customer_name' => NULL,
-            ]);
-
             $activation = self::createActivation($user->id, NULL, $payload['role']->id);
             return [
                 'btn_url' => \MyDpo\Models\System\Platform::find(1)->url . '/' . \Str::replace('[token]', $activation->token, $template['btn_url']),
