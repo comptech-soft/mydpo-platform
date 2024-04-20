@@ -20,15 +20,10 @@ class SystemMail extends Mailable {
     public $payload = NULL;
 
     public function __construct($user, $sender, $template, $payload) {
-
-
-        dd($user, $sender, $template, $payload);
-
         $this->user = $user;
         $this->sender = $sender;
         $this->template = $template;
         $this->payload = $payload;
-
     }
 
     /**
@@ -48,18 +43,17 @@ class SystemMail extends Mailable {
         
         $markdown = \View::exists($markdown = ('emails.' . $this->template['name'])) ? $markdown : 'emails.system';
         
+        $input = [];
+
         if(!!$this->template['before_method'])
         {
             list($className, $methodName) = explode("::", $this->template['before_method']);
-
-            $input = [];
-
+            
             if (method_exists($className, $methodName)) 
             {
                 $input = $className::$methodName($this->user, $this->sender, $this->template, $this->payload);
             } 
         }
-
         
         return new Content(
             markdown: $markdown,
