@@ -62,7 +62,7 @@ class TemplateEmail extends Model {
 
             \Mail::to($user->email)->send(
                 new \MyDpo\Mail\System\SystemMail(
-                    user: $email->user,
+                    user: $user,
                     sender: \Auth::user(),
                     template: $record,
                     payload:  $input['payload'],
