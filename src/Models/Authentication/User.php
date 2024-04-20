@@ -270,7 +270,7 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail 
             'customer_id' => NULL, 
             'customers' => [],
             'user' => $user, 
-            'role' => $role
+            'role' => $role->role,
         ]));
         
 
