@@ -7,11 +7,12 @@ use Illuminate\Http\Request;
 use MyDpo\Helpers\Response;
 use MyDpo\Helpers\UserSession;
 use MyDpo\Models\Customer\Accounts\Activation;
+use MyDpo\Core\Http\Response\Index;
 
 class ActivateAccountController extends Controller {
 
     public function index($token, Request $r) {
-
+        
         $activation = Activation::byToken($token);
 
         if($activation && ($activation->activated == 0) )
@@ -21,7 +22,18 @@ class ActivateAccountController extends Controller {
  
             request()->session()->invalidate();
             request()->session()->regenerateToken();
-            
+
+            if(config('app.platform') == 'admin')
+            {
+                return Index::View(
+                    styles: ['css/app.css'],
+                    scripts: ['apps/auth/activate-team/index.js'],
+                    payload: [
+                        'token' => $token,
+                    ],
+                ); 
+            }
+
             return Response::View(
                 '~templates.index', 
                 asset('apps/activate-account/index.js'),
