@@ -49,8 +49,8 @@ class Index {
             'translations' => ($locale == 'ro' ? [] : Translation::pluck('en', 'ro')->toArray()),
             'platform' => config('app.platform'),
             'env' => config('app.env'),
-            'menus' => SysMenu::getMenus(),
-            'actions' => SysAction::getActions(),
+            'menus' => !! $user ? SysMenu::getMenus() : [],
+            'actions' => !! $user ? SysAction::getActions() : [],
             'sysconfig' => SysConfig::all()->pluck('value', 'code'),
             'mycustomers' => config('app.platform') == 'b2b' ? (!! $user ? Account::GetCustomersByUser($user) : NULL) : NULL,
         ];
