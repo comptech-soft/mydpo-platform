@@ -267,7 +267,7 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail 
 
         event(new CreateTeamActivation('team.activation', [
             ...$input, 
-            'customers' => [], 
+            'customers' => NULL, 
             'user' => $user, 
             'role' => $role
         ]));
