@@ -67,25 +67,47 @@ class Activation extends Model {
     }
 
     public static function RegisterActivation($user, $sender, $template, $payload) {
+        if(!! $payload['customer_id'])
+        {
+            $activation = self::createActivation($payload['account']['user_id'], $payload['account']['customer_id'], $payload['account']['role_id']);
+            return [
+                'btn_url' => \MyDpo\Models\System\Platform::find(2)->url . '/' . \Str::replace('[token]', $activation->token, $template['btn_url']),
+                'btn_caption' => $template['btn_caption'],
+                'customer_name' => Customer::find($payload['account']['customer_id'])->name,
+            ];
+        }
+        else
+        {
+            dd([
+                'btn_url' => \MyDpo\Models\System\Platform::find(1)->url . '/' . \Str::replace('[token]', $activation->token, $template['btn_url']),
+                'btn_caption' => $template['btn_caption'],
+                'customer_name' => NULL,
+            ]);
 
-        dd( array_keys($payload));
-        $activation = self::createActivation($payload['account']['user_id'], $payload['account']['customer_id'], $payload['account']['role_id']);
-
-        return [
-            'btn_url' => \MyDpo\Models\System\Platform::find(2)->url . '/' . \Str::replace('[token]', $activation->token, $template['btn_url']),
-            'btn_caption' => $template['btn_caption'],
-            'customer_name' => Customer::find($payload['account']['customer_id'])->name,
-        ];
+            $activation = self::createActivation($user->id, NULL, $payload['role']->id);
+            return [
+                'btn_url' => \MyDpo\Models\System\Platform::find(1)->url . '/' . \Str::replace('[token]', $activation->token, $template['btn_url']),
+                'btn_caption' => $template['btn_caption'],
+                'customer_name' => NULL,
+            ];
+        }
     }
 
     public static function createActivation($user_id, $customer_id, $role_id) {
-        if(!! ($record = self::where('user_id', $user_id)->where('customer_id', $customer_id)->first()) )
+        $q = self::where('user_id', $user_id);
+        if(!! $customer_id )
+        {
+            $q->where('customer_id', $customer_id);
+        }
+        $record = $q->first();
+
+        if(!! $record )
         {
             $record->update(['activated' => 0, 'activated_at' => NULL, 'role_id' => $role_id]);
         }
         else
         {
-            $record = self::create(['user_id' => $user_id, 'customer_id' => $customer_id, 'role_id' => $role_id, 'token' => \Str::random(64)]);
+            $record = self::create(['user_id' => $user_id, 'role_id' => $role_id, 'token' => \Str::random(64)]);
         }
 
         return $record;
