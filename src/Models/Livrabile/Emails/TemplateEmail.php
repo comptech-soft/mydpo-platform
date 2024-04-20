@@ -49,14 +49,24 @@ class TemplateEmail extends Model {
      */
     public static function doSend($input, $record = NULL) {
 
-        $payload = array_key_exists('payload', $input) ? $input['payload'] : [];
-
-        if(array_key_exists('customers', $input))
+        if(array_key_exists('customers', $input) && count( $input['customers']) > 0 )
         {
             /**
              * Se inregistreaza emailurile pentru a fi trimise
              */
             $record->RegisterCustomersEmailsToSend(self::PrepareCustomersToSend($input['customers']), $payload);
+        }
+        else
+        {
+            $user = $input['payload']['user'];
+
+            \Mail::to($user->email)->send(
+                new \MyDpo\Mail\System\SystemMail(
+                    user: $email->user,
+                    sender: \Auth::user(),
+                    template: $record,
+                    payload:  $input['payload'],
+                ));
         }
     }
 

@@ -21,6 +21,9 @@ class SystemMail extends Mailable {
 
     public function __construct($user, $sender, $template, $payload) {
 
+
+        dd($user, $sender, $template, $payload);
+
         $this->user = $user;
         $this->sender = $sender;
         $this->template = $template;

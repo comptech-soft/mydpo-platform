@@ -24,8 +24,6 @@ class BaseBroadcastEvent implements ShouldBroadcast {
 
     public function __construct($template_name, $input) {
        
-        dd($template_name, $input);
-
         $this->template_name = $template_name;
         $this->input = $input;
         
@@ -35,7 +33,8 @@ class BaseBroadcastEvent implements ShouldBroadcast {
         {
             TemplateEmail::doSend([
                 'customers' => $this->customers, 
-                'payload' => $this->input
+                'payload' => $this->input,
+                'link' => NULL,
             ], $this->template_email);
         }
 
