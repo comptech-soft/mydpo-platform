@@ -253,12 +253,12 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail 
 
         if( ! $role)
         {
-                RoleUser::create([
-                    'user_id' => $user->id,
-                    'role_id' => $input['role_id'],
-                    'customer_id' => NULL,
-                ]);
-            }
+            $role = RoleUser::create([
+                'user_id' => $user->id,
+                'role_id' => $input['role_id'],
+                'customer_id' => NULL,
+            ]);
+        }
         else
         {
             $role->role_id = $input['role_id'];
