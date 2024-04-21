@@ -7,7 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use MyDpo\Http\Requests\Auth\LoginRequest;
-use MyDpo\Helpers\Response;
+// use MyDpo\Helpers\Response;
+use MyDpo\Core\Http\Response\Index;
 
 class AuthenticatedSessionController extends Controller {
 
@@ -21,7 +22,12 @@ class AuthenticatedSessionController extends Controller {
      */
     public function create()
     {
-        return Response::View('~templates.index', asset('apps/auth/index.js'));
+        // return Response::View('~templates.index', asset('apps/auth/index.js'));
+
+        return Index::View(
+            styles: ['css/app.css'],
+            scripts: ['apps/auth/login/index.js'],
+        ); 
     }
 
     /**
