@@ -18,8 +18,8 @@
 
 //     Route::prefix('database')->group(function () {
 
-//         Route::post('column-value-exists', [ValidationController::class, 'columnValueExists']);
-//         Route::post('column-value-unique', [ValidationController::class, 'columnValueUnique']);
+//         Route::post('column-value-exists', [ValidationController::class, '']);
+//         Route::post('', [ValidationController::class, '']);
     
 //     });
     
