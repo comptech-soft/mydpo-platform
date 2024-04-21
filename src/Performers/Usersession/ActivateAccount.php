@@ -35,12 +35,14 @@ class ActivateAccount extends Perform {
             throw new \Exception('Nu există utilizatorul corespunzător acestei cereri de activare a contului.');
         }
 
-        dd(__METHOD__);
-        $customer = Customer::find($activation->customer_id);
-
-        if(! $customer )
+        if( config('app.platform') == 'b2b' )
         {
-            throw new \Exception('Nu există clientul corespunzător acestei cereri de activare a contului.');
+            $customer = Customer::find($activation->customer_id);
+
+            if(! $customer )
+            {
+                throw new \Exception('Nu există clientul corespunzător acestei cereri de activare a contului.');
+            }
         }
 
         /**
@@ -75,14 +77,16 @@ class ActivateAccount extends Perform {
 
         event(new Login(\Auth::guard(), \Auth::user(), false));
 
-        UserSetting::saveActiveCustomer([
-            'user_id' => $user->id,
-            'platform' => config('app.platform'),
-            'customer_id' => $customer->id,
-        ]);
+        if( config('app.platform') == 'b2b' )
+        {
+            UserSetting::saveActiveCustomer([
+                'user_id' => $user->id,
+                'platform' => config('app.platform'),
+                'customer_id' => $customer->id,
+            ]);
 
-        Account::SyncRecords($customer->id);
-
+            Account::SyncRecords($customer->id);
+        }
     }
 
 }
