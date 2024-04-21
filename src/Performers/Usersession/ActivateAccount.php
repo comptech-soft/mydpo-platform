@@ -35,6 +35,7 @@ class ActivateAccount extends Perform {
             throw new \Exception('Nu există utilizatorul corespunzător acestei cereri de activare a contului.');
         }
 
+        dd(__METHOD__);
         $customer = Customer::find($activation->customer_id);
 
         if(! $customer )
