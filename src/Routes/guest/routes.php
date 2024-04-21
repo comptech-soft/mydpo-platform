@@ -10,10 +10,10 @@
 //     /**
 //      * Resetarea parolei
 //      */
-//     Route::get('forgot-password',  [ForgotPasswordController::class, 'index']);
-//     Route::post('system/forgot-password',  [ForgotPasswordController::class, 'sendResetPasswordLink']);
-//     Route::get('reset-password/{token}', [NewPasswordController::class, 'index'])->name('password.reset');
-//     Route::post('system/reset-password', [NewPasswordController::class, 'updateNewPassword']);
+//     Route::get('',  [ForgotPasswordController::class, '']);
+//     Route::post('',  [ForgotPasswordController::class, '']);
+//     Route::get('', [NewPasswordController::class, 'index'])->name('');
+//     Route::post('', [NewPasswordController::class, '']);
 
 
 //     /**
