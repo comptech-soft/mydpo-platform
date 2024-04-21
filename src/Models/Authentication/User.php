@@ -274,6 +274,8 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail 
         ]));
         
 
+        return self::find($user->id);
+
     }
     
     // public static function doAction($action, $input) {
