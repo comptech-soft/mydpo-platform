@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Http\Controllers\Validation;
+namespace MyDpo\Http\Controllers\Helpers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
