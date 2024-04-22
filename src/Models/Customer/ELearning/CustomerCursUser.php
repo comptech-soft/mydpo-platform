@@ -6,10 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use MyDpo\Models\Authentication\User;
 use MyDpo\Models\Nomenclatoare\Livrabile\ELearning\Curs;
 use MyDpo\Models\Nomenclatoare\Livrabile\ELearning\Sharematerial;
-
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
-
 use Carbon\Carbon;
 
 class CustomerCursUser extends Model {
@@ -93,7 +91,7 @@ class CustomerCursUser extends Model {
             return NULL;
         }
 
-        $now = Carbon::createFromFormat('Y-m-d h:i:s', $this->done_at);
+        $now = Carbon::createFromFormat('Y-m-d H:i:s', $this->done_at);
         $expire = Carbon::createFromFormat('Y-m-d', $this->trimitere->date_to);
 
         $daysDiff = $expire->diffInDays($now, false);
