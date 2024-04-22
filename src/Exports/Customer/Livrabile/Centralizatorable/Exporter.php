@@ -77,6 +77,8 @@ class Exporter implements FromView, WithStrictNullComparison, ShouldAutoSize {
     }
 
     protected function GetRows(){
+        $department_ids = $this->department_ids;
+
         $rows = $this->myclasses[$this->input['model']]['row']::where($this->myclasses[$this->input['model']]['field'], $this->input['document_id'])
             ->orderBy('order_no')
             ->get()
@@ -84,9 +86,13 @@ class Exporter implements FromView, WithStrictNullComparison, ShouldAutoSize {
                 return [
                     'visibility' => $row->visibility,
                     'status' => $row->status,
+                    'department_id' => $row->department_id,
                     'department' => $row->department->departament,
                     'values' => $this->GetValues($row),
                 ];
+            })
+            ->filter(function($row) use($department_ids) {
+                return in_array($row['department_id'], $department_ids);
             })
             ->toArray();
 
