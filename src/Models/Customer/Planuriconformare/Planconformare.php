@@ -164,17 +164,17 @@ class Planconformare extends Model {
         
         $admins = \DB::select($sql);
 
-        $accounts = [];
+        $receivers = [];
         
         foreach([...$accounts, ...$admins] as $i => $item)
         {
-            if(! in_array($item->user_id, $accounts) )
+            if(! in_array($item->user_id, $receivers) )
             {
-                $accounts[] = $item->user_id;
+                $receivers[] = $item->user_id;
             }
         }
 
-        return collect($accounts)->map(function($item) use ($customer_id) {
+        return collect($receivers)->map(function($item) use ($customer_id) {
             return $customer_id . '#' . $item;
         })->toArray();
 
