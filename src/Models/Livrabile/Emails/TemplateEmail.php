@@ -54,10 +54,12 @@ class TemplateEmail extends Model {
             /**
              * Se inregistreaza emailurile pentru a fi trimise
              */
-            $record->RegisterCustomersEmailsToSend(self::PrepareCustomersToSend($input['customers']), $payload);
+            $record->RegisterCustomersEmailsToSend(self::PrepareCustomersToSend($input['customers']), $input['payload']);
         }
         else
         {
+
+
             $user = $input['payload']['user'];
 
             \Mail::to($user->email)->send(
