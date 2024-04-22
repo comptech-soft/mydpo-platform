@@ -33,6 +33,4 @@ class VerifyEmailController extends Controller
         return UserSession::sendActivationEmail();
     }
 
-    
-
 }
