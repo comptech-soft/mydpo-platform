@@ -449,8 +449,6 @@ class CustomerFile extends Model {
 
         return collect($r)
             ->filter(function($id) use($user_id) {
-
-                dd($id, $user_id);
                 return $id != $user_id;
             })
             ->map(function($user_id) use ($customer_id){
