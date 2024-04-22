@@ -445,9 +445,18 @@ class CustomerFile extends Model {
             }
         }
 
-        return collect($r)->map(function($user_id) use ($customer_id){
-            return $customer_id . '#' . $user_id;
-        })->toArray();
+        $user_id = \Auth::user()->id;
+
+        return collect($r)
+            ->filter(function($id) use($user_id) {
+
+                dd($id, $user_id);
+                return $id != $user_id;
+            })
+            ->map(function($user_id) use ($customer_id){
+                return $customer_id . '#' . $user_id;
+            })
+            ->toArray();
     }
 
     public static function GetQuery() {
