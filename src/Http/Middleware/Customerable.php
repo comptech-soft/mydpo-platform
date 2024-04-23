@@ -30,7 +30,7 @@ class Customerable {
             {
                 return redirect(config('app.url') . '/my-customers'); 
             }
-            
+
             $account = Account::where('user_id', $user->id)->where('customer_id', $customer->id)->first();
 
             if(!! $account)
@@ -60,10 +60,8 @@ class Customerable {
 
     protected function Logout() {
         \Auth::guard('web')->logout();
-
         request()->session()->invalidate();
         request()->session()->regenerateToken();
-
         return redirect(config('app.url'));
     }
 }
