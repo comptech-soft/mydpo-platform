@@ -26,6 +26,11 @@ class Customerable {
                 return redirect(config('app.url') . '/my-customers'); 
             }
             
+            if($customer->status != 'active')
+            {
+                return redirect(config('app.url') . '/my-customers'); 
+            }
+            
             $account = Account::where('user_id', $user->id)->where('customer_id', $customer->id)->first();
 
             if(!! $account)
