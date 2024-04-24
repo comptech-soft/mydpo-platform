@@ -156,8 +156,8 @@ class Customer_base extends Model {
     public static function doDelete($action, $record) {
         $record->deleted = 1;
         $record->name = '#' . $record->id . '#' . $record->name;
+        $record->status = 'inactive';
         $record->save();
-
         return $record;
     }
 

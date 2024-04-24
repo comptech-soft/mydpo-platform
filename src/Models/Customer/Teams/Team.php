@@ -3,7 +3,6 @@
 namespace MyDpo\Models\Customer\Teams;
 
 use Illuminate\Database\Eloquent\Model;
-// use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Models\Customer\Customer;
 use MyDpo\Models\Authentication\User;
 // use MyDpo\Performers\UserCustomer\UpdateUserCustomers;
@@ -48,10 +47,6 @@ class Team extends Model {
     public function user() {
         return $this->belongsTo(User::class, 'user_id');
     }
-
-    // public static function getItems($input) {
-    //     return (new GetItems($input, self::query()->with(['user', 'customer']), __CLASS__))->Perform();
-    // }
 
     // public static function updateUserCustomers($input) {
     //     return (new UpdateUserCustomers($input))
