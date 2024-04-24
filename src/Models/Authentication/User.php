@@ -625,7 +625,7 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail 
      * 24.04.2024 - deactiveza contul in caz ca nu este activat
      */
     public function deActivateAccount() {
-        if(! $this->email_verified_at )
+        if($this->email_verified_at )
         {
             $this->activated_at = $this->email_verified_at = NULL;
             $this->save();
