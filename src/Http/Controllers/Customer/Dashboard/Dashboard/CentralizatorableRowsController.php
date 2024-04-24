@@ -5,13 +5,11 @@ namespace MyDpo\Http\Controllers\Customer\Dashboard\Dashboard;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
-
 use MyDpo\Models\Customer\Customer;
-
 use MyDpo\Models\Livrabile\Centralizatoare\TipCentralizator;
 use MyDpo\Models\Customer\Centralizatoare\Centralizator;
 use MyDpo\Models\Customer\Centralizatoare\Row as CentralizatorRow;
-
+use MyDpo\Models\Customer\Centralizatoare\Access as CentralizatorAccess;
 use MyDpo\Models\Livrabile\Registre\TipRegistru;
 use MyDpo\Models\Customer\Registre\Registru;
 use MyDpo\Models\Customer\Registre\Row as RegistruRow;
@@ -119,7 +117,8 @@ class CentralizatorableRowsController extends Controller {
                     if($user->role->id == 5)
                     {
                         $customer_centralizator = Centralizator::find($input['customer_centralizator_id']);
-                        
+                        $access = CentralizatorAccess::where('customer_centralizator_id', $input['customer_centralizator_id'])->get();
+
                         if(!! 1 * $customer_centralizator->department_column_id)
                         {
                             /** Cazul in care avem coloana departament */
@@ -127,6 +126,7 @@ class CentralizatorableRowsController extends Controller {
                         else
                         {
                             /** Cazul in care avem NU coloana departament */
+                            dd($access);
                             dd($user->id, $customer_centralizator->department_column_id);
                         }
                     }
