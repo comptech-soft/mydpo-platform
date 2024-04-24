@@ -389,6 +389,11 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail 
         {
             $user->deActivateAccount();
         }
+
+        if($input['role_id'] != $user->role->id)
+        {
+            $this->updateAccountRole($input['role_id']);
+        }
     }
 
     public static function GetRules($action, $input) {
@@ -620,6 +625,14 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail 
     //     }
     // }
 
+
+
+    /**
+     * 24.04.2024 - acttualizeaza rolul
+     */
+    public function updateAccountRole($role_id) {
+        dd($role_id);
+    }
 
     /**
      * 24.04.2024 - deactiveza contul in caz ca nu este activat
