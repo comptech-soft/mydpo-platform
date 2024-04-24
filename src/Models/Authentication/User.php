@@ -547,21 +547,9 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail 
     //         ->Perform();
     // }
 
-    public function activateAccount() {
-        dd(__METHOD__);
-        // $this->email_verified_at = \Carbon\Carbon::now();
-        // $this->activated_at = \Carbon\Carbon::now();
-        // $this->save();
-        // return $this;
-    }
+    
 
-    public function deActivateAccount() {
-        dd(__METHOD__);
-        // $this->email_verified_at = NULL;
-        // $this->activated_at = NULL;
-        // $this->save();
-        // return $this;
-    }
+    
 
     // /**
     //  * Am un array de obiecte [ ['user_id' => 15], ....]
@@ -631,6 +619,29 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail 
     //         }
     //     }
     // }
+
+
+    /**
+     * 24.04.2024 - deactiveza contul in caz ca nu este activat
+     */
+    public function deActivateAccount() {
+        if(! $this->email_verified_at )
+        {
+            $this->activated_at = $this->email_verified_at = NULL;
+            $this->save();
+        }
+    }
+
+    /**
+     * 24.04.2024 - activeza contul in caz ca nu este activat
+     */
+    public function activateAccount() {
+        if(! $this->email_verified_at )
+        {
+            $this->activated_at = $this->email_verified_at = \Carbon\Carbon::now();
+            $this->save();
+        }
+    }
 
     /**
      * 19.08.2023 - daca rolul meu este in array-ul $slugs
