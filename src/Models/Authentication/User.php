@@ -278,22 +278,6 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail 
 
     }
     
-    // public static function doAction($action, $input) {
-
-    //     /**
-    //      * creare cont - parola #49
-    //      * sunt pe platforma de client - rol de master - dau adaugare new user. aici trebuie scos campul de parola
-    //      */
-    //     if(config('app.platform') == 'b2b')
-    //     {
-    //         if( ! $input['password'] )
-    //         {
-    //             $input['password'] = $input['password_confirmation'] = \Str::random(10) . 'aA?1';
-    //         }
-    //     }
-
-    //     return (new DoAction($action, $input, __CLASS__))->Perform();
-    // }
 
     // public static function doUpdate($input, $user) {
 
@@ -396,16 +380,13 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail 
     //     return $user;
     // }
 
-    // public static function doDelete($input, $user) {
-    //     $user->deleted = 1;
-    //     $user->email = $user->id . '#' . $user->email;
-        
-    //     $user->save();
-
-    //     $user->refresh();
-
-    //     return $user;
-    // }
+    public static function doDelete($input, $user) {
+        $user->deleted = 1;
+        $user->email = $user->id . '#' . $user->email;        
+        $user->save();
+        $user->refresh();
+        return $user;
+    }
 
     public static function GetRules($action, $input) {
 
