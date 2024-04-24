@@ -9,10 +9,8 @@ use MyDpo\Traits\Actionable;
 use MyDpo\Traits\Customer\Centralizatoare\Rowable;
 use MyDpo\Traits\Exportable;
 use MyDpo\Traits\Importable;
-
 use MyDpo\Models\Livrabile\Centralizatoare\TipCentralizator;
 use MyDpo\Models\Livrabile\Centralizatoare\TipCentralizatorColoana;
-
 use MyDpo\Exports\Customer\Livrabile\Centralizatorable\Exporter;
 use MyDpo\Imports\Customer\Centralizator\Importer;
 
@@ -123,6 +121,10 @@ class Row extends Model {
                 'row_id' => $id,
             ]);
         }
+    }
+
+    public function PrepareQueryInput() {
+        dd('???');
     }
     
 }

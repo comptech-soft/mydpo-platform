@@ -90,23 +90,15 @@ class Dataprovider extends Perform {
         {
             $this->query->select($this->select);
         }
-
-
+        
         $this->payload = [
             'recordcount' => call_user_func([$this->model, 'count']), 
-
             'initialfilter' => $initialfilter,
-
             'quicksearch' => $this->Quicksearch->Search($this->search),
-
             'globalfilter' => $this->Globalfilter->Filter($this->globalfilter),
-
             'sort' => $this->Sorter->Sort($this->sort),
-
             'paginator' => $this->query->paginate($this->per_page),
-
             'input' => $this->input,
-
         ];
     }
 } 

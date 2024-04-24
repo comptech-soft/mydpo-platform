@@ -98,7 +98,7 @@ class CentralizatorableRowsController extends Controller {
                 "(`customers-centralizatoare-rows`.`visibility` = 1)"
             ];
 
-            $input['initialfilter'] = $filter;
+           
 
             /**
              * Daca stim customerul
@@ -117,7 +117,7 @@ class CentralizatorableRowsController extends Controller {
                     if($user->role->id == 5)
                     {
                         $customer_centralizator = Centralizator::find($input['customer_centralizator_id']);
-                        $access = CentralizatorAccess::where('customer_centralizator_id', $input['customer_centralizator_id'])->get();
+                        $access = CentralizatorAccess::where('customer_centralizator_id', $input['customer_centralizator_id'])->first();
 
                         if(!! 1 * $customer_centralizator->department_column_id)
                         {
@@ -126,8 +126,10 @@ class CentralizatorableRowsController extends Controller {
                         else
                         {
                             /** Cazul in care avem NU coloana departament */
-                            dd($access);
-                            dd($user->id, $customer_centralizator->department_column_id);
+                            if(! $access)
+                            {                               
+                                $filter[] = '(1 = 0)';
+                            }
                         }
                     }
                 }
@@ -135,6 +137,8 @@ class CentralizatorableRowsController extends Controller {
 
             
         }
+
+        $input['initialfilter'] = $filter;
 
         return CentralizatorRow::getRecords($input);
     }
