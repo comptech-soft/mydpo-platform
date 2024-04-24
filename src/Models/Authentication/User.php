@@ -485,6 +485,13 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail 
     //     ];
     // }
 
+    public static function doSetpassword($input, $user) {
+        $user->update([
+            'password' => \Hash::make($input['password'])
+        ]);
+        return $user;
+    }
+
     public static function doChangepassword($input, $user) {
         $user->update([
             'password' => \Hash::make($input['password'])
