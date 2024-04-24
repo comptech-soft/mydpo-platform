@@ -219,8 +219,15 @@ class Centralizator extends Model {
 
     public function RowsCountByUser($customer_id, $user) {
 
-        $cnt = $this->rows->count();
-
+        if(config('app.platform') == 'b2b')
+        {
+            $cnt = $this->rows()->where('visibility', 1)->count();
+        }
+        else
+        {
+            $cnt = $this->rows->count();
+        }
+        
         if($user->role->id == 5)
         {
             if($cnt > 0)
