@@ -22,7 +22,7 @@ use MyDpo\Rules\User\Oldpassword;
 
 // use MyDpo\Models\RoleUser;
 // use MyDpo\Models\Customer\Customer;
-MyDpo\Models\Customer\Teams\Team;
+use MyDpo\Models\Customer\Teams\Team;
 // use MyDpo\Helpers\Performers\Datatable\GetItems;
 // use MyDpo\Helpers\Performers\Datatable\DoAction;
 
