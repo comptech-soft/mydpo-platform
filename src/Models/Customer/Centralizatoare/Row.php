@@ -176,6 +176,8 @@ class Row extends Model {
         }
 
         $input['initialfilter'] = $filter;
+
+        return $input;
     }
     
 }
