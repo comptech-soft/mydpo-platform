@@ -233,14 +233,6 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail 
     
 
     /** *************************
-     * ITEMS                    *
-     ****************************/
-
-    // public static function getItems($input) {
-    //     return (new GetItems($input, self::query(), __CLASS__))->Perform();
-    // }
-
-    /** *************************
      * ACTIONS                  *
      ****************************/
     public static function doInsertteam($input, $record) {
@@ -386,6 +378,12 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail 
         $user->save();
         $user->refresh();
         return $user;
+    }
+
+    public static function doSetstatus($input, $user) {
+
+        dd($input, $user->toArray());
+        
     }
 
     public static function GetRules($action, $input) {
