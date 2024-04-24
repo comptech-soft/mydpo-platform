@@ -180,10 +180,10 @@ class Row extends Model {
                 }
             }
 
-            
+            $input['initialfilter'] = $filter;
         }
 
-        $input['initialfilter'] = $filter;
+        
 
         return $input;
     }

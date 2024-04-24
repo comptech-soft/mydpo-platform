@@ -129,6 +129,9 @@ class Row extends Model {
     }
 
     public static function PrepareQueryInput($input) {
+
+       
+
         /**
          * Pe platforma B2B
          */
@@ -185,10 +188,10 @@ class Row extends Model {
                 }
             }
 
-            
+            $input['initialfilter'] = $filter;
         }
 
-        $input['initialfilter'] = $filter;
+        
 
         return $input;
     }
