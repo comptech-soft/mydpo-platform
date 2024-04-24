@@ -84,6 +84,9 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail 
 
     protected $with = [
         'roles',
+    ];
+
+    protected $withCount = [
         'associated_customers',
     ];
 
