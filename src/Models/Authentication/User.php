@@ -22,7 +22,7 @@ use MyDpo\Rules\User\Oldpassword;
 
 // use MyDpo\Models\RoleUser;
 // use MyDpo\Models\Customer\Customer;
-// use MyDpo\Models\UserCustomer;
+MyDpo\Models\Customer\Teams\Team;
 // use MyDpo\Helpers\Performers\Datatable\GetItems;
 // use MyDpo\Helpers\Performers\Datatable\DoAction;
 
@@ -84,7 +84,7 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail 
 
     protected $with = [
         'roles',
-        // 'customers',
+        'associated_customers',
     ];
 
     protected $appends  = [
@@ -222,9 +222,9 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail 
         return $this->hasMany(UserSetting::class, 'user_id')->where('platform', config('app.platform'));
     }
 
-    // function usercustomers() {
-    //     return $this->hasMany(UserCustomer::class, 'user_id');
-    // }
+    function associated_customers() {
+        return $this->hasMany(Team::class, 'user_id');
+    }
 
     /** *************************
      * ROLURI.PERMISIUNI        *
