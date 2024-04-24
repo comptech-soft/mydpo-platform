@@ -548,6 +548,7 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail 
     // }
 
     public function activateAccount() {
+        dd(__METHOD__);
         // $this->email_verified_at = \Carbon\Carbon::now();
         // $this->activated_at = \Carbon\Carbon::now();
         // $this->save();
@@ -555,6 +556,7 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail 
     }
 
     public function deActivateAccount() {
+        dd(__METHOD__);
         // $this->email_verified_at = NULL;
         // $this->activated_at = NULL;
         // $this->save();
