@@ -159,7 +159,14 @@ class Row extends Model {
                         if(!! 1 * $customer_centralizator->department_column_id)
                         {
                             /** Cazul in care avem coloana departament */
-                            dd($accss->departamente);
+                            if( ! $access->departamente || count($access->departamente) == 0) 
+                            {
+                                $filter[] = "(`customers-centralizatoare-rows`.`visibility` = -1)";
+                            }
+                            else
+                            {
+                                $filter[] = "(`customers-centralizatoare-rows`.`department_id` IN (" . implode(',', $access->departamente) . "))";
+                            }
                         }
                         else
                         {
