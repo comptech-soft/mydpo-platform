@@ -82,10 +82,7 @@ class CentralizatorableRowsController extends Controller {
     }
 
     public function getCentralizatorRows(Request $r) {
-
-
-
-        return CentralizatorRow::getRecords($input);
+        return CentralizatorRow::getRecords($r->all());
     }
 
     public function getRegistruRows(Request $r) {
