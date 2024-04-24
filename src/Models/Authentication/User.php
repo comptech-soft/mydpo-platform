@@ -631,7 +631,17 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail 
      * 24.04.2024 - acttualizeaza rolul
      */
     public function updateAccountRole($role_id) {
-        dd($role_id);
+        $role_user = RoleUser::where('user_id', $this->id)->first();
+
+        if(!! $role_user)
+        {
+            $role_user->role_id = $role_id;
+            $role_user->save();
+        }
+        else
+        {
+            RoleUser::create(['user_id', $this->id, 'role_id' => $Role_id]);
+        }
     }
 
     /**
