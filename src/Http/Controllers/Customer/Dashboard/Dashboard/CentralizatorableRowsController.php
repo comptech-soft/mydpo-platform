@@ -84,7 +84,59 @@ class CentralizatorableRowsController extends Controller {
     }
 
     public function getCentralizatorRows(Request $r) {
-        return CentralizatorRow::getRecords($r->all());
+
+        $input = [...$r->all()];
+
+        /**
+         * Pe platforma B2B
+         */
+        if( config('app.platform') == 'b2b')
+        {
+            /**
+             * Doar cele vizibile
+             */
+            $filter = [
+                ...$input['initialfilter'],
+                "(`customers-centralizatoare-rows`.`visibility` = 1)"
+            ];
+
+            $input['initialfilter'] = $filter;
+
+            /**
+             * Daca stim customerul
+             */
+            if(array_key_exists('customer_id', $input) && !! $input['customer_id'] )
+            {
+                $user = \Auth::user();
+                /**
+                 * Daca stim rolul userului
+                 */
+                if($user->role)
+                {
+                    /**
+                     * Daca este user trebuie doar cele la care avem access
+                     */
+                    if($user->role->id == 5)
+                    {
+                        $customer_centralizator = Centralizator::find($input['customer_centralizator_id']);
+                        
+                        if(!! 1 * $customer_centralizator->department_column_id)
+                        {
+                            /** Cazul in care avem coloana departament */
+                        }
+                        else
+                        {
+                            /** Cazul in care avem NU coloana departament */
+                            dd($user->id, $customer_centralizator->department_column_id);
+                        }
+                    }
+                }
+            }
+
+            
+        }
+
+        return CentralizatorRow::getRecords($input);
     }
 
     public function getRegistruRows(Request $r) {
