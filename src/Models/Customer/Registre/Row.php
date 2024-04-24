@@ -128,4 +128,69 @@ class Row extends Model {
         }
     }
 
+    public static function PrepareQueryInput($input) {
+        /**
+         * Pe platforma B2B
+         */
+        if( config('app.platform') == 'b2b')
+        {
+            /**
+             * Doar cele vizibile
+             */
+            $filter = [
+                ...$input['initialfilter'],
+                "(`customers-registers-rows`.`visibility` = 1)"
+            ];
+
+            /**
+             * Daca stim customerul
+             */
+            if(array_key_exists('customer_id', $input) && !! $input['customer_id'] )
+            {
+                $user = \Auth::user();
+                /**
+                 * Daca stim rolul userului
+                 */
+                if($user->role)
+                {
+                    /**
+                     * Daca este user trebuie doar cele la care avem access
+                     */
+                    if($user->role->id == 5)
+                    {
+                        $customer_registru = Registru::find($input['customer_register_id']);
+                        $access = Access::where('customer_registru_id', $input['customer_register_id'])->first();
+
+                        if(!! 1 * $customer_registru->department_column_id)
+                        {
+                            /** Cazul in care avem coloana departament */
+                            if( ! $access->departamente || count($access->departamente) == 0) 
+                            {
+                                $filter[] = "(`customers-registers-rows`.`visibility` = -1)";
+                            }
+                            else
+                            {
+                                $filter[] = "(`customers-registers-rows`.`department_id` IN (" . implode(',', $access->departamente) . "))";
+                            }
+                        }
+                        else
+                        {
+                            /** Cazul in care avem NU coloana departament */
+                            if(! $access)
+                            {                               
+                                $filter[] = '(1 = 0)';
+                            }
+                        }
+                    }
+                }
+            }
+
+            
+        }
+
+        $input['initialfilter'] = $filter;
+
+        return $input;
+    }
+
 }
