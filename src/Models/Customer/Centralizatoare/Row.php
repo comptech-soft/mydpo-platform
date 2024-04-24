@@ -123,7 +123,7 @@ class Row extends Model {
         }
     }
 
-    public function PrepareQueryInput() {
+    public static function PrepareQueryInput() {
         dd('???');
     }
     
