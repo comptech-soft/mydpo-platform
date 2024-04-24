@@ -123,8 +123,59 @@ class Row extends Model {
         }
     }
 
-    public static function PrepareQueryInput() {
-        dd('???');
+    public static function PrepareQueryInput($input) {
+        /**
+         * Pe platforma B2B
+         */
+        if( config('app.platform') == 'b2b')
+        {
+            /**
+             * Doar cele vizibile
+             */
+            $filter = [
+                ...$input['initialfilter'],
+                "(`customers-centralizatoare-rows`.`visibility` = 1)"
+            ];
+
+            /**
+             * Daca stim customerul
+             */
+            if(array_key_exists('customer_id', $input) && !! $input['customer_id'] )
+            {
+                $user = \Auth::user();
+                /**
+                 * Daca stim rolul userului
+                 */
+                if($user->role)
+                {
+                    /**
+                     * Daca este user trebuie doar cele la care avem access
+                     */
+                    if($user->role->id == 5)
+                    {
+                        $customer_centralizator = Centralizator::find($input['customer_centralizator_id']);
+                        $access = Access::where('customer_centralizator_id', $input['customer_centralizator_id'])->first();
+
+                        if(!! 1 * $customer_centralizator->department_column_id)
+                        {
+                            /** Cazul in care avem coloana departament */
+                        }
+                        else
+                        {
+                            /** Cazul in care avem NU coloana departament */
+                            if(! $access)
+                            {                               
+                                $filter[] = '(1 = 0)';
+                            }
+                        }
+                    }
+                }
+            }
+
+            
+        }
+
+        $input['initialfilter'] = $filter;
     }
     
 }
