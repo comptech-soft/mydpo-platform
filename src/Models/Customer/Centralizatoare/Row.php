@@ -159,6 +159,7 @@ class Row extends Model {
                         if(!! 1 * $customer_centralizator->department_column_id)
                         {
                             /** Cazul in care avem coloana departament */
+                            dd($accss->departamente);
                         }
                         else
                         {
