@@ -392,7 +392,7 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail 
 
         if($input['role_id'] != $user->role->id)
         {
-            $this->updateAccountRole($input['role_id']);
+            $user->updateAccountRole($input['role_id']);
         }
     }
 
