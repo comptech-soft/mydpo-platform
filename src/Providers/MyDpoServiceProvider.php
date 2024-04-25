@@ -14,7 +14,7 @@ class MyDpoServiceProvider extends ServiceProvider {
 
             $this->loadRoutesFrom(__DIR__ . '/../Routes/routes.php');
 
-            // $this->RegisterSysRoutes();
+            $this->RegisterSysRoutes();
         
         });
 
