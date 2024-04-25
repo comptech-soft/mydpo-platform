@@ -156,24 +156,27 @@ class Row extends Model {
                         $customer_centralizator = Centralizator::find($input['customer_centralizator_id']);
                         $access = Access::where('customer_centralizator_id', $input['customer_centralizator_id'])->first();
 
-                        if(!! 1 * $customer_centralizator->department_column_id)
-                        {
-                            /** Cazul in care avem coloana departament */
-                            if( ! $access->departamente || count($access->departamente) == 0) 
-                            {
-                                $filter[] = "(`customers-centralizatoare-rows`.`visibility` = -1)";
-                            }
-                            else
-                            {
-                                $filter[] = "(`customers-centralizatoare-rows`.`department_id` IN (" . implode(',', $access->departamente) . "))";
-                            }
+                        if(! $access)
+                        {                               
+                            $filter[] = '(1 = 0)';
                         }
                         else
                         {
-                            /** Cazul in care avem NU coloana departament */
-                            if(! $access)
-                            {                               
-                                $filter[] = '(1 = 0)';
+                            if(!! 1 * $customer_centralizator->department_column_id)
+                            {
+                                /** Cazul in care avem coloana departament */
+                                if( ! $access->departamente || count($access->departamente) == 0) 
+                                {
+                                    $filter[] = "(`customers-centralizatoare-rows`.`visibility` = -1)";
+                                }
+                                else
+                                {
+                                    $filter[] = "(`customers-centralizatoare-rows`.`department_id` IN (" . implode(',', $access->departamente) . "))";
+                                }
+                            }
+                            else
+                            {
+                                /** Cazul in care avem NU coloana departament */
                             }
                         }
                     }
