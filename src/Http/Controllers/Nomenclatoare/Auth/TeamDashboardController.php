@@ -22,7 +22,7 @@ class TeamDashboardController extends Controller {
             styles: ['css/app.css'],
             scripts: ['apps/nomenclatoare/auth/team-dashboard/index.js'],
             payload: [
-                'user' => $user,
+                'team_member' => $user,
             ],
         );        
     }
