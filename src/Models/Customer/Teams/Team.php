@@ -57,7 +57,10 @@ class Team extends Model {
     // }
 
     public static function doAttach($input, $record) {
-        dd($input, $record);
+        
+        $record = self::where('user_id', $input['user_id'])->where('customer_id', $input['customer_id'])->first();
+
+        dd($record);
     }
 
     public static function GetQuery() {
