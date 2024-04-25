@@ -56,6 +56,10 @@ class Team extends Model {
     //         ->Perform();
     // }
 
+    public static function doAttach($input, $record) {
+        dd($input, $record);
+    }
+
     public static function GetQuery() {
         return 
             self::query()
@@ -73,6 +77,27 @@ class Team extends Model {
             )
             ->whereHas('user')
             ->select('users-customers.*');
+    }
+
+    public static function GetRules($action, $input) {
+
+        if($action == 'delete')
+        {
+            return NULL;
+        }
+
+        if($action == 'attach')
+        {
+            return [
+                'customer_id' => 'required|exists:customers,id',
+            ];
+        }
+
+        if( $action == 'update')
+        {
+            $result['name'] .= (',' . $input['id']);
+        }
+        return NULL;
     }
 
 }
