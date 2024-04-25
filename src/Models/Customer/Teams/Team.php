@@ -60,7 +60,15 @@ class Team extends Model {
         
         $record = self::where('user_id', $input['user_id'])->where('customer_id', $input['customer_id'])->first();
 
-        dd($record);
+        if(! $record )
+        {
+            $record = self::create([
+                'user_id' => $input['user_id'],
+                'customer_id' => $input['customer_id'],
+            ]);
+        }
+
+        return $record;
     }
 
     public static function GetQuery() {
