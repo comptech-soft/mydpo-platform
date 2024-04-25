@@ -7,10 +7,11 @@ use MyDpo\Models\Customer\Customer;
 use MyDpo\Models\Authentication\User;
 // use MyDpo\Performers\UserCustomer\UpdateUserCustomers;
 use MyDpo\Traits\Itemable;
+use MyDpo\Traits\Actionable;
 
 class Team extends Model {
 
-    use Itemable;
+    use Itemable, Actionable;
 
     protected $table = 'users-customers';
 
