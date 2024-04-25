@@ -64,6 +64,12 @@ class Team extends Model {
                     $q->on('users.id', '=', 'users-customers.user_id');
                 }
             )
+            ->leftJoin(
+                'customers',
+                function($q) {
+                    $q->on('customers.id', '=', 'users-customers.customer_id');
+                }
+            )
             ->whereHas('user')
             ->select('users-customers.*');
     }
