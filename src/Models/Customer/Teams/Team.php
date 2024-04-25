@@ -106,7 +106,9 @@ class Team extends Model {
 
         if( $action == 'update')
         {
-            $result['name'] .= (',' . $input['id']);
+            return [
+                'customer_id' => 'required|exists:customers,id',
+            ];
         }
         return NULL;
     }
