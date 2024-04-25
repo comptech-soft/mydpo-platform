@@ -37,7 +37,8 @@ class Team extends Model {
     ];
 
     protected $with = [
-        'user'
+        'user',
+        'customer',
     ];
 
     public function customer() {
