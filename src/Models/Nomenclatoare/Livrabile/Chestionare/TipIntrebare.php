@@ -23,7 +23,7 @@ class TipIntrebare extends Model {
         'order_no',
         'icon',
         'has_answers',
-        'can_has_subqestion',
+        'can_has_subquestion',
     ];
 
     protected $casts = [
