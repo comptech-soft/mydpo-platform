@@ -5,7 +5,6 @@ namespace MyDpo\Http\Controllers\Nomenclatoare\Livrabile\Chestionare;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
-// use MyDpo\Models\Curs;
 use MyDpo\Models\Chestionar;
 
 class ChestionareController extends Controller {

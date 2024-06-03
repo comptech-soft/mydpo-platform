@@ -5,7 +5,7 @@ namespace MyDpo\Http\Controllers\Nomenclatoare\Livrabile\Chestionare;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
-// use MyDpo\Models\Livrabile\Centralizatoare\TipCentralizator;
+use MyDpo\Models\Nomenclatoare\Livrabile\Chestionare\TipIntrebare;
 
 class TipuriIntrebariController extends Controller {
     
@@ -17,11 +17,11 @@ class TipuriIntrebariController extends Controller {
     }
 
     public function getRecords(Request $r) {
-        return TipCentralizator::getRecords($r->all());
+        return TipIntrebare::getRecords($r->all());
     }
 
     public function doAction($action, Request $r) {
-        return TipCentralizator::doAction($action, $r->all());
+        return TipIntrebare::doAction($action, $r->all());
     }
  
 }
