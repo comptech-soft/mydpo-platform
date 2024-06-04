@@ -43,5 +43,11 @@ class Question extends Model {
         'is_required' => 'integer',
     ];
 
-   
+    protected $with = [
+        'tip'
+    ];
+
+    public function tip() {
+        return $this->belongsTo(TipIntrebare::class, 'question_type_id');
+    }
 }
