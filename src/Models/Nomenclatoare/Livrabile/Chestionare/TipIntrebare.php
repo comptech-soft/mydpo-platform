@@ -3,12 +3,8 @@
 namespace MyDpo\Models\Nomenclatoare\Livrabile\Chestionare;
 
 use Illuminate\Database\Eloquent\Model;
-// use MyDpo\Models\Livrabile\Categories\Category;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
-// use MyDpo\Traits\Admin\Livrabile\Tipuri\Centralizatorable;
-// use MyDpo\Scopes\NotdeletedScope;
-// use MyDpo\Models\Customer\Centralizatoare\Centralizator;
 
 class TipIntrebare extends Model {
 
