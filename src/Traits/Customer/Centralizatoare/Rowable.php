@@ -104,8 +104,6 @@ trait Rowable {
             }
         }
 
-        dd($input);
-
         $record->update([
             ...$input,
             'props' => [
