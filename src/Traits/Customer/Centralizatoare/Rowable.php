@@ -96,6 +96,14 @@ trait Rowable {
             $input['rowvalues'] = [];
         }
 
+        if(! array_key_exists('department_id', $input) )
+        {
+            if($input['department_id'] == 0)
+            {
+                $input['department_id'] = NULL;
+            }
+        }
+
         dd($input);
 
         $record->update([
