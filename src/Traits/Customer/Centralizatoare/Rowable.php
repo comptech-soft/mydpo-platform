@@ -91,6 +91,8 @@ trait Rowable {
      */
     public static function doUpdate($input, $record) {
         
+        dd(__METHOD__);
+        
         if(! array_key_exists('rowvalues', $input) )
         {
             $input['rowvalues'] = [];
