@@ -91,12 +91,12 @@ trait Rowable {
      */
     public static function doUpdate($input, $record) {
         
-        dd(__METHOD__);
-        
         if(! array_key_exists('rowvalues', $input) )
         {
             $input['rowvalues'] = [];
         }
+
+        dd($input);
 
         $record->update([
             ...$input,
