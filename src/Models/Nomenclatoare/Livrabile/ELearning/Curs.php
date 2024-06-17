@@ -253,7 +253,7 @@ class Curs extends Model {
     // }
 
     public static function getKnolyxCourses() {
-        return (new GetKnolyxCourses())->Perform();
+        return (new GetKnolyxCourses([]))->Perform();
     }
 
 
