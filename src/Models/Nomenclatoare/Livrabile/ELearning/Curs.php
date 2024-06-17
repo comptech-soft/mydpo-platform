@@ -7,18 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 // use MyDpo\Scopes\NotdeletedScope;
 
 use Illuminate\Http\UploadedFile;
-// use MyDpo\Helpers\Performers\Datatable\GetItems;
-// use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Models\Livrabile\Categories\Category;
-// use MyDpo\Models\Cursadresare;
-// 
-// 
-// use MyDpo\Performers\Curs\GetKnolyxCourses;
+
+use MyDpo\Performers\Curs\GetKnolyxCourses;
 // use MyDpo\Models\Livrabile\ELearning\Knolyx;
 use MyDpo\Rules\Nomenclatoare\Livrabile\Cursuri\Curs\IsUrlPresent;
 use MyDpo\Rules\Nomenclatoare\Livrabile\Cursuri\Curs\IsFilePresent;
-// 
-
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 use MyDpo\Traits\DaysDifference;
@@ -258,9 +252,9 @@ class Curs extends Model {
     //     $this->save();
     // }
 
-    // public static function getKnolyxCourses($input) {
-    //     return (new GetKnolyxCourses($input))->Perform();
-    // }
+    public static function getKnolyxCourses($input) {
+        return (new GetKnolyxCourses($input))->Perform();
+    }
 
 
     // public static function saveCoursesFromKnolyx($courses) {
