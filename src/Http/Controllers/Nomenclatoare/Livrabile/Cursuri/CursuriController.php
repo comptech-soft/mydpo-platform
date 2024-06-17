@@ -11,13 +11,9 @@ class CursuriController extends Controller {
     
     public function index(Request $r) {
 
+        Curs::getKnolyxCourses();
         Curs::CalculateInfos();
         
-        info('START. Get Knolyx courses');
-        Curs::getKnolyxCourses();
-        info('END. Get Knolyx courses');
-
-
         return Index::View(
             styles: ['css/app.css'],
             scripts: ['apps/nomenclatoare/livrabile/cursuri/cursuri/index.js'],
