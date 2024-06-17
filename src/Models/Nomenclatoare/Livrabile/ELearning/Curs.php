@@ -252,8 +252,8 @@ class Curs extends Model {
     //     $this->save();
     // }
 
-    public static function getKnolyxCourses($input) {
-        return (new GetKnolyxCourses($input))->Perform();
+    public static function getKnolyxCourses() {
+        return (new GetKnolyxCourses())->Perform();
     }
 
 
