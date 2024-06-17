@@ -12,6 +12,11 @@ class CursuriController extends Controller {
     public function index(Request $r) {
 
         Curs::CalculateInfos();
+        
+        info('START. Get Knolyx courses');
+        Curs::getKnolyxCourses();
+        info('END. Get Knolyx courses');
+
 
         return Index::View(
             styles: ['css/app.css'],
@@ -31,17 +36,10 @@ class CursuriController extends Controller {
     }
 
     // public function getKnolyxCourses(Request $r) {
-    //     return Curs::getKnolyxCourses($r->all());
+    //     return 
     // }
 
     // public function openKnolyxCourse(Request $r) {
     //     return Curs::openKnolyxCourse($r->all());
     // }
-
-    // public function getItems(Request $r) {
-    //     return Curs::getItems($r->all());
-    // }
-
-    
-
 }

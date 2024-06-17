@@ -18,15 +18,12 @@ class GetKnolyxCourses extends Perform {
             Curs::saveCoursesFromKnolyx($result['list']);
             $this->GetCourses($page + 1, $size);
         }
-        
     }
 
     public function Action() {
         $cursuriStart = Curs::whereNotNull('k_id')->get()->map( function($item) {
 			return $item->id;
 		})->toArray();
-		
-		
 		
 		$this->GetCourses(0, 20);
 		
@@ -47,5 +44,5 @@ class GetKnolyxCourses extends Perform {
 		}
 		
     }
-
+	
 }
