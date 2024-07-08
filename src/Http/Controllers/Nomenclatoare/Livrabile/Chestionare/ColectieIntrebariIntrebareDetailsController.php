@@ -13,11 +13,17 @@ class ColectieIntrebariIntrebareDetailsController extends Controller {
 
         $question = Question::find($id);
 
-        dd($question);
+        if(! $question )
+        {
+            return redirect('colectie-intrebari');
+        }
 
         return Index::View(
             styles: ['css/app.css'],
-            scripts: ['apps/nomenclatoare/livrabile/colectie-intrebari/index.js'],
+            scripts: ['apps/nomenclatoare/livrabile/colectie-intrebari-intrebare-details/index.js'],
+            payload: [
+                'question' => $question,
+            ],
         );        
     }
 
