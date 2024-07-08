@@ -137,7 +137,6 @@ class CustomerCurs extends Model {
 
         $course = Curs::find($input['curs_id']);
 
-			
         if( ! $course || ! $course->k_id)
         {
             throw new \Exception('Curs inexistent.');

@@ -41,6 +41,7 @@ class Knolyx {
      * #2. GET {{baseURL}}/public/api/v1/business-rule/course/{{courseId}}
      */
     public static function GetCourseRole($course, $user) {
+
         $response =  \Http::withHeaders([
             'X-Project-Id' => config('knolyx.project_id'),
             'X-Api-Key' => config('knolyx.app_key')
@@ -66,12 +67,15 @@ class Knolyx {
 				],
 				'associations' => [
 					"USER" => []
-				 ],
+				],
 				'action' => "STUDENTS"
 			];
 		}
 		else
 		{
+			/**
+			 * aici nu trebuie suprascris raspunsul primit
+			 */
 			$response[0] = [
 				'name' => "All",
 				'type' => "PRIVATE",
@@ -84,7 +88,7 @@ class Knolyx {
 				],
 				'associations' => [
 					"USER" => []
-				 ],
+				],
 				'action' => "STUDENTS"
 			];
 		}
