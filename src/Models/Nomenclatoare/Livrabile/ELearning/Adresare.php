@@ -3,10 +3,8 @@
 namespace MyDpo\Models\Nomenclatoare\Livrabile\ELearning;
 
 use Illuminate\Database\Eloquent\Model;
-
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
-
 use MyDpo\Rules\Nomenclatoare\Livrabile\Cursuri\Cursadresare\UniqueName;
 
 class Adresare extends Model {
@@ -32,11 +30,6 @@ class Adresare extends Model {
         'deleted_by'
     ];
 
-    // function cursuri() {
-    //     return $this->hasMany(Curs::class, 'adresare_id');
-    // }
-
-
     public static function GetRules($action, $input) {
 
         if(! in_array($action, ['insert', 'update']) )
@@ -54,7 +47,5 @@ class Adresare extends Model {
 
         return $result;
     }
-
-
 
 }

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Kalnoy\Nestedset\NodeTrait;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
-
+use MyDpo\Rules\Nomenclatoare\Livrabile\Chestionare\Question\UniqueName;
 class Question extends Model {
 
     use Itemable, Actionable, NodeTrait;
@@ -49,5 +49,27 @@ class Question extends Model {
 
     public function tip() {
         return $this->belongsTo(TipIntrebare::class, 'question_type_id');
+    }
+
+    public static function GetRules($action, $input) {
+
+        if(! in_array($action, ['insert', 'update']) )
+        {
+            return NULL;
+        }
+
+        $result = [
+            'name' => [
+                'required',
+                'max:128',
+                new UniqueName($action, $input),
+            ],
+
+            'question_text' => [
+                'required',
+            ],
+        ];
+
+        return $result;
     }
 }
