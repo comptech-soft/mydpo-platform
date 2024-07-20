@@ -41,7 +41,6 @@ class Knolyx {
      * #2. GET {{baseURL}}/public/api/v1/business-rule/course/{{courseId}}
      */
     public static function GetCourseRole($course, $user) {
-
         $response =  \Http::withHeaders([
             'X-Project-Id' => config('knolyx.project_id'),
             'X-Api-Key' => config('knolyx.app_key')
@@ -54,7 +53,6 @@ class Knolyx {
 	
         if(count($response) == 0)
 		{
-			
 			$response[] = [
 				'name' => "All",
 				'type' => "PRIVATE",
@@ -67,30 +65,12 @@ class Knolyx {
 				],
 				'associations' => [
 					"USER" => []
-				],
+				 ],
 				'action' => "STUDENTS"
 			];
 		}
 		else
 		{
-			/**
-			 * aici nu trebuie suprascris raspunsul primit
-			 */
-			$response[0] = [
-				'name' => "All",
-				'type' => "PRIVATE",
-				'startDateTime' => $startDateTime,
-				'endDateTime' => $endDateTime,
-				'restrictions' => [
-					'minimumTime' => false,
-					'browseOrder' => "anyOrder",
-					'minimumTimeValue' => "1 hours",
-				],
-				'associations' => [
-					"USER" => []
-				],
-				'action' => "STUDENTS"
-			];
 		}
 		
         $courseRole = $response[0];
@@ -100,8 +80,8 @@ class Knolyx {
             $courseRole['associations']['USER'] = [];
         }
 
-        $courseRole['associations']['USER'][] = $user['k_id'];
-
+        $courseRole['associations']['USER'][] = 1 * $user['k_id'];
+			
         return [$courseRole];
     }
 
