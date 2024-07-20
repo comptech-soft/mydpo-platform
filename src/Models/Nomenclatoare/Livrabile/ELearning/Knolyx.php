@@ -82,8 +82,14 @@ class Knolyx {
             $courseRole['associations']['USER'] = [];
         }
 
-        $courseRole['associations']['USER'][] = 1 * $user['k_id'];
-			
+		$user_id = 1 * $user['k_id'];
+		if(! in_array($user_id, $courseRole['associations']['USER']) )
+        {
+			$courseRole['associations']['USER'][] = $user_id;
+		}
+
+		dd($courseRole);
+		
         return [$courseRole];
     }
 
