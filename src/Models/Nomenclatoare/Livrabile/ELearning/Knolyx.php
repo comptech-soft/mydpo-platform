@@ -71,6 +71,7 @@ class Knolyx {
 		}
 		else
 		{
+			// 20.07.2024
 			// De aici am eliminat suprascrierea regulii
 		}
 		
