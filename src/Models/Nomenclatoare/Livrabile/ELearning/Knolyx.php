@@ -56,8 +56,6 @@ class Knolyx {
 			$response[] = [
 				'name' => "All",
 				'type' => "PRIVATE",
-				'startDateTime' => $startDateTime,
-				'endDateTime' => $endDateTime,
 				'restrictions' => [
 					'minimumTime' => false,
 					'browseOrder' => "anyOrder",
@@ -90,6 +88,8 @@ class Knolyx {
         {
 			$courseRole['associations']['USER'][] = $user_id;
 		}
+
+		dd([$courseRole]);
 
         return [$courseRole];
     }
