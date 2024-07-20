@@ -71,6 +71,7 @@ class Knolyx {
 		}
 		else
 		{
+			// De aici am eliminat suprascrierea regulii
 		}
 		
         $courseRole = $response[0];
