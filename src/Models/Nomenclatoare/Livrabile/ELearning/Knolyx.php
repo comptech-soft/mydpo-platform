@@ -89,8 +89,6 @@ class Knolyx {
 			$courseRole['associations']['USER'][] = $user_id;
 		}
 
-		dd([$courseRole]);
-
         return [$courseRole];
     }
 
