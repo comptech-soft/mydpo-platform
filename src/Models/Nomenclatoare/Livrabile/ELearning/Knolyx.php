@@ -77,6 +77,9 @@ class Knolyx {
 		
         $courseRole = $response[0];
 		
+		$courseRole['startDateTime'] = $startDateTime;
+		$courseRole['endDateTime'] = $endDateTime;
+		
         if( ! array_key_exists('USER', $courseRole['associations']) )
         {
             $courseRole['associations']['USER'] = [];
@@ -88,8 +91,6 @@ class Knolyx {
 			$courseRole['associations']['USER'][] = $user_id;
 		}
 
-		dd($courseRole);
-		
         return [$courseRole];
     }
 
