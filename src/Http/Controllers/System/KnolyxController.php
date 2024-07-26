@@ -13,28 +13,20 @@ use MyDpo\Events\Knolyx\CursFinished;
 class KnolyxController extends Controller {
 
     public function webhookProcess(Request $r) {
-
-		// $q = [
-		// 	"id" => "af46ec07-de79-40b5-916c-0058b54b2d2b", // unique id, messages with the same id should be ignored
-		// 	"type" => "COURSE_COMPLETED",
-		// 	"data" => [
-		// 		"user" => [
-		// 			"id" => 38232,
-		// 			"name" => "test1 test2",
-		// 			"email" => "mydpo@decalex.ro"
-		// 		],
-		// 		"course" => [
-		// 			"id" => 2455,
-		// 			"name" => "Intro to marketing",
-		// 		]
-		// 	],
-		// ];
-
-		\Log::info('Start process received message');
-
-        $q = [...$r->all()];
 		
+		// inregistrarea din DB
+		$token = \MyDpo\Models\System\SysConfig::where('code', 'knolyx-webhook-security-token')->first();
 		
+		// headerul X-Webhook-Security-Token din request 
+		$value = $r->header('X-Webhook-Security-Token');
+			
+		// verificarea
+		if(! $token || ! $value || $token->value != $value)
+		{
+			return response("Solicitare neautorizata. Nu sunt permisiuni.", 403);
+		}
+			
+		$q = [...$r->all()];
 		
 		if($q['type'] == 'COURSE_COMPLETED')
 		{
@@ -49,11 +41,13 @@ class KnolyxController extends Controller {
 
 			foreach($records as $i => $record) 
 			{
+				// se marcheaza cursul ca finalizat
 				$record->update([
 					'status' => 'done',
 					'done_at' => \Carbon\Carbon::now()->format('Y-m-d'),
 				]);
-
+				
+				// se afla clientul
 				// if( ! $customer )
 				// {
 				// 	$customer = Customer::find( $record->customer_id);
@@ -61,27 +55,18 @@ class KnolyxController extends Controller {
 
 				// 
 			}
-
+			
+			// se declanseaza un eveniment notificare
 			// event(new CursFinished([
 			// 	'customer' => $customer,
 			// 	'curs' => $curs,
 			// 	'receiver' => $user,
 			// ]));
 			
-			// \Log::info(__METHOD__ . '== END ==' . __METHOD__);
-			
-			return __METHOD__;
+			return response('Evenimentul COURSE_COMPLETED (' . $q['id'] . ') înregistrat cu succes.', 200);
 		}
 
-        $params = [
-            "id" => $q['id'], //"af46ec07-de79-40b5-916c-0058b54b2d2b", // unique id, messages with the same id should be ignored
-            "type" => "PING",
-            "data" => [
-                "message" => "PING"
-            ]
-        ];
-
-        return $params;
+        return response("Tipul eveniment (" . $q['type'] . ") nu este tratat.", 403);
     }
 
 }
