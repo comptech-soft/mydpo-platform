@@ -3,7 +3,7 @@
 use MyDpo\Http\Controllers\System\DashboardController;
 
 use MyDpo\Http\Controllers\System\AccountInactiveController;
-use MyDpo\Http\Controllers\Usersession\EmailVerificationPromptController;
+// use MyDpo\Http\Controllers\Usersession\EmailVerificationPromptController;
 use MyDpo\Http\Controllers\Usersession\VerifyEmailController;
 use MyDpo\Http\Controllers\Usersession\LogoutController;
 use MyDpo\Http\Controllers\System\ConfigController;

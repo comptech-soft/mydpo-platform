@@ -14,11 +14,7 @@ class KnolyxController extends Controller {
 
     public function webhookProcess(Request $r) {
 
-
-        $q = [...$r->all()];
-		
 		// $q = [
-			
 		// 	"id" => "af46ec07-de79-40b5-916c-0058b54b2d2b", // unique id, messages with the same id should be ignored
 		// 	"type" => "COURSE_COMPLETED",
 		// 	"data" => [
@@ -31,9 +27,14 @@ class KnolyxController extends Controller {
 		// 			"id" => 2455,
 		// 			"name" => "Intro to marketing",
 		// 		]
-		
 		// 	],
 		// ];
+
+		\Log::info('Start process received message');
+
+        $q = [...$r->all()];
+		
+		
 		
 		if($q['type'] == 'COURSE_COMPLETED')
 		{
@@ -53,12 +54,12 @@ class KnolyxController extends Controller {
 					'done_at' => \Carbon\Carbon::now()->format('Y-m-d'),
 				]);
 
-				if( ! $customer )
-				{
-					$customer = Customer::find( $record->customer_id);
-				}
+				// if( ! $customer )
+				// {
+				// 	$customer = Customer::find( $record->customer_id);
+				// }
 
-				// \Log::info($user->id . '#' . $curs->id . '#' . $record->id . '#' . $record->status . '#' . $record->done_at);
+				// 
 			}
 
 			// event(new CursFinished([
