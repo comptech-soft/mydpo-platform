@@ -143,4 +143,9 @@ class Notification extends Model {
 
     }
 
+    public static function PrepareQueryInput($input)
+    {
+        dd($input);
+    }
+
 }
