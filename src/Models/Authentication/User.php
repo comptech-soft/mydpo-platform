@@ -2,9 +2,8 @@
 
 namespace MyDpo\Models\Authentication;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Http\UploadedFile;
+// use Illuminate\Http\UploadedFile;
 use Illuminate\Contracts\Auth\CanResetPassword;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

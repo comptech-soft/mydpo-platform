@@ -5,9 +5,9 @@ namespace MyDpo\Http\Controllers\System;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Models\Authentication\User;
-use MyDpo\Models\Curs;
+use MyDpo\Models\Nomenclatoare\Livrabile\ELearning\Curs;
 use MyDpo\Models\Customer\Customer;
-use MyDpo\Models\Customer\CustomerCursUser;
+use MyDpo\Models\Customer\ELearning\CustomerCursUser;
 use MyDpo\Events\Knolyx\CursFinished;
 
 class KnolyxController extends Controller {
@@ -58,22 +58,22 @@ class KnolyxController extends Controller {
 					$customer = Customer::find( $record->customer_id);
 				}
 
-				\Log::info($user->id . '#' . $curs->id . '#' . $record->id . '#' . $record->status . '#' . $record->done_at);
+				// \Log::info($user->id . '#' . $curs->id . '#' . $record->id . '#' . $record->status . '#' . $record->done_at);
 			}
 
-			event(new CursFinished([
-				'customer' => $customer,
-				'curs' => $curs,
-				'receiver' => $user,
-			]));
+			// event(new CursFinished([
+			// 	'customer' => $customer,
+			// 	'curs' => $curs,
+			// 	'receiver' => $user,
+			// ]));
 			
-			\Log::info(__METHOD__ . '== END ==' . __METHOD__);
+			// \Log::info(__METHOD__ . '== END ==' . __METHOD__);
 			
 			return __METHOD__;
 		}
 
         $params = [
-            "id" => "af46ec07-de79-40b5-916c-0058b54b2d2b", // unique id, messages with the same id should be ignored
+            "id" => $q['id'], //"af46ec07-de79-40b5-916c-0058b54b2d2b", // unique id, messages with the same id should be ignored
             "type" => "PING",
             "data" => [
                 "message" => "PING"
