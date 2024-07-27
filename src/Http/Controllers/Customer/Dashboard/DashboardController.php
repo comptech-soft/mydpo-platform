@@ -8,6 +8,7 @@ use MyDpo\Core\Http\Response\Index;
 use MyDpo\Models\Customer\Customer;
 use MyDpo\Models\Customer\Dashboard\Item;
 use MyDpo\Models\Customer\Dashboard\Entity;
+use MyDpo\Models\Authentication\UserSetting;
 
 class DashboardController extends Controller {
     
@@ -18,6 +19,11 @@ class DashboardController extends Controller {
      */
     public function index($customer_id, Request $r) {
 
+
+        $x = GetDefaultCustomer(config('app.platform'), $\Auth::user());
+
+        dd($x->toArray());
+        
         return Index::View(
             styles: ['css/app.css'],
             scripts: ['apps/customer/dashboard/index.js'],
