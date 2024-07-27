@@ -9,6 +9,7 @@ use MyDpo\Models\Nomenclatoare\Livrabile\ELearning\Curs;
 use MyDpo\Models\Customer\Customer;
 use MyDpo\Models\Customer\ELearning\CustomerCursUser;
 use MyDpo\Events\Customer\Livrabile\Cursuri\CursFinished;
+use MyDpo\Models\Authentication\User;
 
 class KnolyxController extends Controller {
 
@@ -56,9 +57,11 @@ class KnolyxController extends Controller {
 				// 
 			}
 			
-			if($customer)
+			if(!! $customer)
 			{
 				// se declanseaza un eveniment notificare
+
+				$receivers = self::GetReceivers($customer->id);
 
 				event(new CursFinished('knolyx.course-completed', [
 					'name' => $curs->name,
@@ -75,6 +78,50 @@ class KnolyxController extends Controller {
 		}
 
         return response("Tipul eveniment (" . $q['type'] . ") nu este tratat.", 403);
+    }
+
+	public static function GetReceivers($customer_id) {
+
+        $sql = "
+            SELECT 
+                user_id 
+            FROM `customers-persons` 
+            WHERE 
+                (customer_id = " . $customer_id . ") AND 
+                (user_id <> " . \Auth::user()->id . ")
+        ";
+
+        $accounts = \DB::select($sql);
+       
+        $sql = "
+            SELECT
+                id as user_id
+            FROM `users`
+            WHERE
+                (type = 'admin') AND 
+                (id <> " . \Auth::user()->id . ")
+        ";
+        
+        $admins = \DB::select($sql);
+
+        $receivers = [];
+        
+        foreach([...$accounts, ...$admins] as $i => $item)
+        {
+            if(! in_array($item->user_id, $receivers) )
+            {
+                $receivers[] = $item->user_id;
+            }
+        }
+
+        $users = User::whereIn('id', $receivers)->whereRaw('( deleted is NULL || (deleted = 0))')->get()->map(function($user){
+            return $user->id;
+        })->toArray();
+
+        return collect($users)->map(function($item) use ($customer_id) {
+            return $customer_id . '#' . $item;
+        })->toArray();
+
     }
 
 }
