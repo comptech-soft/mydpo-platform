@@ -9,7 +9,6 @@ use MyDpo\Models\Nomenclatoare\Livrabile\ELearning\Curs;
 use MyDpo\Models\Customer\Customer;
 use MyDpo\Models\Customer\ELearning\CustomerCursUser;
 use MyDpo\Events\Customer\Livrabile\Cursuri\CursFinished;
-use MyDpo\Models\Authentication\User;
 
 class KnolyxController extends Controller {
 
