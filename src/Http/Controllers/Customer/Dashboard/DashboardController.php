@@ -19,11 +19,12 @@ class DashboardController extends Controller {
      */
     public function index($customer_id, Request $r) {
 
+        UserSetting::saveActiveCustomer([
+            'user_id' => \Auth::user()->id,
+            'platform' => config('app.platform'),
+            'customer_id' => $customer_id
+        ]);
 
-        $x = GetDefaultCustomer(config('app.platform'), $\Auth::user());
-
-        dd($x->toArray());
-        
         return Index::View(
             styles: ['css/app.css'],
             scripts: ['apps/customer/dashboard/index.js'],
