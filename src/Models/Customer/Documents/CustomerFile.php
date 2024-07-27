@@ -446,9 +446,14 @@ class CustomerFile extends Model {
             }
         }
 
+        $users = User::whereIn('id', $r)->whereRaw('( deleted is NULL || (deleted = 0))')->get()->map(function($user){
+            return $user->id;
+        })->toArray();
+
+
         $user_id = \Auth::user()->id;
 
-        return collect($r)
+        return collect($users)
             ->filter(function($id) use($user_id) {
                 return $id != $user_id;
             })
