@@ -121,7 +121,7 @@ class Notification extends Model {
             'type_id' => $template->id,
             'subject_type' => $template->name,
             'subject_id' => NULL,
-            'sender_id' => \Auth::user()->id,
+            'sender_id' => \Auth::user() ? \Auth::user()->id : NULL,
             'sended_at' => NULL,
             'date_from' => NULL,
             'date_to' => NULL,
@@ -133,7 +133,7 @@ class Notification extends Model {
             'status' => 'created',
             'link' => $link,
             'payload' => NULL,
-            'created_by' => \Auth::user()->id,
+            'created_by' => \Auth::user() ? \Auth::user()->id : NULL,
             'props' => [
                 'template' => $template->toArray(),
             ]
