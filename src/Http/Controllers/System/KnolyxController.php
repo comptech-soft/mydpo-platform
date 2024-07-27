@@ -87,7 +87,7 @@ class KnolyxController extends Controller {
             FROM `customers-persons` 
             WHERE 
                 (customer_id = " . $customer_id . ") AND 
-                (user_id <> " . \Auth::user()->id . ")
+                (user_id <> " . (Auth::user() ? \Auth::user()->id : '0') . ")
         ";
 
         $accounts = \DB::select($sql);
@@ -98,7 +98,7 @@ class KnolyxController extends Controller {
             FROM `users`
             WHERE
                 (type = 'admin') AND 
-                (id <> " . \Auth::user()->id . ")
+                (id <> " . (Auth::user() ? \Auth::user()->id : '0') . ")
         ";
         
         $admins = \DB::select($sql);
