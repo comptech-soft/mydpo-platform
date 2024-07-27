@@ -140,15 +140,16 @@ class CustomerFile extends Model {
         $files = self::whereIn('id', $input['files_ids'])->get()->map(function($item) {
             return $item->url;
         })->toArray();
-
-        $temp_directory = storage_path('temp');
-
+		
+		$path = 'arhiva' . md5(time());
+        $temp_directory = storage_path( $path );
+		
         // Verifică și creează directorul temporar dacă nu există
         if (! \File::exists($temp_directory)) 
         {
             \File::makeDirectory($temp_directory, 0755, true);
         }
-        
+		
         foreach($files as $url) 
         {
             $fileName = basename($url);
@@ -158,13 +159,13 @@ class CustomerFile extends Model {
 
         $zip = new \ZipArchive();
 
-        $zipFileName = 'arhiva.zip';
-
+        $zipFileName = $path . '.zip';
+			
         if ($zip->open($zipFileName, \ZipArchive::CREATE) === TRUE) 
         {
             // Adaugă fișierele descărcate în arhiva ZIP
             $files = glob("$temp_directory/*");
-            
+			            
             foreach ($files as $file) 
             {
                 $zip->addFile($file, basename($file));
