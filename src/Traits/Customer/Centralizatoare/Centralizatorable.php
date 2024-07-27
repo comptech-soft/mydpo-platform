@@ -3,8 +3,7 @@
 namespace MyDpo\Traits\Customer\Centralizatoare;
 
 use MyDpo\Models\Customer\Departments\Department;
-use MyDpo\Models\Customer\Centralizatoare\Centralizator;
-use MyDpo\Models\Customer\Accounts\Account;
+use MyDpo\Models\Authentication\User;
 
 trait Centralizatorable {
 
@@ -198,7 +197,11 @@ trait Centralizatorable {
             }
         }
 
-        return collect($accounts)->map(function($item) use ($customer_id) {
+        $users = User::whereIn('id', $accounts)->whereRaw('( deleted is NULL || (deleted = 0))')->get()->map(function($user){
+            return $user->id;
+        })->toArray();
+
+        return collect($users)->map(function($item) use ($customer_id) {
             return $customer_id . '#' . $item;
         })->toArray();
 

@@ -9,6 +9,7 @@ use MyDpo\Traits\Exportable;
 use MyDpo\Models\Livrabile\Planuriconformare\Planconformare as Structura;
 use MyDpo\Models\Customer\Departments\Department;
 use MyDpo\Exports\Customer\Livrabile\Planconformare\Exporter;
+use MyDpo\Models\Authentication\User;
 
 class Planconformare extends Model {
 
@@ -174,7 +175,11 @@ class Planconformare extends Model {
             }
         }
 
-        return collect($receivers)->map(function($item) use ($customer_id) {
+        $users = User::whereIn('id', $receivers)->whereRaw('( deleted is NULL || (deleted = 0))')->get()->map(function($user){
+            return $user->id;
+        })->toArray();
+
+        return collect($users)->map(function($item) use ($customer_id) {
             return $customer_id . '#' . $item;
         })->toArray();
 
