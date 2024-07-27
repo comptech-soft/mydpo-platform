@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Events\Knolyx;
+namespace MyDpo\Events\Customer\Livrabile\Cursuri;
 
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
@@ -14,22 +14,8 @@ use MyDpo\Events\BaseBroadcastEvent;
 
 class CursFinished extends BaseBroadcastEvent {
 
-    public $curs = NULL;
-    
-    public function __construct($input) {
-
-        parent::__construct('curs', 'finished', $input);
-               
-        $this->curs = $this->input['curs'];
-
-        $this->SetSubject(__CLASS__, $this->curs->id);
-
-        $this->CreateMessage([
-            'nume-curs' => $this->curs->name,
-        ]);
-
-        $this->InsertNotification();
-
+    public function __construct($template, $input) {
+        parent::__construct($template, $input);
     }
     
 }

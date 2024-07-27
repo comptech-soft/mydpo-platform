@@ -8,7 +8,7 @@ use MyDpo\Models\Authentication\User;
 use MyDpo\Models\Nomenclatoare\Livrabile\ELearning\Curs;
 use MyDpo\Models\Customer\Customer;
 use MyDpo\Models\Customer\ELearning\CustomerCursUser;
-use MyDpo\Events\Knolyx\CursFinished;
+use MyDpo\Events\Customer\Livrabile\Cursuri\CursFinished;
 
 class KnolyxController extends Controller {
 
@@ -48,20 +48,28 @@ class KnolyxController extends Controller {
 				]);
 				
 				// se afla clientul
-				// if( ! $customer )
-				// {
-				// 	$customer = Customer::find( $record->customer_id);
-				// }
+				if( ! $customer )
+				{
+					$customer = Customer::find( $record->customer_id);
+				}
 
 				// 
 			}
 			
-			// se declanseaza un eveniment notificare
-			// event(new CursFinished([
-			// 	'customer' => $customer,
-			// 	'curs' => $curs,
-			// 	'receiver' => $user,
-			// ]));
+			if($customer)
+			{
+				// se declanseaza un eveniment notificare
+
+				event(new CursFinished('knolyx.course-completed', [
+					'name' => $curs->name,
+				
+					'customers' => [$customer->id . '#' . $user->id], //self::CreateUploadReceivers($record->customer_id, $record->folder_id), 
+
+					'link' => '/customer-my-elearning/' . $customer->id,
+				]));
+			}
+			
+			
 			
 			return response('Evenimentul COURSE_COMPLETED (' . $q['id'] . ') înregistrat cu succes.', 200);
 		}
