@@ -71,7 +71,6 @@ class Activation extends Model {
         {
             $activation = self::createActivation($payload['account']['user_id'], $payload['customer_id'], $payload['account']['role_id']);
 
-            \Log::info(__METHOD__, $activation->toArray());
             return [
                 'btn_url' => \MyDpo\Models\System\Platform::find(2)->url . '/' . \Str::replace('[token]', $activation->token, $template['btn_url']),
                 'btn_caption' => $template['btn_caption'],
@@ -92,10 +91,12 @@ class Activation extends Model {
 
     public static function createActivation($user_id, $customer_id, $role_id) {
         $q = self::where('user_id', $user_id);
+        
         if(!! $customer_id )
         {
             $q->where('customer_id', $customer_id);
         }
+
         $record = $q->first();
 
         if(!! $record )
@@ -106,6 +107,8 @@ class Activation extends Model {
         {
             $record = self::create(['user_id' => $user_id, 'role_id' => $role_id, 'token' => \Str::random(64)]);
         }
+
+        \Log::info(__METHOD__, $record->toArray());
 
         return $record;
     }
