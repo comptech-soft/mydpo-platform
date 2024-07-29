@@ -69,7 +69,8 @@ class Activation extends Model {
     public static function RegisterActivation($user, $sender, $template, $payload) {
         if(!! $payload['customer_id'])
         {
-            $activation = self::createActivation($payload['account']['user_id'], $payload['account']['customer_id'], $payload['account']['role_id']);
+            $activation = self::createActivation($payload['account']['user_id'], $payload['customer_id'], $payload['account']['role_id']);
+
             return [
                 'btn_url' => \MyDpo\Models\System\Platform::find(2)->url . '/' . \Str::replace('[token]', $activation->token, $template['btn_url']),
                 'btn_caption' => $template['btn_caption'],
@@ -79,6 +80,7 @@ class Activation extends Model {
         else
         {
             $activation = self::createActivation($user->id, NULL, $payload['role']->id);
+            
             return [
                 'btn_url' => \MyDpo\Models\System\Platform::find(1)->url . '/' . \Str::replace('[token]', $activation->token, $template['btn_url']),
                 'btn_caption' => $template['btn_caption'],
