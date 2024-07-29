@@ -67,18 +67,37 @@ class Activation extends Model {
     }
 
     public static function RegisterActivation($user, $sender, $template, $payload) {
-        if(!! $payload['customer_id'])
+
+        \Log::info($payload['customer_id']);
+
+        if(!! ($customer_id = $payload['customer_id'] ))
         {
-            $activation = self::createActivation($payload['account']['user_id'], $payload['customer_id'], $payload['account']['role_id']);
+            \Log::info(
+                $payload['account']['user_id'], 
+                $customer_id, 
+                $payload['account']['role_id']
+            );
+
+            $activation = self::createActivation(
+                $payload['account']['user_id'], 
+                $customer_id, 
+                $payload['account']['role_id']
+            );
 
             return [
                 'btn_url' => \MyDpo\Models\System\Platform::find(2)->url . '/' . \Str::replace('[token]', $activation->token, $template['btn_url']),
                 'btn_caption' => $template['btn_caption'],
-                'customer_name' => Customer::find($payload['customer_id'])->name,
+                'customer_name' => Customer::find($customer_id)->name,
             ];
         }
         else
         {
+            \Log::info(
+                $user->id, 
+                NULL, 
+                $payload['role']->id
+            );
+
             $activation = self::createActivation($user->id, NULL, $payload['role']->id);
 
             return [
@@ -90,6 +109,9 @@ class Activation extends Model {
     }
 
     public static function createActivation($user_id, $customer_id, $role_id) {
+
+        \Log::info(__METHOD__, $user_id, $customer_id, $role_id);
+
         $q = self::where('user_id', $user_id);
         
         if(!! $customer_id )
