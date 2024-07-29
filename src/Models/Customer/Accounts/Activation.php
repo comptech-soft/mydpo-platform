@@ -68,16 +68,8 @@ class Activation extends Model {
 
     public static function RegisterActivation($user, $sender, $template, $payload) {
 
-        \Log::info($payload['customer_id']);
-
         if(!! ($customer_id = $payload['customer_id'] ))
         {
-            \Log::info(
-                $payload['account']['user_id'], 
-                $customer_id, 
-                $payload['account']['role_id']
-            );
-
             $activation = self::createActivation(
                 $payload['account']['user_id'], 
                 $customer_id, 
@@ -92,12 +84,6 @@ class Activation extends Model {
         }
         else
         {
-            \Log::info(
-                $user->id, 
-                NULL, 
-                $payload['role']->id
-            );
-
             $activation = self::createActivation($user->id, NULL, $payload['role']->id);
 
             return [
@@ -110,8 +96,6 @@ class Activation extends Model {
 
     public static function createActivation($user_id, $customer_id, $role_id) {
 
-        \Log::info(__METHOD__, $user_id, $customer_id, $role_id);
-
         $q = self::where('user_id', $user_id);
         
         if(!! $customer_id )
@@ -123,14 +107,12 @@ class Activation extends Model {
 
         if(!! $record )
         {
-            $record->update(['activated' => 0, 'activated_at' => NULL, 'role_id' => $role_id]);
+            $record->update(['activated' => 0, 'activated_at' => NULL, 'role_id' => $role_id, 'customer_id' => $customer_id]);
         }
         else
         {
-            $record = self::create(['user_id' => $user_id, 'role_id' => $role_id, 'token' => \Str::random(64)]);
+            $record = self::create(['customer_id' => $customer_id, 'user_id' => $user_id, 'role_id' => $role_id, 'token' => \Str::random(64)]);
         }
-
-        \Log::info(__METHOD__, $record->toArray());
 
         return $record;
     }
