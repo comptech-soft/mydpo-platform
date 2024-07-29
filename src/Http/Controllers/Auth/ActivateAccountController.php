@@ -34,14 +34,22 @@ class ActivateAccountController extends Controller {
                 ); 
             }
 
-            return Response::View(
-                '~templates.index', 
-                asset('apps/auth/activate-account/index.js'),
-                [], 
-                [
+            return Index::View(
+                styles: ['css/app.css'],
+                scripts: ['apps/auth/activate-account/index.js'],
+                payload: [
                     'token' => $token,
-                ]
-            );
+                ],
+            ); 
+
+            // return Response::View(
+            //     '~templates.index', 
+            //     asset('apps/auth/activate-account/index.js'),
+            //     [], 
+            //     [
+            //         'token' => $token,
+            //     ]
+            // );
         }
         
         return redirect('/');
