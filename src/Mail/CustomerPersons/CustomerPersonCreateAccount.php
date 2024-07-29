@@ -12,8 +12,6 @@ class CustomerPersonCreateAccount extends BaseEmail {
 
         parent::__construct($entity, $action, $input);
         
-        dd($input);
-        
         $activation = Activation::createActivation(
             $this->input['account']->user_id, 
             $this->input['customer_id'],
