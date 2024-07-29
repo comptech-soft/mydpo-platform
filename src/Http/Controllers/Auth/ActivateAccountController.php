@@ -36,7 +36,7 @@ class ActivateAccountController extends Controller {
 
             return Response::View(
                 '~templates.index', 
-                asset('apps/activate-account/index.js'),
+                asset('apps/auth/activate-account/index.js'),
                 [], 
                 [
                     'token' => $token,
