@@ -123,9 +123,6 @@ class Account extends Model {
          * #1. Se creaza inregistrarea in tabela [users]
          * se ataseaza id-ul userului la $input
          */
-
-         dd($input);
-         
         $user = User::create([...$input['user'], 'type' => 'b2b']);
         $input['user_id'] = $user->id;
 
