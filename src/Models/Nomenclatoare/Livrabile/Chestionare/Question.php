@@ -51,6 +51,12 @@ class Question extends Model {
         return $this->belongsTo(TipIntrebare::class, 'question_type_id');
     }
 
+    public static function doUpdate($input, $record) {
+
+        dd($input, $record);
+    }
+
+
     public static function GetRules($action, $input) {
 
         if(! in_array($action, ['insert', 'update']) )
