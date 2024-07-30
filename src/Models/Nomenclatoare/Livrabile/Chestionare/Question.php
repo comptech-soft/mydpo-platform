@@ -55,7 +55,7 @@ class Question extends Model {
     }
 
     public function answers() {
-        return $this->hasMany(QuestionAnswer::class, 'question_id');
+        return $this->hasMany(QuestionAnswer::class, 'question_id')->orderBy('order_no');
     }
 
     // public static function doUpdate($input, $record) {
