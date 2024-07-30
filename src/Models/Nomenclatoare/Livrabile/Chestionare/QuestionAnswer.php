@@ -3,10 +3,13 @@
 namespace MyDpo\Models\Nomenclatoare\Livrabile\Chestionare;
 
 use Illuminate\Database\Eloquent\Model;
-
+use MyDpo\Traits\Itemable;
+use MyDpo\Traits\Actionable;
 
 class QuestionAnswer extends Model {
 
+    use Actionable, Itemable;
+    
     protected $table = 'questions-collection-answers';
     
     protected $fillable = [
