@@ -46,19 +46,24 @@ class Question extends Model {
     ];
 
     protected $with = [
-        'tip'
+        'tip',
+        'answers',
     ];
 
     public function tip() {
         return $this->belongsTo(TipIntrebare::class, 'question_type_id');
     }
 
-    public static function doUpdate($input, $record) {
-
-        $record->update($input);
-
-        return $record;
+    public function answers() {
+        return $this->hasMany(QuestionAnswer::class, 'question_id');
     }
+
+    // public static function doUpdate($input, $record) {
+
+    //     $record->update($input);
+
+    //     return $record;
+    // }
 
 
     public static function GetRules($action, $input) {
