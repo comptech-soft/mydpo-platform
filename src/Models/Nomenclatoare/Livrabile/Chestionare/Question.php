@@ -55,7 +55,9 @@ class Question extends Model {
 
     public static function doUpdate($input, $record) {
 
-        dd($input, $record);
+        $record->update($input);
+
+        return $record;
     }
 
 

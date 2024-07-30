@@ -12,6 +12,7 @@ class QuestionObserver {
 
     public function updated(Record $record): void 
     {  
+        dd(__METHOD__, $record);
     }
 
     public function deleted(Record $record): void 
