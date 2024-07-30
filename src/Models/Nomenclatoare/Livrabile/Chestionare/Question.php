@@ -7,6 +7,8 @@ use Kalnoy\Nestedset\NodeTrait;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 use MyDpo\Rules\Nomenclatoare\Livrabile\Chestionare\Question\UniqueName;
+use MyDpo\Observers\Nomenclatoare\Livrabile\Chestionare\QuestionObserver;
+
 class Question extends Model {
 
     use Itemable, Actionable, NodeTrait;
@@ -77,5 +79,10 @@ class Question extends Model {
         ];
 
         return $result;
+    }
+
+    protected static function booted() 
+    {
+        static::observe(QuestionObserver::class);
     }
 }
