@@ -17,11 +17,11 @@ class ChestionareController extends Controller {
     }
 
     public function getRecords(Request $r) {
-        return Chestionar::getItems($r->all());
+        return Chestionar::getRecords($r->all());
     }
 
     public function doAction($action, Request $r) {
         return Chestionar::doAction($action, $r->all());
     }
-
+ 
 }

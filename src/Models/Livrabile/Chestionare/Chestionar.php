@@ -4,8 +4,13 @@ namespace MyDpo\Models\Livrabile\Chestionare;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Models\Livrabile\Category;
+use MyDpo\Traits\Itemable;
+use MyDpo\Traits\Actionable;
+use MyDpo\Traits\DaysDifference;
 
 class Chestionar extends Model {
+    
+    use Itemable, Actionable, DaysDifference;
     
     protected $table = 'chestionare';
 
