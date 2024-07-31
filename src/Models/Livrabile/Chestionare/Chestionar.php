@@ -51,7 +51,7 @@ class Chestionar extends Model {
     protected $appends = [
         'visible',
         'days_difference',
-        'status',
+        'human_status',
     ];
 
     public function getVisibleAttribute() {
