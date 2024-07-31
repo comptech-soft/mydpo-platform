@@ -36,6 +36,8 @@ class Chestionar extends Model {
         'category_id',
         'questions_count',
         'visibility',
+        'date_form',
+        'date_to',
         'description',
         'subject',
         'body',
@@ -48,6 +50,8 @@ class Chestionar extends Model {
 
     protected $appends = [
         'visible',
+        'days_difference',
+        'status',
     ];
 
     public function getVisibleAttribute() {
@@ -55,6 +59,14 @@ class Chestionar extends Model {
             'color' => !! $this->visibility ? 'green' : 'red',
             'icon' => !! $this->visibility ? 'mdi-check' : 'mdi-cancel',
         ];
+    }
+
+    public function getStatusAttribute() {
+        if(! $this->date_from && ! $this->date_to )
+        {
+            return 2;
+        }
+        return $this->days_difference['hours'] > 0 ? 0 : 1;
     }
     
     public function category() {
