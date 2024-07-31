@@ -48,10 +48,15 @@ class Question extends Model {
     protected $with = [
         'tip',
         'answers',
+        'activator'
     ];
 
     public function tip() {
         return $this->belongsTo(TipIntrebare::class, 'question_type_id');
+    }
+
+    public function activator() {
+        return $this->belongsTo(QuestionAnswer::class, 'activate_on_answer_id');
     }
 
     public function answers() {
@@ -66,7 +71,6 @@ class Question extends Model {
             'parent_id' => $input['parent_id'],
             'activate_on_answer_id' => $input['activate_on_answer_id'],
         ]);
-
 
         return $child;
     }
