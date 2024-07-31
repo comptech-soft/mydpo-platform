@@ -58,12 +58,14 @@ class Question extends Model {
         return $this->hasMany(QuestionAnswer::class, 'question_id')->orderBy('order_no');
     }
 
-    // public static function doUpdate($input, $record) {
+    public static function doAttachsubquestion($input, $record) {
 
-    //     $record->update($input);
+        dd($input, $record);
+        
+        // $record->update($input);
 
-    //     return $record;
-    // }
+        // return $record;
+    }
 
 
     public static function GetRules($action, $input) {
