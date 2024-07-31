@@ -88,7 +88,7 @@ class Question extends Model {
         return $result;
     }
 
-    public static function GetQuery($input)
+    public static function GetQuery()
     {
         return self::query()->withCount(['children']);
     }
