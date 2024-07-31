@@ -77,6 +77,21 @@ class Chestionar extends Model {
         return $this->belongsTo(Category::class, 'category_id');
     }
 
+    public static function doDelete($input, $record) {
+
+        $record->update([
+            'deleted' => 1,
+            'deleted_by'=> \Auth::user()->id,
+            'name' => '#' . $record->id . '#',
+            'props' => [
+                ...(!! $record->props ? $record->props : []),
+                'old_name' => $record->name, 
+            ],
+        ]);
+
+        return $record;
+    }
+
     public static function getQuery() {
         return 
             self::query()
