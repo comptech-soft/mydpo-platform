@@ -68,6 +68,10 @@ class Chestionar extends Model {
         }
         return $this->days_difference['hours'] > 0 ? 0 : 1;
     }
+
+    public function getHumanStatusAttribute() {
+        return self::$statuses[$this->status];
+    }
     
     public function category() {
         return $this->belongsTo(Category::class, 'category_id');
@@ -85,6 +89,23 @@ class Chestionar extends Model {
             ->select('chestionare.*')
         ;
     }
+
+    protected static $statuses = [
+        0 => [
+            'text' => 'Inactiv',
+            'color' => 'red',
+        ],
+
+        1 => [
+            'text' => 'Activ',
+            'color' => 'blue',
+        ],
+
+        2 => [
+            'text' => 'Activ (Nelimitat)',
+            'color' => 'green',
+        ],
+    ];
 
 
 }
