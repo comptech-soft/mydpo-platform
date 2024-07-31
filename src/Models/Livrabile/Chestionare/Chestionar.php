@@ -16,16 +16,17 @@ class Chestionar extends Model {
 
     protected $with = ['category'];
 
-    // protected $withCount = ['intrebari'];
 
     protected $casts = [
         'id' => 'integer',
         'props' => 'json',
         'category_id' => 'integer',
+        'questions_count' => 'integer',
         'deleted' => 'integer',
         'created_by' => 'integer',
         'updated_by' => 'integer',
         'deleted_by' => 'integer',
+        'visibility'=> 'integer',
     ];
 
     protected $fillable = [
@@ -33,6 +34,8 @@ class Chestionar extends Model {
         'status',
         'name',
         'category_id',
+        'questions_count',
+        'visibility',
         'description',
         'subject',
         'body',
@@ -43,7 +46,7 @@ class Chestionar extends Model {
         'deleted_by',
     ];
 
-    protected $appends [
+    protected $appends = [
         'visible',
     ];
 
