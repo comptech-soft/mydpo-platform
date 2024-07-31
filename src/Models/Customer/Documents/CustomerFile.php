@@ -317,16 +317,16 @@ class CustomerFile extends Model {
 
     public static function CreateFile($file, $input) {
         
-        if(in_array($ext = $file->extension(), ['jpg', 'jpeg', 'png', 'doc', 'docx', 'xls', 'xlsx', 'pdf', 'txt', 'rar', 'zip']))
+        if(in_array($ext = $file->getClientOriginalExtension(), ['jpg', 'jpeg', 'png', 'doc', 'docx', 'xls', 'xlsx', 'pdf', 'txt', 'rar', 'zip']))
         {
-            $filename = \Str::slug(str_replace($file->extension(), '', $file->getClientOriginalName())) . '.' .  strtolower($file->extension());
+            $filename = \Str::slug(str_replace($file->getClientOriginalExtension(), '', $file->getClientOriginalName())) . '.' .  strtolower($file->getClientOriginalExtension());
             
             $result = $file->storeAs('documents/' . $input['customer_id'] . '/' . \Auth::user()->id, $filename, 's3');
 
             $input = [
                 ...$input,
                 'file_original_name' => $file->getClientOriginalName(),
-                'file_original_extension' => $file->extension(),
+                'file_original_extension' => $file->getClientOriginalExtension(),
                 'file_full_name' => $filename,
                 'file_mime_type' => $file->getMimeType(),
                 'file_upload_ip' => request()->ip(),
@@ -373,7 +373,7 @@ class CustomerFile extends Model {
         }
         else
         {
-            throw new \Exception('Fișier incorect.');
+            throw new \Exception('Fișier incorect (' . $ext = $file->getClientOriginalExtension() . ').');
         }
     }
 
