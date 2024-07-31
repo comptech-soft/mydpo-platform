@@ -36,7 +36,7 @@ class Chestionar extends Model {
         'category_id',
         'questions_count',
         'visibility',
-        'date_form',
+        'date_from',
         'date_to',
         'description',
         'subject',
