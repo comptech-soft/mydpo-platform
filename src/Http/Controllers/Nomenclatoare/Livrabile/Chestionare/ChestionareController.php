@@ -16,7 +16,7 @@ class ChestionareController extends Controller {
         );
     }
 
-    public function getItems(Request $r) {
+    public function getRecords(Request $r) {
         return Chestionar::getItems($r->all());
     }
 
