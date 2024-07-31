@@ -43,6 +43,16 @@ class Chestionar extends Model {
         'deleted_by',
     ];
 
+    protected $appends [
+        'visible',
+    ];
+
+    public function getVisibleAttribute() {
+        return [
+            'color' => !! $this->visibility ? 'green' : 'red',
+            'icon' => !! $this->visibility ? 'mdi-check' : 'mdi-cancel',
+        ];
+    }
     
     public function category() {
         return $this->belongsTo(Category::class, 'category_id');
