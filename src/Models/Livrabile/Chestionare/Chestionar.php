@@ -3,10 +3,7 @@
 namespace MyDpo\Models\Livrabile\Chestionare;
 
 use Illuminate\Database\Eloquent\Model;
-use MyDpo\Helpers\Performers\Datatable\GetItems;
-use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Models\Livrabile\Category;
-use MyDpo\Scopes\NotdeletedScope;
 
 class Chestionar extends Model {
     
@@ -41,9 +38,6 @@ class Chestionar extends Model {
         'deleted_by',
     ];
 
-    protected static function booted() {
-        static::addGlobalScope( new NotdeletedScope() );
-    }
     
     public function category() {
         return $this->belongsTo(Category::class, 'category_id');
@@ -62,14 +56,5 @@ class Chestionar extends Model {
         ;
     }
 
-    public static function getItems($input) {
-        return (new GetItems(
-            $input, 
-            self::getQuery()->with([
-            ]), 
-            __CLASS__
-        ))
-        ->Perform();
-    }
 
 }
