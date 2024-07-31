@@ -99,7 +99,7 @@ class Question extends Model {
 
     public static function GetQuery()
     {
-        return self::query()->withCount(['children']);
+        return self::query()->withCount(['children'])->with(['parent']);
     }
 
     protected static function booted() 
