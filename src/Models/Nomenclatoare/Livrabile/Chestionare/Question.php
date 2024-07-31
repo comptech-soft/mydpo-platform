@@ -60,13 +60,16 @@ class Question extends Model {
 
     public static function doAttachsubquestion($input, $record) {
 
-        dd($input, $record);
-        
-        // $record->update($input);
+        $child = self::find($input['child_id']);
 
-        // return $record;
+        $child->update([
+            'parent_id' => $input['parent_id'],
+            'activate_on_answer_id' => $input['activate_on_answer_id'],
+        ]);
+
+
+        return $child;
     }
-
 
     public static function GetRules($action, $input) {
 
