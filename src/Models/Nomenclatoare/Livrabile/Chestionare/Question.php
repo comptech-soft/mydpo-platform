@@ -50,10 +50,6 @@ class Question extends Model {
         'answers',
     ];
 
-    protected $withCount = [
-        'children',
-    ];
-
     public function tip() {
         return $this->belongsTo(TipIntrebare::class, 'question_type_id');
     }
@@ -90,6 +86,11 @@ class Question extends Model {
         ];
 
         return $result;
+    }
+
+    public static function GetQuery($input)
+    {
+        return self::query()->withCount(['children']);
     }
 
     protected static function booted() 
