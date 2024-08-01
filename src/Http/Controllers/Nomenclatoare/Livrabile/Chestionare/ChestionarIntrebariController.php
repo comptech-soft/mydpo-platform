@@ -5,7 +5,7 @@ namespace MyDpo\Http\Controllers\Nomenclatoare\Livrabile\Chestionare;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
-use MyDpo\Models\Livrabile\Chestionare\Chestionar;
+use MyDpo\Models\Livrabile\Chestionare\ChestionarQuestion;
 
 class ChestionarIntrebariController extends Controller {
     
@@ -27,5 +27,11 @@ class ChestionarIntrebariController extends Controller {
         );        
     }
 
+    public function getRecords(Request $r) {
+        return ChestionarQuestion::getRecords($r->all());
+    }
 
+    public function doAction($action, Request $r) {
+        return ChestionarQuestion::doAction($action, $r->all());
+    }
 }
