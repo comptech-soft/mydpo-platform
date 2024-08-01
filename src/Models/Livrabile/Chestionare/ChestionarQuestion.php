@@ -3,6 +3,7 @@
 namespace MyDpo\Models\Livrabile\Chestionare;
 
 use Illuminate\Database\Eloquent\Model;
+use MyDpo\Models\Nomenclatoare\Livrabile\Chestionare\TipIntrebare;
 use Kalnoy\Nestedset\NodeTrait;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
@@ -46,10 +47,16 @@ class ChestionarQuestion extends Model {
         'props',
     ];
 
+    protected $with = [
+        'tip',
+        // 'answers',
+        // 'activator'
+    ];
 
 
-
-
+    public function tip() {
+        return $this->belongsTo(TipIntrebare::class, 'question_type_id');
+    }
 
 
 
