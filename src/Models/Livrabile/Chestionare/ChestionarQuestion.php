@@ -7,11 +7,12 @@ use MyDpo\Models\Nomenclatoare\Livrabile\Chestionare\TipIntrebare;
 use Kalnoy\Nestedset\NodeTrait;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
+use MyDpo\Traits\Reorderable;
 
 
 class ChestionarQuestion extends Model {
     
-    use Itemable, Actionable, NodeTrait;
+    use Itemable, Actionable, NodeTrait, Reorderable;
 
     protected $table = 'chestionare-questions';
 
