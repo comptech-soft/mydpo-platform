@@ -93,14 +93,17 @@ class ChestionarQuestion extends Model {
 
     protected function syncOptions($options)
     {
-        
         $this->markOptionsForDelete();
-        
 
-        // foreach($options as $i => $item)
-        // {
-            // dd($item);
-        // }
+        $this->updateOptions($options);   
+    }
+
+    protected function updateOptions($options)
+    {
+        foreach($options as $i => $option)
+        {
+            ChestionarQuestionOption::updateOption($option);
+        }
     }
 
     protected function markOptionsForDelete()
