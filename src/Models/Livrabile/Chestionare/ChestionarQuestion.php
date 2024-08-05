@@ -16,7 +16,6 @@ class ChestionarQuestion extends Model {
 
     protected $table = 'chestionare-questions';
 
-
     protected $casts = [
         'id' => 'integer',
         'order_no' => 'integer',
@@ -59,7 +58,13 @@ class ChestionarQuestion extends Model {
         return $this->belongsTo(TipIntrebare::class, 'question_type_id');
     }
 
-
+    /**
+     * adaugarea unei intrebari la chestionar
+     */
+    public static function doInsert($input, $record)
+    {
+        dd($input, $record);
+    }
 
 
 }
