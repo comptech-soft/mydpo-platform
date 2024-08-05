@@ -87,12 +87,12 @@ class ChestionarQuestion extends Model {
         {
             $input['options'] = [];
         }
-        
+
         $record->update($input);
 
         $record->syncOptions( $input['options'] );
 
-        return $record;
+        return self::find($record->id);
     }
 
     protected function syncOptions($options)
