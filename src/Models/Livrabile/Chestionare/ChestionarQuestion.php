@@ -92,11 +92,22 @@ class ChestionarQuestion extends Model {
 
     protected function syncOptions($options)
     {
+        \Log::info('Mark ..... START');
         $this->markOptionsForDelete();
-
+        \Log::info($this->options);
+        \Log::info('END');
+        \Log::info('======');
+        
+        \Log::info('Update ..... START');
         $this->updateOptions($options);   
+        \Log::info($this->options);
+        \Log::info('END');
+        \Log::info('======');
 
+        \Log::info('Delete ..... START');
         $this->deleteMarkedOptions();   
+        \Log::info('END');
+        \Log::info('======');
     }
 
     protected function updateOptions($options)
