@@ -13,7 +13,7 @@ use MyDpo\Observers\Livrabile\Chestionare\ChestionarQuestionObserver;
 
 class ChestionarQuestion extends Model {
     
-    use Itemable, Actionable, NodeTrait, Reorderable, ChestionarQuestionObserver;
+    use Itemable, Actionable, NodeTrait, Reorderable;
 
     protected $table = 'chestionare-questions';
 
