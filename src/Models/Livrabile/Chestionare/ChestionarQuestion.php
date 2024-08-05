@@ -103,7 +103,7 @@ class ChestionarQuestion extends Model {
         // }
     }
 
-    protected function markForDelete($options)
+    protected function markOptionsForDelete()
     {
         foreach($this->options as $i => $record)
         {
