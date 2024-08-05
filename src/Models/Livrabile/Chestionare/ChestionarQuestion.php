@@ -105,7 +105,8 @@ class ChestionarQuestion extends Model {
         \Log::info('======');
 
         \Log::info('Delete ..... START');
-        $this->deleteMarkedOptions();   
+        $this->deleteMarkedOptions();
+        \Log::info($this->options);   
         \Log::info('END');
         \Log::info('======');
     }
