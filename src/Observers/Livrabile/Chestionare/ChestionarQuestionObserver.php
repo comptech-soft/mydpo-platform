@@ -2,7 +2,7 @@
 
 namespace MyDpo\Observers\Livrabile\Chestionare;
 
-use MyDpo\Models\Livrabile\Chestionare\ChestionarQuestio as Record;
+use MyDpo\Models\Livrabile\Chestionare\ChestionarQuestion as Record;
 
 class ChestionarQuestionObserver {
 
