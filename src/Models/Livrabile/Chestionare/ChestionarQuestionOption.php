@@ -31,5 +31,17 @@ class ChestionarQuestionOption extends Model {
         'props' => 'json',
     ];
 
+    public function markForDelete()
+    {
+        $props = !! $this->props ? $this->props : [];
+
+        $this->update([
+            'props' => [
+                ...$props,
+                'deleted' => 1,
+            ],
+        ]);
+    }
+
 
 }

@@ -81,9 +81,34 @@ class ChestionarQuestion extends Model {
         return $record;
     }
 
+    
     public static function doUpdate($input, $record)
     {
-        dd($input, $record);
+        $record->update($input);
+
+        $record->syncOptions( $input['options'] );
+
+        return $record;
+    }
+
+    protected function syncOptions($options)
+    {
+        
+        $this->markOptionsForDelete();
+        
+
+        // foreach($options as $i => $item)
+        // {
+            // dd($item);
+        // }
+    }
+
+    protected function markForDelete($options)
+    {
+        foreach($this->options as $i => $record)
+        {
+            $record->markForDelete();
+        }
     }
 
 
