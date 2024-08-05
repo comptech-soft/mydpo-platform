@@ -78,7 +78,9 @@ class ChestionarQuestion extends Model {
             $record = self::create($input);
         }
 
-        return $record;
+        $record->syncOptions( array_key_exists('options', $input)  ? $input['options'] : [] );
+        
+        return self::find($record->id);
     }
 
     public static function doUpdate($input, $record)
