@@ -41,6 +41,7 @@ class ChestionarQuestionOption extends Model {
             $props['deleted'] = 0;
 
             $record->answer_text = $option['answer_text'];
+            $record->order_no = $option['order_no'];
             $record->props = $props;
             $record->save();
         }
