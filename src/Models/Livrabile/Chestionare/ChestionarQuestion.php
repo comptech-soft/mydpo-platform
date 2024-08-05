@@ -8,11 +8,12 @@ use Kalnoy\Nestedset\NodeTrait;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 use MyDpo\Traits\Reorderable;
+use MyDpo\Observers\Livrabile\Chestionare\ChestionarQuestionObserver;
 
 
 class ChestionarQuestion extends Model {
     
-    use Itemable, Actionable, NodeTrait, Reorderable;
+    use Itemable, Actionable, NodeTrait, Reorderable, ChestionarQuestionObserver;
 
     protected $table = 'chestionare-questions';
 
@@ -135,5 +136,8 @@ class ChestionarQuestion extends Model {
         $this->refresh();
     }
 
-
+    protected static function booted() 
+    {
+        static::observe(ChestionarQuestionObserver::class);
+    }
 }
