@@ -49,12 +49,16 @@ class ChestionarQuestion extends Model {
 
     protected $with = [
         'tip',
-        'children'
+        'children',
+        'options'
     ];
-
 
     public function tip() {
         return $this->belongsTo(TipIntrebare::class, 'question_type_id');
+    }
+
+    public function options() {
+        return $this->hasMany(ChestionarQuestionOption::class, 'chestionar_question_id');
     }
 
     /**
