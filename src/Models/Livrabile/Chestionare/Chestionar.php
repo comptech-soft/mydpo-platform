@@ -98,6 +98,11 @@ class Chestionar extends Model {
         return $record;
     }
 
+    public function syncQuestionCount()
+    {
+        dd(__METHOD__, $this->id);
+    }
+
     public static function getQuery() {
         return 
             self::query()

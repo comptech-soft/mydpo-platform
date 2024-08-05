@@ -8,15 +8,17 @@ class ChestionarQuestionObserver {
 
     public function created(Record $record): void 
     {
-        dd($record->toArray());
+        $record->chestionar->syncQuestionCount();
     }
 
     public function updated(Record $record): void 
     {  
+        $record->chestionar->syncQuestionCount();
     }
 
     public function deleted(Record $record): void 
     {   
+        $record->chestionar->syncQuestionCount();
     }
 
     public function restored(Record $record): void 

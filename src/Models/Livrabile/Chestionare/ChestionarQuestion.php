@@ -58,6 +58,10 @@ class ChestionarQuestion extends Model {
         return $this->belongsTo(TipIntrebare::class, 'question_type_id');
     }
 
+    public function chestionar() {
+        return $this->belongsTo(Chestionar::class, 'chestionar_id');
+    }
+
     public function options() {
         return $this->hasMany(ChestionarQuestionOption::class, 'chestionar_question_id')->orderBy('order_no');
     }
