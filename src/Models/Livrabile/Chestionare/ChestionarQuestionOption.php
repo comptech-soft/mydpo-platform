@@ -38,6 +38,7 @@ class ChestionarQuestionOption extends Model {
         if(!! $record)
         {
             $props = !! $record->props ? $record->props : [];
+            $props['deleted'] = 0;
 
             $record->answer_text = $option['answer_text'];
             $record->props = $props;
@@ -45,7 +46,7 @@ class ChestionarQuestionOption extends Model {
         }
         else
         {
-            $props['deledetd'] = 0;
+            $props['deleted'] = 0;
 
             $record = self::create([
                 'chestionar_question_id' => $option['chestionar_question_id'],
