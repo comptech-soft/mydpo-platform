@@ -81,10 +81,10 @@ class ChestionarQuestion extends Model {
         return $record;
     }
 
-    // public static function GetQuery($input)
-    // {
-    //     dd($input);
-    // }
+    public static function doUpdate($input, $record)
+    {
+        dd($input, $record);
+    }
 
 
 }
