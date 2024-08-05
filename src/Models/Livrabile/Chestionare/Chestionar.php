@@ -100,7 +100,14 @@ class Chestionar extends Model {
 
     public function syncQuestionCount()
     {
-        dd(__METHOD__, $this->id);
+        $items = \DB::select("
+            SELECT
+                COUNT(*) AS questions_count
+            FROM `chestionare-questions`
+            WHERE chestionar_id=" . $this->id
+        );
+
+        $this->update(['questions_count' => $items[0]->questions_count]);
     }
 
     public static function getQuery() {
