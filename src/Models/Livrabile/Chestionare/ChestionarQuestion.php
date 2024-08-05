@@ -120,6 +120,8 @@ class ChestionarQuestion extends Model {
                 'chestionar_question_id' => $this->id,
             ]);
         }
+
+        $this->refresh();
     }
 
     protected function deleteMarkedOptions()
@@ -128,6 +130,8 @@ class ChestionarQuestion extends Model {
         {
             $record->deleteIfIsMarked();
         }
+
+        $this->refresh();
     }
 
     protected function markOptionsForDelete()
@@ -136,6 +140,8 @@ class ChestionarQuestion extends Model {
         {
             $record->markForDelete();
         }
+
+        $this->refresh();
     }
 
 
