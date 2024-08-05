@@ -60,7 +60,7 @@ class ChestionarQuestionOption extends Model {
 
     public function deleteIfIsMarked()
     {
-        if(! $this->props )
+        if(!! $this->props )
         {
             if( array_key_exists('deleted', $this->props))
             {
