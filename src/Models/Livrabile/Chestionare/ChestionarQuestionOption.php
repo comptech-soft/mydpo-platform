@@ -33,7 +33,28 @@ class ChestionarQuestionOption extends Model {
 
     public static function updateOption($option)
     {
-        dd($option);
+        $record = self::find($option['id']);
+        
+        if(!! $record)
+        {
+            $props = !! $record->props ? $record->props : [];
+
+            $record->answer_text = $option['answer_text'];
+            $record->props = $props;
+            $record->save();
+        }
+        else
+        {
+            $props['deledetd'] = 0;
+
+            $record = self::create([
+                'chestionar_question_id' => $option['chestionar_question_id'],
+                'answer_text' => $option['answer_text'],
+                'props' => $props
+            ]);
+        }
+
+        return $record;
     }
 
     public function markForDelete()

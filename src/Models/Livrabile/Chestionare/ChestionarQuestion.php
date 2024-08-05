@@ -102,7 +102,10 @@ class ChestionarQuestion extends Model {
     {
         foreach($options as $i => $option)
         {
-            ChestionarQuestionOption::updateOption($option);
+            ChestionarQuestionOption::updateOption([
+                ...$option,
+                'chestionar_question_id' => $this->id,
+            ]);
         }
     }
 
