@@ -49,8 +49,7 @@ class ChestionarQuestion extends Model {
 
     protected $with = [
         'tip',
-        // 'answers',
-        // 'activator'
+        'children'
     ];
 
 
@@ -78,10 +77,10 @@ class ChestionarQuestion extends Model {
         return $record;
     }
 
-    public static function GetQuery($input)
-    {
-        dd($input);
-    }
+    // public static function GetQuery($input)
+    // {
+    //     dd($input);
+    // }
 
 
 }
