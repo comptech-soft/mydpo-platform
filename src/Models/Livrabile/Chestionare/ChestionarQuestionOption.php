@@ -58,6 +58,19 @@ class ChestionarQuestionOption extends Model {
         return $record;
     }
 
+    public function deleteIfIsMarked()
+    {
+        if(! $this->props )
+        {
+            if( array_key_exists('deleted', $this->props))
+            {
+                if($this->props['deleted'] == 1)
+                {
+                    $this->delete();
+                }
+            }
+        }
+    }
     public function markForDelete()
     {
         $props = !! $this->props ? $this->props : [];

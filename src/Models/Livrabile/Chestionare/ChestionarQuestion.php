@@ -96,6 +96,8 @@ class ChestionarQuestion extends Model {
         $this->markOptionsForDelete();
 
         $this->updateOptions($options);   
+
+        $this->deleteMarkedOptions();   
     }
 
     protected function updateOptions($options)
@@ -106,6 +108,14 @@ class ChestionarQuestion extends Model {
                 ...$option,
                 'chestionar_question_id' => $this->id,
             ]);
+        }
+    }
+
+    protected function deleteMarkedOptions()
+    {
+        foreach($this->options as $i => $record)
+        {
+            $record->deleteIfIsMarked();
         }
     }
 
