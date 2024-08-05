@@ -55,8 +55,6 @@ class ChestionarQuestionOption extends Model {
             ]);
         }
 
-        \Log::info('#' . $record->id . '-->' . $record->is_deleted);
-
         return $record;
     }
 
@@ -64,7 +62,6 @@ class ChestionarQuestionOption extends Model {
     {
         if($this->is_deleted == 1)
         {
-            \Log::info('#' . $this->id . '-->' . $this->is_deleted . ' ===> deleted');
             $this->delete();
         }
     }
@@ -72,8 +69,6 @@ class ChestionarQuestionOption extends Model {
     {
         $this->update(['is_deleted' => 1]);
 
-        \Log::info('#' . $this->id . '-->' . $this->is_deleted);
     }
-
 
 }
