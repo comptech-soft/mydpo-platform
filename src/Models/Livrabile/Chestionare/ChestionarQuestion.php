@@ -58,7 +58,7 @@ class ChestionarQuestion extends Model {
     }
 
     public function options() {
-        return $this->hasMany(ChestionarQuestionOption::class, 'chestionar_question_id');
+        return $this->hasMany(ChestionarQuestionOption::class, 'chestionar_question_id')->orderBy('order_no');
     }
 
     /**
@@ -81,7 +81,6 @@ class ChestionarQuestion extends Model {
         return $record;
     }
 
-    
     public static function doUpdate($input, $record)
     {
         $record->update($input);
