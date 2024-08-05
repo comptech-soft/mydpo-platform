@@ -51,6 +51,7 @@ class ChestionarQuestionOption extends Model {
             $record = self::create([
                 'chestionar_question_id' => $option['chestionar_question_id'],
                 'answer_text' => $option['answer_text'],
+                'order_no' => $option['order_no'],
                 'props' => $props
             ]);
         }
