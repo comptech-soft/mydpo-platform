@@ -37,25 +37,25 @@ class ChestionarQuestionOption extends Model {
         
         if(!! $record)
         {
-            $props = !! $record->props ? $record->props : [];
-            $props['deleted'] = 0;
-
             $record->answer_text = $option['answer_text'];
             $record->order_no = $option['order_no'];
-            $record->props = $props;
             $record->save();
         }
         else
         {
-            $props = ['deleted' => 0];
-
             $record = self::create([
                 'chestionar_question_id' => $option['chestionar_question_id'],
                 'answer_text' => $option['answer_text'],
                 'order_no' => $option['order_no'],
-                'props' => $props
             ]);
         }
+
+        $record->update([
+            'props' => [
+                ...(!! $record->props ? $record->props : []),
+                'deleted' => 0,
+            ]
+        ]);
 
         \Log::info('#' . $record->id . '-->' . $record->props['deleted']);
 
