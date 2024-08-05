@@ -83,14 +83,9 @@ class ChestionarQuestion extends Model {
 
     public static function doUpdate($input, $record)
     {
-        if(! array_key_exists('options', $input) )
-        {
-            $input['options'] = [];
-        }
-
         $record->update($input);
 
-        $record->syncOptions( $input['options'] );
+        $record->syncOptions( array_key_exists('options', $input)  ? $input['options'] : [] );
 
         return self::find($record->id);
     }

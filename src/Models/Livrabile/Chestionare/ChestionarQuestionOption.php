@@ -18,6 +18,7 @@ class ChestionarQuestionOption extends Model {
         'answer_text',
         'triggered_subquestion_id',
         'is_correct',
+        'is_deleted',
         'order_no',
         'props',
     ];
@@ -28,6 +29,7 @@ class ChestionarQuestionOption extends Model {
         'chestionar_question_id' => 'integer',
         'triggered_subquestion_id' => 'integer',
         'is_correct' => 'integer',
+        'is_deleted' => 'integer',
         'props' => 'json',
     ];
 
@@ -37,9 +39,11 @@ class ChestionarQuestionOption extends Model {
         
         if(!! $record)
         {
-            $record->answer_text = $option['answer_text'];
-            $record->order_no = $option['order_no'];
-            $record->save();
+            $record->update([
+                'answer_text' => $option['answer_text'],
+                'order_no' => $option['order_no'],
+                'is_deleted' => 0,
+            ]);
         }
         else
         {
@@ -47,47 +51,28 @@ class ChestionarQuestionOption extends Model {
                 'chestionar_question_id' => $option['chestionar_question_id'],
                 'answer_text' => $option['answer_text'],
                 'order_no' => $option['order_no'],
+                'is_deleted' => 0,
             ]);
         }
 
-        $record->update([
-            'props' => [
-                ...(!! $record->props ? $record->props : []),
-                'deleted' => 0,
-            ]
-        ]);
-
-        \Log::info('#' . $record->id . '-->' . $record->props['deleted']);
+        \Log::info('#' . $record->id . '-->' . $record->is_deleted);
 
         return $record;
     }
 
     public function deleteIfIsMarked()
     {
-        if(!! $this->props )
+        if($this->is_deleted == 1)
         {
-            if( array_key_exists('deleted', $this->props))
-            {
-                if($this->props['deleted'] == 1)
-                {
-                    \Log::info('#' . $this->id . '-->' . $this->props['deleted'] . '===> deleted');
-                    $this->delete();
-                }
-            }
+            \Log::info('#' . $this->id . '-->' . $this->is_deleted . ' ===> deleted');
+            $this->delete();
         }
     }
     public function markForDelete()
     {
-        $props = !! $this->props ? $this->props : [];
+        $this->update(['is_deleted' => 1]);
 
-        $this->update([
-            'props' => [
-                ...$props,
-                'deleted' => 1,
-            ],
-        ]);
-
-        \Log::info('#' . $this->id . '-->' . $this->props['deleted']);
+        \Log::info('#' . $this->id . '-->' . $this->is_deleted);
     }
 
 
