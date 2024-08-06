@@ -53,15 +53,46 @@ class CustomerChestionar extends Model {
     //     return $this->hasMany(CustomerCursUser::class, 'customer_curs_id');
     // }
 
-    public static function getItems($input) {
-        return (new GetItems(
-            $input, 
-            self::query()->has('chestionar'), 
-            __CLASS__
-        ))->Perform();
-    }
+    // public static function getItems($input) {
+    //     return (new GetItems(
+    //         $input, 
+    //         self::query()->has('chestionar'), 
+    //         __CLASS__
+    //     ))->Perform();
+    // }
 
-    public static function getSummary($input) {
-        return (new GetSummary($input))->Perform();
+    // public static function getSummary($input) {
+    //     return (new GetSummary($input))->Perform();
+    // }
+
+    public static function CreateRecordsByTrimitere($trimitere) 
+    {
+
+        dd( __METHOD__, $trimitere->toArray() );
+
+        // $numberOfitems = $trimitere->count_users * $trimitere->count_materiale;
+        // $calculated_time = ($numberOfitems > 0) ? $trimitere->effective_time/$numberOfitems : 0; 
+
+        // foreach($trimitere->customers as $customer_id => $users)
+        // {
+        //     foreach($trimitere->materiale_trimise as $i => $curs_id)
+        //     {
+        //         $input = [
+        //             'customer_id' => $customer_id,
+        //             'curs_id' => $curs_id,
+        //             'trimitere_id' => $trimitere->id,
+        //             'platform'=> config('app.platform'),
+        //             'effective_time' => $calculated_time,
+        //             'assigned_users' => $users,
+        //             'trimitere_number' => $trimitere->number,
+        //             'trimitere_date' => $trimitere->date,
+        //             'trimitere_sended_by' => $trimitere->sender_full_name,
+        //         ];
+
+        //         self::CreateOrUpdateRecord($input);
+        //     }
+
+        //     self::Sync($customer_id);
+        // }
     }
 }

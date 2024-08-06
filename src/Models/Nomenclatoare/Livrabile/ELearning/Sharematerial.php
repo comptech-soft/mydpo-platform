@@ -11,6 +11,7 @@ use MyDpo\Scopes\NotdeletedScope;
 // use MyDpo\Models\CustomerCursUser;
 use MyDpo\Models\Authentication\User;
 use MyDpo\Models\Customer\ELearning\CustomerCurs;
+use MyDpo\Models\Customer\Chestionare\CustomerChestionar;
 
 // use MyDpo\Events\CustomerCurs\CursShare as CursShareEvent;
 
