@@ -218,7 +218,7 @@ class CustomerCurs extends Model {
             /**
              * Cursul nu este asociat la client ==> se asociaza
              */
-            $record = CustomerCurs::create($input);
+            $record = self::create($input);
         }
 
         /**
@@ -243,7 +243,6 @@ class CustomerCurs extends Model {
 
             CustomerCursUser::AttachUser($input);
         }
-
     }
 
     /**
