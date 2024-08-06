@@ -68,11 +68,13 @@ class CustomerChestionar extends Model {
     public static function CreateRecordsByTrimitere($trimitere) 
     {
 
+        
+
+        $numberOfitems = $trimitere->count_users * $trimitere->count_materiale;
+        $calculated_time = ($numberOfitems > 0) ? $trimitere->effective_time/$numberOfitems : 0; 
+
         dd( __METHOD__, $trimitere->toArray() );
-
-        // $numberOfitems = $trimitere->count_users * $trimitere->count_materiale;
-        // $calculated_time = ($numberOfitems > 0) ? $trimitere->effective_time/$numberOfitems : 0; 
-
+        
         // foreach($trimitere->customers as $customer_id => $users)
         // {
         //     foreach($trimitere->materiale_trimise as $i => $curs_id)
