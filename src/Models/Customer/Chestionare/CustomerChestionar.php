@@ -5,6 +5,7 @@ namespace MyDpo\Models\Customer\Chestionare;
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Models\Livrabile\Chestionare\Chestionar;
+use MyDpo\Models\Nomenclatoare\Livrabile\ELearning\Sharematerial;
 // use MyDpo\Models\CustomerChestionarUser;
 use MyDpo\Performers\CustomerChestionar\GetSummary;
 
@@ -53,11 +54,16 @@ class CustomerChestionar extends Model {
 
     protected $with = [
         'chestionar',
+        'trimitere',
         // 'cursusers',
     ];
 
     public function chestionar() {
         return $this->belongsTo(Chestionar::class, 'chestionar_id');
+    }
+
+    public function trimitere() {
+        return $this->belongsTo(Sharematerial::class, 'trimitere_id');
     }
 
     // public function cursusers() {
