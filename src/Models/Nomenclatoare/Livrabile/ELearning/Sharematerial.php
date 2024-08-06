@@ -382,8 +382,7 @@ class Sharematerial extends Model {
 
         if($this->type == 'chestionar')
         {
-            dd(__METHOD__);
-            // CustomerCurs::CreateRecordsByTrimitere($this);
+            CustomerChestionar::CreateRecordsByTrimitere($this);
         }
     }
     
