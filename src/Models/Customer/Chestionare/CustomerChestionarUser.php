@@ -4,7 +4,7 @@ namespace MyDpo\Models\Customer\Chestionare;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Models\Authentication\User;
-use MyDpo\Models\Nomenclatoare\Livrabile\Chestionare\Chestionar;
+use MyDpo\Models\Livrabile\Chestionare\Chestionar;
 use MyDpo\Models\Nomenclatoare\Livrabile\ELearning\Sharematerial;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
