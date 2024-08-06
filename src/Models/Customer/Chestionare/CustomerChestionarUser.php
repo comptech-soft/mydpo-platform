@@ -176,9 +176,9 @@ class CustomerChestionarUser extends Model {
     //     return $this->belongsTo(User::class, 'created_by');
     // }
 
-    // public function curs() {
-    //     return $this->belongsTo(Curs::class, 'curs_id');
-    // }
+    public function chestionar() {
+        return $this->belongsTo(Chestionar::class, 'chestionar_id');
+    }
 
     // public function trimitere() {
     //     return $this->belongsTo(Sharematerial::class, 'trimitere_id')->select(['id', 'number', 'date', 'date_from', 'date_to', 'sender_full_name']);
