@@ -300,16 +300,16 @@ class CustomerChestionarUser extends Model {
 
         $record->refresh();
 
-        // event(
-        //     new \MyDpo\Events\Customer\Livrabile\Cursuri\Trimitere(
-        //         'curs.trimitere', 
-        //         [
-        //             'nume_curs' => $record->curs->name,
-        //             'customers' => [$input['customer_id'] . '#' . $input['user_id']],
-        //             'link' => '/customer-my-elearning/' . $input['customer_id'],
-        //         ]
-        //     )
-        // );
+        event(
+            new \MyDpo\Events\Customer\Livrabile\Chestionare\Trimitere(
+                'chestionar.trimitere', 
+                [
+                    'nume_chestionar' => $record->chestionar->name,
+                    'customers' => [$input['customer_id'] . '#' . $input['user_id']],
+                    'link' => '/customer-user-chestionar/' . $input['user_id'] . '/' . $input['customer_id'],
+                ]
+            )
+        );
 
     }
 }
