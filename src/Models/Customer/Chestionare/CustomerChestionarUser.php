@@ -33,7 +33,7 @@ class CustomerChestionarUser extends Model {
         'id',
         'customer_chestionar_id',
         'customer_id',
-        'curs_id',
+        'chestionar_id',
         'trimitere_id',
         'user_id',
         'status',
