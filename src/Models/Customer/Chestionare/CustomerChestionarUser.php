@@ -10,7 +10,7 @@ use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 use Carbon\Carbon;
 
-class CustomerCursUser extends Model {
+class CustomerChestionarUser extends Model {
 
     use Itemable, Actionable;
 
