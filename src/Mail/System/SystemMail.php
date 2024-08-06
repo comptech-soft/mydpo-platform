@@ -55,11 +55,23 @@ class SystemMail extends Mailable {
             } 
         }
         
+        dd([
+            'user' => collect($this->user->toArray())->only(['id', 'email', 'first_name', 'last_name'])->toArray(),
+            'body' => $this->BodyContent($input),
+            'btn_url' => $this->template['btn_url'],
+            'btn_caption' => $this->template['btn_caption'],
+            
+            ...$input,
+        ]);
+
         return new Content(
             markdown: $markdown,
             with: [
                 'user' => collect($this->user->toArray())->only(['id', 'email', 'first_name', 'last_name'])->toArray(),
                 'body' => $this->BodyContent($input),
+                'btn_url' => $this->template['btn_url'],
+                'btn_caption' => $this->template['btn_caption'],
+                
                 ...$input,
             ],
         );
