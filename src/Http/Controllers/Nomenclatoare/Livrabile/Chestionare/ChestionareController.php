@@ -12,7 +12,10 @@ class ChestionareController extends Controller {
     public function index(Request $r) {
         return Index::View(
             styles: ['css/app.css'],
-            scripts: ['apps/nomenclatoare/livrabile/chestionare/index.js'],            
+            scripts: ['apps/nomenclatoare/livrabile/chestionare/index.js'],
+            payload: [
+                'type' => 'chestionar',
+            ],
         );
     }
 
