@@ -6,7 +6,7 @@ class Chestionare {
 
     public static function CountLivrabile($customer_id) {
 
-        return -1;
+        return 1750;
     } 
 
 }
