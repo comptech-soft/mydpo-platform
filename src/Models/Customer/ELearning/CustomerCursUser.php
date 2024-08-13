@@ -180,10 +180,6 @@ class CustomerCursUser extends Model {
         return $this->belongsTo(Sharematerial::class, 'trimitere_id')->select(['id', 'number', 'date', 'date_from', 'date_to', 'sender_full_name']);
     }
 
-    // public function customer() {
-    //     return $this->belongsTo(Customer::class, 'customer_id');
-    // }
-
     // public function removeRecord() {
     //     $record = SharematerialDetail::where('trimitere_id', $this->trimitere_id)
     //         ->where('customer_id', $this->customer_id)
