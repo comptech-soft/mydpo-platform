@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MyDpo\Core\Http\Response\Index;
 use MyDpo\Models\Customer\Customer;
+use MyDpo\Models\Customer\Chestionare\CustomerChestionar;
 
 class ChestionareController extends Controller {
     
@@ -21,24 +22,12 @@ class ChestionareController extends Controller {
         );        
     }
 
-    // public function index($customer_id, Request $r) {
+    public function getRecords(Request $r) {
+        return CustomerChestionar::getRecords($r->all());
+    }
 
-    //     return Response::View(
-    //         '~templates.index', 
-    //         asset('apps/customer-chestionare/index.js'),
-    //         [], 
-    //         [
-    //             'customer_id' => $customer_id,
-    //         ]
-    //     );
-    // }
-
-    // public function getItems(Request $r) {
-    //     return CustomerChestionar::getItems($r->all());
-    // }
-
-    // public function getSummary(Request $r) {
-    //     return CustomerChestionar::getSummary($r->all());
-    // }
+    public function doAction($action, Request $r) {
+        return CustomerChestionar::doAction($action, $r->all());
+    }
     
 }
