@@ -58,7 +58,7 @@ class CustomerChestionarUser extends Model {
 
     protected $with = [
         'user',
-        // 'trimitere',
+        'trimitere',
         // 'createdby',
     ];
 
@@ -180,13 +180,13 @@ class CustomerChestionarUser extends Model {
         return $this->belongsTo(Chestionar::class, 'chestionar_id');
     }
 
-    // public function trimitere() {
-    //     return $this->belongsTo(Sharematerial::class, 'trimitere_id')->select(['id', 'number', 'date', 'date_from', 'date_to', 'sender_full_name']);
-    // }
+    public function trimitere() {
+        return $this->belongsTo(Sharematerial::class, 'trimitere_id')->select(['id', 'number', 'date', 'date_from', 'date_to', 'sender_full_name']);
+    }
 
-    // public function customer() {
-    //     return $this->belongsTo(Customer::class, 'customer_id');
-    // }
+    public function customer() {
+        return $this->belongsTo(Customer::class, 'customer_id');
+    }
 
     // public function removeRecord() {
     //     $record = SharematerialDetail::where('trimitere_id', $this->trimitere_id)
