@@ -209,4 +209,23 @@ class CustomerChestionar extends Model {
             ->where('participants_count', 0)
             ->delete();
     }
+
+    public static function GetQuery() {
+        return 
+            self::query()
+            ->leftJoin(
+                'chestionare',
+                function($q) {
+                    $q->on('chestionare.id', '=', 'customers-chestionare.chestionar_id');
+                }
+            )
+            ->leftJoin(
+                'share-materiale',
+                function($q) {
+                    $q->on('share-materiale.id', '=', 'customers-chestionare.trimitere_id');
+                }
+            )
+            ->whereRaw("((`customers-chestionare`.`deleted` IS NULL) OR (`customers-chestionare`.`deleted` = 0))")
+            ->select('customers-chestionare.*');
+    }
 }
