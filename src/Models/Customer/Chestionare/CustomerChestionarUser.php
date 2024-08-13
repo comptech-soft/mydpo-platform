@@ -51,7 +51,7 @@ class CustomerChestionarUser extends Model {
     ];
 
     protected $appends = [
-        // 'my_status',
+        'my_status',
         // 'status_termen',
         // 'finalizat',
     ];
@@ -62,32 +62,32 @@ class CustomerChestionarUser extends Model {
         // 'createdby',
     ];
 
-    // protected $statuses = [
+    protected $statuses = [
 
-    //     'sended' => [
-    //         'text' => 'Neînceput',
-    //         'color' => 'red',
-    //     ],
+        'sended' => [
+            'text' => 'Neînceput',
+            'color' => 'red',
+        ],
 
-    //     'done' => [
-    //         'text' => 'Finalizat',
-    //         'color' => 'green',
-    //     ],
+        'done' => [
+            'text' => 'Finalizat',
+            'color' => 'green',
+        ],
 
-    //     'started' => [
-    //         'text' => 'Început',
-    //         'color' => 'orange',
-    //     ]
-    // ];
+        'started' => [
+            'text' => 'Început',
+            'color' => 'orange',
+        ]
+    ];
 
-    // public function getMyStatusAttribute() {
-    //     return array_key_exists($this->status, $this->statuses) 
-    //         ? $this->statuses[$this->status]
-    //         : [
-    //             'text' => '-',
-    //             'color' => 'grey',
-    //         ];
-    // }
+    public function getMyStatusAttribute() {
+        return array_key_exists($this->status, $this->statuses) 
+            ? $this->statuses[$this->status]
+            : [
+                'text' => '-',
+                'color' => 'grey',
+            ];
+    }
 
     // public function getFinalizatAttribute() {
     //     if($this->status != 'done' || ! $this->done_at || ! $this->trimitere->date_to)
