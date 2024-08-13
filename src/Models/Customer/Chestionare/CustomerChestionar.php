@@ -3,14 +3,16 @@
 namespace MyDpo\Models\Customer\Chestionare;
 
 use Illuminate\Database\Eloquent\Model;
-use MyDpo\Helpers\Performers\Datatable\GetItems;
 use MyDpo\Models\Livrabile\Chestionare\Chestionar;
 use MyDpo\Models\Nomenclatoare\Livrabile\ELearning\Sharematerial;
 // use MyDpo\Models\CustomerChestionarUser;
-use MyDpo\Performers\CustomerChestionar\GetSummary;
+// use MyDpo\Performers\CustomerChestionar\GetSummary;
+use MyDpo\Traits\Itemable;
+use MyDpo\Traits\Actionable;
 
 class CustomerChestionar extends Model {
 
+    use Itemable, Actionable;
     protected $table = 'customers-chestionare';
 
     protected $casts = [
