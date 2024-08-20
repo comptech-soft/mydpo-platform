@@ -65,7 +65,14 @@ class Question extends Model {
 
     public static function doInsert($input, $record)
     {
-        dd($input, $record);
+        $record = self::create( collect($input)->except(['options'])->toArray() );
+
+        if( array_key_exists('options', $input) )
+        {
+            $record->attachOptions( $input['options'] );
+        }
+
+        return $record;
     }
 
     public static function doAttachsubquestion($input, $record) {
