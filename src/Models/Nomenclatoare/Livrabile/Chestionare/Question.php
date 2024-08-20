@@ -63,6 +63,11 @@ class Question extends Model {
         return $this->hasMany(QuestionAnswer::class, 'question_id')->orderBy('order_no');
     }
 
+    public static function doInsert($input, $record)
+    {
+        dd($input, $record);
+    }
+
     public static function doAttachsubquestion($input, $record) {
 
         $child = self::find($input['child_id']);
