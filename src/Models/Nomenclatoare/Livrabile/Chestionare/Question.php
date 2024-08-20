@@ -76,6 +76,11 @@ class Question extends Model {
         return $record;
     }
 
+    public static function doUpdate($input, $record)
+    {
+        dd($input, $record);
+    }
+
     public function attachOptions($options)
     {
 
