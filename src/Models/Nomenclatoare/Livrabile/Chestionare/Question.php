@@ -76,6 +76,12 @@ class Question extends Model {
         return $record;
     }
 
+
+    public function attachOptions($options)
+    {
+        dd($options);
+    }
+
     public static function doAttachsubquestion($input, $record) {
 
         $child = self::find($input['child_id']);
