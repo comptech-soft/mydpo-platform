@@ -146,6 +146,8 @@ class Question extends Model {
             'activate_on_answer_id' => $input['activate_on_answer_id'],
         ]);
 
+        self::fixTree();
+        
         return $child;
     }
 
