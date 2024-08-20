@@ -66,11 +66,16 @@ class Question extends Model {
 
     public static function doInsert($input, $record)
     {
-        $record = self::create( collect($input)->except(['options'])->toArray() );
+        $record = self::create( collect($input)->except(['options', 'answers'])->toArray() );
 
         if( array_key_exists('options', $input) )
         {
             $record->attachOptions( $input['options'] );
+        }
+
+        if( array_key_exists('answers', $input) )
+        {
+            $record->attachOptions( $input['answers'] );
         }
 
         return $record;
@@ -78,7 +83,18 @@ class Question extends Model {
 
     public static function doUpdate($input, $record)
     {
-        dd($input, $record);
+
+        $record->update( collect($input)->except(['options', 'answers'])->toArray() );
+
+        if( array_key_exists('options', $input) )
+        {
+            $record->attachOptions( $input['options'] );
+        }
+
+        if( array_key_exists('answers', $input) )
+        {
+            $record->attachOptions( $input['answers'] );
+        }
     }
 
     public function attachOptions($options)
