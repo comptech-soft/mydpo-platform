@@ -95,6 +95,8 @@ class Question extends Model {
         {
             $record->attachOptions( $input['answers'] );
         }
+
+        return $record;
     }
 
     public function attachOptions($options)
