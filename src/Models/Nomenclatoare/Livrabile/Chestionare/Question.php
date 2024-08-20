@@ -76,16 +76,40 @@ class Question extends Model {
         return $record;
     }
 
-
     public function attachOptions($options)
     {
-        dd( collect($options)->map( function($item) {
+
+        $this->answers()->update(['deleted' => 1]);
+
+        $options = collect($options)->map( function($item) {
             return [
                 ...$item,
                 'id' => ($item['id'] < 0 ? NULL : $item['id']),
                 'question_id' => $this->id,
+                'deleted' => 0,
             ];
-        })->toArray() );
+        })->toArray();
+
+        foreach( $options as $i => $option)
+        {
+            if( ! $option['id'] )
+            {
+                $record = QuestionAnswer::create($option);
+            }
+            else
+            {
+                $record = QuestionAnswer::find( $option['id'] );
+                if(! $record )
+                {
+                    $record = QuestionAnswer::create($option);
+                }
+                else
+                {
+                    $record->update($option);
+                }
+            }
+        }
+        $this->answers()->where('deleted', 1)->delete();
     }
 
     public static function doAttachsubquestion($input, $record) {
