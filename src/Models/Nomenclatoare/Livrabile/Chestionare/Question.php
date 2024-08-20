@@ -79,7 +79,13 @@ class Question extends Model {
 
     public function attachOptions($options)
     {
-        dd($options);
+        dd( collect($options)->map( function($item) {
+            return [
+                ...$item,
+                'id' => ($item['id'] < 0 ? NULL : $item['id']),
+                'question_id' => $this->id,
+            ];
+        })->toArray() );
     }
 
     public static function doAttachsubquestion($input, $record) {

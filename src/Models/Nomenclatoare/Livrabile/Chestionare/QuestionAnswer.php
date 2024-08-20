@@ -19,6 +19,7 @@ class QuestionAnswer extends Model {
         'triggered_subquestion_id',
         'is_correct',
         'order_no',
+        'deleted',
         'props',
     ];
 
@@ -26,6 +27,7 @@ class QuestionAnswer extends Model {
         'id' => 'integer',
         'order_no' => 'integer',
         'question_id' => 'integer',
+        'deleted' => 'integer',
         'triggered_subquestion_id' => 'integer',
         'is_correct' => 'integer',
         'props' => 'json',
