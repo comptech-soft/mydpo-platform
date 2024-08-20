@@ -43,6 +43,7 @@ class Question extends Model {
         'score' => 'integer',
         'time_limit' => 'integer',
         'is_required' => 'integer',
+        'props' => 'json',
     ];
 
     protected $with = [
