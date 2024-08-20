@@ -33,6 +33,7 @@ class Question extends Model {
         'correct_explanation',
         'incorrect_explanation',
         'props',
+        'parent_id',
     ];
 
     protected $casts = [
@@ -44,6 +45,7 @@ class Question extends Model {
         'time_limit' => 'integer',
         'is_required' => 'integer',
         'props' => 'json',
+        'parent_id' => 'integer',
     ];
 
     protected $with = [
