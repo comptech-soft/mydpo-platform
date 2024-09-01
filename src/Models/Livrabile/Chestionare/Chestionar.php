@@ -16,7 +16,6 @@ class Chestionar extends Model {
 
     protected $with = ['category'];
 
-
     protected $casts = [
         'id' => 'integer',
         'props' => 'json',
@@ -58,6 +57,7 @@ class Chestionar extends Model {
         'visible',
         'days_difference',
         'human_status',
+        'my_image',
     ];
 
     public function getVisibleAttribute() {
@@ -78,6 +78,14 @@ class Chestionar extends Model {
     public function getHumanStatusAttribute() {
         return self::$statuses[$this->status];
     }
+
+    public function getMyImageAttribute() 
+    {
+        $image = config('app.url') . '/imgs/layout/card-chestionar-header.jpg';
+
+        return $image;
+    }
+
     
     public function category() {
         return $this->belongsTo(Category::class, 'category_id');
