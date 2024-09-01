@@ -55,7 +55,6 @@ class CustomerCursUser extends Model {
     protected $with = [
         'user',
         'trimitere',
-        // 'createdby',
     ];
 
     protected $statuses = [
