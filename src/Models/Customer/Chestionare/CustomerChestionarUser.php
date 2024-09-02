@@ -208,29 +208,31 @@ class CustomerChestionarUser extends Model {
     //     return (new AssignCursuri($input))->Perform();
     // }
 
-    // public static function doChangestatus($input, $record) {
+    public static function doChangestatus($input, $record) {
 
-    //     $now = \Carbon\Carbon::now();
+        $now = \Carbon\Carbon::now();
 
-    //     $record->status = $input['status'];
+        dd($input);
+        
+        $record->status = $input['status'];
 
-    //     if($record->status == 'done')
-    //     {
-    //         $record->done_at = $now;
-    //     }
-    //     else
-    //     {
-    //         $record->done_at = NULL;
-    //     }
+        if($record->status == 'done')
+        {
+            $record->done_at = $now;
+        }
+        else
+        {
+            $record->done_at = NULL;
+        }
 
-    //     $props = !! $record->props ? $record->props : [];
-    //     $props[$record->status . '_at'] = $now;
-    //     $record->props = $props;
+        $props = !! $record->props ? $record->props : [];
+        $props[$record->status . '_at'] = $now;
+        $record->props = $props;
 
-    //     $record->save();
+        $record->save();
 
-    //     return $record;
-    // }
+        return $record;
+    }
 
     // public static function doSetstatus($input, $record) {
     //     return self::doChangestatus($input, $record);
