@@ -44,15 +44,17 @@ class CustomerChestionarUserAnswer extends Model {
         if( ! $record )
         {
             $record = self::create([
-                'customer_chestionar_user_id' => $customer_chestionar_user_id,
                 ...$input,
+                'customer_chestionar_user_id' => $customer_chestionar_user_id,
+                'value' => $input['value'],                
             ]);
         }
         else
         {
             $record->update([
-                'customer_chestionar_user_id' => $customer_chestionar_user_id,
                 ...$input,
+                'customer_chestionar_user_id' => $customer_chestionar_user_id,
+                'value' => $input['value'],                
             ]);
         }
 
