@@ -59,7 +59,7 @@ class CustomerChestionarUser extends Model {
     protected $with = [
         'user',
         'trimitere',
-        'answer',
+        'answers',
     ];
 
     protected $statuses = [
@@ -184,8 +184,8 @@ class CustomerChestionarUser extends Model {
         return $this->belongsTo(Sharematerial::class, 'trimitere_id')->select(['id', 'number', 'date', 'date_from', 'date_to', 'sender_full_name']);
     }
 
-    public function answer() {
-        return $this->hasOne(CustomerChestionarUserAnswer::class, 'customer_chestionar_user_id');
+    public function answers() {
+        return $this->hasMany(CustomerChestionarUserAnswer::class, 'customer_chestionar_user_id');
     }
 
     // public function removeRecord() {
