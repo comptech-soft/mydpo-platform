@@ -240,6 +240,11 @@ class CustomerChestionarUser extends Model {
         return $record;
     }
 
+    public static function doSaveanswer($input, $record)
+    {
+        dd($record, $input);
+    }
+
     // public static function doSetstatus($input, $record) {
     //     return self::doChangestatus($input, $record);
     // }
