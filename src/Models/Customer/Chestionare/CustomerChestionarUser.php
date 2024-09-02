@@ -211,22 +211,28 @@ class CustomerChestionarUser extends Model {
     public static function doChangestatus($input, $record) {
 
         $now = \Carbon\Carbon::now();
-
-        dd($input);
         
         $record->status = $input['status'];
 
-        if($record->status == 'done')
+        if($record->status = 'sended')
         {
-            $record->done_at = $now;
+            $record->received_at = $now;
         }
-        else
+
+        if($record->status = 'started')
         {
-            $record->done_at = NULL;
+            $record->started_at = $now;
+        }
+
+        if($record->status = 'done')
+        {
+            $record->finished_at = $now;
         }
 
         $props = !! $record->props ? $record->props : [];
+       
         $props[$record->status . '_at'] = $now;
+       
         $record->props = $props;
 
         $record->save();
