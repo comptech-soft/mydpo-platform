@@ -112,7 +112,7 @@ class Chestionar extends Model {
             SELECT
                 COUNT(*) AS questions_count
             FROM `chestionare-questions`
-            WHERE chestionar_id=" . $this->id
+            WHERE (chestionar_id=" . $this->id . ") AND (parent_id IS NULL)"
         );
 
         $this->update(['questions_count' => $items[0]->questions_count]);
