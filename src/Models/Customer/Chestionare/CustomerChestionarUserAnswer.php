@@ -37,8 +37,25 @@ class CustomerChestionarUserAnswer extends Model {
         {
             $input['subanswers'] = NULL;
         }
-        
-        dd($customer_chestionar_user_id, $input);
+
+        $record = self::where('customer_chestionar_user_id', $customer_chestionar_user_id)->where('question_id', $question_id)->first();
+
+        if( ! $record )
+        {
+            $record = self::create([
+                'customer_chestionar_user_id' => $customer_chestionar_user_id,
+                ...$input,
+            ]);
+        }
+        else
+        {
+            $record->update([
+                'customer_chestionar_user_id' => $customer_chestionar_user_id,
+                ...$input,
+            ]);
+        }
+
+        return $record;
     }
 
 }
