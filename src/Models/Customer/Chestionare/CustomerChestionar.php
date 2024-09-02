@@ -25,6 +25,7 @@ class CustomerChestionar extends Model {
         'deleted_by' => 'integer',
         'deleted' => 'integer',
         'effective_time' => 'float',
+        'current_questions' => 'json',
         'assigned_users' => 'json',
     ];
 
