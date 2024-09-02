@@ -30,4 +30,10 @@ class CustomerChestionarUserAnswer extends Model {
         'subanswers'
     ];
 
+    public static function attachAnswer($customer_chestionar_user_id, $input)
+    {
+
+        dd($customer_chestionar_user_id, $input);
+    }
+
 }
