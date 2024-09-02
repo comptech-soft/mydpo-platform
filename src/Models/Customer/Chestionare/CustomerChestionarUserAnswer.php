@@ -46,7 +46,9 @@ class CustomerChestionarUserAnswer extends Model {
             $record = self::create([
                 ...$input,
                 'customer_chestionar_user_id' => $customer_chestionar_user_id,
-                'value' => $input['value'],                
+                'value' => [
+                    'answer' => $input['value']
+                ],                
             ]);
         }
         else
@@ -54,7 +56,9 @@ class CustomerChestionarUserAnswer extends Model {
             $record->update([
                 ...$input,
                 'customer_chestionar_user_id' => $customer_chestionar_user_id,
-                'value' => $input['value'],                
+                'value' => [
+                    'answer' => $input['value']
+                ],   
             ]);
         }
 
