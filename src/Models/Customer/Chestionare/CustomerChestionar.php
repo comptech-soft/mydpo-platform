@@ -4,6 +4,7 @@ namespace MyDpo\Models\Customer\Chestionare;
 
 use Illuminate\Database\Eloquent\Model;
 use MyDpo\Models\Livrabile\Chestionare\Chestionar;
+use MyDpo\Models\Livrabile\Chestionare\ChestionarQuestion;
 use MyDpo\Models\Nomenclatoare\Livrabile\ELearning\Sharematerial;
 // use MyDpo\Models\CustomerChestionarUser;
 // use MyDpo\Performers\CustomerChestionar\GetSummary;
@@ -151,7 +152,7 @@ class CustomerChestionar extends Model {
             $record = self::create($input);
         }
 
-        dd($record->toArray());
+        dd($record->current_questions, ChestionarQuestion::where('chestionar_id', $record->chestionar_id)->get());
 
         /**
          * Se asociaza si utilizatorii la inregistrarea creata
