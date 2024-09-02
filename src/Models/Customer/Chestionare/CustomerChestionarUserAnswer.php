@@ -33,6 +33,11 @@ class CustomerChestionarUserAnswer extends Model {
     public static function attachAnswer($customer_chestionar_user_id, $input)
     {
 
+        if(! array_key_exists('subanswers', $input) )
+        {
+            $input['subanswers'] = NULL;
+        }
+        
         dd($customer_chestionar_user_id, $input);
     }
 
