@@ -24,7 +24,7 @@ class ChestionarParcurgereController extends Controller {
             return redirect('/');
         }
 
-        if($user->id != $user_id || $customer_chestionar->customer_id != $customer_id || ! $customer_chestionar_user->user_id != $user->id)
+        if($user->id != $user_id || $customer_chestionar->customer_id != $customer_id || $customer_chestionar_user->user_id != $user->id)
         {
             return redirect('/');
         }
