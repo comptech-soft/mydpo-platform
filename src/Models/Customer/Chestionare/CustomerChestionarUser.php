@@ -214,17 +214,17 @@ class CustomerChestionarUser extends Model {
         
         $record->status = $input['status'];
 
-        if($record->status = 'sended')
+        if($record->status == 'sended')
         {
             $record->received_at = $now;
         }
 
-        if($record->status = 'started')
+        if($record->status == 'started')
         {
             $record->started_at = $now;
         }
 
-        if($record->status = 'done')
+        if($record->status == 'done')
         {
             $record->finished_at = $now;
         }
