@@ -151,6 +151,8 @@ class CustomerChestionar extends Model {
             $record = self::create($input);
         }
 
+        dd($record->toArray());
+
         /**
          * Se asociaza si utilizatorii la inregistrarea creata
          */
