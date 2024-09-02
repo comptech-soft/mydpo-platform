@@ -17,6 +17,7 @@ class CustomerChestionarUserAnswer extends Model {
 
     protected $casts = [
         'subanswers' => 'json',
+        'value' => 'json',
         'customer_chestionar_user_id' => 'integer',
         'question_id' => 'integer',
         'id' => 'integer',
