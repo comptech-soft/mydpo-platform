@@ -38,7 +38,7 @@ class CustomerChestionarUserAnswer extends Model {
             $input['subanswers'] = NULL;
         }
 
-        $record = self::where('customer_chestionar_user_id', $customer_chestionar_user_id)->where('question_id', $question_id)->first();
+        $record = self::where('customer_chestionar_user_id', $customer_chestionar_user_id)->where('question_id', $input['question_id'])->first();
 
         if( ! $record )
         {
