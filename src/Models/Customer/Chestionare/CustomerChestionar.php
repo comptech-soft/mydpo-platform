@@ -126,6 +126,9 @@ class CustomerChestionar extends Model {
                 'trimitere_id' => $this->trimitere_id,
                 'user_id' => $user_id,
                 'status' => 'sended',
+                'received_at' => \Carbon\Carbon::now(),
+                'started_at' => NULL,
+                'finished_at' => NULL,
                 'platform'=> config('app.platform'),
             ];
 
@@ -137,6 +140,13 @@ class CustomerChestionar extends Model {
 
         $record = self::where('customer_id', $input['customer_id'])->where('chestionar_id', $input['chestionar_id'])->first();
         
+        $questions = ChestionarQuestion::where('chestionar_id', $record->chestionar_id)->whereNull('parent_id')->get()->toArray();
+
+        $input = [
+            ...$input,
+            'current_questions' => $questions,
+        ];
+
         if($record)
         {
             /**
@@ -151,8 +161,6 @@ class CustomerChestionar extends Model {
              */
             $record = self::create($input);
         }
-
-        dd($record->current_questions, ChestionarQuestion::where('chestionar_id', $record->chestionar_id)->get());
 
         /**
          * Se asociaza si utilizatorii la inregistrarea creata
