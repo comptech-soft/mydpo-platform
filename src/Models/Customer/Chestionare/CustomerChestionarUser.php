@@ -242,7 +242,9 @@ class CustomerChestionarUser extends Model {
 
     public static function doSaveanswer($input, $record)
     {
-        CustomerChestionarUserAnswer::attachAnswer($this->id, $input);
+        CustomerChestionarUserAnswer::attachAnswer($record->id, $input);
+
+        return self::find($record->id);
     }
 
     // public static function doSetstatus($input, $record) {
