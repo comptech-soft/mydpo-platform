@@ -163,8 +163,6 @@ class CustomerChestionar extends Model {
 
 
     public static function doAsociere($input, $record) {
-
-        dd($input, $record);
         return Sharematerial::doInsert($input, $record);
     }
 
