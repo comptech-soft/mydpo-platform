@@ -279,15 +279,19 @@ class CustomerChestionarUser extends Model {
         /**
          * Se sterg inregistraile din tabela [customers-chestionare-users] si din [customers-chestionare-users-answers] 
          */
-        $records = self::where('customer_id', $input['customer_id'])
+        $query = self::where('customer_id', $input['customer_id'])
             ->where('customer_chestionar_id', $input['customer_chestionar_id'])
-            ->whereIn('user_id', $input['users'])
-            ->delete();
+            ->whereIn('user_id', $input['users']);
+
+        CustomerChestionarUserAnswer::whereIn('customer_chestionar_user_id', $query->pluck('id')->toArray())->delete();
+
+        $records = $query->delete();
 
         CustomerChestionar::Sync($input['customer_id']);
 
         return $records;
     }
+
 
     // public static function doDelete($input, $record) {
 
