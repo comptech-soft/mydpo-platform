@@ -74,13 +74,6 @@ class CustomerChestionar extends Model {
     //     return $this->hasMany(CustomerCursUser::class, 'customer_curs_id');
     // }
 
-    // public static function getItems($input) {
-    //     return (new GetItems(
-    //         $input, 
-    //         self::query()->has('chestionar'), 
-    //         __CLASS__
-    //     ))->Perform();
-    // }
 
     // public static function getSummary($input) {
     //     return (new GetSummary($input))->Perform();
@@ -166,6 +159,13 @@ class CustomerChestionar extends Model {
          * Se asociaza si utilizatorii la inregistrarea creata
          */
         $record->AttachUsersToChestionar();
+    }
+
+
+    public static function doAsociere($input, $record) {
+
+        dd($input, $record);
+        return Sharematerial::doInsert($input, $record);
     }
 
     /**
