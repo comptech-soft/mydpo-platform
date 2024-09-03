@@ -58,7 +58,8 @@ class CustomerChestionarUserAnswer extends Model {
                 ...$input,
                 'customer_chestionar_user_id' => $customer_chestionar_user_id,
                 'value' => [
-                    'answer' => $input['value']
+                    'answer' => $input['value'],
+                    'other' => $input['other']
                 ],   
             ]);
         }
