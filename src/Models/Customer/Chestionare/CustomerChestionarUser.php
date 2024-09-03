@@ -254,7 +254,21 @@ class CustomerChestionarUser extends Model {
 
     public static function doFinish($input, $record) {
 
-        dd($input, $record);
+        $record->status = 'done';
+
+        $now = \Carbon\Carbon::now();
+
+        $record->finished_at = $now;
+        
+        $props = !! $record->props ? $record->props : [];
+       
+        $props[$record->status . '_at'] = $now;
+       
+        $record->props = $props;
+
+        $record->save();
+
+        return $record;
     }
 
     // public static function doSetstatus($input, $record) {
