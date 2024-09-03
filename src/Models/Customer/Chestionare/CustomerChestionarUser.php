@@ -293,14 +293,14 @@ class CustomerChestionarUser extends Model {
     }
 
 
-    // public static function doDelete($input, $record) {
+    public static function doDelete($input, $record) {
 
-    //     $record->delete();
+        $record->delete();
 
-    //     CustomerCurs::Sync($input['customer_id']);
+        CustomerChestionar::Sync($input['customer_id']);
 
-    //     return $record;
-    // }
+        return $record;
+    }
 
     // public static function GetQuery() {
     //     return 
