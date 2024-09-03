@@ -138,6 +138,8 @@ class CustomerChestionar extends Model {
 
     public static function CreateOrUpdateRecord($input) {
 
+        dd($input);
+        
         $record = self::where('customer_id', $input['customer_id'])->where('chestionar_id', $input['chestionar_id'])->first();
         
         $questions = ChestionarQuestion::where('chestionar_id', $record->chestionar_id)->whereNull('parent_id')->get()->toArray();
