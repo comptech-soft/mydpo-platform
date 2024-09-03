@@ -332,6 +332,11 @@ class CustomerChestionarUser extends Model {
             $record = self::create($input);
         }
 
+        /**
+         * Se sterg raspunsurile
+         */
+        $record->answers()->delete();
+
         $record->refresh();
 
         event(
