@@ -252,6 +252,11 @@ class CustomerChestionarUser extends Model {
         return self::find($record->id);
     }
 
+    public static function doFinish($input, $record) {
+
+        dd($input, $record);
+    }
+
     // public static function doSetstatus($input, $record) {
     //     return self::doChangestatus($input, $record);
     // }
