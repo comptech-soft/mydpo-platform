@@ -19,6 +19,7 @@ class TipIntrebare extends Model {
         'order_no',
         'icon',
         'has_answers',
+        'is_numeric',
         'can_has_subquestion',
     ];
 
@@ -27,6 +28,7 @@ class TipIntrebare extends Model {
         'order_no' => 'integer',
         'has_answers' => 'integer',
         'can_has_subqestion' => 'integer',
+        'is_numeric' => 'integer',
     ];
 
    
