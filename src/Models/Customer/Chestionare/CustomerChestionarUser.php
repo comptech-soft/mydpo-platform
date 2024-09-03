@@ -275,19 +275,19 @@ class CustomerChestionarUser extends Model {
     //     return self::doChangestatus($input, $record);
     // }
 
-    // public static function doDezasociere($input, $record) {
-    //     /**
-    //      * Se sterg inregistraile din tabela [customers-cursuri-users]
-    //      */
-    //     $records = self::where('customer_id', $input['customer_id'])
-    //         ->where('customer_curs_id', $input['customer_curs_id'])
-    //         ->whereIn('user_id', $input['users'])
-    //         ->delete();
+    public static function doDezasociere($input, $record) {
+        /**
+         * Se sterg inregistraile din tabela [customers-chestionare-users] si din [customers-chestionare-users-answers] 
+         */
+        $records = self::where('customer_id', $input['customer_id'])
+            ->where('customer_chestionar_id', $input['customer_chestionar_id'])
+            ->whereIn('user_id', $input['users'])
+            ->delete();
 
-    //     CustomerCurs::Sync($input['customer_id']);
+        CustomerChestionar::Sync($input['customer_id']);
 
-    //     return $records;
-    // }
+        return $records;
+    }
 
     // public static function doDelete($input, $record) {
 

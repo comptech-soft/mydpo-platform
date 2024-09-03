@@ -215,8 +215,6 @@ class CustomerChestionar extends Model {
          */
         $records = self::where('customer_id', $customer_id)
             ->where('users_count', 0)
-            ->where('files_count', 0)
-            ->where('participants_count', 0)
             ->delete();
     }
 
