@@ -90,12 +90,12 @@ class CustomerChestionarUser extends Model {
     }
 
     public function getFinalizatAttribute() {
-        if($this->status != 'done' || ! $this->done_at || ! $this->trimitere->date_to)
+        if($this->status != 'done' || ! $this->finished_at || ! $this->trimitere->date_to)
         {
             return NULL;
         }
 
-        $now = Carbon::createFromFormat('Y-m-d H:i:s', $this->done_at);
+        $now = Carbon::createFromFormat('Y-m-d H:i:s', $this->finished_at);
         $expire = Carbon::createFromFormat('Y-m-d', $this->trimitere->date_to);
 
         $daysDiff = $expire->diffInDays($now, false);
