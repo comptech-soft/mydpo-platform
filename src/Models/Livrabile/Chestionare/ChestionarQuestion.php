@@ -71,7 +71,17 @@ class ChestionarQuestion extends Model {
      */
     public static function doAttachfromcollection($input, $record)
     {
-        dd($input, $record);
+        if( array_key_exists('question_id', $input) && !! $input['question_id'] )
+        {
+            $question = Question::find($input['question_id']);
+
+            self::AttachQuestionFromCollection( $input['chestionar_id'],  $question);
+        }
+    }
+
+    public static function AttachQuestionFromCollection( $chestionar_id,  Question $question)
+    {
+        dd($chestionar_id,  $question->toArray());
     }
 
     /**
