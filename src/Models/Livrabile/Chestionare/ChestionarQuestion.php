@@ -9,7 +9,7 @@ use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 use MyDpo\Traits\Reorderable;
 use MyDpo\Observers\Livrabile\Chestionare\ChestionarQuestionObserver;
-
+use MyDpo\Models\Nomenclatoare\Livrabile\Chestionare\Question;
 
 class ChestionarQuestion extends Model {
     
@@ -71,9 +71,6 @@ class ChestionarQuestion extends Model {
      */
     public static function doInsert($input, $record)
     {
-
-        dd($input, $record);
-
         if(!! $input['parent_id'])
         {
             $parent = self::find($input['parent_id']);
@@ -87,6 +84,11 @@ class ChestionarQuestion extends Model {
 
         $record->syncOptions( array_key_exists('options', $input)  ? $input['options'] : [] );
         
+        if( array_key_exists('add_to_collection', $input) && ($input['add_to_collection'] == 1) )
+        {   
+            Question::addToCollectio($record);
+        }
+
         return self::find($record->id);
     }
 

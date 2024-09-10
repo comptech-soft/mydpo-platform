@@ -8,6 +8,7 @@ use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 use MyDpo\Rules\Nomenclatoare\Livrabile\Chestionare\Question\UniqueName;
 use MyDpo\Observers\Nomenclatoare\Livrabile\Chestionare\QuestionObserver;
+use MyDpo\Models\Livrabile\Chestionare\ChestionarQuestion;
 
 class Question extends Model {
 
@@ -64,6 +65,11 @@ class Question extends Model {
 
     public function answers() {
         return $this->hasMany(QuestionAnswer::class, 'question_id')->orderBy('order_no');
+    }
+
+    public static function addToCollectio(ChestionarQuestion $record)
+    {
+        dd($record->toArray());
     }
 
     public static function doInsert($input, $record)
