@@ -67,6 +67,14 @@ class ChestionarQuestion extends Model {
     }
 
     /**
+     * atasarea la chestionar a unei intrebari din colectia de interbari
+     */
+    public static function doAttachfromcollection($input, $record)
+    {
+        dd($input, $record);
+    }
+
+    /**
      * adaugarea unei intrebari la chestionar
      */
     public static function doInsert($input, $record)

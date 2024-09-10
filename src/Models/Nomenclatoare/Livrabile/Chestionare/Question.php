@@ -69,14 +69,19 @@ class Question extends Model {
 
     public static function addToCollectio(ChestionarQuestion $record)
     {
-
-        dd($record->toArray());
-        
         return self::doInsert(
             [
                 ...$record->toArray(),
                 'id' => NULL,
                 'name' => '#' . $record->id,
+                'options' => $record->options->map(function($option, $i){
+
+                    return [
+                        'id' => NULL,
+                        'answer_text' => $option->answer_text,
+                        'order_no' => 1 + $i
+                    ];
+                })->toArray()
             ], 
             NULL
         );
