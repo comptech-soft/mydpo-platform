@@ -40,6 +40,9 @@ class CustomerFolderPermission extends Model {
      * Setarea permisiunilor pe un folder
      */
     public static function UpdatePermissions($input) {
+
+
+        dd($input);
         
         self::where('customer_id', $input['customer_id'])
             ->where('user_id',  $input['user_id'])
