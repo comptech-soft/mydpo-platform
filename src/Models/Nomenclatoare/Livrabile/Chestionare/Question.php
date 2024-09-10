@@ -69,6 +69,9 @@ class Question extends Model {
 
     public static function addToCollectio(ChestionarQuestion $record)
     {
+
+        dd($record->toArray());
+        
         return self::doInsert(
             [
                 ...$record->toArray(),
