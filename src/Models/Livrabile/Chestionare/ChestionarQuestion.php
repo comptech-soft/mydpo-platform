@@ -66,7 +66,7 @@ class ChestionarQuestion extends Model {
         return $this->hasMany(ChestionarQuestionOption::class, 'chestionar_question_id')->orderBy('order_no');
     }
 
-    /**
+        /**
      * atasarea la chestionar a unei intrebari din colectia de interbari
      */
     public static function doAttachfromcollection($input, $record)
@@ -75,13 +75,38 @@ class ChestionarQuestion extends Model {
         {
             $question = Question::find($input['question_id']);
 
-            self::AttachQuestionFromCollection( $input['chestionar_id'],  $question);
+            return self::AttachQuestionFromCollection( $input['chestionar_id'],  $question);
         }
+
+        return NULL;
     }
 
     public static function AttachQuestionFromCollection( $chestionar_id,  Question $question)
     {
-        dd($chestionar_id,  $question->toArray());
+        $input = [
+            'parent_id' => NULL,
+            'chestionar_id' => $chestionar_id,
+            'order_no' => self::where('chestionar_id', $chestionar_id)->count() + 1,
+            'question_type_id' => $question->question_type_id,
+            'question_text' => $question->question_text,
+            'score' => $question->score,
+            'time_limit' => $question->time_limit,
+            'is_required' => $question->is_required,
+            'other_text' => $question->other_text,
+            'none_text' => $question->none_text,
+            'options' => $question->answers->map(function($option, $i){
+
+                return [
+                    'id' => NULL,
+                    'answer_text' => $option->answer_text,
+                    'order_no' => 1 + $i,
+                ];
+    
+            })->toArray(),
+            
+        ];
+        
+        return self::doInsert($input, NULL);
     }
 
     /**
