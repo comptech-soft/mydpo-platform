@@ -114,6 +114,9 @@ class ChestionarQuestion extends Model {
      */
     public static function doInsert($input, $record)
     {
+
+        dd($input);
+        
         if(!! $input['parent_id'])
         {
             $parent = self::find($input['parent_id']);
