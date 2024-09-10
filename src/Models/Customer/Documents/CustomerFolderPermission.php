@@ -41,11 +41,9 @@ class CustomerFolderPermission extends Model {
      */
     public static function UpdatePermissions($input) {
 
-
-        dd($input);
-        
         self::where('customer_id', $input['customer_id'])
             ->where('user_id',  $input['user_id'])
+            ->whereIn('folder_id', $input['all_folders_ids'])
             ->update([
                 'has_access' => 0,
             ]);
