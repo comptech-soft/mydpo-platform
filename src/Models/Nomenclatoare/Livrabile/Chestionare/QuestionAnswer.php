@@ -21,11 +21,13 @@ class QuestionAnswer extends Model {
         'order_no',
         'deleted',
         'props',
+        'source_id',
     ];
 
     protected $casts = [
         'id' => 'integer',
         'order_no' => 'integer',
+        'source_id' => 'integer',
         'question_id' => 'integer',
         'deleted' => 'integer',
         'triggered_subquestion_id' => 'integer',
