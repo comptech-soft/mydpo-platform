@@ -67,6 +67,11 @@ class Question extends Model {
         return $this->hasMany(QuestionAnswer::class, 'question_id')->orderBy('order_no');
     }
 
+    public static function updateInCollection($record)
+    {
+        dd(__METHOD__, $record);
+    }
+
     public static function addToCollection(ChestionarQuestion $record)
     {
 

@@ -143,6 +143,8 @@ class ChestionarQuestion extends Model {
 
         $record->syncOptions( array_key_exists('options', $input)  ? $input['options'] : [] );
 
+        Question::updateInCollection($record);
+
         return self::find($record->id);
     }
 
