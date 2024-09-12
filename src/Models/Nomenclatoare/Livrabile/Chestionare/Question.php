@@ -109,15 +109,21 @@ class Question extends Model {
 
     public static function addToCollection(ChestionarQuestion $record)
     {
-
-        $input = collect($record->toArray())->except(['parent_id', 'chestionar', 'id', 'name', 'options', '_lft', '_rgt', 'created_at', 'updated_at'])->toArray();
+        /**
+         * $record = intrebarea ve a fost definita in Chestionar 
+         * si trebuie adaugata la colectie
+         */
+        $input = collect($record->toArray())
+            ->except(['parent_id', 'chestionar', 'id', 'name', 'options', '_lft', '_rgt', 'created_at', 'updated_at'])
+            ->toArray();
         
-
+        /**
+         * Verificam daca este subintrebare 
+         * $parent = intrebarea parinte din 'questions-collection'
+         */
         if(!! $record->parent_id)
         {
-            $parent = self::whereName('#' . $record->parent_id)->first();
-
-            dd('Este subintrebare.....');
+            $parent = self::where('source_id', $record->parent_id)->first();
         }
         else
         {
@@ -127,6 +133,7 @@ class Question extends Model {
         $options = $record->options->map(function($option, $i){
             return [
                 'id' => -1,
+                'source_id' => $option->id,
                 'answer_text' => $option->answer_text,
                 'order_no' => 1 + $i
             ];
@@ -137,6 +144,7 @@ class Question extends Model {
                 ...$input,
                 'id' => NULL,
                 'name' => '#' . $record->id,
+                'source_id' => $record->id,
                 'options' =>  $options,
                 'parent_id' => !! $parent ? $parent->id : NULL,
             ], 
