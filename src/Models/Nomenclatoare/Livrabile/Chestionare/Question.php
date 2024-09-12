@@ -72,13 +72,34 @@ class Question extends Model {
     public static function updateInCollection(ChestionarQuestion $record)
     {
 
-        $collection = self::whereName('#' . $record->id)->first();
+        $collection = self::where('source_id', $record->id)->first();
 
-        $input = collect($record->toArray())->except(['parent_id', 'chestionar', 'id', 'name', 'options', '_lft', '_rgt', 'created_at', 'updated_at'])->toArray();
+        $input = collect($record->toArray())
+            ->except(['parent_id', 'chestionar', 'id', 'name', 'options', '_lft', '_rgt', 'created_at', 'updated_at'])
+            ->toArray();
+
+        /**
+         * Verificam daca este subintrebare 
+         * $parent = intrebarea parinte din 'questions-collection'
+         */
+        $parent = NULL;
+        $activate_on_answer_id = NULL;
 
         if(!! $record->parent_id)
         {
-            $parent = self::whereName('#' . $record->parent_id)->first();
+            /**
+             * Avem o subintrebare
+             * Se activeaza pentru $record->activate_on_answer_id dim 'chestionare-questions'
+             */
+            $parent = self::where('source_id', $record->parent_id)->first();
+
+            $activator = $parent->answers->where('source_id', $record->activate_on_answer_id)->first();
+
+            if(!! $activator )
+            {
+                $activate_on_answer_id = $activator->id;
+            }
+
         }
         else
         {
@@ -89,6 +110,7 @@ class Question extends Model {
             return [
                 'id' => -1,
                 'answer_text' => $option->answer_text,
+                'source_id' => $option->id,
                 'order_no' => 1 + $i
             ];
         })->toArray();
@@ -101,6 +123,7 @@ class Question extends Model {
                 'name' => '#' . $record->id,
                 'options' =>  $options,
                 'parent_id' => !! $parent ? $parent->id : NULL,
+                'activate_on_answer_id' => $activate_on_answer_id,
             ], 
 
             $collection
@@ -109,6 +132,7 @@ class Question extends Model {
 
     public static function addToCollection(ChestionarQuestion $record)
     {
+
         /**
          * $record = intrebarea ve a fost definita in Chestionar 
          * si trebuie adaugata la colectie
@@ -121,16 +145,27 @@ class Question extends Model {
          * Verificam daca este subintrebare 
          * $parent = intrebarea parinte din 'questions-collection'
          */
+        $parent = NULL;
+        $activate_on_answer_id = NULL;
+
         if(!! $record->parent_id)
         {
+            /**
+             * Avem o subintrebare
+             * Se activeaza pentru $record->activate_on_answer_id dim 'chestionare-questions'
+             */
             $parent = self::where('source_id', $record->parent_id)->first();
-        }
-        else
-        {
-            $parent = NULL;
+
+            $activator = $parent->answers->where('source_id', $record->activate_on_answer_id)->first();
+
+            if(!! $activator )
+            {
+                $activate_on_answer_id = $activator->id;
+            }
+            
         }
 
-        $options = $record->options->map(function($option, $i){
+        $options = $record->options->map(function($option, $i) use ($activate_on_answer_id){
             return [
                 'id' => -1,
                 'source_id' => $option->id,
@@ -138,7 +173,7 @@ class Question extends Model {
                 'order_no' => 1 + $i
             ];
         })->toArray();
-
+        
         return self::doInsert(
             [
                 ...$input,
@@ -147,6 +182,7 @@ class Question extends Model {
                 'source_id' => $record->id,
                 'options' =>  $options,
                 'parent_id' => !! $parent ? $parent->id : NULL,
+                'activate_on_answer_id' => $activate_on_answer_id,
             ], 
 
             NULL
