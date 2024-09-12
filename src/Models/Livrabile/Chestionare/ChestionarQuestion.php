@@ -131,7 +131,10 @@ class ChestionarQuestion extends Model {
         
         if( array_key_exists('add_to_collection', $input) && ($input['add_to_collection'] == 1) )
         {   
-            Question::addToCollectio($record);
+
+            dd($record->toArray());
+            
+            Question::addToCollection($record);
         }
 
         return self::find($record->id);

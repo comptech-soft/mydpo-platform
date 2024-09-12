@@ -67,25 +67,33 @@ class Question extends Model {
         return $this->hasMany(QuestionAnswer::class, 'question_id')->orderBy('order_no');
     }
 
-    public static function addToCollectio(ChestionarQuestion $record)
+    public static function addToCollection(ChestionarQuestion $record)
     {
+
+        $input = collect($record->toArray())->except(['chestionar', 'id', 'name', 'options', '_lft', '_rgt', 'created_at', 'updated_at'])->toArray();
+        
+        $options = $record->options->map(function($option, $i){
+
+            return [
+                'id' => -1,
+                'answer_text' => $option->answer_text,
+                'order_no' => 1 + $i
+            ];
+        })->toArray();
+
         return self::doInsert(
             [
-                ...$record->toArray(),
+                ...$input,
                 'id' => NULL,
                 'name' => '#' . $record->id,
-                'options' => $record->options->map(function($option, $i){
-
-                    return [
-                        'id' => NULL,
-                        'answer_text' => $option->answer_text,
-                        'order_no' => 1 + $i
-                    ];
-                })->toArray()
+                'options' =>  $options,
             ], 
+
             NULL
         );
+
     }
+
 
     public static function doInsert($input, $record)
     {
