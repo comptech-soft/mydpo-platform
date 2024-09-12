@@ -70,10 +70,19 @@ class Question extends Model {
     public static function addToCollection(ChestionarQuestion $record)
     {
 
-        $input = collect($record->toArray())->except(['chestionar', 'id', 'name', 'options', '_lft', '_rgt', 'created_at', 'updated_at'])->toArray();
+        $input = collect($record->toArray())->except(['parent_id', 'chestionar', 'id', 'name', 'options', '_lft', '_rgt', 'created_at', 'updated_at'])->toArray();
         
-        $options = $record->options->map(function($option, $i){
 
+        if(!! $record->parent_id)
+        {
+            $parent = self::whereName('#' . $record->parent_id)->first();
+        }
+        else
+        {
+            $parent = NULL;
+        }
+
+        $options = $record->options->map(function($option, $i){
             return [
                 'id' => -1,
                 'answer_text' => $option->answer_text,
@@ -87,13 +96,13 @@ class Question extends Model {
                 'id' => NULL,
                 'name' => '#' . $record->id,
                 'options' =>  $options,
+                'parent_id' => !! $parent ? $parent->id : NULL,
             ], 
 
             NULL
         );
 
     }
-
 
     public static function doInsert($input, $record)
     {
