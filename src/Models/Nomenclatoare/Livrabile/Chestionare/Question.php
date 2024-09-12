@@ -67,9 +67,42 @@ class Question extends Model {
         return $this->hasMany(QuestionAnswer::class, 'question_id')->orderBy('order_no');
     }
 
-    public static function updateInCollection($record)
+    public static function updateInCollection(ChestionarQuestion $record)
     {
-        dd(__METHOD__, $record);
+
+        $collection = self::whereName('#' . $record->id)->first();
+
+        $input = collect($record->toArray())->except(['parent_id', 'chestionar', 'id', 'name', 'options', '_lft', '_rgt', 'created_at', 'updated_at'])->toArray();
+
+        if(!! $record->parent_id)
+        {
+            $parent = self::whereName('#' . $record->parent_id)->first();
+        }
+        else
+        {
+            $parent = NULL;
+        }
+
+        $options = $record->options->map(function($option, $i){
+            return [
+                'id' => -1,
+                'answer_text' => $option->answer_text,
+                'order_no' => 1 + $i
+            ];
+        })->toArray();
+
+
+        return self::doUpdate(
+            [
+                ...$input,
+                'id' => $collection->id,
+                'name' => '#' . $record->id,
+                'options' =>  $options,
+                'parent_id' => !! $parent ? $parent->id : NULL,
+            ], 
+
+            $collection
+        );
     }
 
     public static function addToCollection(ChestionarQuestion $record)
@@ -81,6 +114,8 @@ class Question extends Model {
         if(!! $record->parent_id)
         {
             $parent = self::whereName('#' . $record->parent_id)->first();
+
+            dd('Este subintrebare.....');
         }
         else
         {
