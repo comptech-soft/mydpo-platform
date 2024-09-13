@@ -349,15 +349,19 @@ class CustomerChestionarUser extends Model {
 
         event(
             new \MyDpo\Events\Customer\Livrabile\Chestionare\Trimitere(
+                
                 'chestionar.trimitere', 
+                
                 [
                     'nume_chestionar' => $record->chestionar->name,
                     'customers' => [$input['customer_id'] . '#' . $input['user_id']],
                     'link' => $url,
-                ]
-                ),
+                ],
+
                 $record->chestionar->subject,
-                $record->chestionar->body,
+                
+                $record->chestionar->body
+            )
         );
 
     }
