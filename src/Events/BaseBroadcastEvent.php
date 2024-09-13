@@ -33,12 +33,23 @@ class BaseBroadcastEvent implements ShouldBroadcast {
         $this->subject = $subject;
         $this->body = $body;
         
-        dd($this->subject, $this->body);
-        
         $this->template_email = TemplateEmail::FindByName($template_name);
         
         if(!! $this->template_email)
         {
+
+            if(!! $this->subject)
+            {
+                $this->template_email->subject = $this->subject;
+            }
+
+            if(!! $this->body)
+            {
+                $this->template_email->body = $this->body;
+            }
+
+            dd( $this->template_email->toArray());
+
             TemplateEmail::doSend([
                 'customers' => $this->customers, 
                 'payload' => $this->input,
