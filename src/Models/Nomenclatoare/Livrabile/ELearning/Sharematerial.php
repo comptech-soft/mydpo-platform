@@ -288,6 +288,9 @@ class Sharematerial extends Model {
     // }
 
     public static function doInsert($input, $record) {
+
+        dd($input);
+        
         $record = self::create([
             ...$input,
             'created_by' => \Auth::user()->id,
