@@ -355,7 +355,9 @@ class CustomerChestionarUser extends Model {
                     'customers' => [$input['customer_id'] . '#' . $input['user_id']],
                     'link' => $url,
                 ]
-            )
+                ),
+                $record->chestionar->subject,
+                $record->chestionar->body,
         );
 
     }

@@ -22,10 +22,18 @@ class BaseBroadcastEvent implements ShouldBroadcast {
 
     public $notifications = NULL;
 
-    public function __construct($template_name, $input) {
+    public $subject = NULL;
+    public $body = NULL;
+
+    public function __construct($template_name, $input, $subject = NULL, $body = NULL) {
        
         $this->template_name = $template_name;
         $this->input = $input;
+
+        $this->subject = $subject;
+        $this->body = $body;
+        
+        dd($this->subject, $this->body);
         
         $this->template_email = TemplateEmail::FindByName($template_name);
         
