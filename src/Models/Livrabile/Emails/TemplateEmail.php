@@ -58,8 +58,7 @@ class TemplateEmail extends Model {
         }
         else
         {
-
-
+            
             $user = $input['payload']['user'];
 
             \Mail::to($user->email)->send(

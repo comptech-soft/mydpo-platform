@@ -55,8 +55,6 @@ class BaseBroadcastEvent implements ShouldBroadcast {
                 $this->template_email->btn_url = $this->url;
             }
 
-            dd( $this->template_email->toArray());
-
             TemplateEmail::doSend([
                 'customers' => $this->customers, 
                 'payload' => $this->input,
