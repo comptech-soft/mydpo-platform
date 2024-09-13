@@ -343,6 +343,7 @@ class CustomerChestionarUser extends Model {
 
         $record->refresh();
 
+        dd(__METHOD__ . __LINE__);
         event(
             new \MyDpo\Events\Customer\Livrabile\Chestionare\Trimitere(
                 'chestionar.trimitere', 
