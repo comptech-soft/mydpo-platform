@@ -360,7 +360,9 @@ class CustomerChestionarUser extends Model {
 
                 $record->chestionar->subject,
                 
-                $record->chestionar->body
+                $record->chestionar->body,
+
+                $url,
             )
         );
 

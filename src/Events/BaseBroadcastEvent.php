@@ -24,14 +24,16 @@ class BaseBroadcastEvent implements ShouldBroadcast {
 
     public $subject = NULL;
     public $body = NULL;
+    public $url = NULL;
 
-    public function __construct($template_name, $input, $subject = NULL, $body = NULL) {
+    public function __construct($template_name, $input, $subject = NULL, $body = NULL, $url = NULL) {
        
         $this->template_name = $template_name;
         $this->input = $input;
 
         $this->subject = $subject;
         $this->body = $body;
+        $this->url = $url;
         
         $this->template_email = TemplateEmail::FindByName($template_name);
         
@@ -46,6 +48,11 @@ class BaseBroadcastEvent implements ShouldBroadcast {
             if(!! $this->body)
             {
                 $this->template_email->body = $this->body;
+            }
+
+            if(!! $this->url)
+            {
+                $this->template_email->btn_url = $this->url;
             }
 
             dd( $this->template_email->toArray());
