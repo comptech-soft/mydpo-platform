@@ -106,15 +106,17 @@ class Question extends Model {
             $parent = NULL;
         }
 
-        $options = $record->options->map(function($option, $i){
+        $options = $record->options->map(function($option, $i) use ($collection) {
+
+            $exists = $collection->answers()->where('source_id', $option->id)->first();
+
             return [
-                'id' => -1,
+                'id' => !! $exists ? $exists->id : -1,
                 'answer_text' => $option->answer_text,
                 'source_id' => $option->id,
                 'order_no' => 1 + $i
             ];
         })->toArray();
-
 
         return self::doUpdate(
             [
