@@ -343,14 +343,17 @@ class CustomerChestionarUser extends Model {
 
         $record->refresh();
 
-        dd(__METHOD__ . __LINE__);
+        $platform = \MyDpo\Models\System\Platform::whereSlug('b2b')->first();
+
+        $url = $platform->url . '/customer-my-chestionar-parcurgere/' . $input['customer_id'] . '/' . $record->customer_chestionar_id . '/' . $record->id. '/' . $input['user_id'] ;
+
         event(
             new \MyDpo\Events\Customer\Livrabile\Chestionare\Trimitere(
                 'chestionar.trimitere', 
                 [
                     'nume_chestionar' => $record->chestionar->name,
                     'customers' => [$input['customer_id'] . '#' . $input['user_id']],
-                    'link' => '/customer-user-chestionar/' . $input['user_id'] . '/' . $input['customer_id'],
+                    'link' => $url,
                 ]
             )
         );
