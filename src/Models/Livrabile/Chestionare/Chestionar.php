@@ -144,7 +144,9 @@ class Chestionar extends Model {
 
     public static function PrepareOneQuestionsToDuplicate(array $question)
     {
-        dd($question);
+        return [
+            ...collect($question)->except(['options', 'children', 'tip', '_lft', '_rgt', 'created_at', 'updated_at'])->toArray(),
+        ];
     }
 
     public function duplicateOneQuestion($question, $parent_id)
