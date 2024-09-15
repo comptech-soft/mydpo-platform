@@ -148,9 +148,9 @@ class ChestionarQuestion extends Model {
         return self::find($record->id);
     }
 
-    protected static function CreateDuplicatedOptions($options)
+    protected static function CreateDuplicatedOptions($options, $question)
     {
-        dd($options);
+        dd($question, $options);
     }
 
 
