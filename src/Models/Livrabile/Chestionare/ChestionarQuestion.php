@@ -148,18 +148,9 @@ class ChestionarQuestion extends Model {
         return self::find($record->id);
     }
 
-    public function duplicateOptions()
+    protected static function CreateDuplicatedOptions($options)
     {
-        $options = [...$this->options->map(function($option){
-            return [
-                ...$option->toArray(),
-                'id' => NULL,
-                'chestionar_question_id' => $this->id,
-            ];
-
-        })->toArray()];
-
-        $this->syncOptions($options);
+        dd($options);
     }
 
 

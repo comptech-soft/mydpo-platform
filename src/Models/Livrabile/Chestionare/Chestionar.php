@@ -172,15 +172,28 @@ class Chestionar extends Model {
 
     public static function CreateDuplicatedQuestions(array $questions, $parent_id, Chestionar $chestionar)
     {
+        $r = [];
+        
         foreach($questions as $question)
         {
-            self::CreateDuplicatedOneQuestion(array $question, $parent_id, Chestionar $chestionar)
+            $r[] = self::CreateDuplicatedOneQuestion($question, $parent_id, $chestionar);
         }
+
+        return $r;
     }
 
-    public static function CreateDuplicatedQuestions(array $questions, $parent_id, Chestionar $chestionar)
+    public static function CreateDuplicatedOneQuestion(array $question, $parent_id, Chestionar $chestionar)
     {
-        dd($question, $parent_id, $chestionar);
+        $input = [
+            ...collect($question)->except(['options', 'children', 'source_id'])->toArray(),
+            'chestionar_id' => $chestionar->id,
+        ];
+
+        $record = ChestionarQuestion::create($input);
+
+        ChestionarQuestion::CreateDuplicatedOptions($question['options']);
+        
+        return $record;
     }
 
     public static function doDelete($input, $record) {
