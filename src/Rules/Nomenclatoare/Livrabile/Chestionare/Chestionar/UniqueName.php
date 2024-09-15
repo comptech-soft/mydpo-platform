@@ -18,8 +18,8 @@ class UniqueName implements Rule {
 
     public function passes($attribute, $value) {   
 
-        dd($this->deleted);
-        
+        dd($this->input);
+
         $q = Chestionar::where('name', $this->input['name'])->whereDeleted($this->deleted);
 
         if($this->action == 'update')
