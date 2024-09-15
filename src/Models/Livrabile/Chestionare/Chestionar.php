@@ -104,9 +104,17 @@ class Chestionar extends Model {
 
     public function duplicateOneQuestion($question, $parent_id)
     {
+        $new_question = $question->replicate();
 
-        dd($question, $parent_id);
+        $new_question->chestionar_id = $this->id;
+
+        $new_question->duplicateOptions();
+
+        $new_question->duplicateChildren();
+
+        $new_question->save();
     }
+
 
     public function duplicateQuestions(Chestionar $source, $parent_id)
     {

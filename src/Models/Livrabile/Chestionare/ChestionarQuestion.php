@@ -148,6 +148,11 @@ class ChestionarQuestion extends Model {
         return self::find($record->id);
     }
 
+    public function duplicateOptions()
+    {
+        dd($this->options);
+    }
+
     protected function syncOptions($options)
     {
         $this->markOptionsForDelete();
