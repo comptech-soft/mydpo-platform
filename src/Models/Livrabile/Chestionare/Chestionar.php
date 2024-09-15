@@ -146,7 +146,7 @@ class Chestionar extends Model {
         $result = [
             'name' => [
                 'required',
-                new UniqueName($input),
+                new UniqueName($action, $input),
             ],
            
         ];
