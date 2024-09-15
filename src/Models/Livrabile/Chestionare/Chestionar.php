@@ -149,7 +149,7 @@ class Chestionar extends Model {
             'source_id' => $question['id'],
             'id' => NULL,
             'options' => self::PrepareOptionsToDuplicate($question['options']),
-            'children' => self::repareQuestionsToDuplicate(array $question['children']),
+            'children' => self::PrepareQuestionsToDuplicate($question['children']),
         ];
     }
 
