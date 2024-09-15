@@ -187,6 +187,7 @@ class Chestionar extends Model {
         $input = [
             ...collect($question)->except(['options', 'children', 'source_id'])->toArray(),
             'chestionar_id' => $chestionar->id,
+            'activate_on_answer_id' => NULL,
         ];
 
         if(! $parent)
