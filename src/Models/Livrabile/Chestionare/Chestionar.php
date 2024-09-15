@@ -130,9 +130,21 @@ class Chestionar extends Model {
         dd($root_questions);
     }
 
-    public static function PrepareQuestionsToDuplicate(array $root_questions)
+    public static function PrepareQuestionsToDuplicate(array $questions)
     {
-        dd($root_questions);
+        $r = [];
+
+        foreach($questions as $question)
+        {
+            $r[] = self::PrepareOneQuestionsToDuplicate($question); 
+        }
+
+        return $r;
+    }
+
+    public static function PrepareOneQuestionsToDuplicate(array $question)
+    {
+        dd($question);
     }
 
     public function duplicateOneQuestion($question, $parent_id)
