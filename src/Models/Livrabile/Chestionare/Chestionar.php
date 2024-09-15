@@ -146,7 +146,16 @@ class Chestionar extends Model {
     {
         return [
             ...collect($question)->except(['options', 'children', 'tip', '_lft', '_rgt', 'created_at', 'updated_at'])->toArray(),
+            'source_id' => $question['id'],
+            'id' => NULL,
+            'options' => self::PrepareOptionsToDuplicate($question['options']),
         ];
+    }
+
+    public static function PrepareOptionsToDuplicate(array $options)
+    {
+
+        dd($options);
     }
 
     public function duplicateOneQuestion($question, $parent_id)
