@@ -125,7 +125,14 @@ class Chestionar extends Model {
             ...$input,
         ];
 
-        dd($target);
+        $root_questions = self::PrepareQuestionsToDuplicate(ChestionarQuestion::where('chestionar_id', $source->id)->whereNull('parent_id')->get()->toArray());
+
+        dd($root_questions);
+    }
+
+    public static function PrepareQuestionsToDuplicate(array $root_questions)
+    {
+        dd($root_questions);
     }
 
     public function duplicateOneQuestion($question, $parent_id)
