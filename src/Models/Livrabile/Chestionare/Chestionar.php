@@ -85,10 +85,14 @@ class Chestionar extends Model {
 
         return $image;
     }
-
     
     public function category() {
         return $this->belongsTo(Category::class, 'category_id');
+    }
+
+    public static function doDuplicate($input, $record) {
+
+        dd($input, $record);
     }
 
     public static function doDelete($input, $record) {
