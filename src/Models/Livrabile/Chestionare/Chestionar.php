@@ -154,8 +154,15 @@ class Chestionar extends Model {
 
     public static function PrepareOptionsToDuplicate(array $options)
     {
+        return collect($options)->map( function($option){
 
-        dd($options);
+            return [
+                ...collect($option)->except(['created_at', 'updated_at'])->toArray(),
+                'chestionar_question_id' => NULL,
+                'id' => NULL,
+                'source_id' => $option['id'], 
+            ];
+        })->toArray();
     }
 
     public function duplicateOneQuestion($question, $parent_id)
