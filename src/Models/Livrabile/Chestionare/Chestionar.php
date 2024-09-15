@@ -161,12 +161,20 @@ class Chestionar extends Model {
 
     public static function CreateDuplicatedChestionar(array $target)
     {
-        dd($target);
+        $input = collect($target)->except(['source_id', 'days_difference', 'visible', 'human_status', 'my_image', 'status', 'questions_count', 'questions', 'created_at', 'updated_at', 'created_by', 'updated_by', 'deleted_by', 'category'])->toArray();
+
+        $record = self::create($input);
+
+        self::CreateDuplicatedQuestions( $target['questions'], NULL, $record);
+
+        return $record;
     }
 
 
-    // public function duplicateQuestions(Chestionar $source, $parent_id)
-    // {
+    public static function CreateDuplicatedQuestions(array $questions, $parent_id, Chestionar $chestionar)
+    {
+
+        dd($questions, $parent_id, $chestionar);
     //     /**
     //      * $this = chestionarul curent
     //      * Aflam interbarile chestionarului curent
@@ -189,7 +197,7 @@ class Chestionar extends Model {
     //         $this->duplicateOneQuestion($question, $parent_id);
     //     }
 
-    // }
+    }
 
     public static function doDelete($input, $record) {
 
