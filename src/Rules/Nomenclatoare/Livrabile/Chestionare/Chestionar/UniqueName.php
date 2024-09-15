@@ -1,6 +1,6 @@
 <?php
 
-namespace MyDpo\Rules\Nomenclatoare\Livrabile\Chestionare\Question;
+namespace MyDpo\Rules\Nomenclatoare\Livrabile\Chestionare\Chestionar;
 
 use Illuminate\Contracts\Validation\Rule;
 use MyDpo\Models\Livrabile\Chestionare\Chestionar;
