@@ -170,19 +170,19 @@ class Chestionar extends Model {
         return $record;
     }
 
-    public static function CreateDuplicatedQuestions(array $questions, $parent_id, Chestionar $chestionar)
+    public static function CreateDuplicatedQuestions(array $questions, $parent, Chestionar $chestionar)
     {
         $r = [];
         
         foreach($questions as $question)
         {
-            $r[] = self::CreateDuplicatedOneQuestion($question, $parent_id, $chestionar);
+            $r[] = self::CreateDuplicatedOneQuestion($question, $parent, $chestionar);
         }
 
         return $r;
     }
 
-    public static function CreateDuplicatedOneQuestion(array $question, $parent_id, Chestionar $chestionar)
+    public static function CreateDuplicatedOneQuestion(array $question, $parent, Chestionar $chestionar)
     {
         $input = [
             ...collect($question)->except(['options', 'children', 'source_id'])->toArray(),
@@ -190,8 +190,14 @@ class Chestionar extends Model {
             'parent_id' => $parent_id,
         ];
 
-        $record = ChestionarQuestion::create($input);
-
+        if(! $parent)
+        {
+            $record = ChestionarQuestion::create($input);
+        }
+        else
+        {
+            $parent->children()->create($input);
+        }
         ChestionarQuestion::CreateDuplicatedOptions($question['options'], $record);
 
         self::CreateDuplicatedQuestions($question['children'], $record->id, $chestionar);
