@@ -223,6 +223,12 @@ class Chestionar extends Model {
         return $record;
     }
 
+    public static function doExport($input, $record) {
+
+        dd($record, $input);
+        
+    }
+
     public function syncQuestionCount()
     {
         $items = \DB::select("
@@ -250,7 +256,7 @@ class Chestionar extends Model {
 
     public static function GetRules($action, $input) {
 
-        if($action == 'delete')
+        if(in_array($action, ['export', 'delete']) )
         {
             return [];
         }
