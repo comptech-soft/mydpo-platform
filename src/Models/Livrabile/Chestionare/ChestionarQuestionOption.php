@@ -14,6 +14,7 @@ class ChestionarQuestionOption extends Model {
     
     protected $fillable = [
         'id',
+        'source_id',
         'chestionar_question_id',
         'answer_text',
         'triggered_subquestion_id',
@@ -25,6 +26,7 @@ class ChestionarQuestionOption extends Model {
 
     protected $casts = [
         'id' => 'integer',
+        'source_id' => 'integer',
         'order_no' => 'integer',
         'chestionar_question_id' => 'integer',
         'triggered_subquestion_id' => 'integer',

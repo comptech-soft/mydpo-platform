@@ -19,6 +19,7 @@ class ChestionarQuestion extends Model {
 
     protected $casts = [
         'id' => 'integer',
+        'source_id' => 'integer',
         'order_no' => 'integer',
         'chestionar_id' => 'integer',
         'question_type_id' => 'integer',
@@ -31,6 +32,7 @@ class ChestionarQuestion extends Model {
 
     protected $fillable = [
         'id',
+        'source_id',
         'chestionar_id',
         'order_no',
         'question_type_id',

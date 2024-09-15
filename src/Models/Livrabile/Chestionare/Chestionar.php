@@ -19,6 +19,7 @@ class Chestionar extends Model {
 
     protected $casts = [
         'id' => 'integer',
+        'source_id' => 'integer',
         'props' => 'json',
         'category_id' => 'integer',
         'on_gap' => 'integer',
@@ -34,6 +35,7 @@ class Chestionar extends Model {
 
     protected $fillable = [
         'id',
+        'source_id',
         'status',
         'name',
         'category_id',
@@ -93,20 +95,13 @@ class Chestionar extends Model {
 
     public static function doDuplicate($input, $record) {
 
-        /**
-         * Chestionarul sursa
-         */
+        /** Chestionarul sursa */
         $source = self::find( $input['source_id']);
 
-        /**
-         * Se construiesc datele noului chestionar
-         */
+        /** Se construiesc datele noului chestionar */
         $target = self::PrepareSourceToDuplicate($source, $input);
 
-
-        /**
-         * Chestionarul obtinut
-         */
+        /** Chestionarul obtinut */
         $record = self::CreateDuplicatedChestionar($target);
 
         return $record;
@@ -117,6 +112,7 @@ class Chestionar extends Model {
         $target = [
             ...$source->toArray(),
             ...$input,
+            'source_id' => $source->id,
             'questions' => self::PrepareQuestionsToDuplicate(ChestionarQuestion::where('chestionar_id', $source->id)->whereNull('parent_id')->get()->toArray()),
         ];
 
@@ -161,7 +157,7 @@ class Chestionar extends Model {
 
     public static function CreateDuplicatedChestionar(array $target)
     {
-        $input = collect($target)->except(['source_id', 'days_difference', 'visible', 'human_status', 'my_image', 'status', 'questions_count', 'questions', 'created_at', 'updated_at', 'created_by', 'updated_by', 'deleted_by', 'category'])->toArray();
+        $input = collect($target)->except(['days_difference', 'visible', 'human_status', 'my_image', 'status', 'questions_count', 'questions', 'created_at', 'updated_at', 'created_by', 'updated_by', 'deleted_by', 'category'])->toArray();
 
         $record = self::create($input);
 
@@ -198,6 +194,7 @@ class Chestionar extends Model {
         {
             $record = $parent->children()->create($input);
         }
+
         ChestionarQuestion::CreateDuplicatedOptions($question['options'], $record);
 
         self::CreateDuplicatedQuestions($question['children'], $record, $chestionar);
