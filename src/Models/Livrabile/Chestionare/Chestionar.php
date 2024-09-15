@@ -145,7 +145,6 @@ class Chestionar extends Model {
     public static function PrepareOptionsToDuplicate(array $options)
     {
         return collect($options)->map( function($option){
-
             return [
                 ...collect($option)->except(['created_at', 'updated_at'])->toArray(),
                 'chestionar_question_id' => NULL,
@@ -181,7 +180,7 @@ class Chestionar extends Model {
     public static function CreateDuplicatedOneQuestion(array $question, $parent, Chestionar $chestionar)
     {
         $input = [
-            ...collect($question)->except(['options', 'children', 'source_id'])->toArray(),
+            ...collect($question)->except(['options', 'children'])->toArray(),
             'chestionar_id' => $chestionar->id,
             'activate_on_answer_id' => NULL,
         ];
