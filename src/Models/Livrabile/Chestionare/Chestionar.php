@@ -191,6 +191,13 @@ class Chestionar extends Model {
         }
         else
         {
+            $activator = $parent->options()->where('source_id', $question['activate_on_answer_id'])->first();
+
+            if($activator)
+            {
+                $input['activate_on_answer_id'] = $activator->id;
+            }
+
             $record = $parent->children()->create($input);
         }
 
