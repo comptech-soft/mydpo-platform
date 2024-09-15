@@ -18,9 +18,7 @@ class UniqueName implements Rule {
 
     public function passes($attribute, $value) {   
 
-        dd($this->input);
-
-        $q = Chestionar::where('name', $this->input['name'])->whereDeleted($this->deleted);
+        $q = Chestionar::where('name', $this->input['name'])->whereDeleted(0);
 
         if($this->action == 'update')
         {
@@ -34,6 +32,6 @@ class UniqueName implements Rule {
 
     public function message()
     {
-        return 'Numele de întrebare ' . $this->input['name'] . ' este deja definit.';
+        return 'Numele de chestionar ' . $this->input['name'] . ' este deja definit.';
     }
 }
