@@ -194,7 +194,7 @@ class Chestionar extends Model {
 
         ChestionarQuestion::CreateDuplicatedOptions($question['options'], $record);
 
-        self::CreateDuplicatedQuestions($question['children'], $record, $chestionar);
+        self::CreateDuplicatedQuestions($question['children'], $record->id, $chestionar);
 
         return $record;
     }
