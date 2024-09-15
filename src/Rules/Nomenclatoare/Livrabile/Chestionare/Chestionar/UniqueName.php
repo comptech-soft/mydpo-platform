@@ -18,9 +18,9 @@ class UniqueName implements Rule {
 
     public function passes($attribute, $value) {   
 
-        dd($this->action, $this->input);
-
-        $q = Question::where('name', $this->input['name']);
+        dd($this->deleted);
+        
+        $q = Chestionar::where('name', $this->input['name'])->whereDeleted($this->deleted);
 
         if($this->action == 'update')
         {
