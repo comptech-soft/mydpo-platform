@@ -135,6 +135,23 @@ class Chestionar extends Model {
         ;
     }
 
+    public static function GetRules($action, $input) {
+
+        dd($action, $input);
+
+        if($action == 'delete')
+        {
+            return NULL;
+        }
+        $result = [
+            'name' => [
+                'required',
+                new UniquePermission($input),
+            ],
+           
+        ];
+        return $result;
+    }
     protected static $statuses = [
         0 => [
             'text' => 'Inactiv',
