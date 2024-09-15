@@ -7,7 +7,8 @@ use MyDpo\Models\Livrabile\Categories\Category;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 use MyDpo\Traits\DaysDifference;
-use MyDpo\Rules\Nomenclatoare\Livrabile\Chestionar\UniqueName;
+use MyDpo\Rules\Nomenclatoare\Livrabile\Chestionare\Chestionar\UniqueName;
+
 class Chestionar extends Model {
     
     use Itemable, Actionable, DaysDifference;
