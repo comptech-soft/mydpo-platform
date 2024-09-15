@@ -93,7 +93,22 @@ class Chestionar extends Model {
 
     public static function doDuplicate($input, $record) {
 
-        dd($input, $record);
+        $record = self::create($input);
+
+        $source = self::find( $input['source_id']);
+
+        $record->duplicateQuestions($source);
+
+        return $record;
+    }
+
+    public function duplicateQuestions(Chestionar $source)
+    {
+
+        $questions = ChestionarQuestion::where('chestionar_id', $source->id)->get();
+
+        dd($questions);
+        
     }
 
     public static function doDelete($input, $record) {
