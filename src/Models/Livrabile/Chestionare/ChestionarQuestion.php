@@ -150,14 +150,18 @@ class ChestionarQuestion extends Model {
 
     public function duplicateOptions()
     {
+        $options = [...$this->options->map(function($option){
+            return [
+                ...$option->toArray(),
+                'id' => NULL,
+                'chestionar_question_id' => $this->id,
+            ];
 
-        dd($this->toArray());
+        })->toArray()];
 
-        $options = [...$this->options->toArray()];
-
-        dd($options);
-
+        $this->syncOptions($options);
     }
+
 
     protected function syncOptions($options)
     {

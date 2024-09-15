@@ -93,10 +93,26 @@ class Chestionar extends Model {
 
     public static function doDuplicate($input, $record) {
 
-        $record = self::create($input);
-
+        /**
+         * Chestionarul sursa
+         */
         $source = self::find( $input['source_id']);
 
+        dd($source);
+        
+
+        /**
+         * Chestionarul obtinut
+         */
+        $record = self::create($input);
+
+       
+
+        /**
+         * Start duplicare intrebari radacina
+         * O intrebare radacina poate avea subintrebari
+         * $record = chestionar
+         */
         $record->duplicateQuestions($source, NULL);
 
         return $record;
@@ -110,19 +126,20 @@ class Chestionar extends Model {
 
         $new_question->save();
 
-        dd($new_question->toArray());
-
         $new_question->duplicateOptions();
 
-        $new_question->duplicateChildren();
+        dd($new_question->children);
 
-       
+        $new_question->duplicateChildren();
     }
 
 
     public function duplicateQuestions(Chestionar $source, $parent_id)
     {
-
+        /**
+         * $this = chestionarul curent
+         * Aflam interbarile chestionarului curent
+         */
         if(! $parent_id)
         {
             $questions = ChestionarQuestion::where('chestionar_id', $source->id)->whereNull($parent_id)->get();
@@ -130,9 +147,12 @@ class Chestionar extends Model {
         else
         {
             $questions = ChestionarQuestion::where('chestionar_id', $source->id)->where('parent_id', $parent_id)->get();
-
         }
 
+        /**
+         * Pentru fiecare intrebare din chestionarul curent
+         * se face duplicarea ei
+         */
         foreach($questions as $question)
         {
             $this->duplicateOneQuestion($question, $parent_id);
