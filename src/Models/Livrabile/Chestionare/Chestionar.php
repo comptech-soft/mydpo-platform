@@ -108,11 +108,15 @@ class Chestionar extends Model {
 
         $new_question->chestionar_id = $this->id;
 
+        $new_question->save();
+
+        dd($new_question->toArray());
+
         $new_question->duplicateOptions();
 
         $new_question->duplicateChildren();
 
-        $new_question->save();
+       
     }
 
 

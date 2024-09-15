@@ -150,7 +150,13 @@ class ChestionarQuestion extends Model {
 
     public function duplicateOptions()
     {
-        dd($this->options);
+
+        dd($this->toArray());
+
+        $options = [...$this->options->toArray()];
+
+        dd($options);
+
     }
 
     protected function syncOptions($options)
