@@ -45,6 +45,7 @@ class ChestionarQuestionOption extends Model {
                 'answer_text' => $option['answer_text'],
                 'order_no' => $option['order_no'],
                 'is_deleted' => 0,
+                'source_id' => array_key_exists('source_id', $option) ? $option['source_id'] : NULL,
             ]);
         }
         else
@@ -54,6 +55,7 @@ class ChestionarQuestionOption extends Model {
                 'answer_text' => $option['answer_text'],
                 'order_no' => $option['order_no'],
                 'is_deleted' => 0,
+                'source_id' => array_key_exists('source_id', $option) ? $option['source_id'] : NULL,
             ]);
         }
 
