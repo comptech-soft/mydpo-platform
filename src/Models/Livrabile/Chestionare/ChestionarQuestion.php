@@ -150,9 +150,10 @@ class ChestionarQuestion extends Model {
 
     protected static function CreateDuplicatedOptions($options, $question)
     {
-        dd($question, $options);
-    }
+        $question->syncOptions($options);
 
+        return $question;
+    }
 
     protected function syncOptions($options)
     {
