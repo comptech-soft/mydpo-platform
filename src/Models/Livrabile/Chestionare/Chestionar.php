@@ -97,18 +97,35 @@ class Chestionar extends Model {
 
         $source = self::find( $input['source_id']);
 
-        $record->duplicateQuestions($source);
+        $record->duplicateQuestions($source, NULL);
 
         return $record;
     }
 
-    public function duplicateQuestions(Chestionar $source)
+    public function duplicateOneQuestion($question, $parent_id)
     {
 
-        $questions = ChestionarQuestion::where('chestionar_id', $source->id)->get();
+        dd($question, $parent_id);
+    }
 
-        dd($questions);
-        
+    public function duplicateQuestions(Chestionar $source, $parent_id)
+    {
+
+        if(! $parent_id)
+        {
+            $questions = ChestionarQuestion::where('chestionar_id', $source->id)->whereNull($parent_id)->get();
+        }
+        else
+        {
+            $questions = ChestionarQuestion::where('chestionar_id', $source->id)->where('parent_id', $parent_id)->get();
+
+        }
+
+        foreach($questions as $question)
+        {
+            $this->duplicateOneQuestion($question, $parent_id);
+        }
+
     }
 
     public static function doDelete($input, $record) {
