@@ -98,8 +98,8 @@ class Chestionar extends Model {
          */
         $source = self::find( $input['source_id']);
 
-        dd($source);
-        
+        $target = self::PrepareSourceToDuplicate($source, $input);
+
 
         /**
          * Chestionarul obtinut
@@ -116,6 +116,16 @@ class Chestionar extends Model {
         $record->duplicateQuestions($source, NULL);
 
         return $record;
+    }
+
+    public static function PrepareSourceToDuplicate(Chestionar $source, array $input)
+    {
+        $target = [
+            ...$source->toArray(),
+            ...$input,
+        ];
+
+        dd($target);
     }
 
     public function duplicateOneQuestion($question, $parent_id)
