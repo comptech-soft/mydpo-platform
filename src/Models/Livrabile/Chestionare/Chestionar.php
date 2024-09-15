@@ -165,31 +165,31 @@ class Chestionar extends Model {
     }
 
 
-    public function duplicateQuestions(Chestionar $source, $parent_id)
-    {
-        /**
-         * $this = chestionarul curent
-         * Aflam interbarile chestionarului curent
-         */
-        if(! $parent_id)
-        {
-            $questions = ChestionarQuestion::where('chestionar_id', $source->id)->whereNull($parent_id)->get();
-        }
-        else
-        {
-            $questions = ChestionarQuestion::where('chestionar_id', $source->id)->where('parent_id', $parent_id)->get();
-        }
+    // public function duplicateQuestions(Chestionar $source, $parent_id)
+    // {
+    //     /**
+    //      * $this = chestionarul curent
+    //      * Aflam interbarile chestionarului curent
+    //      */
+    //     if(! $parent_id)
+    //     {
+    //         $questions = ChestionarQuestion::where('chestionar_id', $source->id)->whereNull($parent_id)->get();
+    //     }
+    //     else
+    //     {
+    //         $questions = ChestionarQuestion::where('chestionar_id', $source->id)->where('parent_id', $parent_id)->get();
+    //     }
 
-        /**
-         * Pentru fiecare intrebare din chestionarul curent
-         * se face duplicarea ei
-         */
-        foreach($questions as $question)
-        {
-            $this->duplicateOneQuestion($question, $parent_id);
-        }
+    //     /**
+    //      * Pentru fiecare intrebare din chestionarul curent
+    //      * se face duplicarea ei
+    //      */
+    //     foreach($questions as $question)
+    //     {
+    //         $this->duplicateOneQuestion($question, $parent_id);
+    //     }
 
-    }
+    // }
 
     public static function doDelete($input, $record) {
 
