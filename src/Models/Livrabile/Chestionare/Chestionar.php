@@ -196,11 +196,11 @@ class Chestionar extends Model {
         }
         else
         {
-            $parent->children()->create($input);
+            $record = $parent->children()->create($input);
         }
         ChestionarQuestion::CreateDuplicatedOptions($question['options'], $record);
 
-        self::CreateDuplicatedQuestions($question['children'], $record->id, $chestionar);
+        self::CreateDuplicatedQuestions($question['children'], $record, $chestionar);
 
         return $record;
     }
