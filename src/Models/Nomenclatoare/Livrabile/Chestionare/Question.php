@@ -71,9 +71,13 @@ class Question extends Model {
 
     public static function updateInCollection(ChestionarQuestion $record)
     {
-
         $collection = self::where('source_id', $record->id)->first();
 
+        if( ! $collection )
+        {
+            return NULL;
+        }
+        
         $input = collect($record->toArray())
             ->except(['parent_id', 'chestionar', 'id', 'name', 'options', '_lft', '_rgt', 'created_at', 'updated_at'])
             ->toArray();
