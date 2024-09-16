@@ -6,6 +6,7 @@ use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use MyDpo\Models\Livrabile\Categories\Category;
 use MyDpo\Models\Nomenclatoare\Livrabile\Chestionare\TipIntrebare;
+use MyDpo\Models\Livrabile\Chestionare\Chestionar;
 
 class Importer implements ToCollection {
 
@@ -24,15 +25,13 @@ class Importer implements ToCollection {
     public function collection(Collection $rows) {
 
         $this->PrepareChestionarToImport($rows);
-        
-        // $this->CreateLines($rows);
 
-        // $this->Process();
+        Chestionar::CreateQuestionarFromImport($this->target);
+
     }
 
     public function PrepareChestionarToImport($rows)
     {
-        
         $row = $rows[1];
 
         $this->target = [
@@ -55,8 +54,6 @@ class Importer implements ToCollection {
         })->values()->toArray());
 
         $this->target['questions'] = $this->PrepareQuestionsToImport($raw_questions, 0);
-
-        dd($this->target);
     }
 
     public function PrepareOneRawQuestionsToImport($raw_question, $index, $level)
@@ -142,81 +139,5 @@ class Importer implements ToCollection {
 
         return $items;
     }
-
-    // private function ValidRecord($record) {
-        
-    //     return !! $record['ro'];
-    // }
-
-    // private function RowToRecord($row) {
-    //     return [
-    //         'ro' => $row[1],
-    //         'en' => $row[2],
-    //         '__line' => $row['__line']
-    //     ];
-    // }
-
-    // private function ProcessLine($line) {
-
-    //     $input = collect($line)->except(['__line'])->toArray();
-
-    //     $record = Translation::where('ro', $input['ro'])->first();
-
-    //     if( !! $record )
-    //     {
-    //         $record->update($input);
-    //     }
-    //     else
-    //     {
-    //         $record = Translation::create($input);
-    //     }
-
-    // }    
-
-    // protected function Process() {
-    //     foreach($this->lines as $i => $line) 
-    //     {
-    //         $this->ProcessLine($line);
-    //     }
-    // }
-
-    // protected function CreateLines($rows) {
-    //     /**
-    //      * Din input se ia start_row = linia de inceput
-    //      */
-    //     $start_row = 1 * $this->input['start_row'];
-
-    //     $this->lines = $rows->map(function($row, $i){
-
-    //         /**
-    //          * Se ataseaza numarul de linie
-    //          */
-    //         return [
-    //             ...$row,
-    //             '__line' => $i,
-    //         ];
-
-    //     })->filter( function($row, $i) use ($start_row) {
-    //         /**
-    //          * Se incepe de la linia $start_row
-    //          */
-    //         return $i >= $start_row; 
-        
-    //     })->map( function($row, $i) {
-
-    //         /**
-    //          * Se convertesc randurile la tabela din BD
-    //          */
-    //         return $this->RowToRecord($row);
-        
-    //     })->filter( function($record, $i) {
-
-    //         /**
-    //          * Logica de validare a recordurilor
-    //          */
-    //         return $this->ValidRecord($record);
-
-    //     })->values()->toArray();
-    // }
 
 }
