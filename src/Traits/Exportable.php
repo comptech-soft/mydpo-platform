@@ -15,7 +15,7 @@ trait Exportable {
 
         if( array_key_exists('html', $input) && ($input['html'] == 1))
         {
-            return self::GetExporter($input)->view()->render();
+            return self::GetExporter($input, $record)->view()->render();
         }
 
         \Excel::store(
