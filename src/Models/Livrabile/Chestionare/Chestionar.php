@@ -231,7 +231,15 @@ class Chestionar extends Model {
 
     public function attachImportedQuestions($questions, $parent, $level)
     {
-        dd($questions, $parent, $level);
+        foreach($questions as $i => $question)
+        {
+            $this->attachOneImportedQuestions($question, $parent, $level);
+        }
+    }
+
+    public function attachOneImportedQuestions($question, $parent, $level)
+    {
+        dd($question, $parent, $level);
     }
 
     public static function doDelete($input, $record) {
