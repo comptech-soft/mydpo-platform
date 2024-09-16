@@ -67,11 +67,13 @@ class Chestionar extends Model {
         'my_image',
     ];
 
-    protected static function GetExporter($input) {
-        return new Exporter($input); 
+    protected static function GetExporter($input, $record) 
+    {
+        return new Exporter($input, $record); 
     }
-
-    protected static function GetImporter($input) {
+    
+    protected static function GetImporter($input) 
+    {
         return new Importer($input); 
     }
 
