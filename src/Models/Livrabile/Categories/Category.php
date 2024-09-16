@@ -3,10 +3,6 @@
 namespace MyDpo\Models\Livrabile\Categories;
 
 use Illuminate\Database\Eloquent\Model;
-// use MyDpo\Helpers\Performers\Datatable\GetItems;
-// use MyDpo\Actions\Items\Dataprovider;
-// use MyDpo\Helpers\Performers\Datatable\DoAction;
-// use MyDpo\Rules\Category\UniqueName;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 use MyDpo\Rules\Livrabile\Category\UniqueName;
@@ -35,51 +31,20 @@ class Category extends Model {
         'deleted_by'
     ];
 
-    // function centralizatoare() {
-    //     return $this->hasMany(Centralizator::class, 'category_id');
-    // }
+    public static function CreateIfNotExists(string $name, string $type)
+    {
+        $record = self::whereName($name)->whereType($type)->first();
 
-    // function cursuri() {
-    //     return $this->hasMany(Curs::class, 'category_id');
-    // }
+        if(!! $record )
+        {
+            return $record;
+        }
 
-    // public static function getItems($input, $type = NULL) {
-    //     if(! $type )
-    //     {
-    //         return (new GetItems($input, self::query()->select(['id', 'name', 'type']), __CLASS__))->Perform();
-    //     }
-
-    //     if($type == 'centralizatoare')
-    //     {
-    //         return (new Dataprovider($input, self::query()->select(['id', 'name'])->where('type', $type), __CLASS__))->Perform();
-    //     }
-
-    //     return (new GetItems(
-    //         $input, 
-    //         self::query()->select(['id', 'name'])->where('type', $type)->withCount($type), 
-    //         __CLASS__
-    //     ))->Perform();
-    // }
-
-    // public static function doAction($action, $input) {
-    //     return (new DoAction($action, $input, __CLASS__))->Perform();
-    // }
-
-    // public static function doDelete($input, $record) {
-
-    //     $record->deleted = 1;
-    //     $record->deleted_by = \Auth::user()->id;
-
-    //     $record->name = '#' . $record->id . '-' . $record->name;
-
-    //     $record->save();
-    //     return $record;
-    // }
-
-    // public static function isValidName($input) {
-    //     $validator = \Validator::make($input, self::GetRules('insert', $input) );
-    //     return $validator->fails() ? 0 : 1;
-    // }
+        return self::create([
+            'name' => $name,
+            'type' => $type,
+        ]);
+    }
 
     public static function GetRules($action, $input) {
 
