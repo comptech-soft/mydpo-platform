@@ -5,8 +5,6 @@ namespace MyDpo\Traits;
 trait Exportable { 
 
     public static function doExport($input, $record) {
-       
-        dd($input, $record);
         
         if(! \Storage::exists('public/exports/' . \Auth::user()->id) )
         {
@@ -21,7 +19,7 @@ trait Exportable {
         }
 
         \Excel::store(
-            self::GetExporter($input), 
+            self::GetExporter($input, $record), 
             $file_name, 
             NULL, 
             NULL, 
