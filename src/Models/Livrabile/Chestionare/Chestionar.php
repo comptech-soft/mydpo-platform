@@ -7,11 +7,13 @@ use MyDpo\Models\Livrabile\Categories\Category;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 use MyDpo\Traits\DaysDifference;
+use MyDpo\Traits\Exportable;
 use MyDpo\Rules\Nomenclatoare\Livrabile\Chestionare\Chestionar\UniqueName;
+use MyDpo\Exports\Livrabile\Chestionare\Exporter;
 
 class Chestionar extends Model {
     
-    use Itemable, Actionable, DaysDifference;
+    use Itemable, Actionable, DaysDifference, Exportable;
 
     protected $table = 'chestionare';
 
@@ -62,6 +64,10 @@ class Chestionar extends Model {
         'human_status',
         'my_image',
     ];
+
+    protected static function GetExporter($input) {
+        return new Exporter($input); 
+    }
 
     public function getVisibleAttribute() {
         return [
@@ -221,12 +227,6 @@ class Chestionar extends Model {
         ]);
 
         return $record;
-    }
-
-    public static function doExport($input, $record) {
-
-        dd($record, $input);
-        
     }
 
     public function syncQuestionCount()
