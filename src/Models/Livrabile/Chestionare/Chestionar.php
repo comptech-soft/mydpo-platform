@@ -251,6 +251,20 @@ class Chestionar extends Model {
         }
         else
         {
+            if(!! $input['activate_on_answer_id'])
+            {
+                $option = $parent->options()->where('answer_text', $input['activate_on_answer_id'])->first();
+
+                if(!! $option)
+                {
+                    $input = [
+                        ...$input,
+                        'activate_on_answer_id' => $option->id,
+                    ];
+                }
+            }
+            
+            
             $node = $parent->children()->create($input);
         }
 
@@ -262,10 +276,12 @@ class Chestionar extends Model {
             ];
         })->toArray(), $node);
 
-        dd($question['children']);
-
-        dd($question, $parent, $level);
+        if( count($question['children']) > 0)
+        {
+            $this->attachImportedQuestions($question['children'], $node, $level + 1);
+        }
     }
+    
     public static function doDelete($input, $record) {
 
         $record->update([
