@@ -226,7 +226,7 @@ class Chestionar extends Model {
     {
         $chestionar = self::create(collect($target)->except(['questions'])->toArray());
 
-        $chestionar->attachImportedQuestions(collect($target)->only(['questions'])->toArray(), NULL, 0);
+        $chestionar->attachImportedQuestions($target['questions'], NULL, 0);
     }
 
     public function attachImportedQuestions($questions, $parent, $level)
@@ -239,9 +239,39 @@ class Chestionar extends Model {
 
     public function attachOneImportedQuestions($question, $parent, $level)
     {
+
+        $input = [
+            ...collect($question)->except(['children', 'options', 'parent_id'])->toArray(),
+            'chestionar_id' => $this->id,
+        ];
+
+        if( ! $parent )
+        {
+            $node = ChestionarQuestion::create($input);
+        }
+        else
+        {
+            $node = $parent->children()->create($input);
+        }
+
+        ChestionarQuestion::CreateDuplicatedOptions(collect($question['options'])->map(function($option, $i){
+            return [
+                'answer_text' => $option['answer_text'],
+                'order_no' => 1 + $i,
+                'id' => -1,
+            ];
+        })->toArray(), $node);
+
+        // $node->syncOptions();
+
+        dd($node);
+
+
+
+        dd($question);
+
         dd($question, $parent, $level);
     }
-
     public static function doDelete($input, $record) {
 
         $record->update([
