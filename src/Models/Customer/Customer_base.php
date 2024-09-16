@@ -8,8 +8,6 @@ use MyDpo\Helpers\Performers\Datatable\DoAction;
 use MyDpo\Models\Customer\Statuses\Status;
 use MyDpo\Models\System\City;
 use MyDpo\Models\Customer\Contracts\CustomerContract;
-use MyDpo\Models\Customer\Accounts\Account;
-use MyDpo\Models\Customer\Documents\CustomerFolder;
 use MyDpo\Models\UserCustomer;
 use MyDpo\Performers\Customer\GetCustomersByIds;
 use MyDpo\Models\Customer\Dashboard\Item;
@@ -65,10 +63,6 @@ class Customer_base extends Model {
         'has_contract',
         'has_order',
     ];
-
-    // protected static function booted() {
-    //     static::addGlobalScope( new NotdeletedScope() );
-    // }
 
     public function getMylogoAttribute() {
         
