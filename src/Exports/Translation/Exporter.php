@@ -14,7 +14,7 @@ class Exporter implements FromView, WithStrictNullComparison, ShouldAutoSize {
 
     public $input = NULL;
 
-    public function __construct($input) {
+    public function __construct($input, $record = NULL) {
         $this->input = $input;    
     }
 

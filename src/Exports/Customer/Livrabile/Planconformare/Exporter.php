@@ -17,7 +17,7 @@ class Exporter implements FromView, WithStrictNullComparison, ShouldAutoSize {
     public $records = [];
     public $html_styles = [];
 
-    public function __construct($input) {
+    public function __construct($input, $record = NULL) {
         $this->input = $input;   
         $this->plan = Planconformare::find($this->input['plan_id']); 
         $this->plan->CalculateTree();

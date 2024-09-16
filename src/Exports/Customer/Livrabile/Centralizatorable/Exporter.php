@@ -52,7 +52,7 @@ class Exporter implements FromView, WithStrictNullComparison, ShouldAutoSize {
         ],
     ];
 
-    public function __construct($input) {
+    public function __construct($input, $record = NULL) {
         $this->input = $input;   
         
         $this->department_ids = array_key_exists('department_ids', $input) ? $input['department_ids'] : [];
