@@ -24,12 +24,11 @@ class Exporter implements FromView, WithStrictNullComparison, ShouldAutoSize {
 
     public function view(): View 
     {
-
-        $questions = Chestionar::PrepareSourceToDuplicate($this->record, []);
-        dd($questions);
+        $chestionar = Chestionar::PrepareSourceToDuplicate($this->record, []);
 
         return view('exports.livrabile.chestionar.export', [
             'chestionar' => $this->record->toArray(),
+            'questions' => $chestionar['questions'],
         ]);
     }
 
