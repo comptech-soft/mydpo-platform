@@ -8,12 +8,14 @@ use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 use MyDpo\Traits\DaysDifference;
 use MyDpo\Traits\Exportable;
+use MyDpo\Traits\Importable;
 use MyDpo\Rules\Nomenclatoare\Livrabile\Chestionare\Chestionar\UniqueName;
 use MyDpo\Exports\Livrabile\Chestionare\Exporter;
+use MyDpo\Imports\Livrabile\Chestionare\Importer;
 
 class Chestionar extends Model {
     
-    use Itemable, Actionable, DaysDifference, Exportable;
+    use Itemable, Actionable, DaysDifference, Exportable, Importable;
 
     protected $table = 'chestionare';
 
@@ -67,6 +69,10 @@ class Chestionar extends Model {
 
     protected static function GetExporter($input) {
         return new Exporter($input); 
+    }
+
+    protected static function GetImporter($input) {
+        return new Importer($input); 
     }
 
     public function getVisibleAttribute() {
@@ -256,7 +262,7 @@ class Chestionar extends Model {
 
     public static function GetRules($action, $input) {
 
-        if(in_array($action, ['export', 'delete']) )
+        if(in_array($action, ['export', 'import', 'delete']) )
         {
             return [];
         }
