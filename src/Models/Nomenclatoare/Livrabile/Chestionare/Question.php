@@ -97,11 +97,14 @@ class Question extends Model {
              */
             $parent = self::where('source_id', $record->parent_id)->first();
 
-            $activator = $parent->answers->where('source_id', $record->activate_on_answer_id)->first();
-
-            if(!! $activator )
+            if(!! $parent)
             {
-                $activate_on_answer_id = $activator->id;
+                $activator = $parent->answers->where('source_id', $record->activate_on_answer_id)->first();
+
+                if(!! $activator )
+                {
+                    $activate_on_answer_id = $activator->id;
+                }
             }
 
         }
