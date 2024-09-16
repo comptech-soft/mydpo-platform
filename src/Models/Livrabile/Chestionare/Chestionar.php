@@ -222,6 +222,11 @@ class Chestionar extends Model {
         return $record;
     }
 
+    public static function CreateQuestionarFromImport($target)
+    {
+        dd($target);
+    }
+
     public static function doDelete($input, $record) {
 
         $record->update([

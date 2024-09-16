@@ -234,11 +234,6 @@ class Question extends Model {
         return $record;
     }
 
-    public static function CreateQuestionarFromImport($target)
-    {
-        dd($target);
-    }
-
     public function attachOptions($options)
     {
 
