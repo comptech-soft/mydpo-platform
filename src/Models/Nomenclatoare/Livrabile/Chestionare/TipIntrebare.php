@@ -31,7 +31,7 @@ class TipIntrebare extends Model {
         'is_numeric' => 'integer',
     ];
 
-    public static function findByShortName(?string $short_name): TipIntrebare
+    public static function findByShortName(?string $short_name): ?TipIntrebare
     {
         return self::where('short_name', $short_name)->first();
     }

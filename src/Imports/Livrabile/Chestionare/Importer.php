@@ -72,9 +72,9 @@ class Importer implements ToCollection {
                 $question = [
                     'parent_id' => NULL,
                     'order_no' => $index,
-                    'question_type_id' => $raw_question[$line][2],
+                    'question_type_id' => TipIntrebare::findByShortName($raw_question[$line][2])->id,
                     'question_text' => $raw_question[$line][3],
-                    'activate_on_answer_id' => TipIntrebare::findByShortName($raw_question[$line][8])->id,
+                    'activate_on_answer_id' => $raw_question[$line][8],
                     'score' => $raw_question[$line][5],
                     'time_limit' => $raw_question[$line][6],
                     'is_required' => $raw_question[$line][4],
