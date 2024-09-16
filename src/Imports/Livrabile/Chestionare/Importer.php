@@ -4,7 +4,7 @@ namespace MyDpo\Imports\Livrabile\Chestionare;
 
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
-use MyDpo\Models\Livrabile\Categories;
+use MyDpo\Models\Livrabile\Categories\Category;
 
 class Importer implements ToCollection {
 
@@ -30,7 +30,7 @@ class Importer implements ToCollection {
 
         $chestionar = [
             'name' => $row[1],
-            'category_id' => Categories::CreateIfNotExists($row[2], 'chestionare')->id,
+            'category_id' => Category::CreateIfNotExists($row[2], 'chestionare')->id,
             'subject' => $row[3],
             'body' => $row[4],
             'visibility' => $row[5],
