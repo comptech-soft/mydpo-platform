@@ -27,7 +27,7 @@ class GetFileProperties extends Perform {
         }
 
         $extension = strtolower($file->extension());
-        $full_name = strtolower($file->getClientOriginalName() . '-' . \Str::random(16) );
+        $full_name = strtolower($file->getClientOriginalName() . '-' . md5(time()) );
 
 
         $result = $file->storeAs( ($path = $this->input['path'] . '/' . $user->id), $full_name, 's3');
