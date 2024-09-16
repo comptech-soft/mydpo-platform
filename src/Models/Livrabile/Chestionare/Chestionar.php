@@ -262,13 +262,7 @@ class Chestionar extends Model {
             ];
         })->toArray(), $node);
 
-        // $node->syncOptions();
-
-        dd($node);
-
-
-
-        dd($question);
+        dd($question['children']);
 
         dd($question, $parent, $level);
     }
