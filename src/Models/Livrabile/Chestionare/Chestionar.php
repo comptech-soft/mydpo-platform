@@ -224,7 +224,14 @@ class Chestionar extends Model {
 
     public static function CreateQuestionarFromImport($target)
     {
-        dd($target);
+        $chestionar = self::create(collect($target)->except(['questions'])->toArray());
+
+        $chestionar->attachImportedQuestions(collect($target)->only(['questions'])->toArray(), NULL, 0);
+    }
+
+    public function attachImportedQuestions($questions, $parent, $level)
+    {
+        dd($questions, $parent, $level);
     }
 
     public static function doDelete($input, $record) {
