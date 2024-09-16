@@ -22,11 +22,11 @@ class Exporter implements FromView, WithStrictNullComparison, ShouldAutoSize {
 
     public function view(): View {
 
-        dd(__METHOD__);
-        $records = ( ($this->input['structure'] == 1) ? [] : Translation::orderBy('ro')->get());
+        // dd(__METHOD__);
+        // $records = ( ($this->input['structure'] == 1) ? [] : Translation::orderBy('ro')->get());
 
-        return view('exports.admin.translations.export', [
-            'records' => $records,
+        return view('exports.livrabile.chestionar.export', [
+            'records' => [],
         ]);
     }
 
