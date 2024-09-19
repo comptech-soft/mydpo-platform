@@ -35,7 +35,7 @@ class Importer implements ToCollection {
         $row = $rows[1];
 
         $this->target = [
-            'name' => $row[1],
+            'name' => Chestionar::CheckNameIfExists($row[1]),
             'category_id' => Category::CreateIfNotExists($row[2], 'chestionare')->id,
             'subject' => $row[3],
             'body' => $row[4],

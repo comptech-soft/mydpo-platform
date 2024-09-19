@@ -322,6 +322,11 @@ class Chestionar extends Model {
         ;
     }
 
+    public static function CheckNameIfExists(string $name): string
+    {
+        dd(__METHOD__ . '('. $name . ')');
+    }
+
     public static function GetRules($action, $input) {
 
         if(in_array($action, ['export', 'import', 'delete']) )
