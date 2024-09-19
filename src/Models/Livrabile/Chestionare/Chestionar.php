@@ -324,7 +324,14 @@ class Chestionar extends Model {
 
     public static function CheckNameIfExists(string $name): string
     {
-        dd(__METHOD__ . '('. $name . ')');
+        $record = self::whereName($name)->first();
+        
+        if(!! $record)
+        {
+            return $name . '-' . \Carbon\Carbon::now()->format('Y-m-d-h-i-s');
+        }
+
+        return $name;
     }
 
     public static function GetRules($action, $input) {
