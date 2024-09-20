@@ -116,7 +116,30 @@ class CustomerFolderPermission extends Model {
 
     public static function GivePermissionToUser($folder_id, $user_id, $customer_id)
     {
-        dd($folder_id, $user_id, $customer_id);
+
+        $record = self::where('customer_id', $customer_id)
+            ->where('user_id',  $user_id)
+            ->where('folder_id',  $folder_id)
+            ->first();
+
+        if(!! $record )
+        {
+            $record->update([
+                'has_access' => 1,
+                'updated_by' => \Auth::user()->id,
+            ]);
+        }
+        else
+        {
+            self::create([
+                'has_access' => 1,
+                'customer_id' => $customer_id,
+                'user_id' => $user_id,
+                'folder_id' => $folder_id,
+                'created_by' => \Auth::user()->id,
+            ]);
+        }
+       
     }
     
 }

@@ -123,6 +123,8 @@ class CustomerFolder extends Folder {
     public static function GivePermissionsToOneTree( $folder, $user_id, $customer_id )
     {
         CustomerFolderPermission::GivePermissionToUser($folder->id, $user_id, $customer_id);
+
+        dd($folder->children);
     }
 
 }
