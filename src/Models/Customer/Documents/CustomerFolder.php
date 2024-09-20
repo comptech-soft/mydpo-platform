@@ -112,4 +112,17 @@ class CustomerFolder extends Folder {
         return $result;
     }
 
+    public static function GivePermissionsToTrees( $folders, $user_id )
+    {
+        foreach($folders as $folder)
+        {
+            self::GivePermissionsToOneTree($folder, $user_id);
+        }
+    }
+
+    public static function GivePermissionsToOneTree( $folder, $user_id )
+    {
+        CustomerFolderPermission::GivePermissionToUser($folder->id, $user_id);
+    }
+
 }

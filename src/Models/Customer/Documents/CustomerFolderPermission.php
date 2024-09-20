@@ -113,5 +113,10 @@ class CustomerFolderPermission extends Model {
         }
 
     }
+
+    public static function GivePermissionToUser($folder_id, $user_id)
+    {
+        dd($folder_id, $user_id);
+    }
     
 }

@@ -159,9 +159,18 @@ class Account extends Model {
 
     public function setInitialFoldersAccess() {
 
-        dd(__METHOD__);
-    }
+        // doar daca este user si nu master
+        if($this->role_id == 5)
+        {
+            $folders = \MyDpo\Models\Customer\Documents\CustomerFolder::where('customer_id', $this->customer_id)
+                ->whereRaw("(type = 'studiicaz' OR type = 'sfaturidpo' OR type = 'infografice')")
+                ->whereNull('parent_id')
+                ->get();
 
+            
+            \MyDpo\Models\Customer\Documents\CustomerFolder::GivePermissionsToTrees( $folders, $this->user_id );
+        }
+    }
     /**
      * se preiau setarile default (de la rolul master sau user) pentru dashboard items visibility si se salveaza
      */
