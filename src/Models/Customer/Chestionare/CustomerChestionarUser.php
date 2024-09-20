@@ -271,9 +271,9 @@ class CustomerChestionarUser extends Model {
         return $record;
     }
 
-    // public static function doSetstatus($input, $record) {
-    //     return self::doChangestatus($input, $record);
-    // }
+    public static function doSetstatus($input, $record) {
+        return self::doChangestatus($input, $record);
+    }
 
     public static function doDezasociere($input, $record) {
         /**
