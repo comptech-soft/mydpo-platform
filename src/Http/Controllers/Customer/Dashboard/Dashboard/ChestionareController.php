@@ -12,8 +12,8 @@ class ChestionareController extends Controller {
     
     public function index($customer_id, Request $r) {
 
-        dd(__METHOD__);
-        
+        CustomerChestionar::Sync($customer_id);
+
         return Index::View(
             styles: ['css/app.css'],
             scripts: ['apps/customer/chestionare/index.js'],
