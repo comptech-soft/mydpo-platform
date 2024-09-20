@@ -132,6 +132,7 @@ class Account extends Model {
          **/
         $account = self::create(collect($input)->except(['user'])->toArray());
         $account->setDefaultDashboardItemsVisibility();
+        $account->setInitialFoldersAccess();
 
         /** 
          * #3. Se ataseaza rolul in tabela [role-users] 
@@ -154,6 +155,11 @@ class Account extends Model {
         ]));
 
         return self::where('id', $account->id)->first();
+    }
+
+    public function setInitialFoldersAccess() {
+
+        dd(__METHOD__);
     }
 
     /**
