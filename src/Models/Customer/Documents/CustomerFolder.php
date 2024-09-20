@@ -124,7 +124,10 @@ class CustomerFolder extends Folder {
     {
         CustomerFolderPermission::GivePermissionToUser($folder->id, $user_id, $customer_id);
 
-        dd($folder->children);
+        if( $folder->children->count() )
+        {
+            self::GivePermissionsToTrees( $folder->children, $user_id, $customer_id);
+        }
     }
 
 }
