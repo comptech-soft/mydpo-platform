@@ -11,6 +11,9 @@ use MyDpo\Models\Customer\Chestionare\CustomerChestionar;
 class ChestionareController extends Controller {
     
     public function index($customer_id, Request $r) {
+
+        dd(__METHOD__);
+        
         return Index::View(
             styles: ['css/app.css'],
             scripts: ['apps/customer/chestionare/index.js'],
