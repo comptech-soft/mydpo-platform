@@ -76,6 +76,7 @@ class Importer implements ToCollection {
         $role = RoleUser::CreateAccountRole($this->input['customer_id'], $user->id, $account->role_id);
 
         $account->setDefaultDashboardItemsVisibility();
+        $account->setInitialFoldersAccess();
         
         $customers = [
             $this->input['customer_id'] . '#' . $user->id,
