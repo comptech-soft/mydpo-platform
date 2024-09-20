@@ -168,7 +168,7 @@ class Account extends Model {
                 ->get();
 
             
-            \MyDpo\Models\Customer\Documents\CustomerFolder::GivePermissionsToTrees( $folders, $this->user_id );
+            \MyDpo\Models\Customer\Documents\CustomerFolder::GivePermissionsToTrees( $folders, $this->user_id, $this->customer_id );
         }
     }
     /**
