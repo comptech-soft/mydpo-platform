@@ -37,6 +37,7 @@ class ChestionarQuestionOption extends Model {
 
     public static function updateOption($option)
     {
+        dd($option);
         $record = !!$option['id'] ? self::find($option['id']) : NULL;
         
         if(!! $record)
