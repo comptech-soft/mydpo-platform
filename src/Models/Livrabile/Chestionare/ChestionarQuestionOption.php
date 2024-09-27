@@ -37,7 +37,6 @@ class ChestionarQuestionOption extends Model {
 
     public static function updateOption($option)
     {
-        dd($option);
         $record = !!$option['id'] ? self::find($option['id']) : NULL;
         
         if(!! $record)
@@ -45,6 +44,7 @@ class ChestionarQuestionOption extends Model {
             $record->update([
                 'answer_text' => $option['answer_text'],
                 'order_no' => $option['order_no'],
+                'is_correct' => $option['is_correct'],
                 'is_deleted' => 0,
                 'source_id' => array_key_exists('source_id', $option) ? $option['source_id'] : NULL,
             ]);
@@ -55,6 +55,7 @@ class ChestionarQuestionOption extends Model {
                 'chestionar_question_id' => $option['chestionar_question_id'],
                 'answer_text' => $option['answer_text'],
                 'order_no' => $option['order_no'],
+                'is_correct' => $option['is_correct'],
                 'is_deleted' => 0,
                 'source_id' => array_key_exists('source_id', $option) ? $option['source_id'] : NULL,
             ]);
