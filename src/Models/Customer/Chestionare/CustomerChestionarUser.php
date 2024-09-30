@@ -203,7 +203,15 @@ class CustomerChestionarUser extends Model {
 
     public function CalculateUserScore()
     {
-        $this->score = rand(100, 999);
+        if($this->status == 'done' && !! $this->finished_at)
+        {
+            $this->score = rand(100, 999);
+        }
+        else
+        {
+            $this->score = 0;
+        }
+        
         $this->saveQuietly();
     }
 
