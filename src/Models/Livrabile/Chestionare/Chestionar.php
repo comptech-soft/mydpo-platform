@@ -322,6 +322,12 @@ class Chestionar extends Model {
         ;
     }
 
+
+    public function CalculateUserScores()
+    {
+        dd('CalculateUserScores(' . $this->id . ')');
+    }
+
     public static function CheckNameIfExists(string $name): string
     {
         $record = self::whereName($name)->first();

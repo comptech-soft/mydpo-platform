@@ -18,7 +18,7 @@ class ChestionarDetailsController extends Controller {
             return redirect('chestionare');
         }
 
-        dd(__METHOD__);
+        $chestionar->CalculateUserScores();
 
         return Index::View(
             styles: ['css/app.css'],
