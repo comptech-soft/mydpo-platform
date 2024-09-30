@@ -326,7 +326,7 @@ class Chestionar extends Model {
 
     public function CalculateUserScores()
     {
-        CustomerChestionarUser::CalculateUserScores($this->id);
+        CustomerChestionarUser::CalculateAllUsersScores($this->id);
     }
 
     public static function CheckNameIfExists(string $name): string

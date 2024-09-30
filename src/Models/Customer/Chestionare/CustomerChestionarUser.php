@@ -201,16 +201,17 @@ class CustomerChestionarUser extends Model {
     // }
 
 
-    public function calculateOneUserScore()
+    public function CalculateUserScore()
     {
-        dd($this->toArray());
+        $this->score = rand(100, 999);
+        $this->saveQuietly();
     }
-    
-    public static function CalculateUserScores(int $chsetionar_id)
+
+    public static function CalculateAllUsersScores(int $chsetionar_id)
     {
         foreach(self::where('chestionar_id', $chsetionar_id)->get() as $record)
         {
-            $record->calculateOneUserScore();
+            $record->CalculateUserScore();
         }
     }
 
