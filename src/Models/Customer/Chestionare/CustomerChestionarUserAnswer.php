@@ -51,7 +51,7 @@ class CustomerChestionarUserAnswer extends Model {
             return 0;
         }
 
-        $answer = self::where('customer_chestionar_user_id', $customer_chestionar_user_id)->where('question_id', $question->id)->first();
+        $answer = self::where('customer_chestionar_user_id', $customer_chestionar_user_id)->where('question_id', $question['id'])->first();
 
         if( ! $answer )
         {
