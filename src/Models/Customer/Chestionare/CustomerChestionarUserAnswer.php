@@ -41,13 +41,15 @@ class CustomerChestionarUserAnswer extends Model {
             $response = [$response];
         }
 
-        $response = collect($response)->map( function($item){ return 1 * $item; });
+        $response = collect($response)
+            ->map( function($item){ return 1 * $item; })
+            ->filter(function($item){ return $item != 0;});
 
-        $correct = collect($question['options'])->filter( function($item){
-
-            return $item['is_correct'] == 1;
-
-        })->map(function($item){ return 1 * $item['id']; });
+        $correct = collect($question['options'])
+            ->filter( function($item){
+                return $item['is_correct'] == 1;
+            })
+            ->map(function($item){ return 1 * $item['id']; });
 
        return collect($response)->diff($correct)->isEmpty();
     
