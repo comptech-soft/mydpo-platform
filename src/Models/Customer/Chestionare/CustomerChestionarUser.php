@@ -211,13 +211,13 @@ class CustomerChestionarUser extends Model {
         {
             $this->score = 0;
         }
-        
+
         $this->saveQuietly();
     }
 
-    public static function CalculateAllUsersScores(int $chsetionar_id)
+    public static function CalculateAllUsersScores(int $chestionar_id)
     {
-        foreach(self::where('chestionar_id', $chsetionar_id)->get() as $record)
+        foreach(self::where('chestionar_id', $chestionar_id)->get() as $record)
         {
             $record->CalculateUserScore();
         }
