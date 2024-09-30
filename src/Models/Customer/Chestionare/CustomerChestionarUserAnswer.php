@@ -61,7 +61,7 @@ class CustomerChestionarUserAnswer extends Model {
             return FALSE;
         }
 
-        return collect($correct)->diff($response)->isEmpty()
+        return collect($correct)->diff($response)->isEmpty();
     }
 
     public static function CalculateScore(array $question, int $customer_chestionar_user_id, int $customer_chestionar_id)
