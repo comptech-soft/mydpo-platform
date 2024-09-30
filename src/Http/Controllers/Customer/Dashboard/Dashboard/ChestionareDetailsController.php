@@ -22,6 +22,8 @@ class ChestionareDetailsController extends Controller {
             return redirect(config('app.url') . '/customer-chestionare/' . $customer_id);
         }
 
+        dd(__METHOD__);
+
         return Index::View(
             styles: ['css/app.css'],
             scripts: ['apps/customer/chestionare-details/index.js'],
