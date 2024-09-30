@@ -41,11 +41,13 @@ class CustomerChestionarUserAnswer extends Model {
             $response = [$response];
         }
 
+        $response = collect($response)->map( function($item){ return 1 * $item});
+
         $correct = collect($question['options'])->filter( function($item){
 
             return $item['is_correct'] == 1;
 
-        })->map(function($item){ return $item['id']; })->toArray();
+        })->map(function($item){ return 1 * $item['id']; });
 
         dd($response, $correct);
     
