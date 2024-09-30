@@ -18,6 +18,8 @@ class ChestionarDetailsController extends Controller {
             return redirect('chestionare');
         }
 
+        dd(__METHOD__);
+
         return Index::View(
             styles: ['css/app.css'],
             scripts: ['apps/nomenclatoare/livrabile/chestionar-details/index.js'],
