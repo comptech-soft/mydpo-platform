@@ -394,6 +394,7 @@ class Account extends Model {
         /**
          * Atentie! S-ar putea ca si userii sa fie deleted
          */
+        dd(request()->all());
         
         return 
             self::query()
