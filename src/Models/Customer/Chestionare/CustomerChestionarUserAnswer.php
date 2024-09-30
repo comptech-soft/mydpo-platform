@@ -31,6 +31,13 @@ class CustomerChestionarUserAnswer extends Model {
         'subanswers'
     ];
 
+    public static function IsCorrectAnswer($value, $question)
+    {
+
+        dd($value, $question);
+    
+    }
+
     public static function CalculateScore(array $question, int $customer_chestionar_user_id, int $customer_chestionar_id)
     {
 
@@ -44,11 +51,19 @@ class CustomerChestionarUserAnswer extends Model {
             return 0;
         }
 
-        return $question['score'];
+        $answer = self::where('customer_chestionar_user_id', $customer_chestionar_user_id)->where('question_id', $question->id)->first();
 
-        // dd($question, $customer_chestionar_user_id, $customer_chestionar_id);
+        if( ! $answer )
+        {
+            return 0;
+        }
 
-        // return $score;
+        if( self::IsCorrectAnswer($answer->value, $question) )
+        {
+            return $question['score'];
+        }
+
+        return 0;
     }
 
     public static function CalculateQuestionsScore(int $customer_chestionar_user_id, int $customer_chestionar_id)
