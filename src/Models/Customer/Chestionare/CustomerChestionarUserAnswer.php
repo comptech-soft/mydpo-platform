@@ -49,7 +49,7 @@ class CustomerChestionarUserAnswer extends Model {
 
         })->map(function($item){ return 1 * $item['id']; });
 
-        dd($response, $correct);
+       dd(collect($response)->diff($correct)->toArray()); //isEmpty();
     
     }
 
