@@ -31,6 +31,11 @@ class CustomerChestionarUserAnswer extends Model {
         'subanswers'
     ];
 
+    public static function CalculateQuestionsScore(int $customer_chestionar_user_id, int $customer_chestionar_id)
+    {
+        dd('CalculateQuestionsScore(' . $customer_chestionar_user_id .  ',' . $customer_chestionar_id .  ')');
+    }
+
     public static function attachAnswer($customer_chestionar_user_id, $input)
     {
 

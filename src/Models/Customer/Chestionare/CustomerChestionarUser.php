@@ -205,7 +205,7 @@ class CustomerChestionarUser extends Model {
     {
         if($this->status == 'done' && !! $this->finished_at)
         {
-            $this->score = rand(100, 999);
+            $this->score = CustomerChestionarUserAnswer::CalculateQuestionsScore($this->id);
         }
         else
         {
