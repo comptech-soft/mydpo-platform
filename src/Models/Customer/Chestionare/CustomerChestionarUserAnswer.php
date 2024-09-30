@@ -51,7 +51,9 @@ class CustomerChestionarUserAnswer extends Model {
             })
             ->map(function($item){ return 1 * $item['id']; });
 
-       return collect($response)->diff($correct)->isEmpty();
+        dd($question['tip']);
+        
+        return collect($response)->diff($correct)->isEmpty();
     
     }
 
