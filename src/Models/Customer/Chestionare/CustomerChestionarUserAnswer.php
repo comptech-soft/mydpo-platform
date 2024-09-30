@@ -34,7 +34,14 @@ class CustomerChestionarUserAnswer extends Model {
     public static function IsCorrectAnswer($value, $question)
     {
 
-        dd($value['answer'], $question['tip']['can_has_subquestion'], $question['options'] );
+        $response = $value['answer'];
+        if( ! is_array($response) )
+        {
+            $response = [$response];
+        }
+        dd($response, $question['tip']['can_has_subquestion'], collect($question['options'])->filter($item){
+            dd($item);
+        } );
     
     }
 
