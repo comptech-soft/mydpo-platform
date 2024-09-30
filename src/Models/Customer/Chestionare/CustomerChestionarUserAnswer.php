@@ -31,14 +31,28 @@ class CustomerChestionarUserAnswer extends Model {
         'subanswers'
     ];
 
+    public static function CalculateScore(array $question, int $customer_chestionar_user_id, int $customer_chestionar_id)
+    {
+        dd($question, $customer_chestionar_user_id, $customer_chestionar_id);
+
+        return $score;
+    }
+
     public static function CalculateQuestionsScore(int $customer_chestionar_user_id, int $customer_chestionar_id)
     {
         $chestionar = CustomerChestionar::find($customer_chestionar_id);
         
-        $records = self::where('customer_chestionar_user_id', $customer_chestionar_user_id)->get();
+        // $records = self::where('customer_chestionar_user_id', $customer_chestionar_user_id)->get();
 
-        dd($chestionar->current_questions, $records);
+        $score = 0;
 
+        foreach($chestionar->current_questions as $question)
+        {
+            $score += CalculateScore($question, $customer_chestionar_user_id, $customer_chestionar_id);
+        }
+
+        
+        return $score;
     }
 
     public static function attachAnswer($customer_chestionar_user_id, $input)
