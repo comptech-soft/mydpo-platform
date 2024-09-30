@@ -45,7 +45,7 @@ class CustomerChestionarUserAnswer extends Model {
 
             return $item['is_correct'] == 1;
 
-        })->map(function($item){ return $item['id']})->toArray();
+        })->map(function($item){ return $item['id']; })->toArray();
 
         dd($response, $correct);
     
