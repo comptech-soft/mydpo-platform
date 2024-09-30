@@ -41,7 +41,7 @@ class CustomerChestionarUserAnswer extends Model {
             $response = [$response];
         }
 
-        $response = collect($response)->map( function($item){ return 1 * $item});
+        $response = collect($response)->map( function($item){ return 1 * $item; });
 
         $correct = collect($question['options'])->filter( function($item){
 
