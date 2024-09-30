@@ -35,16 +35,19 @@ class CustomerChestionarUserAnswer extends Model {
     {
 
         $response = $value['answer'];
+        
         if( ! is_array($response) )
         {
             $response = [$response];
         }
 
-        dd($response, $question['tip']['can_has_subquestion'], collect($question['options'])->filter( function($item){
+        $correct = collect($question['options'])->filter( function($item){
 
-            dd($item);
-            
-        }) );
+            return $item['is_correct'] == 1;
+
+        })->toArray();
+
+        dd($response, $correct);
     
     }
 
