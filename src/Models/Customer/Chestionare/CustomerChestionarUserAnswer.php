@@ -39,10 +39,12 @@ class CustomerChestionarUserAnswer extends Model {
         {
             $response = [$response];
         }
-        
-        dd($response, $question['tip']['can_has_subquestion'], collect($question['options'])->filter($item){
+
+        dd($response, $question['tip']['can_has_subquestion'], collect($question['options'])->filter( function($item){
+
             dd($item);
-        } );
+            
+        }) );
     
     }
 
