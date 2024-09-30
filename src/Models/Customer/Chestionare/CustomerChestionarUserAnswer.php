@@ -37,7 +37,7 @@ class CustomerChestionarUserAnswer extends Model {
         
         $records = self::where('customer_chestionar_user_id', $customer_chestionar_user_id)->get();
 
-        dd($chestionar->toArray(), $records);
+        dd($chestionar->current_questions, $records);
 
     }
 
