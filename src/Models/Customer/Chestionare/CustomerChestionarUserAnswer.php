@@ -34,6 +34,11 @@ class CustomerChestionarUserAnswer extends Model {
     public static function CalculateScore(array $question, int $customer_chestionar_user_id, int $customer_chestionar_id)
     {
 
+        if( $question['parent_id'] != NULL)
+        {
+            return 0;
+        }
+
         if(! $question['score'])
         {
             return 0;
