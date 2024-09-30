@@ -34,7 +34,7 @@ class CustomerChestionarUserAnswer extends Model {
     public static function IsCorrectAnswer($value, $question)
     {
 
-        dd($value, $question['tip'], $question['options'] );
+        dd($value['answer'], $question['tip']['can_has_subquestion'], $question['options'] );
     
     }
 
