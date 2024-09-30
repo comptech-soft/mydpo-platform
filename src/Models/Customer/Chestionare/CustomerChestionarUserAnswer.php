@@ -33,9 +33,17 @@ class CustomerChestionarUserAnswer extends Model {
 
     public static function CalculateScore(array $question, int $customer_chestionar_user_id, int $customer_chestionar_id)
     {
-        dd($question, $customer_chestionar_user_id, $customer_chestionar_id);
 
-        return $score;
+        if(! $question['score'])
+        {
+            return 0;
+        }
+
+        return $question['score'];
+
+        // dd($question, $customer_chestionar_user_id, $customer_chestionar_id);
+
+        // return $score;
     }
 
     public static function CalculateQuestionsScore(int $customer_chestionar_user_id, int $customer_chestionar_id)
