@@ -394,14 +394,18 @@ class Account extends Model {
         /**
          * Atentie! S-ar putea ca si userii sa fie deleted
          */
-        dd(request()->all());
-        
         return 
             self::query()
             ->leftJoin(
                 'users',
                 function($q) {
                     $q->on('users.id', '=', 'customers-persons.user_id');
+                }
+            )
+            ->leftJoin(
+                'roles',
+                function($q) {
+                    $q->on('roles.id', '=', 'customers-persons.role_id');
                 }
             )
             ->leftJoin(
