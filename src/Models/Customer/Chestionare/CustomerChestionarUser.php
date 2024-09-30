@@ -205,7 +205,7 @@ class CustomerChestionarUser extends Model {
     {
         if($this->status == 'done' && !! $this->finished_at)
         {
-            $this->score = CustomerChestionarUserAnswer::CalculateQuestionsScore($this->id);
+            $this->score = CustomerChestionarUserAnswer::CalculateQuestionsScore($this->id, $this->customer_chestionar_id);
         }
         else
         {
