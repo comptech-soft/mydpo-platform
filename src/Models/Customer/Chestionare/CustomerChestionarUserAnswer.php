@@ -51,10 +51,17 @@ class CustomerChestionarUserAnswer extends Model {
             })
             ->map(function($item){ return 1 * $item['id']; });
 
-        dd($question['tip']);
-        
-        return collect($response)->diff($correct)->isEmpty();
-    
+        if( $question['tip']['can_has_subquestion'] == 1 )
+        {
+            return collect($response)->diff($correct)->isEmpty();
+        }
+
+        if(! collect($response)->diff($correct)->isEmpty())
+        {
+            return FALSE;
+        }
+
+        return collect($correct)->diff($response)->isEmpty()
     }
 
     public static function CalculateScore(array $question, int $customer_chestionar_user_id, int $customer_chestionar_id)
