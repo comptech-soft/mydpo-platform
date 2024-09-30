@@ -26,6 +26,7 @@ class CustomerChestionarUser extends Model {
         'deleted_by' => 'integer',
         'deleted' => 'integer',
         'user_id' => 'integer',
+        'score' => 'integer',
         'customer_chestionar_id' => 'integer',
     ];
 
@@ -41,9 +42,8 @@ class CustomerChestionarUser extends Model {
         'received_at',
         'started_at',
         'finished_at',
-
+        'score',
         'props',
-        
         'deleted',
         'created_by',
         'updated_by',
@@ -203,9 +203,11 @@ class CustomerChestionarUser extends Model {
 
     public static function CalculateUserScores(int $chsetionar_id)
     {
-        dd("CalculateUserScores(#" . $chsetionar_id . ")");
+        $records = self::where('chestionar_id', $chsetionar_id)->get();
+
+        dd($records);
     }
-    
+
     public static function doChangestatus($input, $record) {
 
         $now = \Carbon\Carbon::now();
