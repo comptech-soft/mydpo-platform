@@ -201,18 +201,11 @@ class CustomerChestionarUser extends Model {
     // }
 
 
-    // public static function getCounter($input) {
-    //     return (new GetCounter($input))->Perform();
-    // }
-
-    // public static function changeStatus($input) {
-    //     return (new ChangeStatus($input))->Perform();
-    // }
-
-    // public static function assignCursuri($input) {
-    //     return (new AssignCursuri($input))->Perform();
-    // }
-
+    public static function CalculateUserScores(int $chsetionar_id)
+    {
+        dd("CalculateUserScores(#" . $chsetionar_id . ")");
+    }
+    
     public static function doChangestatus($input, $record) {
 
         $now = \Carbon\Carbon::now();

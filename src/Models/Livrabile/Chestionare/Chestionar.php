@@ -12,6 +12,7 @@ use MyDpo\Traits\Importable;
 use MyDpo\Rules\Nomenclatoare\Livrabile\Chestionare\Chestionar\UniqueName;
 use MyDpo\Exports\Livrabile\Chestionare\Exporter;
 use MyDpo\Imports\Livrabile\Chestionare\Importer;
+use MyDpo\Models\Customer\Chestionare\CustomerChestionarUser;
 
 class Chestionar extends Model {
     
@@ -325,7 +326,7 @@ class Chestionar extends Model {
 
     public function CalculateUserScores()
     {
-        dd('CalculateUserScores(' . $this->id . ')');
+        CustomerChestionarUser::CalculateUserScores($this->id);
     }
 
     public static function CheckNameIfExists(string $name): string
