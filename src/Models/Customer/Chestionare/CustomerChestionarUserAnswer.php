@@ -34,7 +34,7 @@ class CustomerChestionarUserAnswer extends Model {
     public static function IsCorrectAnswer($value, $question)
     {
 
-        dd($value, $question);
+        dd($value, $question->options);
     
     }
 
