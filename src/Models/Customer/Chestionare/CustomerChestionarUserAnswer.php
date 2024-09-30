@@ -48,7 +48,7 @@ class CustomerChestionarUserAnswer extends Model {
 
         foreach($chestionar->current_questions as $question)
         {
-            $score += CalculateScore($question, $customer_chestionar_user_id, $customer_chestionar_id);
+            $score += self::CalculateScore($question, $customer_chestionar_user_id, $customer_chestionar_id);
         }
 
         
