@@ -68,7 +68,7 @@ class Activation extends Model {
 
     public static function RegisterActivation($user, $sender, $template, $payload) {
 
-        if(!! ($customer_id = $payload['account']['customer_id'] ))
+        if( array_key_exists('account', $payload) && !! ($customer_id = $payload['account']['customer_id'] ))
         {
             $activation = self::createActivation(
                 $payload['account']['user_id'], 
