@@ -39,6 +39,11 @@ class ChestionarQuestionOption extends Model {
     {
         $record = !!$option['id'] ? self::find($option['id']) : NULL;
         
+        if( ! array_key_exists('is_correct', $option))
+        {
+            $option['is_correct'] = 0;
+        }
+        
         if(!! $record)
         {
             $record->update([
