@@ -199,6 +199,25 @@ class ChestionarQuestion extends Model {
         $this->refresh();
     }
 
+    public static function doDelete($input, $record) {
+
+        $record->DeleteNode();
+        
+        return $record;
+    }
+
+    protected function DeleteNode() {
+
+        foreach($this->children as $i => $child)
+        {
+            $child->DeleteNode();
+        }
+
+        ChestionarQuestionOption::where('chestionar_question_id', $this->id)->delete();
+
+        $this->delete();
+    }
+
     protected static function booted() 
     {
         static::observe(ChestionarQuestionObserver::class);
