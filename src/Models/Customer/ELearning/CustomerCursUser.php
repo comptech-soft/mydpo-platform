@@ -37,6 +37,8 @@ class CustomerCursUser extends Model {
         'trimitere_id',
         'user_id',
         'status',
+        'date_from',
+        'date_to',
         'done_at',
         'props',
         'platform',
@@ -85,16 +87,15 @@ class CustomerCursUser extends Model {
     }
 
     public function getFinalizatAttribute() {
-        if($this->status != 'done' || ! $this->done_at || ! $this->trimitere->date_to)
+        if($this->status != 'done' || ! $this->done_at || ! $this->date_to)
         {
             return NULL;
         }
 
         $now = Carbon::createFromFormat('Y-m-d H:i:s', $this->done_at);
-        $expire = Carbon::createFromFormat('Y-m-d', $this->trimitere->date_to);
+        $expire = Carbon::createFromFormat('Y-m-d', $this->date_to);
 
         $daysDiff = $expire->diffInDays($now, false);
-        $hoursDiff = $expire->diffInHours($now, false);
 
         return $daysDiff <= 0 
             ? [
@@ -121,14 +122,13 @@ class CustomerCursUser extends Model {
         else
         {
             $color = 'green';
-            if( $this->trimitere->date_to )
+            if( $this->date_to )
             {
                 $now = Carbon::now();
-                $expire = Carbon::createFromFormat('Y-m-d', $this->trimitere->date_to);
+                $expire = Carbon::createFromFormat('Y-m-d', $this->date_to);
         
                 $daysDiff = $expire->diffInDays($now, false);
                 $hoursDiff = $expire->diffInHours($now, false);
-
                 
                 if( ($daysDiff > 0) || ( ($daysDiff == 0) && ($hoursDiff > 0)))
                 {
@@ -154,8 +154,8 @@ class CustomerCursUser extends Model {
         }
 
         return [
-            'date_from' => $this->trimitere->date_from,
-            'date_to' => $this->trimitere->date_to,
+            'date_from' => $this->date_from,
+            'date_to' => $this->date_to,
             'days' => $daysDiff,
             'hours' => $hoursDiff,
             'color' => $color,
