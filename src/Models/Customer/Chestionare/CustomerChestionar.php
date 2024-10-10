@@ -122,6 +122,8 @@ class CustomerChestionar extends Model {
                 'received_at' => \Carbon\Carbon::now(),
                 'started_at' => NULL,
                 'finished_at' => NULL,
+                'date_from' => $this->trimitere->date_from,
+                'date_to' => $this->trimitere->date_to,
                 'platform'=> config('app.platform'),
             ];
 
