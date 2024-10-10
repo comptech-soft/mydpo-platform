@@ -6,13 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 use MyDpo\Models\Authentication\User;
 use MyDpo\Models\Nomenclatoare\Livrabile\ELearning\Curs;
 use MyDpo\Models\Nomenclatoare\Livrabile\ELearning\Sharematerial;
+use MyDpo\Traits\DaysDifference;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 use Carbon\Carbon;
 
 class CustomerCursUser extends Model {
 
-    use Itemable, Actionable;
+    use Itemable, Actionable, DaysDifference;
 
     protected $table = 'customers-cursuri-users';
 
@@ -52,6 +53,8 @@ class CustomerCursUser extends Model {
         'my_status',
         'status_termen',
         'finalizat',
+        'valabilitate',
+        'days_difference',
     ];
 
     protected $with = [
@@ -161,6 +164,26 @@ class CustomerCursUser extends Model {
             'color' => $color,
             'caption' => $text,
         ];
+    }
+
+    public function getValabilitateAttribute() {
+
+        if(! $this->date_from && ! $this->date_to )
+        {
+            return 'Nelimitat';
+        }
+
+        if(!! $this->date_from && !! $this->date_to)
+        {
+            return \Carbon\Carbon::createFromFormat('Y-m-d', $this->date_from)->format('d.m.Y') . ' - ' . \Carbon\Carbon::createFromFormat('Y-m-d', $this->date_to)->format('d.m.Y');
+        }
+
+        if(!! $this->date_from)
+        {
+            return \Carbon\Carbon::createFromFormat('Y-m-d', $this->date_from)->format('d.m.Y');        
+        }
+
+        return \Carbon\Carbon::createFromFormat('Y-m-d', $this->date_to)->format('d.m.Y');        
     }
 
     public function user() {

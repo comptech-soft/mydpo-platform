@@ -9,10 +9,11 @@ use MyDpo\Models\Nomenclatoare\Livrabile\ELearning\Sharematerial;
 use MyDpo\Traits\Itemable;
 use MyDpo\Traits\Actionable;
 use Carbon\Carbon;
+use MyDpo\Traits\DaysDifference;
 
 class CustomerChestionarUser extends Model {
 
-    use Itemable, Actionable;
+    use Itemable, Actionable, DaysDifference;
 
     protected $table = 'customers-chestionare-users';
 
@@ -42,6 +43,8 @@ class CustomerChestionarUser extends Model {
         'received_at',
         'started_at',
         'finished_at',
+        'date_from',
+        'date_to',
         'score',
         'props',
         'deleted',
@@ -54,6 +57,8 @@ class CustomerChestionarUser extends Model {
         'my_status',
         'status_termen',
         'finalizat',
+        'valabilitate',
+        'days_difference',
     ];
 
     protected $with = [
@@ -166,6 +171,26 @@ class CustomerChestionarUser extends Model {
             'color' => $color,
             'caption' => $text,
         ];
+    }
+
+    public function getValabilitateAttribute() {
+
+        if(! $this->date_from && ! $this->date_to )
+        {
+            return 'Nelimitat';
+        }
+
+        if(!! $this->date_from && !! $this->date_to)
+        {
+            return \Carbon\Carbon::createFromFormat('Y-m-d', $this->date_from)->format('d.m.Y') . ' - ' . \Carbon\Carbon::createFromFormat('Y-m-d', $this->date_to)->format('d.m.Y');
+        }
+
+        if(!! $this->date_from)
+        {
+            return \Carbon\Carbon::createFromFormat('Y-m-d', $this->date_from)->format('d.m.Y');        
+        }
+
+        return \Carbon\Carbon::createFromFormat('Y-m-d', $this->date_to)->format('d.m.Y');        
     }
 
     public function user() {
