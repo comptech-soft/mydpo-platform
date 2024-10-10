@@ -240,6 +240,7 @@ class CustomerCurs extends Model {
                 'status' => 'sended',
                 'date_from' => $this->trimitere->date_from,
                 'date_to' => $this->trimitere->date_to,
+                'done_at' => NULL,
                 'platform'=> config('app.platform'),
             ];
 
