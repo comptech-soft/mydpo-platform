@@ -238,6 +238,8 @@ class CustomerCurs extends Model {
                 'trimitere_id' => $this->trimitere_id,
                 'user_id' => $user_id,
                 'status' => 'sended',
+                'date_from' => $this->trimiter->date_from,
+                'date_to' => $this->trimiter->date_to,
                 'platform'=> config('app.platform'),
             ];
 
